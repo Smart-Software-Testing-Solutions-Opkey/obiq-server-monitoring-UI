@@ -4,22 +4,17 @@ import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
 
+ 
   {
-    path: 'welcome',
-    loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule)
-  },{
     path: 'environment',
-    loadChildren: () => import('./environment/environment.module').then(m => m.EnvironmentModule)
+    loadChildren: () => import('./environment/environment.module').then(m => m.EnvironmentModule),
+    data: { title: 'Environment' ,breadcrumb:'Environment'}
   },
   {
      path: '',
      pathMatch: 'full',
      component: LoadingComponent
   },
-  // {
-  //   path: '**', // route every undefined route to the root of this feature
-  //   redirectTo: ''
-  // },
 ];
 
 @NgModule({

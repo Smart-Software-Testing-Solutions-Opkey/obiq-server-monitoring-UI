@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EnvironmentSelectedComponent } from './selected/environment-selected.component';
-import { EnvironmentManagerComponent } from './manager/environment-manager.component';
 
 const routes: Routes = [
 
   {
     path: '',
-    pathMatch: 'full',
-    component: EnvironmentManagerComponent
+    loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
+    data: { title: 'Manager' ,breadcrumb:'Manager'}
+  },{
+    path: 'configure',
+    loadChildren: () => import('./configure/module/environment-configure.module').then(m => m.EnvironmentConfigureModule),
+    data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
+  },{
+    path: 'manager',
+    loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
+    data: { title: 'Manager' ,breadcrumb:'Manager'}
   },{
     path: ':id',
-    component: EnvironmentSelectedComponent
+    loadChildren: () => import('./selected/module/environment-selected.module').then(m => m.EnvironmentSelectedModule),
+    data: { title: 'Environment' ,breadcrumb:'Environment'}
   },
 
 ];
