@@ -5,7 +5,8 @@ import { EnvironmentConfigureComponent } from '../environment-configure.componen
 const routes: Routes = [ {
   path: '',
   pathMatch: 'full',
-  component: EnvironmentConfigureComponent
+  component: EnvironmentConfigureComponent, 
+  data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
 }];
 
 @NgModule({

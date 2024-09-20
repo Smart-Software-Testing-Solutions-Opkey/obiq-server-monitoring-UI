@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EnvironmentSelectedRoutingModule } from './environment-selected-routing.module';
 import { EnvironmentSelectedComponent } from '../environment-selected.component';
+import { NavModule } from 'src/app/modules/nav.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { EnvironmentSelectedComponent } from '../environment-selected.component'
   ],
   imports: [
     CommonModule,
+    NavModule,
     EnvironmentSelectedRoutingModule
   ]
 })

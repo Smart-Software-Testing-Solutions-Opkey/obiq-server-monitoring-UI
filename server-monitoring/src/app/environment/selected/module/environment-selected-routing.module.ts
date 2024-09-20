@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: EnvironmentSelectedComponent,
-    data: { title: 'Manager' ,breadcrumb:'Manager'}
+    data: { title: 'Selected Environment' ,breadcrumb:'Selected'}
   }
 
 ];

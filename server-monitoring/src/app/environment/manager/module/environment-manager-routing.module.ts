@@ -7,7 +7,7 @@ const routes: Routes = [
    {
   path: '',
   component: EnvironmentManagerComponent,
-  data: { title: 'Manager' ,breadcrumb:'Manager'}
+  data: { title: 'Environment Manager' ,breadcrumb:'Manager'}
 }
 
 ];

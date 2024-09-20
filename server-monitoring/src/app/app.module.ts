@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,18 +9,24 @@ import { EnvironmentCurdComponent } from './environment/curd/add/environment-cur
 import { EnvironmentCurdServiceComponent } from './environment/curd/service/environment-curd-service.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
     Error404Component,
     EnvironmentCurdComponent,
-    EnvironmentCurdServiceComponent
+    EnvironmentCurdServiceComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
+  exports:[
+    
+  ],  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
