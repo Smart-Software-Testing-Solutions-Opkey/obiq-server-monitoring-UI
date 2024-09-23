@@ -4,7 +4,7 @@ import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
 
- 
+
   {
     path: 'environment',
     loadChildren: () => import('./environment/environment.module').then(m => m.EnvironmentModule),

@@ -1,5 +1,21 @@
-<h4>This is default page. Basic structure for Arpan/Upendra is created in Angular 16 with lazy module routing.They can start their work. </h4>
+<div class="feature-container flex-box-column">
 
-<img src="/servermonitoring/assets/images/default/server.gif">
+    <div class="feature-header">
+        <app-navigator-breadcrumb></app-navigator-breadcrumb>
+    </div>
 
+    <div class="feature-body h-100">
+        
+        <div class="app-loading-cmp">
+            <div class="app-loading-img">
+                <img src="/servermonitoring/assets/images/default/server.gif">
+            </div>
+            <div class="app-loading-footer">
+                <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()">Add Environment</button>
+            </div>
+        </div>
+       
 
+        
+    </div>
+</div>
