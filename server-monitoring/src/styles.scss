@@ -75,6 +75,10 @@ body {
     color: #116173 !important;
 }
 
+.text-red {
+    color: #FF0404 !important;
+}
+
 /*****************other common app scss******************/
 .flex-box-column {
     display: flex;
@@ -103,6 +107,40 @@ body {
     background: #FFFFFF;
     color: #344054;
     border-color: #D0D5DD !important;
+}
+
+.btn-icon {
+    padding: 0rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: #5A607F;
+    font-size: 0.875rem;
+    border-color: #D9E1EC;
+
+    &+.btn-icon {
+        margin-left: 0.5rem;
+    }
+
+    &.bt-sm {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0;
+        justify-content: center;
+        font-size: 0.75rem;
+    }
+
+    &:hover {
+        border-color: #D9E1EC;
+    }
+
+    &:disabled,
+    &.disabled {
+        background-color: #ddd;
+        opacity: 0.5;
+    }
 }
 
 button:focus-visible {

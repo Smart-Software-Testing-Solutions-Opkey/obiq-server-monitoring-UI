@@ -26,7 +26,31 @@
                 <label class="form-label" style="font-size: 0.875rem;">Service</label>
 
                 <div style="height: 10rem;">
-                    <kendo-grid [data]="datasource_service" [hideHeader]="false">
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Download</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let item of datasource_service">
+                                <tr>
+                                    <td>{{ item.name }}</td>
+                                    <td class="text-center text-red"> {{ item.status }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-icon border-0">
+                                            <i class="fa fa-download"></i>
+                                        </button>
+                                    </td>
+                                  </tr>
+                            </ng-container>
+                        </tbody>
+                      </table>
+
+                    <!-- <kendo-grid [data]="datasource_service" [hideHeader]="false">
 
                         <kendo-grid-column title="Name">
 
@@ -54,14 +78,14 @@
 
                             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         
-                               <button type="button">
-                                <i class="fa fa-download"></i>
-                               </button>
+                                 <button type="button" class="btn btn-icon border-0">
+                                    <i class="fa fa-download"></i>
+                                </button>
         
                             </ng-template>
                         </kendo-grid-column>
 
-                    </kendo-grid>
+                    </kendo-grid> -->
                 </div>
             </div>
         </div>
