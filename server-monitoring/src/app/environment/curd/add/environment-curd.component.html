@@ -1,1 +1,65 @@
-<p>environment-curd works!</p>
+
+
+<div id="modal-environment-curd">
+
+    <div class="modal-header">
+    
+        <h3 class="modal-h-title text-theme">Create New Environment</h3>
+
+        <div class="modal-header-right">
+            <!-- <button class="btn btn-bg-white btn-mh-right" (click)="close_model()">Close</button> -->
+        </div>
+
+    </div>
+
+    <div class="modal-body" style="height: 30rem; overflow-y: auto;">
+
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-environment">Environment<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role-environment" aria-required="true">
+            </div>
+        </div>
+
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-business-unit">Business Unit<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role-business-unit" aria-required="true">
+            </div>
+        </div>
+
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-service-type">Service Type<span class="text-danger">*</span></label>
+              
+            </div>
+        </div>
+            
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-cloud">Cloud<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role-cloud" aria-required="true">
+            </div>
+        </div>
+
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-physical-location">Physical Location<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role-physical-location" aria-required="true">
+            </div>
+        </div>
+
+        <div class="row mx-0">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" for="role-product">Product<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role-product" aria-required="true">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer justify-content-start">
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="create_environment()">Add</button>
+    </div>
+    
+</div>
