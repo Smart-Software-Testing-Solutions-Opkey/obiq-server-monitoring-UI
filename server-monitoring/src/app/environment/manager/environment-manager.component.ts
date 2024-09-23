@@ -10,9 +10,7 @@ import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component
 export class EnvironmentManagerComponent {
 
   constructor(
-
     private modalService: NgbModal,
-  
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +27,7 @@ export class EnvironmentManagerComponent {
     });
     modalRef.result.then((result) => {
     }, (response) => {
-      if (response == 'Cross click') {
+      if (response == 'close modal') {
         return;
       }
     });

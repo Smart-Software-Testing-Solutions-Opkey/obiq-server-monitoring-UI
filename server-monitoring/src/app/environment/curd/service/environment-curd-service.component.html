@@ -1,1 +1,77 @@
-<p>environment-curd-service works!</p>
+
+
+<div id="modal-environment-curd">
+
+    <div class="modal-header border-bottom-0 justify-content-center">
+    
+        <h3 class="modal-h-title text-theme">PROD_US</h3>
+
+    </div>
+
+    <div class="modal-body" style="height: 30rem; overflow-y: auto;">
+
+        <div class="row mx-0 mb-3">
+
+            <ng-container *ngFor="let item of seleted_from_environment">
+                <div class="col-sm-3 ps-0 service-text">
+                    <span class="sp-label">{{item.title}}</span>
+                    <span class="sp-name text-theme">{{item.name}}</span>
+                </div>
+            </ng-container>
+          
+        </div>
+
+        <div class="row mx-0 mb-0">
+            <div class="col-sm-12 px-0">
+                <label class="form-label" style="font-size: 0.875rem;">Service</label>
+
+                <div style="height: 10rem;">
+                    <kendo-grid [data]="datasource_service" [hideHeader]="false">
+
+                        <kendo-grid-column title="Name">
+
+                            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        
+                                <span class="k_grid_text text_wrap">
+                                    {{ dataItem.name }}
+                                </span>
+        
+                            </ng-template>
+                        </kendo-grid-column>
+
+                        <kendo-grid-column title="Status">
+
+                            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        
+                                <span class="k_grid_text text_wrap">
+                                    {{ dataItem.status }}
+                                </span>
+        
+                            </ng-template>
+                        </kendo-grid-column>
+
+                        <kendo-grid-column title="Download">
+
+                            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        
+                               <button type="button">
+                                <i class="fa fa-download"></i>
+                               </button>
+        
+                            </ng-template>
+                        </kendo-grid-column>
+
+                    </kendo-grid>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-layout btn-bg-white" (click)="download_all()">Download All</button>
+        <button type="button" class="btn btn-layout btn-bg-theme ms-2" (click)="create_service()">Done</button>
+    </div>
+    
+</div>

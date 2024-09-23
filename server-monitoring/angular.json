@@ -31,7 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@progress/kendo-theme-default/dist/all.scss",
               "src/styles.scss"
             ],
             "scripts": []
