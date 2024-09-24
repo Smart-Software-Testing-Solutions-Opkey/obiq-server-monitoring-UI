@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-environment-manager',
@@ -10,27 +9,20 @@ import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component
 export class EnvironmentManagerComponent {
 
   constructor(
-    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.curd_create_environment();
+    this.check_env_configuration();
   }
 
-  curd_create_environment() {
-    const modalRef = this.modalService.open(EnvironmentCurdComponent, {
-      backdrop: 'static',
-      keyboard: false,
-      size: 'md',
-      centered: true,
-      windowClass: 'layout-modal'
-    });
-    modalRef.result.then((result) => {
-    }, (response) => {
-      if (response == 'close modal') {
-        return;
-      }
-    });
+  is_env_configure:boolean = true;
+  check_env_configuration() {
+    debugger;
+    if(this.is_env_configure) {
+      this.router.navigate(['configure'], { relativeTo: this.route });
+    }
   }
 
 }

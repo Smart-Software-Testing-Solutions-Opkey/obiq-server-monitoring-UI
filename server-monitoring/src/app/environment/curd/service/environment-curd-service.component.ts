@@ -19,6 +19,7 @@ export class EnvironmentCurdServiceComponent {
   create_service() {
     debugger;
     this.close_model();
+    this.activeModal.dismiss('add_service');
   }
 
   close_model() {

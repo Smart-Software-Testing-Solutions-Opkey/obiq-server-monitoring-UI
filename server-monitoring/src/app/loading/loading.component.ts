@@ -14,8 +14,10 @@ export class LoadingComponent {
   ) { }
 
 
-  add_environment() {
-    this.router.navigate(['/environment'], { relativeTo: this.route });
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigate(['/environment'], { relativeTo: this.route });
+    }, 2000);
   }
 
 

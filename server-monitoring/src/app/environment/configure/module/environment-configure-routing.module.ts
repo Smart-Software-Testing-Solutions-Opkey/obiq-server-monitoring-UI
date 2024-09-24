@@ -6,7 +6,7 @@ const routes: Routes = [ {
   path: '',
   pathMatch: 'full',
   component: EnvironmentConfigureComponent, 
-  data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
+  // data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
 }];
 
 @NgModule({

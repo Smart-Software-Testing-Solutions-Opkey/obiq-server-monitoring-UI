@@ -1,0 +1,20 @@
+.app-configure-cmp {
+    height: 100%;
+    width: 75%;
+    margin: 0px auto;
+    padding: 1rem;
+
+    .app-loading-img {
+        height: calc(100% - 7rem);
+        opacity: 0.7;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .app-loading-footer {
+        padding: 1rem;
+        text-align: center;
+    }
+}
