@@ -9,7 +9,33 @@
     <div class="sidebar-menu-body flex-box-column">
         
         <div class="sidebar-menu-toolbar">
+            <div class="btn-group layout-btn-group">
 
+                <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
+                     aria-label="Add Environment">Environment
+                </button>
+
+                <button type="button" class="btn"
+                    aria-label="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <button type="button" class="btn"
+                    aria-label="Delete">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+
+                <button type="button" class="btn"
+                    aria-label="Edit">
+                    <i class="fa fa-pencil"></i>
+                </button>
+
+                <button type="button" class="btn"
+                    aria-label="Refresh">
+                    <i class="fa fa-refresh"></i>
+                </button>
+
+            </div>
         </div>
 
         <div class="sidebar-menu-content">
@@ -34,10 +60,14 @@
     
                                         <a class="nav-link" href="javascript:void(0)" (click)="change_view(dataitem.view)">
                 
-                                            <span class="menu-icon">
-                                                <i class="oci oci-journey menu-icon"></i>
+                                            <span>
+                                                <span class="menu-icon">
+                                                    <i class="oci oci-journey menu-icon"></i>
+                                                </span>
+                                                <span class="menu-text">{{dataitem.displayname}}</span>
                                             </span>
-                                            <span class="menu-text">{{dataitem.displayname}}</span>
+
+                                            <span class="layout-status text-red">{{dataitem.status}}</span>
                                         </a>
 
                                     </li>
