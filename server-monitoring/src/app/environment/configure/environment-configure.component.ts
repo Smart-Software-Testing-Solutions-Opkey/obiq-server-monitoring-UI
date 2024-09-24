@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigureModalAddEnvironmentComponent } from './module/modal-add-environment/configure-modal-add-environment.component';
 import { EnvironmentCurdServiceComponent } from '../curd/service/environment-curd-service.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-environment-configure',
@@ -13,11 +14,9 @@ export class EnvironmentConfigureComponent {
   
   constructor(
     private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
-
-  ngOnInit(): void {
-    
-  }
 
   add_environment() {
     this.curd_create_environment();

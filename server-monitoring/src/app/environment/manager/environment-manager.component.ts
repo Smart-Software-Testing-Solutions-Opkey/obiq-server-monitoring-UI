@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './environment-manager.component.html',
   styleUrls: ['./environment-manager.component.scss']
 })
-export class EnvironmentManagerComponent {
+export class EnvironmentManagerComponent implements OnInit {
 
   constructor(
     private router: Router,
