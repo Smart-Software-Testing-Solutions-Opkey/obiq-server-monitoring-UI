@@ -28,7 +28,7 @@ export class EnvironmentConfigureComponent {
     const modalRef = this.modalService.open(ConfigureModalAddEnvironmentComponent, {
       backdrop: 'static',
       keyboard: false,
-      size: 'md',
+      size: 'lg',
       centered: true,
       windowClass: 'layout-modal'
     });
