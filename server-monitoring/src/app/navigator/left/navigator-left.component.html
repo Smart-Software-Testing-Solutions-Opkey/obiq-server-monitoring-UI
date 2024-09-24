@@ -1,1 +1,57 @@
-<p>navigator-left works!</p>
+<div class="sidebar-left-menu flex-box-column">
+    <div class="sidebar-menu-header">
+        <div class="left">
+            <h3 class="mb-0 text-ellipsis">Observe IQ</h3>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="sidebar-menu-body flex-box-column">
+        
+        <div class="sidebar-menu-toolbar">
+
+        </div>
+
+        <div class="sidebar-menu-content">
+            <nav>
+                <ul class="nav nav-pills menu-category">
+
+                    <ng-container *ngFor="let item of array_sidebar_menu">
+    
+                        <li *ngIf="item.display" class="nav-item">
+    
+                            <a class="nav-link" href="javascript:void(0)" (click)="change_view(item.view)">
+    
+                                <span class="menu-icon">
+                                    <i class="oci oci-journey menu-icon"></i>
+                                </span>
+                                <span class="menu-text">{{item.displayname}}</span>
+                            </a>
+
+                            <ul class="nav nav-pills menu-subcategory">
+                                <ng-container *ngFor="let dataitem of item.submenu">
+                                    <li *ngIf="dataitem.display" class="nav-item">
+    
+                                        <a class="nav-link" href="javascript:void(0)" (click)="change_view(dataitem.view)">
+                
+                                            <span class="menu-icon">
+                                                <i class="oci oci-journey menu-icon"></i>
+                                            </span>
+                                            <span class="menu-text">{{dataitem.displayname}}</span>
+                                        </a>
+
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </li>
+    
+    
+    
+                    </ng-container>
+    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>

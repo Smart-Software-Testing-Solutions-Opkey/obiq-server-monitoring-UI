@@ -6,4 +6,6 @@ import { Injectable } from '@angular/core';
 export class AppDataService {
 
   constructor() { }
+
+  is_env_configure:boolean = false;
 }

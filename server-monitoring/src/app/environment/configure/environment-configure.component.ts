@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigureModalAddEnvironmentComponent } from './module/modal-add-environment/configure-modal-add-environment.component';
 import { EnvironmentCurdServiceComponent } from '../curd/service/environment-curd-service.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppDataService } from 'src/app/services/app-data.service';
 
 @Component({
   selector: 'app-environment-configure',
@@ -15,7 +16,8 @@ export class EnvironmentConfigureComponent {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private service_data: AppDataService
   ) { }
 
   add_environment() {
@@ -36,6 +38,7 @@ export class EnvironmentConfigureComponent {
         return;
       }
       this.open_modal_service();
+      this.service_data.is_env_configure = true;
     });
   }
 
@@ -60,6 +63,7 @@ export class EnvironmentConfigureComponent {
 
   select_service_data() {
     debugger;
+    this.router.navigate(['/environment'], { relativeTo: this.route });
   }
   
 }
