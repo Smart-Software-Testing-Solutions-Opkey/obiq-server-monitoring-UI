@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoadingComponent } from './loading/loading.component';
 import { Error404Component } from './error/404/error-404.component';
-import { EnvironmentCurdComponent } from './environment/curd/add/environment-curd.component';
+// import { EnvironmentCurdComponent } from './environment/curd/add/environment-curd.component';
 import { EnvironmentCurdServiceComponent } from './environment/curd/service/environment-curd-service.component';
 
 
@@ -16,7 +16,7 @@ import { EnvironmentCurdServiceComponent } from './environment/curd/service/envi
     AppComponent,
     LoadingComponent,
     Error404Component,
-    EnvironmentCurdComponent,
+    // EnvironmentCurdComponent,
     EnvironmentCurdServiceComponent,
   ],
   imports: [

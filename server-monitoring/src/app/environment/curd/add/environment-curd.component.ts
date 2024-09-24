@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-environment-curd',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './environment-curd.component.html',
   styleUrls: ['./environment-curd.component.scss']
 })

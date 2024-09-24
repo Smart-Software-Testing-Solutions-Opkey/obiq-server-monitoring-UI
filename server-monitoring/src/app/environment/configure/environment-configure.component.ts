@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component';
+import { ConfigureModalAddEnvironmentComponent } from './module/modal-add-environment/configure-modal-add-environment.component';
 import { EnvironmentCurdServiceComponent } from '../curd/service/environment-curd-service.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class EnvironmentConfigureComponent {
   }
 
   curd_create_environment() {
-    const modalRef = this.modalService.open(EnvironmentCurdComponent, {
+    const modalRef = this.modalService.open(ConfigureModalAddEnvironmentComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'md',
