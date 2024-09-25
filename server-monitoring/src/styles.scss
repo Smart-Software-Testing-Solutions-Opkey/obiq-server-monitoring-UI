@@ -343,10 +343,8 @@ a:focus-visible {
 .layout-modal-right {
     &.panel-end {
         z-index: 1079;
-        position: fixed;
-        top: 0;
-        right: 0;
         left: auto;
+        right: 0;
         width: 35rem;
         border-left: 0px solid #fff;
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
@@ -606,6 +604,31 @@ a:focus-visible {
 
     }
 
+}
+
+
+/***************scss for layout grid table***************/
+
+.layout-grid-table {
+    thead {
+        th {
+            background-color: #f9fafb;
+            font-size: .75rem;
+            color: #667085;
+            font-weight: 500;
+            border-color: #e4e7ec;
+        }
+    }
+    
+    tbody {
+        td {
+            color: #344054;
+            border-color: #e4e7ec;
+            font-size: .8125rem;
+            line-height: 1.25rem;
+            font-weight: 400;
+        }
+    }
 }
 
 /***********************************/

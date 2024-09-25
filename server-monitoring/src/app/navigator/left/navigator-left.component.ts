@@ -45,9 +45,9 @@ export class NavigatorLeftComponent implements OnInit {
   ];
 
 
-  change_view(view:any) {
+  change_view(selected_item:any) {
     debugger
-    console.log("view==", view);
+    console.log("selected_item==", selected_item);
   }
 
 

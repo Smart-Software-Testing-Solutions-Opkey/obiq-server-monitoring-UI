@@ -47,7 +47,7 @@
     
                         <li *ngIf="item.display" class="nav-item">
     
-                            <a class="nav-link" href="javascript:void(0)" (click)="change_view(item.view)">
+                            <a class="nav-link" href="javascript:void(0)" (click)="change_view(item)">
     
                                 <span class="menu-icon">
                                     <i class="oci oci-journey menu-icon"></i>
@@ -59,7 +59,7 @@
                                 <ng-container *ngFor="let dataitem of item.submenu">
                                     <li *ngIf="dataitem.display" class="nav-item">
     
-                                        <a class="nav-link" href="javascript:void(0)" (click)="change_view(dataitem.view)">
+                                        <a class="nav-link" href="javascript:void(0)" (click)="change_view(dataitem)">
                 
                                             <span>
                                                 <span class="menu-icon">

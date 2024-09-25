@@ -13,7 +13,7 @@
         <div class="row mx-0 mb-3">
 
             <ng-container *ngFor="let item of seleted_from_environment">
-                <div class="col-sm-3 ps-0 service-text">
+                <div class="col-sm-3 ps-0 service-header-text">
                     <span class="sp-label">{{item.title}}</span>
                     <span class="sp-name text-theme">{{item.name}}</span>
                 </div>
@@ -27,12 +27,12 @@
 
                 <div style="height: 10rem;">
 
-                    <table class="table">
+                    <table class="table layout-grid-table">
                         <thead>
                           <tr>
-                            <th>Name</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Download</th>
+                            <th style="width: 60%;">Name</th>
+                            <th class="text-center" style="width: 25%;">Status</th>
+                            <th class="text-center" style="width: 15%;">Download</th>
                           </tr>
                         </thead>
                         <tbody>

@@ -38,7 +38,6 @@ export class EnvironmentConfigureComponent {
         return;
       }
       this.open_modal_service();
-      this.service_data.is_env_configure = true;
     });
   }
 
@@ -63,6 +62,7 @@ export class EnvironmentConfigureComponent {
 
   select_service_data() {
     debugger;
+    this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
   }
   
