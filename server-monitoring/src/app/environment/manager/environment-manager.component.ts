@@ -23,7 +23,7 @@ export class EnvironmentManagerComponent implements OnInit {
   check_env_configuration() {
     debugger;
     if(!this.service_data.is_env_configure) {
-      this.router.navigate(['configure'], { relativeTo: this.route });
+      this.router.navigate(['environment/configure']);
     } else {
       
     }

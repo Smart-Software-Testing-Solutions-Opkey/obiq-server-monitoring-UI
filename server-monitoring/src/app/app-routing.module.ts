@@ -15,6 +15,7 @@ const routes: Routes = [
      pathMatch: 'full',
      component: LoadingComponent
   },
+  
 ];
 
 @NgModule({

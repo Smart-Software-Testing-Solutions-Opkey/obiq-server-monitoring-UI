@@ -34,6 +34,37 @@ body {
     color: #344054;
 }
 
+/*********************scss for scrolable*******************/
+
+.scrollable {
+    overflow: auto;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ccc;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #6f6d6d;
+    border-radius: 20px;
+    border: 3px solid #6f6d6d;
+}
+
 /*************scss for main feature container**************/
 .feature-container {
     height: 100%;
@@ -217,10 +248,6 @@ a:focus-visible {
         }
     }
 
-    &+.btn-card {
-        margin-left: 1rem;
-    }
-
     .btn-refresh {
         background-color: #fff;
         color: #344054;
@@ -230,6 +257,10 @@ a:focus-visible {
         &:focus {
             border: 1px solid #D9E1EC;
         }
+    }
+
+    &.btn-group-sm .btn {
+        font-size: 0.875rem;
     }
 
 }

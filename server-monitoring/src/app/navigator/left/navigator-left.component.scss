@@ -34,10 +34,10 @@
     }
 
     .sidebar-menu-body {
-        height: 100%;
+        height: calc(100% - 3.5rem);
+
         .sidebar-menu-toolbar {
             padding: 0.5rem;
-            margin-bottom: 0.5rem;
         }
 
         .sidebar-menu-content {

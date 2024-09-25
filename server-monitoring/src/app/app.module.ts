@@ -23,9 +23,6 @@ import { EnvironmentCurdServiceComponent } from './environment/curd/service/envi
     BrowserModule,
     AppRoutingModule
   ],
-  exports:[
-    
-  ],  
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
