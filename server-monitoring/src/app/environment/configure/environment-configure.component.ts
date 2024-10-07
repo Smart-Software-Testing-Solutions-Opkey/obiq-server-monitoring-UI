@@ -4,6 +4,7 @@ import { EnvironmentCurdServiceComponent } from '../curd/service/environment-cur
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { ConfigureCreateEnvironmentComponent } from './configure-create-environment/configure-create-environment.component';
+import { RightPanelAddEnvironmentComponent } from '../manager/right-panel/right-panel-add-environment.component';
 
 @Component({
   selector: 'app-environment-configure',
@@ -12,7 +13,6 @@ import { ConfigureCreateEnvironmentComponent } from './configure-create-environm
 })
 export class EnvironmentConfigureComponent {
 
-  
   constructor(
     private modalService: NgbModal,
     private router: Router,
@@ -21,44 +21,60 @@ export class EnvironmentConfigureComponent {
   ) { }
 
   add_environment() {
-    this.create_environment();
-  }
-
-  create_environment() {
-    const modalRef = this.modalService.open(ConfigureCreateEnvironmentComponent, {
+    const modalRef = this.modalService.open(RightPanelAddEnvironmentComponent, {
+      windowClass: 'layout-modal-right panel-end',
+      backdropClass: 'modal-overlay-bg-light',
       backdrop: 'static',
-      keyboard: false,
-      size: 'lg',
-      centered: true,
-      windowClass: 'layout-modal'
+      size: 'xl'
     });
     modalRef.result.then((result) => {
     }, (response) => {
       if (response == 'close modal') {
         return;
       }
-      this.open_modal_service();
-    });
-  }
-
-
-  open_modal_service() {
-    const modalRef = this.modalService.open(EnvironmentCurdServiceComponent, {
-      backdrop: 'static',
-      keyboard: false,
-      size: 'lg',
-      centered: true,
-      windowClass: 'layout-modal'
-    });
-    modalRef.result.then((result) => {
-    }, (response) => {
-      if (response == 'close modal') {
-        return;
-      }
-
       this.select_service_data();
     });
   }
+
+  // add_environment() {
+  //   this.create_environment();
+  // }
+
+  // create_environment() {
+  //   const modalRef = this.modalService.open(ConfigureCreateEnvironmentComponent, {
+  //     backdrop: 'static',
+  //     keyboard: false,
+  //     size: 'lg',
+  //     centered: true,
+  //     windowClass: 'layout-modal'
+  //   });
+  //   modalRef.result.then((result) => {
+  //   }, (response) => {
+  //     if (response == 'close modal') {
+  //       return;
+  //     }
+  //     this.open_modal_service();
+  //   });
+  // }
+
+
+  // open_modal_service() {
+  //   const modalRef = this.modalService.open(EnvironmentCurdServiceComponent, {
+  //     backdrop: 'static',
+  //     keyboard: false,
+  //     size: 'lg',
+  //     centered: true,
+  //     windowClass: 'layout-modal'
+  //   });
+  //   modalRef.result.then((result) => {
+  //   }, (response) => {
+  //     if (response == 'close modal') {
+  //       return;
+  //     }
+
+  //     this.select_service_data();
+  //   });
+  // }
 
   select_service_data() {
     debugger;

@@ -6,16 +6,49 @@
 
     <div class="feature-body h-100">
         
-        <div class="app-configure-cmp">
+        <!-- <div class="app-configure-cmp">
             <div class="app-loading-img d-flex-center">
                 <img src="/servermonitoring/assets/images/default/server.png">
             </div>
             <div class="app-loading-footer">
                 <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()">Add Environment</button>
             </div>
-        </div>
-       
+        </div> -->
 
+        <div class="app-main-view">
+            <div class="app-search-bar">
+                <div class="search_panel  searchToggle">
+
+                    <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search fa fa-search"></i></span>
+            
+                    <input type="text" class="form-control search_input" placeholder="Search">
+            
+                    <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"><i
+                            class="oci oci-x"></i>
+            
+                    </span>
+                </div>
+            </div>
+            <diV class="app-loading-header d-flex-center mb-2">
+                <span class="app-header-text">Build Your First View</span>
+            </diV>
+            <div class="app-loading-img d-flex-center">
+                <div class="content">
+                    <ul>
+                        <li>Add Widgets</li>
+                        <li>Customize your view</li>
+                        <li>Analyze logs</li>
+                        <li>Set your scope</li>
+                    </ul>
+                    <img src="/servermonitoring/assets/images/default/Dashboard.png" alt="Illustration of a person analyzing data on a computer and mobile device">
+                </div>
+            </div>
+            <div class="app-loading-footer d-flex-center">
+                <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()">
+                    <i class="fa fa-plus mx-2"></i> Start Building Your View
+                </button>
+            </div>
+        </div>
         
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="row mx-0 mb-3">
+<!-- <div class="row mx-0 mb-3">
     <div class="col-sm-12 px-0">
         <label class="form-label" for="role-environment">Environment<span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="role-environment" aria-required="true">
@@ -38,11 +38,81 @@
         <label class="form-label" for="role-product">Product<span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="role-product" aria-required="true">
     </div>
+</div> -->
+<div class="scrollable">
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-12 px-0">
+            <label class="form-label" for="role-name">Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="role-name" aria-required="true">
+        </div>
+    </div>
+    
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-12 px-0">
+            <label class="form-label" for="role-access-type">Access Type<span class="text-danger">*</span></label>
+            <div class="dropdown">
+                <select id="access-type">
+                    <option value="" disabled selected></option>
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                    <option value="shared">Shared</option>
+                </select>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-12 px-0">
+            <label class="form-label" for="role-data-source">Choose Data-Source<span class="text-danger">*</span></label>
+            <div class="data-source-items">
+                <div class="data-item flex-center" (click)="toggleAccordion(0 ,$event)">
+                    <div class="item-name"><p>ERP Analytics</p></div>
+                    <br>
+                    <div class="item-discription">
+                        <p class="description">ERP is a software system that integrates core business processes into a single platform to improve efficiency and decision-making.</p>
+                        <p class="note text-red">To display more ERPs go to Instance and select ESS logs.</p>
+                    </div>
+                </div>
+                <div  *ngIf="accordionOpen[0]" style="height: 4rem; width: 10rem;">
+                    
+                </div>
+                <div class="data-item flex-center" (click)="toggleAccordion(2 ,$event)">
+                    <div class="item-name"><p>User Behavior Analytics</p></div>
+                    <div class="item-discription">
+                        <p class="description">User behavior analytics definition will be displayed here.</p>
+                    </div>
+                </div>
+                <div *ngIf="accordionOpen[2]" style="height: 4rem; width: 10rem;">
+
+                </div>
+                <div class="data-item flex-center" (click)="toggleAccordion(3 ,$event)">
+                    <div class="item-name"><p>System Diagnostics</p></div>
+                    <div class="item-discription">
+                        <p class="description">System diagnostics definition will be displayed here.</p>
+                    </div>
+                </div>
+                <div *ngIf="accordionOpen[3]" style="height: 4rem; width: 10rem;">
+
+                </div>
+                <div class="data-item flex-center" (click)="toggleAccordion(4, $event)">
+                    <div class="item-name"><p>Test Automation Analytics</p></div>
+                    <div class="item-discription">
+                        <p class="description">Test automation analytics definition will be displayed here.</p>
+                    </div>
+                </div>
+                <div *ngIf="accordionOpen[4]" style="height: 4rem; width: 10rem;">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-<div class="row mx-0">
-    <div class="col-sm-12 px-0">
-        <button type="button" class="btn btn-layout btn-bg-theme" (click)="create_environment()">Add</button>
+<div class="row mx-0 mb-4">
+    <div class="col-sm-12 text-end px-0">
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="create_environment()">Next</button>
     </div>
 </div>
