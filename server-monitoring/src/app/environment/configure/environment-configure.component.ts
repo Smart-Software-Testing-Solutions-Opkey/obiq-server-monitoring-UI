@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { ConfigureCreateEnvironmentComponent } from './configure-create-environment/configure-create-environment.component';
 import { RightPanelAddEnvironmentComponent } from '../manager/right-panel/right-panel-add-environment.component';
+import { ViewBuilderComponent } from '../manager/view-builder/view-builder/view-builder.component';
 
 @Component({
   selector: 'app-environment-configure',
@@ -21,8 +22,8 @@ export class EnvironmentConfigureComponent {
   ) { }
 
   add_environment() {
-    const modalRef = this.modalService.open(RightPanelAddEnvironmentComponent, {
-      windowClass: 'layout-modal-right panel-end',
+    const modalRef = this.modalService.open(ViewBuilderComponent, {
+      windowClass: 'layout-modal modal-fullscreen',
       backdropClass: 'modal-overlay-bg-light',
       backdrop: 'static',
       size: 'xl'
