@@ -1,0 +1,52 @@
+<div class="selected-view-container pt-4">
+
+    <div class="selected-view-content scrollable px-4" style="height: calc(100vh - 4.8rem);">
+
+        <div class="custom-tabs">
+            <ul class="custom-tabs-menu">
+                <li [ngClass]="{'active': selectedTab=='overview'}" class="active" (click)="onTabSelect('overview')">
+                    <i class="oci oci-list-view" aria-hidden="true"></i>&nbsp; Overview</li>
+                <li [ngClass]="{'active': selectedTab=='log'}" (click)="onTabSelect('log')" tabindex="0">
+                    <i class="oci oci-view_kanban" aria-hidden="true"></i>&nbsp;Log</li>
+                <li [ngClass]="{'active': selectedTab=='time-explorer'}" (click)="onTabSelect('time-explorer')" tabindex="0">
+                    <i class="oci oci-gantt-view" aria-hidden="true"></i>&nbsp;Time Explorer</li>
+                <li [ngClass]="{'active': selectedTab=='telemetry'}" (click)="onTabSelect('telemetry')" tabindex="0">
+                    <i class="oci oci-dashboard " aria-hidden="true"></i>&nbsp;Telemetry</li>
+            </ul>
+        </div>
+
+        <div class="custom-tabs-content">
+
+            <div class="d-inline-block" style="min-width: 100%;" *ngIf="selectedTab=='overview'">
+                <div class="my-3 overview-chart-box">
+
+                </div>
+                <div class="my-3 overview-chart-box">
+
+                </div>
+                <div class="my-3 overview-chart-box">
+
+                </div>
+                <div class="my-3 overview-chart-box">
+
+                </div>
+                
+            </div>
+
+
+            <div class="d-block" *ngIf="selectedTab=='log'">
+                
+            </div>
+
+            <div class="d-block" *ngIf="selectedTab=='time-explorer'">
+
+            </div>
+
+            <div class="d-block" *ngIf="selectedTab=='telemetry'">
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
