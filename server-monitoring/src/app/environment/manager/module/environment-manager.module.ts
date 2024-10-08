@@ -4,18 +4,24 @@ import { CommonModule } from '@angular/common';
 import { EnvironmentManagerRoutingModule } from './environment-manager-routing.module';
 import { EnvironmentManagerComponent } from '../environment-manager.component';
 import { NavModule } from 'src/app/modules/nav.module';
-import { NavigatorLeftComponent } from 'src/app/navigator/left/navigator-left.component';
+import { FormsModule } from '@angular/forms';
+import { EnvironmentManagerLeftMenuComponent } from '../navigator/environment-manager-left-menu.component';
+import { SeletedViewComponent } from '../view/selected-view.component';
+import { EnvironmentManagerRightSectionComponent } from '../view-right-section/environment-manager-right-section.component';
 
 
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
-    NavigatorLeftComponent,  
+    EnvironmentManagerLeftMenuComponent,
+    EnvironmentManagerRightSectionComponent,
+    SeletedViewComponent,
   ],
   imports: [
     CommonModule,
     NavModule,
-    EnvironmentManagerRoutingModule
+    EnvironmentManagerRoutingModule,
+    FormsModule,
   ]
 })
 export class EnvironmentManagerModule { }
