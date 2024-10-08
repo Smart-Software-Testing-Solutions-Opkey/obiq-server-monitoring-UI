@@ -2,25 +2,41 @@
 
 <div id="modal-view-bilder" class="modal-content-wrapper flex-box-column">
 
-    <div class="modal-header">
+    <div class="modal-header bg-theme rounded-0">
     
-        <h3 class="modal-h-title">Add View</h3>
+        <h3 class="modal-h-title text-white">Add View</h3>
 
         <div class="modal-header-right">
-            <button class="btn btn-bg-white btn-mh-right" (click)="activeModal.dismiss('Cross click')">Close</button>
+            <button class="btn text-light" (click)="activeModal.dismiss('Cross click')">
+                <i class="fa fa-times"></i>
+            </button>
         </div>
 
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body pt-4">
 
         <div class="panel-selection">
 
             <div class="selection-left">
-                <ul class="list-group">
-                    <li class="list-group-item">Select Data-Sources</li>
-                    <li class="list-group-item">Value of Data-Sources</li>
-                    <li class="list-group-item">Create View</li>
+
+                <ul class="stepper-content">
+
+                    <li class="active">
+                        <span class="icon">1</span>
+                        Select Data-Sources
+                    </li>
+
+                    <li>
+                        <span class="icon">2</span>
+                        Value of Data-Sources
+                    </li>
+
+                    <li>
+                        <span class="icon">3</span>
+                        Create View
+                    </li>
+
                 </ul>
             </div>
     
