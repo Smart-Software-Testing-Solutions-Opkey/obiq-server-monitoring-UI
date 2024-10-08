@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentCurdComponent } from '../../curd/add/environment-curd.component';
 
 @Component({
   selector: 'app-right-panel-add-environment',
   standalone: true,
-  imports: [CommonModule, EnvironmentCurdComponent],
+  imports: [CommonModule],
   templateUrl: './right-panel-add-environment.component.html',
   styleUrl: './right-panel-add-environment.component.scss'
 })

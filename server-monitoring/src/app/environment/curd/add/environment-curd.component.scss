@@ -1,48 +1,13 @@
-select {
+.panel-selection {
+    display: flex;
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 
-    option{
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-}
-
-.hide-arrow .accordion-button::after {
-    display: none;
-  }
-
-.data-source-items{
-    margin-bottom: 20px;
-
-    .data-item{
-        width: 100%;
-        padding: 10px;
-        border-radius: 4px;
-        margin-bottom: 10px;
-        background-color: #e0f7fa;
-
-        .item-name{
-            color: #116173;
-            padding: 0.2rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            width: 6rem;
-            border-right: 2px solid #116173;
-        }
-
-        .item-discription{
-            color: #000000;
-            font-size: 0.75rem;
-            width: 24rem;
-            padding-left: 0.5rem;
-            text-align: center;
-        }
+    .selection-left {
+        width: 20rem;
     }
 
+    .selection-right {
+        width: calc(100% - 20rem);
+        padding: 0rem 1rem;
+    }
 }

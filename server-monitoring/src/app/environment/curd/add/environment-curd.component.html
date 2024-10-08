@@ -1,118 +1,88 @@
-<!-- <div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-environment">Environment<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="role-environment" aria-required="true">
-    </div>
-</div>
 
-<div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-business-unit">Business Unit<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="role-business-unit" aria-required="true">
-    </div>
-</div>
 
-<div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-service-type">Service Type<span class="text-danger">*</span></label>
-      
-    </div>
-</div>
+<div id="modal-view-bilder" class="modal-content-wrapper flex-box-column">
+
+    <div class="modal-header">
     
-<div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-cloud">Cloud<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="role-cloud" aria-required="true">
-    </div>
-</div>
+        <h3 class="modal-h-title">Add View</h3>
 
-<div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-physical-location">Physical Location<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="role-physical-location" aria-required="true">
-    </div>
-</div>
-
-<div class="row mx-0 mb-3">
-    <div class="col-sm-12 px-0">
-        <label class="form-label" for="role-product">Product<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="role-product" aria-required="true">
-    </div>
-</div> -->
-<div class="scrollable">
-
-    <div class="row mx-0 mb-3">
-        <div class="col-sm-12 px-0">
-            <label class="form-label" for="role-name">Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="role-name" aria-required="true">
+        <div class="modal-header-right">
+            <button class="btn btn-bg-white btn-mh-right" (click)="activeModal.dismiss('Cross click')">Close</button>
         </div>
+
     </div>
-    
-    <div class="row mx-0 mb-3">
-        <div class="col-sm-12 px-0">
-            <label class="form-label" for="role-access-type">Access Type<span class="text-danger">*</span></label>
-            <div class="dropdown">
-                <select id="access-type">
-                    <option value="" disabled selected></option>
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
-                    <option value="shared">Shared</option>
-                </select>
-                
+
+    <div class="modal-body">
+
+        <div class="panel-selection">
+
+            <div class="selection-left">
+                <ul class="list-group">
+                    <li class="list-group-item">Select Data-Sources</li>
+                    <li class="list-group-item">Value of Data-Sources</li>
+                    <li class="list-group-item">Create View</li>
+                </ul>
             </div>
+    
+            <div class="selection-right">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="acces-type">Acces Type</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <div class="row mx-0">
+                        @for(item of select_datasource; track item.displayname) {
+
+                            <div class="col-6">
+                                <div>
+                                    <h4>{{item.displayname}}</h4>
+        
+                                    <p>
+                                        <span class="d-block">{{item.title}}</span>
+        
+                                        <span class="d-block">{{item.subtitle}}</span>
+                                    </p>
+                                </div>
+        
+                                @if(item.display_subitem) {
+                                    <div class="ps-4">
+                                            @for(dataItem of item.subitem; track dataItem.displayname) {
+                                                <div class="form-check mb-3">
+                                                    <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" name="Environment">
+                                                      <span>
+                                                        <i class="oci oci-{{dataItem.icon}}"></i>
+                                                        {{dataItem.displayname}}
+                                                      </span>
+                                                    </label>
+                                                </div>
+                                            }
+        
+                                       
+                                    </div>
+                                }
+                            </div>
+                         
+                        }
+                    </div>
+                       
+                </div>
+
+            </div>
+
         </div>
+
+    </div>
+
+    <div class="modal-footer border-top-0">
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="next()">Next</button>
     </div>
     
-    <div class="row mx-0 mb-3">
-        <div class="col-sm-12 px-0">
-            <label class="form-label" for="role-data-source">Choose Data-Source<span class="text-danger">*</span></label>
-            <div class="data-source-items">
-                <div class="data-item flex-center" (click)="toggleAccordion(0 ,$event)">
-                    <div class="item-name"><p>ERP Analytics</p></div>
-                    <br>
-                    <div class="item-discription">
-                        <p class="description">ERP is a software system that integrates core business processes into a single platform to improve efficiency and decision-making.</p>
-                        <p class="note text-red">To display more ERPs go to Instance and select ESS logs.</p>
-                    </div>
-                </div>
-                <div  *ngIf="accordionOpen[0]" style="height: 4rem; width: 10rem;">
-                    
-                </div>
-                <div class="data-item flex-center" (click)="toggleAccordion(2 ,$event)">
-                    <div class="item-name"><p>User Behavior Analytics</p></div>
-                    <div class="item-discription">
-                        <p class="description">User behavior analytics definition will be displayed here.</p>
-                    </div>
-                </div>
-                <div *ngIf="accordionOpen[2]" style="height: 4rem; width: 10rem;">
-
-                </div>
-                <div class="data-item flex-center" (click)="toggleAccordion(3 ,$event)">
-                    <div class="item-name"><p>System Diagnostics</p></div>
-                    <div class="item-discription">
-                        <p class="description">System diagnostics definition will be displayed here.</p>
-                    </div>
-                </div>
-                <div *ngIf="accordionOpen[3]" style="height: 4rem; width: 10rem;">
-
-                </div>
-                <div class="data-item flex-center" (click)="toggleAccordion(4, $event)">
-                    <div class="item-name"><p>Test Automation Analytics</p></div>
-                    <div class="item-discription">
-                        <p class="description">Test automation analytics definition will be displayed here.</p>
-                    </div>
-                </div>
-                <div *ngIf="accordionOpen[4]" style="height: 4rem; width: 10rem;">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="row mx-0 mb-4">
-    <div class="col-sm-12 text-end px-0">
-        <button type="button" class="btn btn-layout btn-bg-theme" (click)="create_environment()">Next</button>
-    </div>
 </div>
