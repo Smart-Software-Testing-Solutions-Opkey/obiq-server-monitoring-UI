@@ -53,6 +53,12 @@ export class EnvironmentCurdComponent {
         { displayname: "Oracle EBS", icon: 'OracleEBS'},
       ]
     },
-  ]
+  ];
+
+
+  create_environment() {
+    this.activeModal.dismiss('create_environment');
+  }
+
 
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentCurdServiceComponent } from '../curd/service/environment-curd-service.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component';
@@ -32,6 +31,8 @@ export class EnvironmentConfigureComponent {
       if (response == 'close modal') {
         return;
       }
+      else if(response == 'create_environment')
+      this.select_service_data();
     });
   }
 
