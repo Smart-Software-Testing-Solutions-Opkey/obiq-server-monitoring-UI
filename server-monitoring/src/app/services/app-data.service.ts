@@ -8,4 +8,9 @@ export class AppDataService {
   constructor() { }
 
   is_env_configure:boolean = false;
+  showSelectedViewEnvironment: boolean = false;
+
+  setSelectedViewEnvironmentVisibility(visible: boolean) {
+    this.showSelectedViewEnvironment = visible;
+  }
 }

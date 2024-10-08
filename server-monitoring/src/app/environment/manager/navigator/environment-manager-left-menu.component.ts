@@ -72,9 +72,9 @@ export class EnvironmentManagerLeftMenuComponent {
     }
 
     if (selected_item.view === 'View_01') {
-      this.appDataService.setProdUsEnvironmentVisibility(true);
+      this.appDataService.setSelectedViewEnvironmentVisibility(true);
     } else {
-      this.appDataService.setProdUsEnvironmentVisibility(false);
+      this.appDataService.setSelectedViewEnvironmentVisibility(false);
     }
   }
 
