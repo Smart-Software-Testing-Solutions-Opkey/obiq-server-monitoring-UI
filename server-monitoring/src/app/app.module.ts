@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoadingComponent } from './loading/loading.component';
 import { Error404Component } from './error/404/error-404.component';
 import { EnvironmentCurdServiceComponent } from './environment/curd/service/environment-curd-service.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -19,7 +21,8 @@ import { EnvironmentCurdServiceComponent } from './environment/curd/service/envi
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
