@@ -40,8 +40,8 @@
                     <div class="row mx-0">
                         @for(item of select_datasource; track item.displayname) {
                             <div class="col-6">
-                                <div>
-                                    <h4 (click)="item.showServices = !item.showServices">{{item.displayname}}</h4>
+                                <div (click)="item.showServices = !item.showServices">
+                                    <h4>{{item.displayname}}</h4>
                 
                                     <p>
                                         <span class="d-block">{{item.title}}</span>
