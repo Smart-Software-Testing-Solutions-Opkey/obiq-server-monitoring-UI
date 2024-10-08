@@ -29,6 +29,30 @@
 
 /***************************icon start here**************************/
 
+.oci-x:before {
+  content: "\e906";
+}
+
+.oci-refresh-cw:before {
+  content: "\e901";
+}
+
+.oci-edit:before {
+  content: "\e902";
+}
+
+.oci-delete:before {
+  content: "\e903";
+}
+
+.oci-check:before {
+  content: "\e904";
+}
+
+.oci-search:before {
+  content: "\e905";
+}
+
 .oci-plus:before {
   content: "\e900";
 }
