@@ -23,13 +23,14 @@ export class EnvironmentCurdComponent {
   next() {
 
   }
-
+  selectedServices: { [key: string]: string[] } = {};
   select_datasource = [
     {
       displayname: "ERP Analytics",
       title: "ERP is a software system that integrates core business processes into a single platform to improve efficiency and decision-making.",
       subtitle: "To display more ERPs go to instance and select ESS logs.",
       display_services: true,
+      showServices: false, 
       services: [
         { displayname: "Oracle Fusion", icon: 'OracleFusion'},
         { displayname: "SAP", icon: 'SAP'},
@@ -44,6 +45,7 @@ export class EnvironmentCurdComponent {
       title: "ERP is a software system that integrates core business processes into a single platform to improve efficiency and decision-making.",
       subtitle: "",
       display_services: true,
+      showServices: false, 
       services: [
         { displayname: "Oracle Fusion", icon: 'OracleFusion'},
         { displayname: "SAP", icon: 'SAP'},
@@ -53,7 +55,36 @@ export class EnvironmentCurdComponent {
         { displayname: "Oracle EBS", icon: 'OracleEBS'},
       ]
     },
-  ];
+];
+isSelected(widgetName: string, serviceName: string): boolean {
+  return this.selectedServices[widgetName] && this.selectedServices[widgetName].includes(serviceName);
+}
+
+
+onServiceSelection(widgetName: string, serviceName: string, event: any) {
+  const isChecked = event.target.checked;
+
+  if (isChecked) {
+    
+    if (!this.selectedServices[widgetName]) {
+      this.selectedServices[widgetName] = [];
+    }
+
+   
+    this.selectedServices[widgetName].push(serviceName);
+  } else {
+   
+    this.selectedServices[widgetName] = this.selectedServices[widgetName].filter(item => item !== serviceName);
+
+    
+    if (this.selectedServices[widgetName].length === 0) {
+      delete this.selectedServices[widgetName];
+    }
+  }
+
+  console.log(this.selectedServices); 
+}
+
 
 
   create_environment() {
