@@ -1,10 +1,10 @@
-<div class="feature-container flex-box-column">
+<div class="feature-container h-100">
 
     <div class="feature-breadcrumb">
         <app-navigator-breadcrumb></app-navigator-breadcrumb>
     </div>
 
-    <div class="feature-body h-100">
+    <div class="feature-body feature-body-height flex-box-column app-main-view">
         
         <!-- <div class="app-configure-cmp">
             <div class="app-loading-img d-flex-center">
@@ -15,8 +15,7 @@
             </div>
         </div> -->
 
-        <div class="app-main-view">
-            <div class="app-search-bar">
+            <div class="app-search-bar py-3">
                 <div class="search_panel  searchToggle">
 
                     <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search fa fa-search"></i></span>
@@ -29,26 +28,35 @@
                     </span>
                 </div>
             </div>
-            <diV class="app-loading-header d-flex-center mb-2">
-                <span class="app-header-text">Build Your First View</span>
-            </diV>
-            <div class="app-loading-img d-flex-center">
-                <div class="content">
-                    <ul>
-                        <li>Add Widgets</li>
-                        <li>Customize your view</li>
-                        <li>Analyze logs</li>
-                        <li>Set your scope</li>
-                    </ul>
-                    <img src="/servermonitoring/assets/images/default/MainView.png" alt="Illustration of a person analyzing data on a computer and mobile device">
+
+            <div class="app-body-main py-5">
+                <div class="app-loading-header text-center py-3">
+                    <span class="app-header-text">Build Your First View</span>
+                </div>
+                <div class="app-loading-img">
+                    <div class="row mx-0">
+                        <div class="content col-sm-6 px-0 flex-center">
+                            <ul>
+                                <li>Add Widgets</li>
+                                <li>Customize your view</li>
+                                <li>Analyze logs</li>
+                                <li>Set your scope</li>
+                            </ul>
+                           
+                        </div>
+                        <div class="col-sm-6 px-0 img-mainview m-auto">
+                            <img src="/servermonitoring/assets/images/default/MainView.png" 
+                                alt="Illustration of a person analyzing data on a computer and mobile device">
+                        </div>
+                    </div>
+                </div>
+                <div class="app-loading-footer d-flex-center">
+                    <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()">
+                        <i class="fa fa-plus me-2"></i> Start Building Your View
+                    </button>
                 </div>
             </div>
-            <div class="app-loading-footer d-flex-center">
-                <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()">
-                    <i class="fa fa-plus mx-2"></i> Start Building Your View
-                </button>
-            </div>
-        </div>
+        
         
     </div>
 </div>

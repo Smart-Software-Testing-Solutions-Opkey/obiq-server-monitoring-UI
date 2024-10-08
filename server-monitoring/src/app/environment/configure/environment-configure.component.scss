@@ -1,62 +1,17 @@
-// .app-configure-cmp {
-//     height: 100%;
-//     width: 75%;
-//     margin: 0px auto;
-//     padding: 1rem;
-
-//     .app-loading-img {
-//         height: calc(100% - 8rem);
-//         opacity: 0.7;
-
-//         img {
-//             height: 100%;
-//         }
-//     }
-
-//     .app-loading-footer {
-//         padding: 1rem;
-//         text-align: center;
-//     }
-// }
-
-// .app-configure-fullbackground {
-//     height: 100%;
-
-//     .app-background-img {
-//         height: calc(100% - 5rem);
-//         margin: 0rem 2rem;
-//         opacity: 0.7;
-//         overflow: hidden;
-
-//         img {
-//             height: 100%;
-//             width: 100%;
-//             object-fit: cover;
-//         }
-//     }
-
-// }
-
-// new scss code
 .app-main-view {
-    text-align: center;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 1rem;
 
     .app-search-bar {
         display: flex;
         justify-content: flex-end;
-        margin-bottom: 20px;
 
         .search_panel{
-            width: 18rem !important;
+            width: 25rem !important;
         }
         input {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 16rem;
         }
     }
 
@@ -64,45 +19,41 @@
         
         .app-header-text{
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 1.25rem;
             color: #116173;
         }
     }
 
     .app-loading-img {
+        width: 60rem;
+        margin: auto;
+        border-radius: 0.6rem;
+        background-color: #ffffff;
+        border: 1px solid #E8E8E8;
+        padding: 3rem;
 
         .content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4rem 3rem;
-            border-radius: 0.6rem;
-            background-color: #ffffff;
-            border: 1px solid #E8E8E8;
-
-
             ul {
-                list-style-type: disc;
-                padding-left: 20px;
-                text-align: left;
-                margin-bottom: 0rem;
-
                 li {
-                    margin-bottom: 10px;
+                    margin-bottom: 0.5rem;
+                    font-size: 1.25rem;
                 }
             }
+        }
+
+        .img-mainview {
+            width: 22rem;
 
             img {
-                width: 322px;
-                height: 234px;
-                margin-left: 3rem;
+                width: 100%;
+                height: 100%;
             }
-        }
+        } 
     }
 
     .app-loading-footer {
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 0.5rem;
 
         button{
             font-size: 0.875rem !important;
