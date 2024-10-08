@@ -51,9 +51,9 @@
                                     </p>
                                 </div>
         
-                                @if(item.display_subitem) {
+                                @if(item.display_services) {
                                     <div class="ps-4">
-                                            @for(dataItem of item.subitem; track dataItem.displayname) {
+                                            @for(dataItem of item.services; track dataItem.displayname) {
                                                 <div class="form-check mb-3">
                                                     <label class="form-check-label">
                                                       <input class="form-check-input" type="checkbox" name="Environment">
