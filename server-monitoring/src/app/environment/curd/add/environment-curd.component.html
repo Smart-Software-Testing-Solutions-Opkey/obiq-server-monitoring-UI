@@ -8,7 +8,7 @@
 
         <div class="modal-header-right">
             <button class="btn text-light" (click)="activeModal.dismiss('Cross click')">
-                <i class="fa fa-times"></i>
+                <i class="oci oci-x"></i>
             </button>
         </div>
 
@@ -73,7 +73,7 @@
                     
                                         <p style="padding-top: 2rem;">
                                             <span class="d-block text-center">{{item.title}}</span>
-                                            <span class="d-block text-red text-center">{{item.subtitle}}</span>
+                                            <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span>
                                         </p>
                                         
                                         <span class="checked-data-source">
@@ -84,19 +84,52 @@
                                     @if(item.display_services && item.showServices) {
                                         <div class="data-source-item">
                                             @for(dataItem of item.services; track dataItem.displayname) {
-                                                <div class="form-check mb-3">
-                                                    <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" 
-                                                            [checked]="isSelected(item.displayname, dataItem.displayname)"
-                                                            (change)="onServiceSelection(item.displayname, dataItem.displayname, $event)">
-                                                    <span>
-                                                        <i class="oci oci-{{dataItem.icon}} px-2"></i>
-                                                       <span>
-                                                            {{dataItem.displayname}}
-                                                       </span>
-                                                    </span>
-                                                    </label>
-                                                </div>
+
+                                                @if(item.displayType == 'UserBehaviorAnalytics') {
+                                                    <div class="form-check mb-3">
+                                                        <label class="form-check-label">
+                                                        <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                                [checked]="isSelected(item.displayname, dataItem.displayname)"
+                                                                (change)="onServiceSelection(item.displayname, dataItem.displayname, $event)">
+                                                        <span class="flex-center">
+                                                            <!-- <i class="oci oci-{{dataItem.icon}} px-2"></i> -->
+                                                            <span class="img-avatar-profile">
+                                                                <img src="assets/images/default/{{dataItem.icon}}.png" alt="">
+                                                            </span>
+                                                            <span>
+                                                                <span class="d-inline-block font-bold font-14px">
+                                                                    {{dataItem.displayname}}
+                                                                </span>
+    
+                                                                <span class="d-block email-text-color font-14px">
+                                                                    {{dataItem.email}}
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                        </label>
+                                                    </div>
+                                                }
+
+                                                @else {
+                                                    <div class="form-check mb-3">
+                                                        <label class="form-check-label">
+                                                        <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                                [checked]="isSelected(item.displayname, dataItem.displayname)"
+                                                                (change)="onServiceSelection(item.displayname, dataItem.displayname, $event)">
+                                                        <span>
+                                                            <!-- <i class="oci oci-{{dataItem.icon}} px-2"></i> -->
+                                                           <span class="application-images">
+                                                            <img src="assets/images/default/application/{{dataItem.icon}}.png" alt="">
+                                                           </span>
+                                                           <span class="font-14px">
+                                                                {{dataItem.displayname}}
+                                                           </span>
+                                                        </span>
+                                                        </label>
+                                                    </div>
+                                                }
+
+                                                
                                             }
                                         </div>
                                     }

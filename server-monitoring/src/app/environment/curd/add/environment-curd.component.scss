@@ -70,9 +70,44 @@
         }
 
         .data-source-item {
-            border: 1px solid #F5F5F5;
+            border: 1px solid #f1e8e8;
             border-radius: 0.5rem;
             padding: 1.5rem;
+            max-height: 17.2rem;
+            overflow: auto;
+
+            .img-avatar-profile {
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                margin: 0rem 1rem;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+
+            .application-images {
+                width: 1.5rem;
+                height: 1.5rem;
+                display: inline-block;
+                margin: 0rem 0.5rem;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .email-text-color {
+                color: #667085;
+            }
+        }
+
+        .form-check:last-child {
+            margin-bottom: 0rem !important;
         }
     }
 }
