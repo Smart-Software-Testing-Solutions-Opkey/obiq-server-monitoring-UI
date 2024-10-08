@@ -52,44 +52,7 @@ export class EnvironmentManagerLeftMenuComponent {
             { display: true, displayname: "User Behaviour Analytics", view: ""},
             { display: true, displayname: "System Diagnostics", view: ""},
           ]
-    },
-   
-    // {
-    //   display: true,
-    //   displayname: "View 02",
-    //   view: "View_02",
-    // },
-    // {
-    //   display: true,
-    //   displayname: "View 03",
-    //   view: "View_03",
-    // },
-    // {
-    //   display: true,
-    //   displayname: "View 04",
-    //   view: "View_04",
-    // }
-    // {
-    //   display: true,
-    //   displayname: "PROD_US",
-    //   view: "PROD_US",
-    //   submenu: [
-    //     { display: true, displayname: "Oracle EBS", status: "Not configured", view: "OracleEBS"},
-    //     { display: true, displayname: "IIS", status: "Not configured", view: "IIS"},
-    //     { display: true, displayname: "MySQL", status: "Not configured", view: "MySQL"},
-    //   ]
-    // },
-    // {
-    //   display: true,
-    //   displayname: "Opkey QA",
-    //   view: "OpkeyQA",
-    //   submenu: [
-    //     { display: true, displayname: "Workday", status: "Not configured", view: "Workday"},
-    //     { display: true, displayname: "IIS 01", status: "Not configured", view: "IIS"},
-    //     { display: true, displayname: "IIS 02", status: "Not configured", view: "IIS"},
-    //     { display: true, displayname: "Redis", status: "Not configured", view: "redis"},
-    //   ]
-    // }
+    }
   ];
 
   activeMenuIndex: number = 0;
