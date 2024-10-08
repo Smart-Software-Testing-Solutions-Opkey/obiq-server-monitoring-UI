@@ -23,59 +23,19 @@ export class EnvironmentConfigureComponent {
 
   add_environment() {
     const modalRef = this.modalService.open(EnvironmentConfigureViewBuilderComponent, {
-      windowClass: 'modal-100',
-      backdropClass: 'modal-overlay-bg-light',
       backdrop: 'static',
-      // size: 'xl'
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal transition-none'
     });
     modalRef.result.then((result) => {
     }, (response) => {
       if (response == 'close modal') {
         return;
       }
-      this.select_service_data();
     });
   }
-
-  // add_environment() {
-  //   this.create_environment();
-  // }
-
-  // create_environment() {
-  //   const modalRef = this.modalService.open(ConfigureCreateEnvironmentComponent, {
-  //     backdrop: 'static',
-  //     keyboard: false,
-  //     size: 'lg',
-  //     centered: true,
-  //     windowClass: 'layout-modal'
-  //   });
-  //   modalRef.result.then((result) => {
-  //   }, (response) => {
-  //     if (response == 'close modal') {
-  //       return;
-  //     }
-  //     this.open_modal_service();
-  //   });
-  // }
-
-
-  // open_modal_service() {
-  //   const modalRef = this.modalService.open(EnvironmentCurdServiceComponent, {
-  //     backdrop: 'static',
-  //     keyboard: false,
-  //     size: 'lg',
-  //     centered: true,
-  //     windowClass: 'layout-modal'
-  //   });
-  //   modalRef.result.then((result) => {
-  //   }, (response) => {
-  //     if (response == 'close modal') {
-  //       return;
-  //     }
-
-  //     this.select_service_data();
-  //   });
-  // }
 
   select_service_data() {
     debugger;
