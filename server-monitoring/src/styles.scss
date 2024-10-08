@@ -89,7 +89,13 @@ body {
     }
 
     .feature-body {
-        padding: 0rem;
+        width: 100%;
+        height: auto;
+        background: #FFFFFF;
+    }
+
+    .feature-body-height {
+        height: calc(100% - 5.875rem) !important;
     }
 
 }
