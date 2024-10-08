@@ -139,6 +139,12 @@ body {
     justify-content: space-between;
 }
 
+.text-astric {
+    color: #F90505 !important;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
 /***************scss for button layout***************/
 .btn-layout {
     padding: 0.625rem 0.875rem !important;
@@ -367,7 +373,7 @@ a:focus-visible {
 
 /*****scss for form control******/
 .form-label {
-    font-size: .75rem;
+    font-size: .8125rem;
     font-weight: 600;
     color: #344054;
     line-height: 1.25rem;
