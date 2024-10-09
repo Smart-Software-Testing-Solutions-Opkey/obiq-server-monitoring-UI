@@ -6,18 +6,29 @@ import { EnvironmentManagerComponent } from '../environment-manager.component';
 import { NavModule } from 'src/app/modules/nav.module';
 import { FormsModule } from '@angular/forms';
 import { NavigatorLeftComponent } from 'src/app/navigator/left/navigator-left.component';
+import { EnvironmentManagerMainRightComponent } from '../main-right/environment-manager-main-right.component';
+import { EnvironmentManagerMainRightOverviewTabComponent } from '../main-right/overview-tab/environment-manager-main-right-overview-tab.component';
 
 
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
-    NavigatorLeftComponent
+    NavigatorLeftComponent,
+    EnvironmentManagerMainRightComponent,
+    EnvironmentManagerMainRightOverviewTabComponent
   ],
   imports: [
     CommonModule,
     NavModule,
     EnvironmentManagerRoutingModule,
     FormsModule,
+  
+  ],
+  exports:[
+    EnvironmentManagerComponent,
+    NavigatorLeftComponent,
+    EnvironmentManagerMainRightComponent,
+    EnvironmentManagerMainRightOverviewTabComponent
   ]
 })
 export class EnvironmentManagerModule { }
