@@ -86,9 +86,9 @@
                                             @for(dataItem of item.services; track dataItem.displayname) {
 
                                                 @if(item.displayType == 'UserBehaviorAnalytics') {
-                                                    <div class="form-check mb-3">
-                                                        <label class="form-check-label">
-                                                        <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                    <div class="form-check mb-3 ps-0">
+                                                        <label class="form-check-label flex-center">
+                                                        <input class="chekbox-custom" type="checkbox" 
                                                                 [checked]="isSelected(item.displayname, dataItem.displayname)"
                                                                 (change)="onServiceSelection(item.displayname, dataItem.displayname, $event)">
                                                         <span class="flex-center">
@@ -111,9 +111,9 @@
                                                 }
 
                                                 @else {
-                                                    <div class="form-check mb-3">
-                                                        <label class="form-check-label">
-                                                        <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                    <div class="form-check mb-3 ps-0">
+                                                        <label class="form-check-label flex-center">
+                                                        <input class="chekbox-custom" type="checkbox" 
                                                                 [checked]="isSelected(item.displayname, dataItem.displayname)"
                                                                 (change)="onServiceSelection(item.displayname, dataItem.displayname, $event)">
                                                         <span>
