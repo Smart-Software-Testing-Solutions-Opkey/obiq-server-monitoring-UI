@@ -5,11 +5,13 @@ import { EnvironmentManagerRoutingModule } from './environment-manager-routing.m
 import { EnvironmentManagerComponent } from '../environment-manager.component';
 import { NavModule } from 'src/app/modules/nav.module';
 import { FormsModule } from '@angular/forms';
+import { NavigatorLeftComponent } from 'src/app/navigator/left/navigator-left.component';
 
 
 @NgModule({
   declarations: [
-    EnvironmentManagerComponent
+    EnvironmentManagerComponent,
+    NavigatorLeftComponent
   ],
   imports: [
     CommonModule,
