@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component';
+import { ConfigurationSettingsComponent } from './configuration-settings/configuration-settings.component';
 
 @Component({
   selector: 'app-environment-configure',
@@ -19,7 +20,7 @@ export class EnvironmentConfigureComponent {
   ) { }
 
   add_environment() {
-    const modalRef = this.modalService.open(EnvironmentCurdComponent, {
+    const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
       backdrop: 'static',
       keyboard: false,
       size: 'full',

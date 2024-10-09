@@ -1,0 +1,57 @@
+
+
+<div id="modal-view-bilder" class="modal-content-wrapper flex-box-column">
+
+    <div class="modal-header bg-theme rounded-0">
+    
+        <h3 class="modal-h-title text-white">Add View</h3>
+
+        <div class="modal-header-right">
+            <button class="btn text-light" (click)="close_model()">
+                <i class="oci oci-x"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="modal-body pt-4">
+
+        <div class="panel-selection">
+
+            <div class="selection-left">
+
+                <ul class="stepper-content">
+
+                    <li class="active">
+                        <span class="icon">1</span>
+                        Select Data-Sources
+                    </li>
+
+                    <li>
+                        <span class="icon">2</span>
+                        Value of Data-Sources
+                    </li>
+
+                    <li>
+                        <span class="icon">3</span>
+                        Create View
+                    </li>
+
+                </ul>
+            </div>
+    
+           <div class="selection-right">
+            <app-configuration-data-source-selection>
+                
+            </app-configuration-data-source-selection>
+           </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer border-top-0">
+        <button type="button" class="btn btn-layout btn-bg-theme">Next</button>
+    </div>
+    
+</div>

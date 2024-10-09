@@ -1,0 +1,136 @@
+
+    <div>
+        <p class="selection-header">
+            Add your view by selecting multiple data sources
+        </p>
+    </div>
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-5 ps-0">
+            <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-5 ps-0">
+            <label for="acces-type" class="form-label">Acces Type <span class="text-astric">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-12 px-0">
+            <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
+            <div class="row mx-0">
+                @for(item of data_Source_widjets; track item.name) {
+                    <div class="col-5 ps-0 mb-3 me-3">
+                        <div class="data-source-category active" (click)="ShowWSelectedWidjetData(item)">
+                            <h4 class="text-center pb-3 header">{{item.name}}</h4>
+                            <p style="padding-top: 2rem;">
+                                <span class="d-block text-center">{{item.description}}</span>
+                                <!-- <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span> -->
+                            </p>
+                            <span class="checked-data-source">
+                                <i class="oci oci-check element-center"></i>
+                            </span>
+                        </div>
+    
+                        @if(item.display_services && item.showServices && item.name === 'ERP Analytics') {
+                            <div class="data-source-item">
+                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                                @for(dataItem of Application_dataSource; track dataItem) {
+                                    <div class="form-check mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                   [checked]="isSelected(item.name, dataItem)"
+                                                   (change)="onServiceSelection(item.name, dataItem, $event)">
+                                            <span>
+                                                <span class="application-images">
+                                                    <!-- Assuming icons are based on application names -->
+                                                    <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
+                                                </span>
+                                                <span class="font-14px">
+                                                    {{dataItem}} <!-- Display the application name -->
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @else if(item.display_services && item.showServices && item.name === 'User Behaviour Analytics') {
+                            <div class="data-source-item">
+                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                                @for(dataItem of Application_dataSource; track dataItem) {
+                                    <div class="form-check mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                   [checked]="isSelected(item.name, dataItem)"
+                                                   (change)="onServiceSelection(item.name, dataItem, $event)">
+                                            <span>
+                                                <span class="application-images">
+                                                    <!-- Assuming icons are based on application names -->
+                                                    <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
+                                                </span>
+                                                <span class="font-14px">
+                                                    {{dataItem}} <!-- Display the application name -->
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @else if(item.display_services && item.showServices && item.name === 'System Diagnostics') {
+                            <div class="data-source-item">
+                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                                @for(dataItem of Application_dataSource; track dataItem) {
+                                    <div class="form-check mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                   [checked]="isSelected(item.name, dataItem)"
+                                                   (change)="onServiceSelection(item.name, dataItem, $event)">
+                                            <span>
+                                                <span class="application-images">
+                                                    <!-- Assuming icons are based on application names -->
+                                                    <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
+                                                </span>
+                                                <span class="font-14px">
+                                                    {{dataItem}} <!-- Display the application name -->
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @else if(item.display_services && item.showServices && item.name === 'Test Automation Analysis') {
+                            <div class="data-source-item">
+                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                                @for(dataItem of Application_dataSource; track dataItem) {
+                                    <div class="form-check mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                                   [checked]="isSelected(item.name, dataItem)"
+                                                   (change)="onServiceSelection(item.name, dataItem, $event)">
+                                            <span>
+                                                <span class="application-images">
+                                                    <!-- Assuming icons are based on application names -->
+                                                    <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
+                                                </span>
+                                                <span class="font-14px">
+                                                    {{dataItem}} <!-- Display the application name -->
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    

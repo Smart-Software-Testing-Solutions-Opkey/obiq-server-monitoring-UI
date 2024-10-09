@@ -6,17 +6,12 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppService } from 'src/app/services/app.service';
 
-
-
 @Component({
-  selector: 'app-environment-curd',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './environment-curd.component.html',
-  styleUrls: ['./environment-curd.component.scss']
+  selector: 'app-configuration-data-source-selection',
+  templateUrl: './configuration-data-source-selection.component.html',
+  styleUrl: './configuration-data-source-selection.component.scss'
 })
-export class EnvironmentCurdComponent implements OnInit {
-
+export class ConfigurationDataSourceSelectionComponent {
   constructor(
     public activeModal: NgbActiveModal,
     public app_service:AppService
@@ -154,5 +149,4 @@ ShowWSelectedWidjetData(selectedItem: any) {
   close_model() {
     this.activeModal.dismiss('close modal');
   }
-
 }
