@@ -41,9 +41,18 @@
             </div>
     
            <div class="selection-right">
-            <app-configuration-data-source-selection>
-                
-            </app-configuration-data-source-selection>
+            <div *ngIf="showSelectionComponent">
+                <app-configuration-data-source-selection 
+                 >
+                </app-configuration-data-source-selection>
+              </div>
+              
+              <div *ngIf="!showSelectionComponent">
+                <app-configuration-datasource-erp-analytics 
+                  >
+                </app-configuration-datasource-erp-analytics>
+              </div>
+          
            </div>
 
         </div>
@@ -51,7 +60,7 @@
     </div>
 
     <div class="modal-footer border-top-0">
-        <button type="button" class="btn btn-layout btn-bg-theme">Next</button>
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="Navigate_Child_comp()">Next</button>
     </div>
     
 </div>
