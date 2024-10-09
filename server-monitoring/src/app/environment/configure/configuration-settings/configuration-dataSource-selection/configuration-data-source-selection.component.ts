@@ -68,11 +68,13 @@ this.app_service.make_get_server_call(ajax_url, {})
 }
 
   getAllWidjets(){
+  window.loadingStart("#div-datasource-slection", "Please wait");
   var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
   this.app_service.make_get_server_call(ajax_url, {})
   .subscribe({
    
     next: (result: any) => {
+      window.loadingStop("#div-datasource-slection");
         result.forEach((widjet: any) => {
           if (widjet.name === "ERP Analytics") {
            
@@ -91,6 +93,7 @@ this.app_service.make_get_server_call(ajax_url, {})
       this.data_Source_widjets = result;
     },
     error: (error: any) => {
+      window.loadingStop("#div-datasource-slection");
       console.warn(error);
     },
     complete: () => {
