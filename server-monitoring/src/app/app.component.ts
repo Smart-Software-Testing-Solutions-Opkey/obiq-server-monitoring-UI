@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     this.get_data();
   }
 
-  get_data() {
+   get_data():any {
 
     console.log("window.keycloak object ", window.keycloak);
 
@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
        
       }
     );
+
+    
   }
 }
 
