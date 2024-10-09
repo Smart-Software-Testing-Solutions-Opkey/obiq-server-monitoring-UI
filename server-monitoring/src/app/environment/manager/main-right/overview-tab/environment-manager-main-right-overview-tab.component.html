@@ -1,0 +1,21 @@
+<div class="main">
+   @for (applicationData of applicationTotalData; track $index) {
+    <div class="applicationdiv" style="border: 1px solid black;">
+        <div class="icon mb-2">
+            <span>{{applicationData.applicationName}}</span>
+        </div>
+        <div class="stats mb-2 d-flex flex-row justify-content-around">
+            <div class="cpu">
+                {{applicationData.cpu}} <span>cpu</span>
+            </div>
+            <div class="ram">
+                {{applicationData.ram}} <span>ram</span>
+            </div>
+            <div class="health">
+                <span>Current Health :</span>{{applicationData.health}} 
+            </div>
+        </div>
+
+    </div>
+   }
+</div>

@@ -1,0 +1,36 @@
+<div class="header">
+  header here
+</div>
+<div class="body">
+   <div class="tabs border-bottom" >
+        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('overview')">Overview</a>
+        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('log')">Log</a>
+        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('timeexplorer')">Time Explorer</a>
+        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('telemetry')">Telemetry</a>
+   </div>
+   <div class="tabscontent">
+    @if (selectedTab == 'overview') { 
+        <div class="overview">
+            <app-environment-manager-main-right-overview-tab></app-environment-manager-main-right-overview-tab>
+        </div>
+    }
+    @else if (selectedTab == 'log') {
+        <div class="log">
+            Log component here
+        </div>
+
+    }
+    @else if (selectedTab == 'timeexplorer') {
+
+        <div class="timeexplorer">
+            Time explorer component here
+        </div>
+    }
+    @else if (selectedTab == 'telemetry') {
+
+        <div class="telemetry">
+            Telemetry component here
+        </div>
+    }
+   </div>
+</div>

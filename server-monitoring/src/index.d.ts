@@ -12,5 +12,7 @@ declare global {
         keycloak_loaduserprofile: any;
         validate_updatetoken: any
         opkey_project_key: any
+        loadingStart: any;
+        loadingStop: any;
     }
 }

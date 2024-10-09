@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit,EventEmitter  } from '@angular/core';
+import { Component, OnInit,EventEmitter, Input  } from '@angular/core';
 import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,14 @@ export class ConfigurationDataSourceSelectionComponent implements OnInit {
     public activeModal: NgbActiveModal,
     public app_service:AppService
   ) { }
+
+
+  obj_configuration_setting:any;
+
+  @Input('child_data') set child_data({ obj_configuration_setting }) {
+    this.obj_configuration_setting = obj_configuration_setting;
+  }
+
   ngOnInit() {
    this.getAllWidjets();
   }
@@ -60,11 +68,13 @@ this.app_service.make_get_server_call(ajax_url, {})
 }
 
   getAllWidjets(){
+  window.loadingStart("#div-datasource-slection", "Please wait");
   var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
   this.app_service.make_get_server_call(ajax_url, {})
   .subscribe({
    
     next: (result: any) => {
+      window.loadingStop("#div-datasource-slection");
         result.forEach((widjet: any) => {
           if (widjet.name === "ERP Analytics") {
            
@@ -83,6 +93,7 @@ this.app_service.make_get_server_call(ajax_url, {})
       this.data_Source_widjets = result;
     },
     error: (error: any) => {
+      window.loadingStop("#div-datasource-slection");
       console.warn(error);
     },
     complete: () => {
@@ -90,7 +101,8 @@ this.app_service.make_get_server_call(ajax_url, {})
     }
   });
  
-  console.log(this.data_Source_widjets,"these are widjets")
+  console.log(this.data_Source_widjets,"these are widjets");
+
 }
  
   select_datasource:any = []
@@ -123,7 +135,8 @@ onServiceSelection(widgetName: string, serviceName: string, event: any) {
       delete this.selectedServices[widgetName];
     }
   }
-console.log(this.selectedServices)
+console.log(this.selectedServices);
+this.obj_configuration_setting.selected_datasource = this.selectedServices;
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
 

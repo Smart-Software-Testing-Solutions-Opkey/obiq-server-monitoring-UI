@@ -1,17 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit,EventEmitter  } from '@angular/core';
+import { Component, OnInit,EventEmitter,Input  } from '@angular/core';
 import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppService } from 'src/app/services/app.service';
 
+
 @Component({
   selector: 'app-configuration-datasource-erp-analytics',
   templateUrl: './configuration-datasource-erp-analytics.component.html',
   styleUrl: './configuration-datasource-erp-analytics.component.scss'
 })
-export class ConfigurationDatasourceErpAnalyticsComponent {
+export class ConfigurationDatasourceErpAnalyticsComponent implements OnInit {
+
+  obj_configuration_setting:any;
+
+  @Input('child_data') set child_data({ obj_configuration_setting }) {
+    this.obj_configuration_setting = obj_configuration_setting;
+  }
 
   constructor( 
     public activeModal: NgbActiveModal,

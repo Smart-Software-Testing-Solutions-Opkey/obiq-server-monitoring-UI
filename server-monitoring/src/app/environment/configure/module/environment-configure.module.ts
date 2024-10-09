@@ -23,6 +23,12 @@ import { GridModule } from '@progress/kendo-angular-grid';
     
     
   ],
+  exports: [
+    EnvironmentConfigureComponent,
+    ConfigurationSettingsComponent,
+    ConfigurationDataSourceSelectionComponent,
+    ConfigurationDatasourceErpAnalyticsComponent
+  ]
   
 })
 export class EnvironmentConfigureModule { }

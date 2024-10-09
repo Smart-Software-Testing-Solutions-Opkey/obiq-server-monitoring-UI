@@ -4,7 +4,7 @@
 
     <div class="modal-header bg-theme rounded-0">
     
-        <h3 class="modal-h-title text-white">Add View</h3>
+        <h3 class="modal-h-title text-white">{{obj_configuration_setting.title}}</h3>
 
         <div class="modal-header-right">
             <button class="btn text-light" (click)="close_model()">
@@ -41,16 +41,16 @@
             </div>
     
            <div class="selection-right">
-            <div *ngIf="showSelectionComponent">
-                <app-configuration-data-source-selection 
-                 >
-                </app-configuration-data-source-selection>
+            <div *ngIf="obj_configuration_setting.tab=='datasource'">
+                <app-configuration-data-source-selection [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-data-source-selection>
               </div>
               
-              <div *ngIf="!showSelectionComponent">
-                <app-configuration-datasource-erp-analytics 
-                  >
-                </app-configuration-datasource-erp-analytics>
+              <div *ngIf="obj_configuration_setting.tab=='datasource_value'">
+                <app-configuration-datasource-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-datasource-erp-analytics>
+              </div>
+
+              <div *ngIf="obj_configuration_setting.tab=='datasource_summary'">
+                    summary work
               </div>
           
            </div>
@@ -60,7 +60,9 @@
     </div>
 
     <div class="modal-footer border-top-0">
-        <button type="button" class="btn btn-layout btn-bg-theme" (click)="Navigate_Child_comp()">Next</button>
+        <button *ngIf="obj_configuration_setting.tab != 'datasource'" type="button" class="btn btn-layout btn-bg-white me-2" (click)="back()">Back</button>
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="next()">Next</button>
+
     </div>
     
 </div>
