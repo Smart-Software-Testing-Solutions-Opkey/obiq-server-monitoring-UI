@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
-import { EnvironmentCurdComponent } from '../curd/add/environment-curd.component';
 import { ConfigurationSettingsComponent } from './configuration-settings/configuration-settings.component';
 
 @Component({
