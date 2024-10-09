@@ -29,7 +29,7 @@ function keycloak_init_with_force_login(keycloakClientName, initedCallback) {
 
     let xhr = new XMLHttpRequest();
     KeycloakClientName = keycloakClientName;
-    xhr.open('GET', pre_url + '/login/get_keycloak_settings?opkeyone_callsource=' + keycloakClientName);
+    xhr.open('GET', pre_url + '/login/get_keycloak_settings?opkeyone_callsource=' + "Default");
 
     xhr.onload = function () {
 
