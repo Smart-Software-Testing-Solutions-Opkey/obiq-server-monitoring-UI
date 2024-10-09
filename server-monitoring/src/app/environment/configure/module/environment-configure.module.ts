@@ -19,8 +19,13 @@ import { ConfigurationDatasourceErpAnalyticsComponent } from '../configuration-s
     CommonModule,
     NavModule,
     EnvironmentConfigureRoutingModule,
-    
   ],
+  exports: [
+    EnvironmentConfigureComponent,
+    ConfigurationSettingsComponent,
+    ConfigurationDataSourceSelectionComponent,
+    ConfigurationDatasourceErpAnalyticsComponent
+  ]
   
 })
 export class EnvironmentConfigureModule { }
