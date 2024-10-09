@@ -1,1 +1,44 @@
-<p>configuration-datasource-erp-analytics works!</p>
+<kendo-grid 
+    #grid_application 
+    [data]="Instance_list" 
+    (cellClick)="onCellClick($event)"
+    [selectable]="true" 
+    [navigable]="true"
+    (selectionChange)="onSelectionChange($event)"
+    [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+    
+    <kendo-grid-checkbox-column
+    [showSelectAll]="true"
+    [width]="50">
+    </kendo-grid-checkbox-column>
+
+    <kendo-grid-column field="SystemIdentifier" title="Name">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="ApplicationType" title="Application">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="k_grid_text">{{dataItem.ApplicationType}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Info">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="info-icon" title="More Info">
+                <i class="k-icon k-i-info"></i>
+            </span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoGridNoRecordsTemplate>
+        <div class="no_data_found" style="height: 17rem !important;">
+            <div class="no_data_found_content">
+                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                <p class="no_data_found_content_text">No data available</p>
+            </div>
+        </div>
+    </ng-template>
+</kendo-grid>

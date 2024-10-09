@@ -11,7 +11,7 @@ import { AppService } from 'src/app/services/app.service';
   templateUrl: './configuration-data-source-selection.component.html',
   styleUrl: './configuration-data-source-selection.component.scss'
 })
-export class ConfigurationDataSourceSelectionComponent {
+export class ConfigurationDataSourceSelectionComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     public app_service:AppService
