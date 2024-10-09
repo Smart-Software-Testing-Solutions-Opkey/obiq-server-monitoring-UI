@@ -12,6 +12,5 @@ declare global {
         keycloak_loaduserprofile: any;
         validate_updatetoken: any
         opkey_project_key: any
-        opkeyone_callsource:any;
     }
 }
