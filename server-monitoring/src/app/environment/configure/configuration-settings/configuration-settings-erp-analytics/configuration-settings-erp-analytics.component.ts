@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-configuration-settings-erp-analytics',
@@ -246,25 +247,25 @@ export class ConfigurationSettingsErpAnalyticsComponent {
         ApplicationType: appType, // Add application type
     }))
 );
-}
-  //   var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetAllSettingsByApplications"
-  //   var ajax_data = { str_application: "Oracle Fusion" };
-  //   this.app_service.make_get_server_call(ajax_url, ajax_data)
-  //   .subscribe({
-   
-  //   next: (result: any) => {
-  //     this.Instance_list = result;
+return
 
-  //   },
-  //   error: (error: any) => {
-     
-  //     console.warn(error);
-  //   },
-  //   complete: () => {
-  //     console.log("Completed");
-  //   }
-  // });
-  //  }
+    var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetAllSettingsByApplications"
+    var ajax_data = { str_application: JSON.stringify([app]) };
+
+    this.app_service.make_get_server_call(ajax_url, ajax_data)
+        .subscribe({
+            next: (result: any) => {
+                this.Instance_list = result;
+            },
+            error: (error: any) => {
+                console.warn(error);
+            },
+            complete: () => {
+                console.log("Completed");
+            }
+        });
+  }
+  
    ngOnDestroy() {
     
     
@@ -274,16 +275,20 @@ export class ConfigurationSettingsErpAnalyticsComponent {
       console.log(clickedRowData);
   }
   onSelectionChange(event: any) {
-    const selectedDataItems = event.selectedRows.map((row: { dataItem: any }) => row.dataItem);
-    
-    
-    const selectedDataSet = new Set(selectedDataItems);
+    const selectedRow = event.selectedRows;
+    const deselectedRow = event.deselectedRows;
+    selectedRow.forEach((row: any) => {
+      this.selectedRows.push(row.dataItem);
+    });
 
-    
-    this.selectedRows = this.selectedRows
-      .filter(item => selectedDataSet.has(item))
-      .concat(selectedDataItems.filter((item: any) => !this.selectedRows.includes(item))); 
-    console.log('Currently Selected Rows:', this.selectedRows); 
+    deselectedRow.forEach((row: any) => {
+      const index = this.selectedRows.findIndex(item => item.SystemIdentifier === row.dataItem.SystemIdentifier);
+      if (index !== -1) {
+        this.selectedRows.splice(index, 1);
+      }
+    });
+
+    console.log('Selected Rows:', this.selectedRows);
   }
 
 
