@@ -22,11 +22,18 @@ export class NavigatorLeftComponent implements OnInit {
   ) { }
     
   analyticsValueChange = output<any>()
+  onChangeView = output<any>()
+  onSettingsSelected = output<any>()
+
+
 
   ngOnInit(): void {
+    this.onChangeView.emit(this.selectedView)
+    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+
   
   }
-  selectedView = 'view1'
+  selectedView:any = {name:'View 01',val:'view01',accessType:'Public'}
   array_sidebar_menu = [
     {
       display: true,
@@ -52,7 +59,7 @@ export class NavigatorLeftComponent implements OnInit {
   ];
 
   analyticsTypes = [
-    {name:'ERP Analytics',val:'erp',display:true,isSelected:false},
+    {name:'ERP Analytics',val:'erp',display:true,isSelected:true},
     {name:'User Behaviour Analytics',val:'userbehaviour',display:true,isSelected:false},
     {name:'System Diagnostics',val:'systemdiagnostics',display:true,isSelected:false},
     {name:'Test Automation Analysis',val:'testautomation',display:true,isSelected:false}
@@ -60,7 +67,7 @@ export class NavigatorLeftComponent implements OnInit {
 
   ]
 
-  selectedAnalyticsType:any
+  selectedAnalyticsType:any = {name:'ERP Analytics',val:'erp',display:true,isSelected:false}
 
 
   change_view(selected_item:any) {
@@ -69,22 +76,16 @@ export class NavigatorLeftComponent implements OnInit {
   }
   changeAnalyticsSelection(item){
     debugger
-    let isSameType = false
+   
     this.analyticsTypes.forEach((ele)=>{
       if(ele.isSelected){
         ele.isSelected = false
-        if(ele.val == item.val){
-          isSameType = true
-        }
       }
     })
-    if(!isSameType){
+   
       item.isSelected = true
       this.selectedAnalyticsType = item
-    }
-    else{
-      this.selectedAnalyticsType = null
-    }
+    
     this.analyticsValueChange.emit(this.selectedAnalyticsType)
 
   }
@@ -93,6 +94,13 @@ export class NavigatorLeftComponent implements OnInit {
     'view1',
     'view2',
     'view3'
+  ]
+
+  totalViews = [
+    {name:'View 01',val:'view01',accessType:'Public'},
+    {name:'View 02',val:'view02',accessType:'Private'},
+    {name:'View 03',val:'view03',accessType:'Custom'}
+
   ]
   add_environment() {
     const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
@@ -116,6 +124,45 @@ export class NavigatorLeftComponent implements OnInit {
     debugger;
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
+  }
+
+  viewChanged(val){
+    debugger
+    this.selectedView = val
+    this.onChangeView.emit(this.selectedView)
+
+  }
+
+  changeToView(){
+    this.selectedAnalyticsType = null
+    this.analyticsTypes.forEach((ele)=>{
+      if(ele.isSelected){
+        ele.isSelected = false
+      }
+    })
+    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+
+  }
+
+  isopenSettings:boolean = false
+
+  openSettings(){
+    this.isopenSettings = true
+    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+
+  }
+  backToMenu(){
+    this.isopenSettings = false
+    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+
+  }
+
+  selectedViewSettings:any =   {name:'View 01',val:'view01',accessType:'Public'}
+
+  settingsViewSelect(val){
+    this.selectedViewSettings = val
+    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+
   }
 
 }

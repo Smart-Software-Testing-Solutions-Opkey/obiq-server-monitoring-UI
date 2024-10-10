@@ -28,6 +28,7 @@
         padding-left: 2rem;
 
         &.active{
+            color: #116173;
             .icon{
                 background-color: #023444;
                 color: white;
@@ -35,6 +36,7 @@
             &::after{
                 background-color:  #023444;
             }
+
         }
         &::after{
             position: absolute;
@@ -64,5 +66,17 @@
             background-color: #ccc;
             z-index: 0;
         }
-    }  
+
+    } 
+    
+    li.item_subcategory {
+        li {
+            color: #344054;
+
+            &.active {
+                color: #116173 !important;
+            }
+        }
+        
+    }
 }

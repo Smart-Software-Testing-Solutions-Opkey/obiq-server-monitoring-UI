@@ -1,53 +1,108 @@
 <div class="sidebar-left-menu flex-box-column">
     
     <div class="sidebar-menu-header">
-        <div class="left">
+        @if (isopenSettings) {
+            <div class="back" >
+                <button (click)="backToMenu()">back</button>
+            </div>
+        }
+        <div class="head">
             <h3 class="mb-0 text-ellipsis">Analytics</h3>
         </div>
-        <div class="right"></div>
     </div>
 
-    <div class="sidebar-menu-body flex-box-column">
+    @if (isopenSettings) {
+        <div class="sidebar-menu-body flex-box-column">
+    
+            
+            <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
+            aria-label="Add Environment"> <i class="fa fa-plus me-1"></i>View
+            </button>
+    
+            <div class="sidebar-menu-content">
+                <nav>
+                    <ul class="nav nav-pills menu-category">
+    
+                       @for (view of totalViews; track $index) {
+                        <li  class="nav-item">
         
-        <div class="sidebar-menu-toolbar">
-            <div class="btn-group layout-btn-group btn-group-sm">
+                            <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)" [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
+    
+                                <div>
+                                    <span class="name">{{view.name}}</span>
+                                    <span class="type" style="margin-left: 3rem;">{{view.accessType}}</span>    
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:void(0)">Rename</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)">Delete</a></li>
+                                        </ul>
+                                        </div>                      
+                                </div>
 
-                <div>
-                    <kendo-dropdownlist [data]="viewList" [(ngModel)]="selectedView"></kendo-dropdownlist>
-                </div>
-
-
-                <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
-                     aria-label="Add Environment"> <i class="fa fa-plus me-1"></i> 
-                </button>
-                <button type="button" class="btn btn-bg-theme" 
-                     aria-label="Settings"> <i class="fa fa-gear me-1"></i> 
-                </button>
-
+                            </a>
+    
+                        </li>
+                       }
+        
+                    </ul>
+                </nav>
             </div>
+    
         </div>
+    }
+    @else {
 
-        <div class="sidebar-menu-content">
+        <div class="sidebar-menu-body flex-box-column">
+    
             <nav>
                 <ul class="nav nav-pills menu-category">
-
-                   @for (item of analyticsTypes; track $index) {
-                    <li  class="nav-item">
     
-                        <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)" [ngClass]="item.isSelected?'active':''">
-
-                            <span class="menu-icon">
-                                <i class="oci oci-journey menu-icon"></i>
-                            </span>
-                            <span class="menu-text">{{item.name}}</span>
-                        </a>
-
-                    </li>
-                   }
+                 
+            <li class="nav-item" >
+                <a class="nav-link d-flex" style="width: 17rem;">
+    
+                    <div>
+                        <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView" (valueChange)="viewChanged($event)" textField="name" valueField="val"></kendo-dropdownlist>
+                    </div>
+    
+    
+                    <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
+                         aria-label="Add Environment"> <i class="fa fa-plus me-1"></i> 
+                    </button>
+                    <button type="button" class="btn btn-bg-theme" (click)="openSettings()"
+                         aria-label="Settings"> <i class="fa fa-gear me-1"></i> 
+                    </button>
+    
+                </a>
+            </li>
     
                 </ul>
             </nav>
+    
+            <div class="sidebar-menu-content">
+                <nav>
+                    <ul class="nav nav-pills menu-category">
+    
+                       @for (item of analyticsTypes; track $index) {
+                        <li  class="nav-item">
+        
+                            <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)" [ngClass]="item.isSelected?'active':''">
+    
+                                <span class="menu-icon">
+                                    <i class="oci oci-journey menu-icon"></i>
+                                </span>
+                                <span class="menu-text">{{item.name}}</span>
+                            </a>
+    
+                        </li>
+                       }
+        
+                    </ul>
+                </nav>
+            </div>
+    
         </div>
-
-    </div>
+    }
 </div>
