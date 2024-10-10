@@ -608,13 +608,14 @@ a:focus-visible {
         z-index: 1079;
         left: auto;
         right: 0;
-        width: 35rem;
+        width: 35%;
         border-left: 0px solid #fff;
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
 
         .modal-dialog {
             margin: 0px;
             transform: none;
+            max-width: 100%;
         }
 
         .modal-content {

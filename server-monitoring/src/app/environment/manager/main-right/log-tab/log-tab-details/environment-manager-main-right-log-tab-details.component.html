@@ -1,0 +1,71 @@
+<div class="logs-details">
+
+    <div class="status-strip mb-3" style="display: flex; justify-content: space-between;">
+        <div class="left">
+            <span>Error</span>
+            <span style="margin-left: 2rem;">{{selectedData.date}}</span>
+        </div>
+        <div class="right">
+            <button>Export</button>
+        </div>
+    </div>
+
+    <div class="details-strip mb-3" style="display: flex; justify-content: space-evenly;">
+        @for (item of dataKeys; track $index; let idx = $index, e = $even) {
+            <div class="host" style="border: 1px solid;">
+                <span>{{dataKeys[idx]}}</span>
+                <div>{{dataValues[idx]}}</div>
+            </div>
+            }
+       
+    </div>
+
+    <div class="status-message mb-3">
+        Radis connection failed.
+    </div>
+
+    <div class="lowerPart">
+
+        <div class="tab_panel" role="tabpanel" aria-label="Tab Panel">
+            <ul class="nav-tabs mb-0" role="tablist">
+
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Trace'?'active':''" (click)="changeSelectedTab('Trace')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Trace</a>
+                </li>
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab" >
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Metrics'?'active':''" (click)="changeSelectedTab('Metrics')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Metrics</a>
+                </li>
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Journey'?'active':''" (click)="changeSelectedTab('Journey')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Journey</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab_view_content">
+            @if (tabSelected == 'Trace') {
+                <div class="trace">
+                    Trace widget
+                </div>
+            }
+            @else if (tabSelected == 'Metrics') {
+                <div class="metrics">
+                    Metrics widget
+                </div>
+            }
+            @else if (tabSelected == 'Journey') {
+                <div class="journey">
+                    Journey widget
+                </div>
+            }
+        </div>
+    </div>
+</div>

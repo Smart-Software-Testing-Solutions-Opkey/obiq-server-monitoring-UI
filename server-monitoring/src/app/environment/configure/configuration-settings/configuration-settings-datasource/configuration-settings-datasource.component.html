@@ -31,6 +31,9 @@
                         </div>
     
                         @if(item.display_services && item.showServices && item.name === 'ERP Analytics') {
+
+                            <label for="application" class="form-label mt-2">Choose your application <span class="text-astric">*</span></label>
+
                             <div class="data-source-item">
                                 <!-- Loop over this.ApplicationdataSource.Applications -->
                                 @for(dataItem of Application_dataSource; track dataItem) {
