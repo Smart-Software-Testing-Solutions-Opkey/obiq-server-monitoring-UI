@@ -23,6 +23,7 @@ export class ConfigurationSettingsComponent {
 
   obj_configuration_setting = {
     tab: "datasource",
+    is_inner_tab: false,
     title: "Add View",
     selected_datasource: [],
     selected_erp_analytics: []
@@ -33,14 +34,15 @@ export class ConfigurationSettingsComponent {
     if (this.obj_configuration_setting.tab == "datasource") { 
       this.obj_configuration_setting.tab = "ERP_Analytics";
       this.obj_configuration_setting.title = "Add ERP Analytics";
-      console.log("selected_datasource===", this.obj_configuration_setting.selected_datasource);
+      this.obj_configuration_setting.is_inner_tab = true;
     }
     else if (this.obj_configuration_setting.tab == "ERP_Analytics") { 
       this.obj_configuration_setting.tab = "view_summary";
       this.obj_configuration_setting.title = "Create View";
-      console.log("selected_erp_analytics===", this.obj_configuration_setting.selected_erp_analytics);
+      this.obj_configuration_setting.is_inner_tab = false;
     }
     else if (this.obj_configuration_setting.tab == "view_summary") { 
+      this.obj_configuration_setting.is_inner_tab = false;
       alert("error"); 
       
     }
@@ -48,16 +50,19 @@ export class ConfigurationSettingsComponent {
   }
 
   back() {
-
+    debugger;
     if (this.obj_configuration_setting.tab == "ERP_Analytics") { 
       this.obj_configuration_setting.tab = "datasource"; 
       this.obj_configuration_setting.title = "Create View";
+      this.obj_configuration_setting.is_inner_tab = false;
     }
     else if (this.obj_configuration_setting.tab == "view_summary") { 
       this.obj_configuration_setting.tab = "ERP_Analytics"; 
       this.obj_configuration_setting.title = "Add ERP Analytics";
+      this.obj_configuration_setting.is_inner_tab = true;
     }
     else if (this.obj_configuration_setting.tab == "datasource") { 
+      this.obj_configuration_setting.is_inner_tab = false;
       alert("error");
     }
 

@@ -22,19 +22,30 @@
 
                 <ul class="stepper-content">
 
-                    <li class="active">
+                    <li [ngClass]="obj_configuration_setting.tab=='datasource' ? 'active' : ''">
                         <span class="icon">1</span>
-                        Select Data-Sources
+                        <span>Select Data-Sources</span>
                     </li>
 
-                    <li>
-                        <span class="icon">2</span>
-                        Value of Data-Sources
+                    <li [ngClass]="obj_configuration_setting.is_inner_tab ? 'item_subcategory active' : ''">
+                        <span>
+                            <span class="icon">2</span>
+                            <span>Value of Data-Sources</span>
+                        </span>
+
+                        <ul>
+                            <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''">
+                                <span>Add ERP Analytics</span>
+                            </li>
+                            <li>
+                                Add System Diagnostics
+                            </li>
+                        </ul>
                     </li>
 
-                    <li>
+                    <li [ngClass]="obj_configuration_setting.tab=='view_summary' ? 'active' : ''">
                         <span class="icon">3</span>
-                        Create View
+                        <span>Create View</span>
                     </li>
 
                 </ul>
