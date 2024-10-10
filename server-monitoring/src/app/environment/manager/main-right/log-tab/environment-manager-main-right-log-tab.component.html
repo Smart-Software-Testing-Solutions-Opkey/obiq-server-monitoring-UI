@@ -1,31 +1,33 @@
-<div class="main">
-    <div class="graph">
+<div class="logs-panel">
+
+    <div class="graph-timeseries mb-3">
         graph here
     </div>
+
     <div class="grid">
         <kendo-grid 
-    [data]="logDataSource" 
-    [selectable]="true" 
-    (selectionChange)="onSelectionChange($event)" 
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+            [data]="logDataSource" 
+            [selectable]="true" 
+            (selectionChange)="onSelectionChange($event)" 
+            class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
 
-    <kendo-grid-column field="date" title="Date">
-    </kendo-grid-column>
-    <kendo-grid-column field="host" title="Host">
-    </kendo-grid-column>
-    <kendo-grid-column field="service" title="Service">
-    </kendo-grid-column>
-    <kendo-grid-column field="content" title="Content">
-    </kendo-grid-column>
+            <kendo-grid-column field="date" title="Date">
+            </kendo-grid-column>
+            <kendo-grid-column field="host" title="Host">
+            </kendo-grid-column>
+            <kendo-grid-column field="service" title="Service">
+            </kendo-grid-column>
+            <kendo-grid-column field="content" title="Content">
+            </kendo-grid-column>
 
-    <ng-template kendoGridNoRecordsTemplate>
-        <div class="no_data_found" style="height: 17rem !important;">
-            <div class="no_data_found_content">
-                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
-                <p class="no_data_found_content_text">No data available</p>
-            </div>
-        </div>
-    </ng-template>
-</kendo-grid>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div class="no_data_found" style="height: 17rem !important;">
+                    <div class="no_data_found_content">
+                        <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                        <p class="no_data_found_content_text">No data available</p>
+                    </div>
+                </div>
+            </ng-template>
+        </kendo-grid>
     </div>
 </div>
