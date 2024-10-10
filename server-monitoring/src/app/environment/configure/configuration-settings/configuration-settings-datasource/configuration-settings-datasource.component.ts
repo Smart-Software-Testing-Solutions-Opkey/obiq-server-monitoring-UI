@@ -147,17 +147,23 @@ this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Select
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
 
-toggleactiveItems(selectedItem :any){
-  if (!this.isActive(selectedItem)) {
+toggleactiveItems(selectedItem: any) {
+  debugger;
+  if (this.isActive(selectedItem)) {
+   
+    this.activeItems = this.activeItems.filter(item => item !== selectedItem);
+  } else {
+    
     this.activeItems.push(selectedItem);
   }
 }
+
 isActive(item: any): boolean {
- 
   return this.activeItems.includes(item);
 }
 ShowWSelectedWidjetData(selectedItem: any) {
-  this.toggleactiveItems(selectedItem);
+  debugger;
+ 
   this.data_Source_widjets.forEach((item: any) => {
     item.showServices = false;
     item.display_services = false;
@@ -165,9 +171,21 @@ ShowWSelectedWidjetData(selectedItem: any) {
 
   const selectedIndex = this.data_Source_widjets.findIndex((item: any) => item.id === selectedItem.id);
   if (selectedIndex !== -1) {
-    this.data_Source_widjets[selectedIndex].showServices = true;
-    this.data_Source_widjets[selectedIndex].display_services = true;
+    const isActiveItem = this.activeItems.some(activeItem => activeItem.id === this.data_Source_widjets[selectedIndex].id);
+
+    if (!isActiveItem) {
+      this.data_Source_widjets[selectedIndex].showServices = true;
+      this.data_Source_widjets[selectedIndex].display_services = true;
+    }
+    else{
+      this.selectedServices = {};
+      this.obj_Data_Source_Selection.datasource = this.selectedServices;
+      this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection
+    }
+    // this.data_Source_widjets[selectedIndex].showServices = true;
+    // this.data_Source_widjets[selectedIndex].display_services = true;
   }
+  this.toggleactiveItems(selectedItem);
   
 }
 onInputChange(event:any){
