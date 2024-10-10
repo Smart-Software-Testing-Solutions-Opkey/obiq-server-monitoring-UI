@@ -45,7 +45,7 @@
                                                     <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
                                                 </span>
                                                 <span class="font-14px">
-                                                    {{dataItem}} <!-- Display the application name -->
+                                                    {{dataItem}} 
                                                 </span>
                                             </span>
                                         </label>
@@ -53,9 +53,9 @@
                                 }
                             </div>
                         }
-                        @else if(item.display_services && item.showServices && item.name === 'User Behaviour Analytics') {
+                        <!-- @else if(item.display_services && item.showServices && item.name === 'User Behaviour Analytics') {
                             <div class="data-source-item">
-                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                              
                                 @for(dataItem of Behaviour_Analytics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
@@ -64,21 +64,21 @@
                                                    (change)="onServiceSelection(item.name, dataItem, $event)">
                                             <span>
                                                 <span class="application-images">
-                                                    <!-- Assuming icons are based on application names -->
+                                                  
                                                     <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
                                                 </span>
                                                 <span class="font-14px">
-                                                    {{dataItem}} <!-- Display the application name -->
+                                                    {{dataItem}} 
                                                 </span>
                                             </span>
                                         </label>
                                     </div>
                                 }
                             </div>
-                        }
+                        } -->
                         @else if(item.display_services && item.showServices && item.name === 'System Diagnostics') {
                             <div class="data-source-item">
-                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                               
                                 @for(dataItem of System_Diagnostics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
@@ -87,11 +87,11 @@
                                                    (change)="onServiceSelection(item.name, dataItem, $event)">
                                             <span>
                                                 <span class="application-images">
-                                                    <!-- Assuming icons are based on application names -->
+                                                   
                                                     <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
                                                 </span>
                                                 <span class="font-14px">
-                                                    {{dataItem}} <!-- Display the application name -->
+                                                    {{dataItem}} 
                                                 </span>
                                             </span>
                                         </label>
@@ -99,9 +99,9 @@
                                 }
                             </div>
                         }
-                        @else if(item.display_services && item.showServices && item.name === 'Test Automation Analysis') {
+                        <!-- @else if(item.display_services && item.showServices && item.name === 'Test Automation Analysis') {
                             <div class="data-source-item">
-                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                              
                                 @for(dataItem of Application_dataSource; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
@@ -110,18 +110,18 @@
                                                    (change)="onServiceSelection(item.name, dataItem, $event)">
                                             <span>
                                                 <span class="application-images">
-                                                    <!-- Assuming icons are based on application names -->
+                                                   
                                                     <img src="assets/images/default/application/{{dataItem}}.png" alt="{{dataItem}}">
                                                 </span>
                                                 <span class="font-14px">
-                                                    {{dataItem}} <!-- Display the application name -->
+                                                    {{dataItem}} 
                                                 </span>
                                             </span>
                                         </label>
                                     </div>
                                 }
                             </div>
-                        }
+                        } -->
                     </div>
                 }
             </div>
