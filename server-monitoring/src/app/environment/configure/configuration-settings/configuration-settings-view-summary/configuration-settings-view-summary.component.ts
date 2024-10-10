@@ -1,5 +1,4 @@
 import { Component, Input ,OnInit} from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -11,8 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ConfigurationSettingsViewSummaryComponent implements OnInit{
 
-  constructor(
-    public activeModal: NgbActiveModal,
+  constructor( 
     public app_service:AppService){
 
   }
@@ -20,6 +18,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit{
   Selected_grid_dataSource:any;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
+    debugger
     this.obj_configuration_setting = obj_configuration_setting;
     console.log("vidwsummary==============================", this.obj_configuration_setting);
     this.CreateViewSummarySelectedInstance(this.obj_configuration_setting)
