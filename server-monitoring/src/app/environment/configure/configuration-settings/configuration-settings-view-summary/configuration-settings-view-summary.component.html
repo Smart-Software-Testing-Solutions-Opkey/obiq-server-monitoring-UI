@@ -1,1 +1,38 @@
-<p>configuration-settings-view-summary works!</p>
+<h1>Add Access Type To Complete</h1>
+<div>
+    <kendo-grid 
+    #grid_Selected_Instance_list
+    [data]="Selected_grid_dataSource" 
+    (cellClick)="onCellClick($event)"
+    [selectable]="true" 
+    [navigable]="true"
+    (selectionChange)="onSelectionChange($event)"
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+    <kendo-grid-column field="SystemIdentifier" title="Name">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="CreatedBy" title="CreatedBy">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="k_grid_text">{{dataItem.CreatedBy}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="ModifiedBy" title="ModifiedBy">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="k_grid_text">{{dataItem.ModifiedBy}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoGridNoRecordsTemplate>
+        <div class="no_data_found" style="height: 17rem !important;">
+            <div class="no_data_found_content">
+                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                <p class="no_data_found_content_text">No data available</p>
+            </div>
+        </div>
+    </ng-template>
+</kendo-grid>
+</div>

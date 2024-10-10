@@ -41,9 +41,13 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   User_Behaviour_Analytics_dataSource:any = null;
   System_Diagnostics_dataSource:any = null;
   Test_Automation_Analysis:any = null;
-
-  
-
+  viewName:String = "";
+  Behaviour_Analytics :any=null;
+  System_Diagnostics:any = null;
+  obj_Data_Source_Selection = {
+    viewName: null,
+    datasource: null,
+  }
 
   getAllApplications(){
  debugger;
@@ -135,8 +139,9 @@ onServiceSelection(widgetName: string, serviceName: string, event: any) {
       delete this.selectedServices[widgetName];
     }
   }
-console.log(this.selectedServices);
-this.obj_configuration_setting.selected_datasource = this.selectedServices;
+this.obj_Data_Source_Selection.datasource = this.selectedServices;
+this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection
+
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
 
@@ -153,6 +158,11 @@ ShowWSelectedWidjetData(selectedItem: any) {
     this.data_Source_widjets[selectedIndex].display_services = true;
   }
   
+}
+onInputChange(event:any){
+  console.log(event.target.value);
+  this.viewName = event.target.value;
+  this.obj_Data_Source_Selection.viewName  = this.viewName;
 }
 
   create_environment() {

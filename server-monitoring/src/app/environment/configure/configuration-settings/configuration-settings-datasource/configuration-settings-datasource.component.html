@@ -9,7 +9,7 @@
     <div class="row mx-0 mb-3">
         <div class="col-sm-5 ps-0">
             <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" (input)="onInputChange($event)">
         </div>
     </div>
 
@@ -56,7 +56,7 @@
                         @else if(item.display_services && item.showServices && item.name === 'User Behaviour Analytics') {
                             <div class="data-source-item">
                                 <!-- Loop over this.ApplicationdataSource.Applications -->
-                                @for(dataItem of Application_dataSource; track dataItem) {
+                                @for(dataItem of Behaviour_Analytics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
                                             <input class="form-check-input chekbox_custom" type="checkbox" 
@@ -79,7 +79,7 @@
                         @else if(item.display_services && item.showServices && item.name === 'System Diagnostics') {
                             <div class="data-source-item">
                                 <!-- Loop over this.ApplicationdataSource.Applications -->
-                                @for(dataItem of Application_dataSource; track dataItem) {
+                                @for(dataItem of System_Diagnostics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
                                             <input class="form-check-input chekbox_custom" type="checkbox" 

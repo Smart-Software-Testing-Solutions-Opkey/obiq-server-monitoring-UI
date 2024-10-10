@@ -19,17 +19,15 @@
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="ApplicationType" title="Application">
+    <kendo-grid-column field="CreatedBy" title="CreatedBy">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="k_grid_text">{{dataItem.ApplicationType}}</span>
+            <span class="k_grid_text">{{dataItem.CreatedBy}}</span>
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column title="Info">
+    <kendo-grid-column field="ModifiedBy" title="ModifiedBy">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="info-icon" title="More Info">
-                <i class="k-icon k-i-info"></i>
-            </span>
+            <span class="k_grid_text">{{dataItem.ModifiedBy}}</span>
         </ng-template>
     </kendo-grid-column>
 
