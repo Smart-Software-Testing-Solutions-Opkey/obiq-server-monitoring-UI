@@ -10,13 +10,16 @@ import { EnvironmentManagerMainRightComponent } from '../main-right/environment-
 import { EnvironmentManagerMainRightOverviewTabComponent } from '../main-right/overview-tab/environment-manager-main-right-overview-tab.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { EnvironmentConfigureModule } from '../../configure/module/environment-configure.module';
+import { EnvironmentManagerMainRightLogTabComponent } from '../main-right/log-tab/environment-manager-main-right-log-tab.component';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
     NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
-    EnvironmentManagerMainRightOverviewTabComponent
+    EnvironmentManagerMainRightOverviewTabComponent,
+    EnvironmentManagerMainRightLogTabComponent
   ],
   imports: [
     CommonModule,
@@ -24,15 +27,16 @@ import { EnvironmentConfigureModule } from '../../configure/module/environment-c
     EnvironmentManagerRoutingModule,
     FormsModule,
     DropDownsModule,
-    EnvironmentConfigureModule
-
+    EnvironmentConfigureModule,
+    GridModule
   
   ],
   exports:[
     EnvironmentManagerComponent,
     NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
-    EnvironmentManagerMainRightOverviewTabComponent
+    EnvironmentManagerMainRightOverviewTabComponent,
+    EnvironmentManagerMainRightLogTabComponent
   ]
 })
 export class EnvironmentManagerModule { }

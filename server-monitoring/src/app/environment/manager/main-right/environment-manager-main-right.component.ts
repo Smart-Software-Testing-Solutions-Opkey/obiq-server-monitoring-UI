@@ -64,6 +64,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
           {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
         ]
       }
+      this.selectedTab = this.availableTabs[0]
     }
     else {
       this.availableTabs = [
