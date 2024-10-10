@@ -16,7 +16,7 @@ export class EnvironmentManagerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.check_env_configuration();
+    this.check_env_configuration();
   }
 
   selectedAnalyticsType:any = null
