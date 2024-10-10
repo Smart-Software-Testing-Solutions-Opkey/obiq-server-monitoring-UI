@@ -130,7 +130,7 @@ export class NavigatorLeftComponent implements OnInit {
 
   viewChanged(val){
     debugger
-    this.selectedView
+    this.selectedView = val
     this.onChangeView.emit(this.selectedView)
 
   }
@@ -143,6 +143,17 @@ export class NavigatorLeftComponent implements OnInit {
       }
     })
     this.analyticsValueChange.emit(this.selectedAnalyticsType)
+
+  }
+
+  isopenSettings:boolean = false
+
+  openSettings(){
+    this.isopenSettings = true
+
+  }
+  backToMenu(){
+    this.isopenSettings = false
 
   }
 
