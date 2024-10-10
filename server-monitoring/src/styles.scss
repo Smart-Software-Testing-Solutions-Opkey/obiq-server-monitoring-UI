@@ -382,9 +382,13 @@ a:focus-visible {
 
 /**************scss for bs-modal************/
 .layout-modal {
-    
-    &.transition-none {
-        transition: none;
+
+    &.fade-off {
+        transition: none !important;
+        
+        .modal-dialog {
+            transition: none !important;
+        }
     }
 
     .modal-header {

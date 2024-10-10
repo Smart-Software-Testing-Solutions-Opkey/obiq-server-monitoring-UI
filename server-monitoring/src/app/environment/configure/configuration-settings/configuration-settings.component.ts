@@ -15,19 +15,6 @@ export class ConfigurationSettingsComponent {
     this.activeModal.dismiss('close modal');
   }
 
-  showSelectionComponent = true;  
-  passedData: any;  
-
- 
-  Navigate_Child_comp() {
-
-    this.showSelectionComponent = false;
-  }
-
- 
-  handleDataCompletion(data: any) {
-    this.passedData = data;  
-  }
 
   obj_configuration_setting = {
     tab: "datasource",

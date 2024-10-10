@@ -24,7 +24,7 @@ export class EnvironmentConfigureComponent {
       keyboard: false,
       size: 'full',
       centered: true,
-      windowClass: 'layout-modal transition-none'
+      windowClass: 'layout-modal fade-off'
     });
     modalRef.result.then((result) => {
     }, (response) => {
