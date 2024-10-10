@@ -14,15 +14,22 @@
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="CreatedBy" title="CreatedBy">
+    <kendo-grid-column field="CreatedBy" title="Created">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="k_grid_text">{{dataItem.CreatedBy}}</span>
+            <div class="created-info">
+                <div class="created-name">{{dataItem.CreatedBy}}</div>
+                <div class="created-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+            </div>
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="ModifiedBy" title="ModifiedBy">
+    <!-- ModifiedBy Column with Date -->
+    <kendo-grid-column field="ModifiedBy" title="Last Modified">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="k_grid_text">{{dataItem.ModifiedBy}}</span>
+            <div class="modified-info">
+                <div class="modified-name">{{dataItem.ModifiedBy}}</div>
+                <div class="modified-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+            </div>
         </ng-template>
     </kendo-grid-column>
 
