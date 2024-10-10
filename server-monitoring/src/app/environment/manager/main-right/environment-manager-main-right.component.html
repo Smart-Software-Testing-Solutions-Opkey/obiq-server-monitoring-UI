@@ -3,6 +3,7 @@
 
     <div class="feature-breadcrumb">
         <app-navigator-breadcrumb></app-navigator-breadcrumb>
+        <h3>{{this.selectedView.name}}</h3>
     </div>
 
     <div class="feature-body feature-body-height flex-box-column">
@@ -12,12 +13,16 @@
             <ul class="nav-tabs mb-0" role="tablist">
                 @for (tab of availableTabs; track $index) {
 
-                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                        <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
-                            href="javascript:void(0)" (click)="changeSelectedTab(tab)">
-                            <i class="oci oci-journey pr-1"></i>
-                            {{tab.name}}</a>
-                    </li>
+                    @if (tab.isVisible) {
+
+                        <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                            <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
+                                href="javascript:void(0)" (click)="changeSelectedTab(tab)">
+                                <i class="oci oci-journey pr-1"></i>
+                                {{tab.name}}</a>
+                        </li>
+                    }
+
                 }
                 <!-- <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
                     <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"

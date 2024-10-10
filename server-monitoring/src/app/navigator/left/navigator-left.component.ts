@@ -22,11 +22,14 @@ export class NavigatorLeftComponent implements OnInit {
   ) { }
     
   analyticsValueChange = output<any>()
+  onChangeView = output<any>()
+
 
   ngOnInit(): void {
+    this.onChangeView.emit(this.selectedView)
   
   }
-  selectedView = 'view1'
+  selectedView:any = {name:'View 01',val:'view01',accessType:'Public'}
   array_sidebar_menu = [
     {
       display: true,
@@ -94,6 +97,13 @@ export class NavigatorLeftComponent implements OnInit {
     'view2',
     'view3'
   ]
+
+  totalViews = [
+    {name:'View 01',val:'view01',accessType:'Public'},
+    {name:'View 02',val:'view02',accessType:'Private'},
+    {name:'View 03',val:'view03',accessType:'Custom'}
+
+  ]
   add_environment() {
     const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
       backdrop: 'static',
@@ -116,6 +126,24 @@ export class NavigatorLeftComponent implements OnInit {
     debugger;
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
+  }
+
+  viewChanged(val){
+    debugger
+    this.selectedView
+    this.onChangeView.emit(this.selectedView)
+
+  }
+
+  changeToView(){
+    this.selectedAnalyticsType = null
+    this.analyticsTypes.forEach((ele)=>{
+      if(ele.isSelected){
+        ele.isSelected = false
+      }
+    })
+    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+
   }
 
 }

@@ -1,12 +1,12 @@
 <section class="app-section-main">
 
     <div class="left-section">
-        <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" ></app-navigator-left>
+        <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" (onChangeView)="viewChanged($event)" ></app-navigator-left>
     </div>
 
     <div class="right-section">
         <!-- <router-outlet></router-outlet> -->
-        <app-environment-manager-main-right>
+        <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
             
         </app-environment-manager-main-right>
     </div>

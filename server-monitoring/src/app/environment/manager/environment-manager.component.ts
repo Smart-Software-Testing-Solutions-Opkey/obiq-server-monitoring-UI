@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 
@@ -31,6 +31,10 @@ this.selectedAnalyticsType = val
     } else {
       
     }
+  }
+  selectedView:any = null
+  viewChanged(val){
+    this.selectedView = val
   }
 
 }
