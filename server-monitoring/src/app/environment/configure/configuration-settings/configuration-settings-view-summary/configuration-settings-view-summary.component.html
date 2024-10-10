@@ -1,45 +1,120 @@
-<h1>Add Access Type To Complete</h1>
-<div>
-    <kendo-grid 
-    #grid_Selected_Instance_list
-    [data]="Selected_grid_dataSource" 
-    (cellClick)="onCellClick($event)"
-    [selectable]="true" 
-    [navigable]="true"
-    (selectionChange)="onSelectionChange($event)"
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-    <kendo-grid-column field="SystemIdentifier" title="Name">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
-        </ng-template>
-    </kendo-grid-column>
+<div class="configuration-view-summary">
 
-    <kendo-grid-column field="CreatedBy" title="Created">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="created-info">
-                <div class="created-name">{{dataItem.CreatedBy}}</div>
-                <div class="created-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</div>
-            </div>
-        </ng-template>
-    </kendo-grid-column>
+    <h4>Add Access Type to complete</h4>
 
-    <!-- ModifiedBy Column with Date -->
-    <kendo-grid-column field="ModifiedBy" title="Last Modified">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="modified-info">
-                <div class="modified-name">{{dataItem.ModifiedBy}}</div>
-                <div class="modified-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</div>
-            </div>
-        </ng-template>
-    </kendo-grid-column>
-
-    <ng-template kendoGridNoRecordsTemplate>
-        <div class="no_data_found" style="height: 17rem !important;">
-            <div class="no_data_found_content">
-                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
-                <p class="no_data_found_content_text">No data available</p>
-            </div>
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-5 ps-0">
+            <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
+            <input type="text" class="form-control">
         </div>
-    </ng-template>
-</kendo-grid>
+    </div>
+
+    <h4>View Summary</h4>
+
+    <div class="row mx-0 mb-3">
+        <div class="col-12 px-0">
+
+            <div id="accordion-view-summary">
+
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
+                            ERP Analytics
+                        </a>
+                    </div>
+                    <div id="collapse_ERPAnalytics" class="collapse show" data-bs-parent="#accordion-view-summary">
+                        <div class="card-body">
+
+                            <div class="kendo_grid">
+                                <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                                    (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                                    (selectionChange)="onSelectionChange($event)"
+                                    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                    <kendo-grid-column field="SystemIdentifier" title="Name">
+                                        <ng-template kendoGridCellTemplate let-dataItem>
+                                            <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
+                                        </ng-template>
+                                    </kendo-grid-column>
+
+                                    <kendo-grid-column field="CreatedBy" title="Created">
+                                        <ng-template kendoGridCellTemplate let-dataItem>
+                                            <div class="created-info">
+                                                <div class="created-name">{{dataItem.CreatedBy}}</div>
+                                                <div class="created-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </kendo-grid-column>
+                                 
+                                    <!-- ModifiedBy Column with Date -->
+                                    <kendo-grid-column field="ModifiedBy" title="Last Modified">
+                                        <ng-template kendoGridCellTemplate let-dataItem>
+                                            <div class="modified-info">
+                                                <div class="modified-name">{{dataItem.ModifiedBy}}</div>
+                                                <div class="modified-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </kendo-grid-column>
+
+                                    <ng-template kendoGridNoRecordsTemplate>
+                                        <div class="no_data_found" style="height: 17rem !important;">
+                                            <div class="no_data_found_content">
+                                                <img class="no_data_found_content_img"
+                                                    src="/assets/icon-image/nodata-img.png" alt="No data">
+                                                <p class="no_data_found_content_text">No data available</p>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </kendo-grid>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
+                            System Diagnostics
+                        </a>
+                    </div>
+                    <div id="collapse_systemDiagnostics" class="collapse" data-bs-parent="#accordion-view-summary">
+                        <div class="card-body">
+                            System Diagnostics summary
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_user">
+                            User Behavior Analytics
+                        </a>
+                    </div>
+                    <div id="collapse_user" class="collapse" data-bs-parent="#accordion-view-summary">
+                        <div class="card-body">
+                            User Behavior Analytics summary
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
+                            Test Automation Analysis
+                        </a>
+                    </div>
+                    <div id="collapse_testAutomation" class="collapse" data-bs-parent="#accordion-view-summary">
+                        <div class="card-body">
+                            Test Automation Analysis
+                        </div>
+                    </div>
+                </div>
+
+             
+            </div>
+
+        </div>
+    </div>
+
 </div>
