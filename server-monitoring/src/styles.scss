@@ -615,6 +615,7 @@ a:focus-visible {
         .modal-dialog {
             margin: 0px;
             transform: none;
+            max-width: 100%;
         }
 
         .modal-content {
