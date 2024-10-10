@@ -28,9 +28,13 @@ export class ConfigurationSettingsComponent {
     selected_datasource: [],
     selected_erp_analytics: []
   }
-
+  checkValidation(){
+    console.log(this.obj_configuration_setting,"this is configggggggggggggsettttingggg================")
+  }
   next() {
     debugger;
+    
+      this.checkValidation();
     if (this.obj_configuration_setting.tab == "datasource") { 
       this.obj_configuration_setting.tab = "ERP_Analytics";
       this.obj_configuration_setting.title = "Add ERP Analytics";

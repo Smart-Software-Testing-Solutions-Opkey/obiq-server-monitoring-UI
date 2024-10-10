@@ -48,6 +48,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     viewName: null,
     datasource: null,
   }
+  selectedWidget: any = null;
+  activeItems: any[] = [];
 
   getAllApplications(){
  debugger;
@@ -145,8 +147,17 @@ this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Select
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
 
-
+toggleactiveItems(selectedItem :any){
+  if (!this.isActive(selectedItem)) {
+    this.activeItems.push(selectedItem);
+  }
+}
+isActive(item: any): boolean {
+ 
+  return this.activeItems.includes(item);
+}
 ShowWSelectedWidjetData(selectedItem: any) {
+  this.toggleactiveItems(selectedItem);
   this.data_Source_widjets.forEach((item: any) => {
     item.showServices = false;
     item.display_services = false;
