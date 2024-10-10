@@ -42,14 +42,14 @@
     
            <div class="selection-right">
             <div *ngIf="obj_configuration_setting.tab=='datasource'">
-                <app-configuration-data-source-selection [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-data-source-selection>
+                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-datasource>
               </div>
               
-              <div *ngIf="obj_configuration_setting.tab=='datasource_value'">
-                <app-configuration-datasource-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-datasource-erp-analytics>
+              <div *ngIf="obj_configuration_setting.tab=='ERP_Analytics'">
+                <app-configuration-settings-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-erp-analytics>
               </div>
 
-              <div *ngIf="obj_configuration_setting.tab=='datasource_summary'">
+              <div *ngIf="obj_configuration_setting.tab=='view_summary'">
                     summary work
               </div>
           

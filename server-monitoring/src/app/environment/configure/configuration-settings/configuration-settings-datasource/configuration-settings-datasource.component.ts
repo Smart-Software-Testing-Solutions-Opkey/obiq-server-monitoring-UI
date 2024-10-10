@@ -1,17 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit,EventEmitter, Input  } from '@angular/core';
-import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-configuration-data-source-selection',
-  templateUrl: './configuration-data-source-selection.component.html',
-  styleUrl: './configuration-data-source-selection.component.scss'
+  selector: 'app-configuration-settings-datasource',
+  templateUrl: './configuration-settings-datasource.component.html',
+  styleUrl: './configuration-settings-datasource.component.scss'
 })
-export class ConfigurationDataSourceSelectionComponent implements OnInit {
+export class ConfigurationSettingsDatasourceComponent implements OnInit {
+
+  
   constructor(
     public activeModal: NgbActiveModal,
     public app_service:AppService
@@ -162,4 +162,6 @@ ShowWSelectedWidjetData(selectedItem: any) {
   close_model() {
     this.activeModal.dismiss('close modal');
   }
+
+
 }

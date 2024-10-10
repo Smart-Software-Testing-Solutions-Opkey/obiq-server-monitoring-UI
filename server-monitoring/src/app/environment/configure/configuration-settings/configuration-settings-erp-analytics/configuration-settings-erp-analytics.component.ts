@@ -1,19 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit,EventEmitter,Input  } from '@angular/core';
-import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app.service';
 
-
 @Component({
-  selector: 'app-configuration-datasource-erp-analytics',
-  templateUrl: './configuration-datasource-erp-analytics.component.html',
-  styleUrl: './configuration-datasource-erp-analytics.component.scss'
+  selector: 'app-configuration-settings-erp-analytics',
+  templateUrl: './configuration-settings-erp-analytics.component.html',
+  styleUrl: './configuration-settings-erp-analytics.component.scss'
 })
-export class ConfigurationDatasourceErpAnalyticsComponent implements OnInit {
+export class ConfigurationSettingsErpAnalyticsComponent {
 
+    
   obj_configuration_setting:any;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
@@ -289,8 +285,6 @@ export class ConfigurationDatasourceErpAnalyticsComponent implements OnInit {
       .concat(selectedDataItems.filter((item: any) => !this.selectedRows.includes(item))); 
     console.log('Currently Selected Rows:', this.selectedRows); 
   }
-  
-
 
 
 }
