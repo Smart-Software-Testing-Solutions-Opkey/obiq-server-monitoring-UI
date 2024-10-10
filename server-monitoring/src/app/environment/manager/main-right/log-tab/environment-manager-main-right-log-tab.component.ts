@@ -23,7 +23,6 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   onSelectionChange(e){
     debugger
    let dataItem = e.selectedRows[0].dataItem
-   dataItem
    const modalRef = this.modalService.open( RightPanelAddEnvironmentComponent,{
     backdrop: 'static',
     keyboard: false,
@@ -37,6 +36,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
       return;
     }
   });
+  modalRef.componentInstance.selectedItem = {callsource:'environmentManager',data:dataItem};
   }
   selectedKeys = []
   logDataSource = [

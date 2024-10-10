@@ -16,7 +16,10 @@
     </div>
 
     <div class="feature-rp-body pd-rp">
-  
+        
+        @if (selectedItem && selectedItem.callsource == "environmentManager") {
+            <app-environment-manager-main-right-log-tab-details [child_data]="{selectedData:selectedItem.data}"></app-environment-manager-main-right-log-tab-details>
+        }
     </div>
 
 

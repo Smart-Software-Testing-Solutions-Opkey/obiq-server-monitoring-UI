@@ -12,6 +12,8 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { EnvironmentConfigureModule } from '../../configure/module/environment-configure.module';
 import { EnvironmentManagerMainRightLogTabComponent } from '../main-right/log-tab/environment-manager-main-right-log-tab.component';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { EnvironmentManagerMainRightLogTabDetailsComponent } from '../main-right/log-tab/log-tab-details/environment-manager-main-right-log-tab-details.component';
+import { RightPanelAddEnvironmentComponent } from '../right-panel/right-panel-add-environment.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { GridModule } from '@progress/kendo-angular-grid';
     NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
     EnvironmentManagerMainRightOverviewTabComponent,
-    EnvironmentManagerMainRightLogTabComponent
+    EnvironmentManagerMainRightLogTabComponent,
+    EnvironmentManagerMainRightLogTabDetailsComponent,
+    RightPanelAddEnvironmentComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import { GridModule } from '@progress/kendo-angular-grid';
     NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
     EnvironmentManagerMainRightOverviewTabComponent,
-    EnvironmentManagerMainRightLogTabComponent
+    EnvironmentManagerMainRightLogTabComponent,
+    EnvironmentManagerMainRightLogTabDetailsComponent,
+    RightPanelAddEnvironmentComponent
   ]
 })
 export class EnvironmentManagerModule { }
