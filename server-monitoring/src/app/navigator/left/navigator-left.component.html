@@ -2,7 +2,7 @@
     
     <div class="sidebar-menu-header">
         <div class="left">
-            <h3 class="mb-0 text-ellipsis">Observe IQ</h3>
+            <h3 class="mb-0 text-ellipsis">Analytics</h3>
         </div>
         <div class="right"></div>
     </div>
@@ -12,28 +12,16 @@
         <div class="sidebar-menu-toolbar">
             <div class="btn-group layout-btn-group btn-group-sm">
 
+                <div>
+                    <kendo-dropdownlist [data]="viewList" [(ngModel)]="selectedView"></kendo-dropdownlist>
+                </div>
+
+
                 <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
-                     aria-label="Add Environment"> <i class="fa fa-plus me-1"></i> Environment
+                     aria-label="Add Environment"> <i class="fa fa-plus me-1"></i> 
                 </button>
-
-                <button type="button" class="btn"
-                    aria-label="Search">
-                    <i class="fa fa-search"></i>
-                </button>
-
-                <button type="button" class="btn"
-                    aria-label="Delete">
-                    <i class="fa fa-trash-o"></i>
-                </button>
-
-                <button type="button" class="btn"
-                    aria-label="Edit">
-                    <i class="fa fa-pencil"></i>
-                </button>
-
-                <button type="button" class="btn"
-                    aria-label="Refresh">
-                    <i class="fa fa-refresh"></i>
+                <button type="button" class="btn btn-bg-theme" 
+                     aria-label="Settings"> <i class="fa fa-gear me-1"></i> 
                 </button>
 
             </div>
@@ -43,42 +31,19 @@
             <nav>
                 <ul class="nav nav-pills menu-category">
 
-                    <ng-container *ngFor="let item of array_sidebar_menu">
+                   @for (item of analyticsTypes; track $index) {
+                    <li  class="nav-item">
     
-                        <li *ngIf="item.display" class="nav-item">
-    
-                            <a class="nav-link" href="javascript:void(0)" (click)="change_view(item)">
-    
-                                <span class="menu-icon">
-                                    <i class="oci oci-journey menu-icon"></i>
-                                </span>
-                                <span class="menu-text">{{item.displayname}}</span>
-                            </a>
+                        <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)" [ngClass]="item.isSelected?'active':''">
 
-                            <ul class="nav nav-pills menu-subcategory">
-                                <ng-container *ngFor="let dataitem of item.submenu">
-                                    <li *ngIf="dataitem.display" class="nav-item">
-    
-                                        <a class="nav-link" href="javascript:void(0)" (click)="change_view(dataitem)">
-                
-                                            <span>
-                                                <span class="menu-icon">
-                                                    <i class="oci oci-journey menu-icon"></i>
-                                                </span>
-                                                <span class="menu-text">{{dataitem.displayname}}</span>
-                                            </span>
+                            <span class="menu-icon">
+                                <i class="oci oci-journey menu-icon"></i>
+                            </span>
+                            <span class="menu-text">{{item.name}}</span>
+                        </a>
 
-                                            <span class="layout-status text-red">{{dataitem.status}}</span>
-                                        </a>
-
-                                    </li>
-                                </ng-container>
-                            </ul>
-                        </li>
-    
-    
-    
-                    </ng-container>
+                    </li>
+                   }
     
                 </ul>
             </nav>

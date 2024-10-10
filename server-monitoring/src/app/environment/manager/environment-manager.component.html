@@ -1,7 +1,7 @@
 <section class="app-section-main">
 
     <div class="left-section">
-        <app-navigator-left></app-navigator-left>
+        <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" ></app-navigator-left>
     </div>
 
     <div class="right-section">

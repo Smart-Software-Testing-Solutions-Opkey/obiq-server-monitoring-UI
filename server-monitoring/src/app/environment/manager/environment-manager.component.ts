@@ -19,7 +19,11 @@ export class EnvironmentManagerComponent implements OnInit {
     this.check_env_configuration();
   }
 
-  
+  selectedAnalyticsType:any = null
+  changeSelectedAnalytics(val){
+    debugger
+this.selectedAnalyticsType = val
+  }
   check_env_configuration() {
     debugger;
     if(!this.service_data.is_env_configure) {

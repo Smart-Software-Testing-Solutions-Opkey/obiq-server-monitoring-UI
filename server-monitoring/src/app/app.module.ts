@@ -7,6 +7,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { Error404Component } from './error/404/error-404.component';
 import { EnvironmentCurdServiceComponent } from './environment/curd/service/environment-curd-service.component';
 import { HttpClientModule } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 
@@ -25,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [    
+    provideAnimations(),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

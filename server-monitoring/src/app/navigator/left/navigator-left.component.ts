@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RightPanelAddEnvironmentComponent } from 'src/app/environment/manager/right-panel/right-panel-add-environment.component';
+import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
+import { AppDataService } from 'src/app/services/app-data.service';
+
 
 @Component({
   selector: 'app-navigator-left',
@@ -13,13 +16,17 @@ export class NavigatorLeftComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private service_data: AppDataService
+
   ) { }
+    
+  analyticsValueChange = output<any>()
 
   ngOnInit(): void {
   
   }
-
+  selectedView = 'view1'
   array_sidebar_menu = [
     {
       display: true,
@@ -44,26 +51,71 @@ export class NavigatorLeftComponent implements OnInit {
     }
   ];
 
+  analyticsTypes = [
+    {name:'ERP Analytics',val:'erp',display:true,isSelected:false},
+    {name:'User Behaviour Analytics',val:'userbehaviour',display:true,isSelected:false},
+    {name:'System Diagnostics',val:'systemdiagnostics',display:true,isSelected:false},
+    {name:'Test Automation Analysis',val:'testautomation',display:true,isSelected:false}
+
+
+  ]
+
+  selectedAnalyticsType:any
+
 
   change_view(selected_item:any) {
     debugger
     console.log("selected_item==", selected_item);
   }
+  changeAnalyticsSelection(item){
+    debugger
+    let isSameType = false
+    this.analyticsTypes.forEach((ele)=>{
+      if(ele.isSelected){
+        ele.isSelected = false
+        if(ele.val == item.val){
+          isSameType = true
+        }
+      }
+    })
+    if(!isSameType){
+      item.isSelected = true
+      this.selectedAnalyticsType = item
+    }
+    else{
+      this.selectedAnalyticsType = null
+    }
+    this.analyticsValueChange.emit(this.selectedAnalyticsType)
 
+  }
 
+  viewList = [
+    'view1',
+    'view2',
+    'view3'
+  ]
   add_environment() {
-    const modalRef = this.modalService.open(RightPanelAddEnvironmentComponent, {
-      windowClass: 'layout-modal-right panel-end',
-      backdropClass: 'modal-overlay-bg-light',
+    const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
       backdrop: 'static',
-      size: 'xl'
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal transition-none'
     });
     modalRef.result.then((result) => {
     }, (response) => {
       if (response == 'close modal') {
         return;
       }
+      else if(response == 'create_environment')
+      this.select_service_data();
     });
+  }
+
+  select_service_data() {
+    debugger;
+    this.service_data.is_env_configure = true;
+    this.router.navigate(['/environment']);
   }
 
 }

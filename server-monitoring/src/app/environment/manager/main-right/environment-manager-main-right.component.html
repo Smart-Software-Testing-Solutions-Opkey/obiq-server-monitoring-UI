@@ -10,11 +10,20 @@
         <div class="tab_panel px-app" role="tabpanel" aria-label="Tab Panel">
 
             <ul class="nav-tabs mb-0" role="tablist">
-                <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
+                @for (tab of availableTabs; track $index) {
+
+                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                        <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
+                            href="javascript:void(0)" (click)="changeSelectedTab(tab)">
+                            <i class="oci oci-journey pr-1"></i>
+                            {{tab.name}}</a>
+                    </li>
+                }
+                <!-- <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
                     <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"
                         href="javascript:void(0)" (click)="changeSelectedTab('overview')">
                         <i class="oci oci-journey pr-1"></i>
-                        Top Overview</a>
+                        Overview</a>
                 </li>
 
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
@@ -36,31 +45,31 @@
                         href="javascript:void(0)" (click)="changeSelectedTab('telemetry')">
                         <i class="oci oci-journey pr-1"></i>
                         Telemetry</a>
-                </li>
+                </li> -->
 
             </ul>
         </div>
 
         <div class="tab_view_content px-app h-100">
 
-            @if (selectedTab == 'overview') { 
+            @if (selectedTab.val == 'overview') { 
                 <div class="overview">
                     <app-environment-manager-main-right-overview-tab></app-environment-manager-main-right-overview-tab>
                 </div>
             }
-            @else if (selectedTab == 'log') {
+            @else if (selectedTab.val == 'log') {
                 <div class="log">
                     Log component here
                 </div>
         
             }
-            @else if (selectedTab == 'timeexplorer') {
+            @else if (selectedTab.val == 'timeexplorer') {
         
                 <div class="timeexplorer">
                     Time explorer component here
                 </div>
             }
-            @else if (selectedTab == 'telemetry') {
+            @else if (selectedTab.val == 'telemetry') {
         
                 <div class="telemetry">
                     Telemetry component here
