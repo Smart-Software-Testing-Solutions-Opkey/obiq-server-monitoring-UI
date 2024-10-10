@@ -26,11 +26,19 @@
                        @for (view of totalViews; track $index) {
                         <li  class="nav-item">
         
-                            <a class="nav-link" href="javascript:void(0)" (click)="viewChanged(view)" [ngClass]="view.val == this.selectedView.val?'active':''">
+                            <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)" [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
     
                                 <div>
                                     <span class="name">{{view.name}}</span>
-                                    <span class="type" style="margin-left: 3rem;">{{view.accessType}}</span>                          
+                                    <span class="type" style="margin-left: 3rem;">{{view.accessType}}</span>    
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:void(0)">Rename</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)">Delete</a></li>
+                                        </ul>
+                                        </div>                      
                                 </div>
 
                             </a>
@@ -53,7 +61,7 @@
     
                  
             <li class="nav-item" >
-                <a class="nav-link d-flex" [ngClass]=" this.selectedAnalyticsType == null?'active':''" (click)="changeToView()" style="width: 17rem;">
+                <a class="nav-link d-flex" style="width: 17rem;">
     
                     <div>
                         <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView" (valueChange)="viewChanged($event)" textField="name" valueField="val"></kendo-dropdownlist>

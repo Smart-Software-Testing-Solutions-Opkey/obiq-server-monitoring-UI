@@ -29,7 +29,9 @@ import { ConfigurationSettingsViewSummaryComponent } from '../configuration-sett
     EnvironmentConfigureComponent,
     ConfigurationSettingsComponent,
     ConfigurationSettingsDatasourceComponent, 
-    ConfigurationSettingsErpAnalyticsComponent
+    ConfigurationSettingsErpAnalyticsComponent,
+    ConfigurationSettingsViewSummaryComponent
+
   ]
   
 })

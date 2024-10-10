@@ -16,7 +16,7 @@ export class EnvironmentManagerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.check_env_configuration();
+    // this.check_env_configuration();
   }
 
   selectedAnalyticsType:any = null
@@ -35,6 +35,21 @@ this.selectedAnalyticsType = val
   selectedView:any = null
   viewChanged(val){
     this.selectedView = val
+  }
+  objSettings:any = {
+    isOpen:false,
+    selectedViewSettings:{}
+  }
+  settingsSelected(val){
+    debugger
+    this.objSettings = val
+  }
+
+  obj_configuration_setting = {
+    tab: "datasource",
+    title: "Add View",
+    selected_datasource: [],
+    selected_erp_analytics: []
   }
 
 }

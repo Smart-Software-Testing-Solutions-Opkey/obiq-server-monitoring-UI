@@ -9,6 +9,7 @@ import { NavigatorLeftComponent } from 'src/app/navigator/left/navigator-left.co
 import { EnvironmentManagerMainRightComponent } from '../main-right/environment-manager-main-right.component';
 import { EnvironmentManagerMainRightOverviewTabComponent } from '../main-right/overview-tab/environment-manager-main-right-overview-tab.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { EnvironmentConfigureModule } from '../../configure/module/environment-configure.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
     EnvironmentManagerRoutingModule,
     FormsModule,
     DropDownsModule,
+    EnvironmentConfigureModule
 
   
   ],

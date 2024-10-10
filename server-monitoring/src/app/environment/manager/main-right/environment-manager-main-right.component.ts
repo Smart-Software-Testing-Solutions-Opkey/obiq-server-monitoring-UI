@@ -32,12 +32,38 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
   
   bindData(){
     if(this.selectedAnalyticsType){
-      this.availableTabs = [
-        {name:'Overview',val:'overview',isVisible:true,isSelected:true},
-        {name:'Log',val:'log',isVisible:true,isSelected:false},
-        {name:'Time Explorer',val:'timeexplorer',isVisible:false,isSelected:false},
-        {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
-      ]
+      if(this.selectedAnalyticsType.val == 'erp'){
+        this.availableTabs = [
+          {name:'Overview',val:'overview',isVisible:true,isSelected:true},
+          {name:'Log',val:'log',isVisible:true,isSelected:false},
+          {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
+          {name:'Telemetry',val:'telemetry',isVisible:true,isSelected:false},
+        ]
+      }
+      else if(this.selectedAnalyticsType.val == 'erp'){
+        this.availableTabs = [
+          {name:'Overview',val:'overview',isVisible:true,isSelected:true},
+          {name:'Log',val:'log',isVisible:true,isSelected:false},
+          {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
+          {name:'Telemetry',val:'telemetry',isVisible:true,isSelected:false},
+        ]
+      }
+      else if(this.selectedAnalyticsType.val == 'userbehaviour'){
+        this.availableTabs = [
+          {name:'Overview',val:'overview',isVisible:true,isSelected:true},
+          {name:'Log',val:'log',isVisible:true,isSelected:false},
+          {name:'Time Explorer',val:'timeexplorer',isVisible:false,isSelected:false},
+          {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
+        ]
+      }
+      else {
+        this.availableTabs = [
+          {name:'Overview',val:'overview',isVisible:true,isSelected:true},
+          {name:'Log',val:'log',isVisible:true,isSelected:false},
+          {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
+          {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
+        ]
+      }
     }
     else {
       this.availableTabs = [
