@@ -1,36 +1,73 @@
-<div class="header">
-  header here
-</div>
-<div class="body">
-   <div class="tabs border-bottom" >
-        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('overview')">Overview</a>
-        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('log')">Log</a>
-        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('timeexplorer')">Time Explorer</a>
-        <a href="javascript:void(0)" class="ml-1" (click)="changeSelectedTab('telemetry')">Telemetry</a>
-   </div>
-   <div class="tabscontent">
-    @if (selectedTab == 'overview') { 
-        <div class="overview">
-            <app-environment-manager-main-right-overview-tab></app-environment-manager-main-right-overview-tab>
-        </div>
-    }
-    @else if (selectedTab == 'log') {
-        <div class="log">
-            Log component here
+
+<div class="feature-container h-100">
+
+    <div class="feature-breadcrumb">
+        <app-navigator-breadcrumb></app-navigator-breadcrumb>
+    </div>
+
+    <div class="feature-body feature-body-height flex-box-column">
+
+        <div class="tab_panel px-app" role="tabpanel" aria-label="Tab Panel">
+
+            <ul class="nav-tabs mb-0" role="tablist">
+                <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
+                    <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"
+                        href="javascript:void(0)" (click)="changeSelectedTab('overview')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Top Overview</a>
+                </li>
+
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" [ngClass]="selectedTab=='log'?'active':''"
+                        href="javascript:void(0)" (click)="changeSelectedTab('log')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Log</a>
+                </li>
+
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" [ngClass]="selectedTab=='timeexplorer'?'active':''"
+                        href="javascript:void(0)" (click)="changeSelectedTab('timeexplorer')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Time Explorer</a>
+                </li>
+
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" [ngClass]="selectedTab=='telemetry'?'active':''"
+                        href="javascript:void(0)" (click)="changeSelectedTab('telemetry')">
+                        <i class="oci oci-journey pr-1"></i>
+                        Telemetry</a>
+                </li>
+
+            </ul>
         </div>
 
-    }
-    @else if (selectedTab == 'timeexplorer') {
+        <div class="tab_view_content px-app h-100">
 
-        <div class="timeexplorer">
-            Time explorer component here
-        </div>
-    }
-    @else if (selectedTab == 'telemetry') {
+            @if (selectedTab == 'overview') { 
+                <div class="overview">
+                    <app-environment-manager-main-right-overview-tab></app-environment-manager-main-right-overview-tab>
+                </div>
+            }
+            @else if (selectedTab == 'log') {
+                <div class="log">
+                    Log component here
+                </div>
+        
+            }
+            @else if (selectedTab == 'timeexplorer') {
+        
+                <div class="timeexplorer">
+                    Time explorer component here
+                </div>
+            }
+            @else if (selectedTab == 'telemetry') {
+        
+                <div class="telemetry">
+                    Telemetry component here
+                </div>
+            }
 
-        <div class="telemetry">
-            Telemetry component here
         </div>
-    }
-   </div>
+    </div>
+
 </div>

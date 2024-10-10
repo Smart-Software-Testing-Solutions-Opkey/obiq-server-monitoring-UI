@@ -100,6 +100,96 @@ body {
 
 }
 
+.px-app {
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+}
+
+/*******************css for common tab******************/
+.tab_panel {
+    margin-bottom: 1rem;
+
+    .nav-tabs {
+        border-bottom: 1px solid rgba(0, 0, 0, .1) !important;
+        margin-bottom: 1rem;
+        padding-left: 0rem;
+        position: relative;
+        right: 0;
+        width: calc(100%);
+        display: flex;
+        margin-bottom: 1rem;
+        list-style: none;
+
+        li.nav-item {
+            display: flex;
+            padding: 0rem;
+            flex-basis: auto;
+            margin-right: 1.5rem;
+
+            &:last-child {
+                margin-right: 0rem !important;
+            }
+
+            .nav-link {
+                border: 0;
+                border-bottom: 0.1875rem solid transparent;
+                padding: 0.5rem 0rem;
+                padding-top: 0rem !important;
+                font-size: 0.875rem;
+                font-weight: 500;
+                line-height: 1.375rem;
+                color: #667085;
+
+                &.active {
+                    border-color: #116173 !important;
+                    color: #116173 !important;
+
+                    &:hover,
+                    &:focus {
+                        border-color: #116173 !important;
+                    }
+                }
+
+                &:hover,
+                &:focus {
+                    border-color: transparent;
+                }
+
+            }
+
+        }
+
+        .nav_item_right {
+            margin-left: auto;
+            position: relative;
+
+            .item_content {
+                position: absolute;
+                top: -0.3rem;
+                right: 0;
+
+                .bt_dropdown {
+                    padding: 0.46rem 0.5rem !important;
+                    color: #667085;
+                    font-size: 0.75rem !important;
+
+                    &.dropdown-toggle:after {
+                        font-size: 0.75rem;
+                        color: #667085;
+                    }
+                }
+            }
+
+        }
+        
+    }
+    
+}
+
+.tab_view_content {
+    margin: 0rem;
+}
+
 /***************scss for text color**************/
 .text-theme {
     color: #116173 !important;
@@ -508,7 +598,7 @@ a:focus-visible {
     }
 }
 
-/**************scss for bs-modal right position************/
+/**************scss for bs-modal right panel************/
 .layout-modal-right {
     &.panel-end {
         z-index: 1079;
