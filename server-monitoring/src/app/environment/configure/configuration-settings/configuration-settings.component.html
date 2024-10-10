@@ -50,7 +50,7 @@
               </div>
 
               <div *ngIf="obj_configuration_setting.tab=='view_summary'">
-                    summary work
+                    <app-configuration-settings-view-summary [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-view-summary>
               </div>
           
            </div>
@@ -61,8 +61,8 @@
 
     <div class="modal-footer border-top-0">
         <button *ngIf="obj_configuration_setting.tab != 'datasource'" type="button" class="btn btn-layout btn-bg-white me-2" (click)="back()">Back</button>
-        <button type="button" class="btn btn-layout btn-bg-theme" (click)="next()">Next</button>
-
+        <button  *ngIf="this.obj_configuration_setting.tab !== 'view_summary'" type="button" class="btn btn-layout btn-bg-theme" (click)="next()">Next</button>
+        <button  *ngIf="this.obj_configuration_setting.tab == 'view_summary'" type="button" class="btn btn-layout btn-bg-theme" (click)="finish()">Finish</button>
     </div>
     
 </div>

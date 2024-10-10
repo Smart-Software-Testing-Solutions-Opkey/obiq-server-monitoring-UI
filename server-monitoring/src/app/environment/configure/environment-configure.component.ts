@@ -31,15 +31,7 @@ export class EnvironmentConfigureComponent {
       if (response == 'close modal') {
         return;
       }
-      else if(response == 'create_environment')
-      this.select_service_data();
     });
-  }
-
-  select_service_data() {
-    debugger;
-    this.service_data.is_env_configure = true;
-    this.router.navigate(['/environment']);
   }
   
 }

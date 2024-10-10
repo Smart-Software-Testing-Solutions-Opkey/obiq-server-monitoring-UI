@@ -289,6 +289,8 @@ return
     });
 
     console.log('Selected Rows:', this.selectedRows);
+
+    this.obj_configuration_setting.selected_erp_analytics = this.selectedRows;
   }
 
 

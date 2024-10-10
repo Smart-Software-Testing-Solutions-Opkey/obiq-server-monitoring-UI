@@ -6,7 +6,6 @@ import { EnvironmentRoutingModule } from './environment-routing.module';
 @NgModule({
   declarations: [    
 
-  
   ],
   imports: [
     CommonModule,
