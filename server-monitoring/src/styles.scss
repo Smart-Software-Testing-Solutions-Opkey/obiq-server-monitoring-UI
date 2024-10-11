@@ -353,6 +353,17 @@ a:focus-visible {
     outline: #116173 auto 1px !important;
 }
 
+.bt-dropdown-icon {
+    &.dropdown-toggle:after {
+        border-width: 0 !important;
+        font-family: cs-icon !important;
+        content: "\e907" !important;
+        font-size: .75rem;
+        color: #667085;
+        margin-left: .5rem !important;
+    }
+}
+
 /************sccs for button group**************/
 .layout-btn-group {
     box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
