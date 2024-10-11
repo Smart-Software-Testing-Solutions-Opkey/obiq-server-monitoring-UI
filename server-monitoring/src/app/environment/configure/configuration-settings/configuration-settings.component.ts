@@ -52,19 +52,21 @@ export class ConfigurationSettingsComponent {
   this.revert_Error_Flags()
   const allWidgets = this.obj_configuration_setting.active_dataSource_widjets;
   const selectedDataSource: any = this.obj_configuration_setting.selected_datasource;
+  const isErpOrDiagnostics = allWidgets.some((item)=>item.name == 'ERP Analytics' || item.name == 'System Diagnostics') ; // check krenge if erp and Diagnostics selected h ya nhi 
   if(this.obj_configuration_setting.viewName == ""){
     this.error_obj.ViewNameFlag = true
    return false;
   }
-  else if (Array.isArray(allWidgets) && allWidgets.length == 0) {
+   if (Array.isArray(allWidgets) && allWidgets.length == 0) {
     this.error_obj.DataSourceFlag = true
     return false
-  } 
-  else if (Array.isArray(this.obj_configuration_setting.selected_datasource)) {
+  }
+
+  if (Array.isArray(this.obj_configuration_setting.selected_datasource) && isErpOrDiagnostics) {
     this.error_obj.ErpApplication = true
     return false;
   }
-  else if (typeof selectedDataSource === 'object' && this.obj_configuration_setting.selected_datasource !== null) {
+  else if (typeof selectedDataSource === 'object' && this.obj_configuration_setting.selected_datasource !== null && this.obj_configuration_setting.selected_datasource && isErpOrDiagnostics) {
     for (const key in selectedDataSource) {
       if (selectedDataSource.hasOwnProperty(key)) {
         const dataSource = selectedDataSource[key];
@@ -72,7 +74,7 @@ export class ConfigurationSettingsComponent {
         if (dataSource) {
           // Check kr rhe  'ERP Analytics' aur 'SystemDiagnostics' properties ke liye
           const hasErpAnalytics = dataSource.hasOwnProperty('ERP Analytics');
-          const hasSystemDiagnostics = dataSource.hasOwnProperty('SystemDiagnostics');
+          const hasSystemDiagnostics = dataSource.hasOwnProperty('System Diagnostics');
 
           // if (!hasErpAnalytics ) { // hiiden as i dont have data for now && !hasSystemDiagnostics
             
@@ -82,7 +84,7 @@ export class ConfigurationSettingsComponent {
             return false;
           }
           //  else if (!hasSystemDiagnostics) {
-          //   alert("'SystemDiagnostics' nhi hai.");
+          //   alert("'SystemDiagnostics validation implimented nhi hai");
           // }
   
         } 
