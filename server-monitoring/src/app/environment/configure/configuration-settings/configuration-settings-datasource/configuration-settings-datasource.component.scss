@@ -56,11 +56,11 @@
 }
 
 .data-source-item {
-    border: 1px solid #f1e8e8;
     border-radius: 0.5rem;
-    padding: 1.25rem;
-    max-height: 17.3rem;
-    overflow: auto;
+    padding: 1.25rem 0rem;
+    // border: 1px solid #f1e8e8;
+    // max-height: 17.3rem;
+    // overflow: auto;
 
     .img-avatar-profile {
         width: 3rem;
