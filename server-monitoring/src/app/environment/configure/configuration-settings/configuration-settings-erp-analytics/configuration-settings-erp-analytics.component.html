@@ -1,3 +1,7 @@
+<h6 class="mb-3 font-bold">
+    Choose Instances 
+</h6>
+
 <kendo-grid 
     #grid_application 
     [data]="Instance_list" 
@@ -15,15 +19,26 @@
 
     <kendo-grid-column field="SystemIdentifier" title="Name">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
+            <div class="flex-center">
+                <span class="img-avatar-profile">
+                    <img src="assets/images/default/application/OracleFusion.png" alt="">
+                </span>
+                <span class="layout-text-obiq ps-2">{{dataItem.SystemIdentifier}}</span>
+            </div>
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="CreatedBy" title="Created">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="created-info">
-                <div class="created-name">{{dataItem.CreatedBy}}</div>
-                <div class="created-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+
+            <div class="flex-center">
+                <span class="img-app-profile">
+                    <img src="assets/images/default/profile.png" alt="">
+                </span>
+                <div class="ps-2">
+                    <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                    <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                </div>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -31,9 +46,14 @@
     <!-- ModifiedBy Column with Date -->
     <kendo-grid-column field="ModifiedBy" title="Last Modified">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="modified-info">
-                <div class="modified-name">{{dataItem.ModifiedBy}}</div>
-                <div class="modified-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</div>
+            <div class="flex-center">
+                <span class="img-app-profile">
+                    <img src="assets/images/default/profile.png" alt="">
+                </span>
+                <div class="ps-2">
+                    <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                    <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                </div>
             </div>
         </ng-template>
     </kendo-grid-column>

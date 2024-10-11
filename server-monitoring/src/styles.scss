@@ -235,6 +235,37 @@ body {
     vertical-align: middle;
 }
 
+.img-app-profile {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}
+
+.layout-text-name {
+    color: #101828;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    display: block;
+}
+
+.layout-text-date {
+    color: #667085;
+    font-size: 0.8125rem;
+    display: block;
+}
+
+.layout-text-obiq {
+    font-size: 0.8125rem;
+    color: #364155;
+    font-weight: 600;
+}
+
 // -------------------font weight--------------------------
 
 .font-bold {
