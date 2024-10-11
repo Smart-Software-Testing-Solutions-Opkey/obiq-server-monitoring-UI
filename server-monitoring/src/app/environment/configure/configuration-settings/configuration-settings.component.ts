@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-configuration-settings',
@@ -25,13 +26,35 @@ export class ConfigurationSettingsComponent {
     tab: "datasource",
     is_inner_tab: false,
     title: "Add View",
+    viewName:"",
     selected_datasource: [],
     selected_erp_analytics: []
   }
-
+  error_obj={
+    ViewNameFlag : false,
+    DataSourceFlag :false,
+  }
+ 
+  ValidationCheck(): boolean {
+  debugger;
+  this.error_obj.ViewNameFlag = false;
+  this.error_obj.DataSourceFlag = false;
+  if(this.obj_configuration_setting.viewName == ""){
+    this.error_obj.ViewNameFlag = true
+   return false;
+  }
+  else if(Object.keys(this.obj_configuration_setting.selected_datasource).length === 0){
+    this.error_obj.DataSourceFlag = true
+  return false
+  }
+  $('#error-message').hide();
+  return true;
+}
   next() {
     debugger;
-    console.log(this.obj_configuration_setting,"this is checking console")
+    if (!this.ValidationCheck()) {
+      return; 
+    }
     if (this.obj_configuration_setting.tab == "datasource") { 
       this.obj_configuration_setting.tab = "ERP_Analytics";
       this.obj_configuration_setting.title = "Add ERP Analytics";

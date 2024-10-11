@@ -9,7 +9,8 @@
     <div class="row mx-0 mb-3">
         <div class="col-sm-5 ps-0">
             <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
-            <input type="text" class="form-control" (input)="onInputChange($event)">
+            <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)">
+            <div *ngIf="error_flag.ViewNameFlag" id="error-message" class="text-danger" >View Name is required.</div>
         </div>
     </div>
 
@@ -17,8 +18,10 @@
         <div class="col-sm-12 px-0">
             <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
             <div class="row mx-0">
+                <div *ngIf="error_flag.DataSourceFlag" id="error-message" class="text-danger" >Application Selection is Required.</div>
                 @for(item of data_Source_widjets; track item.name) {
                     <div class="col-5 ps-0 mb-3 me-3">
+                       
                         <div class="data-source-category" [ngClass]="{'active': isActive(item)}"  (click)="ShowWSelectedWidjetData(item) ">
                             <h4 class="text-center pb-3 header">{{item.name}}</h4>
                             <p style="padding-top: 2rem;">
@@ -31,7 +34,7 @@
                         </div>
     
                         @if(item.display_services && item.showServices && item.name === 'ERP Analytics') {
-
+                            
                             <label for="application" class="form-label mt-2">Choose your application <span class="text-astric">*</span></label>
 
                             <div class="data-source-item">

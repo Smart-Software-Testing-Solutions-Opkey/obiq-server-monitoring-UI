@@ -53,7 +53,7 @@
     
            <div class="selection-right">
             <div *ngIf="obj_configuration_setting.tab=='datasource'">
-                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-datasource>
+                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting}"[error_flag]="error_obj"></app-configuration-settings-datasource>
               </div>
               
               <div *ngIf="obj_configuration_setting.tab=='ERP_Analytics'">

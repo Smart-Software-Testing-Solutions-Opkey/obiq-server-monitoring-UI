@@ -38,8 +38,8 @@ export class ConfigurationSettingsErpAnalyticsComponent {
             
               this.Instance_list = Object.entries(result).flatMap(([appType, instances]) =>
                 instances.map(instance => ({
-                    ...instance, // Spread all original properties
-                    ApplicationType: appType, // Add application type
+                    ...instance, // saari origanal properties spred kii 
+                    ApplicationType: appType, //Application Type Add KRdia
                 }))
               )
             },

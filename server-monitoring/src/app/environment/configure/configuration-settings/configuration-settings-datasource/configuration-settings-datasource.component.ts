@@ -20,6 +20,10 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   obj_configuration_setting:any;
 
+  @Input() error_flag: { ViewNameFlag: boolean, DataSourceFlag: boolean } = { 
+    ViewNameFlag: false, 
+    DataSourceFlag: false 
+  };
   @Input('child_data') set child_data({ obj_configuration_setting }) {
     this.obj_configuration_setting = obj_configuration_setting;
   }
@@ -191,7 +195,9 @@ ShowWSelectedWidjetData(selectedItem: any) {
 onInputChange(event:any){
   console.log(event.target.value);
   this.viewName = event.target.value;
-  this.obj_Data_Source_Selection.viewName  = this.viewName;
+  this.obj_Data_Source_Selection.viewName = this.viewName 
+  this.obj_configuration_setting.viewName = this.obj_Data_Source_Selection.viewName
+   
 }
 
   create_environment() {
