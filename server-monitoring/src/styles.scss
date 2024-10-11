@@ -203,6 +203,12 @@ body {
     color: #FF0404 !important;
 }
 
+.form_error {
+    color: #ff0000;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
 /*****************other common app scss******************/
 .flex-box-column {
     display: flex;

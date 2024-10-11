@@ -98,6 +98,9 @@ export class ConfigurationSettingsComponent {
     if (!this.ValidationCheck()) {
       return; 
     }
+
+    console.log("obj_configuration_setting==", this.obj_configuration_setting);
+
     if (this.obj_configuration_setting.tab == "datasource") { 
       this.obj_configuration_setting.tab = "ERP_Analytics";
       this.obj_configuration_setting.title = "Add ERP Analytics";
