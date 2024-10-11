@@ -1,8 +1,8 @@
 <div class="configuration-view-summary">
 
-    <h4 class="selection-header mb-3">Add Access Type to complete</h4>
+    <h4 class="text-header mb-3">Add Access Type to complete</h4>
 
-    <div class="row mx-0 mb-3">
+    <div class="row mx-0 mb-4">
         <div class="col-sm-5 ps-0">
             <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
             
@@ -19,21 +19,21 @@
         </div>
     </div>
 
-    <h4 class="selection-header">View Summary</h4>
+    <h4 class="text-header mb-3">View Summary</h4>
 
     <div class="row mx-0 mb-3">
         <div class="col-12 px-0">
 
-            <div id="accordion-view-summary">
+            <div id="accordion_summary" class="accordion-view-summary">
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
+                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
                             ERP Analytics
                         </a>
                     </div>
-                    <div id="collapse_ERPAnalytics" class="collapse show" data-bs-parent="#accordion-view-summary">
-                        <div class="card-body">
+                    <div id="collapse_ERPAnalytics" class="collapse show">
+                        <div class="card-body px-0">
 
                             <div class="kendo_grid">
                                 <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
@@ -55,7 +55,6 @@
                                         </ng-template>
                                     </kendo-grid-column>
                                  
-                                    <!-- ModifiedBy Column with Date -->
                                     <kendo-grid-column field="ModifiedBy" title="Last Modified">
                                         <ng-template kendoGridCellTemplate let-dataItem>
                                             <div class="modified-info">
@@ -81,13 +80,13 @@
                     </div>
                 </div>
 
-                <!-- <div class="card">
+                <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
+                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
                             System Diagnostics
                         </a>
                     </div>
-                    <div id="collapse_systemDiagnostics" class="collapse" data-bs-parent="#accordion-view-summary">
+                    <div id="collapse_systemDiagnostics" class="collapse show">
                         <div class="card-body">
                             System Diagnostics summary
                         </div>
@@ -96,11 +95,11 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_user">
+                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
                             User Behavior Analytics
                         </a>
                     </div>
-                    <div id="collapse_user" class="collapse" data-bs-parent="#accordion-view-summary">
+                    <div id="collapse_user" class="collapse show">
                         <div class="card-body">
                             User Behavior Analytics summary
                         </div>
@@ -110,16 +109,16 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
+                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
                             Test Automation Analysis
                         </a>
                     </div>
-                    <div id="collapse_testAutomation" class="collapse" data-bs-parent="#accordion-view-summary">
+                    <div id="collapse_testAutomation" class="collapse show">
                         <div class="card-body">
                             Test Automation Analysis
                         </div>
                     </div>
-                </div> -->
+                </div>
 
              
             </div>
