@@ -29,6 +29,10 @@
 
 /***************************icon start here**************************/
 
+.oci-chevron-down:before {
+  content: "\e907";
+}
+
 .oci-x:before {
   content: "\e906";
 }
