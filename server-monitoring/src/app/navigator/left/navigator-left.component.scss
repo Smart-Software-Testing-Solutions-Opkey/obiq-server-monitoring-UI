@@ -18,12 +18,20 @@
             display: flex;
             align-items: center;
 
-            h3 {
+            .h-text-sidebar {
                 font-size: 1.125rem;
                 font-weight: 600;
                 color: #344054;
                 padding-right: 0.5rem;
                 line-height: normal;
+            }
+
+            .bt-back {
+                font-size: 0.875rem;
+            }
+
+            .bt-back + .h-text-sidebar {
+                padding-left: 0.25rem;
             }
         }
 

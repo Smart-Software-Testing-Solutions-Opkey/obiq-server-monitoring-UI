@@ -1,108 +1,117 @@
 <div class="sidebar-left-menu flex-box-column">
-    
+
     <div class="sidebar-menu-header">
-        @if (isopenSettings) {
-            <div class="back" >
-                <button (click)="backToMenu()">back</button>
-            </div>
-        }
-        <div class="head">
-            <h3 class="mb-0 text-ellipsis">Analytics</h3>
+
+        <div class="left">
+            <span class="d-flex">
+                @if (isopenSettings) {
+                <button type="button" class="btn btn-icon bt-sm bt-back border-0" (click)="backToMenu()">
+                    <i class="oci oci-chevron-left"></i>
+                </button>
+                }
+                <h3 class="h-text-sidebar mb-0 text-ellipsis">Analytics</h3>
+            </span>
+
+
+
         </div>
     </div>
 
     @if (isopenSettings) {
-        <div class="sidebar-menu-body flex-box-column">
-    
-            
-            <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
-            aria-label="Add Environment"> <i class="fa fa-plus me-1"></i>View
+    <div class="sidebar-menu-body flex-box-column">
+
+        <div class="sidebar-menu-toolbar">
+            <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()" aria-label="Add Environment"> 
+                <i class="oci oci-plus me-1"></i> View
             </button>
-    
-            <div class="sidebar-menu-content">
-                <nav>
-                    <ul class="nav nav-pills menu-category">
-    
-                       @for (view of totalViews; track $index) {
-                        <li  class="nav-item">
-        
-                            <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)" [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
-    
-                                <div>
-                                    <span class="name">{{view.name}}</span>
-                                    <span class="type" style="margin-left: 3rem;">{{view.accessType}}</span>    
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                        </button>
-                                        <ul class="dropdown-menu">
+        </div>
+
+        <div class="sidebar-menu-content">
+            <nav>
+                <ul class="nav nav-pills menu-category">
+
+                    @for (view of totalViews; track $index) {
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
+                            [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
+
+                            <div>
+                                <span class="name">{{view.name}}</span>
+                                <span class="type" style="margin-left: 3rem;">{{view.accessType}}</span>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-bs-toggle="dropdown">
+                                    </button>
+                                    <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="javascript:void(0)">Rename</a></li>
                                         <li><a class="dropdown-item" href="javascript:void(0)">Delete</a></li>
-                                        </ul>
-                                        </div>                      
+                                    </ul>
                                 </div>
+                            </div>
 
-                            </a>
-    
-                        </li>
-                       }
-        
-                    </ul>
-                </nav>
-            </div>
-    
+                        </a>
+
+                    </li>
+                    }
+
+                </ul>
+            </nav>
         </div>
+
+    </div>
     }
     @else {
 
-        <div class="sidebar-menu-body flex-box-column">
-    
+    <div class="sidebar-menu-body flex-box-column">
+
+        <div class="sidebar-menu-toolbar">
+            <div class="row mx-0">
+
+                <div class="col-9 ps-0 pe-1">
+                    <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
+                        (valueChange)="viewChanged($event)" textField="name"
+                        valueField="val"></kendo-dropdownlist>
+                </div>
+
+                <div class="col-3 px-0">
+                    <button type="button" class="btn btn-icon border-0" (click)="add_environment()"
+                        aria-label="Add Environment">
+                        <i class="oci oci-plus"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-icon border-0" (click)="openSettings()"
+                        aria-label="Settings">
+                        <i class="fa fa-gear me-1"></i>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="sidebar-menu-content">
             <nav>
                 <ul class="nav nav-pills menu-category">
-    
-                 
-            <li class="nav-item" >
-                <a class="nav-link d-flex" style="width: 17rem;">
-    
-                    <div>
-                        <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView" (valueChange)="viewChanged($event)" textField="name" valueField="val"></kendo-dropdownlist>
-                    </div>
-    
-    
-                    <button type="button" class="btn btn-bg-theme" (click)="add_environment()"
-                         aria-label="Add Environment"> <i class="fa fa-plus me-1"></i> 
-                    </button>
-                    <button type="button" class="btn btn-bg-theme" (click)="openSettings()"
-                         aria-label="Settings"> <i class="fa fa-gear me-1"></i> 
-                    </button>
-    
-                </a>
-            </li>
-    
+
+                    @for (item of analyticsTypes; track $index) {
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
+                            [ngClass]="item.isSelected?'active':''">
+
+                            <span class="menu-icon">
+                                <i class="oci oci-journey menu-icon"></i>
+                            </span>
+                            <span class="menu-text">{{item.name}}</span>
+                        </a>
+
+                    </li>
+                    }
+
                 </ul>
             </nav>
-    
-            <div class="sidebar-menu-content">
-                <nav>
-                    <ul class="nav nav-pills menu-category">
-    
-                       @for (item of analyticsTypes; track $index) {
-                        <li  class="nav-item">
-        
-                            <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)" [ngClass]="item.isSelected?'active':''">
-    
-                                <span class="menu-icon">
-                                    <i class="oci oci-journey menu-icon"></i>
-                                </span>
-                                <span class="menu-text">{{item.name}}</span>
-                            </a>
-    
-                        </li>
-                       }
-        
-                    </ul>
-                </nav>
-            </div>
-    
         </div>
+
+    </div>
     }
 </div>

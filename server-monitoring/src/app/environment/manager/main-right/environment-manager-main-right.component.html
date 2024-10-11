@@ -3,12 +3,18 @@
 
     <div class="feature-breadcrumb">
         <app-navigator-breadcrumb></app-navigator-breadcrumb>
-        <h3>{{this.selectedView.name}}</h3>
+        
     </div>
 
-    <div class="feature-body feature-body-height flex-box-column">
+    <div class="feature-body feature-body-height flex-box-column px-app">
 
-        <div class="tab_panel px-app" role="tabpanel" aria-label="Tab Panel">
+        <div class="app-filter">
+
+            <h3 class="mb-0" style="font-size: 0.875rem ;">{{this.selectedView.name}}</h3>
+
+        </div>
+
+        <div class="tab_panel" role="tabpanel" aria-label="Tab Panel">
 
             <ul class="nav-tabs mb-0" role="tablist">
                 @for (tab of availableTabs; track $index) {
@@ -55,7 +61,7 @@
             </ul>
         </div>
 
-        <div class="tab_view_content px-app h-100">
+        <div class="tab_view_content h-100">
 
             @if (selectedTab.val == 'overview') { 
                 <div class="overview">
