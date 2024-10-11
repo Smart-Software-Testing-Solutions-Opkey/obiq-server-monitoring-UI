@@ -24,28 +24,31 @@
 
                     <li [ngClass]="obj_configuration_setting.tab=='datasource' ? 'active' : ''">
                         <span class="icon">1</span>
-                        <span>Select Data-Sources</span>
+                        <span class="text-color-theme">Select Data-Sources</span>
                     </li>
 
                     <li [ngClass]="obj_configuration_setting.is_inner_tab ? 'item_subcategory active' : ''">
                         <span>
                             <span class="icon">2</span>
-                            <span>Value of Data-Sources</span>
+                            <span class="text-color-theme">Value of Data-Sources</span>
                         </span>
 
-                        <ul>
-                            <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''">
-                                <span>Add ERP Analytics</span>
+                        <ul class="pt-3 data-source-child">
+                            <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''" class="ps-2">
+                                <span class="text-color-theme">Add ERP Analytics</span>
                             </li>
-                            <li>
-                                Add System Diagnostics
+                            <li class="ps-2">
+                                <span class="text-color-theme">
+                                    Add System Diagnostics
+                                </span>
+                               
                             </li>
                         </ul>
                     </li>
 
                     <li [ngClass]="obj_configuration_setting.tab=='view_summary' ? 'active' : ''">
                         <span class="icon">3</span>
-                        <span>Create View</span>
+                        <span class="text-color-theme">Create View</span>
                     </li>
 
                 </ul>

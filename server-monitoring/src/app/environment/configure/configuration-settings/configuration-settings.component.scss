@@ -18,7 +18,7 @@
 .stepper-content{
     margin: 0;
     padding: 0;
-    padding-left: 4rem;
+    padding-left: 2rem;
     
     li {
         display: block;
@@ -27,14 +27,21 @@
         margin-bottom: 0.6rem;
         padding-left: 2rem;
 
+        .text-color-theme {
+            color: #8F9191;
+            font-weight: 600;
+        }
+
         &.active{
-            color: #116173;
+            span {
+                color: #116173;
+            }
             .icon{
-                background-color: #023444;
+                background-color: #116173;
                 color: white;
             }
             &::after{
-                background-color:  #023444;
+                background-color:  #116173;
             }
 
         }
@@ -44,7 +51,7 @@
             left: -0.20rem;
             bottom: -2.35rem;
             height: 100%;
-            background-color: gray;
+            background-color: #8F9191;
             width: 0.15rem;
         }
         &:last-child{
@@ -65,6 +72,57 @@
             border-radius: 50%;
             background-color: #ccc;
             z-index: 0;
+        }
+
+        .data-source-child {
+            li {
+                &:after {
+                    display: none;
+                }
+
+                &:last-child {
+                    margin-bottom: 0rem;
+                }
+                span {
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        left: -30%;
+                        top: 50%;
+                        width: 26%;
+                        height: 2px;
+                        background-color: #8F9191;
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 44%;
+                        left: -5%;
+                        width: 0.5rem;
+                        height: 0.5rem;
+                        background-color: #8F9191;
+                        border-radius: 50%;
+                    }
+                }
+
+                .text-color-theme {
+                    color: #8F9191;
+                }
+
+                &.active {
+                    .text-color-theme {
+                        color: #116173;
+                    }
+
+                    span {
+                        &:before , &:after {
+                            background-color: #116173;
+                        }
+                    }
+                }
+                
+            }
         }
 
     } 
