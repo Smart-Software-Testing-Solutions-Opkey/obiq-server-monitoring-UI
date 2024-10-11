@@ -36,6 +36,14 @@
 
 /***************************icon start here**************************/
 
+.oci-batch:before {
+  content: "\e911";
+}
+
+.oci-journey:before {
+  content: "\e912";
+}
+
 .oci-copy-all:before {
   content: "\e90b";
 }
