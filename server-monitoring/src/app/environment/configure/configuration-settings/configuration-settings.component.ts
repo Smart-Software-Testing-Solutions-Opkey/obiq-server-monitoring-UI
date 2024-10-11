@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
-import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-configuration-settings',
@@ -47,7 +47,6 @@ export class ConfigurationSettingsComponent {
     this.error_obj.DataSourceFlag = true
   return false
   }
-  $('#error-message').hide();
   return true;
 }
   next() {
