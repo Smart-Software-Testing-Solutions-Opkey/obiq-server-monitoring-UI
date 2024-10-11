@@ -14,6 +14,7 @@ import { EnvironmentManagerMainRightLogTabComponent } from '../main-right/log-ta
 import { GridModule } from '@progress/kendo-angular-grid';
 import { EnvironmentManagerMainRightLogTabDetailsComponent } from '../main-right/log-tab/log-tab-details/environment-manager-main-right-log-tab-details.component';
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
+import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/view-summary-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.c
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
-    ManagerRightPanelComponent
+    ManagerRightPanelComponent,
+    ViewSummaryDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.c
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
-    ManagerRightPanelComponent
+    ManagerRightPanelComponent,
+    ViewSummaryDetailsComponent
   ]
 })
 export class EnvironmentManagerModule { }

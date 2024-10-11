@@ -7,7 +7,7 @@
     <div class="right-section">
         
         @if (objSettings.isOpen) {
-            <app-configuration-settings-view-summary [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-view-summary>
+            <app-view-summary-details [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
         }
         @else {
             <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
