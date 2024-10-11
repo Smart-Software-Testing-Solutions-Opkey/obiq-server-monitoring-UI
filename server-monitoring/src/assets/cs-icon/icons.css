@@ -27,7 +27,38 @@
   display: inline-block;
 }
 
+.oci-export,
+.oci-shelf-position,
+.oci-trace,
+.oci-host {
+  transform: scale(1.3);
+}
+
 /***************************icon start here**************************/
+
+.oci-copy-all:before {
+  content: "\e90b";
+}
+
+.oci-export:before {
+  content: "\e90c";
+}
+
+.oci-host:before {
+  content: "\e90d";
+}
+
+.oci-shelf-position:before {
+  content: "\e90e";
+}
+
+.oci-trace:before {
+  content: "\e90f";
+}
+
+.oci-WARNING:before {
+  content: "\e910";
+}
 
 .oci-chevron-right:before {
   content: "\e908";
