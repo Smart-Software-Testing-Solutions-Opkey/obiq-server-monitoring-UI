@@ -20,9 +20,11 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   obj_configuration_setting:any;
 
-  @Input() error_flag: { ViewNameFlag: boolean, DataSourceFlag: boolean } = { 
-    ViewNameFlag: false, 
-    DataSourceFlag: false 
+  @Input() error_flag: { ViewNameFlag: boolean, DataSourceFlag: boolean,ErpApplication:boolean,SystemDiagnosticsData:boolean } = {
+    ViewNameFlag: false,
+    DataSourceFlag: false,
+    ErpApplication: false,
+    SystemDiagnosticsData: false
   };
   @Input('child_data') set child_data({ obj_configuration_setting }) {
     this.obj_configuration_setting = obj_configuration_setting;
@@ -146,7 +148,8 @@ onServiceSelection(widgetName: string, serviceName: string, event: any) {
     }
   }
 this.obj_Data_Source_Selection.datasource = this.selectedServices;
-this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection
+this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection;
+
 
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
@@ -159,6 +162,8 @@ toggleactiveItems(selectedItem: any) {
   } else {
     
     this.activeItems.push(selectedItem);
+    this.obj_configuration_setting.active_dataSource_widjets = this.activeItems
+    console.log(this.activeItems,"these are active items")
   }
 }
 
@@ -195,7 +200,6 @@ ShowWSelectedWidjetData(selectedItem: any) {
 onInputChange(event:any){
   console.log(event.target.value);
   this.viewName = event.target.value;
-  this.obj_Data_Source_Selection.viewName = this.viewName 
   this.obj_configuration_setting.viewName = this.obj_Data_Source_Selection.viewName
    
 }

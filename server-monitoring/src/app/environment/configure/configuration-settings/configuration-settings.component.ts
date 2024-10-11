@@ -30,23 +30,64 @@ export class ConfigurationSettingsComponent {
     selected_datasource: [],
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
+    ErpAnalytics:{},
+    SystemDiagnostics:{},
+    active_dataSource_widjets:[]
   }
   error_obj={
     ViewNameFlag : false,
     DataSourceFlag :false,
+    ErpApplication:false,
+    SystemDiagnosticsData:false,
   }
- 
+
+  revert_Error_Flags(){
+    this.error_obj.ViewNameFlag = false;
+    this.error_obj.DataSourceFlag = false;
+    this.error_obj.ErpApplication = false;
+    this.error_obj.SystemDiagnosticsData = false;
+  }
   ValidationCheck(): boolean {
   debugger;
-  this.error_obj.ViewNameFlag = false;
-  this.error_obj.DataSourceFlag = false;
+  this.revert_Error_Flags()
+  const allWidgets = this.obj_configuration_setting.active_dataSource_widjets;
+  const selectedDataSource: any = this.obj_configuration_setting.selected_datasource;
   if(this.obj_configuration_setting.viewName == ""){
     this.error_obj.ViewNameFlag = true
    return false;
   }
-  else if(Object.keys(this.obj_configuration_setting.selected_datasource).length === 0){
+  else if (Array.isArray(allWidgets) && allWidgets.length == 0) {
     this.error_obj.DataSourceFlag = true
-  return false
+    return false
+  } 
+  else if (Array.isArray(this.obj_configuration_setting.selected_datasource)) {
+    this.error_obj.ErpApplication = true
+    return false;
+  }
+  else if (typeof selectedDataSource === 'object' && this.obj_configuration_setting.selected_datasource !== null) {
+    for (const key in selectedDataSource) {
+      if (selectedDataSource.hasOwnProperty(key)) {
+        const dataSource = selectedDataSource[key];
+    
+        if (dataSource) {
+          // Check kr rhe  'ERP Analytics' aur 'SystemDiagnostics' properties ke liye
+          const hasErpAnalytics = dataSource.hasOwnProperty('ERP Analytics');
+          const hasSystemDiagnostics = dataSource.hasOwnProperty('SystemDiagnostics');
+
+          // if (!hasErpAnalytics ) { // hiiden as i dont have data for now && !hasSystemDiagnostics
+            
+          // } 
+          if (!hasErpAnalytics) {
+            this.error_obj.ErpApplication = true
+            return false;
+          }
+          //  else if (!hasSystemDiagnostics) {
+          //   alert("'SystemDiagnostics' nhi hai.");
+          // }
+  
+        } 
+      }
+    }
   }
   return true;
 }

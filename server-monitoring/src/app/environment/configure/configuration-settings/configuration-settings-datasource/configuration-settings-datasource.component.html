@@ -17,8 +17,8 @@
     <div class="row mx-0 mb-3">
         <div class="col-sm-12 px-0">
             <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
+            <div *ngIf="error_flag.DataSourceFlag" id="error-message" class="text-danger" >DataSource Selection is Required.</div>
             <div class="row mx-0">
-                <div *ngIf="error_flag.DataSourceFlag" id="error-message" class="text-danger" >Application Selection is Required.</div>
                 @for(item of data_Source_widjets; track item.name) {
                     <div class="col-5 ps-0 mb-3 me-3">
                        
@@ -34,7 +34,7 @@
                         </div>
     
                         @if(item.display_services && item.showServices && item.name === 'ERP Analytics') {
-                            
+                            <div *ngIf="error_flag.ErpApplication" id="error-message" class="text-danger" >Application Selection is Required.</div>
                             <label for="application" class="form-label mt-2">Choose your application <span class="text-astric">*</span></label>
 
                             <div class="data-source-item">
@@ -84,7 +84,7 @@
                         } -->
                         @else if(item.display_services && item.showServices && item.name === 'System Diagnostics') {
                             <div class="data-source-item">
-                               
+                                <div *ngIf="error_flag.SystemDiagnosticsData" id="error-message" class="text-danger" >StstemDiagnostics Selection is Required.</div>
                                 @for(dataItem of System_Diagnostics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
