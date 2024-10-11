@@ -36,6 +36,14 @@
 
 /***************************icon start here**************************/
 
+.oci-more-vertical:before {
+  content: "\e913";
+}
+
+.oci-settings:before {
+  content: "\e914";
+}
+
 .oci-batch:before {
   content: "\e911";
 }
