@@ -34,10 +34,12 @@
                         </span>
 
                         <ul class="pt-3 data-source-child">
+
                             <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''" class="ps-2">
                                 <span class="text-color-theme">Add ERP Analytics</span>
                             </li>
-                            <li class="ps-2">
+
+                            <li [ngClass]="obj_configuration_setting.tab=='system_diagnostics' ? 'active' : ''" class="ps-2">
                                 <span class="text-color-theme">
                                     Add System Diagnostics
                                 </span>
@@ -61,6 +63,10 @@
               
               <div *ngIf="obj_configuration_setting.tab=='ERP_Analytics'">
                 <app-configuration-settings-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-erp-analytics>
+              </div>
+
+              <div *ngIf="obj_configuration_setting.tab=='system_diagnostics'">
+                <app-configuration-settings-system-diagnostics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-system-diagnostics>
               </div>
 
               <div *ngIf="obj_configuration_setting.tab=='view_summary'">

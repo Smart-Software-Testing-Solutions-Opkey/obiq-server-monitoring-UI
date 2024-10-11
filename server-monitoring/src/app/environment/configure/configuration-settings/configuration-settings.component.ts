@@ -28,7 +28,8 @@ export class ConfigurationSettingsComponent {
     title: "Add View",
     viewName:"",
     selected_datasource: [],
-    selected_erp_analytics: []
+    selected_erp_analytics: [],
+    selected_system_diagnostics: [],
   }
   error_obj={
     ViewNameFlag : false,
@@ -60,6 +61,11 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_inner_tab = true;
     }
     else if (this.obj_configuration_setting.tab == "ERP_Analytics") { 
+      this.obj_configuration_setting.tab = "system_diagnostics";
+      this.obj_configuration_setting.title = "Add System Diagnostics";
+      this.obj_configuration_setting.is_inner_tab = true;
+    }
+    else if (this.obj_configuration_setting.tab == "system_diagnostics") { 
       this.obj_configuration_setting.tab = "view_summary";
       this.obj_configuration_setting.title = "Create View";
       this.obj_configuration_setting.is_inner_tab = false;
@@ -74,15 +80,20 @@ export class ConfigurationSettingsComponent {
 
   back() {
     debugger;
-    if (this.obj_configuration_setting.tab == "ERP_Analytics") { 
-      this.obj_configuration_setting.tab = "datasource"; 
-      this.obj_configuration_setting.title = "Create View";
-      this.obj_configuration_setting.is_inner_tab = false;
+    if (this.obj_configuration_setting.tab == "view_summary") { 
+      this.obj_configuration_setting.tab = "system_diagnostics";
+      this.obj_configuration_setting.title = "Add System Diagnostics";
+      this.obj_configuration_setting.is_inner_tab = true;
     }
-    else if (this.obj_configuration_setting.tab == "view_summary") { 
+    else if (this.obj_configuration_setting.tab == "system_diagnostics") { 
       this.obj_configuration_setting.tab = "ERP_Analytics"; 
       this.obj_configuration_setting.title = "Add ERP Analytics";
       this.obj_configuration_setting.is_inner_tab = true;
+    }
+    else if (this.obj_configuration_setting.tab == "ERP_Analytics") { 
+      this.obj_configuration_setting.tab = "datasource"; 
+      this.obj_configuration_setting.title = "Create View";
+      this.obj_configuration_setting.is_inner_tab = false;
     }
     else if (this.obj_configuration_setting.tab == "datasource") { 
       this.obj_configuration_setting.is_inner_tab = false;
