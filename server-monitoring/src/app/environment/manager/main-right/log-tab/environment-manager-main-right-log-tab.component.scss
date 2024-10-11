@@ -4,3 +4,53 @@
     border: 1px solid #ddd;
     border-radius: 0.5rem;
 }
+
+::ng-deep .logs-grid-layout {
+    .k-grid {
+        .k-grid-header {
+
+            .k-table-th {
+                .k-column-title {
+                    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+                }
+            }
+        }
+
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+                    }
+
+                    .layout-status {
+                        padding: .2rem .5rem;
+                        background: #dfdfdf;
+                        color: #344054;
+                        border-radius: 1rem;
+                        font-weight: 500;
+                        font-size: .8125rem;
+                        line-height: 1.125rem;
+                        vertical-align: middle;
+
+                        &.layout-status-color {
+                            padding: 0.2rem 0.25rem;
+                        }
+
+                        &.error, &.blocked {
+                            background-color: #FF0404;
+                        }
+
+                        &.warning {
+                            background-color: #EB8D00;
+                        }
+
+                        &.success {
+                            background-color: #00B66A;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

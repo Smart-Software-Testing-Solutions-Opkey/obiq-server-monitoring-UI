@@ -4,12 +4,23 @@
         graph here
     </div>
 
-    <div class="grid">
+    <div class="logs-grid-layout">
         <kendo-grid 
             [data]="logDataSource" 
             [selectable]="true" 
             (selectionChange)="onSelectionChange($event)" 
-            class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+            class="scrollable">
+
+            <kendo-grid-column title="" [width]="20">
+
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                    <span class="layout-status layout-status-color success">
+
+                    </span>
+
+                </ng-template>
+            </kendo-grid-column>
 
             <kendo-grid-column field="date" title="Date">
             </kendo-grid-column>

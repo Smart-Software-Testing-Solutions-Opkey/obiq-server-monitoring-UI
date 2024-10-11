@@ -1,27 +1,46 @@
 <div class="logs-details">
 
-    <div class="status-strip mb-3" style="display: flex; justify-content: space-between;">
+    <div class="status-strip mb-3 d-flex-between">
         <div class="left">
-            <span>Error</span>
-            <span style="margin-left: 2rem;">{{selectedData.date}}</span>
+            <span class="error-details">
+                <i class="oci oci-WARNING pe-1"></i>
+                Error
+            </span>
+            <span class="text-theme font-bold ps-3">{{selectedData.date}}</span>
         </div>
         <div class="right">
-            <button>Export</button>
+            <button type="button" class="btn btn-bg-white btn-layout-export"> 
+                <i class="oci oci-export pe-2"></i>
+                Export
+            </button>
         </div>
     </div>
 
-    <div class="details-strip mb-3" style="display: flex; justify-content: space-evenly;">
+    <div class="details-strip mb-3 d-flex align-items-start flex-wrap">
         @for (item of dataKeys; track $index; let idx = $index, e = $even) {
-            <div class="host" style="border: 1px solid;">
-                <span>{{dataKeys[idx]}}</span>
-                <div>{{dataValues[idx]}}</div>
+            <div class="host d-inline-block datakeys-box">
+                <span class="font-bold">{{dataKeys[idx]}}</span>
+                <span class="d-block text-ellipsis font-14px">
+                    @if (dataKeys[idx] == 'host') {
+                        <i class="oci oci-host ps-1 pe-2"></i>
+                    }
+
+                    @else if (dataKeys[idx] == 'content') {
+                        <i class="oci oci-shelf-position ps-1 pe-2"></i>
+                    }
+                    {{dataValues[idx]}}</span>
             </div>
-            }
+        }
        
     </div>
 
-    <div class="status-message mb-3">
-        Radis connection failed.
+    <div class="status-message mb-3 error-details d-flex-between">
+        <span>
+            Redis connection failed.
+        </span>
+        <span>
+            <i class="oci oci-copy-all"></i>
+        </span>
     </div>
 
     <div class="lowerPart">
@@ -32,13 +51,13 @@
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
                     <a class="nav-link" 
                         href="javascript:void(0)" [ngClass]="tabSelected == 'Trace'?'active':''" (click)="changeSelectedTab('Trace')">
-                        <i class="oci oci-journey pr-1"></i>
+                        <i class="oci oci-trace pr-1"></i>
                         Trace</a>
                 </li>
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab" >
                     <a class="nav-link" 
                         href="javascript:void(0)" [ngClass]="tabSelected == 'Metrics'?'active':''" (click)="changeSelectedTab('Metrics')">
-                        <i class="oci oci-journey pr-1"></i>
+                        <i class="oci oci-batch pr-1"></i>
                         Metrics</a>
                 </li>
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab">

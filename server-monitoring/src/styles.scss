@@ -270,6 +270,12 @@ body {
     font-weight: 600;
 }
 
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 // -------------------font weight--------------------------
 
 .font-bold {
