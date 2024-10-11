@@ -1,7 +1,6 @@
 import { Component, OnInit ,output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RightPanelAddEnvironmentComponent } from 'src/app/environment/manager/right-panel/right-panel-add-environment.component';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 
