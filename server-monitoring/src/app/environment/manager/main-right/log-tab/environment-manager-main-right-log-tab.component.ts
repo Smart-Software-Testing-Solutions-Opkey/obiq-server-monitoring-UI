@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RightPanelAddEnvironmentComponent } from '../../right-panel/right-panel-add-environment.component';
+import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 
 @Component({
   selector: 'app-environment-manager-main-right-log-tab',
@@ -23,7 +23,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   onSelectionChange(e){
     debugger
    let dataItem = e.selectedRows[0].dataItem
-   const modalRef = this.modalService.open( RightPanelAddEnvironmentComponent,{
+   const modalRef = this.modalService.open( ManagerRightPanelComponent,{
     backdrop: 'static',
     keyboard: false,
     size: 'full',

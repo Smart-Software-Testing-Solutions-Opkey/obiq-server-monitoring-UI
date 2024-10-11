@@ -13,7 +13,7 @@ import { EnvironmentConfigureModule } from '../../configure/module/environment-c
 import { EnvironmentManagerMainRightLogTabComponent } from '../main-right/log-tab/environment-manager-main-right-log-tab.component';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { EnvironmentManagerMainRightLogTabDetailsComponent } from '../main-right/log-tab/log-tab-details/environment-manager-main-right-log-tab-details.component';
-import { RightPanelAddEnvironmentComponent } from '../right-panel/right-panel-add-environment.component';
+import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { RightPanelAddEnvironmentComponent } from '../right-panel/right-panel-ad
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
-    RightPanelAddEnvironmentComponent
+    ManagerRightPanelComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +42,7 @@ import { RightPanelAddEnvironmentComponent } from '../right-panel/right-panel-ad
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
-    RightPanelAddEnvironmentComponent
+    ManagerRightPanelComponent
   ]
 })
 export class EnvironmentManagerModule { }

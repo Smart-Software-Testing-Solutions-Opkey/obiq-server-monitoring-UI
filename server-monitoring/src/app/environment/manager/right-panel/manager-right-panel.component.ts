@@ -1,15 +1,13 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentManagerModule } from '../module/environment-manager.module';
 
 @Component({
-  selector: 'app-right-panel-add-environment',
-  templateUrl: './right-panel-add-environment.component.html',
-  styleUrl: './right-panel-add-environment.component.scss'
+  selector: 'app-manager-right-panel',
+  templateUrl: './manager-right-panel.component.html',
+  styleUrl: './manager-right-panel.component.scss'
 })
-export class RightPanelAddEnvironmentComponent implements OnInit,OnDestroy {
-
+export class ManagerRightPanelComponent implements OnInit,OnDestroy {
   constructor(
     public activeModal: NgbActiveModal
   ) { }
