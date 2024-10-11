@@ -1,9 +1,9 @@
 <div id="div-datasource-slection">
 
     <div>
-        <p class="selection-header">
+        <h4 class="selection-header">
             Add your view by selecting multiple data sources
-        </p>
+        </h4>
     </div>
 
     <div class="row mx-0 mb-3">
@@ -42,7 +42,7 @@
                                 @for(dataItem of Application_dataSource; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
-                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                            <input class="form-check-input chekbox-custom" type="checkbox" 
                                                    [checked]="isSelected(item.name, dataItem)"
                                                    (change)="onServiceSelection(item.name, dataItem, $event)">
                                             <span>
@@ -88,7 +88,7 @@
                                 @for(dataItem of System_Diagnostics; track dataItem) {
                                     <div class="form-check mb-3">
                                         <label class="form-check-label">
-                                            <input class="form-check-input chekbox_custom" type="checkbox" 
+                                            <input class="form-check-input chekbox-custom" type="checkbox" 
                                                    [checked]="isSelected(item.name, dataItem)"
                                                    (change)="onServiceSelection(item.name, dataItem, $event)">
                                             <span>
