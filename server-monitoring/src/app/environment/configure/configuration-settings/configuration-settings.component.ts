@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class ConfigurationSettingsComponent {
     public activeModal: NgbActiveModal,
     private router: Router,
     private route: ActivatedRoute,
-    private service_data: AppDataService
+    public service_data: AppDataService,
+    public app_service:AppService,
   ) {}
   close_model() {
     this.activeModal.dismiss('close modal');
@@ -32,7 +35,9 @@ export class ConfigurationSettingsComponent {
     selected_system_diagnostics: [],
     ErpAnalytics:{},
     SystemDiagnostics:{},
-    active_dataSource_widjets:[]
+    active_dataSource_widjets:[],
+    AccessType:"PUBLIC",
+    selectedUids:{}
   }
   error_obj={
     ViewNameFlag : false,
@@ -147,9 +152,74 @@ export class ConfigurationSettingsComponent {
     }
 
   }
+  //Base/getAllProjects
+  createLinkedDataSourceObject() {
+    debugger;
+    var linkedDataarray = [];
+
+    this.obj_configuration_setting.active_dataSource_widjets.forEach(widget => {
+       
+        let linkedDataObject = {
+            dataSourceId: widget.id,
+            linkedData: []
+        };
+
+      
+        if (widget.selectedRows && widget.selectedRows.length > 0) {
+          
+            widget.selectedRows.forEach(selectedRow => {
+                linkedDataObject.linkedData.push({
+                    ApplicationType: selectedRow.ApplicationType, 
+                    SettingsID: selectedRow.SettingsID
+                });
+            });
+        }
+      linkedDataarray.push(linkedDataObject);
+    });
+
+    return linkedDataarray;
+}
+
+  create_View_object(){
+    debugger;
+    console.log(this.obj_configuration_setting,"create Object Config settings")
+    var obj_Create_View = new Object();
+    obj_Create_View["viewName"] = this.obj_configuration_setting.viewName;
+    obj_Create_View["description"] = ""
+    obj_Create_View["userId"] = this.service_data.UserDto.UserDTO.U_ID
+    obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
+    obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
+    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType
+    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [this.service_data.UserDto.UserDTO.U_ID] :this.obj_configuration_setting.AccessType === 'PUBLIC' ? [] :this.obj_configuration_setting.selectedUids;
+    obj_Create_View["linkedDataSource"] = this. createLinkedDataSourceObject();
+    return obj_Create_View;
+  }
+  createView(){
+    debugger;
+    var View_obj = this.create_View_object() as any;
+   // window.loadingStart("#div-datasource-slection", "Please wait");
+    
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    this.app_service.make_post_server_call(ajax_url, View_obj)
+    .subscribe({
+      next: (result: any) => {
+        window.loadingStop("#div-datasource-slection");
+        
+     
+      },
+      error: (error: any) => {
+        window.loadingStop("#div-datasource-slection");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
 
   finish() {
     debugger;
+    this.createView()
     this.service_data.is_env_configure = true;
     this.close_model();
     this.router.navigate(['/environment']);

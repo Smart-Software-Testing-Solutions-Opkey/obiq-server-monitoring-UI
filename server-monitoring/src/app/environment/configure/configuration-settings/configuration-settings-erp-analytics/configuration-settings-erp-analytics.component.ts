@@ -25,12 +25,85 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   Instance_list :any=null
   selectedRows: any[] = [];
   ngOnInit() {
-    this.createInstance("OracleFusion")
+  
+    this.createInstance()
    }
 
-   createInstance(app:string){
+   createInstance(){
+    debugger;
+    // var result =  {"SAP": [
+    //   {
+    //     "SystemIdentifier": "Rakesh",
+    //     "EnvironmentType": null,
+    //     "EnvironmentURL": "https://sstsinc2--promtest.my.salesforce.com",
+    //     "ConsumerKey": "sap",
+    //     "ConsumerSecret": null,
+    //     "Scope": null,
+    //     "Username": "rakesh.kumar@opkey.com",
+    //     "Password": "Rocky@123",
+    //     "SecurityToken": null,
+    //     "ClientLanguage": "english",
+    //     "InstanceNumber": "1234",
+    //     "Port": null,
+    //     "SID": null,
+    //     "RefreshToken": null,
+    //     "TenantName": null,
+    //     "OracleIntegrationCloudURL": null,
+    //     "OracleIntegrationCloudInstanceName": null,
+    //     "SettingsID": "2c3b7c9c-54d7-4416-888a-22f90b80153e",
+    //     "SettingsName": null,
+    //     "TeamID": "8f2c0aa6-418d-4f99-9ab1-a53eae2a587c",
+    //     "TeamName": "Default SAP Team",
+    //     "OrgID": null,
+    //     "CreatedBy": "Rakesh Kumar",
+    //     "CreatedOn": "Thursday, January 11, 2024 9:32:59 AM",
+    //     "ModifiedBy": "Kunal Ghai",
+    //     "ModifiedOn": "Wednesday, August 28, 2024 11:50:50 AM",
+    //     "URL": "https://sstsinc2--promtest.my.salesforce.com"
+    //   }, {
+    //     "SystemIdentifier": "Rakesh",
+    //     "EnvironmentType": null,
+    //     "EnvironmentURL": "https://sstsinc2--promtest.my.salesforce.com",
+    //     "ConsumerKey": "sap",
+    //     "ConsumerSecret": null,
+    //     "Scope": null,
+    //     "Username": "rakesh.kumar@opkey.com",
+    //     "Password": "Rocky@123",
+    //     "SecurityToken": null,
+    //     "ClientLanguage": "english",
+    //     "InstanceNumber": "1234",
+    //     "Port": null,
+    //     "SID": null,
+    //     "RefreshToken": null,
+    //     "TenantName": null,
+    //     "OracleIntegrationCloudURL": null,
+    //     "OracleIntegrationCloudInstanceName": null,
+    //     "SettingsID": "2c3b7c9c-54d7-4416-888a-22f90b80153e",
+    //     "SettingsName": null,
+    //     "TeamID": "8f2c0aa6-418d-4f99-9ab1-a53eae2a587c",
+    //     "TeamName": "Default SAP Team",
+    //     "OrgID": null,
+    //     "CreatedBy": "Rakesh Kumar",
+    //     "CreatedOn": "Thursday, January 11, 2024 9:32:59 AM",
+    //     "ModifiedBy": "Kunal Ghai",
+    //     "ModifiedOn": "Wednesday, August 28, 2024 11:50:50 AM",
+    //     "URL": "https://sstsinc2--promtest.my.salesforce.com"
+    //   }
+    // ],}
+    // this.Instance_list = Object.entries(result).flatMap(([appType, instances]) =>
+    //   instances.map(instance => ({
+    //       ...instance, // saari origanal properties spred kii 
+    //       ApplicationType: appType, //Application Type Add KRdia
+    //   }))
+    // )
+    var selectedData = this.obj_configuration_setting.selected_datasource.datasource;
+    var  erpAnalyticsValues = {}
+    if (selectedData["ERP Analytics"]) {
+      erpAnalyticsValues = selectedData["ERP Analytics"];
+    }
+    console.log(selectedData,"this is selected data ")
     var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetAllSettingsByApplications"
-    var ajax_data = { str_application: JSON.stringify([app]) };
+    var ajax_data = { str_application: JSON.stringify(erpAnalyticsValues) };
 
     this.app_service.make_get_server_call(ajax_url, ajax_data)
         .subscribe({
@@ -64,6 +137,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
       console.log(clickedRowData);
   }
   onSelectionChange(event: any) {
+    debugger;
     const selectedRow = event.selectedRows;
     const deselectedRow = event.deselectedRows;
     selectedRow.forEach((row: any) => {
@@ -76,7 +150,18 @@ export class ConfigurationSettingsErpAnalyticsComponent {
         this.selectedRows.splice(index, 1);
       }
     });
+    const targetId = "574cab25-6703-40da-aabf-48ff22668900"; 
+    const targetObject = this.obj_configuration_setting.active_dataSource_widjets.find(obj => obj.id === targetId);
 
+    if (targetObject) {
+       
+        if (!targetObject.selectedRows) {
+            targetObject.selectedRows = []; 
+        }
+        
+      
+        targetObject.selectedRows = [...this.selectedRows]; 
+    }
     console.log('Selected Rows:', this.selectedRows);
 
     this.obj_configuration_setting.selected_erp_analytics = this.selectedRows;

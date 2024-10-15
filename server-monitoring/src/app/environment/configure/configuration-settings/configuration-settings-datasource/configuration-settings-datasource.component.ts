@@ -60,6 +60,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   getAllApplications(){
  debugger;
 //var ajax_url =  environment.BASE_OPKEY_URL+ "ExternalApplicationSettings/GetApplicationAndSettings";
+
 var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetApplications"
  
 this.app_service.make_get_server_call(ajax_url, {})
@@ -78,8 +79,29 @@ this.app_service.make_get_server_call(ajax_url, {})
     }
   });
 }
+get_All_System_Diagnostics_data(widjet_id){
+  debugger;
+  window.loadingStart("#div-datasource-slection", "Please wait");
+  var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+  this.app_service.make_post_server_call(ajax_url, {"id":widjet_id})
+  .subscribe({
+    next: (result: any) => {
+      window.loadingStop("#div-datasource-slection");
+    
+    this.System_Diagnostics_dataSource = result;
+    },
+    error: (error: any) => {
+      window.loadingStop("#div-datasource-slection");
+      console.warn(error);
+    },
+    complete: () => {
+      console.log("Completed");
+    }
+  });
+}
 
   getAllWidjets(){
+
   window.loadingStart("#div-datasource-slection", "Please wait");
   var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
   this.app_service.make_get_server_call(ajax_url, {})
@@ -87,19 +109,14 @@ this.app_service.make_get_server_call(ajax_url, {})
    
     next: (result: any) => {
       window.loadingStop("#div-datasource-slection");
+      
         result.forEach((widjet: any) => {
           if (widjet.name === "ERP Analytics") {
            
             this.getAllApplications();
           }
-          if (widjet.name === "User Behaviour Analytics") {    
-            this.getUserBehaviourAnalytics();
-          }
-          if (widjet.name ==="Test Automation Analysis"){
-
-          }
           if( widjet.name ==="System Diagnostics"){
-
+            this.get_All_System_Diagnostics_data(widjet.id)
           }
         });
       this.data_Source_widjets = result;
@@ -147,6 +164,7 @@ onServiceSelection(widgetName: string, serviceName: string, event: any) {
       delete this.selectedServices[widgetName];
     }
   }
+  console.log(this.selectedServices,"this is selected Service to check delete")
 this.obj_Data_Source_Selection.datasource = this.selectedServices;
 this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection;
 
@@ -198,12 +216,13 @@ ShowWSelectedWidjetData(selectedItem: any) {
   
 }
 onInputChange(event:any){
+  debugger;
   console.log(event.target.value);
   this.viewName = event.target.value;
-  this.obj_configuration_setting.viewName = this.obj_Data_Source_Selection.viewName
+  this.obj_configuration_setting.viewName = this.viewName
+ 
    
 }
-
   create_environment() {
     // (click)="create_environment()"
     this.activeModal.dismiss('create_environment');

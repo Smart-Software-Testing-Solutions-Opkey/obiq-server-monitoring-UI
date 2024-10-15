@@ -77,11 +77,9 @@
         <div class="sidebar-menu-toolbar">
             <div class="row mx-0">
 
-                <div class="col-9 ps-0 pe-1">
-                    <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
-                        (valueChange)="viewChanged($event)" textField="name"
-                        valueField="val"></kendo-dropdownlist>
-                </div>
+                <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
+                (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId">
+                 </kendo-dropdownlist>
 
                 <div class="col-3 px-0">
                     <button type="button" class="btn btn-icon border-0" (click)="add_environment()"

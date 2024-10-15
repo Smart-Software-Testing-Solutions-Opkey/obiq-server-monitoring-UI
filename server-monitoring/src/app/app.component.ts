@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppService } from './services/app.service';
+import { AppDataService } from './services/app-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import { AppService } from './services/app.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private app_service:AppService){}
+  constructor(private app_service:AppService,
+    public dataService:AppDataService
+  ){}
 
   ngOnInit() {
     this.get_data();
@@ -28,7 +31,7 @@ export class AppComponent implements OnInit {
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
         console.log("get_data", result);
-   
+       this.dataService.UserDto = result;
 
 
       },

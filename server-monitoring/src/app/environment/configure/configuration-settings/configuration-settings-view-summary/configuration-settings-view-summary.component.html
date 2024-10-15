@@ -8,14 +8,38 @@
             
             <div class="dropdown">
                 <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle" data-bs-toggle="dropdown">
-                    Public
+                  {{ selectedAccessType }}
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="javascript:void(0)">Public</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0)">Private</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0)">Shared</a></li>
+                  <li *ngFor="let option of accessTypes">
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="onAccessTypeChange(option)">
+                      {{ option }}
+                    </a>
+                  </li>
                 </ul>
             </div>
+            <div *ngIf="Show_Project_Access" class="dropdown">
+                <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle" data-bs-toggle="dropdown">
+                  Select Users
+                </button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let user of users">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        [id]="user.U_ID"
+                        (change)="onUserSelect(user, $event)"
+                       
+                      >
+                      <label class="form-check-label" [for]="user.U_ID">
+                        {{ user.UserName }}
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
         </div>
     </div>
 
@@ -42,6 +66,9 @@
                                     class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
                                     <kendo-grid-column field="SystemIdentifier" title="Name">
                                         <ng-template kendoGridCellTemplate let-dataItem>
+                                            <span class="img-avatar-profile">
+                                                <img src="assets/images/default/application/OracleFusion.png" alt="">
+                                            </span>
                                             <span class="k_grid_text">{{dataItem.SystemIdentifier}}</span>
                                         </ng-template>
                                     </kendo-grid-column>
@@ -49,6 +76,9 @@
                                     <kendo-grid-column field="CreatedBy" title="Created">
                                         <ng-template kendoGridCellTemplate let-dataItem>
                                             <div class="created-info">
+                                                <span class="img-app-profile">
+                                                    <img src="assets/images/default/profile.png" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
+                                                </span>
                                                 <div class="created-name">{{dataItem.CreatedBy}}</div>
                                                 <div class="created-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</div>
                                             </div>
@@ -58,6 +88,9 @@
                                     <kendo-grid-column field="ModifiedBy" title="Last Modified">
                                         <ng-template kendoGridCellTemplate let-dataItem>
                                             <div class="modified-info">
+                                                <span class="img-app-profile">
+                                                    <img src="assets/images/default/profile.png" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
+                                                </span>
                                                 <div class="modified-name">{{dataItem.ModifiedBy}}</div>
                                                 <div class="modified-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</div>
                                             </div>
@@ -79,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-
+<!-- 
                 <div class="card">
                     <div class="card-header">
                         <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
@@ -118,7 +151,7 @@
                             Test Automation Analysis
                         </div>
                     </div>
-                </div>
+                </div> -->
 
              
             </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
 
 
 @Component({
@@ -16,7 +17,10 @@ export class NavigatorLeftComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private service_data: AppDataService
+    private service_data: AppDataService,
+    public app_service:AppService,
+    public dataService:AppDataService
+
 
   ) { }
     
@@ -27,43 +31,19 @@ export class NavigatorLeftComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.onChangeView.emit(this.selectedView)
-    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+   
+    this.getAllVIews();
 
-  
+    this.analyticsValueChange.emit(this.selectedAnalyticsType)
   }
-  selectedView:any = {name:'View 01',val:'view01',accessType:'Public'}
-  array_sidebar_menu = [
-    {
-      display: true,
-      displayname: "PROD_US",
-      view: "PROD_US",
-      submenu: [
-        { display: true, displayname: "Oracle EBS", status: "Not configured", view: "OracleEBS"},
-        { display: true, displayname: "IIS", status: "Not configured", view: "IIS"},
-        { display: true, displayname: "MySQL", status: "Not configured", view: "MySQL"},
-      ]
-    },
-    {
-      display: true,
-      displayname: "Opkey QA",
-      view: "OpkeyQA",
-      submenu: [
-        { display: true, displayname: "Workday", status: "Not configured", view: "Workday"},
-        { display: true, displayname: "IIS 01", status: "Not configured", view: "IIS"},
-        { display: true, displayname: "IIS 02", status: "Not configured", view: "IIS"},
-        { display: true, displayname: "Redis", status: "Not configured", view: "redis"},
-      ]
-    }
-  ];
+  selectedView:any = {}
+
 
   analyticsTypes = [
     {name:'ERP Analytics',val:'erp',display:true,isSelected:true},
     {name:'User Behaviour Analytics',val:'userbehaviour',display:true,isSelected:false},
     {name:'System Diagnostics',val:'systemdiagnostics',display:true,isSelected:false},
     {name:'Test Automation Analysis',val:'testautomation',display:true,isSelected:false}
-
-
   ]
 
   selectedAnalyticsType:any = {name:'ERP Analytics',val:'erp',display:true,isSelected:false}
@@ -95,12 +75,51 @@ export class NavigatorLeftComponent implements OnInit {
     'view3'
   ]
 
-  totalViews = [
-    {name:'View 01',val:'view01',accessType:'Public'},
-    {name:'View 02',val:'view02',accessType:'Private'},
-    {name:'View 03',val:'view03',accessType:'Custom'}
-
-  ]
+  totalViews :any;
+  set_Selected_VIew(selectedVIew){
+    debugger;
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+    this.app_service.make_post_server_call(ajax_url, {"viewId":selectedVIew.viewId,"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
+    .subscribe({
+      next: (result: any) => {
+        window.loadingStop("#div-datasource-slection");
+      
+     
+      },
+      error: (error: any) => {
+        window.loadingStop("#div-datasource-slection");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
+  getAllVIews(){
+    debugger;
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+    this.app_service.make_post_server_call(ajax_url, {"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
+    .subscribe({
+      next: (result: any) => {
+        window.loadingStop("#div-datasource-slection");
+        this.totalViews = result
+        if (this.totalViews && this.totalViews.length > 0) {
+          this.selectedView = this.totalViews[0]; 
+          this.onChangeView.emit(this.selectedView)
+          this.set_Selected_VIew(this.selectedView)
+        }
+    
+     
+      },
+      error: (error: any) => {
+        window.loadingStop("#div-datasource-slection");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
   add_environment() {
     const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
       backdrop: 'static',

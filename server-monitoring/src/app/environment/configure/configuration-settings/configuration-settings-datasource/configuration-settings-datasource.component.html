@@ -75,25 +75,24 @@
                     <div class="data-source-item">
                         <div *ngIf="error_flag.SystemDiagnosticsData" id="error-message" class="form_error">
                             StstemDiagnostics Selection is Required.</div>
-                        @for(dataItem of System_Diagnostics; track dataItem) {
-                        <div class="form-check mb-3">
-                            <label class="form-check-label">
-                                <input class="form-check-input chekbox-custom" type="checkbox"
-                                    [checked]="isSelected(item.name, dataItem)"
-                                    (change)="onServiceSelection(item.name, dataItem, $event)">
-                                <span>
-                                    <span class="application-images">
-
-                                        <img src="assets/images/default/application/{{dataItem}}.png"
-                                            alt="{{dataItem}}">
-                                    </span>
-                                    <span class="font-14px">
-                                        {{dataItem}}
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        }
+                            @for(dataItem of System_Diagnostics_dataSource; track dataItem.id) {
+                                <div class="form-check mb-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input chekbox-custom" type="checkbox"
+                                            [checked]="isSelected(item.name, dataItem.name)"
+                                            (change)="onServiceSelection(item.name, dataItem.name, $event)">
+                                        <span>
+                                            <!-- <span class="application-images">
+                                                <img src="assets/images/default/application/{{dataItem.name}}.png"
+                                                    alt="{{dataItem.name}}">
+                                            </span> -->
+                                            <span class="font-14px">
+                                                {{dataItem.name}}
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            }
                     </div>
                     }
         

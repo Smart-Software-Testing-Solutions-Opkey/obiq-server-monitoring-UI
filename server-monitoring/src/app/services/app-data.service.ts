@@ -9,7 +9,7 @@ export class AppDataService {
 
   is_env_configure:boolean = false;
   showSelectedViewEnvironment: boolean = false;
-
+  UserDto :any = null;
   setSelectedViewEnvironmentVisibility(visible: boolean) {
     this.showSelectedViewEnvironment = visible;
   }
