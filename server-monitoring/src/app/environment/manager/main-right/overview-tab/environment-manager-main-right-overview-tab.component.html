@@ -3,19 +3,45 @@
    @for (applicationData of applicationTotalData; track $index) {
 
     <div class="panel-widget">
-        <div class="icon mb-2">
-            <span>{{applicationData.applicationName}}</span>
+        <div class="panel-application-header pb-2 d-flex-between">
+
+            <div class="flex-center">
+                <span class="img-avatar-profile">
+                    <img src="assets/images/default/application/OracleFusion.png" alt="">
+                </span>
+                <span class="ps-2 font-bold">{{applicationData.applicationName}}</span>
+            </div>
+            <div>
+                <span>
+                    <i class="oci oci-more-vertical font-14px"></i>
+                </span>
+            </div>
+            
         </div>
-        <div class="stats mb-2 d-flex flex-row justify-content-around">
-            <div class="cpu">
-                {{applicationData.cpu}} <span>cpu</span>
+        <div class="graph-details pb-3 d-flex-between px-5">
+            <div class="graph-details-value">
+                <h5 class="graph-percentage">
+                    {{applicationData.cpu}}%
+                </h5>
+                <span>CPU</span>
+
             </div>
-            <div class="ram">
-                {{applicationData.ram}} <span>ram</span>
+            <div class="graph-details-value">
+                <h5 class="graph-percentage">
+                    {{applicationData.ram}}%
+                </h5>
+                <span>RAM</span>
             </div>
-            <div class="health">
-                <span>Current Health :</span>{{applicationData.health}} 
+            <div class="graph-details-health">
+                <span class="layout-text-status">Current Health </span>
+                <span class="ms-3 graph-status">
+                    {{applicationData.health}} 
+                </span>
             </div>
+        </div>
+
+        <div class="graph-diagram text-center">
+            graph  
         </div>
 
     </div>
