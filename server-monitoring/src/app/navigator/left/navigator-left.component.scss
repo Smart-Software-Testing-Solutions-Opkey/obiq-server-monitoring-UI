@@ -47,7 +47,7 @@
         .sidebar-menu-toolbar {
             padding: 0.5rem;
             border-bottom: 1px solid #D0D5DD;
-            margin-bottom: 0.5rem
+            margin-bottom: 0.5rem;
         }
 
         .sidebar-menu-content {
@@ -161,4 +161,8 @@
             }
         }
     }
+}
+
+::ng-deep .k-dropdown-height {
+    height: 2.5rem !important;
 }
