@@ -31,10 +31,12 @@
                     <div class="data-source-category" [ngClass]="{'active': isActive(item)}"
                         (click)="ShowWSelectedWidjetData(item) ">
                         <h4 class="text-center pb-3 header">{{item.name}}</h4>
-                        <p style="padding-top: 2rem;">
-                            <span class="d-block text-center">{{item.description}}</span>
-                            <!-- <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span> -->
-                        </p>
+                       <div class="data-source-text">
+                            <div>
+                                <span class="d-block text-center">{{item.description}}</span>
+                                <!-- <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span> -->
+                            </div>
+                       </div>
                         <span class="checked-data-source">
                             <i class="oci oci-check element-center"></i>
                         </span>

@@ -8,7 +8,7 @@
     border: 1px solid #D0D5DD;
     padding: 1.5rem;
     border-radius: 0.5rem;
-    height: 11rem;
+    height: 14rem;
     position: relative;
 
     &.active {
@@ -38,6 +38,7 @@
         position: relative;
         color: #116173;
         font-size: 1.25rem;
+        height: 2.5rem;
 
         &::after {
             content: "";
@@ -45,10 +46,18 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 10%;
+            width: 4rem;
             height: 2px; 
             background-color: #116173;
         }
+    }
+
+    .data-source-text {
+        height: calc(100% - 2.5rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0rem;
     }
     
     .checked-data-source {
