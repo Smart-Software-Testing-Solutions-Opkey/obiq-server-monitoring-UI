@@ -68,8 +68,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit{
 
 
    getAllProjects(){
-    var ajax_url = environment.BASE_OPKEY_URL+"ProfileController/GetAssignedUserInProject"
-   this.app_service.make_get_server_call(ajax_url,{"P_ID":"7dcdeff2-4538-4c2e-9bb7-1f40309a1438"})//{"P_ID":this.dataService.UserDto.ProjectDTO.P_ID}
+    var ajax_url = environment.BASE_OPKEY_URL+"Profile/GetAssignedUsersInProject"
+   this.app_service.make_get_server_call(ajax_url,{"P_ID":this.dataService.UserDto.ProjectDTO.P_ID})
      .subscribe({
       
        next: (result: any) => {
