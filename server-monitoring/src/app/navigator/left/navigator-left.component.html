@@ -75,12 +75,14 @@
     <div class="sidebar-menu-body flex-box-column">
 
         <div class="sidebar-menu-toolbar">
-            <div class="row mx-0">
+            <div class="row mx-0 align-items-center">
 
-                <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
-                (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId">
-                 </kendo-dropdownlist>
-
+                <div class="col-9 ps-0 pe-1">
+                    <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
+                        (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId">
+                    </kendo-dropdownlist>
+                </div>
+                
                 <div class="col-3 px-0">
                     <button type="button" class="btn btn-icon border-0" (click)="add_environment()"
                         aria-label="Add Environment">
