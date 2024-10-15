@@ -172,21 +172,39 @@ this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Select
   //this.data_service.widjets_selected_dataSource = this.selectedServices
 }
 
+// toggleactiveItems(selectedItem: any) {
+//   debugger;
+//   if (this.isActive(selectedItem)) {
+   
+//     this.activeItems = this.activeItems.filter(item => item !== selectedItem);
+//   } else {
+    
+//     this.activeItems.push(selectedItem);
+//     this.obj_configuration_setting.active_dataSource_widjets = this.activeItems
+//     console.log(this.activeItems,"these are active items")
+//   }
+// }
 toggleactiveItems(selectedItem: any) {
   debugger;
+  
   if (this.isActive(selectedItem)) {
-   
-    this.activeItems = this.activeItems.filter(item => item !== selectedItem);
+    // Remove the item from activeItems using the id for comparison
+    this.activeItems = this.activeItems.filter(item => item.id !== selectedItem.id);
   } else {
-    
+    // Add the item to activeItems
     this.activeItems.push(selectedItem);
-    this.obj_configuration_setting.active_dataSource_widjets = this.activeItems
-    console.log(this.activeItems,"these are active items")
   }
+
+  // Update the active_dataSource_widjets
+  this.obj_configuration_setting.active_dataSource_widjets = this.activeItems;
+  console.log(this.activeItems, "these are active items");
 }
 
+// isActive(item: any): boolean {
+//   return this.activeItems.includes(item);
+// }
 isActive(item: any): boolean {
-  return this.activeItems.includes(item);
+  return this.activeItems.some(activeItem => activeItem.id === item.id);
 }
 ShowWSelectedWidjetData(selectedItem: any) {
   debugger;

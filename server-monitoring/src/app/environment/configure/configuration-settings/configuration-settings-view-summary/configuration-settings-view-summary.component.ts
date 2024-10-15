@@ -68,22 +68,71 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit{
 
 
    getAllProjects(){
-    var ajax_url = environment.BASE_OPKEY_URL+"Profile/GetAssignedUsersInProject"
-   this.app_service.make_get_server_call(ajax_url,{"P_ID":this.dataService.UserDto.ProjectDTO.P_ID})
-     .subscribe({
+  var  result ={
+      "Users": [
+          {
+              "U_ID": "a6419346-5b95-4f16-ae0e-b41f63443333",
+              "Name": "rishabh.jain@opkey.com",
+              "UserName": "rishabh.jain@opkey.com",
+              "email_ID": "rishabh.jain@opkey.com",
+              "Is_Enabled": true,
+              "CreatedOn": "2024-10-14T01:15:35+05:30",
+              "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+              "LastModifiedOn": "2024-10-14T01:15:35+05:30",
+              "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+              "Is_SuperAdmin": false,
+              "Email_Verified_On": "0001-01-01T00:00:00",
+              "Last_Password_Change": "2024-10-14T01:15:35+05:30",
+              "isAutoCreated": false,
+              "ForcePasswordChange": false,
+              "ApiKey": "0RFACJW8AMQ4WWZ7E6",
+              "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
+              "Keycloak_SubjectId": null,
+              "UserImage": null,
+              "idp_Groups": []
+          },
+          {
+              "U_ID": "a89198cc-9d23-4173-a19d-c676ead27fdb",
+              "Name": "himanshu.kumar@opkey.com",
+              "UserName": "himanshu.kumar@opkey.com",
+              "email_ID": "himanshu.kumar@opkey.com",
+              "Is_Enabled": true,
+              "CreatedOn": "2024-10-14T01:15:35+05:30",
+              "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+              "LastModifiedOn": "2024-10-14T01:15:35+05:30",
+              "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+              "Is_SuperAdmin": false,
+              "Email_Verified_On": "0001-01-01T00:00:00",
+              "Last_Password_Change": "2024-10-14T01:15:35+05:30",
+              "isAutoCreated": false,
+              "ForcePasswordChange": false,
+              "ApiKey": "SL04H8NX0A7DN3ETDN",
+              "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
+              "Keycloak_SubjectId": null,
+              "UserImage": null,
+              "idp_Groups": []
+          }
+      ]
+  };    
+    this.Show_Project_Access = true  
+    this.users = result.Users;
+    return;
+  //   var ajax_url = environment.BASE_OPKEY_URL+"Profile/GetAssignedUsersInProject"
+  //  this.app_service.make_get_server_call(ajax_url,{"P_ID":this.dataService.UserDto.ProjectDTO.P_ID})
+  //    .subscribe({
       
-       next: (result: any) => {
-        this.Show_Project_Access = true
-        this.users = result.Users;
-       },
-       error: (error: any) => {
+  //      next: (result: any) => {
+  //       this.Show_Project_Access = true
+  //       this.users = result.Users;
+  //      },
+  //      error: (error: any) => {
         
-         console.warn(error);
-       },
-       complete: () => {
-         console.log("Completed");
-       }
-     });
+  //        console.warn(error);
+  //      },
+  //      complete: () => {
+  //        console.log("Completed");
+  //      }
+  //    });
  }
    onCellClick(event){
 

@@ -1,5 +1,5 @@
 
-<div class="feature-container h-100">
+<div id="Env_manager_main_right" class="feature-container h-100">
 
     <div class="feature-breadcrumb">
         <app-navigator-breadcrumb></app-navigator-breadcrumb>
@@ -10,7 +10,7 @@
 
         <div class="app-filter">
 
-            <h3 class="mb-0" style="font-size: 0.875rem ;">{{this.selectedView.name}}</h3>
+            <h3 class="mb-0" style="font-size: 0.875rem ;">{{this.selectedView.viewName}}</h3>
 
         </div>
 
@@ -27,7 +27,7 @@
                                 <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
                                     href="javascript:void(0)" (click)="changeSelectedTab(tab)">
                                     <i class="oci oci-journey pr-1"></i>
-                                    {{tab.name}}</a>
+                                    {{tab.text}}</a>
                             </li>
                         }
     
@@ -65,24 +65,24 @@
     
             <div class="tab_view_content h-100">
     
-                @if (selectedTab.val == 'overview') { 
+                @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
                     <div class="overview">
                         <app-environment-manager-main-right-overview-tab></app-environment-manager-main-right-overview-tab>
                     </div>
                 }
-                @else if (selectedTab.val == 'log') {
+                @else if (selectedTab.enumType == 'LOG_TAB') {
                     <div class="log">
                         <app-environment-manager-main-right-log-tab></app-environment-manager-main-right-log-tab>
                     </div>
             
                 }
-                @else if (selectedTab.val == 'timeexplorer') {
+                @else if (selectedTab.enumType == 'TIME_EXPLORER_TAB') {
             
                     <div class="timeexplorer">
                         Time explorer component here
                     </div>
                 }
-                @else if (selectedTab.val == 'telemetry') {
+                @else if (selectedTab.enumType == 'telemetry') {
             
                     <div class="telemetry">
                         Telemetry component here

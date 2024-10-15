@@ -190,14 +190,14 @@ export class ConfigurationSettingsComponent {
     obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
     obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
     obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType
-    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [this.service_data.UserDto.UserDTO.U_ID] :this.obj_configuration_setting.AccessType === 'PUBLIC' ? [] :this.obj_configuration_setting.selectedUids;
+    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] :this.obj_configuration_setting.AccessType === 'PUBLIC' ? [] :this.obj_configuration_setting.selectedUids;
     obj_Create_View["linkedDataSource"] = this. createLinkedDataSourceObject();
     return obj_Create_View;
   }
   createView(){
     debugger;
     var View_obj = this.create_View_object() as any;
-   // window.loadingStart("#div-datasource-slection", "Please wait");
+    window.loadingStart("#div-datasource-slection", "Please wait");
     
     let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
     this.app_service.make_post_server_call(ajax_url, View_obj)

@@ -26,7 +26,6 @@ this.selectedAnalyticsType = val
   }
   check_env_configuration() {
     debugger;
-    alert()
     if(!this.service_data.is_env_configure) {
       this.router.navigate(['environment/configure']);
     } else {
