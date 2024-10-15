@@ -46,3 +46,35 @@
         }
     }
 }
+
+.access-type-layout {
+    .PUBLIC , .PRIVATE , .SHARED {
+        span {
+            padding: 0.15rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.8125rem;
+        }
+    }
+    
+    .PUBLIC {
+        span {
+            background-color: #ECFDF3;
+            color: #027A48;
+        }
+    }
+
+    .PRIVATE {
+        span {
+            background-color: #FEF3F2;
+            color: #B42318;
+        }
+    }
+
+    .SHARED {
+        span {
+            background-color: #d4d4e3;
+            color: blue;
+        }
+    }   
+}
