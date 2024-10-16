@@ -70,7 +70,7 @@ export class NavigatorLeftComponent implements OnInit {
     'view3'
   ]
 
-  totalViews :any;
+  totalViews = [];
   set_Selected_View_DataSource(selectedVIew){
     window.loadingStart("#navigator-left", "Please wait");
     let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
@@ -192,6 +192,7 @@ export class NavigatorLeftComponent implements OnInit {
   isopenSettings:boolean = false
 
   openSettings(){
+    debugger;
     this.isopenSettings = true
     this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
 

@@ -30,16 +30,16 @@
             <nav>
                 <ul class="nav nav-pills menu-category">
 
-                    @for (view of totalViews; track $index) {
+                    @for (view of totalViews; track view.viewId) {
                     <li class="nav-item">
 
                         <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
                             [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
 
                             <div class="d-flex-between">
-                                <span class="name">{{view.name}}</span>
+                                <span class="name">{{view.viewName}}</span>
                                 <span class="flex-center">
-                                    <span class="label-status me-2 public">{{view.accessType}}</span> 
+                                    <span class="label-status me-2 public">Public</span> 
 
                                   
                                     <div class="dropdown">

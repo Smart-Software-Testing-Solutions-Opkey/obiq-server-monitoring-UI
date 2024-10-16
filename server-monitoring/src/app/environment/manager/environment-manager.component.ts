@@ -26,12 +26,43 @@ this.selectedAnalyticsType = val
   }
   check_env_configuration() {
     debugger;
+    //this.getAllViews()
     if(!this.service_data.is_env_configure) {
       this.router.navigate(['environment/configure']);
     } else {
       
     }
   }
+  // getAllViews(){
+  //   let result;
+  //   if(result.length != 0 ){
+  //     this.router.navigate(['/environment']);
+  //   }
+  //   else{
+  //     this.router.navigate(['environment/configure']);
+  //   }
+  
+  // }
+  // getAllVIews(){
+  //   debugger;
+  //   window.loadingStart("#navigator-left", "Please wait");
+  //   let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+  //   this.app_service.make_post_server_call(ajax_url, {"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
+  //   .subscribe({
+  //     next: (result: any) => {
+       
+    
+     
+  //     },
+  //     error: (error: any) => {
+  //       window.loadingStop("#navigator-left");
+  //       console.warn(error);
+  //     },
+  //     complete: () => {
+  //       console.log("Completed");
+  //     }
+  //   });
+  // }
   selectedView:any = null
   viewChanged(val){
     this.selectedView = val
