@@ -95,6 +95,53 @@ body {
 
         .app-filter {
             margin-bottom: 0.75rem;
+
+            &.app-filter-content {
+                display: flex;
+                align-items: center;
+                .left {
+
+                    h3 {
+                        font-size: 1rem;
+                        font-weight: 600;
+                    }
+                }
+    
+                .right {
+                    width: 100%;
+
+                    .filter-content {
+                        margin-bottom: .5rem;
+                        margin-right: .5rem;
+
+                        .filter-content-btn {
+                            padding: 0.4rem 0.75rem 0.5rem !important;
+                            font-size: 0.875rem !important;
+                            line-height: 1rem !important;
+                        }
+
+                        .search_panel {
+                            .search_input {
+                                box-shadow: 0px 1px 3px 0px #00000033 !important;
+                                border: 1px solid transparent !important;
+                            }
+                        }
+
+                        .layout-btn-group-time {
+                            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
+                            border-radius: 0.5rem;
+                            .btn {
+                                font-size: 0.875rem;
+                                background-color: #fff;
+                                color: #344054;
+                                padding: 0.4rem 0.5rem;
+                                line-height: 1;
+                                margin-left: 0 !important;
+                            }
+                        }
+                    } 
+                }
+            }
         }
 
         .app-body {
@@ -295,18 +342,22 @@ body {
 
 // ------------------font size------------------
 
+.font-12px {
+    font-size: 0.75rem;
+}
+
 .font-14px {
     font-size: 0.875rem;
 }
 
 /***************scss for button layout***************/
 .btn-layout {
-    padding: 0.625rem 1.25rem !important;
+    padding: 0.625rem 1.25rem;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
     border-radius: 0.5rem !important;
     font-weight: 500 !important;
-    font-size: 1rem !important;
-    line-height: 1.25rem !important;
+    font-size: 1rem;
+    line-height: 1.25rem;
     border-width: 1px !important;
     border-style: solid !important;
 }
@@ -392,7 +443,13 @@ a:focus-visible {
     border-left: .5px solid #d0d5dd;
 
     .btn {
-        border: 1px solid #D9E1EC;
+        font-size: 0.875rem;
+        background-color: #fff;
+        color: #344054;
+        padding: .40rem .5rem;
+        line-height: 1;
+        border-right: 1px solid #d0d5dd;
+        margin-left: 0 !important;
 
         &:active {
             border: 1px solid #D9E1EC !important;
