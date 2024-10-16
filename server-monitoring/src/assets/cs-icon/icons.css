@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-clock:before {
+  content: "\e915";
+}
+
 .oci-more-vertical:before {
   content: "\e913";
 }
