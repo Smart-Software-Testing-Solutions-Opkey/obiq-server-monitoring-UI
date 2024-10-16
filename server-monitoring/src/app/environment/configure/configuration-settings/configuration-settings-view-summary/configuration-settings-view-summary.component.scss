@@ -1,5 +1,5 @@
 .text-header {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #344054;
 }
@@ -15,6 +15,7 @@
         .card-header {
             padding: 0rem;
             border: none;
+            background-color: transparent;
 
             .btn-accordion {
                 width: 100%;
