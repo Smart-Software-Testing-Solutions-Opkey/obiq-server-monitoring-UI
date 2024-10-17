@@ -206,9 +206,33 @@ export class NavigatorLeftComponent implements OnInit {
   selectedViewSettings:any =   {name:'View 01',val:'view01',accessType:'Public'}
 
   settingsViewSelect(val){
+    debugger;
     this.selectedViewSettings = val
     this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
 
+  }
+  Rename_Selected_View(view){
+
+  }
+  Delete_Selected_View(view){
+    debugger;
+    window.loadingStart("#navigator-left", "Please wait");
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+    this.app_service.make_post_server_call(ajax_url, {"viewId":view.viewId,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
+    .subscribe({
+      next: (result: any) => {
+        window.loadingStop("#navigator-left");
+        this.getAllVIews();
+     
+      },
+      error: (error: any) => {
+        window.loadingStop("#navigator-left");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
   }
 
 }
