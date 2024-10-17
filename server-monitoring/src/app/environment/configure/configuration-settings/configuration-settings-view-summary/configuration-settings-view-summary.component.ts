@@ -120,7 +120,9 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit{
   // this.Show_Project_Access = true
   // this.users = result.Users;
   // return;
-   var ajax_url = environment.BASE_OPKEY_URL+"Profile/GetAssignedUsersInProject"
+   //var ajax_url = environment.BASE_OPKEY_URL+"Profile/GetAssignedUsersInProject"
+   
+   var ajax_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject"
    this.app_service.make_get_server_call(ajax_url,{"P_ID":this.dataService.UserDto.ProjectDTO.P_ID})
      .subscribe({
       

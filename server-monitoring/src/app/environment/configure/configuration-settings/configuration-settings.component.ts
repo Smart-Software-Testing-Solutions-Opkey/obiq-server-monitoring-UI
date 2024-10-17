@@ -24,7 +24,7 @@ export class ConfigurationSettingsComponent {
     this.activeModal.dismiss('close modal');
   }
 
-
+ 
   obj_configuration_setting = {
     tab: "datasource",
     is_inner_tab: false,
@@ -44,6 +44,7 @@ export class ConfigurationSettingsComponent {
     DataSourceFlag :false,
     ErpApplication:false,
     SystemDiagnosticsData:false,
+
   }
 
   revert_Error_Flags(){
@@ -85,7 +86,9 @@ export class ConfigurationSettingsComponent {
             
           // } 
           if (!hasErpAnalytics) {
-            this.error_obj.ErpApplication = true
+
+            this.error_obj.ErpApplication = true;
+            
             return false;
           }
           //  else if (!hasSystemDiagnostics) {
@@ -204,8 +207,8 @@ export class ConfigurationSettingsComponent {
     var View_obj = this.create_View_object() as any;
     window.loadingStart("#div-datasource-slection", "Please wait");
     
-    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
-    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
     this.app_service.make_post_server_call(ajax_url, View_obj)
     .subscribe({
       next: (result: any) => {

@@ -50,8 +50,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
   }
   get_Tab_Control_List(AnalysticsType){
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
     this.app_service.make_post_server_call(ajax_url, {"systemId":AnalysticsType.systemId})
     .subscribe({
       next: (result: any) => {

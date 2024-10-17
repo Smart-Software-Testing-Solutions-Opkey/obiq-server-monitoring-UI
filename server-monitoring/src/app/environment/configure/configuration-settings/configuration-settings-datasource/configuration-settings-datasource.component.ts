@@ -25,10 +25,13 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     DataSourceFlag: false,
     ErpApplication: false,
     SystemDiagnosticsData: false
+    
   };
+  
   @Input('child_data') set child_data({ obj_configuration_setting }) {
     this.obj_configuration_setting = obj_configuration_setting;
   }
+
 
   ngOnInit() {
    this.getAllWidjets();
@@ -59,9 +62,9 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   getAllApplications(){
  debugger;
-//var ajax_url =  environment.BASE_OPKEY_URL+ "ExternalApplicationSettings/GetApplicationAndSettings";
+var ajax_url =  "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplicationAndSettings";
 
-var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetApplications"
+//var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetApplications"
  
 this.app_service.make_get_server_call(ajax_url, {})
   .subscribe({
@@ -82,8 +85,8 @@ this.app_service.make_get_server_call(ajax_url, {})
 get_All_System_Diagnostics_data(widjet_id){
   debugger;
   window.loadingStart("#div-datasource-slection", "Please wait");
-  //var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
-  var ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+  var ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+ // var ajax_url =   "https://localhost:44315/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
   this.app_service.make_post_server_call(ajax_url, {"id":widjet_id})
   .subscribe({
     next: (result: any) => {
@@ -104,8 +107,8 @@ get_All_System_Diagnostics_data(widjet_id){
   getAllWidjets(){
 
   window.loadingStart("#div-datasource-slection", "Please wait");
-  var ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
- // var ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+ // var ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+  var ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
   this.app_service.make_get_server_call(ajax_url, {})
   .subscribe({
    
