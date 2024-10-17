@@ -70,6 +70,7 @@ body {
     height: 100%;
 
     .feature-breadcrumb {
+        display: none;
         .breadcrumb {
             padding: 1rem;
             .breadcrumb-item {
@@ -151,7 +152,7 @@ body {
     }
 
     .feature-body-height {
-        height: calc(100% - 5.875rem) !important;
+        height: 100% !important;
     }
 
 }
