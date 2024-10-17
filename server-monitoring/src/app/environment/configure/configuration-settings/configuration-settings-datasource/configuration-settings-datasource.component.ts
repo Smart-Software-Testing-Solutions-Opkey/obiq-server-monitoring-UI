@@ -62,7 +62,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   getAllApplications(){
  debugger;
-var ajax_url =  "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplicationAndSettings";
+var ajax_url =  "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
 
 //var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetApplications"
  
