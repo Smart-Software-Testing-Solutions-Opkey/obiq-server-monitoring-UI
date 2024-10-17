@@ -213,7 +213,9 @@ export class ConfigurationSettingsComponent {
     .subscribe({
       next: (result: any) => {
         window.loadingStop("#div-datasource-slection");
-        
+      this.service_data.is_env_configure = true;
+      this.close_model();   // calling GetAllViewds after View Creation 
+      this.router.navigate(['/environment']);
      
       },
       error: (error: any) => {
@@ -229,9 +231,7 @@ export class ConfigurationSettingsComponent {
   finish() {
     debugger;
     this.createView()
-    this.service_data.is_env_configure = true;
-    this.close_model();
-    this.router.navigate(['/environment']);
+    
   }
 
 }
