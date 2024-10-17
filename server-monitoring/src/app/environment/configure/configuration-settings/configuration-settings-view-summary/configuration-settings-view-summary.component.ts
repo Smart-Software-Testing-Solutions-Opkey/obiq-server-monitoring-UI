@@ -129,7 +129,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit{
        next: (result: any) => {
         
         this.Show_Project_Access = true
-        this.users = result.Users;
+        this.users = result;
        },
        error: (error: any) => {
         
