@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-environment-manager-main-right',
@@ -49,7 +50,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
   }
   get_Tab_Control_List(AnalysticsType){
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
     this.app_service.make_post_server_call(ajax_url, {"systemId":AnalysticsType.systemId})
     .subscribe({
       next: (result: any) => {

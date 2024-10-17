@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -73,7 +74,8 @@ export class NavigatorLeftComponent implements OnInit {
   totalViews = [];
   set_Selected_View_DataSource(selectedVIew){
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
     this.app_service.make_post_server_call(ajax_url, {"viewId":selectedVIew.viewId})
     .subscribe({
       next: (result: any) => {
@@ -101,7 +103,8 @@ export class NavigatorLeftComponent implements OnInit {
   set_Selected_VIew(selectedVIew){
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+   // let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
     this.app_service.make_post_server_call(ajax_url, {"viewId":selectedVIew.viewId,"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
     .subscribe({
       next: (result: any) => {
@@ -122,7 +125,8 @@ export class NavigatorLeftComponent implements OnInit {
   getAllVIews(){
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
     this.app_service.make_post_server_call(ajax_url, {"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
     .subscribe({
       next: (result: any) => {
@@ -217,7 +221,8 @@ export class NavigatorLeftComponent implements OnInit {
   Delete_Selected_View(view){
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+   // let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
     this.app_service.make_post_server_call(ajax_url, {"viewId":view.viewId,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
     .subscribe({
       next: (result: any) => {

@@ -204,7 +204,8 @@ export class ConfigurationSettingsComponent {
     var View_obj = this.create_View_object() as any;
     window.loadingStart("#div-datasource-slection", "Please wait");
     
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    //let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
     this.app_service.make_post_server_call(ajax_url, View_obj)
     .subscribe({
       next: (result: any) => {
