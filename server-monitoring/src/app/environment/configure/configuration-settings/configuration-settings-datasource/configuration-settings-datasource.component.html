@@ -10,7 +10,7 @@
         <div class="col-sm-5 ps-0">
             <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
             <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)">
-            <div *ngIf="error_flag.ViewNameFlag" id="error-message" class="form_error">View Name is required.</div>
+            <span *ngIf="obj_error.dispaly_viewName" class="form-error">View Name is required.</span>
         </div>
     </div>
 
@@ -18,86 +18,91 @@
         <div class="col-sm-12 px-0">
 
             <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
-            
-            <div *ngIf="error_flag.DataSourceFlag" id="error-message" class="form_error">DataSource Selection is
-                Required.</div>
+
+            <span *ngIf="obj_error.dispaly_DataSource" class="form-error">DataSource Selection is Required.</span>
 
             <div class="row mx-0">
 
-                @for(item of data_Source_widjets; track item.name) {
+                @for(item of data_Source_widjets; track item.id) {
 
                 <div class="col-5 ps-0 mb-3 me-3">
 
-                    <div class="data-source-category" [ngClass]="{'active': isActive(item)}"
-                        (click)="ShowWSelectedWidjetData(item) ">
+                    <div class="data-source-category" role="button" (click)="select_datasource(item) "
+                        [ngClass]="item.isChecked ? 'active': '' ">
                         <h4 class="text-center pb-3 header">{{item.name}}</h4>
-                       <div class="data-source-text">
-                            <div>
-                                <span class="d-block text-center">{{item.description}}</span>
-                                <!-- <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span> -->
-                            </div>
-                       </div>
+                        <p style="padding-top: 2rem;">
+                            <span class="d-block text-center">{{item.description}}</span>
+                            <!-- <span class="d-block text-red text-center pt-2">{{item.subtitle}}</span> -->
+                        </p>
                         <span class="checked-data-source">
                             <i class="oci oci-check element-center"></i>
                         </span>
                     </div>
 
-                    @if(item.display_services && item.showServices && item.name === 'ERP Analytics') {
+                    @if((item.name === 'ERP Analytics' && item.isChecked) && (item.name === datasource_item_name || obj_error.display_ErpApplication)) {
+        
+                        <div class="datasource-sub-category">
+                            <label for="application" class="form-label mt-2">Choose your application <span
+                                    class="text-astric">*</span></label>
 
-                    <div *ngIf="error_flag.ErpApplication" id="error-message" class="form_error">Application Selection
-                        is Required.</div>
-                    <label for="application" class="form-label mt-2">Choose your application <span
-                            class="text-astric">*</span></label>
+                            <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application Selection is Required.</span>
 
-                    <div class="data-source-item">
-                        <!-- Loop over this.ApplicationdataSource.Applications -->
-                        @for(dataItem of Application_dataSource; track dataItem) {
-                        <div class="form-check mb-3">
-                            <label class="form-check-label">
-                                <input class="form-check-input chekbox-custom" type="checkbox"
-                                    [checked]="isSelected(item.name, dataItem)"
-                                    (change)="onServiceSelection(item.name, dataItem, $event)">
-                                <span>
-                                    <span class="application-images">
-                                        <!-- Assuming icons are based on application names -->
-                                        <img src="assets/images/default/application/{{dataItem}}.png"
-                                            alt="{{dataItem}}">
-                                    </span>
-                                    <span class="font-14px">
-                                        {{dataItem}}
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        }
-                    </div>
-                    }
-                
-                    @else if(item.display_services && item.showServices && item.name === 'System Diagnostics') {
-                    <div class="data-source-item">
-                        <div *ngIf="error_flag.SystemDiagnosticsData" id="error-message" class="form_error">
-                            StstemDiagnostics Selection is Required.</div>
-                            @for(dataItem of System_Diagnostics_dataSource; track dataItem.id) {
+                            <div class="data-source-item">
+                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                                @for(dataItem of datasource_application; track dataItem) {
                                 <div class="form-check mb-3">
                                     <label class="form-check-label">
                                         <input class="form-check-input chekbox-custom" type="checkbox"
-                                            [checked]="isSelected(item.name, dataItem.name)"
-                                            (change)="onServiceSelection(item.name, dataItem.name, $event)">
+                                            [checked]="dataItem.isChecked"
+                                            (change)="select_applicaton(dataItem, $event)">
                                         <span>
-                                            <!-- <span class="application-images">
-                                                <img src="assets/images/default/application/{{dataItem.name}}.png"
-                                                    alt="{{dataItem.name}}">
-                                            </span> -->
+                                            <span class="application-images">
+                                                <img src="assets/images/default/application/{{dataItem}}.png"
+                                                    alt="{{dataItem}}">
+                                            </span>
                                             <span class="font-14px">
-                                                {{dataItem.name}}
+                                                {{dataItem}}
                                             </span>
                                         </span>
                                     </label>
                                 </div>
-                            }
-                    </div>
+                                }
+                            </div>
+                        </div>
+
                     }
-        
+
+                    @else if((item.name === 'System Diagnostics' && item.isChecked) && (item.name === datasource_item_name || obj_error.display_SystemDiagnosticsData)) {
+                     
+                        <div class="datasource-sub-category">
+
+                            <label for="application" class="form-label mt-2">Choose your system diagnostics
+                                <span class="text-astric">*</span>
+                            </label>
+                            <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">StstemDiagnostics Selection is Required.</span>
+
+                            @for(dataItem of datasource_system_diagnostics; track dataItem.id) {
+                            <div class="form-check mb-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input chekbox-custom" type="checkbox"
+                                        [checked]="dataItem.isChecked"
+                                        (click)="select_systemDiagnostics(dataItem, $event)">
+                                    <span>
+                                        <!-- <span class="application-images">
+
+                                            <img src="assets/images/default/application/{{dataItem}}.png"
+                                                alt="{{dataItem}}">
+                                        </span> -->
+                                        <span class="font-14px">
+                                            {{dataItem.name}}
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            }
+                        </div>
+                    }
+
                 </div>
                 }
             </div>

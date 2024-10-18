@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
     if (window.keycloak == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
     if (window.keycloak.sessionId == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
 
-   // var form_url = environment.BASE_OPKEY_URL + "login/get_data";
-   var form_url = "https://myqlm.dev.opkeyone.com/login/get_data";
+    var form_url = environment.BASE_OPKEY_URL + "login/get_data";
+   //var form_url = "https://myqlm.dev.opkeyone.com/login/get_data";
     var form_data = { sessionID: window.keycloak.sessionId, opkeyone_callsource: "Default" };
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
