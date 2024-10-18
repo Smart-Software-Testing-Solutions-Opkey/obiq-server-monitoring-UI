@@ -28,7 +28,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     keyboard: false,
     size: 'full',
     centered: true,
-    windowClass: 'layout-modal-right panel-end w-50'
+    windowClass: 'layout-modal-right panel-end w-75'
   });
   modalRef.result.then((result) => {
   }, (response) => {

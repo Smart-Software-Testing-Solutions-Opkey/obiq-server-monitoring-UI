@@ -21,24 +21,26 @@
                 .k-master-row {
                     .k-table-td {
                         font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+
+                        &:first-child {
+                            padding: 0rem !important;
+                        }
                     }
 
                     .layout-status {
-                        padding: .2rem .5rem;
+                        // padding: .2rem .5rem;
                         background: #dfdfdf;
                         color: #344054;
                         border-radius: 1rem;
                         font-weight: 500;
                         font-size: .8125rem;
                         line-height: 1.125rem;
-                        vertical-align: middle;
-
-                        &.layout-status-color {
-                            padding: 0.2rem 0.25rem;
-                        }
+                        height: 3rem;
+                        display: block;
+                        width: 0.35rem;
 
                         &.error, &.blocked {
-                            background-color: #FF0404;
+                            background-color: #B42318;
                         }
 
                         &.warning {
@@ -46,7 +48,7 @@
                         }
 
                         &.success {
-                            background-color: #00B66A;
+                            background-color: #268144;
                         }
                     }
                 }
