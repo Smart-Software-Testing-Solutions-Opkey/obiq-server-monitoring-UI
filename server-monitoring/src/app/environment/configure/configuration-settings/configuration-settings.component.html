@@ -39,12 +39,12 @@
                                 <span class="text-color-theme">Add ERP Analytics</span>
                             </li>
 
-                            <!-- <li [ngClass]="obj_configuration_setting.tab=='system_diagnostics' ? 'active' : ''" class="ps-2">
+                            <li [ngClass]="obj_configuration_setting.tab=='system_diagnostics' ? 'active' : ''" class="ps-2">
                                 <span class="text-color-theme">
                                     Add System Diagnostics
                                 </span>
                                
-                            </li> -->
+                            </li>
                         </ul>
                     </li>
 
@@ -58,16 +58,16 @@
     
            <div class="selection-right">
             <div *ngIf="obj_configuration_setting.tab=='datasource'">
-                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting}"[error_flag]="error_obj"></app-configuration-settings-datasource>
+                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting, dispaly_viewName: dispaly_viewName, dispaly_DataSource: dispaly_DataSource, display_ErpApplication: display_ErpApplication, display_SystemDiagnosticsData: display_SystemDiagnosticsData}" ></app-configuration-settings-datasource>
               </div>
               
               <div *ngIf="obj_configuration_setting.tab=='ERP_Analytics'">
                 <app-configuration-settings-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-erp-analytics>
               </div>
 
-              <!-- <div *ngIf="obj_configuration_setting.tab=='system_diagnostics'">
+              <div *ngIf="obj_configuration_setting.tab=='system_diagnostics'">
                 <app-configuration-settings-system-diagnostics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-system-diagnostics>
-              </div> -->
+              </div>
 
               <div *ngIf="obj_configuration_setting.tab=='view_summary'">
                     <app-configuration-settings-view-summary [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-view-summary>

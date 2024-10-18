@@ -11,247 +11,212 @@ import { environment } from 'src/environments/environment';
 })
 export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
-  
+
   constructor(
     public activeModal: NgbActiveModal,
-    public app_service:AppService
+    public app_service: AppService
   ) { }
 
 
-  obj_configuration_setting:any;
-
-  @Input() error_flag: { ViewNameFlag: boolean, DataSourceFlag: boolean,ErpApplication:boolean,SystemDiagnosticsData:boolean } = {
-    ViewNameFlag: false,
-    DataSourceFlag: false,
-    ErpApplication: false,
-    SystemDiagnosticsData: false
-    
-  };
-  
-  @Input('child_data') set child_data({ obj_configuration_setting }) {
-    this.obj_configuration_setting = obj_configuration_setting;
+  obj_configuration_setting: any;
+  obj_error = {
+    dispaly_viewName: false,
+    dispaly_DataSource: false,
+    display_ErpApplication: false,
+    display_SystemDiagnosticsData: false
   }
-
+  
+  @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData }) {
+    this.obj_configuration_setting = obj_configuration_setting;
+    this.obj_error.dispaly_viewName = dispaly_viewName;
+    this.obj_error.dispaly_DataSource = dispaly_DataSource;
+    this.obj_error.display_ErpApplication = display_ErpApplication;
+    this.obj_error.display_SystemDiagnosticsData = display_SystemDiagnosticsData;
+  }
 
   ngOnInit() {
-   this.getAllWidjets();
-  }
- 
-  ngOnDestroy() {
-  //  this.disposeAllSubscriptions();
-  
+    this.get_all_datasource();
+    this.restet_obj_datasource();
   }
 
-  subscriptions: Subscription[] = [];
- 
-  data_Source_widjets:any = null;
-  selectedServices: { [key: string]: string[] } = {};
-  Application_dataSource:any = null;
-  User_Behaviour_Analytics_dataSource:any = null;
-  System_Diagnostics_dataSource:any = null;
-  Test_Automation_Analysis:any = null;
-  viewName:String = "";
-  Behaviour_Analytics :any=null;
-  System_Diagnostics:any = null;
-  obj_Data_Source_Selection = {
-    viewName: null,
-    datasource: null,
+  obj_datasource_widget = {
+    viewName: "",
+    select_datasource_item: [],
+    select_applicaton_item: [],
+    select_systemDiagnostics_item: []
   }
-  selectedWidget: any = null;
-  activeItems: any[] = [];
 
-  getAllApplications(){
- debugger;
-var ajax_url =  "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
+  restet_obj_datasource() {
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+    this.obj_error.dispaly_viewName = false;
+    this.obj_error.dispaly_DataSource = false;
+    this.obj_error.display_ErpApplication = false;
+    this.obj_error.display_SystemDiagnosticsData = false;
+    this.datasource_item_name = "";
+  }
 
-//var ajax_url = environment.BASE_OPKEY_URL+"ExternalApplicationSettings/GetApplications"
- 
-this.app_service.make_get_server_call(ajax_url, {})
-  .subscribe({
-   
-    next: (result: any) => {
-      this.Application_dataSource = result;
+  modal_name: null;
+  data_Source_widjets = [];
 
-    },
-    error: (error: any) => {
-     
-      console.warn(error);
-    },
-    complete: () => {
-      console.log("Completed");
+  get_all_datasource() {
+
+    window.loadingStart("#div-datasource-slection", "Please wait");
+    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    let form_data = {};
+
+    this.app_service.make_get_server_call(form_url, form_data)
+      .subscribe({
+
+        next: (result: any) => {
+          window.loadingStop("#div-datasource-slection");
+          result.forEach((widjet: any) => {
+
+            if (widjet.name === "ERP Analytics") {
+
+              this.get_AllApplications();
+            }
+            if (widjet.name === "User Behaviour Analytics") {
+             
+            }
+            if (widjet.name === "Test Automation Analysis") {
+
+            }
+            if (widjet.name === "System Diagnostics") {
+              this.get_datasource_system_diagnostics(widjet.id);
+            }
+          });
+
+          this.data_Source_widjets = result;
+
+          this.data_Source_widjets.forEach(item => {
+            item['isChecked'] = false;
+          })
+          
+        },
+        error: (error: any) => {
+          window.loadingStop("#div-datasource-slection");
+          console.warn(error);
+        },
+        complete: () => {
+          window.loadingStop("#div-datasource-slection");
+          console.log("Completed");
+        }
+      });
+
+
+  }
+
+
+  datasource_application = [];
+
+  get_AllApplications() {
+
+  //   this.datasource_application = [
+  //     "OracleFusion",
+  //     "SAP",
+  //     "Salesforce",
+  //     "PeopleSoft",
+  //     "Workday",
+  //     "OracleEBS",
+  //     "MSDynamicsFSO",
+  //     "VeevaVault",
+  //     "Coupa",
+  //     "OracleIntegrationCloud"
+  // ];
+  // return
+
+     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications"
+    // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
+    let form_data = {};
+
+    this.app_service.make_get_server_call(form_url, form_data)
+      .subscribe({
+
+        next: (result: any) => {
+          this.datasource_application = result;
+        },
+        error: (error: any) => {
+
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+  }
+
+
+  datasource_system_diagnostics = [];
+
+  get_datasource_system_diagnostics(widjet_id) {
+    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+    let form_data = {id:widjet_id};
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+
+        next: (result: any) => {
+          this.datasource_system_diagnostics = result;
+        },
+        error: (error: any) => {
+
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+  }
+
+
+  onInputChange(event:any){
+    console.log(event.target.value);
+    this.modal_name = event.target.value;
+    this.obj_datasource_widget.viewName = event.target.value;
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+  }
+
+  datasource_item_name = "";
+  select_datasource(dataItem) {
+    debugger;
+    this.datasource_item_name = dataItem.name;
+    dataItem.isChecked = !dataItem.isChecked;
+    if(dataItem.isChecked) {
+      this.obj_datasource_widget.select_datasource_item.push(dataItem);
+    } else {
+      let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item == dataItem);
+      this.obj_datasource_widget.select_datasource_item.splice(index, 1);
     }
-  });
-}
-get_All_System_Diagnostics_data(widjet_id){
-  debugger;
-  window.loadingStart("#div-datasource-slection", "Please wait");
-  var ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
- // var ajax_url =   "https://localhost:44315/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
-  this.app_service.make_post_server_call(ajax_url, {"id":widjet_id})
-  .subscribe({
-    next: (result: any) => {
-      window.loadingStop("#div-datasource-slection");
+
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
     
-    this.System_Diagnostics_dataSource = result;
-    },
-    error: (error: any) => {
-      window.loadingStop("#div-datasource-slection");
-      console.warn(error);
-    },
-    complete: () => {
-      console.log("Completed");
+
+  }
+
+  select_applicaton(dataItem, event) {
+    debugger;
+    if(event.target.checked) {
+      this.obj_datasource_widget.select_applicaton_item.push(dataItem);
+    } else {
+      let index = this.obj_datasource_widget.select_applicaton_item.findIndex(item => item == dataItem);
+      this.obj_datasource_widget.select_applicaton_item.splice(index, 1);
     }
-  });
-}
 
-  getAllWidjets(){
-
-  window.loadingStart("#div-datasource-slection", "Please wait");
- // var ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
-  var ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
-  this.app_service.make_get_server_call(ajax_url, {})
-  .subscribe({
-   
-    next: (result: any) => {
-      window.loadingStop("#div-datasource-slection");
-      
-        result.forEach((widjet: any) => {
-          if (widjet.name === "ERP Analytics") {
-           
-            this.getAllApplications();
-          }
-          if( widjet.name ==="System Diagnostics"){
-            this.get_All_System_Diagnostics_data(widjet.id)
-          }
-        });
-      this.data_Source_widjets = result;
-    },
-    error: (error: any) => {
-      window.loadingStop("#div-datasource-slection");
-      console.warn(error);
-    },
-    complete: () => {
-      console.log("Completed");
-    }
-  });
- 
-  console.log(this.data_Source_widjets,"these are widjets");
-
-}
- 
-  select_datasource:any = []
-
-isSelected(widgetName: string, serviceName: string): boolean {
-  return this.selectedServices[widgetName] && this.selectedServices[widgetName].includes(serviceName);
-}
-getUserBehaviourAnalytics(){
- 
-}
-
-onServiceSelection(widgetName: string, serviceName: string, event: any) {
-  debugger;
-  const isChecked = event.target.checked;
-
-  if (isChecked) {
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
     
-    if (!this.selectedServices[widgetName]) {
-      this.selectedServices[widgetName] = [];
-    }
-
-   
-    this.selectedServices[widgetName].push(serviceName);
-  } else {
-   
-    this.selectedServices[widgetName] = this.selectedServices[widgetName].filter(item => item !== serviceName);
-
-    
-    if (this.selectedServices[widgetName].length === 0) {
-      delete this.selectedServices[widgetName];
-    }
-  }
-  console.log(this.selectedServices,"this is selected Service to check delete")
-this.obj_Data_Source_Selection.datasource = this.selectedServices;
-this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection;
-
-
-  //this.data_service.widjets_selected_dataSource = this.selectedServices
-}
-
-// toggleactiveItems(selectedItem: any) {
-//   debugger;
-//   if (this.isActive(selectedItem)) {
-   
-//     this.activeItems = this.activeItems.filter(item => item !== selectedItem);
-//   } else {
-    
-//     this.activeItems.push(selectedItem);
-//     this.obj_configuration_setting.active_dataSource_widjets = this.activeItems
-//     console.log(this.activeItems,"these are active items")
-//   }
-// }
-toggleactiveItems(selectedItem: any) {
-  debugger;
-  
-  if (this.isActive(selectedItem)) {
-    // Remove the item from activeItems using the id for comparison
-    this.activeItems = this.activeItems.filter(item => item.id !== selectedItem.id);
-  } else {
-    // Add the item to activeItems
-    this.activeItems.push(selectedItem);
   }
 
-  // Update the active_dataSource_widjets
-  this.obj_configuration_setting.active_dataSource_widjets = this.activeItems;
-  console.log(this.activeItems, "these are active items");
-}
-
-// isActive(item: any): boolean {
-//   return this.activeItems.includes(item);
-// }
-isActive(item: any): boolean {
-  return this.activeItems.some(activeItem => activeItem.id === item.id);
-}
-ShowWSelectedWidjetData(selectedItem: any) {
-  debugger;
- 
-  this.data_Source_widjets.forEach((item: any) => {
-    item.showServices = false;
-    item.display_services = false;
-  });
-
-  const selectedIndex = this.data_Source_widjets.findIndex((item: any) => item.id === selectedItem.id);
-  if (selectedIndex !== -1) {
-    const isActiveItem = this.activeItems.some(activeItem => activeItem.id === this.data_Source_widjets[selectedIndex].id);
-
-    if (!isActiveItem) {
-      this.data_Source_widjets[selectedIndex].showServices = true;
-      this.data_Source_widjets[selectedIndex].display_services = true;
+  select_systemDiagnostics(dataItem, event) {
+    debugger;
+    if(event.target.checked) {
+      this.obj_datasource_widget.select_systemDiagnostics_item.push(dataItem);
+    } else {
+      let index = this.obj_datasource_widget.select_systemDiagnostics_item.findIndex(item => item == dataItem);
+      this.obj_datasource_widget.select_systemDiagnostics_item.splice(index, 1);
     }
-    else{
-      this.selectedServices = {};
-      this.obj_Data_Source_Selection.datasource = this.selectedServices;
-      this.obj_configuration_setting.selected_datasource = this.obj_Data_Source_Selection
-    }
-    // this.data_Source_widjets[selectedIndex].showServices = true;
-    // this.data_Source_widjets[selectedIndex].display_services = true;
-  }
-  this.toggleactiveItems(selectedItem);
-  
-}
-onInputChange(event:any){
-  debugger;
-  console.log(event.target.value);
-  this.viewName = event.target.value;
-  this.obj_configuration_setting.viewName = this.viewName
- 
-   
-}
-  create_environment() {
-    // (click)="create_environment()"
-    this.activeModal.dismiss('create_environment');
-  }
-  close_model() {
-    this.activeModal.dismiss('close modal');
+
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
   }
 
 
