@@ -284,8 +284,8 @@ export class ConfigurationSettingsComponent {
          
             widget.selectedRows.forEach(selectedRow => {
                 linkedDataObject.linkedData.push({
-                    ApplicationType: selectedRow.ApplicationType,
-                    SettingsID: selectedRow.SettingsID
+                  name: selectedRow.ApplicationType,
+                  value: selectedRow.SettingsID
                 });
             });
         }
