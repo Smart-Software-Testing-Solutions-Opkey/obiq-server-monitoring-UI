@@ -109,8 +109,8 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
-    let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
-    // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetAllSettingsByApplications";
+   // let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
+     let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetAllSettingsByApplications";
 
     let form_data = { str_application: JSON.stringify(select_applicaton) };
 
