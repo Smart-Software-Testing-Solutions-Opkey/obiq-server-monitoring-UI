@@ -1040,6 +1040,11 @@ input {
 
 // -------------css for dropdown----------------------
 
+.dropdown-menu-scrollable {
+    max-height: 13rem;
+    overflow: auto;
+}
+
 .dropdown-item {
     display: block;
     padding: 0.5rem 0.75rem 0.5rem 0.75rem !important;
