@@ -61,8 +61,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   get_all_datasource() {
 
     window.loadingStart("#div-datasource-slection", "Please wait");
-    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
-    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+   // let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
     let form_data = {};
 
     this.app_service.make_get_server_call(form_url, form_data)
