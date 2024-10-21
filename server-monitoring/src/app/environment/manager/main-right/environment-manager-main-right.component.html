@@ -140,7 +140,8 @@
                 }
                 @else if (selectedTab.enumType == 'LOG_TAB') {
                     <div class="log">
-                        <app-environment-manager-main-right-log-tab></app-environment-manager-main-right-log-tab>
+                        <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType" 
+                        [view]="selectedView" ></app-environment-manager-main-right-log-tab>
                     </div>
             
                 }

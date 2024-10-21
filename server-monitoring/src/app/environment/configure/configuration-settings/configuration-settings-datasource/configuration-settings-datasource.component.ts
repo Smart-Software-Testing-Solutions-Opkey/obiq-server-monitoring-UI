@@ -112,19 +112,19 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   get_AllApplications() {
 
-  //   this.datasource_application = [
-  //     "OracleFusion",
-  //     "SAP",
-  //     "Salesforce",
-  //     "PeopleSoft",
-  //     "Workday",
-  //     "OracleEBS",
-  //     "MSDynamicsFSO",
-  //     "VeevaVault",
-  //     "Coupa",
-  //     "OracleIntegrationCloud"
-  // ];
-  // return
+    this.datasource_application = [
+      "OracleFusion",
+      "SAP",
+      "Salesforce",
+      "PeopleSoft",
+      "Workday",
+      "OracleEBS",
+      "MSDynamicsFSO",
+      "VeevaVault",
+      "Coupa",
+      "OracleIntegrationCloud"
+  ];
+  return
 
    //  let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications"
      let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";

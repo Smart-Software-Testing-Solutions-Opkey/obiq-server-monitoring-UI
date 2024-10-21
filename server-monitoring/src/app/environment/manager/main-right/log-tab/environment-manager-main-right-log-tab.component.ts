@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
+import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-environment-manager-main-right-log-tab',
@@ -12,13 +14,65 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
 
   constructor(
     private modalService: NgbModal,
+    public service_data: AppDataService,
+    public app_service:AppService,
+    public dataService:AppDataService
   ){}
-
+  @Input() analyticsType: any;
+  @Input() view: any;
   ngOnInit(): void {
-    
+    console.log(this.analyticsType,"this is analythics type in log tab")
+    console.log(this.view,"this isnthe view in log tab")
+    this.getLogsChart()
+    this.getViewLogs()
   }
   ngOnDestroy(): void {
     
+  }
+  getLogsChart(){
+    window.loadingStart("#Env_manager_main_right", "Please wait");
+    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    this.app_service.make_post_server_call(ajax_url, {
+      "timeSpanEnum":"LAST_7_DAYS",
+      "viewId":this.view.viewId,
+      "projectId":this.service_data.UserDto.ProjectDTO.P_ID,
+      "limitBy":20,
+      "offset":0,
+      "widgetType":"ESS_LOG_TIMEGRAPH_WIDGET"
+  })
+    .subscribe({
+      next: (result: any) => {
+      window.loadingStop("#Env_manager_main_right");
+      this.logDataSource = result.essLogsList
+      },
+      error: (error: any) => {
+        window.loadingStop("#Env_manager_main_right");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
+  getViewLogs(){
+    window.loadingStart("#Env_manager_main_right", "Please wait");
+    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    this.app_service.make_post_server_call(ajax_url, {"timeSpanEnum":"LAST_7_DAYS","viewId":this.view.viewId,"projectId":this.service_data.UserDto.ProjectDTO.P_ID,"logToSearch":"","limitBy":20,"offset":0, "widgetType":"ESS_LOG_DATA_WIDGET"})
+    .subscribe({
+      next: (result: any) => {
+      window.loadingStop("#Env_manager_main_right");
+      this.logDataSource = result.essLogsList
+      },
+      error: (error: any) => {
+        window.loadingStop("#Env_manager_main_right");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
   }
   onSelectionChange(e){
     debugger
@@ -40,7 +94,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   }
   selectedKeys = []
   logDataSource = [
-    {date:'Mar 02 13:52:10.288',host:'i-0b97ec477e7fe75b3e1',service:'kube-proxy',content:"k8s.io/client-go/informers/factory.go:132: Failed to list"},
-    {date:'Mar 03 13:52:10.288',host:'i-0b9',service:'kube-p',content:"k8s.io/client-go/informers/factory.go:132: Failed to list"}
+   
   ]
+    
 }

@@ -134,6 +134,7 @@ export class NavigatorLeftComponent implements OnInit {
         this.totalViews = result
         if (this.totalViews && this.totalViews.length > 0) {
           this.selectedView = this.totalViews[0]; 
+          this.selectedViewSettings = this.selectedView;
           this.onChangeView.emit(this.selectedView)
           this.set_Selected_VIew(this.selectedView)
           this.onChangeView.emit(this.selectedView)
@@ -207,7 +208,7 @@ export class NavigatorLeftComponent implements OnInit {
 
   }
 
-  selectedViewSettings:any =   {name:'View 01',val:'view01',accessType:'Public'}
+  selectedViewSettings:any =   {}
 
   settingsViewSelect(val){
     debugger;

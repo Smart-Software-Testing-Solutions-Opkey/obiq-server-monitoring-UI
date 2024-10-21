@@ -34,7 +34,7 @@
                     <li class="nav-item">
 
                         <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
-                            [ngClass]="selectedViewSettings && view.val == selectedViewSettings.val?'active':''">
+                            [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''">
 
                             <div class="d-flex-between">
                                 <span class="name">{{view.viewName}}</span>
