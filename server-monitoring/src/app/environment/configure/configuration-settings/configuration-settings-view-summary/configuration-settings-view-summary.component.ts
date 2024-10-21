@@ -35,7 +35,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
 
   }
 
-  selectedAccessType: string = 'PUBLIC';
+  selectedAccessType: string = 'PRIVATE';
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
   users: any[] = [];
   selectedUsers: any[] = [];
@@ -123,8 +123,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     // this.users = result.Users;
     // return;
 
-    let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    //let form_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject";
+    //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
+    let form_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

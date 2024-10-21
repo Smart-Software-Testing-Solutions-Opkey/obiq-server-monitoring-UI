@@ -24,11 +24,14 @@
 
             <kendo-grid-column field="timeStampString" title="Date">
             </kendo-grid-column>
-            <kendo-grid-column field="appType" title="appType">
+            <kendo-grid-column field="dataId" title="Host">
             </kendo-grid-column>
-            <kendo-grid-column field="service" title="Service">
+            <kendo-grid-column field="appType" title="Service">
             </kendo-grid-column>
-            <kendo-grid-column field="summarizedLog" title="summarizedLog">
+            <kendo-grid-column title="Content">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.domainName }} - {{ dataItem.logType }}
+                </ng-template>
             </kendo-grid-column>
 
             <ng-template kendoGridNoRecordsTemplate>

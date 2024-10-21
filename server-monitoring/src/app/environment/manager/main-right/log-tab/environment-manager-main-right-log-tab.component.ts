@@ -20,10 +20,12 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   ){}
   @Input() analyticsType: any;
   @Input() view: any;
+  selectedKeys = []
+  logDataSource = []
   ngOnInit(): void {
     console.log(this.analyticsType,"this is analythics type in log tab")
     console.log(this.view,"this isnthe view in log tab")
-    this.getLogsChart()
+    //this.getLogsChart()
     this.getViewLogs()
   }
   ngOnDestroy(): void {
@@ -32,7 +34,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   getLogsChart(){
     window.loadingStart("#Env_manager_main_right", "Please wait");
     //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
       "timeSpanEnum":"LAST_7_DAYS",
       "viewId":this.view.viewId,
@@ -56,12 +58,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     });
   }
   getViewLogs(){
+    debugger;
     window.loadingStart("#Env_manager_main_right", "Please wait");
     //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {"timeSpanEnum":"LAST_7_DAYS","viewId":this.view.viewId,"projectId":this.service_data.UserDto.ProjectDTO.P_ID,"logToSearch":"","limitBy":20,"offset":0, "widgetType":"ESS_LOG_DATA_WIDGET"})
     .subscribe({
       next: (result: any) => {
+        debugger;
       window.loadingStop("#Env_manager_main_right");
       this.logDataSource = result.essLogsList
       },
@@ -92,9 +96,6 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   });
   modalRef.componentInstance.selectedItem = {callsource:'environmentManager',data:dataItem};
   }
-  selectedKeys = []
-  logDataSource = [
-   
-  ]
+
     
 }
