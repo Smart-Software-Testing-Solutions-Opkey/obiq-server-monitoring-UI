@@ -2,3 +2,18 @@
     font-size: 1rem;
     color: #667085; 
 }
+
+.error-details-count {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    background-color: #FEF3F2;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+
+    span {
+        color: #B42318;;
+    }
+}
