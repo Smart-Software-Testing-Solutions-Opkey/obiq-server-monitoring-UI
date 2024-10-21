@@ -292,11 +292,10 @@ export class ConfigurationSettingsComponent {
       };
 
 
-      if (widget.selectedRows && widget.selectedRows.length > 0) {
-
-        widget.selectedRows.forEach(selectedRow => {
+      if (widget.name == "ERP Analytics") {
+          this.obj_configuration_setting.selected_erp_analytics.forEach(selectedRow => {
           linkedDataObject.linkedData.push({
-            name: selectedRow.ApplicationType,
+            name: selectedRow.SystemIdentifier,
             value: selectedRow.SettingsID
           });
         });

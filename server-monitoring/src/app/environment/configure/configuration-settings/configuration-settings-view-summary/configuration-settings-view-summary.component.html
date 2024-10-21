@@ -68,7 +68,7 @@
 
             <div id="accordion_summary" class="accordion-view-summary">
 
-                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) { 
+                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.length != 0) { 
 
                     @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 

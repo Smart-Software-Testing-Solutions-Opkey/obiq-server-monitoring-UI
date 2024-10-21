@@ -21,8 +21,10 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   Show_Project_Access: boolean = false;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
+    alert("re4ached")
+    debugger;
     this.obj_configuration_setting = obj_configuration_setting;
-    console.log("obj_configuration_setting===", obj_configuration_setting);
+    console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
   }
   ngOnInit() {
     this.get_all_summary(this.obj_configuration_setting)

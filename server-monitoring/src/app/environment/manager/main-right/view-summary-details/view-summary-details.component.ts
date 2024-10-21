@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-view-summary-details',
@@ -6,7 +8,11 @@ import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular
   styleUrl: './view-summary-details.component.scss'
 })
 export class ViewSummaryDetailsComponent implements OnInit ,AfterViewInit  {
-
+  constructor(
+    public app_service: AppService,
+    public dataService: AppDataService,
+    private service_data: AppDataService) {
+  }
   obj_configuration_setting:any;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
@@ -25,7 +31,27 @@ ngOnChanges(changes: SimpleChanges) {
 }
 get_All_Summary_of_Selected_View(view)
 {
+  alert("in summ")
+  debugger;
+  //https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList
+  let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
 
+  let form_data = {"viewId":view.viewId};
+
+  this.app_service.make_post_server_call(form_url, form_data)
+    .subscribe({
+      next: (result: any) => {
+        window.loadingStop("#div-datasource-slection");
+
+      },
+      error: (error: any) => {
+        window.loadingStop("#div-datasource-slection");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
 }
 ngAfterViewInit(): void {
   this.Settings_View_Selection

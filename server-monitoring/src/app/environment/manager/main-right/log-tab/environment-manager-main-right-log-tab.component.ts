@@ -46,7 +46,6 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     .subscribe({
       next: (result: any) => {
       window.loadingStop("#Env_manager_main_right");
-      this.logDataSource = result.essLogsList
       },
       error: (error: any) => {
         window.loadingStop("#Env_manager_main_right");
