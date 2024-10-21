@@ -72,11 +72,14 @@ export class NavigatorLeftComponent implements OnInit {
   ]
 
   totalViews = [];
-  set_Selected_View_DataSource(selectedVIew){
+  set_Selected_View_DataSource(selectedVIew) {
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
-   // let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
-    this.app_service.make_post_server_call(ajax_url, {"viewId":selectedVIew.viewId})
+    let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+   
+   let form_data = { viewId: selectedVIew.viewId };
+   
+   this.app_service.make_post_server_call(form_url, form_data)
     .subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
@@ -100,13 +103,20 @@ export class NavigatorLeftComponent implements OnInit {
       }
     });
   }
-  set_Selected_VIew(selectedVIew){
+
+  set_Selected_VIew(selectedVIew) {
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
-   // let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
-    this.app_service.make_post_server_call(ajax_url, {"viewId":selectedVIew.viewId,"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
-    .subscribe({
+    let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+
+    let form_data = { 
+      viewId:selectedVIew.viewId,
+      userId:this.dataService.UserDto.UserDTO.U_ID,
+      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+    };
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         this.set_Selected_View_DataSource(result)
@@ -122,13 +132,19 @@ export class NavigatorLeftComponent implements OnInit {
       }
     });
   }
-  getAllVIews(){
+
+  getAllVIews() {
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
-   // let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
-    this.app_service.make_post_server_call(ajax_url, {"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
-    .subscribe({
+    let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+
+    let form_data = {
+      userId:this.dataService.UserDto.UserDTO.U_ID,
+      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+    }
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         this.totalViews = result
@@ -222,9 +238,15 @@ export class NavigatorLeftComponent implements OnInit {
   Delete_Selected_View(view){
     debugger;
     window.loadingStart("#navigator-left", "Please wait");
-   // let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
-    let ajax_url =   "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
-    this.app_service.make_post_server_call(ajax_url, {"viewId":view.viewId,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
+    let form_url = environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+
+    let form_data = {
+      viewId:view.viewId,
+      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+    }
+
+    this.app_service.make_post_server_call(form_url, form_data)
     .subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");

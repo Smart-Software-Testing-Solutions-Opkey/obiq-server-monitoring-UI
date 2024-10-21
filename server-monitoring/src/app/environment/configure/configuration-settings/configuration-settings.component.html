@@ -27,25 +27,38 @@
                         <span class="text-color-theme">Select Data-Sources</span>
                     </li>
 
-                    <li [ngClass]="obj_configuration_setting.is_inner_tab ? 'item_subcategory active' : ''">
+                    <li [ngClass]="obj_configuration_setting.is_value_selection ? 'item_subcategory active' : ''">
                         <span>
                             <span class="icon">2</span>
                             <span class="text-color-theme">Value of Data-Sources</span>
                         </span>
 
-                        <ul class="pt-3 data-source-child">
+                        @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) { 
 
-                            <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''" class="ps-2">
-                                <span class="text-color-theme">Add ERP Analytics</span>
-                            </li>
+                            <ul class="pt-3 data-source-child">
 
-                            <li [ngClass]="obj_configuration_setting.tab=='system_diagnostics' ? 'active' : ''" class="ps-2">
-                                <span class="text-color-theme">
-                                    Add System Diagnostics
-                                </span>
+                                @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id ) {
+
+                                    @if(item.name == 'ERP Analytics') {
+                                        <li [ngClass]="obj_configuration_setting.tab=='ERP_Analytics' ? 'active' : ''" class="ps-2">
+                                            <span class="text-color-theme">Add ERP Analytics</span>
+                                        </li>
+                                    }
+
+                                    @if(item.name == 'System Diagnostics') {
+                                        <li [ngClass]="obj_configuration_setting.tab=='system_diagnostics' ? 'active' : ''" class="ps-2">
+                                            <span class="text-color-theme">
+                                                Add System Diagnostics
+                                            </span>
+                                           
+                                        </li>
+                                    }
+
+                                }
                                
-                            </li>
-                        </ul>
+                            </ul>
+                        }
+                        
                     </li>
 
                     <li [ngClass]="obj_configuration_setting.tab=='view_summary' ? 'active' : ''">
@@ -62,7 +75,7 @@
               </div>
               
               <div *ngIf="obj_configuration_setting.tab=='ERP_Analytics'">
-                <app-configuration-settings-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-erp-analytics>
+                <app-configuration-settings-erp-analytics [child_data]="{obj_configuration_setting: obj_configuration_setting, dispaly_Instances: dispaly_Instances}"></app-configuration-settings-erp-analytics>
               </div>
 
               <div *ngIf="obj_configuration_setting.tab=='system_diagnostics'">

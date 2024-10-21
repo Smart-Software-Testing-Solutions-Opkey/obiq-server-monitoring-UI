@@ -10,7 +10,7 @@
         <div class="col-sm-5 ps-0">
             <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
             <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)">
-            <span *ngIf="obj_error.dispaly_viewName" class="form-error">View Name is required.</span>
+            <span *ngIf="obj_error.dispaly_viewName" class="form-error">View name is required.</span>
         </div>
     </div>
 
@@ -19,7 +19,9 @@
 
             <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
 
-            <span *ngIf="obj_error.dispaly_DataSource" class="form-error">DataSource Selection is Required.</span>
+            <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
+                <span class="form-error">Data source selection is required.</span>
+            </div>
 
             <div class="row mx-0">
 
@@ -45,7 +47,7 @@
                             <label for="application" class="form-label mt-2">Choose your application <span
                                     class="text-astric">*</span></label>
 
-                            <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application Selection is Required.</span>
+                            <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
 
                             <div class="data-source-item">
                                 <!-- Loop over this.ApplicationdataSource.Applications -->
@@ -79,7 +81,7 @@
                             <label for="application" class="form-label mt-2">Choose your system diagnostics
                                 <span class="text-astric">*</span>
                             </label>
-                            <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">StstemDiagnostics Selection is Required.</span>
+                            <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">Ststem diagnostics selection is required.</span>
 
                             @for(dataItem of datasource_system_diagnostics; track dataItem.id) {
                             <div class="form-check mb-3">
