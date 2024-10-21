@@ -68,114 +68,138 @@
 
             <div id="accordion_summary" class="accordion-view-summary">
 
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
-                            ERP Analytics
-                        </a>
-                    </div>
-                    <div id="collapse_ERPAnalytics" class="collapse show">
-                        <div class="card-body px-0">
+                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) { 
 
-                            <div class="kendo_grid">
-                                <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
-                                    (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
-                                    (selectionChange)="onSelectionChange($event)"
-                                    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-                                    <kendo-grid-column field="SystemIdentifier" title="Name">
-                                        <ng-template kendoGridCellTemplate let-dataItem>
-                                            <div class="flex-center">
-                                                <span class="img-avatar-profile">
-                                                    <img src="assets/images/default/application/OracleFusion.png" alt="">
-                                                </span>
-                                                <span class="layout-text-obiq ps-2">{{dataItem.SystemIdentifier}}</span>
-                                            </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
+                    @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 
-                                    <kendo-grid-column field="CreatedBy" title="Created">
-                                        <ng-template kendoGridCellTemplate let-dataItem>
-                                            <div class="flex-center">
-                                                <span class="img-app-profile">
-                                                    <img src="assets/images/default/profile.png" alt="">
-                                                </span>
-                                                <div class="ps-2">
-                                                    <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
-                                                    <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
-                                 
-                                    <kendo-grid-column field="ModifiedBy" title="Last Modified">
-                                        <ng-template kendoGridCellTemplate let-dataItem>
-                                            <div class="flex-center">
-                                                <span class="img-app-profile">
-                                                    <img src="assets/images/default/profile.png" alt="">
-                                                </span>
-                                                <div class="ps-2">
-                                                    <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
-                                                    <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
+                        @if(item.name == 'ERP Analytics') {
 
-                                    <ng-template kendoGridNoRecordsTemplate>
-                                        <div class="no_data_found" style="height: 17rem !important;">
-                                            <div class="no_data_found_content">
-                                                <img class="no_data_found_content_img"
-                                                    src="/assets/icon-image/nodata-img.png" alt="No data">
-                                                <p class="no_data_found_content_text">No data available</p>
-                                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
+                                        ERP Analytics
+                                    </a>
+                                </div>
+                                <div id="collapse_ERPAnalytics" class="collapse show">
+                                    <div class="card-body px-0">
+            
+                                        <div class="kendo_grid">
+                                            <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                                                (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                                                (selectionChange)="onSelectionChange($event)"
+                                                class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                                <kendo-grid-column field="SystemIdentifier" title="Name">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="img-avatar-profile">
+                                                                <img src="assets/images/default/application/OracleFusion.png" alt="">
+                                                            </span>
+                                                            <span class="layout-text-obiq ps-2">{{dataItem.SystemIdentifier}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+            
+                                                <kendo-grid-column field="CreatedBy" title="Created">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="img-app-profile">
+                                                                <img src="assets/images/default/profile.png" alt="">
+                                                            </span>
+                                                            <div class="ps-2">
+                                                                <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                                                                <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+                                             
+                                                <kendo-grid-column field="ModifiedBy" title="Last Modified">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="img-app-profile">
+                                                                <img src="assets/images/default/profile.png" alt="">
+                                                            </span>
+                                                            <div class="ps-2">
+                                                                <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                                                                <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+            
+                                                <ng-template kendoGridNoRecordsTemplate>
+                                                    <div class="no_data_found" style="height: 17rem !important;">
+                                                        <div class="no_data_found_content">
+                                                            <img class="no_data_found_content_img"
+                                                                src="/assets/icon-image/nodata-img.png" alt="No data">
+                                                            <p class="no_data_found_content_text">No data available</p>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </kendo-grid>
                                         </div>
-                                    </ng-template>
-                                </kendo-grid>
+            
+                                    </div>
+                                </div>
                             </div>
 
-                        </div>
-                    </div>
-                </div>
-<!-- 
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
-                            System Diagnostics
-                        </a>
-                    </div>
-                    <div id="collapse_systemDiagnostics" class="collapse show">
-                        <div class="card-body">
-                            System Diagnostics summary
-                        </div>
-                    </div>
-                </div>
+                        }
 
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
-                            User Behavior Analytics
-                        </a>
-                    </div>
-                    <div id="collapse_user" class="collapse show">
-                        <div class="card-body">
-                            User Behavior Analytics summary
-                        </div>
-                    </div>
-                </div>
+                        @if(item.name == 'System Diagnostics') {
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
+                                        System Diagnostics
+                                    </a>
+                                </div>
+                                <div id="collapse_systemDiagnostics" class="collapse show">
+                                    <div class="card-body">
+                                        System Diagnostics summary
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                        @if(item.name == 'User Behaviour Analytics') {
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
+                                        User Behavior Analytics
+                                    </a>
+                                </div>
+                                <div id="collapse_user" class="collapse show">
+                                    <div class="card-body">
+                                        User Behavior Analytics summary
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                        @if(item.name == 'Test Automation Analysis') {
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
+                                        Test Automation Analysis
+                                    </a>
+                                </div>
+                                <div id="collapse_testAutomation" class="collapse show">
+                                    <div class="card-body">
+                                        Test Automation Analysis
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        }
 
 
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
-                            Test Automation Analysis
-                        </a>
-                    </div>
-                    <div id="collapse_testAutomation" class="collapse show">
-                        <div class="card-body">
-                            Test Automation Analysis
-                        </div>
-                    </div>
-                </div> -->
+                    }
+
+                }
 
              
             </div>

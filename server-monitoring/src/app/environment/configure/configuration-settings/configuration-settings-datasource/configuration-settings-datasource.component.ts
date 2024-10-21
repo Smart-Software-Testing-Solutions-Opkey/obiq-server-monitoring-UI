@@ -19,6 +19,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
 
   obj_configuration_setting: any;
+
   obj_error = {
     dispaly_viewName: false,
     dispaly_DataSource: false,
@@ -61,8 +62,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   get_all_datasource() {
 
     window.loadingStart("#div-datasource-slection", "Please wait");
-   // let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
-    let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
     let form_data = {};
 
     this.app_service.make_get_server_call(form_url, form_data)
@@ -126,8 +127,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   // ];
   // return
 
-   //  let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications"
-     let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
+    let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications";
+    // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
     let form_data = {};
 
     this.app_service.make_get_server_call(form_url, form_data)
@@ -150,8 +151,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   datasource_system_diagnostics = [];
 
   get_datasource_system_diagnostics(widjet_id) {
-   // let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
-    let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+    //let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
     let form_data = {id:widjet_id};
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({

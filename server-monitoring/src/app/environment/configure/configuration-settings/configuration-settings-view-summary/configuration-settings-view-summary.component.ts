@@ -14,8 +14,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   constructor(
     public app_service: AppService,
     public dataService: AppDataService) {
-
   }
+
   obj_configuration_setting: any;
   Selected_grid_dataSource: any;
   Show_Project_Access: boolean = false;
@@ -39,7 +39,6 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
   users: any[] = [];
   selectedUsers: any[] = [];
-
 
   onAccessTypeChange(selectedOption: string) {
     debugger;
@@ -124,8 +123,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     // this.users = result.Users;
     // return;
 
-   // let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-     let form_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
+    //let form_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

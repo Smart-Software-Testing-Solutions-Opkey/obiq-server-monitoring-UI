@@ -45,6 +45,16 @@
             }
 
         }
+        &.stepper-visited {
+            .icon{
+                background-color: green;
+                color: white;
+            }
+            &::after{
+                background-color:  #ffffff;
+            }
+
+        }
         &::after{
             position: absolute;
             content: "";
