@@ -84,7 +84,7 @@
 
         <div class="app-body flex-box-column scrollable">
 
-            <div class="tab_panel" role="tabpanel" aria-label="Tab Panel">
+            <div class="tab_panel position-relative" role="tabpanel" aria-label="Tab Panel">
 
                 <ul class="nav-tabs mb-0" role="tablist">
                     @for (tab of availableTabs; track $index) {
@@ -129,6 +129,12 @@
                     </li> -->
     
                 </ul>
+
+                <div class="error-details-count">
+                    <span>
+                        <i class="oci oci-WARNING pe-2"></i>4
+                    </span>
+                </div>
             </div>
     
             <div class="tab_view_content h-100 scrollable">
