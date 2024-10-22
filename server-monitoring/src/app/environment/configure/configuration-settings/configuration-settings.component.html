@@ -24,12 +24,14 @@
 
                     <li [ngClass]="obj_configuration_setting.tab=='datasource' ? 'active' : ''" class="mb-3">
                         <span class="icon">1</span>
+                        <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
                         <span class="text-color-theme">Select Data-Sources</span>
                     </li>
 
                     <li [ngClass]="obj_configuration_setting.is_value_selection ? 'item_subcategory active' : ''">
                         <span>
                             <span class="icon">2</span>
+                            <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
                             <span class="text-color-theme">Value of Data-Sources</span>
                         </span>
 
@@ -63,6 +65,7 @@
 
                     <li [ngClass]="obj_configuration_setting.tab=='view_summary' ? 'active' : ''">
                         <span class="icon">3</span>
+                        <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
                         <span class="text-color-theme">Create View</span>
                     </li>
 
