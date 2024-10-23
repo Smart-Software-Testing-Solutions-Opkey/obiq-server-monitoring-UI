@@ -21,7 +21,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   Show_Project_Access: boolean = false;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
-    alert("re4ached")
+  
     debugger;
     this.obj_configuration_setting = obj_configuration_setting;
     console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
@@ -126,7 +126,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     // return;
 
     //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    let form_url = "https://myqlm.dev.opkeyone.com/Profile/GetAssignedUsersInProject";
+    let form_url = "https://myqlm.preprod.opkeyone.com/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

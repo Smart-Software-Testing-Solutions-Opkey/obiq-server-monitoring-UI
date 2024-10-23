@@ -1,8 +1,18 @@
 <div class="logs-panel">
 
-    <div class="graph-timeseries mb-3">
-        graph here
-    </div>
+    <div id="chart" class="graph-timeseries mb-3">
+        <!-- <h2>Log Usage Over Time</h2> -->
+        <apx-chart  *ngIf="chartOptions.series.length > 0"
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [responsive]="chartOptions.responsive"
+        [xaxis]="chartOptions.xaxis"
+        [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill"
+      ></apx-chart>
+      </div>
 
     <div class="logs-grid-layout">
         <kendo-grid 

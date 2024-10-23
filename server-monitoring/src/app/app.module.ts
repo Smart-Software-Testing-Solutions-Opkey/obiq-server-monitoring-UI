@@ -8,6 +8,7 @@ import { Error404Component } from './error/404/error-404.component';
 import { EnvironmentCurdServiceComponent } from './environment/curd/service/environment-curd-service.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 
@@ -23,6 +24,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgApexchartsModule,
     HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

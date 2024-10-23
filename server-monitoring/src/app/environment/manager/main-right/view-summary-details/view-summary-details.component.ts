@@ -31,10 +31,9 @@ ngOnChanges(changes: SimpleChanges) {
 }
 get_All_Summary_of_Selected_View(view)
 {
-  alert("in summ")
   debugger;
   //https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList
-  let form_url = "https://myqlm.dev.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
+  let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
 
   let form_data = {"viewId":view.viewId};
 
@@ -42,7 +41,8 @@ get_All_Summary_of_Selected_View(view)
     .subscribe({
       next: (result: any) => {
         window.loadingStop("#div-datasource-slection");
-
+        this.obj_configuration_setting.linkedDataSource = result;
+        this.obj_configuration_setting.selected_datasource = result;
       },
       error: (error: any) => {
         window.loadingStop("#div-datasource-slection");

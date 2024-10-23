@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EnvironmentRoutingModule } from './environment-routing.module';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { EnvironmentRoutingModule } from './environment-routing.module';
   ],
   imports: [
     CommonModule,
-    EnvironmentRoutingModule
+    EnvironmentRoutingModule,
+    NgApexchartsModule
   ]
 })
 export class EnvironmentModule { }

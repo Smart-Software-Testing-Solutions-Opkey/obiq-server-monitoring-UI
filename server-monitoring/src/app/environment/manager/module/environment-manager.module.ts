@@ -15,6 +15,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { EnvironmentManagerMainRightLogTabDetailsComponent } from '../main-right/log-tab/log-tab-details/environment-manager-main-right-log-tab-details.component';
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
 import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/view-summary-details.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/
     FormsModule,
     DropDownsModule,
     EnvironmentConfigureModule,
-    GridModule
+    GridModule,
+    NgApexchartsModule,
   
   ],
   exports:[
