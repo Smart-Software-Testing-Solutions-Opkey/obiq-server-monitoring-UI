@@ -45,13 +45,41 @@
             }
 
         }
+
+        .icon-visited {
+            display: none;
+        }
+
         &.stepper-visited {
-            .icon{
-                background-color: green;
+            .icon-visited {
+                display: block;
+                position: absolute;
+                font-size: 0.75rem;
+                padding-top: 0.30rem;
+                left: -1rem;
+                top: 0.6rem;
+                text-align: center;
+                width: 1.75rem;
+                height: 1.75rem;        
+                border-radius: 50%;
+                z-index: 0;
+            }
+
+            .icon {
+                display: none;
+            }
+
+            span {
+                color: #268144;
+            }
+
+            .icon-visited{
+                background-color: #268144;
                 color: white;
             }
+
             &::after{
-                background-color:  #ffffff;
+                background-color:  #268144;
             }
 
         }
