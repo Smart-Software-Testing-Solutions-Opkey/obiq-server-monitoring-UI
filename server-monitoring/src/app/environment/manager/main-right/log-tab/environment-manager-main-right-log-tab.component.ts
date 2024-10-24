@@ -48,13 +48,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   ){}
   @Input() analyticsType: any;
   @Input() view: any;
+  startTime:any;
+  endTime :any;
   public chartOptions: Partial<ChartOptions>;
   chartData:any;
   selectedKeys = []
   logDataSource = []
   ngOnInit(): void {
-    console.log(this.analyticsType,"this is analythics type in log tab")
-    console.log(this.view,"this isnthe view in log tab")
     this.getLogsChart()
     this.getViewLogs()
   }
@@ -84,6 +84,17 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
         },
         zoom: {
           enabled: true
+        },
+        events: {
+          selection: (chartContext, { xaxis }) => {
+            const startTime = xaxis.min;
+            const endTime = xaxis.max;
+            console.log('Start Time:', new Date(startTime));
+            console.log('End Time:', new Date(endTime));
+            
+            this.startTime = new Date(startTime);
+            this.endTime = new Date(endTime);
+          }
         }
       },
       responsive: [

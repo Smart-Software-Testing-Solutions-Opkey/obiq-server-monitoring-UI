@@ -29,11 +29,12 @@ export class ConfigurationSettingsComponent {
     tab: "datasource",
     is_value_selection: false,
     title: "Add View",
-    AccessType: "PUBLIC",
+    AccessType: "",
     selectedUids: {},
     selected_datasource: null,
     selected_erp_analytics: [],
-    selected_system_diagnostics: []
+    selected_system_diagnostics: [],
+    selected_view:null
   }
 
 
@@ -44,7 +45,7 @@ export class ConfigurationSettingsComponent {
       return;
     }
 
-    console.log("obj_configuration_setting==", this.obj_configuration_setting);
+    console.log("obj_configuration_setting==**********************", this.obj_configuration_setting);
 
     this.datasource_item = [];
 

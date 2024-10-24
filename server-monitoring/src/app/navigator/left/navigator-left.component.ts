@@ -148,6 +148,7 @@ export class NavigatorLeftComponent implements OnInit {
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         this.totalViews = result
+        console.log(result,"get all  views resultS")
         if (this.totalViews && this.totalViews.length > 0) {
           this.selectedView = this.totalViews[0]; 
           this.selectedViewSettings = this.selectedView;

@@ -80,7 +80,8 @@ this.selectedAnalyticsType = val
     tab: "datasource",
     title: "Add View",
     selected_datasource: [],
-    selected_erp_analytics: []
+    selected_erp_analytics: [],
+    selected_view:null
   }
 
 }

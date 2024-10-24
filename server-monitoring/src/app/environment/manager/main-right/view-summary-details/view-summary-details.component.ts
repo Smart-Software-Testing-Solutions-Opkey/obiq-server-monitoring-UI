@@ -7,7 +7,7 @@ import { AppService } from 'src/app/services/app.service';
   templateUrl: './view-summary-details.component.html',
   styleUrl: './view-summary-details.component.scss'
 })
-export class ViewSummaryDetailsComponent implements OnInit ,AfterViewInit  {
+export class ViewSummaryDetailsComponent implements OnInit ,AfterViewInit {
   constructor(
     public app_service: AppService,
     public dataService: AppDataService,
@@ -25,7 +25,6 @@ ngOnInit(): void {
 }
 ngOnChanges(changes: SimpleChanges) {
   if (changes['Settings_View_Selection'] && changes['Settings_View_Selection'].currentValue) {
-    console.log(this.Settings_View_Selection,"this is =============================")
     this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
   }
 }
@@ -41,8 +40,9 @@ get_All_Summary_of_Selected_View(view)
     .subscribe({
       next: (result: any) => {
         window.loadingStop("#div-datasource-slection");
-        this.obj_configuration_setting.linkedDataSource = result;
-        this.obj_configuration_setting.selected_datasource = result;
+        this.obj_configuration_setting.selected_erp_analytics = result;
+        this.obj_configuration_setting.selected_view = view;
+        this.obj_configuration_setting = JSON.parse(JSON.stringify(this.obj_configuration_setting))
       },
       error: (error: any) => {
         window.loadingStop("#div-datasource-slection");

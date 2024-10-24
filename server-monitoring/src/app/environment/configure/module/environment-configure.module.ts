@@ -9,6 +9,7 @@ import { ConfigurationSettingsDatasourceComponent } from '../configuration-setti
 import { ConfigurationSettingsErpAnalyticsComponent } from '../configuration-settings/configuration-settings-erp-analytics/configuration-settings-erp-analytics.component';
 import { ConfigurationSettingsViewSummaryComponent } from '../configuration-settings/configuration-settings-view-summary/configuration-settings-view-summary.component';
 import { ConfigurationSettingsSystemDiagnosticsComponent } from '../configuration-settings/configuration-settings-system-diagnostics/configuration-settings-system-diagnostics.component';
+import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../configuration-settings/configuration-settings-summary-after-view-creation/configuration-settings-summary-after-view-creation.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ConfigurationSettingsSystemDiagnosticsComponent } from '../configuratio
     ConfigurationSettingsDatasourceComponent, 
     ConfigurationSettingsErpAnalyticsComponent,
     ConfigurationSettingsViewSummaryComponent,
-    ConfigurationSettingsSystemDiagnosticsComponent
+    ConfigurationSettingsSystemDiagnosticsComponent,
+    ConfigurationSettingsSummaryAfterViewCreationComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { ConfigurationSettingsSystemDiagnosticsComponent } from '../configuratio
     ConfigurationSettingsDatasourceComponent, 
     ConfigurationSettingsErpAnalyticsComponent,
     ConfigurationSettingsViewSummaryComponent,
+    ConfigurationSettingsSummaryAfterViewCreationComponent,
     ConfigurationSettingsSystemDiagnosticsComponent
 
   ]

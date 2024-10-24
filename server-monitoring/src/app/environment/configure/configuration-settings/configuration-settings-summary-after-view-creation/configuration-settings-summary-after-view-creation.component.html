@@ -1,0 +1,137 @@
+<h4 class="text-header mb-3">Add Access Type to complete</h4>
+
+<div class="row mx-0 mb-4">
+    <div class="col-sm-5 ps-0">
+        <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
+        
+        <div class="dropdown access-type-layout">
+            <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
+              <span>
+                {{ selectedAccessType }}
+              </span>
+            </button>
+            <ul class="dropdown-menu p-0 w-100">
+                <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
+                    {{ option }}
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="Show_Project_Access" class="dropdown mt-3">
+            <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle font-14px" data-bs-toggle="dropdown">
+              Select Users
+            </button>
+            <ul class="dropdown-menu p-0 w-100 dropdown-menu-scrollable">
+                <li *ngFor="let user of users" class="dropdown-item">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input chekbox-custom me-2"
+                            type="checkbox"
+                            [id]="user.U_ID"
+                            (change)="onUserSelect(user, $event)">
+                        <label class="form-check-label" [for]="user.U_ID">
+                            {{ user.UserName }}
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="row mx-0 mb-3 align-items-center">
+    <div class="col-6 px-0">
+        <h4 class="text-header mb-0">View Summary</h4>
+    </div>
+
+    <div class="col-6 px-0">
+        <div class="search_panel searchToggle ms-auto" style="width: 20rem;">
+
+            <span class="search_icon" ngbTooltip="Search" container="body">
+                <i class="oci oci-search"></i>
+            </span>
+    
+            <input type="text" class="form-control search_input" placeholder="Search">
+    
+            <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"><i
+                class="oci oci-x"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div id="accordion_summary" class="accordion-view-summary">
+
+               <div class="card">
+                   <div class="card-header">
+                       <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
+                           ERP Analytics
+                       </a>
+                   </div>
+                   <div id="collapse_ERPAnalytics" class="collapse show">
+                       <div class="card-body px-0">
+
+                           <div class="kendo_grid">
+                               <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                                   (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                                   class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                   <kendo-grid-column field="SystemIdentifier" title="Name">
+                                       <ng-template kendoGridCellTemplate let-dataItem>
+                                           <div class="flex-center">
+                                               <span class="img-avatar-profile">
+                                                   <img src="assets/images/default/application/OracleFusion.png" alt="">
+                                               </span>
+                                               <span class="layout-text-obiq ps-2">{{dataItem.value.name}}</span>
+                                           </div>
+                                       </ng-template>
+                                   </kendo-grid-column>
+
+                                   <kendo-grid-column field="CreatedBy" title="Created">
+                                       <ng-template kendoGridCellTemplate let-dataItem>
+                                           <div class="flex-center">
+                                               <!-- <span class="img-app-profile">
+                                                   <img src="assets/images/default/profile.png" alt="">
+                                               </span> -->
+                                               <div class="ps-2">
+                                                   <!-- <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                                                   <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                               </div>
+                                           </div>
+                                       </ng-template>
+                                   </kendo-grid-column>
+                                
+                                   <kendo-grid-column field="ModifiedBy" title="Last Modified">
+                                       <ng-template kendoGridCellTemplate let-dataItem>
+                                           <div class="flex-center">
+                                               <!-- <span class="img-app-profile">
+                                                   <img src="assets/images/default/profile.png" alt="">
+                                               </span> -->
+                                               <div class="ps-2">
+                                                   <!-- <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                                                   <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                               </div>
+                                           </div>
+                                       </ng-template>
+                                   </kendo-grid-column>
+
+                                   <ng-template kendoGridNoRecordsTemplate>
+                                       <div class="no_data_found" style="height: 17rem !important;">
+                                           <div class="no_data_found_content">
+                                               <img class="no_data_found_content_img"
+                                                   src="/assets/icon-image/nodata-img.png" alt="No data">
+                                               <p class="no_data_found_content_text">No data available</p>
+                                           </div>
+                                       </div>
+                                   </ng-template>
+                               </kendo-grid>
+                           </div>
+
+                       </div>
+                   </div>
+               </div>
+               
+
+               
+</div>
+<button  type="button" class="btn btn-layout btn-bg-white me-2" (click)="Update_ViewAccess_Type()">Update</button>
