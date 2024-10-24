@@ -18,6 +18,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
 
   obj_configuration_setting: any;
   Selected_grid_dataSource: any;
+  selected_grid_System_Diagnostics:any;
   Show_Project_Access: boolean = false;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
@@ -33,6 +34,9 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   get_all_summary(selectionData) {
     debugger;
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
+    this.selected_grid_System_Diagnostics = selectionData.selected_system_diagnostics;
+    
+
     console.log(this.Selected_grid_dataSource);
 
   }

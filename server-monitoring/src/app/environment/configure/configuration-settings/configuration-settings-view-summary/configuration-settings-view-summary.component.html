@@ -155,7 +155,40 @@
                                 </div>
                                 <div id="collapse_systemDiagnostics" class="collapse show">
                                     <div class="card-body">
-                                        System Diagnostics summary
+                                        <div class="kendo_grid">
+                                            <kendo-grid #grid_Selected_Instance_list [data]="selected_grid_System_Diagnostics"
+                                                [selectable]="false" [navigable]="true"
+                                                class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                                <kendo-grid-column field="SystemIdentifier" title="Name">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="layout-text-obiq ps-2">{{dataItem.OBIQ_Agent}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+            
+                                                <kendo-grid-column field="CreatedBy" title="Created">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                          
+                                                            <div class="ps-2">
+                                                                <span class="layout-text-obiq ps-2">{{dataItem.Unique_Code}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+            
+                                                <ng-template kendoGridNoRecordsTemplate>
+                                                    <div class="no_data_found" style="height: 17rem !important;">
+                                                        <div class="no_data_found_content">
+                                                            <img class="no_data_found_content_img"
+                                                                src="/assets/icon-image/nodata-img.png" alt="No data">
+                                                            <p class="no_data_found_content_text">No data available</p>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </kendo-grid>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
