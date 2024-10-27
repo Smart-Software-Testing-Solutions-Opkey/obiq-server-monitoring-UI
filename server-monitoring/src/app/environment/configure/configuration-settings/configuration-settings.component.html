@@ -84,6 +84,12 @@
               <div *ngIf="obj_configuration_setting.tab=='system_diagnostics'">
                 <app-configuration-settings-system-diagnostics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-system-diagnostics>
               </div>
+              <div *ngIf="obj_configuration_setting.tab==''">
+                <app-configuration-settings-test-automation [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-test-automation >
+              </div>
+              <div *ngIf="obj_configuration_setting.tab==''">
+                <app-configuration-settings-user-behaviour [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-user-behaviour>
+              </div>
 
               <div *ngIf="obj_configuration_setting.tab=='view_summary'">
                     <app-configuration-settings-view-summary [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-view-summary>

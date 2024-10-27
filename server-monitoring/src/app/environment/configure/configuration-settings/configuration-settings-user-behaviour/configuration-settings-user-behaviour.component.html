@@ -1,0 +1,37 @@
+<h6 class="mb-3 font-bold">
+    Choose Agents 
+    <!-- <span *ngIf="obj_error.dispaly_Instances" class="form-error">Instance selection is required.</span> -->
+</h6>
+
+<kendo-grid 
+    #grid_application 
+    [data]="agent_lists" 
+    [selectable]="true" 
+    [navigable]="true"
+    (selectionChange)="on_Selection_Change_User_Behavious($event)"
+    [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+    
+    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
+    </kendo-grid-checkbox-column>
+
+    <kendo-grid-column field="SystemIdentifier" title="Name">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <span class="img-app-profile">
+                    <img src="assets/images/default/profile.png" alt="">
+                </span>
+                <span class="layout-text-obiq ps-2">{{dataItem.name}}</span>
+                <span class="layout-text-obiq ps-2">{{dataItem.email}}</span>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+    <ng-template kendoGridNoRecordsTemplate>
+        <div class="no_data_found" style="height: 17rem !important;">
+            <div class="no_data_found_content">
+                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                <p class="no_data_found_content_text">No data available</p>
+            </div>
+        </div>
+    </ng-template>
+</kendo-grid>

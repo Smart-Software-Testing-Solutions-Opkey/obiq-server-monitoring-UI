@@ -10,6 +10,8 @@ import { ConfigurationSettingsErpAnalyticsComponent } from '../configuration-set
 import { ConfigurationSettingsViewSummaryComponent } from '../configuration-settings/configuration-settings-view-summary/configuration-settings-view-summary.component';
 import { ConfigurationSettingsSystemDiagnosticsComponent } from '../configuration-settings/configuration-settings-system-diagnostics/configuration-settings-system-diagnostics.component';
 import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../configuration-settings/configuration-settings-summary-after-view-creation/configuration-settings-summary-after-view-creation.component';
+import { ConfigurationSettingsUserBehaviourComponent } from '../configuration-settings/configuration-settings-user-behaviour/configuration-settings-user-behaviour.component';
+import { ConfigurationSettingsTestAutomationComponent } from '../configuration-settings/configuration-settings-test-automation/configuration-settings-test-automation.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../confi
     ConfigurationSettingsErpAnalyticsComponent,
     ConfigurationSettingsViewSummaryComponent,
     ConfigurationSettingsSystemDiagnosticsComponent,
-    ConfigurationSettingsSummaryAfterViewCreationComponent
+    ConfigurationSettingsSummaryAfterViewCreationComponent,
+    ConfigurationSettingsUserBehaviourComponent,
+    ConfigurationSettingsTestAutomationComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,10 @@ import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../confi
     ConfigurationSettingsErpAnalyticsComponent,
     ConfigurationSettingsViewSummaryComponent,
     ConfigurationSettingsSummaryAfterViewCreationComponent,
-    ConfigurationSettingsSystemDiagnosticsComponent
+    ConfigurationSettingsSystemDiagnosticsComponent,
+    ConfigurationSettingsSummaryAfterViewCreationComponent,
+    ConfigurationSettingsUserBehaviourComponent,
+    ConfigurationSettingsTestAutomationComponent
 
   ]
   

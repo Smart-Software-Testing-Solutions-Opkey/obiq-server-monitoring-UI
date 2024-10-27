@@ -34,6 +34,7 @@ export class ConfigurationSettingsComponent {
     selected_datasource: null,
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
+    selected_user_behaviour_component:[],
     selected_view:null
   }
 
