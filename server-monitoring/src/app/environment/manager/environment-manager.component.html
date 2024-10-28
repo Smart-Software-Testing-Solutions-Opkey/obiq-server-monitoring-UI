@@ -1,20 +1,38 @@
 <section class="app-section-main">
 
-    <div class="left-section">
-        @if (service_data.UserDto) {
-            <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" (onChangeView)="viewChanged($event)" (onSettingsSelected)="settingsSelected($event)" ></app-navigator-left>
-        }
-    </div>
+   
 
-    <div class="right-section">
+   
+
+    <kendo-splitter orientation="horizontal">
+     
+        <kendo-splitter-pane  min="20%" max="40%" size="20%">
+              <div class="left-section">
+            
+                    @if (service_data.UserDto) {
+                        <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" (onChangeView)="viewChanged($event)" (onSettingsSelected)="settingsSelected($event)" ></app-navigator-left>
+                    }
+              
+              </div>
+        </kendo-splitter-pane>
+        <kendo-splitter-pane >
+             
+                <div class="right-section">
         
-        @if (objSettings.isOpen) {
-            <app-view-summary-details [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
-        }
-        @else if(selectedView && selectedAnalyticsType) {
-            <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
-            </app-environment-manager-main-right>
-        }
-    </div>
+                    @if (objSettings.isOpen) {
+                        <app-view-summary-details [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
+                    }
+                    @else if(selectedView && selectedAnalyticsType) {
+                        <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
+                        </app-environment-manager-main-right>
+                    }
+                </div>
+             
+        </kendo-splitter-pane>
+  
+      
+  
+     
+      </kendo-splitter>
 
 </section>

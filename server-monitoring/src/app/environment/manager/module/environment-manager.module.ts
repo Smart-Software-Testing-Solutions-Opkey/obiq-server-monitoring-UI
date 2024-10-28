@@ -23,6 +23,7 @@ import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environ
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
 import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
 import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
+import { LayoutModule } from "@progress/kendo-angular-layout";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/
     EnvironmentConfigureModule,
     GridModule,
     NgApexchartsModule,
+    LayoutModule
   
   ],
   providers: [DatePipe],

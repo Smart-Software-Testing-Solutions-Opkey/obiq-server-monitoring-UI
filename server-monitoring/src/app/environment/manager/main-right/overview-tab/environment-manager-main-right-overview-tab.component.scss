@@ -45,3 +45,12 @@
         height: 4rem;
     }
 }
+
+::ng-deep .total-error-chart {
+    .total-errors-details {
+        .errors-chart-flex {
+            display: flex;
+            align-items: end;
+        }
+    }
+}

@@ -68,7 +68,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
       ],
       chart: {
         type: "area",
-        height: 350,
+        height: 'auto',
+        width : 180,
         toolbar: {
           show: false
         },

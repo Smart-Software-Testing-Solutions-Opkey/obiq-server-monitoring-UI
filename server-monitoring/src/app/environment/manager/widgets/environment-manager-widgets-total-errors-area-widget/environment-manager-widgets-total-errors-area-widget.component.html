@@ -1,23 +1,29 @@
-<div class="main">
-    <div class="title">
+<div class="total-errors-details">
+    <h6 class="font-bold mb-0">
         Total Errors
-    </div>
-    <div class="value">{{errorObj.totalerrors}}</div>
-    <div class="desc">
-        {{errorObj.errorPercentage}}%
-        {{errorObj.interval}}
-    </div>
-    <div id="chart">
-        <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [xaxis]="chartOptions.xaxis"
-          [stroke]="chartOptions.stroke"
-          [tooltip]="chartOptions.tooltip"
-          [dataLabels]="chartOptions.dataLabels"
-          [fill]="chartOptions.fill"
-          [yaxis]="chartOptions.yaxis"
-          [title]="chartOptions.title"
-        ></apx-chart>
+    </h6>
+    <div class="errors-chart-flex">
+      <div class="pe-3 ps-2" style="transform: scale(1.5);">
+        <span class="error-value">0{{errorObj.totalerrors}}</span>
       </div>
+      <div class="error-value-last pe-3 font-14px" style="color: #667085;">
+          <span class="error-percentage">
+            {{errorObj.errorPercentage}}%
+          </span>
+          {{errorObj.interval}}
+      </div>
+      <div id="chart" style="height: 4rem; width: 12rem;">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [stroke]="chartOptions.stroke"
+            [tooltip]="chartOptions.tooltip"
+            [dataLabels]="chartOptions.dataLabels"
+            [fill]="chartOptions.fill"
+            [yaxis]="chartOptions.yaxis"
+            [title]="chartOptions.title"
+          ></apx-chart>
+        </div>
+    </div>
 </div>
