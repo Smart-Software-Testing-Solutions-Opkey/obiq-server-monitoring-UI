@@ -7,7 +7,7 @@
     <kendo-splitter orientation="horizontal">
      
         <kendo-splitter-pane  min="20%" max="40%" size="20%">
-              <div class="pane-content">
+              <div class="left-section">
             
                     @if (service_data.UserDto) {
                         <app-navigator-left (analyticsValueChange)="changeSelectedAnalytics($event)" (onChangeView)="viewChanged($event)" (onSettingsSelected)="settingsSelected($event)" ></app-navigator-left>
@@ -17,7 +17,7 @@
         </kendo-splitter-pane>
         <kendo-splitter-pane >
              
-                <div class="pane-content">
+                <div class="right-section">
         
                     @if (objSettings.isOpen) {
                         <app-view-summary-details [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
