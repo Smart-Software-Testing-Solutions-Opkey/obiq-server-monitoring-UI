@@ -21,6 +21,7 @@ import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigato
 import { ManagerRightPannelWidjetComponent } from '../right-panel/manager-right-pannel-widjet/manager-right-pannel-widjet/manager-right-pannel-widjet.component';
 import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environment-manager-widgets-stat-widget/environment-manager-widgets-stat-widget.component';
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
+import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widg
     ViewSummaryDetailsComponent,
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
-    EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent
+    EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
+    EnviornmentManagerTimeExplorerGraphComponent 
 
   ],
   imports: [
