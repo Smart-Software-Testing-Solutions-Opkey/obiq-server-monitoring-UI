@@ -239,7 +239,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
       return;
     }
   });
-  modalRef.componentInstance.selectedItem = {callsource:'environmentManager',data:dataItem};
+  modalRef.componentInstance.selectedItem = {callsource:'environmentManagerLogDetails',data:dataItem};
   }
 
     
