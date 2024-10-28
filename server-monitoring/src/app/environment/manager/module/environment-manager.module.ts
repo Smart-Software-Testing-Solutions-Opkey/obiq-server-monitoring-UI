@@ -18,6 +18,7 @@ import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DatePipe } from '@angular/common';
 import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigator-left-settings/navigator-left-settings.component';
+import { ManagerRightPannelWidjetComponent } from '../right-panel/manager-right-pannel-widjet/manager-right-pannel-widjet/manager-right-pannel-widjet.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigato
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
+    ManagerRightPannelWidjetComponent,
     ViewSummaryDetailsComponent,
     NavigatorLeftSettingsComponent
   ],

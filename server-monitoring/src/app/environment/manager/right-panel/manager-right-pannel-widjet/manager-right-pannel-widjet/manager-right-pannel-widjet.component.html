@@ -1,0 +1,17 @@
+<div class="widget-container">
+    <input type="text" placeholder="Search widget" class="search-input" />
+  
+    <div class="widget-list">
+      <div *ngFor="let widget of widgets" class="widget-item">
+        <!-- Placeholder for the image -->
+        <div class="widget-icon"></div>
+  
+        <div class="widget-info">
+          <h3 class="widget-name">{{ widget.Name }}</h3>
+          <p class="widget-description">{{ widget.Description }}</p>
+        </div>
+  
+        <button class="add-button">Add</button>
+      </div>
+    </div>
+  </div>
