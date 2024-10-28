@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-environment-manager-main-right-overview-tab',
@@ -15,6 +15,7 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
   ngOnDestroy(): void {
     
   }
+  @Input() view:any
   applicationTotalData:any = [{
     applicationName : 'Oracle Fusion',
     cpu:'02.68',

@@ -6,6 +6,9 @@
         <app-environment-manager-widgets-stat-widget [child_data]="{title: 'RAM',data:'80%'}"></app-environment-manager-widgets-stat-widget>
         <app-environment-manager-widgets-stat-widget [child_data]="{title: 'User Guides Per Process',data:'8'}"></app-environment-manager-widgets-stat-widget>
     </div>
+    <div>
+        <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
+    </div>
     <div class="overview-panel">
     
        @for (applicationData of applicationTotalData; track $index) {
