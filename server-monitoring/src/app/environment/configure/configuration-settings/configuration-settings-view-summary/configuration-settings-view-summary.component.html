@@ -12,7 +12,7 @@
                     {{ selectedAccessType }}
                   </span>
                 </button>
-                <ul class="dropdown-menu p-0 w-100">
+                <ul class="dropdown-menu w-100">
                     <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
                         {{ option }}
                     </li>
@@ -22,7 +22,7 @@
                 <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle font-14px" data-bs-toggle="dropdown">
                   Select Users
                 </button>
-                <ul class="dropdown-menu p-0 w-100 dropdown-menu-scrollable">
+                <ul class="dropdown-menu w-100 dropdown-menu-scrollable">
                     <li *ngFor="let user of users" class="dropdown-item">
                         <div class="form-check">
                             <input

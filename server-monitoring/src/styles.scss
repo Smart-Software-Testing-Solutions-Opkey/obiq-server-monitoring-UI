@@ -256,6 +256,10 @@ body {
     color: #FF0404 !important;
 }
 
+.text-grey {
+    color: #344054;
+}
+
 .form_error {
     color: #ff0000;
     font-size: 0.875rem;
@@ -1045,35 +1049,38 @@ input {
     overflow: auto;
 }
 
-.dropdown-item {
-    display: block;
-    padding: 0.5rem 0.75rem 0.5rem 0.75rem !important;
-    cursor: pointer;
-    font-size: 0.875rem;
-    color: #667085;
-
-    label , input {
+.dropdown-menu {
+    padding: 0px;
+    .dropdown-item {
+        display: block;
+        padding: 0.5rem 0.75rem 0.5rem 0.75rem !important;
         cursor: pointer;
-        vertical-align: middle;
-    }
-
-    &:first-child {
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-    }
-
-    &:last-child {
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-    }
-
-    &:hover {
-        background-color: #f6feff !important;
-        color: inherit;
-    }
-
-    &:focus {
-        background-color: #E6FBFE !important;
-        color: inherit !important;
+        font-size: 0.875rem;
+        color: #667085;
+    
+        label , input {
+            cursor: pointer;
+            vertical-align: middle;
+        }
+    
+        &:first-child {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+    
+        &:last-child {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+    
+        &:hover {
+            background-color: #f6feff !important;
+            color: inherit;
+        }
+    
+        &:focus {
+            background-color: #E6FBFE !important;
+            color: inherit !important;
+        }
     }
 }
