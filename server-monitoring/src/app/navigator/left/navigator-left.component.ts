@@ -229,8 +229,8 @@ export class NavigatorLeftComponent implements OnInit {
 
   settingsViewSelect(val){
     debugger;
-    this.selectedViewSettings = val
-    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+    // this.selectedViewSettings = val
+    this.onSettingsSelected.emit(val)
 
   }
   Rename_Selected_View(view){
