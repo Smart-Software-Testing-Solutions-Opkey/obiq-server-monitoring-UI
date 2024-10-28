@@ -1,23 +1,27 @@
-<div class="main">
+<div class="total-errors-details">
     <div class="title">
         Total Errors
     </div>
-    <div class="value">{{errorObj.totalerrors}}</div>
-    <div class="desc">
-        {{errorObj.errorPercentage}}%
-        {{errorObj.interval}}
-    </div>
-    <div id="chart">
-        <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [xaxis]="chartOptions.xaxis"
-          [stroke]="chartOptions.stroke"
-          [tooltip]="chartOptions.tooltip"
-          [dataLabels]="chartOptions.dataLabels"
-          [fill]="chartOptions.fill"
-          [yaxis]="chartOptions.yaxis"
-          [title]="chartOptions.title"
-        ></apx-chart>
+    <div class="errors-chart-flex">
+      <div class="error-value pe-2">0{{errorObj.totalerrors}}</div>
+      <div class="error-value-last pe-2">
+          <span class="">
+            {{errorObj.errorPercentage}}%
+          </span>
+          {{errorObj.interval}}
       </div>
+      <div id="chart" style="height: 4rem; width: 12rem;">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [stroke]="chartOptions.stroke"
+            [tooltip]="chartOptions.tooltip"
+            [dataLabels]="chartOptions.dataLabels"
+            [fill]="chartOptions.fill"
+            [yaxis]="chartOptions.yaxis"
+            [title]="chartOptions.title"
+          ></apx-chart>
+        </div>
+    </div>
 </div>
