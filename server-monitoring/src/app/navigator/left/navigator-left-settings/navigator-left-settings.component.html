@@ -1,0 +1,47 @@
+<div class="sidebar-menu-body flex-box-column">
+
+    <div class="sidebar-menu-toolbar">
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()" aria-label="Add Environment"> 
+            <i class="oci oci-plus me-1"></i> View
+        </button>
+    </div>
+
+    <div class="sidebar-menu-content">
+        <nav>
+            <ul class="nav nav-pills menu-category">
+
+                @for (view of totalViews; track view.viewId) {
+                <li class="nav-item">
+
+                    <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
+                        [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''">
+
+                        <div class="d-flex-between">
+                            <span class="name">{{view.viewName}}</span>
+                            <span class="flex-center">
+                                <span class="label-status me-2 public">{{view.accessType}}</span> 
+
+                              
+                                <div class="dropdown">
+                                    <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
+                                        data-bs-toggle="dropdown">
+                                        <i class="oci oci-more-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="Rename_Selected_View(view)" >Rename</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="Delete_Selected_View(view)" >Delete</a></li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+
+                    </a>
+
+                </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
+
+</div>

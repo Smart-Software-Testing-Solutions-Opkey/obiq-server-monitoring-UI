@@ -17,6 +17,7 @@ import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.c
 import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/view-summary-details.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DatePipe } from '@angular/common';
+import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigator-left-settings/navigator-left-settings.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DatePipe } from '@angular/common';
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
-    ViewSummaryDetailsComponent
+    ViewSummaryDetailsComponent,
+    NavigatorLeftSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { DatePipe } from '@angular/common';
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
-    ViewSummaryDetailsComponent
+    ViewSummaryDetailsComponent,
+    NavigatorLeftSettingsComponent
   ]
 })
 export class EnvironmentManagerModule { }
