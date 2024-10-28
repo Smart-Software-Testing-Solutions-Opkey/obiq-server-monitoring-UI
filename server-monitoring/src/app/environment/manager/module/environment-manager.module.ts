@@ -22,6 +22,7 @@ import { ManagerRightPannelWidjetComponent } from '../right-panel/manager-right-
 import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environment-manager-widgets-stat-widget/environment-manager-widgets-stat-widget.component';
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
 import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
+import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviorn
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
-    EnviornmentManagerTimeExplorerGraphComponent 
+    EnviornmentManagerTimeExplorerGraphComponent,
+    ConfugrationSettingsAccessTypeSummaryComponent
 
   ],
   imports: [
@@ -63,7 +65,8 @@ import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviorn
     ViewSummaryDetailsComponent,
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
-    EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent
+    EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
+    ConfugrationSettingsAccessTypeSummaryComponent
   ]
 })
 export class EnvironmentManagerModule { }

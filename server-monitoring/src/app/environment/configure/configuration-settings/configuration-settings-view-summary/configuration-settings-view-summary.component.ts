@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ConfugrationSettingsAccessTypeSummaryComponent } from './configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 
 @Component({
   selector: 'app-configuration-settings-view-summary',
@@ -13,7 +15,9 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
 
   constructor(
     public app_service: AppService,
-    public dataService: AppDataService) {
+    public dataService: AppDataService,
+    private modalService: NgbModal,
+  ) {
   }
 
   obj_configuration_setting: any;
@@ -40,7 +44,23 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     console.log(this.Selected_grid_dataSource);
 
   }
-
+  OnAccessTypeClick(){
+   
+      const modalRef = this.modalService.open( ConfugrationSettingsAccessTypeSummaryComponent,{
+       backdrop: 'static',
+       keyboard: false,
+       size: 'full',
+       centered: true,
+       windowClass: 'layout-modal-right panel-end'
+     });
+     modalRef.result.then((result) => {
+     }, (response) => {
+       if (response == 'close modal') {
+         return;
+       }
+     });
+     modalRef.componentInstance.selectedItem = {callsource:this.obj_configuration_setting};
+  }
   selectedAccessType: string = 'PRIVATE';
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
   users: any[] = [];
