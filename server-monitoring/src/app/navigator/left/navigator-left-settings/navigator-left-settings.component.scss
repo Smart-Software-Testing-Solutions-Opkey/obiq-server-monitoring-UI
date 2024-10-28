@@ -1,0 +1,105 @@
+.sidebar-menu-content {
+    .nav-pills {
+        flex-direction: row;
+        .nav-item {
+            display: block;
+            width: 100%;
+
+            .nav-link {
+                // display: flex;
+                // align-items: center;
+                background: #FFFFFF;
+                padding: 0.75rem 1rem;
+                padding-right: 0.875rem;
+                font-size: 0.875rem;
+                color: #344054;
+                border-top-right-radius: 0rem;
+                border-bottom-right-radius: 0rem;
+                border-right: 2px solid transparent;
+
+                &.active {
+                    background-color: rgba(17, 97, 115, 0.08);
+                    border-right: 2px solid #116173;
+                }
+
+                &:hover {
+                    background-color: rgba(17, 97, 115, 0.08);
+                    color: #344054;
+                }
+
+                .menu-icon {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .menu-text {
+                    padding-left: 1rem;
+                }
+
+                .remove-icon-drop {
+                    &:after {
+                        display: none;
+                    }
+                }
+
+                .btn-layout-more {
+                    padding: 0rem;
+                    background-color: transparent;
+                    border-color: transparent;
+                    font-size: 0.75rem;
+                }
+
+                .label-status {
+                    padding: 0.15rem 0.75rem;
+                    border-radius: 0.5rem;
+                    font-weight: 500;
+
+                    &.public {
+                        background-color: #ECFDF3;
+                        color: #027A48;
+                    }
+
+                    &.private {
+                        background-color: #FEF3F2;
+                        color: #B42318;
+                    }
+                }
+
+                .message-list {
+                    display: flex;
+                    align-items: center;
+
+                    .profile-pic {
+                        width: 2rem;
+                        height: 2rem;   
+                        border-radius: 50%;
+                        margin-right: -10px;
+                        border: 2px solid white;
+                    }
+                    .more-count {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 2rem;
+                        height: 2rem;
+                        border-radius: 50%;
+                        background-color: #E6FBFE;
+                        color: #1C7C92;
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+        }
+
+        &.menu-subcategory {
+            .nav-link {
+                justify-content: space-between;
+
+                .layout-status {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+}

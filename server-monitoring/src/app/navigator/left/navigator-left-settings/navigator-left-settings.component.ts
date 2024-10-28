@@ -50,10 +50,11 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   }
   totalViews:any
   isopenSettings:boolean = false
-  @Input('child_data') set child_data({ totalViews,isopenSettings }) {
+  @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
     debugger
     this.totalViews = totalViews
     this.isopenSettings = isopenSettings
+    this.selectedViewSettings = selectedViewSettings
     
   }
   selectedViewSettings:any = {}

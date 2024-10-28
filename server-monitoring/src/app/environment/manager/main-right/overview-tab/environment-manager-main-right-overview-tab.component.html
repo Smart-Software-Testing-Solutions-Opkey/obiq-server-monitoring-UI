@@ -1,49 +1,58 @@
-<div class="overview-panel">
 
-   @for (applicationData of applicationTotalData; track $index) {
-
-    <div class="panel-widget">
-        <div class="panel-application-header pb-2 d-flex-between">
-
-            <div class="flex-center">
-                <span class="img-avatar-profile">
-                    <img src="assets/images/default/application/OracleFusion.png" alt="">
-                </span>
-                <span class="ps-2 font-bold">{{applicationData.applicationName}}</span>
-            </div>
-            <div>
-                <span>
-                    <i class="oci oci-more-vertical font-14px"></i>
-                </span>
-            </div>
-            
-        </div>
-        <div class="graph-details pb-3 d-flex-between px-5">
-            <div class="graph-details-value">
-                <h5 class="graph-percentage">
-                    {{applicationData.cpu}}%
-                </h5>
-                <span>CPU</span>
-
-            </div>
-            <div class="graph-details-value">
-                <h5 class="graph-percentage">
-                    {{applicationData.ram}}%
-                </h5>
-                <span>RAM</span>
-            </div>
-            <div class="graph-details-health">
-                <span class="layout-text-status">Current Health </span>
-                <span class="ms-3 graph-status">
-                    {{applicationData.health}} 
-                </span>
-            </div>
-        </div>
-
-        <div class="graph-diagram text-center">
-            graph  
-        </div>
-
+<div class="main">
+    <div class="stats d-flex">
+        <app-environment-manager-widgets-total-errors-area-widget></app-environment-manager-widgets-total-errors-area-widget>
+        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'CPU',data:'02.68%'}"></app-environment-manager-widgets-stat-widget>
+        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'RAM',data:'80%'}"></app-environment-manager-widgets-stat-widget>
+        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'User Guides Per Process',data:'8'}"></app-environment-manager-widgets-stat-widget>
     </div>
-   }
+    <div class="overview-panel">
+    
+       @for (applicationData of applicationTotalData; track $index) {
+    
+        <div class="panel-widget">
+            <div class="panel-application-header pb-2 d-flex-between">
+    
+                <div class="flex-center">
+                    <span class="img-avatar-profile">
+                        <img src="assets/images/default/application/OracleFusion.png" alt="">
+                    </span>
+                    <span class="ps-2 font-bold">{{applicationData.applicationName}}</span>
+                </div>
+                <div>
+                    <span>
+                        <i class="oci oci-more-vertical font-14px"></i>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="graph-details pb-3 d-flex-between px-5">
+                <div class="graph-details-value">
+                    <h5 class="graph-percentage">
+                        {{applicationData.cpu}}%
+                    </h5>
+                    <span>CPU</span>
+    
+                </div>
+                <div class="graph-details-value">
+                    <h5 class="graph-percentage">
+                        {{applicationData.ram}}%
+                    </h5>
+                    <span>RAM</span>
+                </div>
+                <div class="graph-details-health">
+                    <span class="layout-text-status">Current Health </span>
+                    <span class="ms-3 graph-status">
+                        {{applicationData.health}} 
+                    </span>
+                </div>
+            </div>
+    
+            <div class="graph-diagram text-center">
+                graph  
+            </div>
+    
+        </div>
+       }
+    </div>
 </div>

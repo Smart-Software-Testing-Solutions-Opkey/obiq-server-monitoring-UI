@@ -10,7 +10,7 @@
                 {{ selectedAccessType }}
               </span>
             </button>
-            <ul class="dropdown-menu p-0 w-100">
+            <ul class="dropdown-menu w-100">
                 <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
                     {{ option }}
                 </li>
