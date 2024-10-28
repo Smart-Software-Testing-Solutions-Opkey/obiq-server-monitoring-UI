@@ -1,0 +1,23 @@
+<div class="main">
+    <div class="title">
+        Total Errors
+    </div>
+    <div class="value">{{errorObj.totalerrors}}</div>
+    <div class="desc">
+        {{errorObj.errorPercentage}}%
+        {{errorObj.interval}}
+    </div>
+    <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke"
+          [tooltip]="chartOptions.tooltip"
+          [dataLabels]="chartOptions.dataLabels"
+          [fill]="chartOptions.fill"
+          [yaxis]="chartOptions.yaxis"
+          [title]="chartOptions.title"
+        ></apx-chart>
+      </div>
+</div>
