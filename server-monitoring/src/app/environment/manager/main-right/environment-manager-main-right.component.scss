@@ -17,3 +17,48 @@
         color: #B42318;;
     }
 }
+
+.border-box-shadow {
+    box-shadow: 0px 1px 2px 0px #0000000F;
+}
+
+.date-time-text{
+    font-size: 0.65rem;
+    padding: 0.25rem;
+    border: 0.5px solid #D0D5DD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    color: #000;
+}
+
+.dropdown-menu {
+    .left-dropdown-menu {
+        .dropdown-item {
+            color: #344054;
+        }
+    }
+}
+
+.layout-btn-group-time {
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .set-custom-color {
+        background-color: #E6FBFE !important;
+        font-size: 0.875rem;
+        color: #116173;
+        padding: 0.6rem;
+    }
+}
+
+.right {
+    .btn-layout-time {
+        .btn {
+            font-size: 0.75rem !important;
+            border-radius: 0.25rem !important;
+        }
+    }
+}
