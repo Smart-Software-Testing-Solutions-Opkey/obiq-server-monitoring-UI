@@ -16,6 +16,7 @@ import { EnvironmentManagerMainRightLogTabDetailsComponent } from '../main-right
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
 import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/view-summary-details.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     NgApexchartsModule,
   
   ],
+  providers: [DatePipe],
   exports:[
     EnvironmentManagerComponent,
     NavigatorLeftComponent,

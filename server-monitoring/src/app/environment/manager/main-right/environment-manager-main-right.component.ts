@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -18,18 +18,28 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
     private route: ActivatedRoute,
     public service_data: AppDataService,
     public app_service:AppService,
-    public dataService:AppDataService
+    public dataService:AppDataService,
+    private cdr: ChangeDetectorRef
   ){}
 
   ngOnDestroy(): void {
     
   }
   ngOnInit(): void {
-    
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        this.receivedTimeRange = data;
+        console.log('Received Data:', this.receivedTimeRange);
+        
+        // Manually trigger change detection
+        this.cdr.detectChanges();
+      }
+    });
   }
   ngAfterViewInit(): void {
     
   }
+  receivedTimeRange:any
   selectedAnalyticsType:any = null
   selectedView:any
   selectedTab:any = {}

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { DatePipe } from '@angular/common';
 import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexFill, ApexLegend,
   ChartComponent,
   ApexPlotOptions,
@@ -44,12 +45,12 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     private modalService: NgbModal,
     public service_data: AppDataService,
     public app_service:AppService,
-    public dataService:AppDataService
+    private datePipe: DatePipe
   ){}
   @Input() analyticsType: any;
   @Input() view: any;
-  startTime:any;
-  endTime :any;
+  startTime: Date | null = null;
+  endTime: Date | null = null;
   public chartOptions: Partial<ChartOptions>;
   chartData:any;
   selectedKeys = []
@@ -62,11 +63,10 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     
   }
   createChart(): void {
-    debugger;
     // Process result data to create series and xaxis categories
-    const categories = this.chartData.essServerLogUsageDtoList.map(item => item.fromTimeInStr);
+    const categories = this.chartData.essServerLogUsageDtoList.map(item => new Date(item.fromTimeInStr).getTime());
     const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList);
-
+  
     this.chartOptions = {
       series: seriesData,
       chart: {
@@ -79,21 +79,31 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
           tools: {
             download: true, 
             selection: true, 
-            zoom: true, 
+            zoom: true,
           },
         },
         zoom: {
-          enabled: true
+          enabled: true,
         },
         events: {
           selection: (chartContext, { xaxis }) => {
-            const startTime = xaxis.min;
-            const endTime = xaxis.max;
-            console.log('Start Time:', new Date(startTime));
-            console.log('End Time:', new Date(endTime));
+            console.log('Selection event triggered'); // Test log for selection
             
-            this.startTime = new Date(startTime);
-            this.endTime = new Date(endTime);
+            const startTime = xaxis?.min;
+            const endTime = xaxis?.max;
+            if (startTime && endTime) {
+              this.startTime = new Date(startTime);
+              this.endTime = new Date(endTime);
+              console.log('Start Time:', this.startTime);
+              console.log('End Time:', this.endTime);
+            }
+          },
+          zoomed: (chartContext, { xaxis }) => {
+            this.startTime = xaxis?.min ? new Date(xaxis.min) : null;
+            this.endTime = xaxis?.max ? new Date(xaxis.max) : null;
+
+            // Call the function to format and display times
+            this.displayTimeRange();
           }
         }
       },
@@ -111,27 +121,36 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
       ],
       plotOptions: {
         bar: {
-          horizontal: false
+          horizontal: false,
         }
       },
       xaxis: {
         categories: categories,
-        type:"datetime"
+        type: "datetime",
       },
       fill: {
-        opacity: 1
+        opacity: 1,
       },
       legend: {
         position: 'right',
         offsetX: 0,
-        offsetY: 50
+        offsetY: 50,
       },
       dataLabels: {
-        enabled: false, // Disable data labels
+        enabled: false,
       },
     };
   }
-
+  
+  displayTimeRange(): void {
+    const formattedStartTime = this.datePipe.transform(this.startTime, 'MMM d, hh:mm a', '+0530');
+    const formattedEndTime = this.datePipe.transform(this.endTime, 'MMM d, hh:mm a', '+0530');
+    
+    const timeRange = `${formattedStartTime} to ${formattedEndTime}`;
+    console.log(timeRange); 
+    this.app_service.dataTransmitter(timeRange);
+  }
+  
   getSeriesData(dataList: any[]): ApexAxisChartSeries {
     const dataPoints = ['Success', 'Error', 'Warning', 'Blocked'];
     return dataPoints.map(point => {
