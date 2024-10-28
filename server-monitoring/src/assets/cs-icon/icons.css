@@ -36,6 +36,22 @@
 
 /***************************icon start here**************************/
 
+.oci-bar-chart:before {
+  content: "\e916";
+}
+
+.oci-logs:before {
+  content: "\e917";
+}
+
+.oci-map:before {
+  content: "\e918";
+}
+
+.oci-time-explorer:before {
+  content: "\e919";
+}
+
 .oci-clock:before {
   content: "\e915";
 }
