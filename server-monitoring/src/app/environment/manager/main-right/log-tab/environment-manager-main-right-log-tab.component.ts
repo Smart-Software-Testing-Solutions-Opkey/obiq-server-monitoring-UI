@@ -225,7 +225,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
   }
   onSelectionChange(e){
     debugger
-   let dataItem = e.selectedRows[0].dataItem
+   let dataItem = e.dataItem
    const modalRef = this.modalService.open( ManagerRightPanelComponent,{
     backdrop: 'static',
     keyboard: false,
