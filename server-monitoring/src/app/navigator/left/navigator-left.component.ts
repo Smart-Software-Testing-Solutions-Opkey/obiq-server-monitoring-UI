@@ -1,4 +1,4 @@
-import { Component, OnInit ,output} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit ,output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
@@ -20,7 +20,8 @@ export class NavigatorLeftComponent implements OnInit {
     private route: ActivatedRoute,
     private service_data: AppDataService,
     public app_service:AppService,
-    public dataService:AppDataService
+    public dataService:AppDataService,
+    private cdr: ChangeDetectorRef
 
 
   ) { }
@@ -32,7 +33,14 @@ export class NavigatorLeftComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+       if(data == "viewCreated"){
+        this.getAllVIews();
+        this.cdr.detectChanges();
+       }
+      }
+    });
     this.getAllVIews();
 
     this.analyticsValueChange.emit(this.selectedAnalyticsType)

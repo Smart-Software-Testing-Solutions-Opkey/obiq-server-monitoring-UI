@@ -253,6 +253,7 @@ export class ConfigurationSettingsComponent {
           window.loadingStop("#div-datasource-slection");
           this.service_data.is_env_configure = true;
           this.close_model();   // calling GetAllViewds after View Creation
+          this.app_service.dataTransmitter("viewCreated");
           this.router.navigate(['/environment']);
 
         },
