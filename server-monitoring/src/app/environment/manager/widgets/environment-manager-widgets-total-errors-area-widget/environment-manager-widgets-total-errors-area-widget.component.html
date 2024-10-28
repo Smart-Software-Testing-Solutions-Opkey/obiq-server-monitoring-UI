@@ -1,11 +1,13 @@
 <div class="total-errors-details">
-    <div class="title">
+    <h6 class="font-bold mb-0">
         Total Errors
-    </div>
+    </h6>
     <div class="errors-chart-flex">
-      <div class="error-value pe-2">0{{errorObj.totalerrors}}</div>
-      <div class="error-value-last pe-2">
-          <span class="">
+      <div class="pe-3 ps-2" style="transform: scale(1.5);">
+        <span class="error-value">0{{errorObj.totalerrors}}</span>
+      </div>
+      <div class="error-value-last pe-3 font-14px" style="color: #667085;">
+          <span class="error-percentage">
             {{errorObj.errorPercentage}}%
           </span>
           {{errorObj.interval}}

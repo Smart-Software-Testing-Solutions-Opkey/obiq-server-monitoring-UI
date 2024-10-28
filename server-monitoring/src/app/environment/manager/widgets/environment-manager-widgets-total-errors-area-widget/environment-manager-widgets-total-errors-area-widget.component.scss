@@ -13,12 +13,13 @@
 
     .error-value {
         font-weight: 600;
-        font-size: 1.25rem;
+        // font-size: 1.25rem;
         color: #E00000;
+        // line-height: 1rem;
     }
 
     .error-value-last {
-        span {
+        .error-percentage {
             font-size: 0.875rem;
             color: #B42318;
         }
