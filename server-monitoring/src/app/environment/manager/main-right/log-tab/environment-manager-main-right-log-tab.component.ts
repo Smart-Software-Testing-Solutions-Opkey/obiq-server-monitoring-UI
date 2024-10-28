@@ -498,7 +498,7 @@ getSeriesData(dataList: any[]): ApexAxisChartSeries {
   }
   onSelectionChange(e){
     debugger
-   let dataItem = e.selectedRows[0].dataItem
+   let dataItem = e.dataItem
    const modalRef = this.modalService.open( ManagerRightPanelComponent,{
     backdrop: 'static',
     keyboard: false,
@@ -512,7 +512,7 @@ getSeriesData(dataList: any[]): ApexAxisChartSeries {
       return;
     }
   });
-  modalRef.componentInstance.selectedItem = {callsource:'environmentManager',data:dataItem};
+  modalRef.componentInstance.selectedItem = {callsource:'environmentManagerLogDetails',data:dataItem};
   }
 
     

@@ -3,7 +3,7 @@
     <div class="feature-rp-header border-bottom">
 
         <div class="rp-header-left">
-            <h3 class="rp-header-title">Log Details</h3>
+            <h3 class="rp-header-title">{{panelHeader}}</h3>
         </div>
 
         <div class="rp-header-right">
@@ -17,8 +17,11 @@
 
     <div class="feature-rp-body pd-rp">
         
-        @if (selectedItem && selectedItem.callsource == "environmentManager") {
+        @if (this.selectedPanel == 'LogDetails') {
             <app-environment-manager-main-right-log-tab-details [child_data]="{selectedData:selectedItem.data}"></app-environment-manager-main-right-log-tab-details>
+        }
+        @else if(this.selectedPanel == 'AddWidgets'){
+
         }
     </div>
 

@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
 
 @Component({
   selector: 'app-environment-manager-main-right',
@@ -151,6 +152,23 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
     tab.isSelected = true
     this.selectedTab = tab
 
+  }
+
+  addWidget(){
+   const modalRef = this.modalService.open( ManagerRightPanelComponent,{
+    backdrop: 'static',
+    keyboard: false,
+    size: 'full',
+    centered: true,
+    windowClass: 'layout-modal-right panel-end'
+  });
+  modalRef.result.then((result) => {
+  }, (response) => {
+    if (response == 'close modal') {
+      return;
+    }
+  });
+  modalRef.componentInstance.selectedItem = {callsource:'addWidget'};
   }
 
 }

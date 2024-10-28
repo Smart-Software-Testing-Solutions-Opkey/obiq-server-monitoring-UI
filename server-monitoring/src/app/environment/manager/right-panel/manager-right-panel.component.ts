@@ -15,12 +15,25 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     
   }
+  panelHeader:string = ''
+  selectedPanel:string = ''
   ngOnInit(): void {
     debugger 
-    this.selectedItem
+    this.bindPanelData()
   }
   close_model() {
     this.activeModal.dismiss('close modal');
+  }
+  bindPanelData(){
+    if(this.selectedItem?.callsource == "environmentManagerLogDetails"){
+      this.panelHeader = 'Log Details'
+      this.selectedPanel = 'LogDetails'
+    }
+    else if(this.selectedItem?.callsource == "addWidget"){
+      this.panelHeader = 'Add Widgets'
+      this.selectedPanel = 'AddWidgets'
+
+    }
   }
 
 }

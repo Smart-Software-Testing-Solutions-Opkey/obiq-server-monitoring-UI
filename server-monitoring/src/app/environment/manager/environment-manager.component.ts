@@ -12,11 +12,11 @@ export class EnvironmentManagerComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service_data: AppDataService
+    public service_data: AppDataService
   ) { }
-
+ 
   ngOnInit(): void {
-    this.check_env_configuration();
+    // this.check_env_configuration();
   }
 
   selectedAnalyticsType:any = null
