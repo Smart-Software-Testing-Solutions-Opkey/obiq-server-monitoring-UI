@@ -18,7 +18,7 @@
     </div>
 
     @if (isopenSettings) {
-        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)">
+        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)">
         </app-navigator-left-settings>
     }
     @else {
