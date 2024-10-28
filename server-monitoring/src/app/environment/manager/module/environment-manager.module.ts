@@ -18,6 +18,7 @@ import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DatePipe } from '@angular/common';
 import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigator-left-settings/navigator-left-settings.component';
+import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environment-manager-widgets-stat-widget/environment-manager-widgets-stat-widget.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigato
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
     ViewSummaryDetailsComponent,
-    NavigatorLeftSettingsComponent
+    NavigatorLeftSettingsComponent,
+    EnvironmentManagerWidgetsStatWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigato
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
     ViewSummaryDetailsComponent,
-    NavigatorLeftSettingsComponent
+    NavigatorLeftSettingsComponent,
+    EnvironmentManagerWidgetsStatWidgetComponent
   ]
 })
 export class EnvironmentManagerModule { }
