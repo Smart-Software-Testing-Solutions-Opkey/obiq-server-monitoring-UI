@@ -20,7 +20,7 @@
     
             <div class="card-head-right ms-auto">
     
-                <button *ngIf="!isPageErrorDetails && !is_fullscreen"
+                <button *ngIf="(!isPageErrorDetails && !is_fullscreen) && calsource != 'single_journey'"
                     class="btn bt-layout-2 btn-card btn_override_onhover" (click)="goBack()" type="button">
                     <i class="oci oci-chevron-left mr-1 font_bold"></i> Back
                 </button>

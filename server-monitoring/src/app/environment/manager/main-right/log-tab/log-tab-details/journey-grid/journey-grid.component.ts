@@ -13,6 +13,7 @@ export class JourneyGridComponent implements OnInit {
     public app_service: AppService
   ) { }
 
+  calsource = null;
   selectedData = null;
   @Input('child_data') set child_data({ selectedData }) {
     debugger
@@ -28,7 +29,7 @@ export class JourneyGridComponent implements OnInit {
   datasource_grid_journey = [];
 
   get_getInsightWidgetData() {
-
+    window.loadingStart("#div-journey", "Please wait");
     let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     //let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     let form_data = {
@@ -44,12 +45,15 @@ export class JourneyGridComponent implements OnInit {
       .subscribe({
 
         next: (result: any) => {
-          this.datasource_grid_journey = result;
+          window.loadingStop("#div-journey");
+          this.journey_state(result);
         },
         error: (error: any) => {
+          window.loadingStop("#div-journey");
           console.warn(error);
         },
         complete: () => {
+          window.loadingStop("#div-journey");
           console.log("Completed");
         }
       });
@@ -57,9 +61,22 @@ export class JourneyGridComponent implements OnInit {
   }
 
 
+  journey_state(result) {
+    if(result.length == 1) {
+      this.obj_selected_journey.datasource = result[0];
+      this.obj_selected_journey.isDisplay_main = false;
+      this.calsource = 'single_journey';
+    } else {
+      this.datasource_grid_journey = result;
+      this.obj_selected_journey.isDisplay_main = true;
+      this.calsource = 'multiple_journey';
+    }
+    
+  }
+
   obj_selected_journey = {
     datasource: [],
-    isDisplay_main: true 
+    isDisplay_main: true
   }
 
   onSelectionChange(e){

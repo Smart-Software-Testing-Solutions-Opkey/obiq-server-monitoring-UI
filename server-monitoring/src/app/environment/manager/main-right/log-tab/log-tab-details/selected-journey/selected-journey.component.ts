@@ -19,11 +19,12 @@ export class SelectedJourneyComponent implements OnInit {
 
   }
 
+  calsource = null;
   obj_selected_journey = null;
   selected_sessionId = null
-  @Input('child_data') set child_data({ obj_selected_journey }) {
+  @Input('child_data') set child_data({ obj_selected_journey, calsource }) {
+    this.calsource = calsource;
     this.obj_selected_journey = obj_selected_journey;
-    console.log("obj_configuration_setting===", obj_selected_journey);
     this.selected_sessionId = this.obj_selected_journey.datasource.sessionId;
   }
 

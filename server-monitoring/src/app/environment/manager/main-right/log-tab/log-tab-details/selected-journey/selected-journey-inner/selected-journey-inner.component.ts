@@ -131,7 +131,7 @@ export class SelectedJourneyInnerComponent {
       keyboard: false,
       size: 'xl',
       centered: true,
-      windowClass: 'layout-modal modal-overlay fade-off'
+      windowClass: 'layout-modal modal-overlay-inner fade-off'
     });
     modalRef.result.then((result) => {
     }, (response) => {
@@ -151,7 +151,7 @@ export class SelectedJourneyInnerComponent {
       keyboard: false,
       size: 'full-lg',
       centered: true,
-      windowClass: 'layout-modal modal-overlay fade-off'
+      windowClass: 'layout-modal modal-overlay-inner fade-off'
     });
     modalRef.result.then((result) => {
     }, (response) => {

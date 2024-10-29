@@ -627,8 +627,9 @@ a:focus-visible {
 }
 
 
-.modal-overlay {
+.modal-overlay-inner {
     z-index: 99999;
+    background-color: rgba(0,0,0,0.3);
 }
 
 /*****scss for form control******/

@@ -1,36 +1,32 @@
-<div *ngIf="obj_selected_journey.isDisplay_main" class="trace">
-    <kendo-grid [data]="datasource_grid_journey" [selectable]="true" (cellClick)="onSelectionChange($event)">
-
-        <kendo-grid-column title="Module" [width]="190">
-            <ng-template kendoGridCellTemplate let-dataItem>
-                <span class="layout-text-obiq">{{dataItem.subModuleName}}</span>
-            </ng-template>
-        </kendo-grid-column>
-
-        <kendo-grid-column title="Activity" [width]="190">
-            <ng-template kendoGridCellTemplate let-dataItem>
-               <span class="layout-text-obiq"> {{dataItem.activityName}}</span>
-            </ng-template>
-        </kendo-grid-column>
-
-        <kendo-grid-column title="Sub Activity" [width]="190">
-            <ng-template kendoGridCellTemplate let-dataItem>
-                <span class="layout-text-obiq">{{dataItem.subActivityName}}</span>
-            </ng-template>
-        </kendo-grid-column>
-
-
-        <ng-template kendoGridNoRecordsTemplate>
-            <div class="no-data-found" style="height: 17rem !important;">
-                <div class="no-data-found-content">
-                    <!-- <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data"> -->
-                    <p class="no-data-found-content-text">No Journey available</p>
+<div *ngIf="calsource != null" id="div-journey">
+    <div *ngIf="obj_selected_journey.isDisplay_main" class="trace">
+        <kendo-grid [data]="datasource_grid_journey" [selectable]="true" (cellClick)="onSelectionChange($event)">
+    
+            <kendo-grid-column title="Module" [width]="190">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class="layout-text-obiq">{{dataItem.subModuleName}}</span>
+                </ng-template>
+            </kendo-grid-column>
+    
+            <kendo-grid-column title="Sub Activity" [width]="190">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class="layout-text-obiq">{{dataItem.subActivityName}}</span>
+                </ng-template>
+            </kendo-grid-column>
+    
+    
+            <ng-template kendoGridNoRecordsTemplate>
+                <div class="no-data-found" style="height: 17rem !important;">
+                    <div class="no-data-found-content">
+                        <!-- <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data"> -->
+                        <p class="no-data-found-content-text">No Journey available</p>
+                    </div>
                 </div>
-            </div>
-        </ng-template>
-    </kendo-grid>
-</div>
-
-<div *ngIf="!obj_selected_journey.isDisplay_main">
-    <app-selected-journey [child_data]="{obj_selected_journey: obj_selected_journey}"></app-selected-journey>
+            </ng-template>
+        </kendo-grid>
+    </div>
+    
+    <div *ngIf="!obj_selected_journey.isDisplay_main">
+        <app-selected-journey [child_data]="{obj_selected_journey: obj_selected_journey, calsource: calsource}"></app-selected-journey>
+    </div>
 </div>

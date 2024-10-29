@@ -33,7 +33,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
 
   }
   ngOnInit(): void {
-    this.getTraceData()
+    this.getTraceData();
   }
   onCellClick(event:any){
 
