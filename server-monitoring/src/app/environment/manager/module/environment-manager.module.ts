@@ -22,7 +22,7 @@ import { ManagerRightPannelWidjetComponent } from '../right-panel/manager-right-
 import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environment-manager-widgets-stat-widget/environment-manager-widgets-stat-widget.component';
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
 import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
-import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
+//import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 import { LayoutModule } from "@progress/kendo-angular-layout";
 
 @NgModule({
@@ -40,7 +40,7 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
     EnviornmentManagerTimeExplorerGraphComponent,
-    ConfugrationSettingsAccessTypeSummaryComponent
+   // ConfugrationSettingsAccessTypeSummaryComponent
 
   ],
   imports: [
@@ -68,7 +68,7 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
-    ConfugrationSettingsAccessTypeSummaryComponent
+    //ConfugrationSettingsAccessTypeSummaryComponent
   ]
 })
 export class EnvironmentManagerModule { }
