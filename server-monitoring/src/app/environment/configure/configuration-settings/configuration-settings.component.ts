@@ -30,6 +30,10 @@ export class ConfigurationSettingsComponent {
     is_value_selection: false,
     title: "Add View",
     AccessType: "",
+    AccessPermisions:{
+      "canView":true,
+      "canEdit":true
+    },
     selectedUids: {},
     selected_datasource: null,
     selected_erp_analytics: [],

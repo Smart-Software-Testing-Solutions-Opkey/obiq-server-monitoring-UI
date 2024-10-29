@@ -13,6 +13,8 @@ import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../confi
 import { ConfigurationSettingsUserBehaviourComponent } from '../configuration-settings/configuration-settings-user-behaviour/configuration-settings-user-behaviour.component';
 import { ConfigurationSettingsTestAutomationComponent } from '../configuration-settings/configuration-settings-test-automation/configuration-settings-test-automation.component';
 import { ConfigureRightPanelComponent } from '../configure-right-panel/configure-right-panel.component';
+import { FormsModule } from '@angular/forms';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 @NgModule({
   declarations: [
     EnvironmentConfigureComponent,
@@ -31,9 +33,9 @@ import { ConfigureRightPanelComponent } from '../configure-right-panel/configure
     CommonModule,
     NavModule,
     EnvironmentConfigureRoutingModule,
-    GridModule
-    
-    
+    GridModule,
+    FormsModule,
+    DropDownsModule 
   ],
   exports: [
     EnvironmentConfigureComponent,
