@@ -4,7 +4,7 @@ import { EnvironmentRoutingModule } from './environment-routing.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ConfigurationSettingsUserBehaviourComponent } from './configure/configuration-settings/configuration-settings-user-behaviour/configuration-settings-user-behaviour.component';
 import { ConfigurationSettingsTestAutomationComponent } from './configure/configuration-settings/configuration-settings-test-automation/configuration-settings-test-automation.component';
-
+import { ConfugrationSettingsAccessTypeSummaryComponent } from './configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 @NgModule({
   declarations: [    
   
