@@ -10,12 +10,12 @@
                 </button>
             <li class="nav-item" style="width: 94%;">
                 <a class="nav-link" href="javascript:void(0)"
-                [ngClass]="selectedView.selected?'active':''" (click)="changeViewSelection()">
+                [ngClass]="selectedView?.selected?'active':''" (click)="changeViewSelection()">
 
                 <span class="menu-icon">
                     <i class="oci oci-journey menu-icon pe-2"></i>
                 </span>
-                <span class="menu-text">{{selectedView.viewName}}</span>
+                <span class="menu-text">{{selectedView?.viewName}}</span>
             </a>
             </li>
         </ul>

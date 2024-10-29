@@ -12,16 +12,24 @@ export class NavigatorLeftTreeViewComponent {
   ngOnInIt(){
 
   }
+  ngAfterViewInit(): void{
+    
+  }
   selectedView:any
   analyticsTypes:any
   
   @Input('child_data') set child_data({analyticsTypes,selectedView  }) {
     debugger
-    this.selectedView = selectedView
-    this.analyticsTypes = analyticsTypes
+    if(analyticsTypes && selectedView ){
+
+      this.selectedView = selectedView
+      this.analyticsTypes = analyticsTypes
+      this.selectedView.selected = true
+      this.treeSelectionChange.emit(this.selectedView)
+    }
   }
   selectedAnalyticsType:any = {}
-  analyticsValueChange = output<any>()
+  treeSelectionChange = output<any>()
 
   changeAnalyticsSelection(item){
     debugger
@@ -32,11 +40,10 @@ export class NavigatorLeftTreeViewComponent {
       }
     })
    
-      item.isSelected = true
-      this.selectedAnalyticsType = item
-      this.selectedView.selected = false
-    
-    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+    item.isSelected = true
+    this.selectedAnalyticsType = item
+    this.selectedView.selected = false
+    this.treeSelectionChange.emit(this.selectedAnalyticsType)
 
   }
   changeViewSelection(){

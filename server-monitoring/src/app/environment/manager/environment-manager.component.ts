@@ -83,5 +83,11 @@ this.selectedAnalyticsType = val
     selected_erp_analytics: [],
     selected_view:null
   }
+  leftPanelDataUpdate(val){
+    debugger
+    this.objSettings = val.settingsPanel
+    this.selectedAnalyticsType = val.analyticsTypes 
+    this.selectedView = val.viewSelected
+  }
 
 }
