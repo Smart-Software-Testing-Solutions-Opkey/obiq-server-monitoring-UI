@@ -1,1 +1,69 @@
-<p>configure-right-panel works!</p>
+
+<div class="feature-right-panel">
+
+    <div class="feature-rp-header border-bottom">
+
+        <div class="rp-header-left">
+            <h3 class="rp-header-title">Access Type</h3>
+        </div>
+
+        <div class="rp-header-right">
+            <button type="button" class="btn btn-rp"
+                aria-label="Close">
+                <i class="oci oci-x"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="feature-rp-body pd-rp">
+        <div  class="row mx-0 private-div mb-3">
+            <div class="col-sm-12">
+                <i class="oci oci-public-off pe-2 public-icon"></i>
+                Private
+            </div>
+        </div>
+
+        <div  class="row mx-0 private-div mb-3">
+            <div class="col-sm-12 d-flex-between">
+                <span>
+                    <i class="oci oci-public pe-2 public-icon"></i>
+                    Public
+                </span>
+
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
+                        data-bs-toggle="dropdown">
+                       Can View
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)">View</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mx-0 mb-3">
+            <div class="col-sm-12 private-div">
+                <i class="oci oci-share pe-2 public-icon"></i>
+                Shared
+            </div>
+
+            <div class="row mx-0 mt-3">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control w-100">
+                </div>
+
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-layout btn-bg-theme">
+                        ADD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
