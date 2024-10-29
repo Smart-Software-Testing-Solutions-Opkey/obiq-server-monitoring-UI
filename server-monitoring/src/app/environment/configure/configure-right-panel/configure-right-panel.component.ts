@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-configure-right-panel',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './configure-right-panel.component.scss'
 })
 export class ConfigureRightPanelComponent {
-
+ 
+  constructor() { }
+  @Input() selectedItem: any;
+  ngOnInit(): void {
+    // Now you can use selectedItem here
+    console.log('Received data:--------------------------------', this.selectedItem);
+  }
 }

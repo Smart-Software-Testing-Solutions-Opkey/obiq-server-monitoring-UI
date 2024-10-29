@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
 @Component({
   selector: 'app-configuration-settings-view-summary',
   templateUrl: './configuration-settings-view-summary.component.html',
@@ -44,20 +45,20 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   }
   OnAccessTypeClick(){
    
-    //   const modalRef = this.modalService.open( ConfigurationSettingsAccessTypeComponent,{
-    //    backdrop: 'static',
-    //    keyboard: false,
-    //    size: 'full',
-    //    centered: true,
-    //    windowClass: 'layout-modal-right panel-end'
-    //  });
-    //  modalRef.result.then((result) => {
-    //  }, (response) => {
-    //    if (response == 'close modal') {
-    //      return;
-    //    }
-    //  });
-    //  modalRef.componentInstance.selectedItem = {callsource:this.obj_configuration_setting};
+      const modalRef = this.modalService.open( ConfigureRightPanelComponent,{
+       backdrop: 'static',
+       keyboard: false,
+       size: 'full',
+       centered: true,
+       windowClass: 'layout-modal-right panel-end'
+     });
+     modalRef.result.then((result) => {
+     }, (response) => {
+       if (response == 'close modal') {
+         return;
+       }
+     });
+     modalRef.componentInstance.selectedItem = {callsource:this.obj_configuration_setting};
   }
   selectedAccessType: string = 'PRIVATE';
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
