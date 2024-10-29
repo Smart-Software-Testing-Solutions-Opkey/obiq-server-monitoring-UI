@@ -26,16 +26,21 @@ export type ChartOptions = {
   title: ApexTitleSubtitle;
   grid: ApexGrid;
 };
+
+
 @Component({
   selector: 'app-environment-manager-widgets-total-errors-area-widget',
   templateUrl: './environment-manager-widgets-total-errors-area-widget.component.html',
   styleUrl: './environment-manager-widgets-total-errors-area-widget.component.scss'
 })
 export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
-
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-
+  errorObj = {
+    totalerrors : 4,
+    errorPercentage:90,
+    interval:'Last day'
+  }
   constructor() {
     this.chartOptions = {
       series: [
@@ -44,36 +49,32 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
           data: [
             {
               x: 1996,
-              y: 162
+              y: 500
             },
             {
               x: 1997,
-              y: 90
+              y: 300
             },
             {
               x: 1998,
-              y: 50
+              y: 400
             },
             {
               x: 1999,
-              y: 77
-            },
-            {
-              x: 2000,
-              y: 35
+              y: 200
             },
            
           ]
         }
       ],
       chart: {
+        height:111,
+        width:180,
         type: "area",
-        height: 'auto',
-        width : 180,
-        toolbar: {
-          show: false
+        toolbar:{
+          show:false
         },
-      zoom: {
+        zoom: {
           enabled: false
         }
       },
@@ -85,12 +86,11 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
       },
 
       title: {
-        text: "",
+        text: "Area with Negative Values",
         align: "left",
         style: {
-          fontSize: "14px",
-        },
-        
+          fontSize: "14px"
+        }
       },
       xaxis: {
         type: "datetime",
@@ -106,12 +106,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         floating: false,
 
         labels: {
-          style: {
-            colors: "red"
-          },
-          offsetY: -7,
-          offsetX: 0,
-          show:false
+          show:false,
+        
         },
         axisBorder: {
           show: false
@@ -122,34 +118,33 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
       },
       fill: {
         opacity: 0.5,
-        colors:['red']
+        type: 'gradient',
+        gradient: {
+          type: "horizontal",
+          shadeIntensity: 0.5,
+          gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+          inverseColors: true,
+       
+        },
+        colors:['#F44336', '#E91E63', '#9C27B0']
       },
       tooltip: {
-        x: {
-          format: "yyyy"
-        },
-        fixed: {
-          enabled: false,
-          position: "topRight"
-        },
-        enabled:false
+        enabled:false,
       },
       grid: {
+        show:false,
         yaxis: {
           lines: {
             offsetX: -30
           }
         },
         padding: {
-          left: 20
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
         }
       }
     };
   }
-  errorObj = {
-    totalerrors : 4,
-    errorPercentage:90,
-    interval:'Last day'
-  }
-
 }
