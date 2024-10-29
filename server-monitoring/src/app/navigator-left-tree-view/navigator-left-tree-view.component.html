@@ -1,42 +1,42 @@
 <div class="tree-view px-3">
-        <ul class="nav nav-pills menu-category d-flex align-items-center">
-            <button (click)="toggleNode()" class="btn btn-default p-0">
-                @if (isOpenNode) {
-                    <i class="oci oci-chevron-down font-14px"></i>
-                }
-                @else {
-                    <i class="oci oci-chevron-right font-14px"></i>
-                }
-                </button>
-            <li class="nav-item" style="width: 94%;">
-                <a class="nav-link" href="javascript:void(0)"
+    <ul class="nav nav-pills menu-category d-flex align-items-center">
+        <button (click)="toggleNode()" class="btn btn-default p-0">
+            @if (isOpenNode) {
+                <i class="oci oci-chevron-down font-14px"></i>
+            }
+            @else {
+                <i class="oci oci-chevron-right font-14px"></i>
+            }
+        </button>
+        <li class="nav-item" style="width: 94%;">
+            <a class="nav-link d-flex" href="javascript:void(0)"
                 [ngClass]="selectedView?.selected?'active':''" (click)="changeViewSelection()">
 
                 <span class="menu-icon">
                     <i class="oci oci-journey menu-icon pe-2"></i>
                 </span>
-                <span class="menu-text">{{selectedView?.viewName}}</span>
+                <span class="menu-text text-ellipsis d-block">{{selectedView?.viewName}}</span>
             </a>
-            </li>
-        </ul>
-        @if (isOpenNode) {
-            <ul class="nav nav-pills menu-category d-block w-100 ps-4">
+        </li>
+    </ul>
+    @if (isOpenNode) {
+        <ul class="nav nav-pills menu-category d-block w-100 ps-4">
 
-                @for (item of analyticsTypes; track $index) {
-                <li class="nav-item ps-2">
-    
-                    <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
-                        [ngClass]="item.isSelected?'active':''">
-    
-                        <span class="menu-icon">
-                            <i class="oci oci-journey menu-icon pe-2"></i>
-                        </span>
-                        <span class="menu-text">{{item.name}}</span>
-                    </a>
-    
-                </li>
-                }
-    
-            </ul>
-        }
+            @for (item of analyticsTypes; track $index) {
+            <li class="nav-item ps-2 dotted-lines-naviagtion position-relative">
+
+                <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
+                    [ngClass]="item.isSelected?'active':''">
+
+                    <span class="menu-icon">
+                        <i class="oci oci-journey menu-icon pe-2"></i>
+                    </span>
+                    <span class="menu-text">{{item.name}}</span>
+                </a>
+
+            </li>
+            }
+
+        </ul>
+    }
 </div>

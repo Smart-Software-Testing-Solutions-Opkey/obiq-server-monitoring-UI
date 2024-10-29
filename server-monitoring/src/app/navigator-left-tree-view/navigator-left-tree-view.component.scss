@@ -21,3 +21,16 @@
 
     }
 }
+
+.dotted-lines-naviagtion::after {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: -1rem;
+    border-left: 1px solid #667085;
+    border-left-style: dotted !important;
+    border-bottom-style: dotted !important;
+    border-bottom: 1px solid #667085;
+    width: 1.4rem;
+    height: 100%;
+}
