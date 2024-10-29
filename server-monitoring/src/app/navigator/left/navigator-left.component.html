@@ -50,26 +50,8 @@
         </div>
 
         <div class="sidebar-menu-content">
-            <nav>
-                <ul class="nav nav-pills menu-category">
-
-                    @for (item of analyticsTypes; track $index) {
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
-                            [ngClass]="item.isSelected?'active':''">
-
-                            <span class="menu-icon">
-                                <i class="oci oci-journey menu-icon"></i>
-                            </span>
-                            <span class="menu-text">{{item.name}}</span>
-                        </a>
-
-                    </li>
-                    }
-
-                </ul>
-            </nav>
+            <app-navigator-left-tree-view [child_data]="{analyticsTypes: analyticsTypes,selectedView:selectedView}">
+            </app-navigator-left-tree-view>
         </div>
 
     </div>

@@ -60,14 +60,14 @@ export class NavigatorLeftComponent implements OnInit {
   changeAnalyticsSelection(item){
     debugger
    
-    this.analyticsTypes.forEach((ele)=>{
-      if(ele.isSelected){
-        ele.isSelected = false
-      }
-    })
+    // this.analyticsTypes.forEach((ele)=>{
+    //   if(ele.isSelected){
+    //     ele.isSelected = false
+    //   }
+    // })
    
-      item.isSelected = true
-      this.selectedAnalyticsType = item
+    //   item.isSelected = true
+    //   this.selectedAnalyticsType = item
     
     this.analyticsValueChange.emit(this.selectedAnalyticsType)
 

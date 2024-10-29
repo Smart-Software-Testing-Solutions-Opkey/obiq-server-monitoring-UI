@@ -23,6 +23,10 @@ import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environ
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
 import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
 import { LayoutModule } from "@progress/kendo-angular-layout";
+import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-view/navigator-left-tree-view.component';
+import { JourneyGridComponent } from '../main-right/log-tab/log-tab-details/journey-grid/journey-grid.component';
+import { SelectedJourneyComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey.component';
+import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
     EnviornmentManagerTimeExplorerGraphComponent,
+   NavigatorLeftTreeViewComponent,
+    JourneyGridComponent,
+    SelectedJourneyComponent,
+    SelectedJourneyInnerComponent
 
   ],
   imports: [
@@ -66,6 +74,10 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
+    NavigatorLeftTreeViewComponent,
+    JourneyGridComponent,
+    SelectedJourneyComponent,
+    SelectedJourneyInnerComponent
   ]
 })
 export class EnvironmentManagerModule { }

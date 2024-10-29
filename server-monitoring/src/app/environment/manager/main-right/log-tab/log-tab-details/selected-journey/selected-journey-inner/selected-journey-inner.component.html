@@ -1,0 +1,178 @@
+<div class="card-body pd-card-body">
+
+    <div class="page-journey-wrapper">
+
+        <div class="layout-p-datatable">
+
+            <table class="table table-borderless mb-0">
+
+                <tbody>
+
+                    <tr>
+                        <td style="width: 30%;">
+
+                            <div class="panel-tile">
+
+                                <div class="panel-tile-header">
+
+                                    <div class="th-top">
+
+                                        <div class="th-top-left success">
+                                            <span class="load-time">{{pageDetails.loadTime}}</span>
+                                        </div>
+
+                                        <div class="th-top-right">
+
+                                            <h4 class="p-tile-title" style="-webkit-box-orient: vertical;">{{pageDetails.title}}</h4>
+
+                                            <div class="d-flex align-items-center pt-2">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-bar" style="width:100%">
+                                                    </div>
+                                                </div>
+
+                                             
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="page-step">
+                                        <span>Page Step</span>
+                                        <span>{{pageDetails.headers.length}}</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-tile-body">
+
+                                    <ul class="body-h-tab">
+                                        <li class="info-item">
+                                            <a href="javascript:void(0)" class="info-link"
+                                                [ngClass]="datasource_functionalErrors.length > 0 ? 'text-red': ''"
+                                                (click)="view_errors(datasource_functionalErrors, 'functionalErrors')">
+                                                <label class="form-label">Functional Error</label>
+                                                <span
+                                                    class="item-count">{{datasource_functionalErrors.length}}</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="info-item">
+                                            <a href="javascript:void(0)" class="info-link"
+                                                [ngClass]="datasource_consoleErrors.length > 0 ? 'text-red': ''"
+                                                (click)="view_errors(datasource_consoleErrors, 'consloleErrors')">
+                                                <label class="form-label">Console Error</label>
+                                                <span
+                                                    class="item-count">{{datasource_consoleErrors.length}}</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="info-item">
+                                            <a href="javascript:void(0)" class="info-link"
+                                                [ngClass]="datasource_apiRequestErrors.length > 0 ? 'text-red': ''"
+                                                (click)="view_errors(datasource_apiRequestErrors, 'apiRequestErrors')">
+                                                <label class="form-label">API Request Error</label>
+                                                <span
+                                                    class="item-count">{{datasource_apiRequestErrors.length}}</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                    <div id="accordion-details" class="accordion-error-details">
+
+                                        <div class="ac-card">
+
+                                            <ng-container *ngFor="let dataItems of pageDetails.headers; let first = first">
+
+                                                <div class="ac-card-header" [ngClass]="{ 'show': first }">
+
+                                                    <span class="time-text">{{(dataItems.usageTime).toFixed(1)}}s</span>
+
+                                                    <span class="line"></span>
+
+                                                    <a class="btn bt-accordion ac-card-link" data-bs-toggle="collapse" data-target="#collapseOne_{{dataItems.id}}">
+                                                        {{dataItems.moduleHeader}}
+                                                    </a>
+
+                                                </div>
+
+                                                <div id="collapseOne_{{dataItems.id}}" class="collapse" [ngClass]="{ 'show': first }" data-bs-parent="#accordion-details">
+
+                                                    <div class="ac-card-body">
+
+                                                        <ng-container
+                                                            *ngFor="let item of dataItems.steps; let index = index">
+
+                                                            <div class="ac-nav-item inprogress"
+                                                                [ngClass]="first && index == 0 ? 'active-link': ''"
+                                                               >
+
+                                                                <span
+                                                                    class="time-text">{{(item.usageTime).toFixed(1)}}s</span>
+
+                                                                <span class="line"></span>
+
+                                                                <a href="javascript:void(0)" class="btn bt-accordion bt-nav"
+                                                                    (click)="select_step(item)">{{item.detail}}
+                                                                </a>
+
+                                                            </div>
+
+                                                        </ng-container>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </ng-container>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td style="width: 60%;">
+                            <div class="panel-screenshot">
+
+                                <div class="sc-header bg-header">
+                                    <h1 class="sc-h-title">Screenshot</h1>
+                                    <div class="sc-h-right">
+                            
+
+                                        <button *ngIf="imgUrl_link != ''" type="button"
+                                            class="btn bt-layout-2" ngbTooltip="View Screenshot"(click)="view_screenshot()"
+                                            aria-label="View Screenshot" triggers="mouseenter:mouseleave">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <div class="sc-body">
+
+                                    <img *ngIf="imgUrl_link != ''" src="{{imgUrl_link}}" alt="Screenshot"
+                                        class="img-screnshot" role="button" (click)="view_screenshot()">
+
+                                    <img *ngIf="imgUrl_link == ''" src="{{imgUrl_link}}" alt="Screenshot"
+                                        class="img-screnshot" role="button" (click)="view_screenshot()">
+
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
