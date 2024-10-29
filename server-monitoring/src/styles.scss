@@ -589,6 +589,22 @@ a:focus-visible {
         }
     }
 
+    .modal-full-lg {
+        max-width: 95%;
+        height: 90vh;
+        overflow: hidden;
+
+        .modal-content {
+            height: 100%;
+            border-radius: 0rem;
+            border: none;
+
+            .modal-content-wrapper {
+                height: 92.5vh;
+            }
+        }
+    }
+
 }
 
 .modal-backdrop {
@@ -602,6 +618,10 @@ a:focus-visible {
     background-color: rgba(0,0,0,.2);
 }
 
+
+.modal-overlay {
+    z-index: 99999;
+}
 
 /*****scss for form control******/
 .form-label {

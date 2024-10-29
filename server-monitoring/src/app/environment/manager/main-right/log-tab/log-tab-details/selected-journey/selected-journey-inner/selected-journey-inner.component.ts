@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ViewJourneySnapshotComponent } from './view-journey-snapshot/view-journey-snapshot.component';
+import { ViewJourneyErrorComponent } from './view-journey-error/view-journey-error.component';
 
 @Component({
   selector: 'app-selected-journey-inner',
@@ -11,7 +14,8 @@ export class SelectedJourneyInnerComponent {
 
   
   constructor(
-    public app_service: AppService
+    public app_service: AppService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -110,43 +114,46 @@ export class SelectedJourneyInnerComponent {
   view_errors(event, errorType) {
     debugger;
 
-    // if (event.length == 0) {
-    //   this.service_notification.notifier(NotificationType.warning, 'No errors available.');
-    //   return false;
-    // }
+    if (event.length == 0) {
+      // this.service_notification.notifier(NotificationType.warning, 'No errors available.');
+      return
+    }
 
-    // this.service_data.modal_instance = this.service_modal.open(
-    //   JourneySelectedInnerErrorComponent,
-    //   {
-    //     windowClass: "modal-74",
-    //     beforeDismiss: () => {
-
-    //       if (event.currentTarget["classList"].contains("modal-74")) {
-    //         return false;
-    //       }
-    //     },
-    //   }
-    // );
-    // this.service_data.modal_instance.componentInstance.datasource_errors = event;
-    // this.service_data.modal_instance.componentInstance.errorType = errorType;
+    const modalRef = this.modalService.open( ViewJourneyErrorComponent,{
+      backdrop: 'static',
+      keyboard: false,
+      size: 'xl',
+      centered: true,
+      windowClass: 'layout-modal modal-overlay fade-off'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.datasource_errors = event;
+    modalRef.componentInstance.errorType = errorType;
   }
 
 
   view_screenshot() {
     debugger;
-    // this.service_data.modal_instance = this.service_modal.open(
-    //   JourneyScreenshotComponent,
-    //   {
-    //     windowClass: "modal-95",
-    //     beforeDismiss: () => {
-
-    //       if (event.currentTarget["classList"].contains("modal-95")) {
-    //         return false;
-    //       }
-    //     },
-    //   }
-    // );
+    const modalRef = this.modalService.open( ViewJourneySnapshotComponent,{
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full-lg',
+      centered: true,
+      windowClass: 'layout-modal modal-overlay fade-off'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
     // this.service_data.modal_instance.componentInstance.selectedScreenshot_url = this.imgUrl_link;
+    modalRef.componentInstance.selectedScreenshot_url = this.imgUrl_link;
   }
 
 
