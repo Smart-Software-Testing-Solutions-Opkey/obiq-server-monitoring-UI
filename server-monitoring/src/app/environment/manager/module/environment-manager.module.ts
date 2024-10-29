@@ -27,6 +27,8 @@ import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-vie
 import { JourneyGridComponent } from '../main-right/log-tab/log-tab-details/journey-grid/journey-grid.component';
 import { SelectedJourneyComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey.component';
 import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
+import { ViewJourneySnapshotComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-snapshot/view-journey-snapshot.component';
+import { ViewJourneyErrorComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-error/view-journey-error.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-det
    NavigatorLeftTreeViewComponent,
     JourneyGridComponent,
     SelectedJourneyComponent,
-    SelectedJourneyInnerComponent
+    SelectedJourneyInnerComponent,
+    ViewJourneySnapshotComponent,
+    ViewJourneyErrorComponent
 
   ],
   imports: [
@@ -77,7 +81,9 @@ import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-det
     NavigatorLeftTreeViewComponent,
     JourneyGridComponent,
     SelectedJourneyComponent,
-    SelectedJourneyInnerComponent
+    SelectedJourneyInnerComponent,
+    ViewJourneySnapshotComponent,
+    ViewJourneyErrorComponent
   ]
 })
 export class EnvironmentManagerModule { }
