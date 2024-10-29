@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 
 import {
   ChartComponent,
@@ -36,12 +36,16 @@ export type ChartOptions = {
 export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  errorObj = {
+  dataObj = {
     totalerrors : 4,
     errorPercentage:90,
     interval:'Last day'
   }
   constructor() {
+    
+  }
+
+  bindChart(){
     this.chartOptions = {
       series: [
         {
@@ -126,7 +130,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
           inverseColors: true,
        
         },
-        colors:['#F44336', '#E91E63', '#9C27B0']
+        colors:[this.chartColor]
       },
       tooltip: {
         enabled:false,
@@ -146,5 +150,23 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         }
       }
     };
+  }
+  typeEnum:string = ''
+  chartColor:string = ''
+  @Input('child_data') set child_data({ typeEnum }) {
+    debugger
+   this.typeEnum = typeEnum
+   if (typeEnum == 'Error') {
+    this.chartColor = '#B42318'
+  }
+  else if(typeEnum == 'Success'){
+    this.chartColor = '#268144'
+
+  }
+  else if(typeEnum == 'Warning'){
+    this.chartColor = '#FFBF00'
+  }
+   this.bindChart()
+
   }
 }
