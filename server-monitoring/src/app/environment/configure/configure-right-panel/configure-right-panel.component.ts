@@ -193,10 +193,8 @@ export class ConfigureRightPanelComponent {
     console.log(this.Shared_Access_Type_Obj, 'Updated Shared_Access_Type_Obj');
   }
   
-  // handlePermissionChange(user: any, permission: string): void {
-   
-  // }
+
   InviteUsers(){
-    
+
   }
 }
