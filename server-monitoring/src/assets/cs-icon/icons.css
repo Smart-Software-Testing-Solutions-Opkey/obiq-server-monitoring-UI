@@ -36,6 +36,18 @@
 
 /***************************icon start here**************************/
 
+.oci-public:before {
+  content: "\e91a";
+}
+
+.oci-public-off:before {
+  content: "\e91b";
+}
+
+.oci-share:before {
+  content: "\e91c";
+}
+
 .oci-bar-chart:before {
   content: "\e916";
 }
