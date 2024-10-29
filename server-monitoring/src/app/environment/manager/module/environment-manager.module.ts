@@ -29,6 +29,7 @@ import { SelectedJourneyComponent } from '../main-right/log-tab/log-tab-details/
 import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
 import { ViewJourneySnapshotComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-snapshot/view-journey-snapshot.component';
 import { ViewJourneyErrorComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-error/view-journey-error.component';
+import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environment-manager-widgets-gauge-meter/environment-manager-widgets-gauge-meter.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ViewJourneyErrorComponent } from '../main-right/log-tab/log-tab-details
     SelectedJourneyComponent,
     SelectedJourneyInnerComponent,
     ViewJourneySnapshotComponent,
-    ViewJourneyErrorComponent
+    ViewJourneyErrorComponent,
+    EnvironmentManagerWidgetsGaugeMeterComponent
 
   ],
   imports: [
