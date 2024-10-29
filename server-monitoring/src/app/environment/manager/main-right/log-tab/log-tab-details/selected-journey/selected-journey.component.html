@@ -1,0 +1,198 @@
+<div id="div-selected-journey">
+
+    <div class="layout-card" style="min-height: auto;">
+
+        <div class="card-header px-3 pt-3">
+    
+            <div class="card-head-left" *ngIf="!isLayoutCardVisible">
+                <ul class="ch-counting-info">
+                    <li class="info-item">
+                        <label class="form-label">Pages:</label>
+                        <span class="item-count">{{totalPage}}</span>
+                    </li>
+    
+                    <li class="info-item">
+                        <label class="form-label">Errors:</label>
+                        <span class="item-count">{{totalPageError}}</span>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="card-head-right ml-auto">
+    
+                <button *ngIf="!isPageErrorDetails && !is_fullscreen"
+                    class="btn bt-layout-2 btn-card btn_override_onhover" (click)="goBack()" type="button">
+                    <i class="oci oci-chevron-left mr-1 font_bold"></i> Back
+                </button>
+    
+                <button *ngIf="isPageErrorDetails"
+                    class="btn bt-layout-2 btn-card btn_override_onhover" type="button" (click)="backToErrorPage()">
+                    <i class="oci oci-chevron-left mr-1"></i> PathFlow
+                </button>
+    
+    
+                <!-- <div *ngIf="!is_fullscreen" class="pl-2 toggle-btn-margin">
+                    <label class="toggle_datasheet_ops">
+                        <input type="checkbox" id="input-toggleBenchmark" [checked]="is_benchmarked"
+                            (click)="toggle_benchmark($event)">
+                        <span class="slider_ops"></span>
+                        <span class="labels_ops"></span>
+                    </label>
+                </div> -->
+    
+                <!-- <button *ngIf="datasource_journey_overview.length != 0" class="btn bt-layout-2 btn-card ml-2 active" type="button"
+                    (click)="sessionReplay()">
+                    <i class="oci oci-play-bg mr-1"></i> Play Session
+                </button> -->
+            </div>
+    
+        </div>
+    
+        <div *ngIf="!isLayoutCardVisible" class="card-body pt-0 pb-3">
+    
+            <div class="div-timeline">
+    
+                <ul class="timeline-menu">
+    
+                    <ng-container *ngFor="let dataItems of datasource_journey_overview; let index = index">
+    
+                        <li *ngIf="toal_error(dataItems.pageDetail.headers) != 0" class="timeline-item">
+                            <button type="button" class="btn bt-timeline error" (click)="scrolltoelement(dataItems)"
+                                [title]="dataItems.pageDetail.title" container="body"
+                                aria-label="presentation">
+                                <i class="fa fa-circle icon-timeline"></i>
+                            </button>
+    
+                        </li>
+    
+                        <li *ngIf="toal_error(dataItems.pageDetail.headers) == 0" class="timeline-item">
+                            <button type="button" class="btn bt-timeline success"
+                                (click)="scrolltoelement(dataItems)" [title]="dataItems.pageDetail.title"
+                                container="body" aria-label="presentation">
+                                <i class="fa fa-circle icon-timeline"></i>
+                            </button>
+                        </li>
+    
+    
+    
+                    </ng-container>
+    
+                    <li class="timeline-item item-time">
+                        <span class="item-time">{{totalDuration}}s</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+    </div>
+    
+    
+    <div *ngIf="!isPageErrorDetails" class="layout-card scroll-inner mt-4">
+    
+        <div id="div-pageError" class="card-body">
+    
+            <div class="page-journey-wrapper">
+    
+                <div class="layout-p-datatable">
+    
+                    <table class="table table-borderless">
+    
+                        <tbody>
+    
+                            <tr>
+                                <td *ngFor="let dataItems of datasource_journey_overview" style="width: 20rem;">
+    
+                                    <div id="panel_{{dataItems.key}}" class="panel-tile">
+    
+                                        <div class="panel-tile-header">
+    
+                                            <div class="th-top" (click)="pageErrorDetails(dataItems.pageDetail)"
+                                                role="button">
+                                                <div class="th-top-left"
+                                                    [ngClass]="toal_error(dataItems.pageDetail.headers) != 0 ? 'error': 'success'">
+                                                    <span class="load-time">{{dataItems.pageDetail.loadTime}}</span>
+                                                </div>
+                                                <div class="th-top-right">
+    
+                                                    <h4 class="p-tile-title" style="-webkit-box-orient: vertical;">{{dataItems.pageDetail.title}}</h4>
+    
+                                                    <div class="d-flex align-items-center pt-2">
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-bar" style="width:100%">
+                                                            </div>
+                                                        </div>
+    
+                                                    
+                                                    </div>
+    
+                                                    <div class="ph-count-description">
+    
+                                                        <div class="item-description">
+                                                            <label class="form-label label-item-desc">Usage
+                                                                Time</label>
+                                                            <span
+                                                                class="item-count-desc warning">{{(dataItems.usageTime).toFixed(1)}}s</span>
+                                                        </div>
+    
+                                                        <div class="item-description">
+                                                            <label class="form-label label-item-desc">Total
+                                                                Errors</label>
+                                                            <span class="item-count-desc"
+                                                                [ngClass]="toal_error(dataItems.pageDetail.headers) != 0 ? 'error': 'success'"
+                                                                [innerHtml]="toal_error(dataItems.pageDetail.headers)"></span>
+                                                        </div>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="page-step">
+                                                <span>Page Step</span>
+                                                <span>{{dataItems.pageDetail.headers.length}}</span>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="panel-tile-body">
+    
+                                            <ng-container *ngFor="let item of dataItems.pageDetail.headers">
+                                                <div class="tile-item">
+                                                    <div class="tile"
+                                                        [ngClass]="item.errorSteps.length != 0 ? 'error' : 'success'">
+    
+                                                        <h4 class="tile-title">{{item.moduleHeader}}</h4>
+    
+                                                        <p class="tile-subtitle"> <b>{{item.steps.length }}</b> Sub
+                                                            steps</p>
+    
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+    
+                                        </div>
+    
+                                    </div>
+                                </td>
+    
+                            </tr>
+                        </tbody>
+    
+                    </table>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    
+    
+    <div *ngIf="isPageErrorDetails,isLayoutCardVisible" class="layout-card mt-4">
+        
+        <app-selected-journey-inner [child_data]="{pageDetails:pageDetails}"></app-selected-journey-inner>
+    
+    </div>
+
+</div>

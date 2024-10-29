@@ -25,6 +25,9 @@ import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviorn
 //import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-view/navigator-left-tree-view.component';
+import { JourneyGridComponent } from '../main-right/log-tab/log-tab-details/journey-grid/journey-grid.component';
+import { SelectedJourneyComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey.component';
+import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-vie
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
     EnviornmentManagerTimeExplorerGraphComponent,
    // ConfugrationSettingsAccessTypeSummaryComponent,
-   NavigatorLeftTreeViewComponent
+   NavigatorLeftTreeViewComponent,
+    JourneyGridComponent,
+    SelectedJourneyComponent,
+    SelectedJourneyInnerComponent
 
   ],
   imports: [
@@ -70,8 +76,11 @@ import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-vie
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
-    NavigatorLeftTreeViewComponent
-    //ConfugrationSettingsAccessTypeSummaryComponent
+    NavigatorLeftTreeViewComponent,
+    //ConfugrationSettingsAccessTypeSummaryComponent,
+    JourneyGridComponent,
+    SelectedJourneyComponent,
+    SelectedJourneyInnerComponent
   ]
 })
 export class EnvironmentManagerModule { }
