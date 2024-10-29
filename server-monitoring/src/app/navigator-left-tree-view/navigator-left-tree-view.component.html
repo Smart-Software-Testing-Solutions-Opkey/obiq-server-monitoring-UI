@@ -1,0 +1,42 @@
+<div class="main">
+    <nav>
+    
+        <ul class="nav nav-pills menu-category">
+            <button (click)="toggleNode()" style="display: inline-block;">
+                @if (isOpenNode) {close}
+                @else {open}
+                </button>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)"
+                [ngClass]="selectedView.selected?'active':''" (click)="changeViewSelection()">
+
+                <span class="menu-icon">
+                    <i class="oci oci-journey menu-icon"></i>
+                </span>
+                <span class="menu-text">{{selectedView.viewName}}</span>
+            </a>
+            </li>
+        </ul>
+        @if (isOpenNode) {
+            <ul class="nav nav-pills menu-category" style="margin-left: 5rem;">
+
+                @for (item of analyticsTypes; track $index) {
+                <li class="nav-item">
+    
+                    <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
+                        [ngClass]="item.isSelected?'active':''">
+    
+                        <span class="menu-icon">
+                            <i class="oci oci-journey menu-icon"></i>
+                        </span>
+                        <span class="menu-text">{{item.name}}</span>
+                    </a>
+    
+                </li>
+                }
+    
+            </ul>
+        }
+       
+    </nav>
+</div>

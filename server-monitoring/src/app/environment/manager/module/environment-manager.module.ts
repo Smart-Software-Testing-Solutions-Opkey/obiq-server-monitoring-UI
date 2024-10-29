@@ -24,6 +24,7 @@ import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widg
 import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
 //import { ConfugrationSettingsAccessTypeSummaryComponent } from '../../configure/configuration-settings/configuration-settings-view-summary/configuration-settings-AccessType-summary/confugration-settings-access-type-summary/confugration-settings-access-type-summary.component';
 import { LayoutModule } from "@progress/kendo-angular-layout";
+import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-view/navigator-left-tree-view.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
     EnviornmentManagerTimeExplorerGraphComponent,
-   // ConfugrationSettingsAccessTypeSummaryComponent
+   // ConfugrationSettingsAccessTypeSummaryComponent,
+   NavigatorLeftTreeViewComponent
 
   ],
   imports: [
@@ -68,6 +70,7 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
     NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
+    NavigatorLeftTreeViewComponent
     //ConfugrationSettingsAccessTypeSummaryComponent
   ]
 })
