@@ -23,7 +23,8 @@ import { ConfigurationSettingsTestAutomationComponent } from '../configuration-s
     ConfigurationSettingsSystemDiagnosticsComponent,
     ConfigurationSettingsSummaryAfterViewCreationComponent,
     ConfigurationSettingsUserBehaviourComponent,
-    ConfigurationSettingsTestAutomationComponent
+    ConfigurationSettingsTestAutomationComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -43,7 +44,8 @@ import { ConfigurationSettingsTestAutomationComponent } from '../configuration-s
     ConfigurationSettingsSystemDiagnosticsComponent,
     ConfigurationSettingsSummaryAfterViewCreationComponent,
     ConfigurationSettingsUserBehaviourComponent,
-    ConfigurationSettingsTestAutomationComponent
+    ConfigurationSettingsTestAutomationComponent,
+    
 
   ]
   

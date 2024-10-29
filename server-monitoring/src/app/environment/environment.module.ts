@@ -8,6 +8,7 @@ import { ConfigurationSettingsTestAutomationComponent } from './configure/config
 @NgModule({
   declarations: [    
   
+    
   ],
   imports: [
     CommonModule,
