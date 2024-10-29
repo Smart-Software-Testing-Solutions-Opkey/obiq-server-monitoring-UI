@@ -100,9 +100,9 @@ export class NavigatorLeftComponent implements OnInit {
         item.display = index === 0
       })
       this.analyticsTypes = result;
-      this.selectedAnalyticsType = result[0];
-      this.dataChanged.analyticsTypes = this.selectedAnalyticsType
-      this.onLeftPanelDataChange.emit(this.dataChanged)
+      // this.selectedAnalyticsType = result[0];
+      // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+      // this.onLeftPanelDataChange.emit(this.dataChanged)
       
      
       },
@@ -212,7 +212,7 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   changeToView(){
-    this.selectedAnalyticsType = null
+    this.selectedAnalyticsType = {}
     this.analyticsTypes.forEach((ele)=>{
       if(ele.isSelected){
         ele.isSelected = false
@@ -244,7 +244,8 @@ export class NavigatorLeftComponent implements OnInit {
   settingsViewSelect(val){
     debugger;
     // this.selectedViewSettings = val
-
+    this.dataChanged.settingsPanel = val
+    this.onLeftPanelDataChange.emit(this.dataChanged)
     // this.onSettingsSelected.emit(val)
 
   }
@@ -281,7 +282,7 @@ export class NavigatorLeftComponent implements OnInit {
 
   selectionChanged(val){
 debugger
-this.dataChanged.selectedTab = val
+this.dataChanged.analyticsTypes = val
 this.onLeftPanelDataChange.emit(this.dataChanged)
   }
 

@@ -25,7 +25,7 @@ export class NavigatorLeftTreeViewComponent {
       this.selectedView = selectedView
       this.analyticsTypes = analyticsTypes
       this.selectedView.selected = true
-      this.treeSelectionChange.emit(this.selectedView)
+      this.treeSelectionChange.emit({})
     }
   }
   selectedAnalyticsType:any = {}
@@ -48,11 +48,12 @@ export class NavigatorLeftTreeViewComponent {
   }
   changeViewSelection(){
     debugger
-    this.selectedView
     this.analyticsTypes.forEach((ele)=>{
         ele.isSelected = false
     })
     this.selectedView.selected = true
+    this.treeSelectionChange.emit({})
+
   }
   isOpenNode = true
   toggleNode(){

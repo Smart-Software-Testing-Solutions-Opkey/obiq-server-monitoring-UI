@@ -25,6 +25,7 @@ ngOnInit(): void {
 }
 ngOnChanges(changes: SimpleChanges) {
   if (changes['Settings_View_Selection'] && changes['Settings_View_Selection'].currentValue) {
+    debugger
     this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
   }
 }
