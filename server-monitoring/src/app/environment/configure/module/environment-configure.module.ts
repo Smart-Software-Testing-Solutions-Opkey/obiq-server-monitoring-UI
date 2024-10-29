@@ -12,7 +12,7 @@ import { ConfigurationSettingsSystemDiagnosticsComponent } from '../configuratio
 import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../configuration-settings/configuration-settings-summary-after-view-creation/configuration-settings-summary-after-view-creation.component';
 import { ConfigurationSettingsUserBehaviourComponent } from '../configuration-settings/configuration-settings-user-behaviour/configuration-settings-user-behaviour.component';
 import { ConfigurationSettingsTestAutomationComponent } from '../configuration-settings/configuration-settings-test-automation/configuration-settings-test-automation.component';
-
+import { ConfigureRightPanelComponent } from '../configure-right-panel/configure-right-panel.component';
 @NgModule({
   declarations: [
     EnvironmentConfigureComponent,
@@ -24,6 +24,7 @@ import { ConfigurationSettingsTestAutomationComponent } from '../configuration-s
     ConfigurationSettingsSummaryAfterViewCreationComponent,
     ConfigurationSettingsUserBehaviourComponent,
     ConfigurationSettingsTestAutomationComponent,
+    ConfigureRightPanelComponent
     
   ],
   imports: [
@@ -45,6 +46,7 @@ import { ConfigurationSettingsTestAutomationComponent } from '../configuration-s
     ConfigurationSettingsSummaryAfterViewCreationComponent,
     ConfigurationSettingsUserBehaviourComponent,
     ConfigurationSettingsTestAutomationComponent,
+    ConfigureRightPanelComponent
     
 
   ]
