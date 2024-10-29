@@ -1,12 +1,28 @@
 
 <div class="main">
-    <div class="stats d-flex">
-        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error'}"></app-environment-manager-widgets-total-errors-area-widget>
-        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning'}"></app-environment-manager-widgets-total-errors-area-widget>
-        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success'}"></app-environment-manager-widgets-total-errors-area-widget>
-        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'CPU',data:'02.68%'}"></app-environment-manager-widgets-stat-widget>
-        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'RAM',data:'80%'}"></app-environment-manager-widgets-stat-widget>
-        <app-environment-manager-widgets-stat-widget [child_data]="{title: 'User Guides Per Process',data:'8'}"></app-environment-manager-widgets-stat-widget>
+    <div class="row mx-0">
+        <div class="col-sm-4 mb-3 ps-0">
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error'}"></app-environment-manager-widgets-total-errors-area-widget>
+        </div>
+        <div class="col-sm-4 mb-3">
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning'}"></app-environment-manager-widgets-total-errors-area-widget>
+        </div>
+        <div class="col-sm-4 mb-3 pe-0">
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success'}"></app-environment-manager-widgets-total-errors-area-widget>
+        </div>
+        <div class="col-sm-3 mb-3 ps-0">
+            <app-environment-manager-widgets-stat-widget [child_data]="{title: 'CPU',data:'02.68%'}"></app-environment-manager-widgets-stat-widget>
+        </div>
+        <div class="col-sm-3 mb-3">
+            <app-environment-manager-widgets-stat-widget [child_data]="{title: 'RAM',data:'80%'}"></app-environment-manager-widgets-stat-widget>
+        </div>
+       
+        <div class="col-sm-3 mb-3">
+            <app-environment-manager-widgets-stat-widget [child_data]="{title: 'User Guides Per Process',data:'8'}"></app-environment-manager-widgets-stat-widget> 
+        </div> 
+        <div class="col-sm-3 mb-3 pe-0">
+            
+        </div>
     </div>
     <div>
         <h6 class="font-bold mb-0">
