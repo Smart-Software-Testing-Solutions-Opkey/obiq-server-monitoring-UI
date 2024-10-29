@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-selected-journey',
@@ -37,8 +38,8 @@ export class SelectedJourneyComponent implements OnInit {
 
   getUserJourneyDtoByUserIdSessionId() {
 
-    //let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
+    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
+    //let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
     let form_data = {
       "sessionId": this.selected_sessionId
     }

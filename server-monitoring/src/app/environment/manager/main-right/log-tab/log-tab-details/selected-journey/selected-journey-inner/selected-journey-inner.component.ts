@@ -27,8 +27,8 @@ export class SelectedJourneyInnerComponent {
   datasource_apiRequestErrors = [];
   imgUrl_link = "";
 
-  //imageUrl = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
-  imageUrl = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
+  imageUrl = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
+  //imageUrl = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
   pageDetails: any;
 
   @Input('child_data') set child_data({ pageDetails }) {
@@ -82,14 +82,21 @@ export class SelectedJourneyInnerComponent {
 
    
 
-    //let form_url = environment.BASE_OPKEY_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
-    let form_url =  `https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
+    let form_url = environment.BASE_OPKEY_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
+    //let form_url =  `https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
 
-    window.loadingStart("form_url", "Please wait");
-    this.app_service.make_get_server_call(form_url, {}).subscribe((res: any) => {
-      window.loadingStop("form_url");
-    }, (err) => {
-      window.loadingStop("form_url");
+    //window.loadingStart("form_url", "Please wait");
+    this.app_service.make_post_server_call(form_url, {}).subscribe({
+
+      next: (result: any) => {
+        //window.loadingStop("form_url");
+      },
+      error: (error: any) => {
+        //window.loadingStop("form_url");
+      },
+      complete: () => {
+        window.loadingStop("form_url");
+      }
     })
 
   }
