@@ -1,0 +1,23 @@
+.nav-item {
+    display: block;
+
+    .nav-link {
+        background: #FFFFFF;
+        padding: 0.5rem;
+        padding-right: 0.875rem;
+        font-size: 0.875rem;
+        color: #344054;
+        border-top-right-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        border-right: 2px solid transparent;
+
+        &.active {
+            background-color: #e6fbfe!important;
+        }
+
+        &:hover {
+            background-color:#f6feff;
+        }
+
+    }
+}
