@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-eye:before {
+  content: "\e91d";
+}
+
 .oci-public:before {
   content: "\e91a";
 }

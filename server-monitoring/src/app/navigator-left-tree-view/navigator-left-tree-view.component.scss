@@ -1,0 +1,36 @@
+.nav-item {
+    display: block;
+
+    .nav-link {
+        background: #FFFFFF;
+        padding: 0.5rem;
+        padding-right: 0.875rem;
+        font-size: 0.875rem;
+        color: #344054;
+        border-top-right-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        border-right: 2px solid transparent;
+
+        &.active {
+            background-color: #e6fbfe!important;
+        }
+
+        &:hover {
+            background-color:#f6feff;
+        }
+
+    }
+}
+
+.dotted-lines-naviagtion::after {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: -1rem;
+    border-left: 1px solid #667085;
+    border-left-style: dotted !important;
+    border-bottom-style: dotted !important;
+    border-bottom: 1px solid #667085;
+    width: 1.4rem;
+    height: 100%;
+}

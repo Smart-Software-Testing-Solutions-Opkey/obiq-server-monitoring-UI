@@ -50,7 +50,7 @@
         </div>
 
         <div class="sidebar-menu-content">
-            <app-navigator-left-tree-view [child_data]="{analyticsTypes: analyticsTypes,selectedView:selectedView}">
+            <app-navigator-left-tree-view [child_data]="{analyticsTypes: analyticsTypes,selectedView:selectedView}" (treeSelectionChange)="selectionChanged($event)">
             </app-navigator-left-tree-view>
         </div>
 

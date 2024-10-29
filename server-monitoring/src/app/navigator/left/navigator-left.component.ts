@@ -26,11 +26,17 @@ export class NavigatorLeftComponent implements OnInit {
 
   ) { }
     
-  analyticsValueChange = output<any>()
-  onChangeView = output<any>()
-  onSettingsSelected = output<any>()
+  // analyticsValueChange = output<any>()
+  // onChangeView = output<any>()
+  // onSettingsSelected = output<any>()
+  onLeftPanelDataChange = output<any>()
 
-
+  dataChanged = {
+    "viewSelected":{},
+    "settingsPanel":{isOpen:false,selectedViewSettings:{}},
+    "analyticsTypes":{},
+    "selectedTab":{}
+  }
 
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
@@ -42,8 +48,6 @@ export class NavigatorLeftComponent implements OnInit {
       }
     });
     this.getAllVIews();
-
-    this.analyticsValueChange.emit(this.selectedAnalyticsType)
   }
   selectedView:any = {}
 
@@ -54,11 +58,11 @@ export class NavigatorLeftComponent implements OnInit {
 
 
   change_view(selected_item:any) {
-    debugger
+    
     console.log("selected_item==", selected_item);
   }
   changeAnalyticsSelection(item){
-    debugger
+  
    
     // this.analyticsTypes.forEach((ele)=>{
     //   if(ele.isSelected){
@@ -67,9 +71,9 @@ export class NavigatorLeftComponent implements OnInit {
     // })
    
     //   item.isSelected = true
-    //   this.selectedAnalyticsType = item
-    
-    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+      this.selectedAnalyticsType = item
+    this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+    this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
 
@@ -94,11 +98,11 @@ export class NavigatorLeftComponent implements OnInit {
        
       result.forEach((item,index)=>{
         item.display = index === 0
-        item.isSelected = index ==0
       })
       this.analyticsTypes = result;
-      this.selectedAnalyticsType = result[0];
-      this.analyticsValueChange.emit(this.selectedAnalyticsType)
+      // this.selectedAnalyticsType = result[0];
+      // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+      // this.onLeftPanelDataChange.emit(this.dataChanged)
       
      
       },
@@ -113,7 +117,7 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   set_Selected_VIew(selectedVIew) {
-    debugger;
+  
     window.loadingStart("#navigator-left", "Please wait");
     //let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
     let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
@@ -142,7 +146,7 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   getAllVIews() {
-    debugger;
+    
     window.loadingStart("#navigator-left", "Please wait");
     //let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
     let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
@@ -160,9 +164,8 @@ export class NavigatorLeftComponent implements OnInit {
         if (this.totalViews && this.totalViews.length > 0) {
           this.selectedView = this.totalViews[0]; 
           this.selectedViewSettings = this.selectedView;
-          this.onChangeView.emit(this.selectedView)
+          this.dataChanged.viewSelected = this.selectedView
           this.set_Selected_VIew(this.selectedView)
-          this.onChangeView.emit(this.selectedView)
         }
     
      
@@ -195,41 +198,44 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   select_service_data() {
-    debugger;
+ 
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
   }
 
   viewChanged(val){
-    debugger
+   
     this.selectedView = val
+    this.dataChanged.viewSelected = this.selectedView
     this.set_Selected_VIew(this.selectedView)
-    this.onChangeView.emit(this.selectedView)
 
   }
 
   changeToView(){
-    this.selectedAnalyticsType = null
+    this.selectedAnalyticsType = {}
     this.analyticsTypes.forEach((ele)=>{
       if(ele.isSelected){
         ele.isSelected = false
       }
     })
-    this.analyticsValueChange.emit(this.selectedAnalyticsType)
+    this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+    this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
 
   isopenSettings:boolean = false
 
   openSettings(){
-    debugger;
+  
     this.isopenSettings = true
-    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+    this.dataChanged.settingsPanel = {isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings}
+    this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
   backToMenu(){
     this.isopenSettings = false
-    this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
+    this.dataChanged.settingsPanel = {isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings}
+    this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
 
@@ -238,14 +244,16 @@ export class NavigatorLeftComponent implements OnInit {
   settingsViewSelect(val){
     debugger;
     // this.selectedViewSettings = val
-    this.onSettingsSelected.emit(val)
+    this.dataChanged.settingsPanel = val
+    this.onLeftPanelDataChange.emit(this.dataChanged)
+    // this.onSettingsSelected.emit(val)
 
   }
   Rename_Selected_View(view){
 
   }
   Delete_Selected_View(view){
-    debugger;
+   
     window.loadingStart("#navigator-left", "Please wait");
     //let form_url = environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
     let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
@@ -270,6 +278,12 @@ export class NavigatorLeftComponent implements OnInit {
         console.log("Completed");
       }
     });
+  }
+
+  selectionChanged(val){
+debugger
+this.dataChanged.analyticsTypes = val
+this.onLeftPanelDataChange.emit(this.dataChanged)
   }
 
 }

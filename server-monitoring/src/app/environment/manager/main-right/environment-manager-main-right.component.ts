@@ -41,7 +41,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
     
   }
   receivedTimeRange:any
-  selectedAnalyticsType:any = null
+  selectedAnalyticsType:any = {}
   selectedView:any
   selectedTab:any = {}
   availableTabs:any
@@ -51,12 +51,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
     if(selectedView){
       this.selectedView = selectedView
     }
-    if(selectedAnalyticsType){
-      this.selectedAnalyticsType = selectedAnalyticsType
-    }
-    if(Object.keys(selectedAnalyticsType).length != 0 ){
-      this.bindData()
-    }
+    this.bindData()
     
   }
   
@@ -96,7 +91,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
   }
   bindData(){
     debugger;
-    if(this.selectedAnalyticsType){
+    if(Object.keys(this.selectedAnalyticsType).length != 0 ){
      // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
         this.get_Tab_Control_List(this.selectedAnalyticsType)
        
@@ -129,13 +124,21 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
     }
     else {
       this.availableTabs = [
-        {name:'Overview',val:'overview',isVisible:true,isSelected:true},
-        {name:'Log',val:'log',isVisible:true,isSelected:false},
-        {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
-        {name:'Telemetry',val:'telemetry',isVisible:true,isSelected:false},
-        
-        
-      ]
+        {
+            "enumType": "OVERVIEW_TAB",
+            "text": "Overview",
+            'isVisible':true,
+            'isSelected':true
+        },
+        {
+          "enumType": "LOG_TAB",
+          "text": "Log",
+          'isVisible':true,
+          'isSelected':false
+      },
+    ]
+   
+    this.selectedTab = this.availableTabs[0]
     }
 
 

@@ -1,1 +1,25 @@
-<p>view-journey-snapshot works!</p>
+
+
+<div id="modal-preview-screenshot" class="preview-screenshot modal-content-wrapper flex-box-column">
+
+    <div class="modal-header bg-theme rounded-0">
+    
+        <h3 class="modal-h-title text-white">Screenshot</h3>
+
+        <div class="modal-header-right">
+            <button class="btn text-light" (click)="close_model()">
+                <i class="oci oci-x"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="preview_img">
+            <img src="{{selectedScreenshot_url}}" alt="Screenshot" class="img-screnshot">
+        </div>
+
+    </div>
+    
+</div>

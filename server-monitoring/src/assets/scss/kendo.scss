@@ -146,3 +146,41 @@
         }
     }
 }
+
+.checkbox-custom-kendo {
+    .k-header {
+        .k-checkbox-wrap {
+            .k-checkbox:indeterminate, .k-checkbox.k-indeterminate {
+                background-image: none !important;
+            }
+        }
+    }
+
+    .k-checkbox-wrap {
+        .k-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .k-checkbox:checked, .k-checkbox.k-checked {
+            background-color: #E6FBFE;
+            border: 1px solid #1C7C92;
+            background-image: none !important;
+
+            &::after {
+                content: "\e904";
+                font-family: 'cs-icon';
+                color: #1C7C92;
+                font-size: 0.75rem;
+                font-weight: 600;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .k-checkbox:checked:focus, .k-checkbox.k-checked.k-focus {
+            box-shadow: none !important;
+        }
+    }
+}

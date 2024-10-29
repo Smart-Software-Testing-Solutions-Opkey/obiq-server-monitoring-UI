@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ViewJourneySnapshotComponent } from './view-journey-snapshot/view-journey-snapshot.component';
+import { ViewJourneyErrorComponent } from './view-journey-error/view-journey-error.component';
 
 @Component({
   selector: 'app-selected-journey-inner',
@@ -11,7 +14,8 @@ export class SelectedJourneyInnerComponent {
 
   
   constructor(
-    public app_service: AppService
+    public app_service: AppService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -23,8 +27,8 @@ export class SelectedJourneyInnerComponent {
   datasource_apiRequestErrors = [];
   imgUrl_link = "";
 
-  //imageUrl = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
-  imageUrl = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
+  imageUrl = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
+  //imageUrl = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
   pageDetails: any;
 
   @Input('child_data') set child_data({ pageDetails }) {
@@ -78,14 +82,21 @@ export class SelectedJourneyInnerComponent {
 
    
 
-    //let form_url = environment.BASE_OPKEY_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
-    let form_url =  `https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
+    let form_url = environment.BASE_OPKEY_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
+    //let form_url =  `https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
 
-    window.loadingStart("form_url", "Please wait");
-    this.app_service.make_get_server_call(form_url, {}).subscribe((res: any) => {
-      window.loadingStop("form_url");
-    }, (err) => {
-      window.loadingStop("form_url");
+    //window.loadingStart("form_url", "Please wait");
+    this.app_service.make_post_server_call(form_url, {}).subscribe({
+
+      next: (result: any) => {
+        //window.loadingStop("form_url");
+      },
+      error: (error: any) => {
+        //window.loadingStop("form_url");
+      },
+      complete: () => {
+        window.loadingStop("form_url");
+      }
     })
 
   }
@@ -110,43 +121,46 @@ export class SelectedJourneyInnerComponent {
   view_errors(event, errorType) {
     debugger;
 
-    // if (event.length == 0) {
-    //   this.service_notification.notifier(NotificationType.warning, 'No errors available.');
-    //   return false;
-    // }
+    if (event.length == 0) {
+      // this.service_notification.notifier(NotificationType.warning, 'No errors available.');
+      return
+    }
 
-    // this.service_data.modal_instance = this.service_modal.open(
-    //   JourneySelectedInnerErrorComponent,
-    //   {
-    //     windowClass: "modal-74",
-    //     beforeDismiss: () => {
-
-    //       if (event.currentTarget["classList"].contains("modal-74")) {
-    //         return false;
-    //       }
-    //     },
-    //   }
-    // );
-    // this.service_data.modal_instance.componentInstance.datasource_errors = event;
-    // this.service_data.modal_instance.componentInstance.errorType = errorType;
+    const modalRef = this.modalService.open( ViewJourneyErrorComponent,{
+      backdrop: 'static',
+      keyboard: false,
+      size: 'xl',
+      centered: true,
+      windowClass: 'layout-modal modal-overlay fade-off'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.datasource_errors = event;
+    modalRef.componentInstance.errorType = errorType;
   }
 
 
   view_screenshot() {
     debugger;
-    // this.service_data.modal_instance = this.service_modal.open(
-    //   JourneyScreenshotComponent,
-    //   {
-    //     windowClass: "modal-95",
-    //     beforeDismiss: () => {
-
-    //       if (event.currentTarget["classList"].contains("modal-95")) {
-    //         return false;
-    //       }
-    //     },
-    //   }
-    // );
+    const modalRef = this.modalService.open( ViewJourneySnapshotComponent,{
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full-lg',
+      centered: true,
+      windowClass: 'layout-modal modal-overlay fade-off'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
     // this.service_data.modal_instance.componentInstance.selectedScreenshot_url = this.imgUrl_link;
+    modalRef.componentInstance.selectedScreenshot_url = this.imgUrl_link;
   }
 
 

@@ -1,1 +1,91 @@
-<p>view-journey-error works!</p>
+
+
+<div id="modal-journey-error">
+
+    <div class="modal-header">
+    
+        <h3 class="modal-h-title text-white">{{header_text}}</h3>
+
+        <div class="modal-header-right">
+            <button class="btn" (click)="close_model()">Close</button>
+        </div>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="scrollable px-2" style="height: 35rem;">
+        
+            <kendo-grid [data]="datasource_errors" [selectable]="true">
+    
+                <kendo-grid-column title="Type" [width]="200">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                        <span class="layout-text-obiq text-red">{{dataItem.type}}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <kendo-grid-column [hidden]="errorType == 'apiRequestError'" title="Log Body">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+    
+                        <span class="layout-text-obiq">{{ dataItem.logBody }}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <kendo-grid-column [hidden]="errorType == 'functionalErrors' || errorType == 'consloleErrors'" title="Request Url">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+    
+                        <span class="layout-text-obiq">{{ dataItem.requestUrl }}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <kendo-grid-column [hidden]="errorType == 'functionalErrors' || errorType == 'consloleErrors'" title="Request Method">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+    
+                        <span class="layout-text-obiq">{{ dataItem.requestMethod }}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <kendo-grid-column [hidden]="errorType == 'functionalErrors' || errorType == 'consloleErrors'" title="Response Code">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                        <span class="layout-text-obiq">{{ dataItem.responseCode }}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <kendo-grid-column [hidden]="errorType == 'functionalErrors' || errorType == 'consloleErrors'" title="Response">
+    
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+    
+                        <span class="layout-text-obiq">{{ dataItem.response }}</span>
+    
+                    </ng-template>
+                </kendo-grid-column>
+    
+                <ng-template kendoGridNoRecordsTemplate>
+                    <div class="no-data-found" style="height: 20rem !important;">
+                        <div class="no-data-found-content">
+                            <!-- <img class="no-data-found-content-img" src="/opkeyone/assets/icon-image/nodata-img.png"
+                                alt="img"> -->
+                            <p class="no-data-found-content-text"> No {{header_text}} available</p>
+                        </div>
+                    </div>
+                </ng-template>
+    
+    
+            </kendo-grid>
+        </div>
+
+    </div>
+    
+</div>
