@@ -9,53 +9,52 @@ import { AppService } from 'src/app/services/app.service';
   templateUrl: './environment-manager-main-right-log-tab-details.component.html',
   styleUrl: './environment-manager-main-right-log-tab-details.component.scss'
 })
-export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit,OnDestroy  {
+export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
-     public activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private router: Router,
     private route: ActivatedRoute,
     public service_data: AppDataService,
-    public app_service: AppService,){
+    public app_service: AppService,) {
 
   }
-  selectedData:any
-  dataKeys:any = []
-  dataValues:any = []
-  tabSelected:string = 'Trace'
-  trace_Selected_data:any =[];
+  selectedData: any
+  dataKeys: any = []
+  dataValues: any = []
+  tabSelected: string = 'Trace'
+  trace_Selected_data: any = [];
   @Input('child_data') set child_data({ selectedData }) {
     debugger
     this.selectedData = selectedData
     this.dataKeys = Object.keys(this.selectedData)
     this.dataValues = Object.values(this.selectedData);
-    console.log(this.selectedData,"this is selected Data in Log tab details main right")
+    console.log(this.selectedData, "this is selected Data in Log tab details main right")
 
   }
   ngOnInit(): void {
     this.getTraceData();
   }
-  onCellClick(event:any){
+  onCellClick(event: any) {
 
   }
-  on_trace_Selection_Change_(event:any){
+  on_trace_Selection_Change_(event: any) {
 
   }
-  getTraceData(){
-      window.loadingStart("#Env_manager_main_right", "Please wait");
-      //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-      let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      this.app_service.make_post_server_call(ajax_url, {
-      "essLogId":this.selectedData.dataId,
-      "widgetType":"ESS_LOG_METADATA_WIDGET"
+  getTraceData() {
+    window.loadingStart("#Env_manager_main_right", "Please wait");
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    this.app_service.make_post_server_call(ajax_url, {
+      "essLogId": this.selectedData.dataId,
+      "widgetType": "ESS_LOG_METADATA_WIDGET"
     })
       .subscribe({
         next: (result: any) => {
-        window.loadingStop("#Env_manager_main_right");
-        console.log(result,"+++++++++++++++++++++++++++++++++++")
-        this.trace_Selected_data.push(result);
+          window.loadingStop("#Env_manager_main_right");
+          console.log(result, "+++++++++++++++++++++++++++++++++++")
+          this.trace_Selected_data.push(result);
 
-       
+
         },
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
@@ -65,12 +64,12 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
           console.log("Completed");
         }
       });
-    
+
   }
   ngOnDestroy(): void {
-    
+
   }
-  changeSelectedTab(tab){
+  changeSelectedTab(tab) {
     this.tabSelected = tab
   }
 

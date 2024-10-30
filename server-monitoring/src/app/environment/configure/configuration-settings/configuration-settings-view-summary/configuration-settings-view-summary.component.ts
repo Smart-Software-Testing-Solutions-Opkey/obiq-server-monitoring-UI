@@ -22,11 +22,11 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
 
   obj_configuration_setting: any;
   Selected_grid_dataSource: any;
-  selected_grid_System_Diagnostics:any;
+  selected_grid_System_Diagnostics: any;
   Show_Project_Access: boolean = false;
   receivedAccessType:any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
-  
+
     debugger;
     this.obj_configuration_setting = obj_configuration_setting;
     console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
@@ -70,27 +70,27 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     debugger;
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
     this.selected_grid_System_Diagnostics = selectionData.selected_system_diagnostics;
-    
+
 
     console.log(this.Selected_grid_dataSource);
 
   }
-  OnAccessTypeClick(){
-   
-      const modalRef = this.modalService.open( ConfigureRightPanelComponent,{
-       backdrop: 'static',
-       keyboard: false,
-       size: 'full',
-       centered: true,
-       windowClass: 'layout-modal-right panel-end'
-     });
-     modalRef.result.then((result) => {
-     }, (response) => {
-       if (response == 'close modal') {
-         return;
-       }
-     });
-     modalRef.componentInstance.selectedItem = {callsource:this.obj_configuration_setting};
+  OnAccessTypeClick() {
+
+    const modalRef = this.modalService.open(ConfigureRightPanelComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal-right panel-end'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting };
   }
   selectedAccessType: string = 'PRIVATE';
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
@@ -181,7 +181,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     // return;
 
     //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    let form_url = "https://myqlm.preprod.opkeyone.com/Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

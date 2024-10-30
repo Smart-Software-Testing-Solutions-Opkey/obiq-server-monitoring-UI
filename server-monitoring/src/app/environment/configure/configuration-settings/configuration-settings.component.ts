@@ -30,16 +30,16 @@ export class ConfigurationSettingsComponent {
     is_value_selection: false,
     title: "Add View",
     AccessType: "",
-    AccessPermisions:{
-      "canView":true,
-      "canEdit":true
+    AccessPermisions: {
+      "canView": true,
+      "canEdit": true
     },
     selectedUids: {},
     selected_datasource: null,
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
-    selected_user_behaviour_component:[],
-    selected_view:null
+    selected_user_behaviour_component: [],
+    selected_view: null
   }
 
 
@@ -87,8 +87,8 @@ export class ConfigurationSettingsComponent {
       }
       else {
         this.obj_configuration_setting.tab = "view_summary";
-      this.obj_configuration_setting.title = "Create View";
-      this.obj_configuration_setting.is_value_selection = false;
+        this.obj_configuration_setting.title = "Create View";
+        this.obj_configuration_setting.is_value_selection = false;
       }
     }
     else if (this.obj_configuration_setting.tab == "system_diagnostics") {
@@ -128,7 +128,7 @@ export class ConfigurationSettingsComponent {
     }
     else if (this.obj_configuration_setting.tab == "system_diagnostics") {
 
-      if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
         this.obj_configuration_setting.tab = "ERP_Analytics";
         this.obj_configuration_setting.title = "Add ERP Analytics";
         this.obj_configuration_setting.is_value_selection = true;
@@ -160,13 +160,13 @@ export class ConfigurationSettingsComponent {
   dispaly_DataSource: boolean = false;
   display_ErpApplication: boolean = false;
   display_SystemDiagnosticsData: boolean = false;
-  dispaly_Instances:boolean = false;
+  dispaly_Instances: boolean = false;
 
   ValidationCheck() {
 
     this.reset_error();
 
-    if(this.obj_configuration_setting.tab == "datasource") {
+    if (this.obj_configuration_setting.tab == "datasource") {
 
       if (this.obj_configuration_setting.selected_datasource.viewName == "") {
         this.dispaly_viewName = true;
@@ -177,11 +177,11 @@ export class ConfigurationSettingsComponent {
         return false;
       }
       else if (this.obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
-  
+
         let is_display = true;
-  
+
         this.obj_configuration_setting.selected_datasource.select_datasource_item.forEach((item: any) => {
-  
+
           if (item.name == 'ERP Analytics') {
             if (this.obj_configuration_setting.selected_datasource.select_applicaton_item.length == 0) {
               this.display_ErpApplication = true;
@@ -195,15 +195,15 @@ export class ConfigurationSettingsComponent {
             }
           }
         });
-  
-  
+
+
         return is_display;
       }
-  
+
 
     }
-    
-    if(this.obj_configuration_setting.tab == "ERP_Analytics") { 
+
+    if (this.obj_configuration_setting.tab == "ERP_Analytics") {
 
       if (this.obj_configuration_setting.selected_erp_analytics.length == 0) {
         this.dispaly_Instances = true;
@@ -246,8 +246,7 @@ export class ConfigurationSettingsComponent {
 
     window.loadingStart("#div-datasource-slection", "Please wait");
 
-    //let form_url =   environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
 
     let form_data = this.create_View_object() as any;
 
@@ -280,7 +279,7 @@ export class ConfigurationSettingsComponent {
     obj_Create_View["userId"] = this.service_data.UserDto.UserDTO.U_ID
     obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
     obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
-    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType === ""? 'PRIVATE' : this.obj_configuration_setting.AccessType
+    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType === "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType
     obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [] : this.obj_configuration_setting.selectedUids;
     obj_Create_View["linkedDataSource"] = this.createLinkedDataSourceObject();
     return obj_Create_View;
@@ -300,7 +299,7 @@ export class ConfigurationSettingsComponent {
 
 
       if (widget.name == "ERP Analytics") {
-          this.obj_configuration_setting.selected_erp_analytics.forEach(selectedRow => {
+        this.obj_configuration_setting.selected_erp_analytics.forEach(selectedRow => {
           linkedDataObject.linkedData.push({
             name: selectedRow.SystemIdentifier,
             value: selectedRow.SettingsID

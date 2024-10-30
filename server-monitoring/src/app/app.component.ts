@@ -10,15 +10,15 @@ import { AppDataService } from './services/app-data.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private app_service:AppService,
-    public service_data:AppDataService
-  ){}
+  constructor(private app_service: AppService,
+    public service_data: AppDataService
+  ) { }
 
   ngOnInit() {
     this.get_data();
   }
 
-   get_data():any {
+  get_data(): any {
 
     console.log("window.keycloak object ", window.keycloak);
 
@@ -29,14 +29,17 @@ export class AppComponent implements OnInit {
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
-      this.service_data.UserDto = result;
+    
+        this.service_data.UserDto = result;
+
+
       },
       (error) => {
-       
+
       }
     );
 
-    
+
   }
 }
 

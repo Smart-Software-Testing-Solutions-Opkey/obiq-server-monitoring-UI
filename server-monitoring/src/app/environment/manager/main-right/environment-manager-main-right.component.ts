@@ -11,74 +11,73 @@ import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.c
   templateUrl: './environment-manager-main-right.component.html',
   styleUrl: './environment-manager-main-right.component.scss'
 })
-export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,AfterViewInit {
+export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(   
+  constructor(
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     public service_data: AppDataService,
-    public app_service:AppService,
-    public dataService:AppDataService,
+    public app_service: AppService,
+    public dataService: AppDataService,
     private cdr: ChangeDetectorRef
-  ){}
+  ) { }
 
   ngOnDestroy(): void {
-    
+
   }
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         this.receivedTimeRange = data;
         console.log('Received Data:', this.receivedTimeRange);
-        
+
         // Manually trigger change detection
         this.cdr.detectChanges();
       }
     });
   }
   ngAfterViewInit(): void {
-    
+
   }
-  receivedTimeRange:any
-  selectedAnalyticsType:any = {}
-  selectedView:any
-  selectedTab:any = {}
-  availableTabs:any
-  @Input('child_data') set child_data({ selectedAnalyticsType,selectedView }) {
+  receivedTimeRange: any
+  selectedAnalyticsType: any = {}
+  selectedView: any
+  selectedTab: any = {}
+  availableTabs: any
+  @Input('child_data') set child_data({ selectedAnalyticsType, selectedView }) {
     debugger
     this.selectedAnalyticsType = selectedAnalyticsType;
-    if(selectedView){
+    if (selectedView) {
       this.selectedView = selectedView
     }
     this.bindData()
-    
+
   }
-  
-  get_Tab_Control_List(AnalysticsType){
+
+  get_Tab_Control_List(AnalysticsType) {
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    //let form_url =  environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let form_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
 
     let form_data = { systemId: AnalysticsType.systemId };
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-      window.loadingStop("#Env_manager_main_right");
-       
-      result.forEach((item,index)=>{
-       if(item.enumType == "OVERVIEW_TAB"){
-        item.isVisible = true
-        item.isSelected = true
-       }
-       else{
-        item.isVisible = true;
-        item.isSelected = false;
-       }
-       
-      }) 
-       this.availableTabs = result
-       this.selectedTab = result[0]
+        window.loadingStop("#Env_manager_main_right");
+
+        result.forEach((item, index) => {
+          if (item.enumType == "OVERVIEW_TAB") {
+            item.isVisible = true
+            item.isSelected = true
+          }
+          else {
+            item.isVisible = true;
+            item.isSelected = false;
+          }
+
+        })
+        this.availableTabs = result
+        this.selectedTab = result[0]
       },
       error: (error: any) => {
         window.loadingStop("#Env_manager_main_right");
@@ -89,13 +88,13 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
       }
     });
   }
-  bindData(){
+  bindData() {
     debugger;
-    if(Object.keys(this.selectedAnalyticsType).length != 0 ){
-     // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
-        this.get_Tab_Control_List(this.selectedAnalyticsType)
-       
-     // }
+    if (Object.keys(this.selectedAnalyticsType).length != 0) {
+      // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
+      this.get_Tab_Control_List(this.selectedAnalyticsType)
+
+      // }
       // else if(this.selectedAnalyticsType.val == '"USER_BEHAVIOUR_ANALYTICS_DATASOURCE"'){
       //   this.availableTabs = [
       //     {name:'Overview',val:'overview',isVisible:true,isSelected:true},
@@ -120,35 +119,35 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
       //     {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
       //   ]
       // }
-    
+
     }
     else {
       this.availableTabs = [
         {
-            "enumType": "OVERVIEW_TAB",
-            "text": "Overview",
-            'isVisible':true,
-            'isSelected':true
+          "enumType": "OVERVIEW_TAB",
+          "text": "Overview",
+          'isVisible': true,
+          'isSelected': true
         },
         {
           "enumType": "LOG_TAB",
           "text": "Log",
-          'isVisible':true,
-          'isSelected':false
-      },
-    ]
-   
-    this.selectedTab = this.availableTabs[0]
+          'isVisible': true,
+          'isSelected': false
+        },
+      ]
+
+      this.selectedTab = this.availableTabs[0]
     }
 
 
   }
- 
 
-  changeSelectedTab(tab){
+
+  changeSelectedTab(tab) {
     // this.selectedTab = val
-    this.availableTabs.forEach((ele)=>{
-      if(ele.isSelected){
+    this.availableTabs.forEach((ele) => {
+      if (ele.isSelected) {
         ele.isSelected = false
       }
     })
@@ -157,21 +156,21 @@ export class EnvironmentManagerMainRightComponent implements OnInit,OnDestroy,Af
 
   }
 
-  addWidget(){
-   const modalRef = this.modalService.open( ManagerRightPanelComponent,{
-    backdrop: 'static',
-    keyboard: false,
-    size: 'full',
-    centered: true,
-    windowClass: 'layout-modal-right panel-end'
-  });
-  modalRef.result.then((result) => {
-  }, (response) => {
-    if (response == 'close modal') {
-      return;
-    }
-  });
-  modalRef.componentInstance.selectedItem = {callsource:'addWidget'};
+  addWidget() {
+    const modalRef = this.modalService.open(ManagerRightPanelComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal-right panel-end'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.selectedItem = { callsource: 'addWidget' };
   }
 
 }

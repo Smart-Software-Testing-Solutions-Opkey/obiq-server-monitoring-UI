@@ -21,7 +21,7 @@ export class JourneyGridComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.get_getInsightWidgetData()
   }
 
@@ -31,15 +31,14 @@ export class JourneyGridComponent implements OnInit {
   get_getInsightWidgetData() {
     window.loadingStart("#div-journey", "Please wait");
     let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    //let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     let form_data = {
       appType: this.selectedData.appType,
       essLogId: this.selectedData.dataId,
-      logToSearch:"",
-      limitBy:20,
-      offset:0,
-      widgetType:"ESS_LOG_JOURNEY_LIST_WIDGET"
-  }
+      logToSearch: "",
+      limitBy: 20,
+      offset: 0,
+      widgetType: "ESS_LOG_JOURNEY_LIST_WIDGET"
+    }
 
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
@@ -62,7 +61,7 @@ export class JourneyGridComponent implements OnInit {
 
 
   journey_state(result) {
-    if(result.length == 1) {
+    if (result.length == 1) {
       this.obj_selected_journey.datasource = result[0];
       this.obj_selected_journey.isDisplay_main = false;
       this.calsource = 'single_journey';
@@ -71,7 +70,7 @@ export class JourneyGridComponent implements OnInit {
       this.obj_selected_journey.isDisplay_main = true;
       this.calsource = 'multiple_journey';
     }
-    
+
   }
 
   obj_selected_journey = {
@@ -79,11 +78,11 @@ export class JourneyGridComponent implements OnInit {
     isDisplay_main: true
   }
 
-  onSelectionChange(e){
+  onSelectionChange(e) {
     debugger
-   let dataItem = e.dataItem;
-   this.obj_selected_journey.datasource = dataItem;
-   this.obj_selected_journey.isDisplay_main = false;
+    let dataItem = e.dataItem;
+    this.obj_selected_journey.datasource = dataItem;
+    this.obj_selected_journey.isDisplay_main = false;
   }
 
 }
