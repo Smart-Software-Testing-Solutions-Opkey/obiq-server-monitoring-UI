@@ -6,9 +6,9 @@
         
     </div>
 
-    <div class="feature-body feature-body-height flex-box-column px-app">
+    <div class="feature-body feature-body-height flex-box-column">
 
-        <div class="app-filter app-filter-content">
+        <div class="app-filter app-filter-content px-4">
 
             <div class="left">
                 <h3 class="mb-0 text-ellipsis">{{this.selectedView.viewName}}</h3>
@@ -206,7 +206,7 @@
 
         <div class="app-body flex-box-column scrollable">
 
-            <div class="tab_panel position-relative" role="tabpanel" aria-label="Tab Panel">
+            <div class="tab_panel position-relative px-4" role="tabpanel" aria-label="Tab Panel">
 
                 <ul class="nav-tabs mb-0" role="tablist">
                     @for (tab of availableTabs; track $index) {
@@ -259,7 +259,7 @@
                 </div>
             </div>
     
-            <div class="tab_view_content h-100 scrollable">
+            <div class="tab_view_content h-100 scrollable px-4 pb-2">
     
                 @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
                     <div class="overview">
