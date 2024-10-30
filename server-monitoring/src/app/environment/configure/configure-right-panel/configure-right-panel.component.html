@@ -1,7 +1,7 @@
 
 <div class="feature-right-panel">
 
-    <div class="feature-rp-header border-bottom">
+    <div class="feature-rp-header mb-0 border-bottom">
 
         <div class="rp-header-left">
             <h3 class="rp-header-title">Access Type</h3>
@@ -16,81 +16,94 @@
 
     </div>
 
-    <div class="feature-rp-body pd-rp">
+    <div class="feature-rp-body has-footer pd-rp pt-3">
         <div  class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
-            <div class="col-sm-12">
-                <i class="oci oci-public-off pe-2 public-icon"></i>
+            <div class="col-sm-12 px-0">
+                <i class="oci oci-public-off public-icon"></i>
                 Private
             </div>
         </div>
 
         <div  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
-            <div class="col-sm-12 d-flex-between">
+            <div class="col-sm-12 px-0 d-flex-between">
                 <span>
-                    <i class="oci oci-public pe-2 public-icon"></i>
+                    <i class="oci oci-public public-icon"></i>
                     Public
                 </span>
 
-                <div class="dropdown">
+                <div class="dropdown dropdown-text-color">
                     <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
                         data-bs-toggle="dropdown">
                         Can View
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('view', $event)">View</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('edit', $event)">Edit</a></li>
+                        <li>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('view', $event)">
+                                <i class="oci oci-eye pe-2"></i>Can View
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('edit', $event)">
+                                <i class="oci oci-edit pe-2"></i>Can Edit
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
             </div>
         </div>
 
-        <div class="row mx-0 mb-3" (click)="selectAccessType('SHARED')">
-            <div class="col-sm-12 private-div">
-                <i class="oci oci-share pe-2 public-icon"></i>
+        <div class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
+            <div class="col-sm-12 px-0 ">
+                <i class="oci oci-share public-icon"></i>
                 Shared
             </div>
         </div>
         <div *ngIf="showSharedInput" class="row mx-0 mt-3">
-            <div class="col-sm-9 d-flex flex-wrap added-users-container">
-            
-              <div *ngFor="let user of addedUsers" class="user-chip">
-                <img *ngIf="user.UserImage" [src]="user.UserImage" alt="{{ user.Name }}" class="user-image"/>
-                <span>{{ user.Name }}</span>
-                <button type="button" class="remove-user" (click)="removeUser(user)">
-                  &times;
+            <div class="col-sm-10 px-0 d-flex flex-wrap" [ngClass]="{'added-users-container':addedUsers?.length}">
+        
+                <div *ngFor="let user of addedUsers" class="user-chip">
+                    <img *ngIf="user.UserImage" [src]="user.UserImage" alt="{{ user.Name }}" class="user-image" />
+                    <span>{{ user.Name }}</span>
+                    <button type="button" class="remove-user" (click)="removeUser(user)">
+                        &times;
+                    </button>
+                </div>
+        
+        
+                <input type="text" [(ngModel)]="searchQuery" class="form-control w-100 user-input"
+                    placeholder="Invite by name or email" (input)="filterUsers(searchQuery)">
+            </div>
+        
+            <div class="col-sm-2 pe-0 text-end">
+                <button type="button" class="btn btn-layout btn-bg-grey" (click)="addSelectedUser(searchQuery)">
+                    ADD
                 </button>
-              </div>
-          
-          
-              <input type="text" [(ngModel)]="searchQuery" class="form-control w-100 user-input" 
-                     placeholder="Invite by name or email" (input)="filterUsers(searchQuery)">
             </div>
-          
-            <div class="col-sm-3">
-              <button type="button" class="btn btn-layout btn-bg-theme" (click)="addSelectedUser(searchQuery)">
-                ADD
-              </button>
-            </div>
-          </div>
-      
-          <!-- Kendo Grid -->
-          <kendo-grid *ngIf="addedUsers.length > 0" [data]="addedUsers">
-            <kendo-grid-column field="UserName" title="User Name"></kendo-grid-column>
-            <kendo-grid-column field="email_ID" title="Email"></kendo-grid-column>
-            <kendo-grid-column field="permission" title="Permission">
-                <ng-template kendoGridCellTemplate let-dataItem>
-                  <kendo-dropdownlist 
-                    [data]="['Can View', 'Can Edit']" 
-                    [value]="dataItem.permission" 
-                    (valueChange)="updateUserPermission(dataItem, $event)">
-                  </kendo-dropdownlist>
-                </ng-template>
-              </kendo-grid-column>
-          </kendo-grid>
-    <button type="button" class="btn btn-rp"
-          aria-label="Close" (click)="InviteUsers()">
-         Invite
-    </button>
+        </div>
+        
+        <!-- Kendo Grid -->
+        <kendo-grid *ngIf="addedUsers.length > 0" [data]="addedUsers">
+        <kendo-grid-column field="UserName" title="User Name"></kendo-grid-column>
+        <kendo-grid-column field="email_ID" title="Email"></kendo-grid-column>
+        <kendo-grid-column field="permission" title="Permission">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <kendo-dropdownlist 
+                [data]="['Can View', 'Can Edit']" 
+                [value]="dataItem.permission" 
+                (valueChange)="updateUserPermission(dataItem, $event)">
+                </kendo-dropdownlist>
+            </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+        
 
+    </div>
+
+    <div class="feature-rp-footer">
+        <button type="button" class="btn btn-layout btn-bg-theme"
+            aria-label="Close" (click)="InviteUsers()">
+            Invite
+        </button>
+    </div>
 </div>

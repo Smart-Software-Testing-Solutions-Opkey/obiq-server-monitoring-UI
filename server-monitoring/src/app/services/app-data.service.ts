@@ -10,6 +10,7 @@ export class AppDataService {
   is_env_configure:boolean = false;
   showSelectedViewEnvironment: boolean = false;
   UserDto :any = null;
+  viewsData = []
   widgets_data:any = [
     {
         "ID": "105265c0-e34f-4c2e-b8f1-adde9687fd9d",

@@ -54,11 +54,14 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         }
       ],
       chart: {
-        height:111,
+        height:90,
         width:this.width,
         type: "area",
         toolbar:{
           show:false
+        },
+        sparkline: {
+          enabled: true
         },
         zoom: {
           enabled: false
