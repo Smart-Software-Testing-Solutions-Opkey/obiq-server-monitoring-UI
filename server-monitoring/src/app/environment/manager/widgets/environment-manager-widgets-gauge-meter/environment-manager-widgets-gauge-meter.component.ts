@@ -51,7 +51,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     this.chartOptions = {
       series: [this.data], // Adjust this value to set the percentage
       chart: {
-        height: 200,
+        height: 150,
         type: "radialBar",
         toolbar: {
           show: false
@@ -113,7 +113,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
         lineCap: "butt", // Makes the ends of the gauge round
         colors: ["#00E396"]
       },
-      labels: ["Progress"]
+      labels: [""]
     };
   
   }
