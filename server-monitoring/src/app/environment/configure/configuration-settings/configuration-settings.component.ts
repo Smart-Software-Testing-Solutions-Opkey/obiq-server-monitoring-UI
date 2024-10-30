@@ -41,6 +41,7 @@ export class ConfigurationSettingsComponent {
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
     selected_user_behaviour_component: [],
+    selected_test_automation_analysis:[],
     selected_view: null,
     visitedTabs:[]
   }
@@ -302,6 +303,10 @@ export class ConfigurationSettingsComponent {
   display_SystemDiagnosticsData: boolean = false;
   dispaly_Instances: boolean = false;
 
+
+  displayUserError: boolean = false;
+  displayTestError: boolean = false;
+
   ValidationCheck() {
 
     this.reset_error();
@@ -351,6 +356,22 @@ export class ConfigurationSettingsComponent {
       }
 
     }
+    if(this.obj_configuration_setting.tab == "User Behaviour Analytics") { 
+
+      if (this.obj_configuration_setting.selected_user_behaviour_component.length == 0) {
+        this.displayUserError = true;
+        return false;
+      }
+
+    }
+    if(this.obj_configuration_setting.tab == "Test Automation Analysis") { 
+
+      if (this.obj_configuration_setting.selected_test_automation_analysis.length == 0) {
+        this.displayTestError = true;
+        return false;
+      }
+
+    }
 
     return true;
 
@@ -363,6 +384,7 @@ export class ConfigurationSettingsComponent {
     this.display_ErpApplication = false;
     this.display_SystemDiagnosticsData = false;
     this.dispaly_Instances = false;
+    this.displayUserError = false
   }
 
   //-------------------------------------------------------

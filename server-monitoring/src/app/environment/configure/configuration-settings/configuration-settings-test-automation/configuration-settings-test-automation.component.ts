@@ -25,9 +25,13 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
   obj_configuration_setting:any;
 
   datasource_agents: Array<any> = [];
+  obj_error = {
+    displayTestError: false,
+  }
 
-  @Input('child_data') set child_data({ obj_configuration_setting }) {
+  @Input('child_data') set child_data({ obj_configuration_setting,displayTestError }) {
     this.obj_configuration_setting = obj_configuration_setting;
+    this.obj_error.displayTestError = displayTestError
     console.log("in Test Automation", obj_configuration_setting);
   }
 

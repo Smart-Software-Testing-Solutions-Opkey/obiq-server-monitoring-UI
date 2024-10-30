@@ -1,3 +1,7 @@
+<h6 class="mb-3 font-bold">
+    Choose Instances 
+    <span *ngIf="obj_error.displayTestError" class="form-error">Test agent selection is required.</span>
+</h6>
 <kendo-grid 
     [data]="datasource_agents" 
     [selectable]="true" 

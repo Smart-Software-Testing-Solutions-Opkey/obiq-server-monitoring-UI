@@ -20,8 +20,12 @@ export class ConfigurationSettingsUserBehaviourComponent {
  }
  obj_configuration_setting:any;
  selected_System_User_behaviour: any[] = [];
-  @Input('child_data') set child_data({ obj_configuration_setting }) {
+ obj_error = {
+  displayUserError: false,
+}
+  @Input('child_data') set child_data({ obj_configuration_setting,displayUserError }) {
     this.obj_configuration_setting = obj_configuration_setting;
+    this.obj_error.displayUserError = displayUserError
     console.log("In User Behaviour", obj_configuration_setting);
   }
   agent_lists = [

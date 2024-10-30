@@ -76,10 +76,10 @@
                 <app-configuration-settings-system-diagnostics [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-system-diagnostics>
               </div>
               <div *ngIf="obj_configuration_setting.tab=='Test Automation Analysis'">
-                <app-configuration-settings-test-automation [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-test-automation >
+                <app-configuration-settings-test-automation [child_data]="{obj_configuration_setting: obj_configuration_setting,displayTestError:displayTestError}"></app-configuration-settings-test-automation >
               </div>
               <div *ngIf="obj_configuration_setting.tab=='User Behaviour Analytics'">
-                <app-configuration-settings-user-behaviour [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-user-behaviour>
+                <app-configuration-settings-user-behaviour [child_data]="{obj_configuration_setting: obj_configuration_setting,displayUserError:displayUserError}"></app-configuration-settings-user-behaviour>
               </div>
 
               <div *ngIf="obj_configuration_setting.tab=='view_summary'">
