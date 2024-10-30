@@ -19,18 +19,23 @@
     flex-wrap: wrap;
     gap: 5px;
     padding: 5px !important;
-    background-color: #f7f9fc;
-    border: 1px solid #dfe1e6;
-    border-radius: 5px;
+    // background-color: #f7f9fc;
+    // border: 1px solid #dfe1e6;
+    background: #fff;
+    border: 0.25px solid #5DD4E4;
+    border-radius: 10px;
+
   }
   
   .user-chip {
     display: flex;
     align-items: center;
     padding: 5px 10px;
-    background-color: #e6f7ff;
-    border: 1px solid #91d5ff;
+    // background-color: #e6f7ff;
+    background-color: #f6feff;;
+    // border: 1px solid #91d5ff;
     border-radius: 20px;
+    color: #101828;
     margin: 3px;
   }
   
@@ -44,9 +49,12 @@
   .remove-user {
     background: none;
     border: none;
-    color: #ff4d4f;
+    // color: #ff4d4f;
+    color: #101828;
     margin-left: 5px;
-    font-size: 18px;
+    // font-size: 18px;
+    font-size: 1.5rem;
+    line-height: 0.75;
     cursor: pointer;
   }
   

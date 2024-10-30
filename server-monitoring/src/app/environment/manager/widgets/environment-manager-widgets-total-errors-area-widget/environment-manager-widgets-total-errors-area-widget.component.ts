@@ -54,7 +54,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         }
       ],
       chart: {
-        height:90,
+        height:this.height,
         width:this.width,
         type: "area",
         toolbar:{
