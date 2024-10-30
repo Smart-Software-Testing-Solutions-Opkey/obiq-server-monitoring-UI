@@ -28,5 +28,12 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
     ram:'80.89',
     health:'good',
   }
-]
+];
+ 
+ progressBarArray: Array<{heading: string}> = [
+  {heading: "User Guides Per Process"},
+  {heading: "Top 5 Fastest Journeys"},
+  {heading: "5 Lowest Journeys"},
+  {heading: "5 Most Common Journeys"},
+ ]
 }
