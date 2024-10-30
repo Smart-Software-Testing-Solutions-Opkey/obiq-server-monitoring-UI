@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 
 import {
   ChartComponent,
@@ -44,36 +44,18 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   constructor() {
     
   }
-
+  dataSet = []
   bindChart(){
     this.chartOptions = {
       series: [
         {
           name: "",
-          data: [
-            {
-              x: 1996,
-              y: 500
-            },
-            {
-              x: 1997,
-              y: 300
-            },
-            {
-              x: 1998,
-              y: 400
-            },
-            {
-              x: 1999,
-              y: 200
-            },
-           
-          ]
+          data: this.dataSet
         }
       ],
       chart: {
         height:111,
-        width:180,
+        width:this.width,
         type: "area",
         toolbar:{
           show:false
@@ -156,17 +138,112 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   @Input('child_data') set child_data({ typeEnum }) {
     debugger
    this.typeEnum = typeEnum
-   if (typeEnum == 'Error') {
-    this.chartColor = '#B42318'
-  }
-  else if(typeEnum == 'Success'){
-    this.chartColor = '#268144'
+  
+ 
 
   }
-  else if(typeEnum == 'Warning'){
-    this.chartColor = '#FFBF00'
-  }
-   this.bindChart()
 
+  bindChartData(type){
+    if(type == 'Error'){
+      this.dataSet =  [
+        {
+          x: 1996,
+          y: 500
+        },
+        {
+          x: 1997,
+          y: 300
+        },
+        {
+          x: 1998,
+          y: 400
+        },
+        {
+          x: 1999,
+          y: 200
+        },
+       
+      ]
+    }
+    else if(type == 'Success'){
+      this.dataSet =  [
+        {
+          x: 1996,
+          y: 200
+        },
+        {
+          x: 1997,
+          y: 300
+        },
+        {
+          x: 1998,
+          y: 100
+        },
+        {
+          x: 1999,
+          y: 500
+        },
+       
+      ]
+    }
+    else if(type == 'Warning'){
+      this.dataSet =  [
+        {
+          x: 1996,
+          y: 500
+        },
+        {
+          x: 1997,
+          y: 400
+        },
+        {
+          x: 1998,
+          y: 400
+        },
+        {
+          x: 1999,
+          y: 500
+        },
+       
+      ]
+    }
+  }
+  @ViewChild('resizableDiv', { static: true }) resizableDiv: ElementRef<any>;
+  ngAfterViewInit(): void {
+    if (this.typeEnum == 'Error') {
+      this.chartColor = '#B42318'
+      this.bindChartData('Error')
+    }
+    else if(this.typeEnum == 'Success'){
+      this.chartColor = '#268144'
+      this.bindChartData('Success')
+  
+    }
+    else if(this.typeEnum == 'Warning'){
+      this.chartColor = '#FFBF00'
+      this.bindChartData('Warning')
+  
+    }
+    this.checkStyling();
+  }
+  width = 0
+  height = 0
+  checkStyling() {
+    debugger
+    let ele = this.resizableDiv.nativeElement;
+    let width = ele.getBoundingClientRect().width;
+    if (width) {
+      this.width = width;
+      this.height = ele.getBoundingClientRect().height;
+   
+      this.bindChart()
+    
+    
+    }
+    if (!this.width) {
+      setTimeout(() => {
+        this.checkStyling();
+      }, 10);
+    }
   }
 }
