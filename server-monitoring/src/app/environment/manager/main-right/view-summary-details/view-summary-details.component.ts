@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-summary-details',
