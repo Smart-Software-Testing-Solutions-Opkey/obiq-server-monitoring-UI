@@ -1,8 +1,43 @@
-<section class="logs-tab-info">
-    <div class="left-section">
-        <a href="javascript: void(0)" (click)="selectedTab = 'summarizedLog' ">Summarized logs</a>
-        <a href="javascript: void(0)" (click)="selectedTab = 'fullLog' ">Full logs</a>
+<section class="logs-tab-info-section menu_body scrollable">
+
+    <div class="menu_navbar_nav left-section">
+        <ul class="nav-pill">
+            <li class="nav_items" (click)="selectedTab = 'summarizedLog' ">
+                <a href="javascript:void(0)" class="nav_links active">
+                    <span class="d-flex align-items-center justify-content-between w-100">
+                        <span class="line_h_normal" style="width: calc(100% - 2rem);">
+                            <span class="sp_nav_text text-ellipsis" container="body">
+                                Summarized logs
+                            </span>
+                        </span>
+                        
+                        <i class="oci oci-chevron-right font_14px mt-1"></i>
+                    </span>
+                </a>
+
+                <!-- <a class="nav_link active" href="javascript: void(0)"
+                    (click)="selectedTab = 'summarizedLog' ">Summarized logs</a> -->
+            </li>
+
+            <li class="nav_items" (click)="selectedTab = 'fullLog' ">
+
+                <a href="javascript:void(0)" class="nav_links ">
+                    <span class="d-flex align-items-center justify-content-between w-100">
+                        <span class="line_h_normal" style="width: calc(100% - 2rem);">
+                            <span class="sp_nav_text text-ellipsis" container="body">
+                                Summarized logs
+                            </span>
+                        </span>
+                        
+                        <i class="oci oci-chevron-right font_14px mt-1"></i>
+                    </span>
+                </a>
+
+                <!-- <a href="javascript: void(0)" (click)="selectedTab = 'fullLog' ">Full logs</a> -->
+            </li>
+        </ul>
     </div>
+
     <div class="right-section">
         {{ selectedData[selectedTab] }}
     </div>

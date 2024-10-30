@@ -1,15 +1,44 @@
-.logs-tab-info {
+.logs-tab-info-section {
     width: 100%;
     height: 100%;
     display: flex;
 
-    .left-section {
-        width: 12rem;
-        height: 100%;
+    .menu_navbar_nav.left-section {
+        width: 19rem;
+        height: calc(100vh - 16.6rem);
+        margin-right: 0.5rem;
+        border-right: 1px solid #ddd;
+
+        .nav-pill {
+            padding-left: 0 !important;
+            list-style: none;
+
+            .nav_links {
+                background: #fff;
+                padding: .75rem .875rem .75rem 1rem;
+                font-size: 1rem;
+                color: #667085;
+                text-decoration: none !important;
+                display: block;
+                border-right: 2px solid transparent;
+
+                &:hover {
+                    background-color: rgba(17, 97, 115, .08);
+                }
+            }
+
+            .nav_links.active {
+                background-color: rgba(17, 97, 115, .08);
+                border-right: 2px solid #116173;
+            }
+
+        }
+
     }
 
     .right-section {
-        width: calc(100% - 18rem);
+        width: calc(100% - 19rem);
         height: 100%;
+        padding-left: 1rem;
     }
 }
