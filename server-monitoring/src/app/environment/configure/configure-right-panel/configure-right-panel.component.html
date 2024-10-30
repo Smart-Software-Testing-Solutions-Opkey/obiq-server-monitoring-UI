@@ -60,22 +60,22 @@
             </div>
         </div>
         <div *ngIf="showSharedInput" class="row mx-0 mt-3">
-            <div class="col-sm-10 d-flex flex-wrap added-users-container">
-            
+            <div class="col-sm-10 px-0 d-flex flex-wrap" [ngClass]="{'added-users-container':addedUsers?.length}">
+        
                 <div *ngFor="let user of addedUsers" class="user-chip">
-                <img *ngIf="user.UserImage" [src]="user.UserImage" alt="{{ user.Name }}" class="user-image"/>
-                <span>{{ user.Name }}</span>
-                <button type="button" class="remove-user" (click)="removeUser(user)">
-                    &times;
-                </button>
+                    <img *ngIf="user.UserImage" [src]="user.UserImage" alt="{{ user.Name }}" class="user-image" />
+                    <span>{{ user.Name }}</span>
+                    <button type="button" class="remove-user" (click)="removeUser(user)">
+                        &times;
+                    </button>
                 </div>
-            
-            
-                <input type="text" [(ngModel)]="searchQuery" class="form-control w-100 user-input" 
-                        placeholder="Invite by name or email" (input)="filterUsers(searchQuery)">
+        
+        
+                <input type="text" [(ngModel)]="searchQuery" class="form-control w-100 user-input"
+                    placeholder="Invite by name or email" (input)="filterUsers(searchQuery)">
             </div>
-            
-            <div class="col-sm-2">
+        
+            <div class="col-sm-2 pe-0 text-end">
                 <button type="button" class="btn btn-layout btn-bg-grey" (click)="addSelectedUser(searchQuery)">
                     ADD
                 </button>
