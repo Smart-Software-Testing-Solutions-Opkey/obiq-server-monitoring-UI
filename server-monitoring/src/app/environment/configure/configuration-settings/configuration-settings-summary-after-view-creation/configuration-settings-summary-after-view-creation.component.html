@@ -7,12 +7,12 @@
         <div class="dropdown access-type-layout">
             <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
               <span>
-                {{ selectedAccessType }}
+                {{ selectedAccessType | titlecase }}
               </span>
             </button>
             <ul class="dropdown-menu w-100">
                 <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
-                    {{ option }}
+                    {{ option | titlecase}}
                 </li>
             </ul>
         </div>
