@@ -26,7 +26,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     display_ErpApplication: false,
     display_SystemDiagnosticsData: false
   }
-  
+
   @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData }) {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.dispaly_viewName = dispaly_viewName;
@@ -62,8 +62,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   get_all_datasource() {
 
     window.loadingStart("#div-datasource-slection", "Please wait");
-    //let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceGroupList";
     let form_data = {};
 
     this.app_service.make_get_server_call(form_url, form_data)
@@ -78,7 +77,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
               this.get_AllApplications();
             }
             if (widjet.name === "User Behaviour Analytics") {
-             
+
             }
             if (widjet.name === "Test Automation Analysis") {
 
@@ -93,7 +92,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           this.data_Source_widjets.forEach(item => {
             item['isChecked'] = false;
           })
-          
+
         },
         error: (error: any) => {
           window.loadingStop("#div-datasource-slection");
@@ -124,8 +123,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
       "VeevaVault",
       "Coupa",
       "OracleIntegrationCloud"
-  ];
-  return
+    ];
+    return
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications";
     // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
@@ -151,9 +150,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   datasource_system_diagnostics = [];
 
   get_datasource_system_diagnostics(widjet_id) {
-    //let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
-    let form_data = {id:widjet_id};
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceServiceList";
+    let form_data = { id: widjet_id };
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
 
@@ -171,7 +169,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   }
 
 
-  onInputChange(event:any){
+  onInputChange(event: any) {
     console.log(event.target.value);
     this.modal_name = event.target.value;
     this.obj_datasource_widget.viewName = event.target.value;
@@ -183,7 +181,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     debugger;
     this.datasource_item_name = dataItem.name;
     dataItem.isChecked = !dataItem.isChecked;
-    if(dataItem.isChecked) {
+    if (dataItem.isChecked) {
       this.obj_datasource_widget.select_datasource_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item == dataItem);
@@ -191,13 +189,13 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
-    
+
 
   }
 
   select_applicaton(dataItem, event) {
     debugger;
-    if(event.target.checked) {
+    if (event.target.checked) {
       this.obj_datasource_widget.select_applicaton_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_applicaton_item.findIndex(item => item == dataItem);
@@ -205,12 +203,12 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
-    
+
   }
 
   select_systemDiagnostics(dataItem, event) {
     debugger;
-    if(event.target.checked) {
+    if (event.target.checked) {
       this.obj_datasource_widget.select_systemDiagnostics_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_systemDiagnostics_item.findIndex(item => item == dataItem);

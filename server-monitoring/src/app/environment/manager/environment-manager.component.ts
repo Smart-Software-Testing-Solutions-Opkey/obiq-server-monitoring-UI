@@ -14,23 +14,23 @@ export class EnvironmentManagerComponent implements OnInit {
     private route: ActivatedRoute,
     public service_data: AppDataService
   ) { }
- 
+
   ngOnInit(): void {
     // this.check_env_configuration();
   }
 
-  selectedAnalyticsType:any = null
-  changeSelectedAnalytics(val){
+  selectedAnalyticsType: any = null
+  changeSelectedAnalytics(val) {
     debugger
-this.selectedAnalyticsType = val
+    this.selectedAnalyticsType = val
   }
   check_env_configuration() {
     debugger;
     //this.getAllViews()
-    if(!this.service_data.is_env_configure) {
+    if (!this.service_data.is_env_configure) {
       this.router.navigate(['environment/configure']);
     } else {
-      
+
     }
   }
   // getAllViews(){
@@ -41,18 +41,18 @@ this.selectedAnalyticsType = val
   //   else{
   //     this.router.navigate(['environment/configure']);
   //   }
-  
+
   // }
   // getAllVIews(){
   //   debugger;
   //   window.loadingStart("#navigator-left", "Please wait");
-  //   let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+  //   let ajax_url =   environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
   //   this.app_service.make_post_server_call(ajax_url, {"userId":this.dataService.UserDto.UserDTO.U_ID,"projectId":this.dataService.UserDto.ProjectDTO.P_ID})
   //   .subscribe({
   //     next: (result: any) => {
-       
-    
-     
+
+
+
   //     },
   //     error: (error: any) => {
   //       window.loadingStop("#navigator-left");
@@ -63,15 +63,15 @@ this.selectedAnalyticsType = val
   //     }
   //   });
   // }
-  selectedView:any = null
-  viewChanged(val){
+  selectedView: any = null
+  viewChanged(val) {
     this.selectedView = val
   }
-  objSettings:any = {
-    isOpen:false,
-    selectedViewSettings:{}
+  objSettings: any = {
+    isOpen: false,
+    selectedViewSettings: {}
   }
-  settingsSelected(val){
+  settingsSelected(val) {
     debugger
     this.objSettings = val
   }
@@ -81,12 +81,12 @@ this.selectedAnalyticsType = val
     title: "Add View",
     selected_datasource: [],
     selected_erp_analytics: [],
-    selected_view:null
+    selected_view: null
   }
-  leftPanelDataUpdate(val){
+  leftPanelDataUpdate(val) {
     debugger
     this.objSettings = val.settingsPanel
-    this.selectedAnalyticsType = val.analyticsTypes 
+    this.selectedAnalyticsType = val.analyticsTypes
     this.selectedView = val.viewSelected
   }
 
