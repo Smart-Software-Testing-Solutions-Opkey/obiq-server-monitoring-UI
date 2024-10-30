@@ -159,9 +159,13 @@ export class NavigatorLeftComponent implements OnInit {
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
-        this.totalViews = result
+        if(result == null ||result?.length == 0){
+          this.router.navigate(['environment/configure']);
+        }
         console.log(result,"get all  views resultS")
-        if (this.totalViews && this.totalViews.length > 0) {
+        if (result?.length > 0) {
+          this.service_data.viewsData = result
+          this.totalViews = result
           this.selectedView = this.totalViews[0]; 
           this.selectedViewSettings = this.selectedView;
           this.dataChanged.viewSelected = this.selectedView
