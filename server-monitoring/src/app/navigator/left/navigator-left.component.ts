@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit ,output} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
@@ -19,59 +19,59 @@ export class NavigatorLeftComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service_data: AppDataService,
-    public app_service:AppService,
-    public dataService:AppDataService,
+    public app_service: AppService,
+    public dataService: AppDataService,
     private cdr: ChangeDetectorRef
 
 
   ) { }
-    
+
   // analyticsValueChange = output<any>()
   // onChangeView = output<any>()
   // onSettingsSelected = output<any>()
   onLeftPanelDataChange = output<any>()
 
   dataChanged = {
-    "viewSelected":{},
-    "settingsPanel":{isOpen:false,selectedViewSettings:{}},
-    "analyticsTypes":{},
-    "selectedTab":{}
+    "viewSelected": {},
+    "settingsPanel": { isOpen: false, selectedViewSettings: {} },
+    "analyticsTypes": {},
+    "selectedTab": {}
   }
 
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-       if(data == "viewCreated"){
-        this.getAllVIews();
-        this.cdr.detectChanges();
-       }
+        if (data == "viewCreated") {
+          this.getAllVIews();
+          this.cdr.detectChanges();
+        }
       }
     });
     this.getAllVIews();
   }
-  selectedView:any = {}
+  selectedView: any = {}
 
 
-  analyticsTypes :any;
+  analyticsTypes: any;
 
-  selectedAnalyticsType:any = {}
+  selectedAnalyticsType: any = {}
 
 
-  change_view(selected_item:any) {
-    
+  change_view(selected_item: any) {
+
     console.log("selected_item==", selected_item);
   }
-  changeAnalyticsSelection(item){
-  
-   
+  changeAnalyticsSelection(item) {
+
+
     // this.analyticsTypes.forEach((ele)=>{
     //   if(ele.isSelected){
     //     ele.isSelected = false
     //   }
     // })
-   
+
     //   item.isSelected = true
-      this.selectedAnalyticsType = item
+    this.selectedAnalyticsType = item
     this.dataChanged.analyticsTypes = this.selectedAnalyticsType
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
@@ -86,54 +86,52 @@ export class NavigatorLeftComponent implements OnInit {
   totalViews = [];
   set_Selected_View_DataSource(selectedVIew) {
     window.loadingStart("#navigator-left", "Please wait");
-    //let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
-   
-   let form_data = { viewId: selectedVIew.viewId };
-   
-   this.app_service.make_post_server_call(form_url, form_data)
-    .subscribe({
-      next: (result: any) => {
-        window.loadingStop("#navigator-left");
-       
-      result.forEach((item,index)=>{
-        item.display = index === 0
-      })
-      this.analyticsTypes = result;
-      // this.selectedAnalyticsType = result[0];
-      // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
-      // this.onLeftPanelDataChange.emit(this.dataChanged)
-      
-     
-      },
-      error: (error: any) => {
-        window.loadingStop("#navigator-left");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+
+    let form_data = { viewId: selectedVIew.viewId };
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+
+          result.forEach((item, index) => {
+            item.display = index === 0
+          })
+          this.analyticsTypes = result;
+          // this.selectedAnalyticsType = result[0];
+          // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+          // this.onLeftPanelDataChange.emit(this.dataChanged)
+
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
   }
 
   set_Selected_VIew(selectedVIew) {
-  
-    window.loadingStart("#navigator-left", "Please wait");
-    //let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
 
-    let form_data = { 
-      viewId:selectedVIew.viewId,
-      userId:this.dataService.UserDto.UserDTO.U_ID,
-      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+    window.loadingStart("#navigator-left", "Please wait");
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
+
+    let form_data = {
+      viewId: selectedVIew.viewId,
+      userId: this.dataService.UserDto.UserDTO.U_ID,
+      projectId: this.dataService.UserDto.ProjectDTO.P_ID
     };
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         this.set_Selected_View_DataSource(result)
-       
-     
+
+
       },
       error: (error: any) => {
         window.loadingStop("#navigator-left");
@@ -146,33 +144,33 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   getAllVIews() {
-    
+
     window.loadingStart("#navigator-left", "Please wait");
-    let form_url = environment.BASE_OPKEY_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
-    //let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
 
     let form_data = {
-      userId:this.dataService.UserDto.UserDTO.U_ID,
-      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+      userId: this.dataService.UserDto.UserDTO.U_ID,
+      projectId: this.dataService.UserDto.ProjectDTO.P_ID
     }
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
-        if(result == null ||result?.length == 0){
+        if (result == null || result?.length == 0) {
           this.router.navigate(['environment/configure']);
         }
-        console.log(result,"get all  views resultS")
+        console.log(result, "get all  views resultS")
         if (result?.length > 0) {
           this.service_data.viewsData = result
           this.totalViews = result
-          this.selectedView = this.totalViews[0]; 
+          this.selectedView = this.totalViews[0];
           this.selectedViewSettings = this.selectedView;
           this.dataChanged.viewSelected = this.selectedView
           this.set_Selected_VIew(this.selectedView)
         }
-    
-     
+
+
       },
       error: (error: any) => {
         window.loadingStop("#navigator-left");
@@ -184,7 +182,7 @@ export class NavigatorLeftComponent implements OnInit {
     });
   }
   add_environment() {
-    const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
+    const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'full',
@@ -196,29 +194,29 @@ export class NavigatorLeftComponent implements OnInit {
       if (response == 'close modal') {
         return;
       }
-      else if(response == 'create_environment')
-      this.select_service_data();
+      else if (response == 'create_environment')
+        this.select_service_data();
     });
   }
 
   select_service_data() {
- 
+
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
   }
 
-  viewChanged(val){
-   
+  viewChanged(val) {
+
     this.selectedView = val
     this.dataChanged.viewSelected = this.selectedView
     this.set_Selected_VIew(this.selectedView)
 
   }
 
-  changeToView(){
+  changeToView() {
     this.selectedAnalyticsType = {}
-    this.analyticsTypes.forEach((ele)=>{
-      if(ele.isSelected){
+    this.analyticsTypes.forEach((ele) => {
+      if (ele.isSelected) {
         ele.isSelected = false
       }
     })
@@ -227,25 +225,25 @@ export class NavigatorLeftComponent implements OnInit {
 
   }
 
-  isopenSettings:boolean = false
+  isopenSettings: boolean = false
 
-  openSettings(){
-  
+  openSettings() {
+
     this.isopenSettings = true
-    this.dataChanged.settingsPanel = {isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings}
+    this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
-  backToMenu(){
+  backToMenu() {
     this.isopenSettings = false
-    this.dataChanged.settingsPanel = {isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings}
+    this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
 
-  selectedViewSettings:any =   {}
+  selectedViewSettings: any = {}
 
-  settingsViewSelect(val){
+  settingsViewSelect(val) {
     debugger;
     // this.selectedViewSettings = val
     this.dataChanged.settingsPanel = val
@@ -253,41 +251,40 @@ export class NavigatorLeftComponent implements OnInit {
     // this.onSettingsSelected.emit(val)
 
   }
-  Rename_Selected_View(view){
+  Rename_Selected_View(view) {
 
   }
-  Delete_Selected_View(view){
-   
+  Delete_Selected_View(view) {
+
     window.loadingStart("#navigator-left", "Please wait");
-    //let form_url = environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
 
     let form_data = {
-      viewId:view.viewId,
-      projectId:this.dataService.UserDto.ProjectDTO.P_ID
+      viewId: view.viewId,
+      projectId: this.dataService.UserDto.ProjectDTO.P_ID
     }
 
     this.app_service.make_post_server_call(form_url, form_data)
-    .subscribe({
-      next: (result: any) => {
-        window.loadingStop("#navigator-left");
-        this.getAllVIews();
-     
-      },
-      error: (error: any) => {
-        window.loadingStop("#navigator-left");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+          this.getAllVIews();
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
   }
 
-  selectionChanged(val){
-debugger
-this.dataChanged.analyticsTypes = val
-this.onLeftPanelDataChange.emit(this.dataChanged)
+  selectionChanged(val) {
+    debugger
+    this.dataChanged.analyticsTypes = val
+    this.onLeftPanelDataChange.emit(this.dataChanged)
   }
 
 }

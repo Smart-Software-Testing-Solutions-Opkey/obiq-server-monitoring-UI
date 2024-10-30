@@ -12,7 +12,7 @@ import { ViewJourneyErrorComponent } from './view-journey-error/view-journey-err
 })
 export class SelectedJourneyInnerComponent {
 
-  
+
   constructor(
     public app_service: AppService,
     private modalService: NgbModal,
@@ -28,7 +28,6 @@ export class SelectedJourneyInnerComponent {
   imgUrl_link = "";
 
   imageUrl = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
-  //imageUrl = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage";
   pageDetails: any;
 
   @Input('child_data') set child_data({ pageDetails }) {
@@ -61,8 +60,8 @@ export class SelectedJourneyInnerComponent {
   }
   view_first_itemImg(event) {
     if (event.headers[0].steps.length != 0) {
-      if(event['headers'][0]['steps'][0].stepImageUrl){
-        this.imgUrl_link  = event['headers'][0]['steps'][0].stepImageUrl;
+      if (event['headers'][0]['steps'][0].stepImageUrl) {
+        this.imgUrl_link = event['headers'][0]['steps'][0].stepImageUrl;
         return;
       }
       this.imgUrl_link = this.imageUrl + "/" + event['headers'][0]['steps'][0].id;
@@ -74,16 +73,15 @@ export class SelectedJourneyInnerComponent {
   select_step(item) {
 
     let id = item.id
-    if(item.stepImageUrl){
+    if (item.stepImageUrl) {
       this.imgUrl_link = item.stepImageUrl;
-    }else{
+    } else {
       this.imgUrl_link = this.imageUrl + "/" + item.id;
     }
 
-   
+
 
     let form_url = environment.BASE_OPKEY_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
-    //let form_url =  `https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ImageController/downloadStepImage/${id}`;
 
     //window.loadingStart("form_url", "Please wait");
     this.app_service.make_post_server_call(form_url, {}).subscribe({
@@ -126,7 +124,7 @@ export class SelectedJourneyInnerComponent {
       return
     }
 
-    const modalRef = this.modalService.open( ViewJourneyErrorComponent,{
+    const modalRef = this.modalService.open(ViewJourneyErrorComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'xl',
@@ -146,7 +144,7 @@ export class SelectedJourneyInnerComponent {
 
   view_screenshot() {
     debugger;
-    const modalRef = this.modalService.open( ViewJourneySnapshotComponent,{
+    const modalRef = this.modalService.open(ViewJourneySnapshotComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'full-lg',

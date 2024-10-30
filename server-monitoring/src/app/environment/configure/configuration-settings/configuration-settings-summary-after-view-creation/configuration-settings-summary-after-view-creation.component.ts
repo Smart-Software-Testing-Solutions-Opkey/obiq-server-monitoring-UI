@@ -170,7 +170,6 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     this.users = result.Users;
     return;
 
-    //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
     let form_url = environment.BASE_OBIQ_SERVER_URL + "/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };

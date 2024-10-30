@@ -14,7 +14,7 @@ export class SelectedJourneyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     this.getUserJourneyDtoByUserIdSessionId()
 
   }
@@ -40,7 +40,6 @@ export class SelectedJourneyComponent implements OnInit {
   getUserJourneyDtoByUserIdSessionId() {
 
     let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
-    //let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
     let form_data = {
       "sessionId": this.selected_sessionId
     }
@@ -113,33 +112,33 @@ export class SelectedJourneyComponent implements OnInit {
   }
 
 
-    // Scroll to journey on selected tab on head
-    private activeButton: HTMLElement | null = null;
+  // Scroll to journey on selected tab on head
+  private activeButton: HTMLElement | null = null;
 
-    scrolltoelement(dataItems): void {
-      const elemntId = 'panel_' + dataItems.key;
-      const element = document.getElementById(elemntId);
-      element.scrollIntoView({ behavior: 'smooth' });
-  
-      // Remove highlighted class from all panel-tiles
-      const allPanelTiles = document.querySelectorAll('.panel-tile');
-      allPanelTiles.forEach(panelTile => {
-        panelTile.classList.remove('highlighted');
-      });
-  
-      // Change background color of the panel-tile
-      const panelTile = document.getElementById(elemntId);
-      panelTile.classList.add('highlighted');
-  
-      // Handle highlight effect on the button
-      if (this.activeButton) {
-        this.activeButton.classList.remove('selected');
-      }
-  
-      // Add selected class to the clicked button
-      const button = event.currentTarget as HTMLElement;
-      button.classList.add('selected');
-      this.activeButton = button;
+  scrolltoelement(dataItems): void {
+    const elemntId = 'panel_' + dataItems.key;
+    const element = document.getElementById(elemntId);
+    element.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove highlighted class from all panel-tiles
+    const allPanelTiles = document.querySelectorAll('.panel-tile');
+    allPanelTiles.forEach(panelTile => {
+      panelTile.classList.remove('highlighted');
+    });
+
+    // Change background color of the panel-tile
+    const panelTile = document.getElementById(elemntId);
+    panelTile.classList.add('highlighted');
+
+    // Handle highlight effect on the button
+    if (this.activeButton) {
+      this.activeButton.classList.remove('selected');
     }
+
+    // Add selected class to the clicked button
+    const button = event.currentTarget as HTMLElement;
+    button.classList.add('selected');
+    this.activeButton = button;
+  }
 
 }

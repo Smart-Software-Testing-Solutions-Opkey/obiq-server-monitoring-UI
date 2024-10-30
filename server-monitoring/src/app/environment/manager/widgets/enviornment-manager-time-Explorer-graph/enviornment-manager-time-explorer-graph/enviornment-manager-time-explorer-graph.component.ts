@@ -6,6 +6,7 @@ import {
 } from 'ng-apexcharts';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -26,10 +27,10 @@ export type ChartOptions = {
 })
 export class EnviornmentManagerTimeExplorerGraphComponent {
   constructor(
-    public app_service:AppService,
+    public app_service: AppService,
     public service_data: AppDataService,
 
-  ){
+  ) {
 
   }
   @Input() chartData: any;
@@ -39,34 +40,33 @@ export class EnviornmentManagerTimeExplorerGraphComponent {
     this.getLogsChart()
     // this.createChart();
   }
-  @Input() view:any
+  @Input() view: any
 
-  getLogsChart(){
+  getLogsChart() {
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
-      "timeSpanEnum":"LAST_7_DAYS",
-      "viewId":this.view.viewId,
-      "projectId":this.service_data.UserDto.ProjectDTO.P_ID,
-      "limitBy":20,
-      "offset":0,
-      "widgetType":"ESS_LOG_TIMEGRAPH_WIDGET"
-  })
-    .subscribe({
-      next: (result: any) => {
-      window.loadingStop("#Env_manager_main_right");
-      this.chartData = result    
-        this.createChart();
-      },
-      error: (error: any) => {
-        window.loadingStop("#Env_manager_main_right");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
+      "timeSpanEnum": "LAST_7_DAYS",
+      "viewId": this.view.viewId,
+      "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
+      "limitBy": 20,
+      "offset": 0,
+      "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
+    })
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#Env_manager_main_right");
+          this.chartData = result
+          this.createChart();
+        },
+        error: (error: any) => {
+          window.loadingStop("#Env_manager_main_right");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
   }
   createChart(): void {
     this.chartOptions = {
