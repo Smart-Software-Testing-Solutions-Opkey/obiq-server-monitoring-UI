@@ -36,6 +36,14 @@
 
 /***************************icon start here**************************/
 
+.oci-arrow-up:before {
+  content: "\e91e";
+}
+
+.oci-star:before {
+  content: "\e91f";
+}
+
 .oci-eye:before {
   content: "\e91d";
 }
