@@ -30,7 +30,11 @@
         </h6>
         <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
     </div>
-    <div class="overview-panel">
-    
-    </div>
+
+    @for(progressBarItem of progressBarArray; track $index){
+        <div class="overview-panel">
+            <h6>{{ progressBarItem?.heading }}</h6>
+            <app-environment-manager-widgets-progress-bars></app-environment-manager-widgets-progress-bars>
+        </div>
+    }
 </div>
