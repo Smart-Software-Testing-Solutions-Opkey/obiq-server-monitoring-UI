@@ -24,7 +24,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   Selected_grid_dataSource: any;
   selected_grid_System_Diagnostics: any;
   Show_Project_Access: boolean = false;
-  receivedAccessType:any;
+  receivedAccessType: any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
 
     debugger;
@@ -36,27 +36,27 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
       if (data !== null) {
         debugger;
         this.receivedAccessType = data;
-        console.log(this.receivedAccessType,"recived==========")
+        console.log(this.receivedAccessType, "recived==========")
         this.selectedAccessType = this.receivedAccessType.AccessType
         this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
-        if(this.obj_configuration_setting.AccessType == "SHARED"){
+        if (this.obj_configuration_setting.AccessType == "SHARED") {
           this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
             userId: item.U_ID,
             permmission: item.permission === "EDIT" ? "ALL" : item.permission
           }));
         }
-        else if(this.obj_configuration_setting.AccessType == "PUBLIC"){
-          
+        else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
+
           this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-           if(this.receivedAccessType.AccessPermisions.EDIT == true){
+          if (this.receivedAccessType.AccessPermisions.EDIT == true) {
             this.obj_configuration_setting.selectedUids.permmission = "ALL";
-           }
-           else{
+          }
+          else {
             this.obj_configuration_setting.selectedUids.permmission = "VIEW"
-           }
+          }
         }
-        else{
-            this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        else {
+          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
           this.obj_configuration_setting.selectedUids.permmission = "ALL";
 
         }
@@ -181,7 +181,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     // return;
 
     //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

@@ -57,7 +57,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   get_Tab_Control_List(AnalysticsType) {
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
 
     let form_data = { systemId: AnalysticsType.systemId };
 

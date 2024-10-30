@@ -44,7 +44,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
   }
   getTraceData() {
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
       "essLogId": this.selectedData.dataId,
       "widgetType": "ESS_LOG_METADATA_WIDGET"

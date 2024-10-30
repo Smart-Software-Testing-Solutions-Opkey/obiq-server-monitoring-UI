@@ -98,7 +98,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
   Update_ViewAccess_Type() {
 
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/updateView";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/updateView";
 
     let form_data = this.create_to_update_object() as any;
 
@@ -170,7 +170,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     this.users = result.Users;
     return;
 
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

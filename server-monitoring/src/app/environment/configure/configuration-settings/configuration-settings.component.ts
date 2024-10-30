@@ -246,7 +246,7 @@ export class ConfigurationSettingsComponent {
 
     window.loadingStart("#div-datasource-slection", "Please wait");
 
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
 
     let form_data = this.create_View_object() as any;
 

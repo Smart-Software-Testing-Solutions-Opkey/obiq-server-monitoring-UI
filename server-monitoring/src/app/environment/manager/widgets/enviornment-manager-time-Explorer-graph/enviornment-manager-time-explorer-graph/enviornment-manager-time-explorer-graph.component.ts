@@ -44,7 +44,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent {
 
   getLogsChart() {
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
       "timeSpanEnum": "LAST_7_DAYS",
       "viewId": this.view.viewId,

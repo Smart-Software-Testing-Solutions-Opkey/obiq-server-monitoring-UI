@@ -86,7 +86,7 @@ export class NavigatorLeftComponent implements OnInit {
   totalViews = [];
   set_Selected_View_DataSource(selectedVIew) {
     window.loadingStart("#navigator-left", "Please wait");
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
 
     let form_data = { viewId: selectedVIew.viewId };
 

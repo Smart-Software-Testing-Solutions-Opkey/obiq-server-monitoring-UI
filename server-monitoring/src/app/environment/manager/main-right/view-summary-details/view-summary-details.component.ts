@@ -32,7 +32,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
   }
   get_All_Summary_of_Selected_View(view) {
     debugger;
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
 
     let form_data = { "viewId": view.viewId };
 
