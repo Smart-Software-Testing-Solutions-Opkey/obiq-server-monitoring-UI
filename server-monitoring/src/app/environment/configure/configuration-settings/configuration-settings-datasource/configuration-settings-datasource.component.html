@@ -41,7 +41,7 @@
                         </span>
                     </div>
 
-                    @if((item.name === 'ERP Analytics' && item.isChecked) && (item.name === datasource_item_name || obj_error.display_ErpApplication)) {
+                    @if((item.type === 'ERP_ANALYTICS_DATASOURCE' && item.isChecked) ) {
         
                         <div class="datasource-sub-category">
                             <label for="application" class="form-label mt-2">Choose your application <span
@@ -74,7 +74,7 @@
 
                     }
 
-                    @else if((item.name === 'System Diagnostics' && item.isChecked) && (item.name === datasource_item_name || obj_error.display_SystemDiagnosticsData)) {
+                    @else if((item.type === 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE' && item.isChecked)) {
                      
                         <div class="datasource-sub-category">
 

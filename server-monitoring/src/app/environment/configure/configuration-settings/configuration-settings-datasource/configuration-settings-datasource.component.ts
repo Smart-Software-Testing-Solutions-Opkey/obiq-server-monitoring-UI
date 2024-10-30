@@ -181,7 +181,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   datasource_item_name = "";
   select_datasource(dataItem) {
     debugger;
-    this.datasource_item_name = dataItem.name;
+    // this.datasource_item_name = dataItem.name;
     dataItem.isChecked = !dataItem.isChecked;
     if(dataItem.isChecked) {
       this.obj_datasource_widget.select_datasource_item.push(dataItem);

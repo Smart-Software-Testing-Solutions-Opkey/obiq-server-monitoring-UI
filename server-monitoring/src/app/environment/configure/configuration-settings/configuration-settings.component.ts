@@ -61,15 +61,21 @@ export class ConfigurationSettingsComponent {
     }
 
     if (this.obj_configuration_setting.tab == "datasource") {
-
-      if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
-        this.obj_configuration_setting.tab = "ERP_Analytics";
-        this.obj_configuration_setting.title = "Add ERP Analytics";
-        this.obj_configuration_setting.is_value_selection = true;
-      }
-      else if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
-        this.obj_configuration_setting.tab = "system_diagnostics";
-        this.obj_configuration_setting.title = "Add System Diagnostics";
+      debugger
+      // if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = 'ERP Analytics';
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      // else if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
+      //   this.obj_configuration_setting.tab = 'System Diagnostics';
+      //   this.obj_configuration_setting.title = "Add System Diagnostics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      if(this.datasource_item.length>0){
+        let item = this.datasource_item[0]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -79,11 +85,33 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    else if (this.obj_configuration_setting.tab == "ERP_Analytics") {
-      if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
-        this.obj_configuration_setting.tab = "system_diagnostics";
-        this.obj_configuration_setting.title = "Add System Diagnostics";
-        this.obj_configuration_setting.is_value_selection = true;
+    else if (this.obj_configuration_setting.tab == "ERP Analytics") {
+      // if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
+      //   this.obj_configuration_setting.tab = 'System Diagnostics';
+      //   this.obj_configuration_setting.title = "Add System Diagnostics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      let ind = this.datasource_item.findIndex(item => item.name == 'ERP Analytics')
+      if((ind+1) != (this.datasource_item.length)){
+       let item = this.datasource_item[ind+1]
+       this.obj_configuration_setting.tab = item.name;
+       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
+        this.obj_configuration_setting.tab = "view_summary";
+      this.obj_configuration_setting.title = "Create View";
+      this.obj_configuration_setting.is_value_selection = false;
+      }
+    }
+      else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+     
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      if((ind+1) != (this.datasource_item.length)){
+       let item = this.datasource_item[ind+1]
+       this.obj_configuration_setting.tab = item.name;
+       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.is_value_selection = true;
       }
       else {
         this.obj_configuration_setting.tab = "view_summary";
@@ -91,11 +119,41 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "system_diagnostics") {
+    else if (this.obj_configuration_setting.tab == "System Diagnostics") {
+    
+      let ind = this.datasource_item.findIndex(item => item.name == 'System Diagnostics')
+      if((ind+1) != (this.datasource_item.length)){
+       let item = this.datasource_item[ind+1]
+       this.obj_configuration_setting.tab = item.name;
+       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
       this.obj_configuration_setting.tab = "view_summary";
       this.obj_configuration_setting.title = "Create View";
       this.obj_configuration_setting.is_value_selection = false;
+      }
     }
+    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+   
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      if((ind+1) != (this.datasource_item.length)){
+       let item = this.datasource_item[ind+1]
+       this.obj_configuration_setting.tab = item.name;
+       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
+        this.obj_configuration_setting.tab = "view_summary";
+      this.obj_configuration_setting.title = "Create View";
+      this.obj_configuration_setting.is_value_selection = false;
+      }
+    }
+    // else if (this.obj_configuration_setting.tab == "System Diagnostics") {
+    //   this.obj_configuration_setting.tab = "view_summary";
+    //   this.obj_configuration_setting.title = "Create View";
+    //   this.obj_configuration_setting.is_value_selection = false;
+    // }
     else if (this.obj_configuration_setting.tab == "view_summary") {
       this.obj_configuration_setting.is_value_selection = false;
       alert("error");
@@ -109,14 +167,20 @@ export class ConfigurationSettingsComponent {
 
     if (this.obj_configuration_setting.tab == "view_summary") {
 
-      if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
-        this.obj_configuration_setting.tab = "system_diagnostics";
-        this.obj_configuration_setting.title = "Add System Diagnostics";
-        this.obj_configuration_setting.is_value_selection = true;
-      }
-      else if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
-        this.obj_configuration_setting.tab = "ERP_Analytics";
-        this.obj_configuration_setting.title = "Add ERP Analytics";
+      // if (this.datasource_item.findIndex(item => item.name == 'System Diagnostics') != -1) {
+      //   this.obj_configuration_setting.tab = "System Diagnostics";
+      //   this.obj_configuration_setting.title = "Add System Diagnostics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      // else if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = "ERP Analytics";
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      if(this.datasource_item?.length>0){
+        let item = this.datasource_item[this.datasource_item.length-1]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -126,11 +190,18 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    else if (this.obj_configuration_setting.tab == "system_diagnostics") {
+    else if (this.obj_configuration_setting.tab == "System Diagnostics") {
 
-      if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
-        this.obj_configuration_setting.tab = "ERP_Analytics";
-        this.obj_configuration_setting.title = "Add ERP Analytics";
+      // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = "ERP Analytics";
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      let ind = this.datasource_item.findIndex(item => item.name == 'System Diagnostics')
+      if((ind-1)>=0){
+        let item = this.datasource_item[ind-1]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -139,11 +210,71 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "ERP_Analytics") {
-      this.obj_configuration_setting.tab = "datasource";
-      this.obj_configuration_setting.title = "Create View";
-      this.obj_configuration_setting.is_value_selection = false;
+    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+
+      // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = "ERP Analytics";
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      if((ind-1)>=0){
+        let item = this.datasource_item[ind-1]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
+        this.obj_configuration_setting.tab = "datasource";
+        this.obj_configuration_setting.title = "Create View";
+        this.obj_configuration_setting.is_value_selection = false;
+      }
     }
+    else if (this.obj_configuration_setting.tab == "ERP Analytics") {
+
+      // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = "ERP Analytics";
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      let ind = this.datasource_item.findIndex(item => item.name == 'ERP Analytics')
+      if((ind-1)>=0){
+        let item = this.datasource_item[ind-1]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
+        this.obj_configuration_setting.tab = "datasource";
+        this.obj_configuration_setting.title = "Create View";
+        this.obj_configuration_setting.is_value_selection = false;
+      }
+    }
+    else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+
+      // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
+      //   this.obj_configuration_setting.tab = "ERP Analytics";
+      //   this.obj_configuration_setting.title = "Add ERP Analytics";
+      //   this.obj_configuration_setting.is_value_selection = true;
+      // }
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      if((ind-1)>=0){
+        let item = this.datasource_item[ind-1]
+        this.obj_configuration_setting.tab = item.name;
+        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.is_value_selection = true;
+      }
+      else {
+        this.obj_configuration_setting.tab = "datasource";
+        this.obj_configuration_setting.title = "Create View";
+        this.obj_configuration_setting.is_value_selection = false;
+      }
+    }
+    // else if (this.obj_configuration_setting.tab == "ERP Analytics") {
+    //   this.obj_configuration_setting.tab = "datasource";
+    //   this.obj_configuration_setting.title = "Create View";
+    //   this.obj_configuration_setting.is_value_selection = false;
+    // }
     else if (this.obj_configuration_setting.tab == "datasource") {
       this.obj_configuration_setting.is_value_selection = false;
       alert("error");
@@ -202,8 +333,8 @@ export class ConfigurationSettingsComponent {
 
 
     }
-
-    if (this.obj_configuration_setting.tab == "ERP_Analytics") {
+    
+    if(this.obj_configuration_setting.tab == "ERP Analytics") { 
 
       if (this.obj_configuration_setting.selected_erp_analytics.length == 0) {
         this.dispaly_Instances = true;
