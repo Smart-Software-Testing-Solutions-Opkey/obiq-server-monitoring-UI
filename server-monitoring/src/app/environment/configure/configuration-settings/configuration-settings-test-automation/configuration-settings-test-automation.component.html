@@ -1,1 +1,45 @@
-<p>configuration-settings-test-automation works!</p>
+<kendo-grid 
+    [data]="datasource_agents" 
+    [selectable]="true" 
+    [navigable]="true" 
+    (selectionChange)="onSelectionChange($event)"
+    [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo">
+    
+    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
+    </kendo-grid-checkbox-column>
+
+    <kendo-grid-column field="AgentName" title="User Name">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <span class="layout-text-obiq ps-2">{{dataItem?.AgentName}}</span>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="AgentName" title="Agent Name">
+        <ng-template kendoGridCellTemplate let-dataItem>
+
+            <div class="flex-center">
+                <span class="layout-text-name">{{dataItem?.AgentName}}</span>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="ModifiedBy" title="Server URL">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <span class="layout-text-name">myqlm.opkeyone.com</span>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <ng-template kendoGridNoRecordsTemplate>
+        <div class="no_data_found" style="height: 17rem !important;">
+            <div class="no_data_found_content">
+                <img class="no_data_found_content_img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                <p class="no_data_found_content_text">No data available</p>
+            </div>
+        </div>
+    </ng-template>
+</kendo-grid>

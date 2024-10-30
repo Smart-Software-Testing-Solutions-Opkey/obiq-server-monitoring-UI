@@ -3,11 +3,11 @@
     width: 100%;
 
     .selection-left {
-        width: 20rem;
+        width: 24rem;
     }
 
     .selection-right {
-        width: calc(100% - 20rem);
+        width: calc(100% - 24rem);
         padding: 0rem 1rem;
         height: calc(100vh - 11.6rem);
         overflow: auto;
@@ -125,9 +125,9 @@
                     &:before {
                         content: "";
                         position: absolute;
-                        left: -30%;
-                        top: 50%;
-                        width: 26%;
+                        left: -16%;
+                        top: 51%;
+                        width: 14%;
                         height: 2px;
                         background-color: #8F9191;
                     }
@@ -135,8 +135,8 @@
                     &:after {
                         content: "";
                         position: absolute;
-                        top: 44%;
-                        left: -5%;
+                        top: 45%;
+                        left: -4%;
                         width: 0.5rem;
                         height: 0.5rem;
                         background-color: #8F9191;
@@ -159,6 +159,19 @@
                         }
                     }
                 }
+
+                &.stepper-visited {
+                    span {
+                        &::after{
+                            background-color:  #268144;
+                        }
+
+                        &::before {
+                            background-color:  #268144;
+                        }
+                    }
+                   
+                }
                 
             }
         }
@@ -166,13 +179,54 @@
     } 
     
     li.item_subcategory {
+        margin-bottom: 0rem;
         li {
             color: #344054;
 
             &.active {
                 color: #116173 !important;
             }
+
+            &.stepper-visited {
+                .icon-visited {
+                    display: block;
+                    position: absolute;
+                    font-size: 0.75rem;
+                    padding-top: 0.30rem;
+                    left: -1rem;
+                    top: 0.6rem;
+                    text-align: center;
+                    width: 1.75rem;
+                    height: 1.75rem;        
+                    border-radius: 50%;
+                    z-index: 0;
+                }
+    
+                .icon {
+                    display: none;
+                }
+    
+                span {
+                    color: #268144 !important;
+                }
+    
+                .icon-visited{
+                    background-color: #268144;
+                    color: white;
+                }
+    
+                &::after{
+                    background-color:  #268144;
+                }
+    
+            }
         }
         
+    }
+}
+
+.stepper-visited {
+    &.stepper-margin-0  {
+        margin-bottom: 0rem !important;
     }
 }

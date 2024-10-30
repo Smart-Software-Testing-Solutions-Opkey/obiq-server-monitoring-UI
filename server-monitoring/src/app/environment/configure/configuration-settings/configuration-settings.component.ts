@@ -41,7 +41,8 @@ export class ConfigurationSettingsComponent {
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
     selected_user_behaviour_component: [],
-    selected_view: null
+    selected_view: null,
+    visitedTabs:[]
   }
 
 
@@ -74,6 +75,7 @@ export class ConfigurationSettingsComponent {
       //   this.obj_configuration_setting.title = "Add System Diagnostics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
+      this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
       if(this.datasource_item.length>0){
         let item = this.datasource_item[0]
         this.obj_configuration_setting.tab = item.name;
@@ -93,6 +95,8 @@ export class ConfigurationSettingsComponent {
       //   this.obj_configuration_setting.title = "Add System Diagnostics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
+      this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
+
       let ind = this.datasource_item.findIndex(item => item.name == 'ERP Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
@@ -107,7 +111,8 @@ export class ConfigurationSettingsComponent {
       }
     }
       else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
-     
+        this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
+
       let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
@@ -122,6 +127,7 @@ export class ConfigurationSettingsComponent {
       }
     }
     else if (this.obj_configuration_setting.tab == "System Diagnostics") {
+      this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
     
       let ind = this.datasource_item.findIndex(item => item.name == 'System Diagnostics')
       if((ind+1) != (this.datasource_item.length)){
@@ -137,7 +143,8 @@ export class ConfigurationSettingsComponent {
       }
     }
     else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
-   
+      this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
+
       let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
@@ -281,7 +288,7 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_value_selection = false;
       alert("error");
     }
-
+    this.obj_configuration_setting.visitedTabs.pop()
     this.reset_error();
 
   }

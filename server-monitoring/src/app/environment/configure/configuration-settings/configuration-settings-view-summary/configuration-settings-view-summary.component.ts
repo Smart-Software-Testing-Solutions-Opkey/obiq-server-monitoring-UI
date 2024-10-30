@@ -23,6 +23,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   obj_configuration_setting: any;
   Selected_grid_dataSource: any;
   selected_grid_System_Diagnostics: any;
+  selected_user_behaviour_component = []
+  selected_test_automation_analysis = []
   Show_Project_Access: boolean = false;
   receivedAccessType: any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
@@ -70,7 +72,14 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     debugger;
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
     this.selected_grid_System_Diagnostics = selectionData.selected_system_diagnostics;
+    if(selectionData?.selected_user_behaviour_component){
 
+      this.selected_user_behaviour_component = selectionData?.selected_user_behaviour_component
+    }
+    if(selectionData.selected_test_automation_analysis){
+
+      this.selected_test_automation_analysis = selectionData.selected_test_automation_analysis
+    }
 
     console.log(this.Selected_grid_dataSource);
 

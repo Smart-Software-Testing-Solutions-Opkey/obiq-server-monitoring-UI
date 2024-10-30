@@ -22,13 +22,13 @@
 
                 <ul class="stepper-content">
 
-                    <li [ngClass]="obj_configuration_setting.tab=='datasource' ? 'active' : ''">
+                    <li [ngClass]="{'active' :obj_configuration_setting.tab=='datasource','stepper-visited':obj_configuration_setting.visitedTabs.indexOf('datasource')>-1}">
                         <span class="icon">1</span>
                         <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
                         <span class="text-color-theme">Select Data-Sources</span>
                     </li>
 
-                    <li [ngClass]="obj_configuration_setting.is_value_selection ? 'item_subcategory active' : ''">
+                    <li [ngClass]="{'item_subcategory active' : obj_configuration_setting.is_value_selection ,'stepper-visited':obj_configuration_setting.is_value_selection == false && obj_configuration_setting.visitedTabs.length > 0}" class="stepper-margin-0">
                         <span>
                             <span class="icon">2</span>
                             <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
@@ -37,12 +37,12 @@
 
                         @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) { 
 
-                            <ul class="pt-3 data-source-child">
+                            <ul class="pt-3 data-source-child ps-3">
 
                                 @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id ) {
 
                                     
-                                        <li [ngClass]="obj_configuration_setting.tab==item.name ? 'active' : ''" class="ps-2">
+                                        <li [ngClass]="{'active' : obj_configuration_setting.tab==item.name ,'stepper-visited':obj_configuration_setting.visitedTabs.indexOf(item.name)>-1}" class="ps-2">
                                             <span class="text-color-theme">Add {{item.name}}</span>
                                         </li>
                                     

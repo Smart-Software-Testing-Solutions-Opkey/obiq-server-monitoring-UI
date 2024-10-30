@@ -204,8 +204,27 @@
                                     </a>
                                 </div>
                                 <div id="collapse_user" class="collapse show">
-                                    <div class="card-body">
-                                        User Behavior Analytics summary
+                                    <div class="card-body px-0">
+                                        <div class="kendo_grid">
+                                            <kendo-grid [data]="selected_user_behaviour_component"
+                                                [selectable]="false" [navigable]="true"
+                                                class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                                <kendo-grid-column field="name" title="Name">           
+                                                </kendo-grid-column>
+                                                <kendo-grid-column field="email" title="Email">
+                                                </kendo-grid-column>
+            
+                                                <ng-template kendoGridNoRecordsTemplate>
+                                                    <div class="no_data_found" style="height: 17rem !important;">
+                                                        <div class="no_data_found_content">
+                                                            <img class="no_data_found_content_img"
+                                                                src="/assets/icon-image/nodata-img.png" alt="No data">
+                                                            <p class="no_data_found_content_text">No data available</p>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </kendo-grid>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -221,8 +240,25 @@
                                     </a>
                                 </div>
                                 <div id="collapse_testAutomation" class="collapse show">
-                                    <div class="card-body">
-                                        Test Automation Analysis
+                                    <div class="card-body px-0">
+                                        <div class="kendo_grid">
+                                            <kendo-grid [data]="selected_test_automation_analysis"
+                                                [selectable]="false" [navigable]="true"
+                                                class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                                <kendo-grid-column field="AgentName" title="AgentName">           
+                                                </kendo-grid-column>
+            
+                                                <ng-template kendoGridNoRecordsTemplate>
+                                                    <div class="no_data_found" style="height: 17rem !important;">
+                                                        <div class="no_data_found_content">
+                                                            <img class="no_data_found_content_img"
+                                                                src="/assets/icon-image/nodata-img.png" alt="No data">
+                                                            <p class="no_data_found_content_text">No data available</p>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </kendo-grid>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
