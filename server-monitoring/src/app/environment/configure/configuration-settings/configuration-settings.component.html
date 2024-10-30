@@ -28,7 +28,7 @@
                         <span class="text-color-theme">Select Data-Sources</span>
                     </li>
 
-                    <li [ngClass]="{'item_subcategory active' : obj_configuration_setting.is_value_selection ,'stepper-visited':obj_configuration_setting.is_value_selection == false && obj_configuration_setting.visitedTabs.length > 0}">
+                    <li [ngClass]="{'item_subcategory active' : obj_configuration_setting.is_value_selection ,'stepper-visited':obj_configuration_setting.is_value_selection == false && obj_configuration_setting.visitedTabs.length > 0}" class="stepper-margin-0">
                         <span>
                             <span class="icon">2</span>
                             <span class="icon-visited"><i class="oci oci-check align-middle"></i></span>
@@ -37,7 +37,7 @@
 
                         @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) { 
 
-                            <ul class="pt-3 data-source-child">
+                            <ul class="pt-3 data-source-child ps-3">
 
                                 @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id ) {
 
