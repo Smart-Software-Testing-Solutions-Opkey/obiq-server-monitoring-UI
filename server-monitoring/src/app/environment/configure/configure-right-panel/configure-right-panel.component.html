@@ -38,12 +38,12 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('view', $event)">
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('VIEW', $event)">
                                 <i class="oci oci-eye pe-2"></i>Can View
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('edit', $event)">
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('EDIT', $event)">
                                 <i class="oci oci-edit pe-2"></i>Can Edit
                             </a>
                         </li>
@@ -89,7 +89,7 @@
         <kendo-grid-column field="permission" title="Permission">
             <ng-template kendoGridCellTemplate let-dataItem>
                 <kendo-dropdownlist 
-                [data]="['Can View', 'Can Edit']" 
+                [data]="['VIEW', 'EDIT']" 
                 [value]="dataItem.permission" 
                 (valueChange)="updateUserPermission(dataItem, $event)">
                 </kendo-dropdownlist>

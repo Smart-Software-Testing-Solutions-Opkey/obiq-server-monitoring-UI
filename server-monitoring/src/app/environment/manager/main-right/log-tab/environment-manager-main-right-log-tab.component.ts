@@ -233,27 +233,437 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
-      "timeSpanEnum": "LAST_7_DAYS",
-      "viewId": this.view.viewId,
-      "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
-      "limitBy": 20,
-      "offset": 0,
-      "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
-    })
-      .subscribe({
-        next: (result: any) => {
-          window.loadingStop("#Env_manager_main_right");
-          this.chartData = result
-          this.createChart();
+      "timeSpanEnum":"LAST_7_DAYS",
+      "viewId":this.view.viewId,
+      "projectId":this.service_data.UserDto.ProjectDTO.P_ID,
+      "limitBy":20,
+      "offset":0,
+      "widgetType":"ESS_LOG_TIMEGRAPH_WIDGET"
+  })
+    .subscribe({
+      next: (result: any) => {
+      window.loadingStop("#Env_manager_main_right");
+      result = {
+        "groupedBy": "Days",
+        "essServerLogUsageDtoList": [
+            {
+                "fromTimeInStr": "2024-10-22",
+                "toTimeInStr": "2024-10-22",
+                "totalLogCount": 120,
+                "dataPointList": [
+                    { "name": "Success", "value": 60 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 15 },
+                    { "name": "Blocked", "value": 15 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-23",
+                "toTimeInStr": "2024-10-23",
+                "totalLogCount": 90,
+                "dataPointList": [
+                    { "name": "Success", "value": 50 },
+                    { "name": "Error", "value": 10 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-24",
+                "toTimeInStr": "2024-10-24",
+                "totalLogCount": 150,
+                "dataPointList": [
+                    { "name": "Success", "value": 100 },
+                    { "name": "Error", "value": 20 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 20 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-25",
+                "toTimeInStr": "2024-10-25",
+                "totalLogCount": 110,
+                "dataPointList": [
+                    { "name": "Success", "value": 60 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-26",
+                "toTimeInStr": "2024-10-26",
+                "totalLogCount": 200,
+                "dataPointList": [
+                    { "name": "Success", "value": 140 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-27",
+                "toTimeInStr": "2024-10-27",
+                "totalLogCount": 80,
+                "dataPointList": [
+                    { "name": "Success", "value": 40 },
+                    { "name": "Error", "value": 20 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-28",
+                "toTimeInStr": "2024-10-28",
+                "totalLogCount": 95,
+                "dataPointList": [
+                    { "name": "Success", "value": 45 },
+                    { "name": "Error", "value": 25 },
+                    { "name": "Warning", "value": 15 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-29",
+                "toTimeInStr": "2024-10-29",
+                "totalLogCount": 130,
+                "dataPointList": [
+                    { "name": "Success", "value": 70 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-30",
+                "toTimeInStr": "2024-10-30",
+                "totalLogCount": 60,
+                "dataPointList": [
+                    { "name": "Success", "value": 20 },
+                    { "name": "Error", "value": 10 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-10-31",
+                "toTimeInStr": "2024-10-31",
+                "totalLogCount": 170,
+                "dataPointList": [
+                    { "name": "Success", "value": 90 },
+                    { "name": "Error", "value": 40 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 20 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-01",
+                "toTimeInStr": "2024-11-01",
+                "totalLogCount": 200,
+                "dataPointList": [
+                    { "name": "Success", "value": 80 },
+                    { "name": "Error", "value": 20 },
+                    { "name": "Warning", "value": 80 },
+                    { "name": "Blocked", "value": 20 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-02",
+                "toTimeInStr": "2024-11-02",
+                "totalLogCount": 110,
+                "dataPointList": [
+                    { "name": "Success", "value": 80 },
+                    { "name": "Error", "value": 10 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-03",
+                "toTimeInStr": "2024-11-03",
+                "totalLogCount": 190,
+                "dataPointList": [
+                    { "name": "Success", "value": 120 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 20 },
+                    { "name": "Blocked", "value": 20 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-04",
+                "toTimeInStr": "2024-11-04",
+                "totalLogCount": 160,
+                "dataPointList": [
+                    { "name": "Success", "value": 100 },
+                    { "name": "Error", "value": 30 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 20 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-05",
+                "toTimeInStr": "2024-11-05",
+                "totalLogCount": 210,
+                "dataPointList": [
+                    { "name": "Success", "value": 150 },
+                    { "name": "Error", "value": 20 },
+                    { "name": "Warning", "value": 30 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-06",
+                "toTimeInStr": "2024-11-06",
+                "totalLogCount": 100,
+                "dataPointList": [
+                    { "name": "Success", "value": 70 },
+                    { "name": "Error", "value": 10 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-07",
+                "toTimeInStr": "2024-11-07",
+                "totalLogCount": 135,
+                "dataPointList": [
+                    { "name": "Success", "value": 85 },
+                    { "name": "Error", "value": 25 },
+                    { "name": "Warning", "value": 15 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+                "fromTimeInStr": "2024-11-08",
+                "toTimeInStr": "2024-11-08",
+                "totalLogCount": 95,
+                "dataPointList": [
+                    { "name": "Success", "value": 55 },
+                    { "name": "Error", "value": 20 },
+                    { "name": "Warning", "value": 10 },
+                    { "name": "Blocked", "value": 10 }
+                ]
+            },
+            {
+              "fromTimeInStr": "2024-11-09",
+              "toTimeInStr": "2024-11-09",
+              "totalLogCount": 50,
+              "dataPointList": [
+                  { "name": "Success", "value": 55 },
+                  { "name": "Error", "value": 20 },
+                  { "name": "Warning", "value": 10 },
+                  { "name": "Blocked", "value": 10 }
+              ]
+          },
+          {
+            "fromTimeInStr": "2024-11-10",
+            "toTimeInStr": "2024-11-10",
+            "totalLogCount": 95,
+            "dataPointList": [
+                { "name": "Success", "value": 55 },
+                { "name": "Error", "value": 20 },
+                { "name": "Warning", "value": 10 },
+                { "name": "Blocked", "value": 10 }
+            ]
         },
-        error: (error: any) => {
-          window.loadingStop("#Env_manager_main_right");
-          console.warn(error);
-        },
-        complete: () => {
-          console.log("Completed");
-        }
-      });
+        {
+          "fromTimeInStr": "2024-12-01",
+          "toTimeInStr": "2024-12-01",
+          "totalLogCount": 130,
+          "dataPointList": [
+              {"name": "Success", "value": 70},
+              {"name": "Error", "value": 25},
+              {"name": "Warning", "value": 20},
+              {"name": "Blocked", "value": 15}
+          ]
+      },
+      {
+          "fromTimeInStr": "2024-12-02",
+          "toTimeInStr": "2024-12-02",
+          "totalLogCount": 110,
+          "dataPointList": [
+              {"name": "Success", "value": 65},
+              {"name": "Error", "value": 15},
+              {"name": "Warning", "value": 20},
+              {"name": "Blocked", "value": 10}
+          ]
+      },
+      {
+          "fromTimeInStr": "2024-12-03",
+          "toTimeInStr": "2024-12-03",
+          "totalLogCount": 140,
+          "dataPointList": [
+              {"name": "Success", "value": 80},
+              {"name": "Error", "value": 30},
+              {"name": "Warning", "value": 20},
+              {"name": "Blocked", "value": 10}
+          ]
+      },
+      {
+          "fromTimeInStr": "2024-12-04",
+          "toTimeInStr": "2024-12-04",
+          "totalLogCount": 120,
+          "dataPointList": [
+              {"name": "Success", "value": 60},
+              {"name": "Error", "value": 40},
+              {"name": "Warning", "value": 15},
+              {"name": "Blocked", "value": 5}
+          ]
+      },
+      {
+          "fromTimeInStr": "2024-12-05",
+          "toTimeInStr": "2024-12-05",
+          "totalLogCount": 150,
+          "dataPointList": [
+              {"name": "Success", "value": 90},
+              {"name": "Error", "value": 30},
+              {"name": "Warning", "value": 20},
+              {"name": "Blocked", "value": 10}
+          ]
+      }, {
+        "fromTimeInStr": "2024-12-06",
+        "toTimeInStr": "2024-12-06",
+        "totalLogCount": 140,
+        "dataPointList": [
+            {"name": "Success", "value": 80},
+            {"name": "Error", "value": 30},
+            {"name": "Warning", "value": 20},
+            {"name": "Blocked", "value": 10}
+        ]
+    },
+    {
+        "fromTimeInStr": "2024-12-07",
+        "toTimeInStr": "2024-12-07",
+        "totalLogCount": 120,
+        "dataPointList": [
+            {"name": "Success", "value": 60},
+            {"name": "Error", "value": 40},
+            {"name": "Warning", "value": 15},
+            {"name": "Blocked", "value": 5}
+        ]
+    },
+    {
+        "fromTimeInStr": "2024-12-08",
+        "toTimeInStr": "2024-12-08",
+        "totalLogCount": 150,
+        "dataPointList": [
+            {"name": "Success", "value": 90},
+            {"name": "Error", "value": 30},
+            {"name": "Warning", "value": 20},
+            {"name": "Blocked", "value": 10}
+        ]
+    }, {
+      "fromTimeInStr": "2024-12-09",
+      "toTimeInStr": "2024-12-09",
+      "totalLogCount": 140,
+      "dataPointList": [
+          {"name": "Success", "value": 80},
+          {"name": "Error", "value": 30},
+          {"name": "Warning", "value": 20},
+          {"name": "Blocked", "value": 10}
+      ]
+  },
+  {
+      "fromTimeInStr": "2024-12-10",
+      "toTimeInStr": "2024-12-10",
+      "totalLogCount": 120,
+      "dataPointList": [
+          {"name": "Success", "value": 60},
+          {"name": "Error", "value": 40},
+          {"name": "Warning", "value": 15},
+          {"name": "Blocked", "value": 5}
+      ]
+  },
+  {
+      "fromTimeInStr": "2024-12-11",
+      "toTimeInStr": "2024-12-11",
+      "totalLogCount": 150,
+      "dataPointList": [
+          {"name": "Success", "value": 90},
+          {"name": "Error", "value": 30},
+          {"name": "Warning", "value": 20},
+          {"name": "Blocked", "value": 10}
+      ]
+  }, {
+    "fromTimeInStr": "2024-12-12",
+    "toTimeInStr": "2024-12-12",
+    "totalLogCount": 140,
+    "dataPointList": [
+        {"name": "Success", "value": 80},
+        {"name": "Error", "value": 30},
+        {"name": "Warning", "value": 20},
+        {"name": "Blocked", "value": 10}
+    ]
+},
+{
+    "fromTimeInStr": "2024-12-13",
+    "toTimeInStr": "2024-12-13",
+    "totalLogCount": 120,
+    "dataPointList": [
+        {"name": "Success", "value": 60},
+        {"name": "Error", "value": 40},
+        {"name": "Warning", "value": 15},
+        {"name": "Blocked", "value": 5}
+    ]
+},
+{
+    "fromTimeInStr": "2024-12-14",
+    "toTimeInStr": "2024-12-14",
+    "totalLogCount": 150,
+    "dataPointList": [
+        {"name": "Success", "value": 90},
+        {"name": "Error", "value": 30},
+        {"name": "Warning", "value": 20},
+        {"name": "Blocked", "value": 10}
+    ]
+}, {
+  "fromTimeInStr": "2024-12-15",
+  "toTimeInStr": "2024-12-15",
+  "totalLogCount": 140,
+  "dataPointList": [
+      {"name": "Success", "value": 80},
+      {"name": "Error", "value": 30},
+      {"name": "Warning", "value": 20},
+      {"name": "Blocked", "value": 10}
+  ]
+},
+{
+  "fromTimeInStr": "2024-12-16",
+  "toTimeInStr": "2024-12-16",
+  "totalLogCount": 120,
+  "dataPointList": [
+      {"name": "Success", "value": 60},
+      {"name": "Error", "value": 40},
+      {"name": "Warning", "value": 15},
+      {"name": "Blocked", "value": 5}
+  ]
+},
+{
+  "fromTimeInStr": "2024-12-17",
+  "toTimeInStr": "2024-12-17",
+  "totalLogCount": 150,
+  "dataPointList": [
+      {"name": "Success", "value": 90},
+      {"name": "Error", "value": 30},
+      {"name": "Warning", "value": 20},
+      {"name": "Blocked", "value": 10}
+  ]
+},
+
+        ]
+    }
+    
+      this.chartData = result    
+        this.createChart();
+      },
+      error: (error: any) => {
+        window.loadingStop("#Env_manager_main_right");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
   }
   getViewLogs() {
     debugger;
