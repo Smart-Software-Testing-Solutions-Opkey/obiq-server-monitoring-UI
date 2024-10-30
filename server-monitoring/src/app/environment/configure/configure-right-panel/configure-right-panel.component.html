@@ -83,7 +83,7 @@
         </div>
         
         <!-- Kendo Grid -->
-        <kendo-grid *ngIf="addedUsers.length > 0" [data]="addedUsers">
+        <!-- <kendo-grid *ngIf="addedUsers.length > 0" [data]="addedUsers">
         <kendo-grid-column field="UserName" title="User Name"></kendo-grid-column>
         <kendo-grid-column field="email_ID" title="Email"></kendo-grid-column>
         <kendo-grid-column field="permission" title="Permission">
@@ -95,7 +95,47 @@
                 </kendo-dropdownlist>
             </ng-template>
             </kendo-grid-column>
-        </kendo-grid>
+        </kendo-grid> -->
+
+        <div class="shared-to-panel" *ngIf="addedUsers.length > 0">
+            <h5 class="my-3">Shared to</h5>
+
+            <!-- Kendo Grid -->
+            <kendo-grid [data]="addedUsers" class="k-grid-sharedTo" [hideHeader]="true">
+                <kendo-grid-column [width]="50">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <span class="sp-user-image">
+                            <img class="user-image" alt="rishabh.jain@opkey.com" src="assets/images/default/profile.png">
+                        </span>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column >
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <div class="user-details">
+                            <span class="layout-text-name">Rishabh Jain</span>
+                            <span class="layout-text-date">hgchkgjklkhjcghgvbjknl</span>
+                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column [width]="150">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <kendo-dropdownlist [data]="['Can View', 'Can Edit']" [value]="dataItem.permission"
+                            (valueChange)="updateUserPermission(dataItem, $event)">
+                        </kendo-dropdownlist>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column [width]="50">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <button type="button" class="btn">
+                            <i class="fa fa-trash text-red"></i>
+                        </button>
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
         
 
     </div>
