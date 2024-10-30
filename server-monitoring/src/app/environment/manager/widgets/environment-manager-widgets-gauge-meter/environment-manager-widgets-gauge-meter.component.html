@@ -1,16 +1,16 @@
-<div>
+<div class="total-errors-details">
   <span class="font-bold">
-      {{title}}
+    {{title}}
   </span>
-</div>
-
-<div id="chart">
+  
+  <div id="chart">
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
       [plotOptions]="chartOptions.plotOptions"
       [fill]="chartOptions.fill"
       [stroke]="chartOptions.stroke"
-      [labels]="chartOptions.labels"
-    ></apx-chart>
+      [labels]="chartOptions.labels">
+    </apx-chart>
   </div>
+</div>

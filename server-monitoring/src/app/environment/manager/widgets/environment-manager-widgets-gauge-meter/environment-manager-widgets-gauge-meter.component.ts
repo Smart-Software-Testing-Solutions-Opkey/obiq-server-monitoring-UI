@@ -51,7 +51,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     this.chartOptions = {
       series: [this.data], // Adjust this value to set the percentage
       chart: {
-        height: 350,
+        height: 200,
         type: "radialBar",
         toolbar: {
           show: false
