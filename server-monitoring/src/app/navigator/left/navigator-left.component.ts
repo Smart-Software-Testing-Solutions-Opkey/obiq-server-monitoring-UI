@@ -147,7 +147,7 @@ export class NavigatorLeftComponent implements OnInit {
 
     window.loadingStart("#navigator-left", "Please wait");
 
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
 
     let form_data = {
       userId: this.dataService.UserDto.UserDTO.U_ID,
