@@ -1,12 +1,12 @@
 <div class="sidebar-menu-body flex-box-column">
 
-    <div class="sidebar-menu-toolbar">
+    <div class="sidebar-menu-toolbar border-bottom pb-3">
         <button type="button" class="btn btn-layout btn-bg-theme" (click)="add_environment()" aria-label="Add Environment"> 
             <i class="oci oci-plus me-1"></i> View
         </button>
     </div>
 
-    <div class="sidebar-menu-content">
+    <div class="sidebar-menu-content scrollable pt-3" style="height: calc(100vh - 7.5rem);">
         <nav>
             <ul class="nav nav-pills menu-category">
 
@@ -17,10 +17,19 @@
                         [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''">
 
                         <div class="d-flex-between">
-                            <span class="name text-ellipsis">{{view.viewName}}</span>
+                            
+                            <span class="name text-ellipsis">
+                                <i class="oci oci-star pe-1"></i>
+                                {{view.viewName}}</span>
                             <span class="flex-center ps-1">
-                                <span class="label-status me-2 public">{{view.accessType}}</span> 
+                                <span class="label-status me-2 {{view.accessType}}" *ngIf="view.accessType != 'SHARED'">{{view.accessType | titlecase}} </span> 
 
+                                <div class="message-list pe-2" *ngIf="view.accessType == 'SHARED'">
+                                    <!-- for 3 to 4 images start loop in img tag -->
+                                    <img src="assets/images/default/profile.png" class="profile-pic" alt="User 1">
+                                    <!-- ---loop end here---- -->
+                                    <div class="more-count">+1</div>
+                                </div>
                               
                                 <div class="dropdown">
                                     <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"

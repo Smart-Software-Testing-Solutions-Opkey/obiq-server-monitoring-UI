@@ -51,16 +51,18 @@
                 }
 
                 .label-status {
-                    padding: 0.15rem 0.75rem;
-                    border-radius: 0.5rem;
+                    padding: 0.15rem 1.25rem;
+                    border-radius: 1rem;
                     font-weight: 500;
+                    font-size: 0.75rem;
+                    width: 5rem;
 
-                    &.public {
+                    &.PUBLIC {
                         background-color: #ECFDF3;
                         color: #027A48;
                     }
 
-                    &.private {
+                    &.PRIVATE {
                         background-color: #FEF3F2;
                         color: #B42318;
                     }
