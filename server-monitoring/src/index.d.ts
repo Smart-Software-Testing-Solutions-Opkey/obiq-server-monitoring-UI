@@ -7,6 +7,7 @@ declare global {
         opkeyone_callsource: any
         keycloak_logout: any; // 👈️ turn off type checking
         keycloak_logout_with_redirect_url: any;
+        base_obiq_server_url: any
         keycloak: any
         keycloak_init_sso: any;
         keycloak_loaduserprofile: any;

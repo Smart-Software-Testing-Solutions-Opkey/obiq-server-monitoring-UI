@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
   templateUrl: './configuration-settings-summary-after-view-creation.component.html',
   styleUrl: './configuration-settings-summary-after-view-creation.component.scss'
 })
-export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit ,AfterViewInit {
+export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit {
   constructor(
     public app_service: AppService,
     public dataService: AppDataService) {
@@ -25,8 +26,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     debugger;
     if (obj_configuration_setting !== this.obj_configuration_setting) {
       this.obj_configuration_setting = obj_configuration_setting;
-      
- 
+
+
       this.onConfigurationSettingChange();
     }
   }
@@ -36,25 +37,25 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
   onConfigurationSettingChange(): void {
     if (this.obj_configuration_setting) {
-   
-      this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {  
+
+      this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {
         return {
-            ...item, 
-            value: JSON.parse(item.value) 
+          ...item,
+          value: JSON.parse(item.value)
         };
-    });
+      });
       this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics
     }
     debugger;
     this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
   }
- 
+
 
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
- 
+
   }
   onAccessTypeChange(selectedOption: string) {
     debugger;
@@ -81,22 +82,23 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     } else {
       this.selectedUsers = this.selectedUsers.filter(selectedUser => selectedUser.userId !== user.U_ID);
     }
-    
+
 
     console.log(this.selectedUsers);
   }
-  create_to_update_object(){
+  create_to_update_object() {
     debugger;
     var obj_Update_View = new Object();
     obj_Update_View["viewId"] = this.obj_configuration_setting.selected_view.viewId,
-    obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
-    obj_Update_View["accessType"] =this.selectedAccessType,
-    obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
-    obj_Update_View["authorizedUsers"] = this.selectedAccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.selectedAccessType === 'PUBLIC' ? [] :  this.selectedUsers;
+      obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
+      obj_Update_View["accessType"] = this.selectedAccessType,
+      obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
+    obj_Update_View["authorizedUsers"] = this.selectedAccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.selectedAccessType === 'PUBLIC' ? [] : this.selectedUsers;
     return obj_Update_View;
   }
-  Update_ViewAccess_Type(){
-    let form_url = "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/updateView";
+  Update_ViewAccess_Type() {
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/updateView";
 
     let form_data = this.create_to_update_object() as any;
 
@@ -118,58 +120,58 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
   getAllProjects() {
     debugger;
-      var  result ={
-        "Users": [
-            {
-                "U_ID": "a6419346-5b95-4f16-ae0e-b41f63443333",
-                "Name": "rishabh.jain@opkey.com",
-                "UserName": "rishabh.jain@opkey.com",
-                "email_ID": "rishabh.jain@opkey.com",
-                "Is_Enabled": true,
-                "CreatedOn": "2024-10-14T01:15:35+05:30",
-                "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
-                "LastModifiedOn": "2024-10-14T01:15:35+05:30",
-                "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
-                "Is_SuperAdmin": false,
-                "Email_Verified_On": "0001-01-01T00:00:00",
-                "Last_Password_Change": "2024-10-14T01:15:35+05:30",
-                "isAutoCreated": false,
-                "ForcePasswordChange": false,
-                "ApiKey": "0RFACJW8AMQ4WWZ7E6",
-                "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
-                "Keycloak_SubjectId": null,
-                "UserImage": null,
-                "idp_Groups": []
-            },
-            {
-                "U_ID": "a89198cc-9d23-4173-a19d-c676ead27fdb",
-                "Name": "himanshu.kumar@opkey.com",
-                "UserName": "himanshu.kumar@opkey.com",
-                "email_ID": "himanshu.kumar@opkey.com",
-                "Is_Enabled": true,
-                "CreatedOn": "2024-10-14T01:15:35+05:30",
-                "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
-                "LastModifiedOn": "2024-10-14T01:15:35+05:30",
-                "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
-                "Is_SuperAdmin": false,
-                "Email_Verified_On": "0001-01-01T00:00:00",
-                "Last_Password_Change": "2024-10-14T01:15:35+05:30",
-                "isAutoCreated": false,
-                "ForcePasswordChange": false,
-                "ApiKey": "SL04H8NX0A7DN3ETDN",
-                "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
-                "Keycloak_SubjectId": null,
-                "UserImage": null,
-                "idp_Groups": []
-            }
-        ]
-    };  
+    var result = {
+      "Users": [
+        {
+          "U_ID": "a6419346-5b95-4f16-ae0e-b41f63443333",
+          "Name": "rishabh.jain@opkey.com",
+          "UserName": "rishabh.jain@opkey.com",
+          "email_ID": "rishabh.jain@opkey.com",
+          "Is_Enabled": true,
+          "CreatedOn": "2024-10-14T01:15:35+05:30",
+          "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+          "LastModifiedOn": "2024-10-14T01:15:35+05:30",
+          "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+          "Is_SuperAdmin": false,
+          "Email_Verified_On": "0001-01-01T00:00:00",
+          "Last_Password_Change": "2024-10-14T01:15:35+05:30",
+          "isAutoCreated": false,
+          "ForcePasswordChange": false,
+          "ApiKey": "0RFACJW8AMQ4WWZ7E6",
+          "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
+          "Keycloak_SubjectId": null,
+          "UserImage": null,
+          "idp_Groups": []
+        },
+        {
+          "U_ID": "a89198cc-9d23-4173-a19d-c676ead27fdb",
+          "Name": "himanshu.kumar@opkey.com",
+          "UserName": "himanshu.kumar@opkey.com",
+          "email_ID": "himanshu.kumar@opkey.com",
+          "Is_Enabled": true,
+          "CreatedOn": "2024-10-14T01:15:35+05:30",
+          "CreatedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+          "LastModifiedOn": "2024-10-14T01:15:35+05:30",
+          "LastModifiedBy": "ceee256b-d766-4e0c-baa0-871f3d60e41a",
+          "Is_SuperAdmin": false,
+          "Email_Verified_On": "0001-01-01T00:00:00",
+          "Last_Password_Change": "2024-10-14T01:15:35+05:30",
+          "isAutoCreated": false,
+          "ForcePasswordChange": false,
+          "ApiKey": "SL04H8NX0A7DN3ETDN",
+          "Last_Remembered_P_ID": "00000000-0000-0000-0000-000000000000",
+          "Keycloak_SubjectId": null,
+          "UserImage": null,
+          "idp_Groups": []
+        }
+      ]
+    };
     this.Show_Project_Access = true
     this.users = result.Users;
     return;
 
     //let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    let form_url = "https://myqlm.preprod.opkeyone.com/Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "/Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

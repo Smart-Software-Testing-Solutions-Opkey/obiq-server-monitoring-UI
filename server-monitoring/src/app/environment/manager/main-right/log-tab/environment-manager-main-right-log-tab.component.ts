@@ -4,7 +4,8 @@ import { ManagerRightPanelComponent } from '../../right-panel/manager-right-pane
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { DatePipe } from '@angular/common';
-import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexFill, ApexLegend,
+import {
+  ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexFill, ApexLegend,
   ChartComponent,
   ApexPlotOptions,
   ApexResponsive,
@@ -12,47 +13,49 @@ import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexFill, Ap
   ApexTitleSubtitle,
   ApexYAxis,
   ApexTooltip,
-  ApexStroke, } from 'ng-apexcharts';
+  ApexStroke,
+} from 'ng-apexcharts';
+import { environment } from 'src/environments/environment';
 
-  export type ChartOptions = {
-    series: ApexAxisChartSeries;
-    chart: any; //ApexChart;
-    dataLabels: ApexDataLabels;
-    markers: ApexMarkers;
-    title: ApexTitleSubtitle;
-    fill: ApexFill;
-    yaxis: ApexYAxis;
-    xaxis: ApexXAxis;
-    tooltip: ApexTooltip;
-    stroke: ApexStroke;
-    responsive: ApexResponsive[];
-    plotOptions: ApexPlotOptions;
-    legend: ApexLegend;
-    grid: any; //ApexGrid;
-    colors: any;
-    toolbar: any;
-  };
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: any; //ApexChart;
+  dataLabels: ApexDataLabels;
+  markers: ApexMarkers;
+  title: ApexTitleSubtitle;
+  fill: ApexFill;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  responsive: ApexResponsive[];
+  plotOptions: ApexPlotOptions;
+  legend: ApexLegend;
+  grid: any; //ApexGrid;
+  colors: any;
+  toolbar: any;
+};
 
 @Component({
   selector: 'app-environment-manager-main-right-log-tab',
   templateUrl: './environment-manager-main-right-log-tab.component.html',
   styleUrl: './environment-manager-main-right-log-tab.component.scss'
 })
-export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDestroy {
+export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDestroy {
 
 
   constructor(
     private modalService: NgbModal,
     public service_data: AppDataService,
-    public app_service:AppService,
+    public app_service: AppService,
     private datePipe: DatePipe
-  ){}
+  ) { }
   @Input() analyticsType: any;
   @Input() view: any;
   startTime: Date | null = null;
   endTime: Date | null = null;
   public chartOptions: Partial<ChartOptions>;
-  chartData:any;
+  chartData: any;
   selectedKeys = []
   logDataSource = []
   ngOnInit(): void {
@@ -60,234 +63,237 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit,OnDest
     this.getViewLogs()
   }
   ngOnDestroy(): void {
-    
+
   }
-createChart(): void {
-  const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList);
+  createChart(): void {
+    const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList);
 
-  this.chartOptions = {
-    series: seriesData,
-    chart: {
-      type: 'bar',
-      height: 200,
-      stacked: true,
-      toolbar: {
-        show: true,
-        tools: {
-          download: true,
-          selection: true,
-          zoom: true,
+    this.chartOptions = {
+      series: seriesData,
+      chart: {
+        type: 'bar',
+        height: 200,
+        stacked: true,
+        toolbar: {
+          show: true,
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+          },
+          offsetX: 0,
+          offsetY: 0
         },
-        offsetX: 0, 
-        offsetY: 0
+        zoom: {
+          enabled: true,
+        },
+        events: {
+          selection: (chartContext, { xaxis }) => {
+            console.log('Selection event triggered');
+
+            const startTime = xaxis?.min;
+            const endTime = xaxis?.max;
+            if (startTime && endTime) {
+              this.startTime = new Date(startTime);
+              this.endTime = new Date(endTime);
+              console.log('Start Time:', this.startTime);
+              console.log('End Time:', this.endTime);
+            }
+          },
+          zoomed: (chartContext, { xaxis }) => {
+            this.startTime = xaxis?.min ? new Date(xaxis.min) : null;
+            this.endTime = xaxis?.max ? new Date(xaxis.max) : null;
+
+            this.displayTimeRange();
+          },
+          mouseMove: (event) => {
+            const rect = event.target.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            console.log('Mouse X:', offsetX);
+          },
+        }
       },
-      zoom: {
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: "bottom",
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }
+      ],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+        }
+      },
+      xaxis: {
+        type: 'datetime',
+        tickAmount: 'dataPoints',
+        labels: {
+          format: 'dd MMM',
+          show: true,
+          rotate: 0,
+        },
+        min: undefined,
+        max: undefined
+      },
+      fill: {
+        opacity: 1,
+      },
+      legend: {
+        position: 'right',
+        offsetX: 0,
+        offsetY: 50,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      tooltip: {
         enabled: true,
-      },
-      events: {
-        selection: (chartContext, { xaxis }) => {
-          console.log('Selection event triggered'); 
-          
-          const startTime = xaxis?.min;
-          const endTime = xaxis?.max;
-          if (startTime && endTime) {
-            this.startTime = new Date(startTime);
-            this.endTime = new Date(endTime);
-            console.log('Start Time:', this.startTime);
-            console.log('End Time:', this.endTime);
-          }
-        },
-        zoomed: (chartContext, { xaxis }) => {
-          this.startTime = xaxis?.min ? new Date(xaxis.min) : null;
-          this.endTime = xaxis?.max ? new Date(xaxis.max) : null;
-
-          this.displayTimeRange();
-        },
-        mouseMove: (event) => {
-          const rect = event.target.getBoundingClientRect();
-          const offsetX = event.clientX - rect.left;
-          console.log('Mouse X:', offsetX);
-        },
-      }
-    },
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: "bottom",
-            offsetX: -10,
-            offsetY: 0
+        shared: false,
+        intersect: true,
+        x: {
+          formatter: (value) => {
+            const date = new Date(value);
+            return date.toLocaleDateString();
           }
         }
-      }
-    ],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-      }
-    },
-    xaxis: {
-      type: 'datetime',
-      tickAmount: 'dataPoints',
-      labels: {
-        format: 'dd MMM',
-        show: true,
-      rotate: 0,
       },
-      min: undefined, 
-      max: undefined
-    },
-    fill: {
-      opacity: 1,
-    },
-    legend: {
-      position: 'right',
-      offsetX: 0,
-      offsetY: 50,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    tooltip: {
-      enabled: true,
-      shared: false,  
-      intersect: true,
-      x: {
-        formatter: (value) => {
-          const date = new Date(value);
-          return date.toLocaleDateString();
-        }
+      yaxis: {
+        labels: {
+          formatter: function (value) {
+            return value.toFixed(0);
+          }
+        },
       }
-    },
-    yaxis: {
-      labels: {
-        formatter: function (value) {
-          return value.toFixed(0); 
-        }
-      },
-    }
-  };
-}
-
-getSeriesData(dataList: any[]): ApexAxisChartSeries {
-  const dataPoints = ['Success', 'Error', 'Warning', 'Blocked'];
-  return dataPoints.map(point => {
-    let color;
-
-    switch (point) {
-      case 'Success':
-        color = '#33c7ff';
-        break;
-      case 'Error':
-        color = '#ff4c33';
-        break;
-      case 'Warning':
-        color = '#ff6833';
-        break;
-      default:
-        color = '#ff3333';
-    }
-
-    return {
-      name: point,
-      data: dataList.map(item => {
-        const dateParts = item.fromTimeInStr.split('-');
-        const year = parseInt(dateParts[0]);
-        const month = parseInt(dateParts[1]) - 1;
-        const day = parseInt(dateParts[2]);
-
-        const pointData = item.dataPointList.find(d => d.name === point);
-        return [
-          Date.UTC(year, month, day), 
-          pointData ? pointData.value : 0
-        ];
-      }),
-      color: color,
     };
-  });
-}
+  }
+
+  getSeriesData(dataList: any[]): ApexAxisChartSeries {
+    const dataPoints = ['Success', 'Error', 'Warning', 'Blocked'];
+    return dataPoints.map(point => {
+      let color;
+
+      switch (point) {
+        case 'Success':
+          color = '#33c7ff';
+          break;
+        case 'Error':
+          color = '#ff4c33';
+          break;
+        case 'Warning':
+          color = '#ff6833';
+          break;
+        default:
+          color = '#ff3333';
+      }
+
+      return {
+        name: point,
+        data: dataList.map(item => {
+          const dateParts = item.fromTimeInStr.split('-');
+          const year = parseInt(dateParts[0]);
+          const month = parseInt(dateParts[1]) - 1;
+          const day = parseInt(dateParts[2]);
+
+          const pointData = item.dataPointList.find(d => d.name === point);
+          return [
+            Date.UTC(year, month, day),
+            pointData ? pointData.value : 0
+          ];
+        }),
+        color: color,
+      };
+    });
+  }
 
 
 
-  
+
   displayTimeRange(): void {
     const formattedStartTime = this.datePipe.transform(this.startTime, 'MMM d, hh:mm a', '+0530');
     const formattedEndTime = this.datePipe.transform(this.endTime, 'MMM d, hh:mm a', '+0530');
-    
+
     const timeRange = `${formattedStartTime} to ${formattedEndTime}`;
-    console.log(timeRange); 
+    console.log(timeRange);
     this.app_service.dataTransmitter(timeRange);
   }
-  
 
 
-  getLogsChart(){
+
+  getLogsChart() {
+
+
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+
+
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {
-      "timeSpanEnum":"LAST_7_DAYS",
-      "viewId":this.view.viewId,
-      "projectId":this.service_data.UserDto.ProjectDTO.P_ID,
-      "limitBy":20,
-      "offset":0,
-      "widgetType":"ESS_LOG_TIMEGRAPH_WIDGET"
-  })
-    .subscribe({
-      next: (result: any) => {
-      window.loadingStop("#Env_manager_main_right");
-      this.chartData = result    
-        this.createChart();
-      },
-      error: (error: any) => {
-        window.loadingStop("#Env_manager_main_right");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
+      "timeSpanEnum": "LAST_7_DAYS",
+      "viewId": this.view.viewId,
+      "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
+      "limitBy": 20,
+      "offset": 0,
+      "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
+    })
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#Env_manager_main_right");
+          this.chartData = result
+          this.createChart();
+        },
+        error: (error: any) => {
+          window.loadingStop("#Env_manager_main_right");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
   }
-  getViewLogs(){
+  getViewLogs() {
     debugger;
     window.loadingStart("#Env_manager_main_right", "Please wait");
-    //let ajax_url =   environment.BASE_OPKEY_URL+"/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
-    let ajax_url =   "https://myqlm.preprod.opkeyone.com/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    this.app_service.make_post_server_call(ajax_url, {"timeSpanEnum":"LAST_7_DAYS","viewId":this.view.viewId,"projectId":this.service_data.UserDto.ProjectDTO.P_ID,"logToSearch":"","limitBy":20,"offset":0, "widgetType":"ESS_LOG_DATA_WIDGET"})
-    .subscribe({
-      next: (result: any) => {
-        debugger;
-      window.loadingStop("#Env_manager_main_right");
-      this.logDataSource = result.essLogsList
-      },
-      error: (error: any) => {
-        window.loadingStop("#Env_manager_main_right");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
+
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + "/OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+    this.app_service.make_post_server_call(ajax_url, { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": "ESS_LOG_DATA_WIDGET" })
+      .subscribe({
+        next: (result: any) => {
+          debugger;
+          window.loadingStop("#Env_manager_main_right");
+          this.logDataSource = result.essLogsList
+        },
+        error: (error: any) => {
+          window.loadingStop("#Env_manager_main_right");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+  }
+  onSelectionChange(e) {
+    debugger
+    let dataItem = e.dataItem
+    const modalRef = this.modalService.open(ManagerRightPanelComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal-right panel-end w-75'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
       }
     });
-  }
-  onSelectionChange(e){
-    debugger
-   let dataItem = e.dataItem
-   const modalRef = this.modalService.open( ManagerRightPanelComponent,{
-    backdrop: 'static',
-    keyboard: false,
-    size: 'full',
-    centered: true,
-    windowClass: 'layout-modal-right panel-end w-75'
-  });
-  modalRef.result.then((result) => {
-  }, (response) => {
-    if (response == 'close modal') {
-      return;
-    }
-  });
-  modalRef.componentInstance.selectedItem = {callsource:'environmentManagerLogDetails',data:dataItem};
+    modalRef.componentInstance.selectedItem = { callsource: 'environmentManagerLogDetails', data: dataItem };
   }
 
-    
+
 }
