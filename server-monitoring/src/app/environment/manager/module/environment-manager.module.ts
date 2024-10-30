@@ -85,7 +85,8 @@ import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environ
     SelectedJourneyComponent,
     SelectedJourneyInnerComponent,
     ViewJourneySnapshotComponent,
-    ViewJourneyErrorComponent
+    ViewJourneyErrorComponent,
+    EnvironmentManagerWidgetsGaugeMeterComponent
   ]
 })
 export class EnvironmentManagerModule { }
