@@ -1,0 +1,60 @@
+#chart {
+    margin-bottom: 20px;
+  }
+  
+  .chart-labels {
+    font-size: 12px;
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+  }
+  .system-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .cpu, .ram, .overall-health {
+    text-align: center;
+  }
+  
+  .cpu h2, .ram h2, .overall-health h2 {
+    color: green;
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .cpu p, .ram p, .overall-health p {
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+  }
+  
+  #chart {
+    margin-bottom: 10px;
+  }
+  
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: gray;
+    margin-top: 5px;
+  }
+  
+  .start-label {
+    color: red;
+    margin-left: 5px;
+  }
+  
+  .center-label {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .end-label {
+    color: red;
+    margin-right: 5px;
+  }

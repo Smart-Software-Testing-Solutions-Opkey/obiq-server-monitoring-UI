@@ -1,1 +1,36 @@
-<p>environment-manager-widgets-health-bars works!</p>
+<div class="system-info">
+    <div class="cpu">
+      <h2>{{ cpuUsage.toFixed(2) }}%</h2>
+      <p>CPU</p>
+    </div>
+    <div class="ram">
+      <h2>{{ ramUsage.toFixed(2) }}%</h2>
+      <p>RAM</p>
+    </div>
+    <div class="overall-health">
+      <h2>{{ overallHealth }}</h2>
+      <p>Current Health</p>
+    </div>
+  </div>
+  
+  <!-- Uptime bar chart -->
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [tooltip]="chartOptions.tooltip"
+      [legend]="chartOptions.legend"
+      [colors]="chartOptions.colors">
+    </apx-chart>
+  </div>
+  
+  <!-- Additional HTML for start and end labels -->
+  <div class="chart-labels">
+    <span class="start-label">90 Days Ago</span>
+    <span class="center-label">92.2% uptime</span>
+    <span class="end-label">Yesterday</span>
+  </div>

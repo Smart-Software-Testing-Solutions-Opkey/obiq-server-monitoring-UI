@@ -84,7 +84,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
               formatter: function (val) {
                 return parseFloat(val.toString()).toFixed(2) + "%";
               },
-              color: "#111",
+              color: "#4cff33",
               fontSize: "22px",
               show: true
             }
