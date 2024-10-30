@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -16,6 +16,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     public app_service: AppService,
     public dataService: AppDataService,
     private modalService: NgbModal,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -23,7 +24,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   Selected_grid_dataSource: any;
   selected_grid_System_Diagnostics:any;
   Show_Project_Access: boolean = false;
-
+  receivedAccessType:any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
   
     debugger;
@@ -31,6 +32,37 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
   }
   ngOnInit() {
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        debugger;
+        this.receivedAccessType = data;
+        console.log(this.receivedAccessType,"recived==========")
+        this.selectedAccessType = this.receivedAccessType.AccessType
+        this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
+        if(this.obj_configuration_setting.AccessType == "SHARED"){
+          this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
+            userId: item.U_ID,
+            permmission: item.permission === "EDIT" ? "ALL" : item.permission
+          }));
+        }
+        else if(this.obj_configuration_setting.AccessType == "PUBLIC"){
+          
+          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+           if(this.receivedAccessType.AccessPermisions.EDIT == true){
+            this.obj_configuration_setting.selectedUids.permmission = "ALL";
+           }
+           else{
+            this.obj_configuration_setting.selectedUids.permmission = "VIEW"
+           }
+        }
+        else{
+            this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+          this.obj_configuration_setting.selectedUids.permmission = "ALL";
+
+        }
+        this.cdr.detectChanges();
+      }
+    });
     this.get_all_summary(this.obj_configuration_setting)
   }
 

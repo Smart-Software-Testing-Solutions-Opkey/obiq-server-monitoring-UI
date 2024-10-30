@@ -24,8 +24,8 @@ export class ConfigureRightPanelComponent {
   accessTypeObj = {
     AccessType: "PRIVATE",
     AccessPermisions: {
-      "canView":true,
-      "canEdit":true
+      "VIEW":true,
+      "EDIT":false
     }
   };
   Shared_Access_Type_Obj: { U_ID: string, permission: string }[] = [];
@@ -34,14 +34,26 @@ export class ConfigureRightPanelComponent {
    this.showSharedInput = false;
    this.accessTypeObj.AccessType = type;
    this.Shared_Access_Type_Obj = [];
-   this. accessTypeObj = {
-    AccessType: "PRIVATE",
-    AccessPermisions: {
-      "canView":true,
-      "canEdit":true
-    }
-  };
-   if(type == "SHARED"){
+   if(type == "PUBLIC"){
+    this. accessTypeObj = {
+      AccessType: "PUBLIC",
+      AccessPermisions: {
+        "VIEW":true,
+        "EDIT":false
+      }
+    };
+   }
+   else  if(type == "PRIVATE"){
+    this. accessTypeObj = {
+      AccessType: "PRIVATE",
+      AccessPermisions: {
+        "VIEW":true,
+        "EDIT":false
+      }
+    };
+   }
+  
+   else if(type == "SHARED"){
     this.showSharedInput = true;
     this.Shared_Access_Type_Obj["AccessType"] = type;
     this.perform_Shared_Access_Operation();
@@ -55,11 +67,11 @@ export class ConfigureRightPanelComponent {
     event.stopPropagation();
   
    if(option == "view"){
-    this.accessTypeObj.AccessPermisions.canEdit = false;
+    this.accessTypeObj.AccessPermisions.EDIT = false;
    }
    else if(option == "edit"){
-    this.accessTypeObj.AccessPermisions.canView = true
-    this.accessTypeObj.AccessPermisions.canEdit = true
+    this.accessTypeObj.AccessPermisions.VIEW = true
+    this.accessTypeObj.AccessPermisions.EDIT = true
    }
  
   }
@@ -170,7 +182,7 @@ export class ConfigureRightPanelComponent {
       this.addedUsers.push(userToAdd);
       this.Shared_Access_Type_Obj.push({
         U_ID: userToAdd.U_ID,
-        permission: 'Can Edit'
+        permission: 'EDIT'
       });
     }
   
@@ -197,7 +209,21 @@ export class ConfigureRightPanelComponent {
   
 
   InviteUsers(){
+    debugger;
+    let finalAccessObj;
 
+  if (this.Shared_Access_Type_Obj.length === 0) {
+    
+    finalAccessObj = this.accessTypeObj;
+  } else {
+  
+    finalAccessObj = this.Shared_Access_Type_Obj;
+  }
+    this.app_service.dataTransmitter(finalAccessObj);
+    this.close_model()
+  }
+  close_model() {
+    this.activeModal.dismiss('close modal');
   }
 
   close_right_panel(){
