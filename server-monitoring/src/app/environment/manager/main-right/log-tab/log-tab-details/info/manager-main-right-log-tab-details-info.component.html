@@ -1,0 +1,9 @@
+<section class="logs-tab-info">
+    <div class="left-section">
+        <a href="javascript: void(0)" (click)="selectedTab = 'summarizedLog' ">Summarized logs</a>
+        <a href="javascript: void(0)" (click)="selectedTab = 'fullLog' ">Full logs</a>
+    </div>
+    <div class="right-section">
+        {{ selectedData[selectedTab] }}
+    </div>
+</section>

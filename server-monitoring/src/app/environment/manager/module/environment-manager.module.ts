@@ -31,6 +31,7 @@ import { ViewJourneySnapshotComponent } from '../main-right/log-tab/log-tab-deta
 import { ViewJourneyErrorComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-error/view-journey-error.component';
 import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environment-manager-widgets-gauge-meter/environment-manager-widgets-gauge-meter.component';
 import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environment-manager-widgets-health-bars/environment-manager-widgets-health-bars.component';
+import { ManagerMainRightLogTabDetailsInfoComponent } from '../main-right/log-tab/log-tab-details/info/manager-main-right-log-tab-details-info.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environ
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
     EnvironmentManagerWidgetsGaugeMeterComponent,
-    EnvironmentManagerWidgetsHealthBarsComponent
+    EnvironmentManagerWidgetsHealthBarsComponent,
+    ManagerMainRightLogTabDetailsInfoComponent
+
 
   ],
   imports: [
