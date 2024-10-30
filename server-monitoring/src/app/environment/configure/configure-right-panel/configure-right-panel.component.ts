@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 
@@ -12,6 +13,7 @@ export class ConfigureRightPanelComponent {
   constructor(    
     public dataService: AppDataService,
      public app_service: AppService,
+     private activeModal: NgbActiveModal,
   ) { }
   @Input() selectedItem: any;
   showSharedInput:boolean = false;
@@ -196,5 +198,9 @@ export class ConfigureRightPanelComponent {
 
   InviteUsers(){
 
+  }
+
+  close_right_panel(){
+    this.activeModal.dismiss('close modal');
   }
 }
