@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { environment } from 'src/environments/environment';
 
 import {
   ChartComponent,
@@ -13,6 +14,8 @@ import {
   ApexFill,
   ApexGrid
 } from "ng-apexcharts";
+import { AppDataService } from "src/app/services/app-data.service";
+import { AppService } from "src/app/services/app.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -37,15 +40,21 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   dataObj = {
-    totalerrors : 4,
-    errorPercentage:90,
-    interval:'Last day'
+    total : 0,
+    percentage:0,
+    msg:'Last day'
   }
-  constructor() {
+  constructor(
+    public service_data: AppDataService,
+    public app_service: AppService,
+
+
+  ) {
     
   }
   dataSet = []
   bindChart(){
+    debugger
     this.chartOptions = {
       series: [
         {
@@ -138,9 +147,11 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   }
   typeEnum:string = ''
   chartColor:string = ''
-  @Input('child_data') set child_data({ typeEnum }) {
+  view:any
+  @Input('child_data') set child_data({ typeEnum,view }) {
     debugger
    this.typeEnum = typeEnum
+   this.view = view
   
  
 
@@ -167,6 +178,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         },
        
       ]
+      this.getChartData('ESS_LOG_ERROR_WIDGET')
+
     }
     else if(type == 'Success'){
       this.dataSet =  [
@@ -188,6 +201,9 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         },
        
       ]
+
+     this.getChartData('ESS_LOG_SUCESS_WIDGET')
+
     }
     else if(type == 'Warning'){
       this.dataSet =  [
@@ -209,7 +225,49 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         },
        
       ]
+      this.getChartData('ESS_LOG_WARNING_WIDGET')
     }
+    
+  }
+dataDir = ''
+  getChartData(type){
+   
+      debugger;
+    
+  
+      let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+      this.app_service.make_post_server_call(ajax_url, { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" })
+        .subscribe({
+          next: (result: any) => {
+            debugger;
+            if(result){
+
+              this.dataObj.total = result.count
+              this.dataObj.percentage = result.percentdiff
+              this.dataDir = result.direction
+              this.dataSet = []
+              result.dataPlotList.forEach((ele,ind) => {
+                let obj = {
+                  x:ind,
+                  y:ele.percentdiff
+                }
+                this.dataSet.push(obj)
+              });
+
+              this.checkStyling();
+
+            }
+
+          },
+          error: (error: any) => {
+            window.loadingStop("#Env_manager_main_right");
+            console.warn(error);
+          },
+          complete: () => {
+            console.log("Completed");
+          }
+        });
+    
   }
   @ViewChild('resizableDiv', { static: true }) resizableDiv: ElementRef<any>;
   ngAfterViewInit(): void {
@@ -227,7 +285,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
       this.bindChartData('Warning')
   
     }
-    this.checkStyling();
+   
   }
   width = 0
   height = 0
