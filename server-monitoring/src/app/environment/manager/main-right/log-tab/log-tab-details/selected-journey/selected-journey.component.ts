@@ -39,7 +39,7 @@ export class SelectedJourneyComponent implements OnInit {
 
   getUserJourneyDtoByUserIdSessionId() {
 
-    let form_url = environment.BASE_OPKEY_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getUserJourneyDtoByUserIdSessionId";
     let form_data = {
       "sessionId": this.selected_sessionId
     }
