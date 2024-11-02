@@ -9,6 +9,7 @@ import { ConfigurationSettingsTestAutomationComponent } from './configure/config
   declarations: [    
   
     
+  
   ],
   imports: [
     CommonModule,

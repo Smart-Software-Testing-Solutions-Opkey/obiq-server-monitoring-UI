@@ -33,6 +33,7 @@ import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environ
 import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environment-manager-widgets-health-bars/environment-manager-widgets-health-bars.component';
 import { ManagerMainRightLogTabDetailsInfoComponent } from '../main-right/log-tab/log-tab-details/info/manager-main-right-log-tab-details-info.component';
 import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progress-bars/environment-manager-widgets-progress-bars.component';
+import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-details/selected-trace/selected-trace-inner/selected-trace-inner.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progr
     EnvironmentManagerWidgetsGaugeMeterComponent,
     EnvironmentManagerWidgetsHealthBarsComponent,
     ManagerMainRightLogTabDetailsInfoComponent,
-    EnvironmentManagerWidgetsProgressBarsComponent
+    EnvironmentManagerWidgetsProgressBarsComponent,
+    SelectedTraceInnerComponent
 
 
   ],
@@ -93,7 +95,8 @@ import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progr
     SelectedJourneyInnerComponent,
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
-    EnvironmentManagerWidgetsGaugeMeterComponent
+    EnvironmentManagerWidgetsGaugeMeterComponent,
+    SelectedTraceInnerComponent
   ]
 })
 export class EnvironmentManagerModule { }
