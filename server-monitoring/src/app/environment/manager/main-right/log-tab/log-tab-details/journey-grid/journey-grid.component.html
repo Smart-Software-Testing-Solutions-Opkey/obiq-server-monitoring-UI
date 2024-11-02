@@ -1,4 +1,5 @@
-<div *ngIf="calsource != null" id="div-journey">
+@if(calsource){
+<div id="div-journey">
     <div *ngIf="obj_selected_journey.isDisplay_main" class="trace">
         <kendo-grid [data]="datasource_grid_journey" [selectable]="true" (cellClick)="onSelectionChange($event)">
     
@@ -30,3 +31,12 @@
         <app-selected-journey [child_data]="{obj_selected_journey: obj_selected_journey, calsource: calsource}"></app-selected-journey>
     </div>
 </div>
+} 
+@else {
+    <div class="no-data-found" style="height: 17rem !important;">
+        <div class="no-data-found-content">
+            <!-- <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data"> -->
+            <p class="no-data-found-content-text">No Journey available</p>
+        </div>
+    </div>
+}
