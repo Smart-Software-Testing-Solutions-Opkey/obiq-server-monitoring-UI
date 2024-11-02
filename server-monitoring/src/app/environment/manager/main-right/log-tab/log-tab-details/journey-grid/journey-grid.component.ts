@@ -15,6 +15,7 @@ export class JourneyGridComponent implements OnInit {
 
   calsource = null;
   selectedData = null;
+  noDataMsg: string = "Please wait fetching data...";
   @Input('child_data') set child_data({ selectedData }) {
     debugger
     this.selectedData = selectedData
@@ -69,6 +70,7 @@ export class JourneyGridComponent implements OnInit {
       this.datasource_grid_journey = result;
       this.obj_selected_journey.isDisplay_main = true;
       this.calsource = 'multiple_journey';
+      this.noDataMsg = "No Journey available";
     }
 
   }

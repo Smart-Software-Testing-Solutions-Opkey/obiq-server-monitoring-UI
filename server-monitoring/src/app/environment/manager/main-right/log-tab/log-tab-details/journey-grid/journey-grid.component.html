@@ -5,13 +5,25 @@
     
             <kendo-grid-column title="Module" [width]="190">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <span class="layout-text-obiq">{{dataItem.subModuleName}}</span>
+                    <span class="layout-text-obiq">{{dataItem?.moduleName}}</span>
                 </ng-template>
             </kendo-grid-column>
     
             <kendo-grid-column title="Sub Activity" [width]="190">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <span class="layout-text-obiq">{{dataItem.subActivityName}}</span>
+                    <span class="layout-text-obiq">{{dataItem?.subActivityName}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column title="Time" [width]="190">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class="layout-text-obiq">{{dataItem?.timeStampStr}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column title="Status" [width]="190">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class="layout-text-obiq">{{dataItem?.subActivityStatus}}</span>
                 </ng-template>
             </kendo-grid-column>
     
@@ -36,7 +48,7 @@
     <div class="no-data-found" style="height: 17rem !important;">
         <div class="no-data-found-content">
             <!-- <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data"> -->
-            <p class="no-data-found-content-text">No Journey available</p>
+            <p class="no-data-found-content-text">{{noDataMsg}}</p>
         </div>
     </div>
 }
