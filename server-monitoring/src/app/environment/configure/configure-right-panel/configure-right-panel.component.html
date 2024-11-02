@@ -17,14 +17,14 @@
     </div>
 
     <div class="feature-rp-body has-footer pd-rp pt-3">
-        <div  class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
             <div class="col-sm-12 px-0">
                 <i class="oci oci-public-off public-icon"></i>
                 Private
             </div>
         </div>
 
-        <div  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PUBLIC'}"  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
             <div class="col-sm-12 px-0 d-flex-between">
                 <span>
                     <i class="oci oci-public public-icon"></i>
@@ -33,7 +33,7 @@
 
                 <div class="dropdown dropdown-text-color">
                     <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
-                        data-bs-toggle="dropdown">
+                        data-bs-toggle="dropdown" data-bs-auto-close= "outside">
                         Can View
                     </button>
                     <ul class="dropdown-menu">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
             <div class="col-sm-12 px-0 ">
                 <i class="oci oci-share public-icon"></i>
                 Shared

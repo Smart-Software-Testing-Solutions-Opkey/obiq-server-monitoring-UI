@@ -8,6 +8,10 @@
       background: #F9FAFB;
       border-radius: 0.5rem;
       padding: 0.5rem 1rem;
+      &.active{
+        background-color: #e6fbfe !important;
+      }
+      
     }
   
     .public-icon {

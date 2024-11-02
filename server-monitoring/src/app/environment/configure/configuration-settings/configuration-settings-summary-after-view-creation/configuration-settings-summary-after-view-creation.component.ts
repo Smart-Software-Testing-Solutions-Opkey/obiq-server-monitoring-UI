@@ -14,7 +14,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     public dataService: AppDataService) {
   }
   obj_configuration_setting: any;
-  selectedAccessType: string;
+  selectedAccessType: string = 'PRIVATE';
   accessTypes: string[] = ['PUBLIC', 'PRIVATE', 'SHARED'];
   users: any[] = [];
   selectedUsers: any[] = [];
@@ -93,8 +93,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
       obj_Update_View["accessType"] = this.selectedAccessType,
       obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
-    obj_Update_View["authorizedUsers"] = this.selectedAccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.selectedAccessType === 'PUBLIC' ? [] : this.selectedUsers;
-    return obj_Update_View;
+      obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
+      return obj_Update_View;
   }
   Update_ViewAccess_Type() {
 
@@ -121,7 +121,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   getAllProjects() {
     debugger;
    
-    let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
 

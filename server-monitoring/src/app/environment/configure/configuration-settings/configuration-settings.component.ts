@@ -35,7 +35,8 @@ export class ConfigurationSettingsComponent {
       "canEdit": true
     },
     selectedUids: {
-      "permmission":""
+      "userId":"00000000-0000-0000-0000-000000000000",
+      "permmission":"ALL"
     },
     selected_datasource: null,
     selected_erp_analytics: [],
@@ -442,7 +443,7 @@ export class ConfigurationSettingsComponent {
     obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
     obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
     obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType === "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType
-    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: this.service_data.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
+    obj_Create_View["authorizedUsers"] = (this.obj_configuration_setting.AccessType === 'PRIVATE' || this.obj_configuration_setting.AccessType === '') ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission }] : this.obj_configuration_setting.selectedUids;
     obj_Create_View["linkedDataSource"] = this.createLinkedDataSourceObject();
     return obj_Create_View;
   }

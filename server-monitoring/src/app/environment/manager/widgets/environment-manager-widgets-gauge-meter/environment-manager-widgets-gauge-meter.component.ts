@@ -10,6 +10,7 @@ import {
   ChartComponent,
   ApexStroke
 } from "ng-apexcharts";
+import { environment } from "src/environments/environment";
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -31,10 +32,14 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   ) { }
   title:string = ''
   public data: number = 0;
-  @Input('child_data') set child_data({ title,data }) {
+  view:any;
+  widgetType:any;
+  @Input('child_data') set child_data({ title,data,view,widgetType}) {
     debugger
    this.title = title
    this.data = parseFloat(data) || 0;
+   this.view = view;
+   this.widgetType = widgetType;
   }
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -42,80 +47,87 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     
   }
   ngOnInit(): void {
-    this.gaugeChart()
+    this.get_Redis_Cpu_Usage(this.view,this.widgetType)
+  
   }
   ngAfterViewInit(): void {
     
   }
-  gaugeChart(){
-    this.chartOptions = {
-      series: [this.data], // Adjust this value to set the percentage
-      chart: {
-        height: 150,
-        type: "radialBar",
-        toolbar: {
-          show: false
-        }
+  get_Redis_Cpu_Usage(view,widgetType){
+    debugger;
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+
+    let form_data = { viewId: view.viewId,projectId:this.dataService.UserDto.ProjectDTO.P_ID,widgetType:widgetType };
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
+      next: (result: any) => {
+        window.loadingStop("#Env_manager_main_right");
+        this.gaugeChart(result.percent)
       },
-      plotOptions: {
-        radialBar: {
-          startAngle: -90,
-          endAngle: 90,
-          hollow: {
-            margin: 0,
-            size: "70%",
-            background: "transparent"
-          },
-          track: {
-            background: "#e7e7e7",
-            strokeWidth: "100%",
-            margin: 0 // Removes extra space around the track
-          },
-          dataLabels: {
-            show: true,
-            name: {
-              offsetY: -10,
-              show: true,
-              color: "#888",
-              fontSize: "16px"
-            },
-            value: {
-              offsetY: 5,
-              formatter: function (val) {
-                return parseFloat(val.toString()).toFixed(2) + "%";
-              },
-              color: "#4cff33",
-              fontSize: "22px",
-              show: true
-            }
-          }
-        }
+      error: (error: any) => {
+        window.loadingStop("#Env_manager_main_right");
+        console.warn(error);
       },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.5,
-          gradientToColors: ["#00E396"], // Progress bar color
-          inverseColors: false,
-          stops: [0, 100],
-          colorStops: [
-            {
-              offset: 0,
-              color: "#00E396",
-              opacity: 1
-            }
-          ]
-        }
-      },
-      stroke: {
-        lineCap: "butt", // Makes the ends of the gauge round
-        colors: ["#00E396"]
-      },
-      labels: [""]
-    };
-  
+      complete: () => {
+        console.log("Completed");
+      }
+    });
   }
+  gaugeChart(percent) {
+    this.chartOptions = {
+        series: [percent],
+        chart: {
+            height: 200,
+            type: "radialBar",
+            toolbar: {
+                show: false
+            }
+        },
+        plotOptions: {
+            radialBar: {
+                startAngle: -90,
+                endAngle: 90,
+                hollow: {
+                    margin: 0,
+                    size: "70%",  
+                    background: "transparent"
+                },
+                track: {
+                    background: "#e0e0e0",  
+                    strokeWidth: "100%",
+                    margin: 0
+                },
+                dataLabels: {
+                    show: true,
+                    name: {
+                        show: false  
+                    },
+                    value: {
+                        offsetY: 5,
+                        formatter: function (val) {
+                            return parseFloat(val.toString()).toFixed(2) + "%";
+                        },
+                        color: "#268144", 
+                        fontSize: "22px",
+                        show: true
+                    }
+                }
+            }
+        },
+        fill: {
+            colors: ["#268144"],  
+            type: "solid"  
+        },
+        stroke: {
+            lineCap: "butt",  
+            width: 10  
+        },
+        labels: [""]  
+    };
+}
+
+
+
+
  
 }
