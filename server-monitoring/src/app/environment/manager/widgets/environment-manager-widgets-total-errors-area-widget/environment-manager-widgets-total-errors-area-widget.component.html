@@ -14,15 +14,22 @@
       <div class="col-sm-7 px-0">
         <div class="row mx-0 align-items-center">
           <div class="col-sm-3 ps-0">
-            <span class="error-value" style="font-size: 1.5rem;">0{{dataObj.totalerrors}}</span>
+            <span class="error-value" style="font-size: 1.2rem;">{{dataObj.total}}</span>
           </div>
           <div class="col-sm-9 ps-3">
             <div class="error-value-last" style="color: #667085;">
               <span class="error-percentage">
-                <i class="oci oci-arrow-up pe-1"></i>
-                {{dataObj.errorPercentage}}%
+                @if(this.dataDir == 'up'){
+
+                  <i class="oci oci-arrow-up pe-1"></i>
+                }
+                @else if(this.dataDir == 'down'){
+                  <i class="oci oci-arrow-down pe-1"></i>
+
+                }
+                {{dataObj.percentage}}%
               </span>
-              {{dataObj.interval}}
+              {{dataObj.msg}}
             </div>
           </div>
         </div>

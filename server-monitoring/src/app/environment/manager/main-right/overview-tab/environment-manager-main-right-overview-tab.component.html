@@ -2,13 +2,13 @@
 <div class="main">
     <div class="row mx-0">
         <div class="col-sm-4 mb-3 ps-0">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error'}"></app-environment-manager-widgets-total-errors-area-widget>
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
         <div class="col-sm-4 mb-3">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning'}"></app-environment-manager-widgets-total-errors-area-widget>
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
         <div class="col-sm-4 mb-3 pe-0">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success'}"></app-environment-manager-widgets-total-errors-area-widget>
+            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
         <div class="col-sm-3 mb-3 ps-0">
             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis Cpu Usage',data:'1.62%'}"></app-environment-manager-widgets-gauge-meter>
