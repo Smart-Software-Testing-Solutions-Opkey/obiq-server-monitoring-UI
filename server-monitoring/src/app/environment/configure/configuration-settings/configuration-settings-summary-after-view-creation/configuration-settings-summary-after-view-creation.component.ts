@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
 
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
@@ -9,9 +11,13 @@ import { environment } from 'src/environments/environment';
   styleUrl: './configuration-settings-summary-after-view-creation.component.scss'
 })
 export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit {
+  receivedAccessType: any;
   constructor(
     public app_service: AppService,
-    public dataService: AppDataService) {
+    public dataService: AppDataService,
+    public modalService: NgbModal,
+    private cdr: ChangeDetectorRef
+  ) {
   }
   obj_configuration_setting: any;
   selectedAccessType: string = 'PRIVATE';
@@ -35,6 +41,23 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   onCellClick(event) {
 
   }
+  OnAccessTypeClick() {
+
+    const modalRef = this.modalService.open(ConfigureRightPanelComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal-right panel-end'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting };
+  }
   onConfigurationSettingChange(): void {
     if (this.obj_configuration_setting) {
 
@@ -53,6 +76,37 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
 
   ngOnInit(): void {
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        debugger;
+        this.receivedAccessType = data;
+        console.log(this.receivedAccessType, "recived==========")
+        this.selectedAccessType = this.receivedAccessType.AccessType
+        this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
+        if (this.obj_configuration_setting.AccessType == "SHARED") {
+          this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
+            userId: item.U_ID,
+            permmission: item.permission === "EDIT" ? "ALL" : item.permission
+          }));
+        }
+        else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
+
+          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+          if (this.receivedAccessType.AccessPermisions.EDIT == true) {
+            this.obj_configuration_setting.selectedUids.permmission = "ALL";
+          }
+          else {
+            this.obj_configuration_setting.selectedUids.permmission = "VIEW"
+          }
+        }
+        else {
+          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+          this.obj_configuration_setting.selectedUids.permmission = "ALL";
+
+        }
+        this.cdr.detectChanges();
+      }
+    });
   }
   ngAfterViewInit(): void {
 

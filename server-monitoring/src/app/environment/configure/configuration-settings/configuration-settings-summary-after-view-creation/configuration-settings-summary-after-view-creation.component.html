@@ -5,33 +5,14 @@
         <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
         
         <div class="dropdown access-type-layout">
-            <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
+            <button (click)="OnAccessTypeClick()"type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
               <span>
-                {{ selectedAccessType | titlecase }}
+                {{ selectedAccessType }}
               </span>
             </button>
             <ul class="dropdown-menu w-100">
                 <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
-                    {{ option | titlecase}}
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="Show_Project_Access" class="dropdown mt-3">
-            <button type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle font-14px" data-bs-toggle="dropdown">
-              Select Users
-            </button>
-            <ul class="dropdown-menu p-0 w-100 dropdown-menu-scrollable">
-                <li *ngFor="let user of users" class="dropdown-item">
-                    <div class="form-check">
-                        <input
-                            class="form-check-input chekbox-custom me-2"
-                            type="checkbox"
-                            [id]="user.U_ID"
-                            (change)="onUserSelect(user, $event)">
-                        <label class="form-check-label" [for]="user.U_ID">
-                            {{ user.UserName }}
-                        </label>
-                    </div>
+                    {{ option }}
                 </li>
             </ul>
         </div>
