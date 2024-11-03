@@ -347,7 +347,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-    padding: 0.5rem 0rem 0.5rem 1.5rem;
+    padding: 0.5rem 0rem 0.5rem 1rem;
     border-bottom: 1px solid #ddd;
 
     .info-item {
@@ -358,9 +358,9 @@
             text-decoration: none;
             .form-label {
                 color: #116173;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 font-weight: normal;
-                padding-right: 0.5rem;
+                padding-right: 0.2rem;
                 margin-bottom: 0;
             }
             .item-count {
@@ -368,7 +368,7 @@
                 color: #116173;
                 font-size: 0.75rem;
                 font-weight: 500;
-                padding: 0rem 0.25rem;
+                padding: 0rem 0.2rem;
                 border-radius: 50%;
             }
 
@@ -387,7 +387,7 @@
         }
 
         &+.info-item {
-            padding-left: 1rem;
+            padding-left: 0.8rem;
         }
     }
 }
