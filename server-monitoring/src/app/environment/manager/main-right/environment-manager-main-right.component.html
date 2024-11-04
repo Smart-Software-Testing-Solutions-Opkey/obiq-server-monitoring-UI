@@ -82,7 +82,7 @@
                 <div class="filter-content">
                     <div class="dropdown layout-btn-group-time">
                         
-                       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false">
                             <button type="button" class="btn btn-default">
                                 <i class="oci oci-chevron-left font-12px"></i>
                             </button>
@@ -144,29 +144,40 @@
                                             <div class="row mx-0">
                                                 <div class="col-sm-6 px-0">
                                                     <div class="date-time-text">
-                                                        sep 13, 2024
+                                                        <kendo-label text="Start Date and Time">
+                                                                <kendo-datetimepicker 
+                                                                [format]="dateTimeFormat"
+                                                                [(value)]="fromDatevalue"
+                                                                ></kendo-datetimepicker>
+                                                          </kendo-label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 pe-0">
+                                                <!-- <div class="col-sm-6 pe-0">
                                                     <div class="date-time-text">
                                                         02:34 pm
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                         
                                         <div class="col-sm-6 pe-0">
                                             <div class="row mx-0">
                                                 <div class="col-sm-6 px-0">
-                                                    <div class="date-time-text">
-                                                        sep 13, 2024
+                                                    <div class="date-time-text" >
+                                                        <!-- sep 13, 2024 -->
+                                                        <kendo-label text="Date and Time">
+                                                            <kendo-datetimepicker
+                                                              [format]="dateTimeFormat"
+                                                              [(value)]="toDateValue"
+                                                            ></kendo-datetimepicker>
+                                                          </kendo-label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 pe-0">
+                                                <!-- <div class="col-sm-6 pe-0">
                                                     <div class="date-time-text">
                                                         02:34 pm
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -177,10 +188,10 @@
                                                 Asia/Kolkata
                                             </span>
                                             <span class="btn-layout-time">
-                                                <button type="button" class="btn btn-layout btn-bg-white px-2 py-1 me-2">
+                                                <button (click)="closeTimeFilterDropdown()" type="button" class="btn btn-layout btn-bg-white px-2 py-1 me-2">
                                                     <span>Cancel</span>
                                                 </button>
-                                                <button type="button" class="btn btn-layout btn-bg-theme px-2 py-1">
+                                                <button (click)="applyCustomFilter()" type="button" class="btn btn-layout btn-bg-theme px-2 py-1">
                                                     <span>Apply</span>
                                                 </button>
                                             </span>

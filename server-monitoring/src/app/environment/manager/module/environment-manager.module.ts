@@ -34,6 +34,8 @@ import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environ
 import { ManagerMainRightLogTabDetailsInfoComponent } from '../main-right/log-tab/log-tab-details/info/manager-main-right-log-tab-details-info.component';
 import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progress-bars/environment-manager-widgets-progress-bars.component';
 import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-details/selected-trace/selected-trace-inner/selected-trace-inner.component';
+import { LabelModule } from "@progress/kendo-angular-label";
+import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-detai
     EnvironmentConfigureModule,
     GridModule,
     NgApexchartsModule,
-    LayoutModule
+    LayoutModule,
+    LabelModule,
+    DateInputsModule
   
   ],
   providers: [DatePipe],
