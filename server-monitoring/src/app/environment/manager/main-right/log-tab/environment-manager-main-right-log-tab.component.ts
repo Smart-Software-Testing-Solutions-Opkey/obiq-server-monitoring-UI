@@ -16,6 +16,7 @@ import {
   ApexStroke,
 } from 'ng-apexcharts';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -58,12 +59,19 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   chartData: any;
   selectedKeys = []
   logDataSource = []
+  subscriptions: Subscription[] = [];
   ngOnInit(): void {
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.getLogsChart(data?.timeFilter);
+        this.getViewLogs(data?.timeFilter);
+      }
+    }))
     this.getLogsChart()
     this.getViewLogs()
   }
   ngOnDestroy(): void {
-
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   createChart(): void {
     const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList);
@@ -226,21 +234,26 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
 
 
-  getLogsChart() {
+  getLogsChart(timeFilter?: any) {
 
 
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    this.app_service.make_post_server_call(ajax_url, {
+    const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
       "viewId": this.view.viewId,
       "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
       "limitBy": 20,
       "offset": 0,
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
-    })
+    };
+    if(timeFilter?.fromTimeInMillis){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#Env_manager_main_right");
@@ -256,12 +269,17 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         }
       });
   }
-  getViewLogs() {
+  getViewLogs(timeFilter?: any) {
     debugger;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    this.app_service.make_post_server_call(ajax_url, { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": "ESS_LOG_DATA_WIDGET" })
+    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": "ESS_LOG_DATA_WIDGET" };
+    if(timeFilter?.fromTimeInMillis){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
           debugger;

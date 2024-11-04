@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -45,6 +45,18 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   selectedView: any
   selectedTab: any = {}
   availableTabs: any
+  timeFilter: Array<{name: string, value: string, timeValue: number}> = [
+    { name: '30min', value: '30 minutes', timeValue: 30},
+    { name: '60min', value: '60 minutes', timeValue: 60},
+    { name: '3hrs', value: '3 hours', timeValue: 3},
+    { name: '6hrs', value: '6 hours', timeValue: 6},
+    { name: '12hrs', value: '12 hours', timeValue: 12},
+    { name: '1mon', value: '1 month', timeValue: 1},
+    { name: '3mon', value: '3 months', timeValue: 3},
+    { name: 'setCustom', value: 'Set Custom', timeValue: 0},
+  ];
+  selectedTime: string = 'setCustom';
+  @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
   @Input('child_data') set child_data({ selectedAnalyticsType, selectedView }) {
     debugger
     this.selectedAnalyticsType = selectedAnalyticsType;
@@ -53,6 +65,26 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     }
     this.bindData()
 
+  }
+
+  onSelctTime(timeItem){
+    this.selectedTime = timeItem?.name;
+    if(this.selectedTime == "setCustom"){
+      return;
+    }
+    const fromDateTime = new Date();
+    let toDateTime = new Date(fromDateTime);
+    if(this.selectedTime.includes('min')){
+      toDateTime.setMinutes(fromDateTime.getMinutes() + timeItem?.timeValue);
+    } else if(this.selectedTime.includes("hrs")){
+      toDateTime.setHours(fromDateTime.getHours() + timeItem?.timeValue)
+    } else if(this.selectedTime.includes('mon')){
+      toDateTime.setMonth(fromDateTime.getMonth() + timeItem?.timeValue);
+    }
+
+    // console.log("from : ", fromDateTime, " To : ", toDateTime);
+    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {fromTimeInMillis: fromDateTime.getTime(), toTimeInMillis: toDateTime.getTime()}});
+    this.toggleButton.nativeElement.click();
   }
 
   get_Tab_Control_List(AnalysticsType) {

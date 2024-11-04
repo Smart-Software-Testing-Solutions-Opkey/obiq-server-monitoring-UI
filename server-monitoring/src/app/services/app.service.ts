@@ -9,6 +9,9 @@ export class AppService {
 
   private transfterSubject: BehaviorSubject<any>;
 
+  private dataStream = new BehaviorSubject<any>(null);
+  public dataStream$ = this.dataStream.asObservable();
+
   constructor(public http: HttpClient) {
     
     this.transfterSubject = new BehaviorSubject<any>(null);
@@ -22,6 +25,10 @@ export class AppService {
  
   dataReceiver(): Observable<any> {
     return this.transfterSubject.asObservable();
+  }
+
+  setStreamData(data: any): void{
+    this.dataStream.next(data);
   }
 
 
