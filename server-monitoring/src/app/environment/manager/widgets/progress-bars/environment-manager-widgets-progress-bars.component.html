@@ -1,38 +1,46 @@
 <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
-        [hideHeader]="false" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager">
+        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager">
 
 
 
-        <kendo-grid-column title="Build Name" field="Name">
+        <kendo-grid-column title="Build Name" field="subActivityName">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <span class="k_grid_text text_wrap" title="{{dataItem?.Name}}" container="body">
-                    {{dataItem?.Name}}
+                <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
+                    {{dataItem?.subActivityName}}
                 </span>
             </ng-template>
 
 
         </kendo-grid-column>
 
-
-        <kendo-grid-column title="" [width]="200">
+        @if(widgetData?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ) {
+        <kendo-grid-column  title="" [width]="200">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <div class="progress" style="border-radius: 25px;">
                     <div class="progress-bar bg-info" role="progressbar"
-                        [style.width]="dataItem?.passpercent + '%'"
-                        [title]="dataItem?.passpercent + '% pass'" style="background-color: #1C7C92 !important;" container="body"></div>
-                        <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failpercent + '% '" style="background-color: #E6FBFE !important;" [title]="dataItem?.failpercent + '% fail'" container="body"></div>
+                        [style.width]="dataItem?.passPercent  + '%'"
+                        [title]="dataItem?.passPercent + '% pass'" style="background-color: #1C7C92 !important;" container="body"></div>
+                        <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
+                        [title]="dataItem?.failPercent + '% fail'" container="body"></div>
                 </div>
             </ng-template>
 
         </kendo-grid-column>
-
-        <kendo-grid-column title="Runs" field="Runscount" [width]="100">
-
-
-
-        </kendo-grid-column>
+        }  @else {
+            <kendo-grid-column title="" field="timeStampStr" [width]="200">
+            </kendo-grid-column>
+        }
+        <ng-template kendoGridNoRecordsTemplate>
+            <div class="no-data-found" style="height: 17rem !important;">
+                <div class="no-data-found-content">
+                    <img class="no-data-found-content-img"
+                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                    <p class="no-data-found-content-text">No data available</p>
+                </div>
+            </div>
+        </ng-template>
 
 
         
