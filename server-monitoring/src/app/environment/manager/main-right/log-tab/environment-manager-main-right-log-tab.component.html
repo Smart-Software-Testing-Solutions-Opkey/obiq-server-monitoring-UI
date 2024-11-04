@@ -32,16 +32,13 @@
                 </ng-template>
             </kendo-grid-column>
 
-            <kendo-grid-column field="timeStampString" title="Date">
+            <kendo-grid-column field="timeStampString" title="Time">
             </kendo-grid-column>
-            <kendo-grid-column field="dataId" title="Host">
+            <kendo-grid-column field="userId" title="User">
             </kendo-grid-column>
-            <kendo-grid-column field="appType" title="Service">
+            <kendo-grid-column field="domainName" title="Domain">
             </kendo-grid-column>
-            <kendo-grid-column title="Content">
-                <ng-template kendoGridCellTemplate let-dataItem>
-                    {{ dataItem.domainName }} - {{ dataItem.logType }}
-                </ng-template>
+            <kendo-grid-column field="logName"  title="Log Name">
             </kendo-grid-column>
 
             <ng-template kendoGridNoRecordsTemplate>

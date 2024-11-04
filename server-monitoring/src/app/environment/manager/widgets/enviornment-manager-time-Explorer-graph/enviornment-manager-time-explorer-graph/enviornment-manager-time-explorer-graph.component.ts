@@ -103,14 +103,18 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
         {
           breakpoint: 480,
           options: {
-            legend: { position: "bottom", offsetX: -10, offsetY: 0 }
+            legend: {
+              show: false, 
+            }
           }
         }
       ],
       plotOptions: { bar: { horizontal: false } },
       xaxis: { type: 'datetime', labels: { format: 'dd MMM' } },
       fill: { opacity: 1 },
-      legend: { position: 'right' },
+      legend: {
+        show: false, 
+      },
       dataLabels: { enabled: false },
       tooltip: {
         enabled: true,
@@ -137,7 +141,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
 
   getColor(point: string): string {
     switch (point) {
-      case 'Success': return '#33c7ff';
+      case 'Success': return '#268144';
       case 'Error': return '#ff4c33';
       case 'Warning': return '#ff6833';
       default: return '#ff3333';

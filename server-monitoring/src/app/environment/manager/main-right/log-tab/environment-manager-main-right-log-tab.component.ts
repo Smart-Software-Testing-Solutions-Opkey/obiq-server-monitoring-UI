@@ -74,8 +74,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   createChart(): void {
+    const isHourly = this.chartData.groupedBy === 'Hour';
     const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList);
-
+  
+    const timestamps = seriesData.flatMap(series => series.data.map(point => point[0]));
+    const minTimestamp = Math.min(...timestamps);
+    const maxTimestamp = Math.max(...timestamps);
+  
     this.chartOptions = {
       series: seriesData,
       chart: {
@@ -97,27 +102,17 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         },
         events: {
           selection: (chartContext, { xaxis }) => {
-            console.log('Selection event triggered');
-
             const startTime = xaxis?.min;
             const endTime = xaxis?.max;
             if (startTime && endTime) {
               this.startTime = new Date(startTime);
               this.endTime = new Date(endTime);
-              console.log('Start Time:', this.startTime);
-              console.log('End Time:', this.endTime);
             }
           },
           zoomed: (chartContext, { xaxis }) => {
             this.startTime = xaxis?.min ? new Date(xaxis.min) : null;
             this.endTime = xaxis?.max ? new Date(xaxis.max) : null;
-
             this.displayTimeRange();
-          },
-          mouseMove: (event) => {
-            const rect = event.target.getBoundingClientRect();
-            const offsetX = event.clientX - rect.left;
-            console.log('Mouse X:', offsetX);
           },
         }
       },
@@ -140,20 +135,20 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       },
       xaxis: {
         type: 'datetime',
-        tickAmount: 'dataPoints',
+        min: minTimestamp,
+        max: maxTimestamp,
         labels: {
-          format: 'dd MMM',
+          format: isHourly ? 'HH:mm' : 'dd MMM', 
           show: true,
           rotate: 0,
         },
-        min: undefined,
-        max: undefined
+        tickAmount: isHourly ? 24 : undefined, 
       },
       fill: {
         opacity: 1,
       },
       legend: {
-        show:false,
+        show: false,
         position: 'right',
         offsetX: 0,
         offsetY: 50,
@@ -168,7 +163,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         x: {
           formatter: (value) => {
             const date = new Date(value);
-            return date.toLocaleDateString();
+            return isHourly ? date.toISOString().substr(11, 5) : date.toLocaleDateString(); 
           }
         }
       },
@@ -181,15 +176,18 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       }
     };
   }
+  
 
   getSeriesData(dataList: any[]): ApexAxisChartSeries {
     const dataPoints = ['Success', 'Error', 'Warning', 'Blocked'];
+    const isHourly = this.chartData.groupedBy === 'Hour';
+  
     return dataPoints.map(point => {
       let color;
-
+  
       switch (point) {
         case 'Success':
-          color = '#33c7ff';
+          color = '#268144';
           break;
         case 'Error':
           color = '#ff4c33';
@@ -197,21 +195,32 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         case 'Warning':
           color = '#ff6833';
           break;
-        default:
-          color = '#ff3333';
       }
-
+  
       return {
         name: point,
         data: dataList.map(item => {
-          const dateParts = item.fromTimeInStr.split('-');
-          const year = parseInt(dateParts[0]);
-          const month = parseInt(dateParts[1]) - 1;
-          const day = parseInt(dateParts[2]);
-
+          let timestamp;
+  
+          if (isHourly) {
+            const timeParts = item.fromTimeInStr.split(':');
+            const hours = parseInt(timeParts[0], 10);
+            const minutes = parseInt(timeParts[1], 10);
+            const seconds = parseInt(timeParts[2], 10);
+  
+            timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds); 
+          } else {
+            const dateParts = item.fromTimeInStr.split('-');
+            const year = parseInt(dateParts[0], 10);
+            const month = parseInt(dateParts[1], 10) - 1;
+            const day = parseInt(dateParts[2], 10);
+  
+            timestamp = Date.UTC(year, month, day); 
+          }
+  
           const pointData = item.dataPointList.find(d => d.name === point);
           return [
-            Date.UTC(year, month, day),
+            timestamp,
             pointData ? pointData.value : 0
           ];
         }),
@@ -219,6 +228,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       };
     });
   }
+  
 
 
 
@@ -260,6 +270,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#Env_manager_main_right");
+       
           this.chartData = result
           this.createChart();
         },

@@ -86,6 +86,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     });
   }
   gaugeChart(percent) {
+    const color = percent > 75 ? "#B42318" : percent > 50 ? "#FFBF00" : "#268144"; 
     this.chartOptions = {
         series: [percent],
         chart: {
@@ -119,7 +120,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
                         formatter: function (val) {
                             return parseFloat(val.toString()).toFixed(2) + "%";
                         },
-                        color: "#268144", 
+                        color: color, 
                         fontSize: "22px",
                         show: true
                     }
@@ -127,7 +128,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
             }
         },
         fill: {
-            colors: ["#268144"],  
+            colors: [color],  
             type: "solid"  
         },
         stroke: {
