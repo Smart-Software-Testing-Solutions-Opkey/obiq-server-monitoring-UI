@@ -33,7 +33,7 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
  progressBarArray: Array<{heading: string, widgetType: string}> = [
   {heading: "User Guides Per Process", widgetType: "USER_GUIDE_LIST_PER_PROCESS_WIDGET"},
   {heading: "Top 5 Fastest Journeys", widgetType: "USER_JOURNEY_TOP_FAST_WIDGET"},
-  {heading: "5 Lowest Journeys", widgetType: "USER_JOURNEY_TOP_SLOW_WIDGET"},
+  {heading: "5 Slowest Journeys", widgetType: "USER_JOURNEY_TOP_SLOW_WIDGET"},
   {heading: "5 Most Common Journeys", widgetType: "USER_JOURNEY_MOST_COMMON_WIDGET"},
  ]
 }
