@@ -11,6 +11,7 @@ import {
   ApexStroke
 } from "ng-apexcharts";
 import { environment } from "src/environments/environment";
+import { Subscription } from "rxjs";
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -43,22 +44,33 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   }
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+  subscriptions: Subscription[] = [];
   ngOnDestroy(): void {
-    
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   ngOnInit(): void {
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.get_Redis_Cpu_Usage(this.view, this.widgetType, data?.timeFilter)
+      }
+    }))
     this.get_Redis_Cpu_Usage(this.view,this.widgetType)
   
   }
   ngAfterViewInit(): void {
     
   }
-  get_Redis_Cpu_Usage(view,widgetType){
+  get_Redis_Cpu_Usage(view,widgetType, timeFilter?: any){
     debugger;
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
 
     let form_data = { viewId: view.viewId,projectId:this.dataService.UserDto.ProjectDTO.P_ID,widgetType:widgetType };
-
+    if(timeFilter?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = timeFilter?.value;
+     } else if(timeFilter?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#Env_manager_main_right");

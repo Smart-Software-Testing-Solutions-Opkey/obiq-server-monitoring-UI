@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { environment } from 'src/environments/environment';
 
 import {
@@ -16,6 +16,7 @@ import {
 } from "ng-apexcharts";
 import { AppDataService } from "src/app/services/app-data.service";
 import { AppService } from "src/app/services/app.service";
+import { Subscription } from "rxjs";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -36,7 +37,7 @@ export type ChartOptions = {
   templateUrl: './environment-manager-widgets-total-errors-area-widget.component.html',
   styleUrl: './environment-manager-widgets-total-errors-area-widget.component.scss'
 })
-export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
+export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements OnInit, OnDestroy {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   dataObj = {
@@ -52,7 +53,21 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   ) {
     
   }
+
+  ngOnInit(){
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
+      }
+    }))
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+  subscriptions: Subscription[] = [];
   dataSet = []
+  
   bindChart(){
     debugger
     this.chartOptions = {
@@ -233,13 +248,21 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
     
   }
 dataDir = ''
-  getChartData(type){
+  getChartData(type, timeFilter?: any){
    
       debugger;
     
   
       let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      this.app_service.make_post_server_call(ajax_url, { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" })
+      const form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+      if(timeFilter?.type == 'setEnum'){
+        form_data.timeSpanEnum = timeFilter?.value;
+       } else if(timeFilter?.type == "setCustom"){
+        delete form_data?.timeSpanEnum;
+        form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+        form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+      }
+      this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {
             debugger;

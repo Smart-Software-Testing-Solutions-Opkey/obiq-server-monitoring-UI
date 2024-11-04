@@ -1,9 +1,10 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexFill,
   ApexLegend, ApexPlotOptions, ApexResponsive, ApexYAxis, ApexTooltip, ApexStroke
 } from 'ng-apexcharts';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,7 @@ export type ChartOptions = {
   templateUrl: './enviornment-manager-time-explorer-graph.component.html',
   styleUrl: './enviornment-manager-time-explorer-graph.component.scss'
 })
-export class EnviornmentManagerTimeExplorerGraphComponent {
+export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnDestroy {
   constructor(
     public app_service: AppService,
     public service_data: AppDataService,
@@ -35,24 +36,41 @@ export class EnviornmentManagerTimeExplorerGraphComponent {
   }
   @Input() chartData: any;
   public chartOptions: Partial<ChartOptions>;
-
+  subscriptions: Subscription[] = [];
   ngOnInit(): void {
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.getLogsChart(data?.timeFilter)
+      }
+    }))
     this.getLogsChart()
     // this.createChart();
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
   @Input() view: any
 
-  getLogsChart() {
+  getLogsChart(timeFilter?: any) {
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    this.app_service.make_post_server_call(ajax_url, {
+    const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
       "viewId": this.view.viewId,
       "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
       "limitBy": 20,
       "offset": 0,
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
-    })
+    };
+    if(timeFilter?.type == 'setEnum'){
+      form_data.timeSpanEnum = timeFilter?.value;
+     } else if(timeFilter?.type == "setCustom"){
+      delete form_data?.timeSpanEnum;
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#Env_manager_main_right");

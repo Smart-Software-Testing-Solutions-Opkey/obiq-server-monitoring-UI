@@ -45,17 +45,22 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   selectedView: any
   selectedTab: any = {}
   availableTabs: any
-  timeFilter: Array<{name: string, value: string, timeValue: number}> = [
-    { name: '30min', value: '30 minutes', timeValue: 30},
-    { name: '60min', value: '60 minutes', timeValue: 60},
-    { name: '3hrs', value: '3 hours', timeValue: 3},
-    { name: '6hrs', value: '6 hours', timeValue: 6},
-    { name: '12hrs', value: '12 hours', timeValue: 12},
-    { name: '1mon', value: '1 month', timeValue: 1},
-    { name: '3mon', value: '3 months', timeValue: 3},
-    { name: 'setCustom', value: 'Set Custom', timeValue: 0},
+  timeFilter: Array<{name: string, value: string, timeValue: string}> = [
+    { name: '15min', value: '15 minutes', timeValue: "LAST_15_MINUTES"},
+    { name: '30min', value: '30 minutes', timeValue: "LAST_30_MINUTES"},
+    { name: '1hr', value: '1 hour', timeValue: "LAST_1_HOUR"},
+    { name: '12hrs', value: '12 hours', timeValue: "LAST_12_HOUR"},
+    { name: '1day', value: '1 day', timeValue: "LAST_1_DAY"},
+    { name: '2days', value: '2 days', timeValue: "LAST_2_DAYS"},
+    { name: '7days', value: '7 days', timeValue: "LAST_7_DAYS"},
+    { name: '1mon', value: '1 month', timeValue: "LAST_1_MONTH"},
+    { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
+    { name: 'setCustom', value: 'Set Custom', timeValue: ""},
   ];
   selectedTime: string = 'setCustom';
+  public fromDatevalue: Date = new Date();
+  public toDateValue: Date = new Date();
+  public dateTimeFormat = "MM/dd/yyyy HH:mm";
   @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
   @Input('child_data') set child_data({ selectedAnalyticsType, selectedView }) {
     debugger
@@ -72,18 +77,28 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     if(this.selectedTime == "setCustom"){
       return;
     }
-    const fromDateTime = new Date();
-    let toDateTime = new Date(fromDateTime);
-    if(this.selectedTime.includes('min')){
-      toDateTime.setMinutes(fromDateTime.getMinutes() + timeItem?.timeValue);
-    } else if(this.selectedTime.includes("hrs")){
-      toDateTime.setHours(fromDateTime.getHours() + timeItem?.timeValue)
-    } else if(this.selectedTime.includes('mon')){
-      toDateTime.setMonth(fromDateTime.getMonth() + timeItem?.timeValue);
-    }
+    // const fromDateTime = new Date();
+    // let toDateTime = new Date(fromDateTime);
+    // if(this.selectedTime.includes('min')){
+    //   toDateTime.setMinutes(fromDateTime.getMinutes() + timeItem?.timeValue);
+    // } else if(this.selectedTime.includes("hrs")){
+    //   toDateTime.setHours(fromDateTime.getHours() + timeItem?.timeValue)
+    // } else if(this.selectedTime.includes('mon')){
+    //   toDateTime.setMonth(fromDateTime.getMonth() + timeItem?.timeValue);
+    // }
 
     // console.log("from : ", fromDateTime, " To : ", toDateTime);
-    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {fromTimeInMillis: fromDateTime.getTime(), toTimeInMillis: toDateTime.getTime()}});
+    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
+    this.closeTimeFilterDropdown();
+  }
+
+  applyCustomFilter(){
+    // console.log("fromDate: ", this.fromDatevalue, " toDate: ", this.toDateValue);
+    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
+    this.closeTimeFilterDropdown();
+  }
+
+  closeTimeFilterDropdown(){
     this.toggleButton.nativeElement.click();
   }
 
@@ -185,7 +200,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     })
     tab.isSelected = true
     this.selectedTab = tab
-
+    this.selectedTime = 'setCustom';
   }
 
   addWidget() {
