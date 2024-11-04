@@ -364,6 +364,11 @@ body {
     font-size: 0.875rem;
 }
 
+.font-18px {
+    font-size: 1.125rem;
+}
+
+
 /***************scss for button layout***************/
 .btn-layout {
     padding: 0.625rem 1.25rem;
@@ -532,10 +537,10 @@ a:focus-visible {
         width: 100%;
 
         .modal-h-title {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.125rem;
+            font-weight: 600;
             color: #131523;
-            line-height: 1.5rem;
+            line-height: 1.36rem;
             margin-bottom: 0rem;
         }
 
@@ -634,7 +639,8 @@ a:focus-visible {
 
 /*****scss for form control******/
 .form-label {
-    font-size: .8125rem;
+    // font-size: .8125rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #344054;
     line-height: 1.25rem;
