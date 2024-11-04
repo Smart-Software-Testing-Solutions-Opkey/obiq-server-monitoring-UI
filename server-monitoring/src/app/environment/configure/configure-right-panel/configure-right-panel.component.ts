@@ -44,6 +44,7 @@ export class ConfigureRightPanelComponent {
           "EDIT": false
         }
       };
+      this.addedUsers = []
     }
     else if (type == "PRIVATE") {
       this.accessTypeObj = {
@@ -53,6 +54,7 @@ export class ConfigureRightPanelComponent {
           "EDIT": false
         }
       };
+      this.addedUsers = [];
     }
 
     else if (type == "SHARED") {
@@ -73,14 +75,15 @@ removeTempEmail(email: string): void {
 }
 
 
-  selectViewOrEdit(option: string, event: Event): void {
+selectViewOrEdit(option: string): void {
+  debugger;
     event.preventDefault();
     event.stopPropagation();
 
-    if (option == "VIEW") {
+    if (option == "Can View") {
       this.accessTypeObj.AccessPermisions.EDIT = false;
     }
-    else if (option == "EDIT") {
+    else if (option == "Can Edit") {
       this.accessTypeObj.AccessPermisions.VIEW = true
       this.accessTypeObj.AccessPermisions.EDIT = true
     }
@@ -88,7 +91,7 @@ removeTempEmail(email: string): void {
   }
   getAllProjects() {
     debugger;
-   
+  
     // let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
 
@@ -167,7 +170,6 @@ removeTempEmail(email: string): void {
     }
     console.log(this.Shared_Access_Type_Obj, 'Updated Shared_Access_Type_Obj');
   }
-
 
   InviteUsers() {
     debugger;

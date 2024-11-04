@@ -32,11 +32,11 @@
                 </span>
 
                 <div class="dropdown dropdown-text-color">
-                    <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
+                    <!-- <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
                         data-bs-toggle="dropdown" data-bs-auto-close= "outside">
                         Can View
-                    </button>
-                    <ul class="dropdown-menu">
+                    </button> -->
+                    <!-- <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('VIEW', $event)">
                                 <i class="oci oci-eye pe-2"></i>Can View
@@ -47,7 +47,13 @@
                                 <i class="oci oci-edit pe-2"></i>Can Edit
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <kendo-dropdownlist
+                    [data]="['Can View', 'Can Edit']"
+                    value="Can View"
+                    (valueChange)="selectViewOrEdit($event)">
+                    </kendo-dropdownlist>
+                    
                 </div>
 
             </div>
