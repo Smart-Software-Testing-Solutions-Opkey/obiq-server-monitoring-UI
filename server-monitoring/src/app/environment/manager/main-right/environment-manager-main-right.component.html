@@ -229,8 +229,23 @@
                             <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
                                 <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
                                     href="javascript:void(0)" (click)="changeSelectedTab(tab)">
-                                    <i class="oci oci-journey pr-1"></i>
-                                    {{tab.text}}</a>
+                                    @if (tab.text == 'Overview') {
+                                        <i class="oci oci-journey pr-1"></i>
+                                    }
+
+                                    @else if  (tab.text == 'Log') {
+                                        <i class="oci oci-logs pr-1"></i>
+                                    }
+                                    
+                                    @else if  (tab.text == 'Time Explorer') {
+                                        <i class="oci oci-time-explorer pr-1"></i>
+                                    }
+
+                                    @else if  (tab.text == 'Telemetry') {
+                                        <i class="oci oci-bar-chart pr-1"></i>
+                                    }
+                                    {{tab.text}}
+                                </a>
                             </li>
                         }
     
