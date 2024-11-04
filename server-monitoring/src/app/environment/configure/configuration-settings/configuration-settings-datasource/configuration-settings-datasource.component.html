@@ -44,7 +44,7 @@
                     @if((item.type === 'ERP_ANALYTICS_DATASOURCE' && item.isChecked) ) {
         
                         <div class="datasource-sub-category">
-                            <label for="application" class="form-label mt-2">Choose your application <span
+                            <label for="application" class="form-label mt-3">Choose your application <span
                                     class="text-astric">*</span></label>
 
                             <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
@@ -78,7 +78,7 @@
                      
                         <div class="datasource-sub-category">
 
-                            <label for="application" class="form-label mt-2">Choose your system diagnostics
+                            <label for="application" class="form-label mt-3">Choose your system diagnostics
                                 <span class="text-astric">*</span>
                             </label>
                             <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">Ststem diagnostics selection is required.</span>
