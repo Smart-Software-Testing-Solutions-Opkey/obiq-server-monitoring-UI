@@ -49,10 +49,18 @@
                         </li>
                     </ul> -->
                     <kendo-dropdownlist class="canView-dd-list"
-                        [data]="['Can View', 'Can Edit']" 
-                        value="Can View" 
-                        (valueChange)="selectViewOrEdit($event)">
-                    </kendo-dropdownlist>
+                    [data]="Public_dropdown_Items"
+                    [(value)]="selectedValue"
+                    (valueChange)="selectViewOrEdit($event)">
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                        <span *ngIf="dataItem === 'Can View'">
+                            <i class="oci oci-eye pe-2"></i> {{ dataItem }}
+                        </span>
+                        <span *ngIf="dataItem === 'Can Edit'">
+                            <i class="oci oci-edit pe-2"></i> {{ dataItem }}
+                        </span>
+                    </ng-template>
+                </kendo-dropdownlist>
                 </div>
 
             </div>
@@ -79,7 +87,7 @@
             </div>
         
             <div class="col-sm-2 pe-0 text-end">
-                <button type="button" class="btn btn-layout btn-bg-grey active" (click)="addAllEmailsToGrid()">
+                <button type="button" class="btn btn-layout btn-bg-grey " [ngClass]="{'active': addedEmails?.length}" (click)="addAllEmailsToGrid()">
                     Add
                 </button>
             </div>
@@ -110,15 +118,24 @@
 
                 <kendo-grid-column [width]="150">
                     <ng-template kendoGridCellTemplate let-dataItem>
-                        <kendo-dropdownlist [data]="['Can View', 'Can Edit']"
-                            (valueChange)="updateUserPermission(dataItem, $event)">
+                        <kendo-dropdownlist [data]="Public_dropdown_Items"
+                                            [(value)]="shared_selected_value"
+                                           (valueChange)="updateUserPermission(dataItem, $event)">
+                            <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                <span *ngIf="dataItem === 'Can View'">
+                                    <i class="oci oci-eye pe-2"></i> {{ dataItem }}
+                                </span>
+                                <span *ngIf="dataItem === 'Can Edit'">
+                                    <i class="oci oci-edit pe-2"></i> {{ dataItem }}
+                                </span>
+                            </ng-template>
                         </kendo-dropdownlist>
                     </ng-template>
                 </kendo-grid-column>
 
                 <kendo-grid-column [width]="50">
-                    <ng-template kendoGridCellTemplate let-dataItem>
-                        <button type="button" class="btn">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <button type="button" class="btn" (click)="deleteUser(rowIndex)">
                             <i class="fa fa-trash text-red"></i>
                         </button>
                     </ng-template>
