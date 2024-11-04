@@ -39,7 +39,9 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
         debugger;
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
-        this.selectedAccessType = this.receivedAccessType.AccessType
+        if(this.receivedAccessType != "viewCreated"){
+          this.selectedAccessType = this.receivedAccessType.AccessType
+        }
         this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
         if (this.obj_configuration_setting.AccessType == "SHARED") {
           this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
