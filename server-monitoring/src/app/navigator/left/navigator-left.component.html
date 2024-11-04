@@ -30,7 +30,23 @@
 
                 <div class="col-9 ps-0 pe-1">
                     <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
-                        (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId" class="k-dropdown-height">
+                        (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId" class="k-dropdown-height"
+                        [popupSettings]="{ popupClass:'dropdown-view-anaytics'}">
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+
+                            <span class="item-template-text text-ellipsis font-14px">
+                                <i class="oci oci-star pe-2"></i>
+                                {{dataItem.viewName}}
+                            </span>
+                        </ng-template>
+
+                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                            <span class="value-template">
+                                <span class="value-template-text text-ellipsis font-14px">
+                                    {{selectedView.viewName}}
+                                </span>
+                            </span>
+                        </ng-template>
                     </kendo-dropdownlist>
                 </div>
                 
