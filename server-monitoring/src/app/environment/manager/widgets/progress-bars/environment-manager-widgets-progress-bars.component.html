@@ -1,5 +1,5 @@
 <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
-        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager">
+        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-height">
 
 
 
@@ -18,7 +18,7 @@
         <kendo-grid-column  title="" [width]="200">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <div class="progress" style="border-radius: 25px;">
+                <div class="progress" style="border-radius: 25px; height: 0.5rem;">
                     <div class="progress-bar bg-info" role="progressbar"
                         [style.width]="dataItem?.passPercent  + '%'"
                         style="background-color: #1C7C92 !important;" container="body"></div>
