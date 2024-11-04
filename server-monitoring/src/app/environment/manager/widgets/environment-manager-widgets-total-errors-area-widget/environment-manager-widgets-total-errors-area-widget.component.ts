@@ -80,7 +80,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         enabled: false
       },
       stroke: {
-        curve: "straight"
+        curve: "straight",
+        width:2
       },
 
       title: {
@@ -115,16 +116,16 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
         }
       },
       fill: {
-        opacity: 0.5,
+        opacity: 0.8,
         type: 'gradient',
         gradient: {
-          type: "horizontal",
-          shadeIntensity: 0.5,
+          type: "vertical",
+          shadeIntensity: 0.9,
           gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-          inverseColors: true,
+          inverseColors: false,
        
         },
-        colors:[this.chartColor]
+        colors:[this.chartColor,this.secColor,'#FFFFFF']
       },
       tooltip: {
         enabled:false,
@@ -147,6 +148,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent {
   }
   typeEnum:string = ''
   chartColor:string = ''
+  secColor:string = ''
+
   view:any
   @Input('child_data') set child_data({ typeEnum,view }) {
     debugger
@@ -246,13 +249,34 @@ dataDir = ''
               this.dataObj.percentage = result.percentdiff
               this.dataDir = result.direction
               this.dataSet = []
-              result.dataPlotList.forEach((ele,ind) => {
-                let obj = {
-                  x:ind,
-                  y:ele.percentdiff
-                }
-                this.dataSet.push(obj)
-              });
+              if(result.dataPlotList.length>0){
+
+                result.dataPlotList.forEach((ele,ind) => {
+                  let obj = {
+                    x:ind,
+                    y:ele.percentdiff
+                  }
+                  this.dataSet.push(obj)
+                });
+              }else{
+            
+                  this.dataSet =  [
+                    {
+                      x: 1,
+                      y: 0
+                    },
+                    {
+                      x: 2,
+                      y: 0
+                    },
+                    {
+                      x: 3,
+                      y: 0
+                    },
+                   
+                  ]
+                
+              }
 
               this.checkStyling();
 
@@ -273,15 +297,19 @@ dataDir = ''
   ngAfterViewInit(): void {
     if (this.typeEnum == 'Error') {
       this.chartColor = '#B42318'
+      this.secColor = '#FEF3F2'
       this.bindChartData('Error')
     }
     else if(this.typeEnum == 'Success'){
       this.chartColor = '#268144'
+      this.secColor = '#F6FEFF'
+
       this.bindChartData('Success')
   
     }
     else if(this.typeEnum == 'Warning'){
       this.chartColor = '#FFBF00'
+      this.secColor = '#FFF7DE'
       this.bindChartData('Warning')
   
     }

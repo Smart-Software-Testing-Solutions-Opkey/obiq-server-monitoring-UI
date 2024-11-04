@@ -18,17 +18,21 @@
           </div>
           <div class="col-sm-9 ps-3">
             <div class="error-value-last" style="color: #667085;">
-              <span class="error-percentage">
-                @if(this.dataDir == 'up'){
+              @if(this.dataDir == 'up'){
+              <span class="success-percentage">
 
                   <i class="oci oci-arrow-up pe-1"></i>
+                  {{dataObj.percentage}}%
+                </span>
                 }
                 @else if(this.dataDir == 'down'){
-                  <i class="oci oci-arrow-down pe-1"></i>
+                  <span class="error-percentage">
+
+                    <i class="oci oci-arrow-down pe-1"></i>
+                    {{dataObj.percentage}}%
+                  </span>
 
                 }
-                {{dataObj.percentage}}%
-              </span>
               {{dataObj.msg}}
             </div>
           </div>
