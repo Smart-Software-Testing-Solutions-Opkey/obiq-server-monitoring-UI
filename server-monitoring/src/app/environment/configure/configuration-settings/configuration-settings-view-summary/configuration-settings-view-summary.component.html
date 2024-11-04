@@ -155,7 +155,7 @@
                                             <kendo-grid #grid_Selected_Instance_list [data]="selected_grid_System_Diagnostics"
                                                 [selectable]="false" [navigable]="true"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-                                                <kendo-grid-column field="SystemIdentifier" title="Name">
+                                                <kendo-grid-column field="SystemIdentifier" title="OBIQ Agent">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                             <span class="layout-text-obiq ps-2">{{dataItem.OBIQ_Agent}}</span>
@@ -163,12 +163,12 @@
                                                     </ng-template>
                                                 </kendo-grid-column>
             
-                                                <kendo-grid-column field="CreatedBy" title="Created">
+                                                <kendo-grid-column field="CreatedBy" title="IP Address">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                           
-                                                            <div class="ps-2">
-                                                                <span class="layout-text-obiq ps-2">{{dataItem.Unique_Code}}</span>
+                                                            <div>
+                                                                <span class="layout-text-date">{{dataItem.Unique_Code}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -205,9 +205,17 @@
                                             <kendo-grid [data]="selected_user_behaviour_component"
                                                 [selectable]="false" [navigable]="true"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-                                                <kendo-grid-column field="name" title="Name">           
-                                                </kendo-grid-column>
-                                                <kendo-grid-column field="email" title="Email">
+
+                                                <kendo-grid-column title="Name">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="img-app-profile">
+                                                                <img src="assets/images/default/profile.png" alt="">
+                                                            </span>
+                                                            <span class="layout-text-obiq ps-2">{{dataItem.name}}</span>
+                                                            <span class="layout-text-obiq ps-2">{{dataItem.email}}</span>
+                                                        </div>
+                                                    </ng-template>
                                                 </kendo-grid-column>
             
                                                 <ng-template kendoGridNoRecordsTemplate>
@@ -241,7 +249,30 @@
                                             <kendo-grid [data]="selected_test_automation_analysis"
                                                 [selectable]="false" [navigable]="true"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-                                                <kendo-grid-column field="AgentName" title="AgentName">           
+                                                <kendo-grid-column field="AgentName" title="User Name">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center executionAgent">               
+                                                            <span class="status me-2" [ngClass]="dataItem.status=='online'? 'online':'offline'"></span>
+                                                            <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+                                            
+                                                <kendo-grid-column field="AgentName" title="Agent Name">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                            
+                                                        <div class="flex-center">
+                                                            <span class="layout-text-date">{{dataItem?.AgentName}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+                                            
+                                                <kendo-grid-column field="ModifiedBy" title="Server URL">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            <span class="layout-text-date">myqlm.opkeyone.com</span>
+                                                        </div>
+                                                    </ng-template>
                                                 </kendo-grid-column>
             
                                                 <ng-template kendoGridNoRecordsTemplate>
