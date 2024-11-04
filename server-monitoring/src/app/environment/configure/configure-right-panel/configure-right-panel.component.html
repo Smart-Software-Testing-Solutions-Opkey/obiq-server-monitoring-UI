@@ -118,7 +118,7 @@
 
                 <kendo-grid-column [width]="150">
                     <ng-template kendoGridCellTemplate let-dataItem>
-                        <kendo-dropdownlist [data]="Public_dropdown_Items"
+                        <kendo-dropdownlist [data]="Public_dropdown_Items" class="canView-dd-list"
                                             [(value)]="shared_selected_value"
                                            (valueChange)="updateUserPermission(dataItem, $event)">
                             <ng-template kendoDropDownListItemTemplate let-dataItem>
