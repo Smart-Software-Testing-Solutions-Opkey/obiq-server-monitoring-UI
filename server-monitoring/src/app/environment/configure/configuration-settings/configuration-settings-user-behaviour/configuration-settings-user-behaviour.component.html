@@ -1,5 +1,5 @@
 <h6 class="mb-3 font-bold">
-    Choose Execution Agent 
+    Choose Agents 
     <span *ngIf="obj_error.displayUserError" class="form-error">Agent selection is required.</span>
 </h6>
 
@@ -12,16 +12,12 @@
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo">
     
-    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="35">
+    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>
 
-    <kendo-grid-column field="SystemIdentifier" title="User Name">
+    <kendo-grid-column field="SystemIdentifier" title="Name">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="flex-center executionAgent">
-
-                <span class="status me-3" [ngClass]="dataItem.status=='online'? 'online':'offline'">  
-                </span>
-
+            <div class="flex-center">
                 <span class="img-app-profile">
                     <img src="assets/images/default/profile.png" alt="">
                 </span>
