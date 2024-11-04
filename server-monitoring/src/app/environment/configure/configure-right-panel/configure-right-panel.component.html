@@ -48,12 +48,11 @@
                             </a>
                         </li>
                     </ul> -->
-                    <kendo-dropdownlist
-                    [data]="['Can View', 'Can Edit']"
-                    value="Can View"
-                    (valueChange)="selectViewOrEdit($event)">
+                    <kendo-dropdownlist class="canView-dd-list"
+                        [data]="['Can View', 'Can Edit']" 
+                        value="Can View" 
+                        (valueChange)="selectViewOrEdit($event)">
                     </kendo-dropdownlist>
-                    
                 </div>
 
             </div>
@@ -80,8 +79,8 @@
             </div>
         
             <div class="col-sm-2 pe-0 text-end">
-                <button type="button" class="btn btn-layout btn-bg-grey" (click)="addAllEmailsToGrid()">
-                    ADD
+                <button type="button" class="btn btn-layout btn-bg-grey active" (click)="addAllEmailsToGrid()">
+                    Add
                 </button>
             </div>
         </div>
@@ -130,7 +129,7 @@
 
     </div>
 
-    <div class="feature-rp-footer">
+    <div class="feature-rp-footer" style="text-align: left;">
         <button type="button" class="btn btn-layout btn-bg-theme"
             aria-label="Close" (click)="InviteUsers()">
             Invite

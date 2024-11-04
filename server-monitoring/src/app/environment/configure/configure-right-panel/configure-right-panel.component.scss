@@ -121,7 +121,28 @@
       background: #8F9191;
       color: #fff;
       border-color: #8F9191 !important;
+      &.active {
+        background-color: #116173 !important;
+        color: white !important;
+        }
     }
   }
 
+  
+
 }
+
+::ng-deep .canView-dd-list.k-dropdownlist,
+::ng-deep .canView-dd-list.k-dropdownlist:hover,
+::ng-deep .canView-dd-list.k-dropdownlist:focus-within {
+  background-color: transparent !important;
+  border-width: 0px !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .canView-dd-list.k-dropdownlist span.k-input-inner,
+::ng-deep .canView-dd-list.k-dropdownlist .k-icon.k-svg-i-caret-alt-down:before  {
+  color: #116173 !important;
+  font-weight: 500 !important;
+}
+
