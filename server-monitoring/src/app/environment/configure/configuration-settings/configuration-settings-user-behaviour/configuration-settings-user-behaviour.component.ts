@@ -27,6 +27,17 @@ export class ConfigurationSettingsUserBehaviourComponent {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.displayUserError = displayUserError
     console.log("In User Behaviour", obj_configuration_setting);
+    this.agent_lists.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
   }
   agent_lists = [
     {
