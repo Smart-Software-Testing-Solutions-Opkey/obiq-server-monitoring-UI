@@ -19,6 +19,9 @@ export class SelectedJourneyInnerComponent {
   ) { }
 
   ngOnInit() {
+    if (this.pageDetails.headers.length > 0) {
+      this.openAccordionId = this.pageDetails.headers[0].id; // Open the first child initially in accordion
+  }
   }
 
   pageErrorDetails: any;
@@ -100,20 +103,35 @@ export class SelectedJourneyInnerComponent {
   }
 
 
-  // toggleActiveLink(target: HTMLElement) {
+  private openAccordionId: string | null = null; 
 
-  //   const allAcNavItems = document.querySelectorAll('.ac-nav-item');
-  //   allAcNavItems.forEach(acNavItem => {
-  //     if (acNavItem !== target.closest('.ac-nav-item')) {
-  //       acNavItem.classList.remove('active-link');
-  //     }
-  //   });
+  toggleAccordion(id: string): void {
+    if (this.openAccordionId === id) {
+      this.openAccordionId = null; 
+    } else {
+      this.openAccordionId = id; 
+    }
+  }
 
-  //   const acNavItem = target.closest('.ac-nav-item');
-  //   if (acNavItem) {
-  //     acNavItem.classList.add('active-link');
-  //   }
-  // }
+  isOpen(id: string): boolean {
+    return this.openAccordionId === id;
+  }
+
+  toggleActiveLink(event: MouseEvent) {
+
+    const target = event.target as HTMLElement;
+    const allAcNavItems = document.querySelectorAll('.ac-nav-item');
+    allAcNavItems.forEach(acNavItem => {
+      if (acNavItem !== target.closest('.ac-nav-item')) {
+        acNavItem.classList.remove('active-link');
+      }
+    });
+
+    const acNavItem = target.closest('.ac-nav-item');
+    if (acNavItem) {
+      acNavItem.classList.add('active-link');
+    }
+  }
 
 
   view_errors(event, errorType) {

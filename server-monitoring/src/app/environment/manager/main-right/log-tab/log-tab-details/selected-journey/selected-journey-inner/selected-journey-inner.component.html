@@ -85,19 +85,19 @@
 
                                             <ng-container *ngFor="let dataItems of pageDetails.headers; let first = first">
 
-                                                <div class="ac-card-header" [ngClass]="{ 'show': first }">
+                                                <div class="ac-card-header" [ngClass]="{ 'show': first }" (click)="toggleAccordion(dataItems.id)">
 
                                                     <span class="time-text">{{(dataItems.usageTime).toFixed(1)}}s</span>
 
                                                     <span class="line"></span>
 
-                                                    <a class="btn bt-accordion ac-card-link" data-bs-toggle="collapse" data-target="#collapseOne_{{dataItems.id}}">
+                                                    <a class="btn bt-accordion ac-card-link" data-toggle="collapse" data-target="#collapseOne_{{dataItems.id}}">
                                                         {{dataItems.moduleHeader}}
                                                     </a>
 
                                                 </div>
 
-                                                <div id="collapseOne_{{dataItems.id}}" class="collapse" [ngClass]="{ 'show': first }" data-bs-parent="#accordion-details">
+                                                <div id="collapseOne_{{dataItems.id}}" class="collapse" [ngClass]="{ 'show': isOpen(dataItems.id) }" data-parent="#accordion-details">
 
                                                     <div class="ac-card-body">
 
@@ -106,7 +106,7 @@
 
                                                             <div class="ac-nav-item inprogress"
                                                                 [ngClass]="first && index == 0 ? 'active-link': ''"
-                                                               >
+                                                                (click)="toggleActiveLink($event)">
 
                                                                 <span
                                                                     class="time-text">{{(item.usageTime).toFixed(1)}}s</span>
