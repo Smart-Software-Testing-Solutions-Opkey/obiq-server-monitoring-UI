@@ -16,21 +16,21 @@
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>
 
-    <kendo-grid-column field="SystemIdentifier" title="Name">
+    <kendo-grid-column field="SystemIdentifier" title="OBIQ Agent">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                
-                <span class="layout-text-obiq ps-2">{{dataItem.OBIQ_Agent}}</span>
+                <span class="layout-text-obiq">{{dataItem.OBIQ_Agent}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="CreatedBy" title="Created">
+    <kendo-grid-column field="CreatedBy" title="IP Address">
         <ng-template kendoGridCellTemplate let-dataItem>
 
             <div class="flex-center">
-                <div class="ps-2">
-                    <span class="layout-text-obiq ps-2">{{dataItem.Unique_Code}}</span>
+                <div>
+                    <span class="layout-text-date">{{dataItem.Unique_Code}}</span>
                  
                 </div>
             </div>

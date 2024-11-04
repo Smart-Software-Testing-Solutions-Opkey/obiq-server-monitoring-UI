@@ -1,5 +1,5 @@
 <h6 class="mb-3 font-bold">
-    Choose Instances 
+    Choose Execution Agent 
     <span *ngIf="obj_error.displayTestError" class="form-error">Test agent selection is required.</span>
 </h6>
 <kendo-grid 
@@ -10,13 +10,14 @@
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo">
     
-    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
+    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="35">
     </kendo-grid-checkbox-column>
 
     <kendo-grid-column field="AgentName" title="User Name">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="flex-center">
-                <span class="layout-text-obiq ps-2">{{dataItem?.AgentName}}</span>
+            <div class="flex-center executionAgent">               
+                <span class="status me-2" [ngClass]="dataItem.status=='online'? 'online':'offline'"></span>
+                <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -25,7 +26,7 @@
         <ng-template kendoGridCellTemplate let-dataItem>
 
             <div class="flex-center">
-                <span class="layout-text-name">{{dataItem?.AgentName}}</span>
+                <span class="layout-text-date">{{dataItem?.AgentName}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -33,7 +34,7 @@
     <kendo-grid-column field="ModifiedBy" title="Server URL">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
-                <span class="layout-text-name">myqlm.opkeyone.com</span>
+                <span class="layout-text-date">myqlm.opkeyone.com</span>
             </div>
         </ng-template>
     </kendo-grid-column>
