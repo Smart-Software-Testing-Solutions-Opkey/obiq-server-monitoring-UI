@@ -81,7 +81,7 @@ export class ConfigurationSettingsComponent {
       if(this.datasource_item.length>0){
         let item = this.datasource_item[0]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -103,7 +103,7 @@ export class ConfigurationSettingsComponent {
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
-       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.title = "Add " + item.name;
        this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -119,7 +119,7 @@ export class ConfigurationSettingsComponent {
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
-       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.title = "Add " + item.name;
        this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -135,7 +135,7 @@ export class ConfigurationSettingsComponent {
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
-       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.title = "Add " + item.name;
        this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -151,7 +151,7 @@ export class ConfigurationSettingsComponent {
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
-       this.obj_configuration_setting.title = "Add" + item.name;
+       this.obj_configuration_setting.title = "Add " + item.name;
        this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -191,7 +191,7 @@ export class ConfigurationSettingsComponent {
       if(this.datasource_item?.length>0){
         let item = this.datasource_item[this.datasource_item.length-1]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -212,7 +212,7 @@ export class ConfigurationSettingsComponent {
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -232,7 +232,7 @@ export class ConfigurationSettingsComponent {
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -252,7 +252,7 @@ export class ConfigurationSettingsComponent {
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
@@ -272,7 +272,7 @@ export class ConfigurationSettingsComponent {
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
-        this.obj_configuration_setting.title = "Add" + item.name;
+        this.obj_configuration_setting.title = "Add " + item.name;
         this.obj_configuration_setting.is_value_selection = true;
       }
       else {
