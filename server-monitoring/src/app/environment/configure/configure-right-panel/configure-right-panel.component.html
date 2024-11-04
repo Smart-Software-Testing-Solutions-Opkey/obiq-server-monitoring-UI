@@ -95,7 +95,7 @@
         
 
         <div class="shared-to-panel" *ngIf="addedUsers.length > 0">
-            <h5 class="my-3">Shared to</h5>
+            <h6 class="mt-3 mb-2 font-bold">Shared to</h6>
 
             <!-- Kendo Grid -->
             <kendo-grid [data]="addedUsers" class="k-grid-sharedTo" [hideHeader]="true">
@@ -111,7 +111,7 @@
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <div class="user-details">
                             <span class="layout-text-name">{{ dataItem.Name }}</span>
-                            <span class="layout-text-email">{{ dataItem.email_ID }}</span>
+                            <span class="layout-text-date">{{ dataItem.email_ID }}</span>
                         </div>
                     </ng-template>
                 </kendo-grid-column>

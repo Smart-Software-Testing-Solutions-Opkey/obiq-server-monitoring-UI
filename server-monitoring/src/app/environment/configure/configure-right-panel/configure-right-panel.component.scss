@@ -99,6 +99,8 @@
   
     .shared-to-panel {
       .k-grid.k-grid-sharedTo {
+        border: none !important;
+
         .sp-user-image {
           width: 3rem;
           height: 3rem;
