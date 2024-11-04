@@ -56,7 +56,7 @@
                            <div class="kendo_grid">
                                <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
                                    (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
-                                   class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                                   class="scrollable grid_remove_vertical_border k_grid_header_pr_0" style="max-height: calc(100vh - 19rem);">
                                    <kendo-grid-column field="SystemIdentifier" title="Name">
                                        <ng-template kendoGridCellTemplate let-dataItem>
                                            <div class="flex-center">
