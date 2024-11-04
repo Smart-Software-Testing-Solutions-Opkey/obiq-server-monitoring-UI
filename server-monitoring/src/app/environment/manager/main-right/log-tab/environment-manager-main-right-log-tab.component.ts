@@ -250,8 +250,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
     };
     if(timeFilter?.fromTimeInMillis){
-      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
-      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+      delete form_data?.timeSpanEnum;
+      form_data["fromTimeInMillis"] = timeFilter?.toTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.fromTimeInMillis;
     }
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
@@ -276,6 +277,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": "ESS_LOG_DATA_WIDGET" };
     if(timeFilter?.fromTimeInMillis){
+      delete form_data?.timeSpanEnum;
       form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
     }
