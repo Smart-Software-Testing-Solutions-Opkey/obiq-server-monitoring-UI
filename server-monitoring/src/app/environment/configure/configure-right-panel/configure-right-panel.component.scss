@@ -140,11 +140,13 @@
   background-color: transparent !important;
   border-width: 0px !important;
   box-shadow: none !important;
+  outline: #116173 auto 0px !important;
 }
 
 ::ng-deep .canView-dd-list.k-dropdownlist span.k-input-inner,
 ::ng-deep .canView-dd-list.k-dropdownlist .k-icon.k-svg-i-caret-alt-down:before  {
   color: #116173 !important;
   font-weight: 500 !important;
+  overflow: visible !important;
 }
 
