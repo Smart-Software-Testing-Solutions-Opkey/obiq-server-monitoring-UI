@@ -26,8 +26,10 @@
                             <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
                             container="body"></div>
                     </div>
-                    <span class="ms-3" style="width: 2rem;">
-                        {{dataItem.count}}
+                    <span class="ms-3 me-2 text-end">
+                        <span>
+                            {{dataItem.count}}
+                        </span>
                     </span>
                 </div>
             </ng-template>
