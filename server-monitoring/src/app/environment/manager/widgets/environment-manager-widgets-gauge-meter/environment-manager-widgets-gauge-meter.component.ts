@@ -62,6 +62,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   }
   get_Redis_Cpu_Usage(view,widgetType, timeFilter?: any){
     debugger;
+    window.loadingStart("#gauge-div-" + widgetType, "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
 
     let form_data = { viewId: view.viewId,projectId:this.dataService.UserDto.ProjectDTO.P_ID,widgetType:widgetType };
@@ -73,11 +74,12 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     }
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-        window.loadingStop("#Env_manager_main_right");
+      
         this.gaugeChart(result.percent)
+       window.loadingStop("#gauge-div-"+widgetType);
       },
       error: (error: any) => {
-        window.loadingStop("#Env_manager_main_right");
+       window.loadingStop("#gauge-div-"+widgetType);
         console.warn(error);
       },
       complete: () => {
@@ -137,6 +139,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
         },
         labels: [""]  
     };
+    
 }
 
 

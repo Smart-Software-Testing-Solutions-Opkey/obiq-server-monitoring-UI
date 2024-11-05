@@ -71,13 +71,6 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
         next: (result: any) => {
           window.loadingStop("#div-datasource-slection");
-          const reorderedResult = [
-            result[2], 
-            result[0],
-            result[1], 
-            result[3],    
-        ];
-        result = reorderedResult;
           result.forEach((widjet: any) => {
           
             if (widjet.name === "ERP Analytics") {

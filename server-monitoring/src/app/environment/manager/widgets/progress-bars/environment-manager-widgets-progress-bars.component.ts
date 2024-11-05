@@ -58,7 +58,8 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
               return {
                 subActivityName: item, 
                 passPercent: passPercent, 
-                failPercent: failPercent
+                failPercent: failPercent,
+                count:count
               };
             })
            
