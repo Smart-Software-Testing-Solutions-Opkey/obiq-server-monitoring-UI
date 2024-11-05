@@ -45,8 +45,10 @@ export class NavigatorLeftComponent implements OnInit {
           this.getAllVIews();
           this.cdr.detectChanges();
         }
-        else if(data == 'backSettings'){
-          this.backToMenu()
+        else if(data?.callsource == 'settings'){
+          if(data?.data == 'backToMenu'){
+            this.backToMenu()
+          }
         }
       }
     });

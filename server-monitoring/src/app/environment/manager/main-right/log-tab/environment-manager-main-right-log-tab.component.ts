@@ -242,7 +242,7 @@ getSeriesData(dataList: any[]): ApexAxisChartSeries {
 
     const timeRange = `${formattedStartTime} to ${formattedEndTime}`;
     console.log(timeRange);
-    this.app_service.dataTransmitter(timeRange);
+    this.app_service.dataTransmitter({callsource:'timeExplorerChart',data:timeRange});
   }
 
   succes_error_switch(){
