@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -17,7 +17,10 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
     private router: Router,
     private route: ActivatedRoute,
     public service_data: AppDataService,
-    public app_service: AppService,) {
+    public app_service: AppService,
+    private cdr: ChangeDetectorRef
+
+  ) {
 
   }
   selectedData: any
@@ -25,6 +28,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
   dataValues: any = []
   tabSelected: string = 'Trace'
   trace_Selected_data: any = [];
+  receivedTimeRange: any
   @Input('child_data') set child_data({ selectedData }) {
     debugger
     this.selectedData = selectedData
@@ -34,8 +38,21 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
 
   }
   ngOnInit(): void {
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if(data.callsource == 'timeExplorerChart'){
+
+          this.receivedTimeRange = data.data;
+          console.log('Received Data:', this.receivedTimeRange);
+  
+          // Manually trigger change detection
+          this.cdr.detectChanges();
+        }
+      }
+    });
     this.getTraceData();
   }
+
   onCellClick(event: any) {
 
   }
