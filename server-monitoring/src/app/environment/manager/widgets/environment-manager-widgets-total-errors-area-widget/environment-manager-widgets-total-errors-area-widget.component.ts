@@ -134,13 +134,14 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
         opacity: 0.8,
         type: 'gradient',
         gradient: {
+          shade:'light',
           type: "vertical",
           shadeIntensity: 0.9,
           gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
           inverseColors: false,
        
         },
-        colors:[this.chartColor,this.secColor,'#FFFFFF']
+        colors:[this.chartColor]
       },
       tooltip: {
         enabled:false,
