@@ -21,8 +21,9 @@
     <kendo-grid-column field="SystemIdentifier" title="Instances">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
-                <span class="img-avatar-profile">
-                    <img src="assets/images/default/application/OracleFusion.png" alt="">
+                <span class="application-images">
+                    <img src="assets/images/default/application/{{dataItem.Application}}.png"
+                        alt="{{dataItem.Application}}">
                 </span>
                 <span class="layout-text-obiq ps-2">{{dataItem.SystemIdentifier}}</span>
             </div>
