@@ -36,6 +36,54 @@
 
 /***************************icon start here**************************/
 
+.oci-copy:before {
+  content: "\e920";
+}
+
+.oci-Coupa:before {
+  content: "\e921";
+}
+
+.oci-info:before {
+  content: "\e922";
+}
+
+.oci-MsDynamicsFSO:before {
+  content: "\e923";
+}
+
+.oci-OracleEBS:before {
+  content: "\e924";
+}
+
+.oci-OracleFusion:before {
+  content: "\e925";
+}
+
+.oci-OracleIntegrationCloud:before {
+  content: "\e926";
+}
+
+.oci-PeopleSoft:before {
+  content: "\e927";
+}
+
+.oci-Salesforce:before {
+  content: "\e928";
+}
+
+.oci-SAP:before {
+  content: "\e929";
+}
+
+.oci-VeevaVault:before {
+  content: "\e92a";
+}
+
+.oci-Workday:before {
+  content: "\e92b";
+}
+
 .oci-arrow-up:before {
   content: "\e91e";
 }
