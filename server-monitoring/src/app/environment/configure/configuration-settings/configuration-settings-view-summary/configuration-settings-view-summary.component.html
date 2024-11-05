@@ -212,8 +212,10 @@
                                                             <span class="img-app-profile">
                                                                 <img src="assets/images/default/profile.png" alt="">
                                                             </span>
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.name}}</span>
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.email}}</span>
+                                                            <div class="ps-2">
+                                                                <span class="layout-text-name">{{dataItem.name}}</span>
+                                                                <span class="layout-text-date">{{dataItem.email}}</span>
+                                                            </div>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
