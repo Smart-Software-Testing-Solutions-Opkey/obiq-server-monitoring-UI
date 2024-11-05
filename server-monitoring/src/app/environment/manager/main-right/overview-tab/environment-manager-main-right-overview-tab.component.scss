@@ -60,3 +60,18 @@
         }
     }
 }
+
+.overview-panel-padiing {
+    &:first-child , &:nth-child(3){
+        padding-left: 0rem;
+        padding-right: 1rem;
+    }
+
+    &:nth-child(2),&:nth-child(4) {
+        padding-right: 0rem;
+        padding-left: 1rem;
+    }
+}
+.margin-bottom-2 {
+    margin-bottom: 2rem;
+}
