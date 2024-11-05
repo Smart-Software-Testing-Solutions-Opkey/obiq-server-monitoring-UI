@@ -1,40 +1,34 @@
 
 <div class="main">
     <div class="row mx-0">
-        <div class="col-sm-4 mb-3 ps-0">
+        <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
             <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
-        <div class="col-sm-4 mb-3">
+        <div class="col-sm-4 margin-bottom-2 px-3">
             <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
-        <div class="col-sm-4 mb-3 pe-0">
+        <div class="col-sm-4 margin-bottom-2 ps-3 pe-0">
             <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
         </div>
-        <div class="col-sm-3 mb-3 ps-0">
+        <div class="col-sm-3 margin-bottom-2 ps-0 pe-3">
             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
         </div>
-        <div class="col-sm-3 mb-3">
+        <div class="col-sm-3 margin-bottom-2 px-3">
             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
         </div>
        
-        <div class="col-sm-3 mb-3">
+        <div class="col-sm-3 margin-bottom-2 px-3">
             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
         </div>
-        <div class="col-sm-3 mb-3 pe-0">
+        <div class="col-sm-3 margin-bottom-2 pe-0 ps-3">
             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
         </div>
-    </div>
-    <div class="widget-section">
-        <h6 class="font-bold mb-0 p-2 pt-3">
-            Weekly Logs
-        </h6>
-        <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
     </div>
 
     <div class="row mx-0">
     @for(progressBarItem of progressBarArray; track $index){
       
-            <div class="col-sm-6 pb-5">
+            <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                 <div class="overview-panel widget-section p-3">
                     <div class="panel-header d-flex-between mb-3">
                         <h6 class="mb-0">{{ progressBarItem?.heading }}</h6>
@@ -46,6 +40,13 @@
        
        
     }
+    </div>
+
+    <div class="widget-section">
+        <h6 class="font-bold mb-0 p-2 pt-3">
+            Weekly Log Trends
+        </h6>
+        <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
     </div>
     <!-- <div class="row mx-0">
         <app-environment-manager-widgets-health-bars></app-environment-manager-widgets-health-bars>

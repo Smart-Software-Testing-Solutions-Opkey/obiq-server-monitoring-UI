@@ -3,7 +3,7 @@
 
 
 
-        <kendo-grid-column title="Build Name" field="subActivityName">
+        <kendo-grid-column title="Build Name" field="subActivityName" [width]="200">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
@@ -15,7 +15,7 @@
         </kendo-grid-column>
 
         @if(widgetData?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ) {
-        <kendo-grid-column  title="" [width]="200">
+        <kendo-grid-column  title="" [width]="220">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <div class="flex-center">
@@ -36,7 +36,7 @@
 
         </kendo-grid-column>
         }  @else {
-            <kendo-grid-column title="" field="timeStampStr" [width]="200">
+            <kendo-grid-column title="" field="timeStampStr" [width]="220">
             </kendo-grid-column>
         }
         <ng-template kendoGridNoRecordsTemplate>
