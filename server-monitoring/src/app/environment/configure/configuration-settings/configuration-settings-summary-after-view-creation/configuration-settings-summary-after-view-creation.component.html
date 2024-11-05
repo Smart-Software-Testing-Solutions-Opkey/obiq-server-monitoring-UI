@@ -1,4 +1,4 @@
-<h4 class="text-header mb-3">Add Access Type to complete</h4>
+<h4 class="text-header mb-0 pb-4">Settings</h4>
 
 <div class="row mx-0 mb-4">
     <div class="col-sm-5 ps-0">
@@ -42,77 +42,77 @@
 </div>
 
 
-<div id="accordion_summary" class="accordion-view-summary">
+<div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 17.1rem);">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
+                ERP Analytics
+            </a>
+        </div>
+        <div id="collapse_ERPAnalytics" class="collapse show">
+            <div class="card-body px-0 pb-0">
 
-               <div class="card">
-                   <div class="card-header">
-                       <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
-                           ERP Analytics
-                       </a>
-                   </div>
-                   <div id="collapse_ERPAnalytics" class="collapse show">
-                       <div class="card-body px-0 pb-0">
+                <div class="kendo_grid">
+                    <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                        (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0" style="max-height: calc(100vh - 20.2rem);">
+                        <kendo-grid-column field="SystemIdentifier" title="Name">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center">
+                                    <span class="img-avatar-profile">
+                                        <img src="assets/images/default/application/OracleFusion.png" alt="">
+                                    </span>
+                                    <span class="layout-text-obiq ps-2">{{dataItem.value.name}}</span>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
 
-                           <div class="kendo_grid">
-                               <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
-                                   (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
-                                   class="scrollable grid_remove_vertical_border k_grid_header_pr_0" style="max-height: calc(100vh - 19rem);">
-                                   <kendo-grid-column field="SystemIdentifier" title="Name">
-                                       <ng-template kendoGridCellTemplate let-dataItem>
-                                           <div class="flex-center">
-                                               <span class="img-avatar-profile">
-                                                   <img src="assets/images/default/application/OracleFusion.png" alt="">
-                                               </span>
-                                               <span class="layout-text-obiq ps-2">{{dataItem.value.name}}</span>
-                                           </div>
-                                       </ng-template>
-                                   </kendo-grid-column>
+                        <kendo-grid-column field="CreatedBy" title="Created">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center">
+                                    <!-- <span class="img-app-profile">
+                                        <img src="assets/images/default/profile.png" alt="">
+                                    </span> -->
+                                    <div class="ps-2">
+                                        <!-- <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                                        <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
+                    
+                        <kendo-grid-column field="ModifiedBy" title="Last Modified">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center">
+                                    <!-- <span class="img-app-profile">
+                                        <img src="assets/images/default/profile.png" alt="">
+                                    </span> -->
+                                    <div class="ps-2">
+                                        <!-- <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                                        <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
 
-                                   <kendo-grid-column field="CreatedBy" title="Created">
-                                       <ng-template kendoGridCellTemplate let-dataItem>
-                                           <div class="flex-center">
-                                               <!-- <span class="img-app-profile">
-                                                   <img src="assets/images/default/profile.png" alt="">
-                                               </span> -->
-                                               <div class="ps-2">
-                                                   <!-- <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
-                                                   <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
-                                               </div>
-                                           </div>
-                                       </ng-template>
-                                   </kendo-grid-column>
-                                
-                                   <kendo-grid-column field="ModifiedBy" title="Last Modified">
-                                       <ng-template kendoGridCellTemplate let-dataItem>
-                                           <div class="flex-center">
-                                               <!-- <span class="img-app-profile">
-                                                   <img src="assets/images/default/profile.png" alt="">
-                                               </span> -->
-                                               <div class="ps-2">
-                                                   <!-- <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
-                                                   <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
-                                               </div>
-                                           </div>
-                                       </ng-template>
-                                   </kendo-grid-column>
+                        <ng-template kendoGridNoRecordsTemplate>
+                            <div class="no-data-found" style="height: 17rem !important;">
+                                <div class="no-data-found-content">
+                                    <img class="no-data-found-content-img"
+                                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                                    <p class="no-data-found-content-text">No data available</p>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-grid>
+                </div>
 
-                                   <ng-template kendoGridNoRecordsTemplate>
-                                       <div class="no-data-found" style="height: 17rem !important;">
-                                           <div class="no-data-found-content">
-                                               <img class="no-data-found-content-img"
-                                                   src="/assets/icon-image/nodata-img.png" alt="No data">
-                                               <p class="no-data-found-content-text">No data available</p>
-                                           </div>
-                                       </div>
-                                   </ng-template>
-                               </kendo-grid>
-                           </div>
-
-                       </div>
-                   </div>
-               </div>
-               
-
-               
+            </div>
+        </div>
+    </div>            
 </div>
-<button  type="button" class="btn btn-layout btn-bg-white me-2 mt-3" (click)="Update_ViewAccess_Type()">Update</button>
+<div class="p-3 border-top-0">
+    <button type="button" class="btn btn-layout btn-bg-white me-2">Cancel</button>
+    <button type="button" class="btn btn-layout btn-bg-theme" (click)="Update_ViewAccess_Type()">Update</button>
+</div>
+
