@@ -147,7 +147,7 @@
                                                 <div class="col-sm-12 px-0">
                                                     <div class="date-time-text">
                                                         <kendo-label>
-                                                                <kendo-datetimepicker 
+                                                                <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
                                                                 [format]="dateTimeFormat"
                                                                 [(value)]="fromDatevalue"
                                                                 ></kendo-datetimepicker>
@@ -168,7 +168,7 @@
                                                     <div class="date-time-text" >
                                                         <!-- sep 13, 2024 -->
                                                         <kendo-label>
-                                                            <kendo-datetimepicker
+                                                            <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
                                                               [format]="dateTimeFormat"
                                                               [(value)]="toDateValue"
                                                             ></kendo-datetimepicker>

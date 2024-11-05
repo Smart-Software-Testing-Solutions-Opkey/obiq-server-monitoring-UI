@@ -68,3 +68,38 @@
     color: #116173 !important;
 }
 
+::ng-deep .dropdownDateTimePicker {
+    &.k-popup {
+        .k-calendar-header .k-button-flat-primary {
+            color: #116173 !important;
+        }
+
+        .k-actions-horizontal .k-button-solid-primary  {
+            background-color: #116173 !important;
+            border-color: #116173 !important;
+        }
+
+        .k-calendar-td.k-selected .k-link {
+            background-color: #116173 !important;
+            color: #fff !important;
+        }
+
+        .k-time-header .k-time-now {
+            color: #116173 !important;
+
+            &:hover {
+                background-color: #f6feff !important;
+            }
+        }
+
+        .k-time-list {
+            .k-item:hover {
+                color: #116173 !important;
+            }
+        }
+        
+        
+    }
+}
+
+
