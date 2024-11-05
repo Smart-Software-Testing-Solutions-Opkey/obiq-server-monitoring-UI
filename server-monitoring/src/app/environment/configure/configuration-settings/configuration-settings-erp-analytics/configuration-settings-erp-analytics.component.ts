@@ -254,7 +254,12 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   selectedKeys = []
 
   bindData(){
-    this.selectedKeys = this.obj_configuration_setting?.selected_erp_analytics?.map(ele =>ele.SettingsID);
+    this.selectedKeys = []
+    this.selectedRows =  []
+    this.obj_configuration_setting?.selected_erp_analytics?.forEach((ele) =>{
+      this.selectedKeys.push(ele.SettingsID)
+      this.selectedRows.push(ele)
+    });
   }
 
 
