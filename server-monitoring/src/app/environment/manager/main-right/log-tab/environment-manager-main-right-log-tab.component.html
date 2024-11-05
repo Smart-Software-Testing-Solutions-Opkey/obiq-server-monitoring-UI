@@ -1,6 +1,7 @@
 <div class="logs-panel">
 
     <div id="chart" class="graph-timeseries mb-3">
+    
         <!-- <h2>Log Usage Over Time</h2> -->
         <apx-chart  *ngIf="chartOptions.series.length > 0"
         [series]="chartOptions.series"
@@ -12,6 +13,11 @@
         [legend]="chartOptions.legend"
         [fill]="chartOptions.fill"
       ></apx-chart>
+      <kendo-dropdownlist
+      [data]="logTypes"
+      [(ngModel)]="selectedLogType"
+      (valueChange)="updateChart()">
+      </kendo-dropdownlist>
       </div>
 
     <div class="logs-grid-layout">

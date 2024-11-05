@@ -349,7 +349,6 @@ dataDir = ''
   width = 0
   height = 0
   checkStyling() {
-    debugger
     let ele = this.resizableDiv.nativeElement;
     let width = ele.getBoundingClientRect().width;
     if (width) {
