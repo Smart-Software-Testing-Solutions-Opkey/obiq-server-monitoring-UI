@@ -1129,3 +1129,46 @@ input {
         }
     }
 }
+
+// -----------------css for icon color-------------------- //
+
+.oci-Coupa:before,
+.oci-coupa:before {
+    color: #44b6e7 !important;
+}
+
+.oci-MsDynamicsFSO:before,
+.oci-msdynamicsfso:before {
+    color: #2b58a9;
+}
+
+.oci-OracleFusion:before,
+.oci-oraclefusion:before,
+.oci-OracleIntegrationCloud:before,
+.oci-oracleintegrationcloud:before,
+.oci-PeopleSoft:before,
+.oci-peoplesoft:before, 
+.oci-OracleEBS:before,
+.oci-oracleebs:before {
+    color: #c84734 !important;
+}
+
+.oci-Salesforce:before,
+.oci-salesforce:before {
+    color: #00a1e1 !important;
+}
+
+.oci-SAP:before,
+.oci-sap:before {
+    color: #1D62BD;
+}
+
+.oci-VeevaVault:before,
+.oci-veevavault:before {
+    color: #f69a2d !important;
+}
+
+.oci-Workday:before,
+.oci-workday:before {
+    color: #0067ab !important;
+}
