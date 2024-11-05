@@ -198,5 +198,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       });
   }
 
-
+  backToMenu(){
+    this.app_service.dataTransmitter("backSettings");
+  }
 }
