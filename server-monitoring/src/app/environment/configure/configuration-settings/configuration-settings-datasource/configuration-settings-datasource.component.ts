@@ -33,6 +33,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     this.obj_error.dispaly_DataSource = dispaly_DataSource;
     this.obj_error.display_ErpApplication = display_ErpApplication;
     this.obj_error.display_SystemDiagnosticsData = display_SystemDiagnosticsData;
+    this.bindData()
   }
 
   ngOnInit() {
@@ -56,7 +57,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     this.datasource_item_name = "";
   }
 
-  modal_name: null;
+  modal_name = '';
   data_Source_widjets = [];
 
   get_all_datasource() {
@@ -99,7 +100,15 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
           this.data_Source_widjets.forEach(item => {
             item['isChecked'] = false;
+            if(this.obj_datasource_widget?.select_datasource_item?.length > 0){
+              this.obj_datasource_widget?.select_datasource_item.forEach(ele =>{
+                if(ele.id == item.id){
+                  item['isChecked'] = true;
+                }
+              })
+            }
           })
+         
 
         },
         error: (error: any) => {
@@ -225,6 +234,28 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
   }
-
-
+  bindData(){
+    debugger
+    this.modal_name = this.obj_configuration_setting?.selected_datasource?.viewName??''
+    this.obj_datasource_widget =  this.obj_configuration_setting?.selected_datasource??{
+      viewName: "",
+      select_datasource_item: [],
+      select_applicaton_item: [],
+      select_systemDiagnostics_item: []
+    }
+  }
+  checkApplication(item){
+    return  this.obj_datasource_widget?.select_applicaton_item?.includes(item)
+  }
+  checkSystem(item){
+    let bool = false
+  this.obj_datasource_widget?.select_systemDiagnostics_item?.forEach((element) =>{
+    if(element.id == item.id)
+    {
+      bool = true
+    }
+    
+  });
+  return bool
+  }
 }

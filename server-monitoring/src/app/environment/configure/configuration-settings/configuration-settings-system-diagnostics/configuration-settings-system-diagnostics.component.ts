@@ -23,7 +23,7 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
     this.obj_configuration_setting = obj_configuration_setting;
-    console.log("obj_configuration_setting===", obj_configuration_setting);
+    this.bindData()
   }
   Instance_list:any;
 
@@ -77,6 +77,9 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
   this.Instance_list = dummyData;
   }
  
-
+  selectedKeys = []
+  bindData(){
+    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.OBIQ_Agent);
+  }
   
 }

@@ -20,7 +20,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   @Input('child_data') set child_data({ obj_configuration_setting, dispaly_Instances }) {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.dispaly_Instances = dispaly_Instances;
-    console.log("obj_configuration_setting===", obj_configuration_setting);
+    this.bindData()
   }
 
   constructor(
@@ -34,7 +34,6 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   ngOnInit() {
 
     this.get_all_Instance()
-    this.obj_configuration_setting.selected_erp_analytics = [];
   }
 
   get_all_Instance() {
@@ -251,6 +250,11 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
     this.obj_configuration_setting.selected_erp_analytics = this.selectedRows;
 
+  }
+  selectedKeys = []
+
+  bindData(){
+    this.selectedKeys = this.obj_configuration_setting?.selected_erp_analytics?.map(ele =>ele.SettingsID);
   }
 
 

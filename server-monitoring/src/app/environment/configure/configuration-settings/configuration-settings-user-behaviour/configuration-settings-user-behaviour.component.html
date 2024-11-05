@@ -6,11 +6,13 @@
 <kendo-grid 
     #grid_application 
     [data]="agent_lists" 
-    [selectable]="true" 
-    [navigable]="true"
+    [selectable]="true"         
+    [navigable]="true"   
     (selectionChange)="on_Selection_Change_User_Behavious($event)"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo">
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
+    kendoGridSelectBy="email"
+    [(selectedKeys)]="selectedKeys">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>

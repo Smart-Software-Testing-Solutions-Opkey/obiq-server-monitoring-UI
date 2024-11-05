@@ -9,7 +9,7 @@
     <div class="row mx-0 mb-3">
         <div class="col-sm-6 ps-0 pe-3">
             <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
-            <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)">
+            <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)" [(ngModel)]="modal_name">
             <span *ngIf="obj_error.dispaly_viewName" class="form-error">View name is required.</span>
         </div>
     </div>
@@ -55,7 +55,7 @@
                                 <div class="form-check mb-3">
                                     <label class="form-check-label">
                                         <input class="form-check-input chekbox-custom" type="checkbox"
-                                            [checked]="dataItem.isChecked"
+                                            [checked]="checkApplication(dataItem)"
                                             (change)="select_applicaton(dataItem, $event)">
                                         <span>
                                             <span class="application-images">
@@ -87,7 +87,7 @@
                             <div class="form-check mb-3">
                                 <label class="form-check-label">
                                     <input class="form-check-input chekbox-custom" type="checkbox"
-                                        [checked]="dataItem.isChecked"
+                                        [checked]="checkSystem(dataItem)"
                                         (click)="select_systemDiagnostics(dataItem, $event)">
                                     <span>
                                         <!-- <span class="application-images">
