@@ -32,7 +32,7 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
   @Input('child_data') set child_data({ obj_configuration_setting,displayTestError }) {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.displayTestError = displayTestError
-    console.log("in Test Automation", obj_configuration_setting);
+   this.bindData()
   }
 
   ngOnInit(){
@@ -78,5 +78,9 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
       }
     }
 
+  }
+  selectedKeys = []
+  bindData(){
+    this.selectedKeys = this.obj_configuration_setting?.selected_test_automation_analysis?.map(ele =>ele.AgentName);
   }
 }

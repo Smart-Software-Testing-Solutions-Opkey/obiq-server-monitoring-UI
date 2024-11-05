@@ -11,7 +11,9 @@
     [navigable]="true"
     (selectionChange)="onSelectionChange($event)"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo">
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
+    kendoGridSelectBy="SettingsID"
+    [(selectedKeys)]="selectedKeys">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>

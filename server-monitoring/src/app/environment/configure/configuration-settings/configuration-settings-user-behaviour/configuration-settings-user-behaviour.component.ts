@@ -26,7 +26,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
   @Input('child_data') set child_data({ obj_configuration_setting,displayUserError }) {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.displayUserError = displayUserError
-    console.log("In User Behaviour", obj_configuration_setting);
+    this.bindData()
   }
   agent_lists = [
     {
@@ -99,7 +99,12 @@ export class ConfigurationSettingsUserBehaviourComponent {
     console.log('Selected Rows:', this.selected_System_User_behaviour);
 
     this.obj_configuration_setting.selected_user_behaviour_component = this.selected_System_User_behaviour;
-
+    this.selectedKeys
   }
   
+  selectedKeys = []
+
+  bindData(){
+    this.selectedKeys = this.obj_configuration_setting?.selected_user_behaviour_component?.map(ele =>ele.email);
+  }
 }
