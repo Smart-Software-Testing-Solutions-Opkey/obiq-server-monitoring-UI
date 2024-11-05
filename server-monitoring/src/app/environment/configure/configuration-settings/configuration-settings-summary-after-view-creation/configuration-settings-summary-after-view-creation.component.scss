@@ -79,3 +79,11 @@
         }
     }   
 }
+
+.access-type-layout {
+    .bt-dropdown-icon {
+        &.dropdown-toggle:after {
+            display: none;
+        }
+    }
+}
