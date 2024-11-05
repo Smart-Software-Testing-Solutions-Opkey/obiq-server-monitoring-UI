@@ -40,7 +40,8 @@
   content: "\e920";
 }
 
-.oci-Coupa:before {
+.oci-Coupa:before,
+.oci-coupa:before {
   content: "\e921";
 }
 
@@ -48,39 +49,48 @@
   content: "\e922";
 }
 
-.oci-MsDynamicsFSO:before {
+.oci-MsDynamicsFSO:before,
+.oci-msdynamicsfso:before {
   content: "\e923";
 }
 
-.oci-OracleEBS:before {
+.oci-OracleEBS:before,
+.oci-oracleebs:before {
   content: "\e924";
 }
 
-.oci-OracleFusion:before {
+.oci-OracleFusion:before,
+.oci-oraclefusion:before {
   content: "\e925";
 }
 
-.oci-OracleIntegrationCloud:before {
+.oci-OracleIntegrationCloud:before,
+.oci-oracleintegrationcloud:before {
   content: "\e926";
 }
 
-.oci-PeopleSoft:before {
+.oci-PeopleSoft:before,
+.oci-peoplesoft:before {
   content: "\e927";
 }
 
-.oci-Salesforce:before {
+.oci-Salesforce:before,
+.oci-salesforce:before {
   content: "\e928";
 }
 
-.oci-SAP:before {
+.oci-SAP:before,
+.oci-sap:before {
   content: "\e929";
 }
 
-.oci-VeevaVault:before {
+.oci-VeevaVault:before,
+.oci-veevavault:before {
   content: "\e92a";
 }
 
-.oci-Workday:before {
+.oci-Workday:before,
+.oci-workday:before {
   content: "\e92b";
 }
 
