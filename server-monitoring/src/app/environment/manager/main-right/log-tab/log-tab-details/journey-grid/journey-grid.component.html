@@ -5,7 +5,7 @@
     
             <kendo-grid-column title="Sub Activity">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <div class="flex-center">
+                    <div class="d-flex align-items-baseline">
                         <i *ngIf="dataItem.appType!=null" class="oci oci-{{dataItem.appType | lowercase}} font_18px align-middle pe-2">
                         </i>
                         <span class="layout-text-obiq">{{dataItem?.subActivityName}}</span>
