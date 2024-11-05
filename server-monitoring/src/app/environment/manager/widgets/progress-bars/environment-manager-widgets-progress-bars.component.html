@@ -18,16 +18,18 @@
         <kendo-grid-column  title="" [width]="200">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <div class="progress" style="border-radius: 25px; height: 0.5rem;">
-                    <div class="progress-bar bg-info" role="progressbar"
-                        [style.width]="dataItem?.passPercent  + '%'"
-                        style="background-color: #1C7C92 !important;" container="body"></div>
-                        <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
-                        container="body"></div>
+                <div class="flex-center">
+                    <div class="progress w-100" style="border-radius: 25px; height: 0.5rem;">
+                        <div class="progress-bar bg-info" role="progressbar"
+                            [style.width]="dataItem?.passPercent  + '%'"
+                            style="background-color: #1C7C92 !important;" container="body"></div>
+                            <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
+                            container="body"></div>
+                    </div>
+                    <span class="ms-3" style="width: 2rem;">
+                        {{dataItem.count}}
+                    </span>
                 </div>
-                <span>
-                    {{dataItem.count}}
-                </span>
             </ng-template>
 
         </kendo-grid-column>

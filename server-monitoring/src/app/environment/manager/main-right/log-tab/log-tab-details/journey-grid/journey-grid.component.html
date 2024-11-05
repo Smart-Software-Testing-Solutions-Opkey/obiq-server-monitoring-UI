@@ -3,27 +3,31 @@
     <div *ngIf="obj_selected_journey.isDisplay_main" class="trace">
         <kendo-grid [data]="datasource_grid_journey" [selectable]="true" (cellClick)="onSelectionChange($event)">
     
+            <kendo-grid-column title="Sub Activity">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div class="d-flex align-items-baseline">
+                        <i *ngIf="dataItem.appType!=null" class="oci oci-{{dataItem.appType | lowercase}} font_18px align-middle pe-2">
+                        </i>
+                        <span class="layout-text-obiq">{{dataItem?.subActivityName}}</span>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            
             <kendo-grid-column title="Module" [width]="190">
                 <ng-template kendoGridCellTemplate let-dataItem>
                     <span class="layout-text-obiq">{{dataItem?.moduleName}}</span>
                 </ng-template>
             </kendo-grid-column>
-    
-            <kendo-grid-column title="Sub Activity" [width]="190">
-                <ng-template kendoGridCellTemplate let-dataItem>
-                    <span class="layout-text-obiq">{{dataItem?.subActivityName}}</span>
-                </ng-template>
-            </kendo-grid-column>
 
-            <kendo-grid-column title="Time" [width]="190">
+            <kendo-grid-column title="Time" [width]="200">
                 <ng-template kendoGridCellTemplate let-dataItem>
                     <span class="layout-text-obiq">{{dataItem?.timeStampStr}}</span>
                 </ng-template>
             </kendo-grid-column>
 
-            <kendo-grid-column title="Status" [width]="190">
+            <kendo-grid-column title="Status" [width]="120">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <span class="layout-text-obiq">{{dataItem?.subActivityStatus}}</span>
+                    <span class="layout-text-obiq layout-status {{dataItem?.subActivityStatus}}">{{dataItem?.subActivityStatus}}</span>
                 </ng-template>
             </kendo-grid-column>
     

@@ -244,7 +244,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
     const timeRange = `${formattedStartTime} to ${formattedEndTime}`;
     console.log(timeRange);
-    this.app_service.dataTransmitter(timeRange);
+    this.app_service.dataTransmitter({callsource:'timeExplorerChart',data:timeRange});
   }
 
 

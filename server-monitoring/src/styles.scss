@@ -351,11 +351,9 @@ body {
     white-space: nowrap;
 }
 
-.text-wrap {
-    word-break: break-all;
+.word-wrap {
     word-wrap: break-word;
 }
-
 // -------------------font weight--------------------------
 
 .font-bold {
@@ -1128,4 +1126,170 @@ input {
             color: inherit !important;
         }
     }
+}
+
+// -----------------css for icon color-------------------- //
+
+.oci-Coupa:before,
+.oci-coupa:before {
+    color: #44b6e7 !important;
+}
+
+.oci-MsDynamicsFSO:before,
+.oci-msdynamicsfso:before {
+    color: #2b58a9;
+}
+
+.oci-OracleFusion:before,
+.oci-oraclefusion:before,
+.oci-OracleIntegrationCloud:before,
+.oci-oracleintegrationcloud:before,
+.oci-PeopleSoft:before,
+.oci-peoplesoft:before, 
+.oci-OracleEBS:before,
+.oci-oracleebs:before {
+    color: #c84734 !important;
+}
+
+.oci-Salesforce:before,
+.oci-salesforce:before {
+    color: #00a1e1 !important;
+}
+
+.oci-SAP:before,
+.oci-sap:before {
+    color: #1D62BD;
+}
+
+.oci-VeevaVault:before,
+.oci-veevavault:before {
+    color: #f69a2d !important;
+}
+
+.oci-Workday:before,
+.oci-workday:before {
+    color: #0067ab !important;
+}
+
+
+// ------------------------------
+
+.layout-status {
+    padding: 0.2rem 0.5rem;
+    background: #DFDFDF;
+    color: #344054;
+    border-radius: 1rem;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    vertical-align: middle;
+}
+
+.layout-status.NotStarted,
+.layout-status.NotExecuted,
+.layout-status.New,
+.layout-status.ToDo,
+.layout-status.Open,
+.layout-status.Reopened,
+.layout-status.Incomplete,
+.layout-status.Stopped,
+.layout-status.Pending,
+.layout-status.InComplete {
+    background-color: #F2F4F7;
+    color: #667085;
+}
+
+.layout-status.OnHold,
+.layout-status.warning {
+    background-color: #FFF2DE;
+    color: #EB8D00;
+}
+
+.layout-status.InProgress,
+.layout-status.Running,
+.layout-status.Inprogress,
+.layout-status.inprogress {
+    background-color: #E0F7FF;
+    color: #009EFF;
+}
+
+.layout-status.Cancelled,
+.layout-status.Expired,
+.layout-status.Blocked,
+.layout-status.High,
+.layout-status.Error,
+.layout-status.Fail,
+.layout-status.Rejected,
+.layout-status.RejectAndStop,
+.layout-status.incompletewitherror,
+.layout-status.completewitherror,
+.layout-status.fail,
+.layout-status.error,
+.layout-status.blocked {
+    background-color: #FFF4F4;
+    color: #FF0404;
+}
+
+.layout-status.Canceled {
+    background-color: #FFF6ED;
+    color: #C4320A;
+}
+
+.layout-status.SkippedOver,
+.layout-status.Skipped {
+    background-color: #FFF7F7;
+    color: #B42318;
+}
+
+.layout-status.Completed,
+.layout-status.Pass,
+.layout-status.Done,
+.layout-status.Approve,
+.layout-status.Approved,
+.layout-status.complete,
+.layout-status.success,
+.layout-status.pass, 
+.layout-status.Complete{
+    background-color: #ECFDF3;
+    color: #00B66A;
+}
+
+.layout-status.ReadyToTest,
+.layout-status.Paused,
+.layout-status.AutoPaused {
+    background-color: #FFF9E3;
+    color: #FFC804;
+}
+
+.layout-status.Backlog,
+.layout-status.Highest {
+    background-color: #F2F4F7;
+    color: #667085;
+}
+
+.layout-status.Low {
+    background-color: #dde9ff;
+    color: #2b58a9;
+}
+
+.layout-status.Medium {
+    background-color: #FFF2DE;
+    color: #FF7E06;
+}
+
+.layout-status.Closed {
+    background-color: #00B66A;
+    color: #fff !important;
+}
+
+.layout-status.NotRunYet {
+    background-color: #FFFFFF;
+    color: #667085;
+    border: 1px solid #667085;
+    padding: 0.2rem 0.5rem;
+}
+
+.layout-status.changed {
+    background: #FFFAEB;
+    color: #B54708;
 }

@@ -9,8 +9,9 @@
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
     <kendo-grid-column field="appType" title="appType">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="flex-center">
-                <span class="layout-text-obiq ps-2">{{dataItem.appType}}</span>
+            <div class="d-flex align-items-baseline">
+                <i *ngIf="dataItem.appType!=null" class="oci oci-{{dataItem.appType | lowercase}} font_18px align-middle pe-2"></i>
+                <span class="layout-text-obiq">{{dataItem.appType}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>

@@ -29,11 +29,14 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        this.receivedTimeRange = data;
-        console.log('Received Data:', this.receivedTimeRange);
+        if(data.callsource == 'timeExplorerChart'){
 
-        // Manually trigger change detection
-        this.cdr.detectChanges();
+          this.receivedTimeRange = data.data;
+          console.log('Received Data:', this.receivedTimeRange);
+  
+          // Manually trigger change detection
+          this.cdr.detectChanges();
+        }
       }
     });
   }
