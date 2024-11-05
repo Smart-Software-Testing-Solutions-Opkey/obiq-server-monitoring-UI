@@ -262,6 +262,7 @@ dataDir = ''
         form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
         form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
       }
+      window.loadingStart("#stats-div-"+this.typeEnum, "Please wait");
       this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {
@@ -302,12 +303,13 @@ dataDir = ''
               }
 
               this.checkStyling();
+              window.loadingStop("#stats-div-"+this.typeEnum);
 
             }
 
           },
           error: (error: any) => {
-            window.loadingStop("#Env_manager_main_right");
+            window.loadingStop("#stats-div-"+this.typeEnum);
             console.warn(error);
           },
           complete: () => {
