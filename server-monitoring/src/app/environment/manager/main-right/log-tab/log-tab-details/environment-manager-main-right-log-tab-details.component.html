@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="details-strip mb-3 d-flex align-items-start flex-wrap">
+    <!-- <div class="details-strip mb-3 d-flex align-items-start flex-wrap">
 
         <div class="host d-inline-block datakeys-box">
             <span class="font-bold">Domain</span>
@@ -40,6 +40,35 @@
                 <i class="oci oci-shelf-position ps-1 pe-2"></i>{{selectedData?.logName}}</span>
         </div>
        
+    </div> -->
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-3 ps-0">
+            <div class="datakeys-box">
+                <span class="font-bold">Domain</span>
+                <span class="d-block text-ellipsis font-14px link-color">{{selectedData?.domainName}}</span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="datakeys-box">
+                <span class="font-bold">Host</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <i class="oci oci-host ps-1 pe-2"></i>{{selectedData?.dataId}}</span>
+            </div> 
+        </div>
+        <div class="col-sm-3">
+            <div class="datakeys-box">
+                <span class="font-bold">Service</span>
+                <span class="d-block text-ellipsis font-14px">{{selectedData?.appName}}</span>
+            </div>
+        </div>
+        <div class="col-sm-3 pe-0">
+            <div class="datakeys-box">
+                <span class="font-bold">Name</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <i class="oci oci-shelf-position ps-1 pe-2"></i>{{selectedData?.logName}}</span>
+            </div> 
+        </div>
     </div>
 
     <!-- <div class="status-message mb-3 error-details d-flex-between">
