@@ -138,7 +138,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
           type: "vertical",
           shadeIntensity: 0.9,
           gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-          inverseColors: false,
+          inverseColors: this.inverseColors,
        
         },
         colors:[this.chartColor]
@@ -164,7 +164,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   }
   typeEnum:string = ''
   chartColor:string = ''
-
+  inverseColors = false
   view:any
   @Input('child_data') set child_data({ typeEnum,view }) {
     debugger
@@ -273,15 +273,21 @@ dataDir = ''
               this.dataObj.percentage = result.percentdiff
               this.dataDir = result.direction
               this.dataSet = []
-              if(result.dataPlotList.length>0){
-
+              if(result?.dataPlotList?.length>0){
+                let totalVal = 0
                 result.dataPlotList.forEach((ele,ind) => {
+                  totalVal += ele.percentdiff
                   let obj = {
-                    x:ind,
+                    x:ind+1,
                     y:ele.percentdiff
                   }
                   this.dataSet.push(obj)
                 });
+                if(totalVal/result.dataPlotList.length < 0){
+                  this.inverseColors = true
+                }else{
+                  this.inverseColors = false
+                }
               }else{
             
                   this.dataSet =  [
