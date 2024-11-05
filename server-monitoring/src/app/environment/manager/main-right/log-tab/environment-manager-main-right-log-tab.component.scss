@@ -27,7 +27,7 @@
                         }
                     }
 
-                    .layout-status {
+                    .layout-status-logs {
                         // padding: .2rem .5rem;
                         background: #dfdfdf;
                         color: #344054;
@@ -54,5 +54,20 @@
                 }
             }
         }
+    }
+}
+
+.graph-status-dropdown {
+    position: absolute;
+    top: 0.6rem;
+    right: 10rem;
+    width: 8rem;
+}
+
+
+@media (max-width: 1366px) {
+    .graph-status-dropdown {
+        top: 0.9rem;
+        right: 12rem;
     }
 }
