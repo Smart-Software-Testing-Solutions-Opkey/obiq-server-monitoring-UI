@@ -164,7 +164,6 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   }
   typeEnum:string = ''
   chartColor:string = ''
-  secColor:string = ''
 
   view:any
   @Input('child_data') set child_data({ typeEnum,view }) {
@@ -323,19 +322,19 @@ dataDir = ''
   ngAfterViewInit(): void {
     if (this.typeEnum == 'Error') {
       this.chartColor = '#B42318'
-      this.secColor = '#FEF3F2'
+     
       this.bindChartData('Error')
     }
     else if(this.typeEnum == 'Success'){
       this.chartColor = '#268144'
-      this.secColor = '#F6FEFF'
+   
 
       this.bindChartData('Success')
   
     }
     else if(this.typeEnum == 'Warning'){
       this.chartColor = '#FFBF00'
-      this.secColor = '#FFF7DE'
+   
       this.bindChartData('Warning')
   
     }
