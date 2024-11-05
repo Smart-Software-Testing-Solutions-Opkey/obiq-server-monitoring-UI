@@ -25,13 +25,15 @@
             @for (item of analyticsTypes; track $index) {
             <li class="nav-item ps-2 dotted-lines-naviagtion position-relative">
 
-                <a class="nav-link" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
+                <a class="nav-link flex-center" href="javascript:void(0)" (click)="changeAnalyticsSelection(item)"
                     [ngClass]="item.isSelected?'active':''">
 
                     <span class="menu-icon">
                         <i class="oci oci-journey menu-icon pe-2"></i>
                     </span>
-                    <span class="menu-text">{{item.name}}</span>
+                    <span class="menu-text text-ellipsis d-block">
+                        {{item.name}}
+                    </span>
                 </a>
 
             </li>
