@@ -20,3 +20,15 @@
 .custom-height{
     height: 12.9rem;
 }
+
+::ng-deep .custom-height {
+    .k-grid-container {
+        .k-grid-table {
+            .k-master-row {
+                .k-table-td {
+                    border-bottom-width: 0px;
+                }
+            }
+        }
+    }
+}
