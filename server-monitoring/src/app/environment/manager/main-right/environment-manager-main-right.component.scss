@@ -102,6 +102,28 @@
     }
 }
 
+::ng-deep .timeZone-dd-list {
+    &.k-dropdownlist {
+        border-width: 0px !important;
+        box-shadow: none !important;
+        &:focus, 
+        &:focus-visible,
+        &:focus-within {
+            outline: #116173 auto 0px !important;
+        }
+
+        .k-svg-icon  {
+            display: none !important;
+        }
+
+        .k-input-inner {
+            .k-input-value-text {
+                color: #116173 !important;
+            }
+        }
+    }
+}
+
 .sp-eperator {
     width: 1.5rem;
     display: inline-block;
