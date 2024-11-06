@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-arrow-down:before {
+  content: "\e92c";
+}
+
 .oci-copy:before {
   content: "\e920";
 }

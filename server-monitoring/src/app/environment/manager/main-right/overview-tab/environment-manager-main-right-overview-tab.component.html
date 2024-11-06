@@ -32,8 +32,12 @@
                 <div class="overview-panel widget-section p-3">
                     <div class="panel-header d-flex-between mb-3">
                         <h6 class="mb-0">{{ progressBarItem?.heading }}</h6>
-                        <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">View Full Journey</a>
+                     
+                        <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
+                            {{ progressBarItem?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
+                        </a>
                         
+                    
                     </div>
                     <app-environment-manager-widgets-progress-bars [widgetData]="progressBarItem" [view]="view"></app-environment-manager-widgets-progress-bars>
                 </div>
