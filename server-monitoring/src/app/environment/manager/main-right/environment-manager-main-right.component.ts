@@ -43,6 +43,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   ngAfterViewInit(): void {
 
   }
+  timezoneDatasource = []
+  selectedTimezone:any
   receivedTimeRange: any
   selectedAnalyticsType: any = {}
   selectedView: any
@@ -222,5 +224,23 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     });
     modalRef.componentInstance.selectedItem = { callsource: 'addWidget' };
   }
+  getTimezones() {
 
+    var form_url = environment.BASE_OPKEY_URL + "Application/GetTimeZones";
+    var form_data = {};
+
+    this.app_service.make_get_server_call(form_url, form_data).subscribe(
+      (result: any) => {
+        debugger
+        this.selectedTimezone = 'India Standard Time'
+        this.timezoneDatasource = result;
+
+      },
+      (error) => {
+
+      }
+    );
+
+
+  }
 }

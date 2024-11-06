@@ -82,7 +82,7 @@
                 <div class="filter-content">
                     <div class="dropdown layout-btn-group-time">
                         
-                       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false">
+                       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false" (click)="getTimezones()">
                             <button type="button" class="btn btn-default">
                                 <i class="oci oci-chevron-left font-12px"></i>
                             </button>
@@ -191,7 +191,13 @@
                                     <div>
                                         <div class="d-flex-between border-bottom pb-2">
                                             <span class="text-theme font-14px">
-                                                Asia/Kolkata
+                                                <!-- Asia/Kolkata -->
+                                                <kendo-dropdownlist class="canView-dd-list"
+                                                [data]="timezoneDatasource"
+                                                [(ngModel)]="selectedTimezone"
+                                                textField="DisplayName"
+                                                valueField="Id">
+                                            </kendo-dropdownlist>
                                             </span>
                                             <span class="btn-layout-time">
                                                 <button (click)="closeTimeFilterDropdown()" type="button" class="btn btn-layout btn-bg-white px-2 py-1 me-2">
