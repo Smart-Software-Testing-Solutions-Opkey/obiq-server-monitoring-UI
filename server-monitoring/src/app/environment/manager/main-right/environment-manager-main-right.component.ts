@@ -232,9 +232,9 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
         debugger
-        this.selectedTimezone = 'India Standard Time'
         this.timezoneDatasource = result;
-
+        this.selectedTimezone =  this.timezoneDatasource.find(ele=>ele.Id == 'India Standard Time' );
+        this.cdr.detectChanges();
       },
       (error) => {
 
