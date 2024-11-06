@@ -128,15 +128,51 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
 
   getSeriesData(dataList: any[]): ApexAxisChartSeries {
     const dataPoints = ['Success', 'Error', 'Warning', 'Blocked'];
-    return dataPoints.map(point => ({
-      name: point,
-      data: dataList.map(item => {
-        const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
-        const pointData = item.dataPointList.find(d => d.name === point);
-        return [Date.UTC(year, month - 1, day), pointData ? pointData.value : 0];
-      }),
-      color: this.getColor(point)
-    }));
+    const isHourly = this.chartData.groupedBy === 'Hour';
+  
+    return dataPoints.map(point => {
+        let color;
+        switch (point) {
+            case 'Success':
+                color = '#268144';
+                break;
+            case 'Error':
+                color = '#ff4c33';
+                break;
+            case 'Warning':
+                color = '#ff6833';
+                break;
+            case 'Blocked':
+                color = '#ff3333';
+                break;
+        }
+
+        return {
+          name: point,
+          data: dataList.map(item => {
+              if (!item.fromTimeInStr) {
+                 
+                  return [null, 0];
+              }
+
+              let timestamp;
+              if (isHourly) {
+                  const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
+                  timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
+              } else {
+                  const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
+                  timestamp = Date.UTC(year, month - 1, day);
+              }
+
+              const pointData = item.dataPointList.find(d => d.name === point);
+              return [
+                  timestamp,
+                  pointData ? pointData.value : 0
+              ];
+          }).filter(dataPoint => dataPoint[0] !== null),
+          color: color,
+      };
+    });
   }
 
   getColor(point: string): string {
