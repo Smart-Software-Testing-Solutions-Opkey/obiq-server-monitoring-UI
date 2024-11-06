@@ -18,24 +18,14 @@
 
     <kendo-grid-column field="domainName" title="domainName">
         <ng-template kendoGridCellTemplate let-dataItem>
-
-            <div class="flex-center">
-                <div class="ps-2">
-                    <span class="layout-text-obiq ps-2">{{dataItem.domainName}}</span>
-                </div>
-            </div>
+            <span class="layout-text-obiq ps-1">{{dataItem.domainName}}</span>
         </ng-template>
     </kendo-grid-column>
 
     <!-- ModifiedBy Column with Date -->
     <kendo-grid-column field="logName" title="logName">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <div class="flex-center">
-              
-                <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.logName}}</span>
-                </div>
-            </div>
+            <span class="layout-text-name ps-1">{{dataItem.logName}}</span>
         </ng-template>
     </kendo-grid-column>
 
