@@ -15,7 +15,9 @@
                 <span class="menu-icon">
                     <i class="oci oci-journey menu-icon pe-2"></i>
                 </span>
-                <span class="menu-text text-ellipsis d-block">{{selectedView?.viewName}}</span>
+                <span class="menu-text text-ellipsis d-block" ngbTooltip="{{selectedView?.viewName}}" container="body">
+                    {{selectedView?.viewName}}
+                </span>
             </a>
         </li>
     </ul>
@@ -31,7 +33,7 @@
                     <span class="menu-icon">
                         <i class="oci oci-journey menu-icon pe-2"></i>
                     </span>
-                    <span class="menu-text text-ellipsis d-block">
+                    <span class="menu-text text-ellipsis d-block" ngbTooltip="{{item.name}}" container="body">
                         {{item.name}}
                     </span>
                 </a>
