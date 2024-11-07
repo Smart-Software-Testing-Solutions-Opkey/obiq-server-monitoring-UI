@@ -53,27 +53,35 @@
         <div class="col-sm-3 ps-0">
             <div class="datakeys-box">
                 <span class="font-bold">Domain</span>
-                <span class="d-block text-ellipsis font-14px link-color">{{selectedData?.domainName}}</span>
+                <span class="d-block text-ellipsis font-14px link-color">
+                    <span ngbTooltip="{{selectedData?.domainName}}" container="body">{{selectedData?.domainName}}</span>
+                </span>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="datakeys-box">
                 <span class="font-bold">Host</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-host ps-1 pe-2"></i>{{selectedData?.dataId}}</span>
+                    <i class="oci oci-host ps-1 pe-2"></i>
+                    <span ngbTooltip="{{selectedData?.dataId}}" container="body">{{selectedData?.dataId}}</span>
+                </span>
             </div> 
         </div>
         <div class="col-sm-3">
             <div class="datakeys-box">
                 <span class="font-bold">Service</span>
-                <span class="d-block text-ellipsis font-14px">{{selectedData?.appName}}</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <span ngbTooltip="{{selectedData?.appName}}" container="body">{{selectedData?.appName}}</span>
+                </span>
             </div>
         </div>
         <div class="col-sm-3 pe-0">
             <div class="datakeys-box">
                 <span class="font-bold">Name</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-shelf-position ps-1 pe-2"></i>{{selectedData?.logName}}</span>
+                    <i class="oci oci-shelf-position ps-1 pe-2"></i>
+                    <span ngbTooltip="{{selectedData?.logName}}" container="body">{{selectedData?.logName}}</span>
+                </span>
             </div> 
         </div>
     </div>

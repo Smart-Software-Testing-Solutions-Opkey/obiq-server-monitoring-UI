@@ -1,34 +1,16 @@
-/* Remove borders from the grid */
-.k-grid, .k-grid .k-grid-header, .k-grid .k-grid-content {
-    border: none !important;
-}
-
-.k-grid .k-grid-header th, .k-grid .k-grid-content td {
-    border: none !important;
-}
-
-/* Optional: If you want to remove row separators */
-.k-grid .k-grid-content tr {
-    border-bottom: none !important;
-}
-
-/* Optional: If you want to adjust the background or padding */
-.k-grid .k-grid-content td {
-    padding: 0; /* Adjust padding as needed */
-}
-
-.custom-height{
+::ng-deep .custom-progress-grid {
     height: 12.9rem;
-}
-
-::ng-deep .custom-height {
-    .k-grid-container {
-        .k-grid-table {
-            .k-master-row {
-                .k-table-td {
-                    border-bottom-width: 0px;
+    &.k-grid {
+        border: none !important;
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        border-bottom-width: 0px;
+                    }
                 }
             }
         }
     }
+    
 }
