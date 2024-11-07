@@ -15,6 +15,7 @@ import { ConfigurationSettingsTestAutomationComponent } from '../configuration-s
 import { ConfigureRightPanelComponent } from '../configure-right-panel/configure-right-panel.component';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     EnvironmentConfigureComponent,
@@ -35,7 +36,8 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
     EnvironmentConfigureRoutingModule,
     GridModule,
     FormsModule,
-    DropDownsModule 
+    DropDownsModule ,
+    NgbTooltipModule
   ],
   exports: [
     EnvironmentConfigureComponent,
