@@ -36,6 +36,7 @@ import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progr
 import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-details/selected-trace/selected-trace-inner/selected-trace-inner.component';
 import { LabelModule } from "@progress/kendo-angular-label";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
     NgApexchartsModule,
     LayoutModule,
     LabelModule,
-    DateInputsModule
+    DateInputsModule,
+    NgbTooltipModule
   
   ],
   providers: [DatePipe],

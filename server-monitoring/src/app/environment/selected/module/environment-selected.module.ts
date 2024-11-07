@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EnvironmentSelectedRoutingModule } from './environment-selected-routing.module';
 import { EnvironmentSelectedComponent } from '../environment-selected.component';
 import { NavModule } from 'src/app/modules/nav.module';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NavModule } from 'src/app/modules/nav.module';
   imports: [
     CommonModule,
     NavModule,
-    EnvironmentSelectedRoutingModule
+    EnvironmentSelectedRoutingModule,
+    NgbTooltipModule
   ]
 })
 export class EnvironmentSelectedModule { }
