@@ -85,11 +85,17 @@
                 <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers($event)" class="form-control w-100 user-input"
                        placeholder="Invite by name or email"
                        (keydown.enter)="addEmailToTempList()">
-                       <div *ngIf="filteredUsers.length" class="suggestions-dropdown">
-                        <div *ngFor="let user of filteredUsers" (click)="selectUser(user)" class="suggestion-item">
-                            {{ user.Name }} ({{ user.email_ID }})
-                        </div>
-                    </div>
+                <div *ngIf="filteredUsers.length" class="suggestions-dropdown">
+                    <ul class="ul-suggestion-box scrollable p-0">
+                        <li ngbDropdownItem class="flex-center suggestion-item px-3 py-2" *ngFor="let user of filteredUsers" 
+                            (click)="selectUser(user)" >
+                            <span class="text-ellipsis" ngbTooltip="{{ user.Name }} ({{ user.email_ID }})"
+                                container="body">
+                                {{ user.Name }} ({{ user.email_ID }})
+                            </span>
+                        </li>
+                    </ul>
+                </div>
                        
             </div>
         
