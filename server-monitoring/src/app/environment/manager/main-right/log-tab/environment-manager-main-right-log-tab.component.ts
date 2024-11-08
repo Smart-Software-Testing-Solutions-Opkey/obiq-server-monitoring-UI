@@ -203,25 +203,30 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
           }
   
           return {
-              name: point,
-              data: dataList.map(item => {
-                  let timestamp;
-                  if (isHourly) {
-                      const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
-                      timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
-                  } else {
-                      const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
-                      timestamp = Date.UTC(year, month - 1, day);
-                  }
-                  
-                  const pointData = item.dataPointList.find(d => d.name === point);
-                  return [
-                      timestamp,
-                      pointData ? pointData.value : 0
-                  ];
-              }),
-              color: color,
-          };
+            name: point,
+            data: dataList.map(item => {
+                if (!item.fromTimeInStr) {
+               
+                    return [null, 0];
+                }
+
+                let timestamp;
+                if (isHourly) {
+                    const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
+                    timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
+                } else {
+                    const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
+                    timestamp = Date.UTC(year, month - 1, day);
+                }
+
+                const pointData = item.dataPointList.find(d => d.name === point);
+                return [
+                    timestamp,
+                    pointData ? pointData.value : 0
+                ];
+            }).filter(dataPoint => dataPoint[0] !== null),
+            color: color,
+        };
       });
   }
   

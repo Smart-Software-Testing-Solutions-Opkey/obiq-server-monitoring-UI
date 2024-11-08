@@ -62,17 +62,47 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
                 count:count
               };
             })
-           
-          } else {
-            this.datasourceProgressBar = result.slice(0, 5);
-           }
-           this.cdRef.detectChanges();
-         } 
-        },
+          }
+            else 
+             if ((this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET" || this?.widgetData?.widgetType == "USER_JOURNEY_TOP_FAST_WIDGET") && typeof result == 'object') {
+             { debugger;
+              this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
+                if(this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET"){}
+                const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
+                return {
+                  ...item,
+                  calculatedTime 
+                };
+              });
+            } 
+            
+          }
+          this.cdRef.detectChanges();
+        }
+        else{
+          this.datasourceProgressBar = result.slice(0, 5);
+        }
+      },
         error: (error: any) => {
           // window.loadingStop("#Env_manager_main_right");
           console.error(error);
         }
       });
   }
+  calculateDuration(from: number, to: number): string {
+    debugger;
+    const durationMillis = from - to;
+
+    
+    if (durationMillis < 1000) {
+        return `${durationMillis} ms`;
+    }
+
+    
+    const durationSeconds = Math.floor(durationMillis / 1000);
+    const minutes = Math.floor(durationSeconds / 60);
+    const seconds = durationSeconds % 60;
+
+    return `${minutes}m ${seconds}s`;
+}
 }

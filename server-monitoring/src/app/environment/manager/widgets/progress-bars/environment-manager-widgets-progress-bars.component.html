@@ -32,12 +32,22 @@
                         </span>
                     </span>
                 </div>
-            </ng-template>
+            </ng-template> 
 
         </kendo-grid-column>
-        }  @else {
+        }  @else if(widgetData?.widgetType == 'USER_JOURNEY_TOP_SLOW_WIDGET' || widgetData?.widgetType ==  "USER_JOURNEY_TOP_FAST_WIDGET") {
             <!-- <kendo-grid-column title="" field="timeStampStr" [width]="220">
             </kendo-grid-column> -->
+            <kendo-grid-column title="" field="timeStampStr" [width]="220" class="text-end">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span class="k_grid_text text_wrap text-start">
+                        <i class="oci oci-clock pe-2"></i>
+                        <span>{{dataItem?.calculatedTime}}</span>
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+        }
+        @else{
             <kendo-grid-column title="" field="timeStampStr" [width]="220" class="text-end">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                     <span class="k_grid_text text_wrap text-start">

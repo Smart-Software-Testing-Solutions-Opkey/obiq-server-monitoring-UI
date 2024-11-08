@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'environment',
     loadChildren: () => import('./environment/environment.module').then(m => m.EnvironmentModule),
-    data: { title: 'Environment' ,breadcrumb:'Environment'}
+    data: { title: 'Environment' ,breadcrumb:'Monitoring'}
   },
   {
      path: '',

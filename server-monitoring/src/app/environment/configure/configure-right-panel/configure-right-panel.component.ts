@@ -70,7 +70,7 @@ export class ConfigureRightPanelComponent {
   addEmailToTempList(): void {
     if (this.searchQuery.trim()) {
         this.addedEmails.push(this.searchQuery.trim());
-        this.searchQuery = ''; // Clear the input field
+        this.searchQuery = ''; 
     }
 }
 removeTempEmail(email: string): void {
@@ -98,7 +98,7 @@ selectViewOrEdit(option: string): void {
   getAllProjects() {
     debugger;
 
-    // let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
+
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
@@ -135,12 +135,23 @@ selectViewOrEdit(option: string): void {
     debugger;
   }
   filterUsers(query: string) {
-    debugger;
+    if (!query) {
+        this.filteredUsers = [];
+        return;
+    }
     this.filteredUsers = this.users.filter(user =>
-      user.email_ID.toLowerCase().includes(query.toLowerCase()) ||
-      user.UserName.toLowerCase().includes(query.toLowerCase())
+        user.Name.toLowerCase().includes(query.toLowerCase()) ||
+        user.email_ID.toLowerCase().includes(query.toLowerCase())
     );
+}
+selectUser(user: any) {
+  // Add email to the list if not already added
+  if (!this.addedEmails.includes(user.email_ID)) {
+      this.addedEmails.push(user.email_ID);
   }
+  this.searchQuery = '';
+  this.filteredUsers = [];
+}
   addAllEmailsToGrid(): void {
     this.addedEmails.forEach(email => {
         const userToAdd = this.users.find(user =>
