@@ -1303,3 +1303,19 @@ input {
     background: #FFFAEB;
     color: #B54708;
 }
+
+/********* Override kendo-grid css******************/
+
+.k-grid {
+    .k-grid-container {
+        .k-grid-content {
+            .k-grid-table {
+                .k-master-row:hover {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+}
+
+/***********************************************/
