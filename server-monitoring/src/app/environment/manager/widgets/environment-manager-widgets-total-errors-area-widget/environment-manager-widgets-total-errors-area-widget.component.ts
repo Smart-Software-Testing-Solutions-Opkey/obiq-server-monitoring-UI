@@ -270,7 +270,7 @@ dataDir = ''
             if(result){
 
               this.dataObj.total = result.count
-              this.dataObj.percentage = result.percentdiff
+              this.dataObj.percentage =Math.abs(result.percentdiff) 
               this.dataDir = result.direction
               this.dataSet = []
               if(result?.dataPlotList?.length>0){
