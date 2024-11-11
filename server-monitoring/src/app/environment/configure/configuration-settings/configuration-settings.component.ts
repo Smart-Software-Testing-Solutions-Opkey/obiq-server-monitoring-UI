@@ -144,10 +144,10 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+    else if (this.obj_configuration_setting.tab == "Test Automation Analytics") {
       this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
 
-      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
@@ -221,14 +221,14 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+    else if (this.obj_configuration_setting.tab == "Test Automation Analytics") {
 
       // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = "ERP Analytics";
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
-      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
@@ -365,7 +365,7 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    if(this.obj_configuration_setting.tab == "Test Automation Analysis") { 
+    if(this.obj_configuration_setting.tab == "Test Automation Analytics") { 
 
       if (this.obj_configuration_setting.selected_test_automation_analysis.length == 0) {
         this.displayTestError = true;
