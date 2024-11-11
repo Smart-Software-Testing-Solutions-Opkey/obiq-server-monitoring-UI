@@ -80,7 +80,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
             if (widjet.name === "User Behaviour Analytics") {
 
             }
-            if (widjet.name === "Test Automation Analysis") {
+            if (widjet.name === "Test Automation Analytics") {
 
             }
             if (widjet.name === "System Diagnostics") {

@@ -48,8 +48,6 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   constructor(
     public service_data: AppDataService,
     public app_service: AppService,
-
-
   ) {
     
   }

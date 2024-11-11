@@ -24,6 +24,7 @@
     "@progress/kendo-angular-dialog": "^16.9.0",
     "@progress/kendo-angular-dropdowns": "^16.9.0",
     "@progress/kendo-angular-grid": "^16.9.0",
+    "@progress/kendo-angular-notification": "^16.11.0",
     "@progress/kendo-licensing": "^1.3.5",
     "@progress/kendo-theme-default": "^9.0.0",
     "apexcharts": "^3.54.1",

@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
-
+import { MsgBoxType, NotificationType } from 'src/app/global/enums';
 
 @Component({
   selector: 'app-configuration-settings',
@@ -19,6 +20,9 @@ export class ConfigurationSettingsComponent {
     private route: ActivatedRoute,
     public service_data: AppDataService,
     public app_service: AppService,
+    public service_notification : NotificationsService
+    
+    
   ) { }
   close_model() {
     this.activeModal.dismiss('close modal');
@@ -144,10 +148,10 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+    else if (this.obj_configuration_setting.tab == "Test Automation Analytics") {
       this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
 
-      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
@@ -221,14 +225,14 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "Test Automation Analysis") {
+    else if (this.obj_configuration_setting.tab == "Test Automation Analytics") {
 
       // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = "ERP Analytics";
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
-      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analysis')
+      let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
@@ -365,7 +369,7 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    if(this.obj_configuration_setting.tab == "Test Automation Analysis") { 
+    if(this.obj_configuration_setting.tab == "Test Automation Analytics") { 
 
       if (this.obj_configuration_setting.selected_test_automation_analysis.length == 0) {
         this.displayTestError = true;
@@ -419,6 +423,7 @@ export class ConfigurationSettingsComponent {
           window.loadingStop("#div-datasource-slection");
           this.service_data.is_env_configure = true;
           this.close_model();   // calling GetAllViewds after View Creation
+          this.service_notification.notifier(NotificationType.success, 'View Created');
           this.app_service.dataTransmitter("viewCreated");
           this.router.navigate(['/environment']);
 

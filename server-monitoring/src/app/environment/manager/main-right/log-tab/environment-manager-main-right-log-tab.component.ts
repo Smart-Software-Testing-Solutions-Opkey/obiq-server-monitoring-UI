@@ -59,14 +59,19 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   chartData: any;
   selectedKeys = []
   logDataSource = []
+  limit: number = 20;
+  offset: number = 0;
+  allDataLoaded: boolean = false;
   subscriptions: Subscription[] = [];
   logTypes: string[] = ['All', 'Success', 'Error', 'Warning', 'Blocked'];
   selectedLogType: string = 'All';  // Default selection
+  selectedTime:any;
   ngOnInit(): void {
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
-        this.getLogsChart(data?.timeFilter);
-        this.getViewLogs(data?.timeFilter);
+        this.selectedTime = data?.timeFilter
+        this.getLogsChart();
+        this.getViewLogs();
       }
     }))
     this.getLogsChart()
@@ -254,12 +259,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
 
 
-  getLogsChart(timeFilter?: any) {
-
+  getLogsChart() {
 
     window.loadingStart("#Env_manager_main_right", "Please wait");
-
-
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
@@ -269,12 +271,12 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       "offset": 0,
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
     };
-    if(timeFilter?.type == 'setEnum'){
-      form_data.timeSpanEnum = timeFilter?.value;
-    } else if(timeFilter?.type == "setCustom"){
+    if(this.selectedTime?.type == 'setEnum'){
+      form_data.timeSpanEnum = this.selectedTime?.value;
+    } else if(this.selectedTime?.type == "setCustom"){
       delete form_data?.timeSpanEnum;
-      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
-      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+      form_data["fromTimeInMillis"] = this.selectedTime?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = this.selectedTime?.toTimeInMillis;
     }
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
@@ -293,26 +295,36 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         }
       });
   }
-  getViewLogs(timeFilter?: any) {
+  getViewLogs(timeFilter?: any, appendData: boolean = false) {
     debugger;
+    if (this.allDataLoaded) return;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": "ESS_LOG_DATA_WIDGET" };
-    if(timeFilter?.type == 'setEnum'){
+    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET" };
+    if(this.selectedTime?.type == 'setEnum'){
      form_data.timeSpanEnum = timeFilter?.value;
-    } else if(timeFilter?.type == "setCustom"){
+    } else if(this.selectedTime?.type == "setCustom"){
       delete form_data?.timeSpanEnum;
       form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
     }
     this.app_service.make_post_server_call(ajax_url, form_data)
-      .subscribe({
-        next: (result: any) => {
-          debugger;
+    .subscribe({
+      next: (result: any) => {
           window.loadingStop("#Env_manager_main_right");
-          this.logDataSource = result.essLogsList
-        },
+
+          if (result.essLogsList.length < this.limit) {
+              this.allDataLoaded = true;
+          }
+
+          if (appendData) {
+              this.logDataSource = [...this.logDataSource, ...result.essLogsList];
+          } else {
+              this.logDataSource = result.essLogsList;
+          }
+          this.offset += this.limit;
+      },
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
           console.warn(error);
@@ -322,6 +334,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         }
       });
   }
+  onScroll() {
+    this.getViewLogs(null, true); // Load more data and append it
+}
   onSelectionChange(e) {
     debugger
     let dataItem = e.dataItem
