@@ -19,9 +19,9 @@
 
             <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
 
-            <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
+            <!-- <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
                 <span class="form-error">Data source selection is required.</span>
-            </div>
+            </div> -->
 
             <div class="row mx-0">
 
@@ -110,6 +110,10 @@
 
                 </div>
                 }
+            </div>
+
+            <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
+                <span class="form-error">Data source selection is required.</span>
             </div>
         </div>
     </div>
