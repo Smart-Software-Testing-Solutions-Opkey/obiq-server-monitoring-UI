@@ -19,9 +19,7 @@ export class SelectedJourneyInnerComponent {
   ) { }
 
   ngOnInit() {
-    if (this.pageDetails.headers.length > 0) {
-      this.openAccordionId = this.pageDetails.headers[0].id; // Open the first child initially in accordion
-  }
+    
   }
 
   pageErrorDetails: any;
@@ -103,20 +101,7 @@ export class SelectedJourneyInnerComponent {
   }
 
 
-  private openAccordionId: string | null = null; 
-
-  toggleAccordion(id: string): void {
-    if (this.openAccordionId === id) {
-      this.openAccordionId = null; 
-    } else {
-      this.openAccordionId = id; 
-    }
-  }
-
-  isOpen(id: string): boolean {
-    return this.openAccordionId === id;
-  }
-
+ 
   toggleActiveLink(event: MouseEvent) {
 
     const target = event.target as HTMLElement;
