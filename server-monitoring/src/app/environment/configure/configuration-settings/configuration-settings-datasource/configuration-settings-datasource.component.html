@@ -8,20 +8,24 @@
 
     <div class="row mx-0 mb-3">
         <div class="col-sm-6 ps-0 pe-3">
-            <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
+            <label for="name" class="form-label">Name <span class="text-astric">*</span>
+                <span *ngIf="obj_error.dispaly_viewName" class="form-error">View name is required.</span>
+            </label>
             <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)" [(ngModel)]="modal_name">
-            <span *ngIf="obj_error.dispaly_viewName" class="form-error">View name is required.</span>
+            
         </div>
     </div>
 
     <div class="row mx-0 mb-3">
         <div class="col-sm-12 px-0">
 
-            <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
+            <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span>
+                <div *ngIf="obj_error.dispaly_DataSource" class="mb-1">
+                    <span class="form-error">Data source selection is required.</span>
+                </div>
+            </label>
 
-            <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
-                <span class="form-error">Data source selection is required.</span>
-            </div>
+            
 
             <div class="row mx-0">
 
@@ -47,9 +51,11 @@
                             <label for="application" class="form-label mt-3" style="font-size: 1.1rem;">
                                 Choose your application 
                                 <span class="text-astric">*</span>
+
+                                <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
                             </label>
 
-                            <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
+                            
 
                             <div class="data-source-item">
                                 <!-- Loop over this.ApplicationdataSource.Applications -->
@@ -83,8 +89,9 @@
                             <label for="application" class="form-label mt-3 pb-1" style="font-size: 1.1rem;">
                                 Choose your system diagnostics
                                 <span class="text-astric">*</span>
+                                <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">System diagnostics selection is required.</span>
                             </label>
-                            <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">System diagnostics selection is required.</span>
+                            
 
                             @for(dataItem of datasource_system_diagnostics; track dataItem.id) {
                             <div class="form-check mb-3">
@@ -111,6 +118,7 @@
                 </div>
                 }
             </div>
+
         </div>
     </div>
 
