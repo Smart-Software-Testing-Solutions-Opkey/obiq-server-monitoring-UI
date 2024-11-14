@@ -38,84 +38,9 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
   get_all_Instance() {
     debugger;
-  //   let result = {
-  //     "OracleFusion": [
-  //         {
-  //             "SystemIdentifier": "Oracle Instance 1",
-  //             "EnvironmentType": null,
-  //             "EnvironmentURL": "https://fa-ewve-test-saasfaprod1.fa.ocs.oraclecloud.com/",
-  //             "ConsumerKey": null,
-  //             "ConsumerSecret": null,
-  //             "Scope": null,
-  //             "Username": "Opkey_Cloud_Emp",
-  //             "Password": "Fusion@123",
-  //             "ProcessEssLog": true,
-  //             "SecurityToken": null,
-  //             "ClientLanguage": null,
-  //             "InstanceNumber": null,
-  //             "Port": null,
-  //             "SID": null,
-  //             "RefreshToken": null,
-  //             "TenantName": null,
-  //             "OracleIntegrationCloudURL": null,
-  //             "OracleIntegrationCloudInstanceName": null,
-  //             "SettingsID": "c66f04d5-4080-43ca-bd43-0a209fe13491",
-  //             "SettingsName": null,
-  //             "TeamID": "90676406-29c5-4bbf-988e-645642808770",
-  //             "TeamName": "Default OracleFusion Team",
-  //             "OrgID": null,
-  //             "CreatedBy": "himanshu sharma",
-  //             "CreatedOn": "Thursday, October 17, 2024 10:24:59 AM",
-  //             "ModifiedBy": "himanshu sharma",
-  //             "ModifiedOn": "Thursday, October 17, 2024 10:24:59 AM",
-  //             "URL": "https://fa-ewve-test-saasfaprod1.fa.ocs.oraclecloud.com/",
-  //             "Application": "OracleFusion"
-  //         }
-
-  //     ],
-  //     "SAP": [
-  //         {
-  //           "SystemIdentifier": "Rakesh",
-  //           "EnvironmentType": null,
-  //           "EnvironmentURL": "https://sstsinc2--promtest.my.salesforce.com",
-  //           "ConsumerKey": "sap",
-  //           "ConsumerSecret": null,
-  //           "Scope": null,
-  //           "Username": "rakesh.kumar@opkey.com",
-  //           "Password": "Rocky@123",
-  //           "SecurityToken": null,
-  //           "ClientLanguage": "english",
-  //           "InstanceNumber": "1234",
-  //           "Port": null,
-  //           "SID": null,
-  //           "RefreshToken": null,
-  //           "TenantName": null,
-  //           "OracleIntegrationCloudURL": null,
-  //           "OracleIntegrationCloudInstanceName": null,
-  //           "SettingsID": "2c3b7c9c-54d7-4416-888a-22f90b80153e",
-  //           "SettingsName": null,
-  //           "TeamID": "8f2c0aa6-418d-4f99-9ab1-a53eae2a587c",
-  //           "TeamName": "Default SAP Team",
-  //           "OrgID": null,
-  //           "CreatedBy": "Rakesh Kumar",
-  //           "CreatedOn": "Thursday, January 11, 2024 9:32:59 AM",
-  //           "ModifiedBy": "Kunal Ghai",
-  //           "ModifiedOn": "Wednesday, August 28, 2024 11:50:50 AM",
-  //           "URL": "https://sstsinc2--promtest.my.salesforce.com"
-  //         }
-  //       ]
-  // };
-
-  // this.Instance_list = this.get_instance_item(result);
-
-  // console.log("Instance_list=====", this.Instance_list);
-
-  // return
-
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
-    //let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetAllSettingsByApplications";
 
     let form_data = { str_application: JSON.stringify(select_applicaton) };
 

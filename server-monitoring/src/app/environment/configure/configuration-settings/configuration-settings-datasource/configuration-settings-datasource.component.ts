@@ -59,6 +59,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   modal_name = '';
   data_Source_widjets = [];
+  Available_Application_Instances:any;
 
   get_all_datasource() {
 
@@ -122,19 +123,19 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   get_AllApplications() {
 
-    this.datasource_application = [
-      "OracleFusion",
-      "SAP",
-      "Salesforce",
-      "PeopleSoft",
-      "Workday",
-      "OracleEBS",
-      "MSDynamicsFSO",
-      "VeevaVault",
-      "Coupa",
-      "OracleIntegrationCloud"
-    ];
-    return
+    // this.datasource_application = [
+    //   "OracleFusion",
+    //   "SAP",
+    //   "Salesforce",
+    //   "PeopleSoft",
+    //   "Workday",
+    //   "OracleEBS",
+    //   "MSDynamicsFSO",
+    //   "VeevaVault",
+    //   "Coupa",
+    //   "OracleIntegrationCloud"
+    // ];
+    // return
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications";
     // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
@@ -145,6 +146,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
         next: (result: any) => {
           this.datasource_application = result;
+          this.get_ERP_App_Instance_count(result)
+          console.log(this.Available_Application_Instances,"A---------------------");
         },
         error: (error: any) => {
 
@@ -154,6 +157,32 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           console.log("Completed");
         }
       });
+  }
+  get_ERP_App_Instance_count(instances){
+      let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
+  
+      let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";  
+      let form_data = { str_application: JSON.stringify(instances) };
+  
+      this.app_service.make_get_server_call(form_url, form_data)
+        .subscribe({
+          next: (result: any) => {
+              this.Available_Application_Instances = Object.keys(result).reduce((acc: any, app: string) => {
+                acc[app] = result[app]?.length || 0;  // caluclated instances of all the appliations
+                return acc;
+            }, {});
+            
+            console.log(this.Available_Application_Instances, "A---------------------");
+           
+          },
+          error: (error: any) => {
+            console.warn(error);
+          },
+          complete: () => {
+            console.log("Completed");
+          }
+        });
+
   }
 
 

@@ -138,7 +138,6 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     console.log(this.selectedUsers);
   }
 
-
   getAllProjects() {
     debugger;
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
