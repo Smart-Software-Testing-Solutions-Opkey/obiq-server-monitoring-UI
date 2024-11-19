@@ -26,6 +26,7 @@ export class NavigatorLeftComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     public service_notification : NotificationsService
 
+
   ) { }
 
   // analyticsValueChange = output<any>()
@@ -46,6 +47,7 @@ export class NavigatorLeftComponent implements OnInit {
         if (data == "viewCreated") {
           this.getAllVIews();
           this.cdr.detectChanges();
+          
         }
         else if(data?.callsource == 'settings'){
           if(data?.data == 'backToMenu'){
@@ -57,7 +59,6 @@ export class NavigatorLeftComponent implements OnInit {
     this.getAllVIews();
   }
   selectedView: any = {}
-
 
   analyticsTypes: any;
 
@@ -109,7 +110,7 @@ export class NavigatorLeftComponent implements OnInit {
           // this.selectedAnalyticsType = result[0];
           // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
           // this.onLeftPanelDataChange.emit(this.dataChanged)
-
+         
 
         },
         error: (error: any) => {
@@ -137,6 +138,7 @@ export class NavigatorLeftComponent implements OnInit {
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         this.set_Selected_View_DataSource(result)
+      
 
 
       },
@@ -228,6 +230,7 @@ export class NavigatorLeftComponent implements OnInit {
       }
     })
     this.dataChanged.analyticsTypes = this.selectedAnalyticsType
+  
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
@@ -292,6 +295,9 @@ export class NavigatorLeftComponent implements OnInit {
     debugger
     this.dataChanged.analyticsTypes = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
+   
+ 
+  
   }
 
 }
