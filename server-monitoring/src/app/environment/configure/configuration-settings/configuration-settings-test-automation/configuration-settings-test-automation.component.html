@@ -1,6 +1,6 @@
 <h6 class="mb-3 font-bold">
     Choose Execution Agent 
-    <span *ngIf="obj_error.displayTestError" class="form-error">Test agent selection is required.</span>
+    <span *ngIf="obj_error.displayTestError" class="form-error">Execution agent selection is required.</span>
 </h6>
 <kendo-grid 
     [data]="datasource_agents" 
@@ -18,7 +18,7 @@
     <kendo-grid-column field="AgentName" title="User Name">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center executionAgent">               
-                <span class="status me-2" [ngClass]="dataItem.status=='online'? 'online':'offline'"></span>
+                <span class="status me-2" [ngClass]="dataItem['IsOnline']==true? 'online':'offline'"></span>
                 <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
             </div>
         </ng-template>

@@ -44,16 +44,18 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
     if(!this.obj_configuration_setting["selected_test_automation_analysis"]){
       this.obj_configuration_setting["selected_test_automation_analysis"] = [];
     }
+    if(this.obj_configuration_setting.selected_test_automation_analysis.length>0)this.obj_error.displayTestError=false;
   }
 
   get_agents() {
 
-
+   
     var ajax_url = environment.BASE_OPKEY_URL + "Execution/getAllAgents";
 
     this.app_service.make_get_server_call(ajax_url, {})
     .subscribe({
       next: (result: any) => {
+      
         if(result && result.length){
           this.datasource_agents = result;
           this.cdRef.detectChanges();
@@ -80,9 +82,13 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
           }
         })
       }
+      if(this.obj_configuration_setting.selected_test_automation_analysis.length>0)this.obj_error.displayTestError=false;
     }
-
+   
   }
+
+
+
   selectedKeys = []
   bindData(){
     this.selectedKeys = this.obj_configuration_setting?.selected_test_automation_analysis?.map(ele =>ele.AgentName);

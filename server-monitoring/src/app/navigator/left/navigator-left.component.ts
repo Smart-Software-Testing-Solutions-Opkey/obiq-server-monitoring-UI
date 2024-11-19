@@ -2,8 +2,10 @@ import { ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
+import { NotificationType } from 'src/app/global/enums';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -21,8 +23,8 @@ export class NavigatorLeftComponent implements OnInit {
     private service_data: AppDataService,
     public app_service: AppService,
     public dataService: AppDataService,
-    private cdr: ChangeDetectorRef
-
+    private cdr: ChangeDetectorRef,
+    public service_notification : NotificationsService
 
   ) { }
 
@@ -211,11 +213,11 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   viewChanged(val) {
-
+   
     this.selectedView = val
     this.dataChanged.viewSelected = this.selectedView
     this.set_Selected_VIew(this.selectedView)
-
+    this.service_notification.notifier(NotificationType.success, 'View selected');
   }
 
   changeToView() {
