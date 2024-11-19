@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-configuration-settings-system-diagnostics',
@@ -28,13 +29,12 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
   Instance_list:any;
 
   ngOnInit(): void {
-    this.System_Diagnostic_grid()
+    this.get_System_Diagnostics_Services();
   }
   onCellClick(event:any){
 
   }
   on_Selection_Change_System_diagnostics(event:any){
-   
       debugger;
   
       const selectedRow = event.selectedRows;
@@ -57,29 +57,29 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
       this.obj_configuration_setting.selected_system_diagnostics = this.selected_System_Diagnostics_Rows;
   
     }
-  System_Diagnostic_grid(){
-   let  dummyData = [
-      { OBIQ_Agent: "IIS", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "Windows M/C", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "MySQL", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "SQLite", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "Redis", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "Linux M/C", Unique_Code: "https://myqlm.preprod.opkeyone.com" },
-      { OBIQ_Agent: "Apache", Unique_Code: "https://myqlm.preprod.opkeytwo.com" },
-      { OBIQ_Agent: "PostgreSQL", Unique_Code: "https://myqlm.preprod.opkeytwo.com" },
-      { OBIQ_Agent: "Nginx", Unique_Code: "https://myqlm.preprod.opkeythree.com" },
-      { OBIQ_Agent: "MongoDB", Unique_Code: "https://myqlm.preprod.opkeythree.com" },
-      { OBIQ_Agent: "Cassandra", Unique_Code: "https://myqlm.preprod.opkeyfour.com" },
-      { OBIQ_Agent: "Elasticsearch", Unique_Code: "https://myqlm.preprod.opkeyfour.com" },
-      { OBIQ_Agent: "RabbitMQ", Unique_Code: "https://myqlm.preprod.opkeyfive.com" },
-      { OBIQ_Agent: "Docker", Unique_Code: "https://myqlm.preprod.opkeyfive.com" }
-  ];
-  this.Instance_list = dummyData;
-  }
  
   selectedKeys = []
   bindData(){
+    debugger;
     this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.OBIQ_Agent);
   }
+  get_System_Diagnostics_Services(){
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryObiqAgentController/getAllAvailableObiqAgents";  
+    let form_data = {};
+
+    this.app_service.make_get_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          this.Instance_list = result;
+        },
+        error: (error: any) => {
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+
+}
   
 }

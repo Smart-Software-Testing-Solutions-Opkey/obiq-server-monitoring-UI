@@ -264,7 +264,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
-      "timeSpanEnum": "LAST_7_DAYS",
+      "timeSpanEnum": "LAST_24_HOUR",
       "viewId": this.view.viewId,
       "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
       "limitBy": 0,
