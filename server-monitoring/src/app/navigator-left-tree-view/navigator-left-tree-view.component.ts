@@ -1,4 +1,6 @@
 import { Component, Input, output } from '@angular/core';
+import { NotificationType } from 'src/app/global/enums';
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 
 @Component({
   selector: 'app-navigator-left-tree-view',
@@ -7,7 +9,11 @@ import { Component, Input, output } from '@angular/core';
 })
 export class NavigatorLeftTreeViewComponent {
 
-  constructor(){}
+  constructor(
+    public service_notification : NotificationsService
+  ){
+  
+  }
 
   ngOnInIt(){
 
@@ -44,6 +50,7 @@ export class NavigatorLeftTreeViewComponent {
     this.selectedAnalyticsType = item
     this.selectedView.selected = false
     this.treeSelectionChange.emit(this.selectedAnalyticsType)
+    this.service_notification.notifier(NotificationType.success, 'Data source selected');
 
   }
   changeViewSelection(){
