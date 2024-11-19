@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
-    
         this.service_data.UserDto = result;
 
 

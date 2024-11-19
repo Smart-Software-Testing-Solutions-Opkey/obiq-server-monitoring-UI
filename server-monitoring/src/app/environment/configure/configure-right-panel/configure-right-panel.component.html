@@ -112,10 +112,10 @@
 
             <!-- Kendo Grid -->
             <kendo-grid [data]="addedUsers" class="k-grid-sharedTo" [hideHeader]="true">
-                <kendo-grid-column [width]="50">
+                <kendo-grid-column [width]="60">
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <span class="sp-user-image">
-                            <img class="user-image" alt="{{ dataItem.Name }}" src="assets/images/default/profile.png">
+                            <img alt="{{ dataItem.Name }}" src="assets/images/default/profile.png">
                         </span>
                     </ng-template>
                 </kendo-grid-column>

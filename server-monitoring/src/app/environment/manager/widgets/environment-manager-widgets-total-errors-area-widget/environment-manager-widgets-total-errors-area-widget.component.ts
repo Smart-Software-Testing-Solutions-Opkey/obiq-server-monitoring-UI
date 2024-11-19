@@ -247,10 +247,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   }
 dataDir = ''
   getChartData(type, timeFilter?: any){
-   
       debugger;
-    
-  
       let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
       const form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
       if(timeFilter?.type == 'setEnum'){
@@ -266,10 +263,24 @@ dataDir = ''
           next: (result: any) => {
             debugger;
             if(result){
-
-              this.dataObj.total = result.count
-              this.dataObj.percentage =Math.abs(result.percentdiff) 
-              this.dataDir = result.direction
+              if(type == "ESS_LOG_ERROR_WIDGET"){
+                debugger;
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff < 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+               // this.dataDir = result.direction
+              }
+              else if(type == 'ESS_LOG_WARNING_WIDGET'){
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff < 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+              }
+              else{
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff > 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+              }
+           
               this.dataSet = []
               if(result?.dataPlotList?.length>0){
                 let totalVal = 0

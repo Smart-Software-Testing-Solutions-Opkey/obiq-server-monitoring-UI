@@ -58,7 +58,7 @@
                             
 
                             <div class="data-source-item">
-                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                              
                                 @for(dataItem of datasource_application; track dataItem) {
                                 <div class="form-check mb-3">
                                     <label class="form-check-label">
@@ -72,6 +72,9 @@
                                             </span>
                                             <span class="font-18px align-middle" style="font-weight: 500;">
                                                 {{dataItem}}
+                                                <span class="sp-instance-count ps-2">
+                                                    ({{ Available_Application_Instances[dataItem] || 0 }})
+                                                  </span>
                                             </span>
                                         </span>
                                     </label>

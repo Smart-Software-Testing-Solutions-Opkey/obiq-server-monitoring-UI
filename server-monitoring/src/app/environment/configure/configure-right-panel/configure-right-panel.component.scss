@@ -49,13 +49,6 @@
       margin: 3px;
     }
   
-    .user-image {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-  
     .remove-user {
       background: none;
       border: none;
@@ -102,8 +95,9 @@
         border: none !important;
 
         .sp-user-image {
-          width: 3rem;
-          height: 3rem;
+          display: block;
+          width: 2.5rem;
+          height: 2.5rem;
           border-radius: 50%;
 
           img {
