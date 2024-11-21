@@ -25,7 +25,11 @@ export class ConfigurationSettingsUserBehaviourComponent {
 }
   @Input('child_data') set child_data({ obj_configuration_setting,displayUserError }) {
     this.obj_configuration_setting = obj_configuration_setting;
-    this.obj_error.displayUserError = displayUserError
+
+    if(this.obj_configuration_setting.selected_user_behaviour_component.length>0)
+      this.obj_error.displayUserError=false;
+    else
+       this.obj_error.displayUserError = displayUserError;
     console.log("In User Behaviour", obj_configuration_setting);
     this.agent_lists.sort((a, b) => {
       const nameA = a.name.toUpperCase();
@@ -111,6 +115,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
     console.log('Selected Rows:', this.selected_System_User_behaviour);
 
     this.obj_configuration_setting.selected_user_behaviour_component = this.selected_System_User_behaviour;
+    if(this.obj_configuration_setting.selected_user_behaviour_component.length>0)this.obj_error.displayUserError=false;
     this.selectedKeys
   }
   

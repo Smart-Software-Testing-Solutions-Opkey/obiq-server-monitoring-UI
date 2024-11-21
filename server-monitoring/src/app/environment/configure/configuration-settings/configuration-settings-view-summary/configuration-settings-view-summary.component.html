@@ -159,17 +159,18 @@
                                                 <kendo-grid-column field="SystemIdentifier" title="OBIQ Agent">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.OBIQ_Agent}}</span>
+                                                            <span class="layout-text-obiq ps-2">{{dataItem.agentName}}</span>
+                                                           
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
             
-                                                <kendo-grid-column field="CreatedBy" title="URL">
+                                                <kendo-grid-column field="CreatedBy" title="IP Address">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                           
                                                             <div>
-                                                                <span class="layout-text-date">{{dataItem.Unique_Code}}</span>
+                                                                <span class="layout-text-date">{{dataItem.ipAddress}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>

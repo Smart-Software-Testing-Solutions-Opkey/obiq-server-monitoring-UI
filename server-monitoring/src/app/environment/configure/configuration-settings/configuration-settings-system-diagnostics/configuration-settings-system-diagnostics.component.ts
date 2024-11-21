@@ -21,9 +21,14 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
  }
   obj_configuration_setting:any;
   selected_System_Diagnostics_Rows: any[] = [];
+  obj_error = {
+    display_SystemDiagnosticsData: false,
+  }
 
-  @Input('child_data') set child_data({ obj_configuration_setting }) {
+  @Input('child_data') set child_data({ obj_configuration_setting ,display_SystemDiagnosticsData}) {
     this.obj_configuration_setting = obj_configuration_setting;
+
+    this.obj_error.display_SystemDiagnosticsData = display_SystemDiagnosticsData;
     this.bindData()
   }
   Instance_list:any;
@@ -55,15 +60,17 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
       console.log('Selected Rows:', this.selected_System_Diagnostics_Rows);
   
       this.obj_configuration_setting.selected_system_diagnostics = this.selected_System_Diagnostics_Rows;
-  }
+      if(this.obj_configuration_setting.selected_system_diagnostics.length>0)this.obj_error.display_SystemDiagnosticsData = false;
     }
  
   selectedKeys = []
   bindData(){
     debugger;
-    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.agentId);
-    
+    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.OBIQ_Agent);
+
   }
+  
+  
   get_System_Diagnostics_Services(){
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryObiqAgentController/getAllAvailableObiqAgents";  
     let form_data = {};

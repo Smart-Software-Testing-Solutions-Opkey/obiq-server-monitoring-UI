@@ -151,6 +151,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
     debugger;
     const clickedRowData = event.dataItem;
     console.log(clickedRowData);
+    
   }
 
   onSelectionChange(event: any) {
@@ -174,6 +175,8 @@ export class ConfigurationSettingsErpAnalyticsComponent {
     console.log('Selected Rows:', this.selectedRows);
 
     this.obj_configuration_setting.selected_erp_analytics = this.selectedRows;
+  
+    if(this.obj_configuration_setting.selected_erp_analytics.length>0)this.obj_error.dispaly_Instances = false;
 
   }
   selectedKeys = []
