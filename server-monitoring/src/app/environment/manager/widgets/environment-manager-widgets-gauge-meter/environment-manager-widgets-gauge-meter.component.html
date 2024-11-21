@@ -3,6 +3,7 @@
     {{title}}
   </span>
   
+  <div id="chart" *ngIf="chartOptions">
     <apx-chart
       [series]="chartOptions?.series"
       [chart]="chartOptions?.chart"
