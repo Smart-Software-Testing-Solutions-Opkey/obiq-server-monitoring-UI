@@ -100,6 +100,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
                   item['isChecked'] = true;
                 }
               })
+              
             }
           })
          
@@ -213,6 +214,10 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     this.modal_name = event.target.value;
     this.obj_datasource_widget.viewName = event.target.value;
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+
+
+
+
   }
 
   datasource_item_name = "";
@@ -228,6 +233,15 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+    
+    if (this.obj_configuration_setting.selected_datasource.select_datasource_item.length > 0) 
+    { 
+        this.obj_error.dispaly_DataSource = false;
+    }
+    else{
+        this.obj_error.dispaly_DataSource = true;
+    }
+       
 
 
   }
