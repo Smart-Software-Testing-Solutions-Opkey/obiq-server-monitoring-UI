@@ -63,12 +63,13 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
       if(this.obj_configuration_setting.selected_system_diagnostics.length>0)this.obj_error.display_SystemDiagnosticsData = false;
     }
  
-  selectedKeys = []
-  bindData(){
-    debugger;
-    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.OBIQ_Agent);
+}
+selectedKeys = []
+bindData(){
+  debugger;
+  this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.agentId);
 
-  }
+}
   
   
   get_System_Diagnostics_Services(){
