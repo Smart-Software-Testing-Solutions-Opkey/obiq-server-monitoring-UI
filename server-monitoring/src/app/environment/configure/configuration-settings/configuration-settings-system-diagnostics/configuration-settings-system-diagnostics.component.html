@@ -1,6 +1,7 @@
 <h6 class="mb-3 font-bold">
-    Choose OBIQ Agents <span class="text-astric">*</span>
-    <span class="form-error">
+    Choose OBIQ Agents 
+    <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error" >
+        <span class="text-astric" >*</span>
         Instance selection is required.
     </span>
 </h6>

@@ -133,6 +133,7 @@ export class ConfigurationSettingsComponent {
       }
     }
     else if (this.obj_configuration_setting.tab == "System Diagnostics") {
+      
       this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
     
       let ind = this.datasource_item.findIndex(item => item.name == 'System Diagnostics')
@@ -153,6 +154,7 @@ export class ConfigurationSettingsComponent {
 
       let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind+1) != (this.datasource_item.length)){
+        
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
        this.obj_configuration_setting.title = "Add " + item.name;
@@ -179,6 +181,7 @@ export class ConfigurationSettingsComponent {
 
   back() {
     debugger;
+    
 
     if (this.obj_configuration_setting.tab == "view_summary") {
 
@@ -296,6 +299,7 @@ export class ConfigurationSettingsComponent {
     }
     this.obj_configuration_setting.visitedTabs.pop()
     this.reset_error();
+    
 
   }
 
@@ -313,7 +317,7 @@ export class ConfigurationSettingsComponent {
   displayTestError: boolean = false;
 
   ValidationCheck() {
-
+  
     this.reset_error();
 
     if (this.obj_configuration_setting.tab == "datasource") {
@@ -370,9 +374,17 @@ export class ConfigurationSettingsComponent {
 
     }
     if(this.obj_configuration_setting.tab == "Test Automation Analytics") { 
-
+    
       if (this.obj_configuration_setting.selected_test_automation_analysis.length == 0) {
         this.displayTestError = true;
+        return false;
+      }
+
+    }
+    if(this.obj_configuration_setting.tab == "System Diagnostics") { 
+    
+      if (this.obj_configuration_setting.selected_system_diagnostics.length == 0) {
+        this.display_SystemDiagnosticsData = true;
         return false;
       }
 
@@ -424,6 +436,7 @@ export class ConfigurationSettingsComponent {
           this.service_data.is_env_configure = true;
           this.close_model();   // calling GetAllViewds after View Creation
           this.service_notification.notifier(NotificationType.success, 'View Created');
+          console.log("after view creation: ",this.obj_configuration_setting); //
           this.app_service.dataTransmitter("viewCreated");
           this.router.navigate(['/environment']);
 
@@ -474,6 +487,7 @@ export class ConfigurationSettingsComponent {
           });
         });
       }
+      
       linkedDataarray.push(linkedDataObject);
     });
 
