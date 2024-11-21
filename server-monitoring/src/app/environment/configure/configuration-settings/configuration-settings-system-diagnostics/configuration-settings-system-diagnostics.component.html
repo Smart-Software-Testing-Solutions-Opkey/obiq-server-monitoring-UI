@@ -5,16 +5,19 @@
     </span>
 </h6>
 
+<!-- [selectable]="true" -->
+
+
 <kendo-grid 
-    #grid_application 
+#grid_application
     [data]="Instance_list" 
-    (cellClick)="onCellClick($event)"
-    [selectable]="true" 
+    (cellClick)="onCellClick($event)" 
+    
     [navigable]="true"
     (selectionChange)="on_Selection_Change_System_diagnostics($event)"
-    [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
+    [selectable]="{ checkboxOnly: true,mode:'multiple'}" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
-    kendoGridSelectBy="OBIQ_Agent"
+    kendoGridSelectBy="agentId"
     [(selectedKeys)]="selectedKeys">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">

@@ -1,16 +1,15 @@
-<div [id]="'stats-div-'+widgetType"  class="total-errors-details">
+<div [id]="'gauge-div-'+ widgetType"  class="total-errors-details">
   <span class="font-bold">
     {{title}}
   </span>
   
-  <div id="chart">
     <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [plotOptions]="chartOptions.plotOptions"
-      [fill]="chartOptions.fill"
-      [stroke]="chartOptions.stroke"
-      [labels]="chartOptions.labels">
+      [series]="chartOptions?.series"
+      [chart]="chartOptions?.chart"
+      [plotOptions]="chartOptions?.plotOptions"
+      [fill]="chartOptions?.fill"
+      [stroke]="chartOptions?.stroke"
+      [labels]="chartOptions?.labels">
     </apx-chart>
   </div>
 </div>

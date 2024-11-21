@@ -36,7 +36,7 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
   }
   on_Selection_Change_System_diagnostics(event:any){
       debugger;
-  
+  if(event){
       const selectedRow = event.selectedRows;
       const deselectedRow = event.deselectedRows;
   
@@ -55,13 +55,14 @@ export class ConfigurationSettingsSystemDiagnosticsComponent implements OnInit {
       console.log('Selected Rows:', this.selected_System_Diagnostics_Rows);
   
       this.obj_configuration_setting.selected_system_diagnostics = this.selected_System_Diagnostics_Rows;
-  
+  }
     }
  
   selectedKeys = []
   bindData(){
     debugger;
-    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.OBIQ_Agent);
+    this.selectedKeys = this.obj_configuration_setting?.selected_system_diagnostics?.map(ele =>ele.agentId);
+    
   }
   get_System_Diagnostics_Services(){
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryObiqAgentController/getAllAvailableObiqAgents";  
