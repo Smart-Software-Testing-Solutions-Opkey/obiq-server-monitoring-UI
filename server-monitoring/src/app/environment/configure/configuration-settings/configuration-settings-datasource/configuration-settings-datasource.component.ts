@@ -174,6 +174,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
             }, {});
             
             console.log(this.Available_Application_Instances, "A---------------------");
+
+          
            
           },
           error: (error: any) => {
@@ -241,8 +243,6 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     else{
         this.obj_error.dispaly_DataSource = true;
     }
-       
-
 
   }
 
@@ -256,6 +256,14 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+    
+    if (this.obj_configuration_setting.selected_datasource.select_applicaton_item.length > 0) 
+    { 
+          this.obj_error.display_ErpApplication = false;
+    }
+    else{
+          this.obj_error.display_ErpApplication = true;
+    }
 
   }
 
