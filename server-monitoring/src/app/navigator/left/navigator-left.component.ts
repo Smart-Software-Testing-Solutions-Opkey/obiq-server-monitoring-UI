@@ -46,6 +46,7 @@ export class NavigatorLeftComponent implements OnInit {
       if (data !== null) {
         if (data == "viewCreated") {
           this.getAllVIews();
+          
           this.cdr.detectChanges();
           
         }
@@ -173,7 +174,7 @@ export class NavigatorLeftComponent implements OnInit {
         if (result?.length > 0) {
           this.service_data.viewsData = result
           this.totalViews = result
-          this.selectedView = this.totalViews[0];
+          this.selectedView = this.totalViews[this.totalViews.length-1];
           this.selectedViewSettings = this.selectedView;
           this.dataChanged.viewSelected = this.selectedView
           this.set_Selected_VIew(this.selectedView)
