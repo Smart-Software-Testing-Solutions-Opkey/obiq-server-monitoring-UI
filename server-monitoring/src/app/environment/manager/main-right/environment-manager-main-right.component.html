@@ -27,9 +27,9 @@
     
                         <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
                 
-                        <input type="text" class="form-control search_input" placeholder="Search">
+                        <input type="text" class="form-control search_input" placeholder="Search" #clearSearch>
                 
-                        <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"><i
+                        <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch.value=''"><i
                                 class="oci oci-x"></i>
                 
                         </span>
