@@ -57,6 +57,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       }
     });
     modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting };
+   
+
   }
   onConfigurationSettingChange(): void {
     if (this.obj_configuration_setting) {
@@ -77,6 +79,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
+      
       if (data !== null) {
         debugger;
         this.receivedAccessType = data;
@@ -157,11 +160,13 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
     let form_data = this.create_to_update_object() as any;
 
+
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
 
         next: (result: any) => {
           this.app_service.dataTransmitter("viewCreated");
+          this.selectedAccessType = form_data.accessType;
         },
         error: (error: any) => {
 
