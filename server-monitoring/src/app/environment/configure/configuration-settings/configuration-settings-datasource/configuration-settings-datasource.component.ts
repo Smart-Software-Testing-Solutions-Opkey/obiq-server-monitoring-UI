@@ -277,6 +277,15 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+   
+    if (this.obj_configuration_setting.selected_datasource.select_systemDiagnostics_item.length > 0) 
+    { 
+        this.obj_error.display_SystemDiagnosticsData = false;
+    }
+    else{
+        this.obj_error.display_SystemDiagnosticsData = true;
+    }
+  
   }
   bindData(){
     debugger
