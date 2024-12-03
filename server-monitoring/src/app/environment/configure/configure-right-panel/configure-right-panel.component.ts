@@ -3,6 +3,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+ 
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
+import { NotificationType } from 'src/app/global/enums';
 
 @Component({
   selector: 'app-configure-right-panel',
@@ -15,6 +18,8 @@ export class ConfigureRightPanelComponent {
     public dataService: AppDataService,
     public app_service: AppService,
     private activeModal: NgbActiveModal,
+     
+    public service_notification : NotificationsService
   ) { }
   @Input() selectedItem: any;
   Public_dropdown_Items = ['Can View', 'Can Edit'];
@@ -201,6 +206,8 @@ selectUser(user: any) {
     }
     this.app_service.dataTransmitter(finalAccessObj);
     this.close_model()
+     
+    this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
   }
   close_model() {
     this.activeModal.dismiss('close modal');
@@ -209,4 +216,5 @@ selectUser(user: any) {
   close_right_panel() {
     this.activeModal.dismiss('close modal');
   }
+  
 }
