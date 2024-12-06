@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   templateUrl: './navigator-left.component.html',
   styleUrls: ['./navigator-left.component.scss']
 })
-export class NavigatorLeftComponent implements OnInit {
-
+export class NavigatorLeftComponent implements OnInit,AfterViewInit {
+  isOpenSettings;
   constructor(
     private modalService: NgbModal,
     private router: Router,
@@ -24,16 +24,23 @@ export class NavigatorLeftComponent implements OnInit {
     public app_service: AppService,
     public dataService: AppDataService,
     private cdr: ChangeDetectorRef,
-    public service_notification : NotificationsService
+    public service_notification : NotificationsService,
+    
 
 
-  ) { }
+  ) {
+   this.isOpenSettings= service_data.getisOpenSettings()
+   }
 
   // analyticsValueChange = output<any>()
   // onChangeView = output<any>()
   // onSettingsSelected = output<any>()
   onLeftPanelDataChange = output<any>()
-
+   ngAfterViewInit(): void {
+     if(this.isFromSettings){
+      this.openSettings()
+     }
+   }
   dataChanged = {
     "viewSelected": {},
     "settingsPanel": { isOpen: false, selectedViewSettings: {} },
@@ -237,7 +244,7 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   isopenSettings: boolean = false
-
+  @Input() isFromSettings = null
   openSettings() {
 
     this.isopenSettings = true
