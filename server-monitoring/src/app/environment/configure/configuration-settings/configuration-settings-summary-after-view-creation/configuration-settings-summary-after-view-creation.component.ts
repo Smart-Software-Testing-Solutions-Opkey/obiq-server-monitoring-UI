@@ -56,7 +56,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         return;
       }
     });
-    modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting };
+    modalRef.componentInstance.selectedItem = this.obj_configuration_setting 
    
 
   }

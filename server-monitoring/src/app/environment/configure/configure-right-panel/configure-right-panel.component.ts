@@ -128,16 +128,33 @@ selectViewOrEdit(option: string): void {
 
 
   perform_Shared_Access_Operation(): void {
-    debugger;
+ 
 
   }
 
   ngOnInit(): void {
 
     this.getAllProjects();
+  
+    if(this.selectedItem?.AccessType){
+      
+      let obj = {
+        AccessType: this.selectedItem?.AccessType,
+        AccessPermisions: this.selectedItem?.AccessPermisions
+      }
+      this.accessTypeObj = obj
+    }
+    else  if(this.selectedItem?.selected_view?.accessType){
+      
+      let obj = {
+        AccessType: this.selectedItem?.selected_view?.accessType,
+        AccessPermisions: this.selectedItem?.AccessPermisions
+      }
+      this.accessTypeObj = obj
+    }
   }
   toggleSharedPermission(dataItem) {
-    debugger;
+    
   }
   filterUsers(query: string) {
     if (!query) {
@@ -176,11 +193,11 @@ selectUser(user: any) {
     this.addedEmails = []; // Clear the temporary list after processing
 }
   removeUser(user: any): void {
-    debugger;
+ 
     this.addedUsers = this.addedUsers.filter(u => u.U_ID !== user.U_ID);
   }
   updateUserPermission(user: any, selectedPermission: string): void {
-    debugger;
+   
     selectedPermission = selectedPermission === 'Can Edit' ? 'ALL' : (selectedPermission === 'Can View' ? 'VIEW' : selectedPermission);
     const userIndex = this.addedUsers.findIndex(u => u.U_ID === user.U_ID);
     if (userIndex !== -1) {
@@ -194,10 +211,14 @@ selectUser(user: any) {
   }
 
   InviteUsers() {
-    debugger;
+   
     let finalAccessObj;
 
     if (this.Shared_Access_Type_Obj.length === 0) {
+      if(this.accessTypeObj.AccessType == "SHARED"){
+        this.service_notification.notifier(NotificationType.error, 'Please select At least one person to share.');
+        return
+      }
 
       finalAccessObj = this.accessTypeObj;
     } else {

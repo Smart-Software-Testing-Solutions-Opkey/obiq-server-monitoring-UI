@@ -178,6 +178,9 @@
     overflow: visible !important;
   }
 }
+::ng-deep .k-notification-group {
+  z-index: 9999 !important;
+}
 
 
 
