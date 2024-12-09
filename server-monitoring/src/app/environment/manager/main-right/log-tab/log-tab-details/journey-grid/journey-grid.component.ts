@@ -17,7 +17,7 @@ export class JourneyGridComponent implements OnInit {
   selectedData = null;
   noDataMsg: string = "Please wait fetching data...";
   @Input('child_data') set child_data({ selectedData }) {
-    debugger
+    
     this.selectedData = selectedData
   }
 
@@ -81,7 +81,7 @@ export class JourneyGridComponent implements OnInit {
   }
 
   onSelectionChange(e) {
-    debugger
+    
     let dataItem = e.dataItem;
     this.obj_selected_journey.datasource = dataItem;
     this.obj_selected_journey.isDisplay_main = false;

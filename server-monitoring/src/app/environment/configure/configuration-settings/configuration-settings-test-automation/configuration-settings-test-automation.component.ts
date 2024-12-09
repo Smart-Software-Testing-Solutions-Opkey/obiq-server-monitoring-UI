@@ -30,7 +30,7 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
   }
 
   @Input('child_data') set child_data({ obj_configuration_setting,displayTestError }) {
-    debugger;
+   
     console.log("in Test Automation")
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.displayTestError = displayTestError
@@ -38,7 +38,7 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
   }
 
   ngOnInit(){
-    debugger;
+   
     console.log("in init of test Auto")
     this.get_agents();
     if(!this.obj_configuration_setting["selected_test_automation_analysis"]){

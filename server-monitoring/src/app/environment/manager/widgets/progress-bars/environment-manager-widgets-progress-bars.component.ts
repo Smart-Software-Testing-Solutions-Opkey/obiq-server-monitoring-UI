@@ -65,7 +65,7 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
           }
             else 
              if ((this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET" || this?.widgetData?.widgetType == "USER_JOURNEY_TOP_FAST_WIDGET") && typeof result == 'object') {
-             { debugger;
+             { 
               this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
                 if(this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET"){}
                 const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
@@ -90,7 +90,7 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
       });
   }
   calculateDuration(from: number, to: number): string {
-    debugger;
+    
     const durationMillis = from - to;
 
     

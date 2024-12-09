@@ -36,7 +36,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   view:any;
   widgetType:any;
   @Input('child_data') set child_data({ title,data,view,widgetType}) {
-    debugger
+    
    this.title = title
    this.data = parseFloat(data) || 0;
    this.view = view;
@@ -61,7 +61,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     
   }
   get_Redis_Cpu_Usage(view,widgetType, timeFilter?: any){
-    debugger;
+    
     window.loadingStart("#gauge-div-" + widgetType, "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
 

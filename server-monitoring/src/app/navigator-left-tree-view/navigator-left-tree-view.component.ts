@@ -19,7 +19,7 @@ export class NavigatorLeftTreeViewComponent {
   analyticsTypes:any
   
   @Input('child_data') set child_data({analyticsTypes,selectedView  }) {
-    debugger
+    
     if(analyticsTypes && selectedView ){
 
       this.selectedView = selectedView
@@ -32,7 +32,7 @@ export class NavigatorLeftTreeViewComponent {
   treeSelectionChange = output<any>()
 
   changeAnalyticsSelection(item){
-    debugger
+    
    
     this.analyticsTypes.forEach((ele)=>{
       if(ele.isSelected){
@@ -47,7 +47,7 @@ export class NavigatorLeftTreeViewComponent {
 
   }
   changeViewSelection(){
-    debugger
+    
     this.analyticsTypes.forEach((ele)=>{
         ele.isSelected = false
     })

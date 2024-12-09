@@ -37,7 +37,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   }
 
   get_all_Instance() {
-    debugger;
+   
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
@@ -135,7 +135,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
 
   get_instance_item(object) {
-    debugger;
+   
     let incident = [];
     Object.keys(object).forEach(function (obj, ind) {
       object[obj].forEach(item => {
@@ -148,14 +148,14 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
 
   onCellClick(event: any) {
-    debugger;
+ 
     const clickedRowData = event.dataItem;
     console.log(clickedRowData);
     
   }
 
   onSelectionChange(event: any) {
-    debugger;
+  
 
     const selectedRow = event.selectedRows;
     const deselectedRow = event.deselectedRows;

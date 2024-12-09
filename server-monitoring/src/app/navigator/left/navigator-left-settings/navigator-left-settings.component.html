@@ -16,12 +16,16 @@
 
                     <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
                         [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''">
-
+                      
                         <div class="d-flex-between">
-                            
-                            <span class="name text-ellipsis">
-                                <i class="oci oci-star pe-1"></i>
-                                {{view.viewName}}</span>
+                            <ng-container *ngIf="view?.isRenamed;else nameOnly">
+                                <input type="text" [(ngModel)]="view.viewName" (blur)="renameView(view)" id='renameInput'>
+                            </ng-container>
+                            <ng-template #nameOnly>
+                                <span class="name text-ellipsis" >
+                                    <i class="oci oci-star pe-1"></i>
+                                    {{view.viewName}}</span>
+                           
                             <span class="flex-center ps-1">
                                 <span class="label-status me-2 {{view.accessType}}" *ngIf="view.accessType != 'SHARED'">{{view.accessType | titlecase}} </span> 
 
@@ -38,11 +42,12 @@
                                         <i class="oci oci-more-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="Rename_Selected_View(view)" >Rename</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="Delete_Selected_View(view)" >Delete</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="renameSelectedView(view)" >Rename</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="deleteSelectedView(view)" >Delete</a></li>
                                     </ul>
                                 </div>
                             </span>
+                        </ng-template>
                         </div>
 
                     </a>

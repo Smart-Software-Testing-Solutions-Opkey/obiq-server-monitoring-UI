@@ -224,7 +224,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   datasource_item_name = "";
   select_datasource(dataItem) {
-    debugger;
+  
     // this.datasource_item_name = dataItem.name;
     dataItem.isChecked = !dataItem.isChecked;
     if (dataItem.isChecked) {
@@ -247,7 +247,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   }
 
   select_applicaton(dataItem, event) {
-    debugger;
+   
     if (event.target.checked) {
       this.obj_datasource_widget.select_applicaton_item.push(dataItem);
     } else {
@@ -268,7 +268,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   }
 
   select_systemDiagnostics(dataItem, event) {
-    debugger;
+
     if (event.target.checked) {
       this.obj_datasource_widget.select_systemDiagnostics_item.push(dataItem);
     } else {
@@ -288,7 +288,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   
   }
   bindData(){
-    debugger
+  
     this.modal_name = this.obj_configuration_setting?.selected_datasource?.viewName??''
     this.obj_datasource_widget =  this.obj_configuration_setting?.selected_datasource??{
       viewName: "",

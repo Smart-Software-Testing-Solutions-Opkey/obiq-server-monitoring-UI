@@ -95,7 +95,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
 
   on_Selection_Change_User_Behavious(event:any){
    
-    debugger;
+   
 
     const selectedRow = event.selectedRows;
     const deselectedRow = event.deselectedRows;

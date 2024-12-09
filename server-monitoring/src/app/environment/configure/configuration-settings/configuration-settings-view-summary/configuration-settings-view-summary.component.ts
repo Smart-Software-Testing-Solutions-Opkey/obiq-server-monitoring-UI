@@ -29,14 +29,14 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   receivedAccessType: any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
 
-    debugger;
+    
     this.obj_configuration_setting = obj_configuration_setting;
     console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
   }
   ngOnInit() {
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        debugger;
+       
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
         if(this.receivedAccessType != "viewCreated"){
@@ -71,7 +71,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   }
 
   get_all_summary(selectionData) {
-    debugger;
+  
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
     this.selected_grid_System_Diagnostics = selectionData.selected_system_diagnostics;
     if(selectionData?.selected_user_behaviour_component){
@@ -109,7 +109,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   selectedUsers: any[] = [];
 
   onAccessTypeChange(selectedOption: string) {
-    debugger;
+    
     this.selectedAccessType = selectedOption;
     if (this.selectedAccessType == "SHARED") {
       this.getAllProjects()
@@ -123,7 +123,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   }
 
   onUserSelect(user: any, event: Event): void {
-    debugger;
+    
     if ((event.target as HTMLInputElement).checked) {
 
       this.selectedUsers.push({
@@ -139,7 +139,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   }
 
   getAllProjects() {
-    debugger;
+    
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };

@@ -54,7 +54,7 @@ export class ConfigurationSettingsComponent {
 
   datasource_item = [];
   next() {
-    debugger;
+    
     if (!this.ValidationCheck()) {
       return;
     }
@@ -70,7 +70,7 @@ export class ConfigurationSettingsComponent {
     }
 
     if (this.obj_configuration_setting.tab == "datasource") {
-      debugger
+      
       // if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = 'ERP Analytics';
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
@@ -180,7 +180,7 @@ export class ConfigurationSettingsComponent {
   }
 
   back() {
-    debugger;
+    
     
 
     if (this.obj_configuration_setting.tab == "view_summary") {
@@ -407,7 +407,7 @@ export class ConfigurationSettingsComponent {
   //-------------------------------------------------------
 
   // finish() {
-  //   debugger;
+  //   ;
   //   this.service_data.is_env_configure = true;
   //   this.close_model();
   //   this.router.navigate(['/environment']);
@@ -415,13 +415,13 @@ export class ConfigurationSettingsComponent {
 
 
   finish() {
-    debugger;
+    
     this.createView()
 
   }
 
   createView() {
-    debugger;
+    
 
     window.loadingStart("#div-datasource-slection", "Please wait");
 
@@ -452,7 +452,7 @@ export class ConfigurationSettingsComponent {
   }
 
   create_View_object() {
-    debugger;
+    
     console.log(this.obj_configuration_setting, "create Object Config settings")
     var obj_Create_View = new Object();
     obj_Create_View["viewName"] = this.obj_configuration_setting.selected_datasource.viewName;
@@ -468,7 +468,7 @@ export class ConfigurationSettingsComponent {
 
 
   createLinkedDataSourceObject() {
-    debugger;
+    
     var linkedDataarray = [];
 
     this.obj_configuration_setting.selected_datasource.select_datasource_item.forEach(widget => {

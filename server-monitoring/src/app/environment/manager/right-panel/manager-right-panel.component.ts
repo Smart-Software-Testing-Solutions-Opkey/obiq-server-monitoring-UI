@@ -18,7 +18,7 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
   panelHeader:string = ''
   selectedPanel:string = ''
   ngOnInit(): void {
-    debugger 
+     
     this.bindPanelData()
   }
   close_model() {

@@ -63,7 +63,7 @@ export class SelectedJourneyComponent implements OnInit {
 
 
   pageInformation(res) {
-    debugger;
+  
     let total_error = 0;
     let total_page = res.length;
     let total_duration = 0;
@@ -85,7 +85,7 @@ export class SelectedJourneyComponent implements OnInit {
   }
 
   pageErrorDetails(event) {
-    debugger;
+   
     this.pageDetails = event;
     this.isPageErrorDetails = true;
     this.isLayoutCardVisible = true;
@@ -93,7 +93,7 @@ export class SelectedJourneyComponent implements OnInit {
   }
 
   goBack(): void {
-    debugger;
+    
     this.obj_selected_journey.isDisplay_main = true;
     // this.obj_selected_journey.datasource = [];
   }

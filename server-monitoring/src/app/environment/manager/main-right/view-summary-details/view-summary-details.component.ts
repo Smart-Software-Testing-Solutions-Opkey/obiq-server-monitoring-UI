@@ -17,7 +17,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
   obj_configuration_setting: any;
 
   @Input('child_data') set child_data({ obj_configuration_setting }) {
-    debugger
+    
     this.obj_configuration_setting = obj_configuration_setting;
    console.log("msg obj settings=========",this.obj_configuration_setting)
   }
@@ -31,14 +31,14 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
 
     
     if (changes['Settings_View_Selection'] && changes['Settings_View_Selection'].currentValue) {
-      debugger
+      
       this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
     }
     else if(this.Settings_View_Selection)this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
       console.log("==========simple chnages :",JSON.stringify(this.Settings_View_Selection));
   }
   get_All_Summary_of_Selected_View(view) {
-    debugger;
+   
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
 
     let form_data = { "viewId": view.viewId };

@@ -67,7 +67,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   dataSet = []
   
   bindChart(){
-    debugger
+    
     this.chartOptions = {
       series: [
         {
@@ -165,7 +165,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   inverseColors = false
   view:any
   @Input('child_data') set child_data({ typeEnum,view }) {
-    debugger
+    
    this.typeEnum = typeEnum
    this.view = view
   
@@ -247,7 +247,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   }
 dataDir = ''
   getChartData(type, timeFilter?: any){
-      debugger;
+      
       let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
       const form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
       if(timeFilter?.type == 'setEnum'){
@@ -261,10 +261,10 @@ dataDir = ''
       this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {
-            debugger;
+            
             if(result){
               if(type == "ESS_LOG_ERROR_WIDGET"){
-                debugger;
+               
                 this.dataObj.total = result.count
                 this.dataDir = result.percentdiff < 0 ? 'up' : 'down';
                 this.dataObj.percentage =Math.abs(result.percentdiff) 

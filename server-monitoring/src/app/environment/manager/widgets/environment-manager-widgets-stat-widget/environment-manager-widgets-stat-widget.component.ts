@@ -14,7 +14,7 @@ export class EnvironmentManagerWidgetsStatWidgetComponent implements OnInit {
   title:string = ''
   data:string = ''
   @Input('child_data') set child_data({ title,data }) {
-    debugger
+    
    this.title = title
    this.data = data
   }
