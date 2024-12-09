@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigator-left.component.scss']
 })
 export class NavigatorLeftComponent implements OnInit,AfterViewInit {
-  isOpenSettings;
+
   constructor(
     private modalService: NgbModal,
     private router: Router,

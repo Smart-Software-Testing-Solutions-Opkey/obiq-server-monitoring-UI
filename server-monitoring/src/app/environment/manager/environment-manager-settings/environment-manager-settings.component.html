@@ -11,7 +11,7 @@
             
                     @if (service_data.UserDto) {
                         
-                        <app-navigator-left-settings (selectedViewSettingsChange)="selectingViewSetting($event)" ></app-navigator-left-settings>
+                        <app-navigator-left-settings (onSettingsSelected)="selectingViewSetting($event)" ></app-navigator-left-settings>
                        
                         
                     }
@@ -23,7 +23,7 @@
                 <div class="right-section">
         
                  
-                        <app-view-summary-details  [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
+                        <app-view-summary-details  [child_data]="{obj_configuration_setting: obj_configuration_setting}" [Settings_View_Selection]="selectedView"></app-view-summary-details>
                        
                 
                     

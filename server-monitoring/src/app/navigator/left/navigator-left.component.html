@@ -1,27 +1,7 @@
 <div id="navigator-left"   class="sidebar-left-menu flex-box-column">
 
 
-    @if (isOpenSettings || isFromSettings) {
-        <!-- <div class="sidebar-menu-header">
-    
-            <div class="left">
-                <span class="d-flex">
-                    <button type="button" class="btn btn-icon bt-sm bt-back border-0" (click)="backToMenu()">
-                        <i class="oci oci-chevron-left"></i>
-                    </button>
-                    <h3 class="h-text-sidebar mb-0 text-ellipsis">Settings</h3>
-                </span>
-                
-                
-                
-            </div>
-        </div> -->
-        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)">
-        </app-navigator-left-settings>
-
-    }
-    @else {
-
+ 
     <div class="sidebar-menu-body flex-box-column">
 
         <div class="sidebar-menu-toolbar">
@@ -70,5 +50,5 @@
         </div>
 
     </div>
-    }
+    
 </div>

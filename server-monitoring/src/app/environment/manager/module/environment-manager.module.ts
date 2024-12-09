@@ -37,6 +37,7 @@ import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-detai
 import { LabelModule } from "@progress/kendo-angular-label";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnvironmentManagerSettingsComponent } from '../environment-manager-settings/environment-manager-settings.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     EnvironmentManagerWidgetsHealthBarsComponent,
     ManagerMainRightLogTabDetailsInfoComponent,
     EnvironmentManagerWidgetsProgressBarsComponent,
-    SelectedTraceInnerComponent
+    SelectedTraceInnerComponent,
+    EnvironmentManagerSettingsComponent
 
 
   ],

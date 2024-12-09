@@ -24,10 +24,10 @@ export class EnvironmentManagerSettingsComponent implements OnInit {
     this.service_data.isFromSettings = true
   }
 
-  selectingViewSetting(event){
-
+  selectingViewSetting(value){
+    this.selectedView = value
   }
- 
+ selectedView:any = {}
   obj_configuration_setting = {
     tab: "datasource",
     title: "Add View",

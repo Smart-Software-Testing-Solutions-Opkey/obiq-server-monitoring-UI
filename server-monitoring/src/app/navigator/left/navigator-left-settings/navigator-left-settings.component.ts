@@ -34,64 +34,11 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
 
   
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
-      if (data !== null) {
-        if (data == "viewCreated") {
-          this.getAllVIews();
-          
-          this.cdr.detectChanges();
-          
-        }
-        else if(data?.callsource == 'settings'){
-          if(data?.data == 'backToMenu'){
-            // this.backToMenu()
-          }
-        }
-      }
-    });
-    this.getAllVIews();
-    
+   
+    this.getAllVIews()
   }
 
-  getAllVIews() {
-
-    window.loadingStart("#navigator-left", "Please wait");
-
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
-
-    let form_data = {
-      userId: this.dataService.UserDto.UserDTO.U_ID,
-      projectId: this.dataService.UserDto.ProjectDTO.P_ID
-    }
-
-    this.app_service.make_post_server_call(form_url, form_data).subscribe({
-      next: (result: any) => {
-        window.loadingStop("#navigator-left");
-        if (result == null || result?.length == 0) {
-          this.router.navigate(['environment/configure']);
-        }
-        console.log(result, "get all  views resultS")
-        if (result?.length > 0) {
-          this.service_data.viewsData = result
-          this.totalViews = result
-          this.selectedView = this.totalViews[this.totalViews.length-1];
-          this.selectedViewSettings = this.selectedView;
-          this.selectedViewSettingsChange.emit(this.selectedViewSettings);
-          // this.dataChanged.viewSelected = this.selectedView
-          // this.set_Selected_VIew(this.selectedView)
-        }
-
-
-      },
-      error: (error: any) => {
-        window.loadingStop("#navigator-left");
-        console.warn(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
-  }
+ 
   add_environment() {
     const modalRef = this.modalService.open( ConfigurationSettingsComponent,{
       backdrop: 'static',
@@ -114,12 +61,12 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.router.navigate(['/environment']);
   }
  
-  @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
-    this.totalViews = totalViews
-    this.isopenSettings = isopenSettings
-    this.selectedViewSettings = selectedViewSettings
+  // @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
+  //   this.totalViews = totalViews
+  //   this.isopenSettings = isopenSettings
+  //   this.selectedViewSettings = selectedViewSettings
     
-  }
+  // }
 
   onSettingsSelected = output<any>()
   onViewDelete = output<any>()
@@ -148,6 +95,43 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   renameView(view){
     
     delete view['isRenamed']
+  }
+
+  getAllVIews() {
+
+    window.loadingStart("#navigator-left", "Please wait");
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+
+    let form_data = {
+      userId: this.dataService.UserDto.UserDTO.U_ID,
+      projectId: this.dataService.UserDto.ProjectDTO.P_ID
+    }
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
+      next: (result: any) => {
+        window.loadingStop("#navigator-left");
+        if (result == null || result?.length == 0) {
+          this.router.navigate(['environment/configure']);
+        }
+        console.log(result, "get all  views resultS")
+        if (result?.length > 0) {
+          this.service_data.viewsData = result
+          this.totalViews = result
+          this.selectedViewSettings = this.totalViews.length == 0 ? {}:this.totalViews[0]
+          this.onSettingsSelected.emit(this.selectedViewSettings)
+        }
+
+
+      },
+      error: (error: any) => {
+        window.loadingStop("#navigator-left");
+        console.warn(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
   }
 
 }
