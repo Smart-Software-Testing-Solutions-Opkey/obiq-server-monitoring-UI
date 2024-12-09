@@ -120,7 +120,7 @@ export class SelectedJourneyInnerComponent {
 
 
   view_errors(event, errorType) {
-    debugger;
+    
 
     if (event.length == 0) {
       // this.service_notification.notifier(NotificationType.warning, 'No errors available.');
@@ -146,7 +146,7 @@ export class SelectedJourneyInnerComponent {
 
 
   view_screenshot() {
-    debugger;
+  
     const modalRef = this.modalService.open(ViewJourneySnapshotComponent, {
       backdrop: 'static',
       keyboard: false,

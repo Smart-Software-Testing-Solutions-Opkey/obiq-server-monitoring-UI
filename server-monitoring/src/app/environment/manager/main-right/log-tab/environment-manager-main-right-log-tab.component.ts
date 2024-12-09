@@ -81,7 +81,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   createChart(): void {
-      debugger;
+      
       const isHourly = this.chartData.groupedBy === 'Hour';
       const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
   
@@ -186,7 +186,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   }
   
   getSeriesData(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
-      debugger;
+      
       const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning', 'Blocked'] : [selectedLogType];
       const isHourly = this.chartData.groupedBy === 'Hour';
   
@@ -296,7 +296,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       });
   }
   getViewLogs(timeFilter?: any, appendData: boolean = false) {
-    debugger;
+   
     if (this.allDataLoaded) return;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
@@ -338,7 +338,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.getViewLogs(null, true); // Load more data and append it
 }
   onSelectionChange(e) {
-    debugger
+   
     let dataItem = e.dataItem
     const modalRef = this.modalService.open(ManagerRightPanelComponent, {
       backdrop: 'static',

@@ -13,11 +13,11 @@ export class EnvironmentCurdServiceComponent {
   ) { }
 
   download_all() {
-    debugger;
+   
   }
 
   create_service() {
-    debugger;
+   
     //this.close_model();
     this.activeModal.dismiss('add_service');
   }

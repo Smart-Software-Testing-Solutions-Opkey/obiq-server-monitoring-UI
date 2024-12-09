@@ -21,11 +21,11 @@ export class EnvironmentManagerComponent implements OnInit {
 
   selectedAnalyticsType: any = null
   changeSelectedAnalytics(val) {
-    debugger
+  
     this.selectedAnalyticsType = val
   }
   check_env_configuration() {
-    debugger;
+    
     //this.getAllViews()
     if (!this.service_data.is_env_configure) {
       this.router.navigate(['environment/configure']);
@@ -72,7 +72,7 @@ export class EnvironmentManagerComponent implements OnInit {
     selectedViewSettings: {}
   }
   settingsSelected(val) {
-    debugger
+    
     this.objSettings = val
   }
 
@@ -93,7 +93,7 @@ export class EnvironmentManagerComponent implements OnInit {
 
   }
   leftPanelDataUpdate(val) {
-    debugger
+    
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
     this.selectedView = val.viewSelected

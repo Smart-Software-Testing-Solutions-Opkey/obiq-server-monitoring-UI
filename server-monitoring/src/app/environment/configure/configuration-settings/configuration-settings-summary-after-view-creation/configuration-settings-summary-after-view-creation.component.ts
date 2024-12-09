@@ -29,7 +29,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   groupedDataSource: any = {};
   @Input('child_data')
   set child_data({ obj_configuration_setting }) {
-    debugger;
+  
     if (obj_configuration_setting !== this.obj_configuration_setting) {
       this.obj_configuration_setting = obj_configuration_setting;
 
@@ -71,7 +71,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       });
       this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics
     }
-    debugger;
+   
     this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
   }
@@ -81,7 +81,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
-        debugger;
+      
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
         this.selectedAccessType = this.receivedAccessType.AccessType
@@ -115,7 +115,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
   }
   onAccessTypeChange(selectedOption: string) {
-    debugger;
+    
     this.selectedAccessType = selectedOption;
     if (this.selectedAccessType == "SHARED") {
       this.getAllProjects()
@@ -129,7 +129,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
 
   onUserSelect(user: any, event: Event): void {
-    debugger;
+  
     if ((event.target as HTMLInputElement).checked) {
 
       this.selectedUsers.push({
@@ -144,7 +144,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     console.log(this.selectedUsers);
   }
   create_to_update_object() {
-    debugger;
+  
     var obj_Update_View = new Object();
     obj_Update_View["viewId"] = this.obj_configuration_setting.selected_view.viewId,
       obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
@@ -179,7 +179,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
 
   getAllProjects() {
-    debugger;
+   
    
     let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 

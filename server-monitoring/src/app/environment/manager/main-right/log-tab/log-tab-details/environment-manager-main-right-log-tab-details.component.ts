@@ -30,7 +30,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
   trace_Selected_data: any = [];
   receivedTimeRange: any
   @Input('child_data') set child_data({ selectedData }) {
-    debugger
+    
     this.selectedData = selectedData
     this.dataKeys = Object.keys(this.selectedData)
     this.dataValues = Object.values(this.selectedData);

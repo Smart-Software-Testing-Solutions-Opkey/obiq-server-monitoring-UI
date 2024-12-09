@@ -40,7 +40,7 @@ export class ConfigureRightPanelComponent {
   };
   Shared_Access_Type_Obj: { U_ID: string, permission: string }[] = [];
   selectAccessType(type: string): void {
-    debugger;
+    
     this.showSharedInput = false;
     this.accessTypeObj.AccessType = type;
     this.Shared_Access_Type_Obj = [];
@@ -84,7 +84,7 @@ removeTempEmail(email: string): void {
 
 
 selectViewOrEdit(option: string): void {
-  debugger;
+ 
     event.preventDefault();
     event.stopPropagation();
 
@@ -101,8 +101,7 @@ selectViewOrEdit(option: string): void {
     this.addedUsers.splice(index, 1);
 }
   getAllProjects() {
-    debugger;
-
+   
 
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
 

@@ -68,7 +68,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   public dateTimeFormat = "MM/dd/yyyy HH:mm";
   @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
   @Input('child_data') set child_data({ selectedAnalyticsType, selectedView }) {
-    debugger
+    
     this.selectedAnalyticsType = selectedAnalyticsType;
     if (selectedView) {
       this.selectedView = selectedView
@@ -141,7 +141,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     });
   }
   bindData() {
-    debugger;
+   
     if (Object.keys(this.selectedAnalyticsType).length != 0) {
       // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
       this.get_Tab_Control_List(this.selectedAnalyticsType)
@@ -231,7 +231,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
-        debugger
+      
         this.timezoneDatasource = result;
         this.selectedTimezone =  this.timezoneDatasource.find(ele=>ele.Id == 'India Standard Time' );
         this.cdr.detectChanges();

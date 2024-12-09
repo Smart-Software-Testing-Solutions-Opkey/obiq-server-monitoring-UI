@@ -44,14 +44,12 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     });
   }
   select_service_data() {
-    debugger;
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
   }
   totalViews:any
   isopenSettings:boolean = false
   @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
-    debugger
     this.totalViews = totalViews
     this.isopenSettings = isopenSettings
     this.selectedViewSettings = selectedViewSettings
@@ -62,17 +60,26 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   onViewDelete = output<any>()
 
   settingsViewSelect(val){
-    debugger;
+
     this.selectedViewSettings = val
     this.onSettingsSelected.emit({isOpen:this.isopenSettings,selectedViewSettings:this.selectedViewSettings})
 
   }
-  Rename_Selected_View(view){
-
+  renameSelectedView(view){
+    view['isRenamed'] = true
+      setTimeout(() => {
+        let ele = document.getElementById('renameInput')
+        ele.focus()
+      }, 0);
+  
   }
-  Delete_Selected_View(view){
+  deleteSelectedView(view){
     this.onViewDelete.emit(view)
 
+  }
+  renameView(view){
+    
+    delete view['isRenamed']
   }
 
 }

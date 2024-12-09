@@ -255,7 +255,7 @@ export class NavigatorLeftComponent implements OnInit {
   selectedViewSettings: any = {}
 
   settingsViewSelect(val) {
-    debugger;
+   
     // this.selectedViewSettings = val
     this.dataChanged.settingsPanel = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -293,7 +293,7 @@ export class NavigatorLeftComponent implements OnInit {
   }
 
   selectionChanged(val) {
-    debugger
+    
     this.dataChanged.analyticsTypes = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
    
