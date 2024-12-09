@@ -4,6 +4,7 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
@@ -16,7 +17,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     public app_service: AppService,
     public dataService: AppDataService,
     public modalService: NgbModal,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {
   }
   obj_configuration_setting: any;
@@ -62,7 +64,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
   onConfigurationSettingChange(): void {
     if (this.obj_configuration_setting) {
-
+      console.log("obj:",JSON.stringify(this.obj_configuration_setting))
       this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {
         return {
           ...item,
@@ -205,5 +207,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
   backToMenu(){
     this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+    this.dataService.isFromSettings=false;
+    this.router.navigate(['/environment']);
   }
 }

@@ -29,7 +29,7 @@ export class NavigatorLeftComponent implements OnInit,AfterViewInit {
 
 
   ) {
-   this.isOpenSettings= service_data.getisOpenSettings()
+   
    }
 
   // analyticsValueChange = output<any>()
@@ -246,11 +246,11 @@ export class NavigatorLeftComponent implements OnInit,AfterViewInit {
   isopenSettings: boolean = false
   @Input() isFromSettings = null
   openSettings() {
-
-    this.isopenSettings = true
+    this.isopenSettings=true;
+    this.service_data.isFromSettings = true
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
-
+    this.router.navigate(['/environment/settings'])
   }
   backToMenu() {
     this.isopenSettings = false

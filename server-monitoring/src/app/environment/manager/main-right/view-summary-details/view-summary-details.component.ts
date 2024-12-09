@@ -19,16 +19,23 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
   @Input('child_data') set child_data({ obj_configuration_setting }) {
     debugger
     this.obj_configuration_setting = obj_configuration_setting;
+   console.log("msg obj settings=========",this.obj_configuration_setting)
   }
+  
   @Input() Settings_View_Selection: any
   ngOnInit(): void {
 
   }
+ 
   ngOnChanges(changes: SimpleChanges) {
+
+    
     if (changes['Settings_View_Selection'] && changes['Settings_View_Selection'].currentValue) {
       debugger
       this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
     }
+    else if(this.Settings_View_Selection)this.get_All_Summary_of_Selected_View(this.Settings_View_Selection)
+      console.log("==========simple chnages :",JSON.stringify(this.Settings_View_Selection));
   }
   get_All_Summary_of_Selected_View(view) {
     debugger;

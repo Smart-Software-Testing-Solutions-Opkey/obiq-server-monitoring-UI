@@ -19,8 +19,10 @@
              
                 <div class="right-section">
         
-                    @if (objSettings.isOpen) {
+                    @if (isOpenSettings) {
                         <app-view-summary-details [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
+                        <!-- app-environment-manager-settings -->
+                        <!-- <app-environment-manager-settings [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-environment-manager-settings> -->
                     }
                     @else if(selectedView && selectedAnalyticsType) {
                         <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">

@@ -10,6 +10,8 @@ export class AppDataService {
   is_env_configure:boolean = false;
   showSelectedViewEnvironment: boolean = false;
   UserDto :any = null;
+  isFromSettings:boolean=false;
+  
   viewsData = []
   widgets_data:any = [
     {

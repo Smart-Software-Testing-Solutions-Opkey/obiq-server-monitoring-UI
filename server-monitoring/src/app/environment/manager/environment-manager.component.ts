@@ -8,12 +8,15 @@ import { AppDataService } from 'src/app/services/app-data.service';
   styleUrls: ['./environment-manager.component.scss']
 })
 export class EnvironmentManagerComponent implements OnInit {
-
+  isOpenSettings;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public service_data: AppDataService
-  ) { }
+    public service_data: AppDataService,
+   
+  ) { 
+   
+  }
 
   ngOnInit(): void {
     // this.check_env_configuration();
