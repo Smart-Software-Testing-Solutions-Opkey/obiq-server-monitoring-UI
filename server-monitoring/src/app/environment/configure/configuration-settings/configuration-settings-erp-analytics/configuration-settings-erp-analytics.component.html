@@ -38,10 +38,10 @@
 
             <div class="flex-center">
                 <span class="img-app-profile">
-                    <img src="assets/images/default/profile.png" alt="">
+                    <img src="user/getavatar/{{dataItem.CreatedBy}}" alt="">
                 </span>
                 <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                    <span class="layout-text-name">{{dataItem.CreatedByName}}</span>
                     <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                 </div>
             </div>
@@ -53,10 +53,10 @@
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                 <span class="img-app-profile">
-                    <img src="assets/images/default/profile.png" alt="">
+                    <img src="user/getavatar/{{dataItem.ModifiedBy}}" alt="">
                 </span>
                 <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                    <span class="layout-text-name">{{dataItem.ModifiedByName}}</span>
                     <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                 </div>
             </div>
