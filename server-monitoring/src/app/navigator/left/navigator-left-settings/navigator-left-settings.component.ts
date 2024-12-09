@@ -52,7 +52,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   tempTotalViews:any = []
   @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
     this.totalViews = [...totalViews]
-    this.tempTotalViews = [...totalViews] 
+    this.tempTotalViews = JSON.parse(JSON.stringify(totalViews))
     this.isopenSettings = isopenSettings
     this.selectedViewSettings = selectedViewSettings
     
@@ -94,6 +94,11 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   }
   unStarView(view){
    delete view['isStarred']
-    this.totalViews = this.tempTotalViews
+   this.totalViews.forEach((item,index)=>{
+     if(view.viewId == item.viewId){
+      let newInd = this.tempTotalViews.findIndex(ele=> ele.viewId == view.viewId) 
+      this.totalViews.splice(newInd,0,this.totalViews.splice(index, 1)[0])
+    }
+})
   }
 }
