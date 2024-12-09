@@ -30,8 +30,17 @@ export class AppComponent implements OnInit {
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
         this.service_data.UserDto = result;
-
-
+        if(result.UserDTO == null && result.Exception == "User already logged in from other location!" && window.origin.includes("localhost:4200")){
+          var form_url = environment.BASE_OPKEY_URL + "login/force_login_user";
+          var form_data = { sessionID: window.keycloak.sessionId};
+          this.app_service.make_get_server_call(form_url, form_data).subscribe(
+            (result: any) => {
+              if(result){
+                this.get_data()
+              }
+            }
+          );
+        }
       },
       (error) => {
 
