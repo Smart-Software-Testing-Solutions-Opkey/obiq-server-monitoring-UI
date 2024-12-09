@@ -47,10 +47,12 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.service_data.is_env_configure = true;
     this.router.navigate(['/environment']);
   }
-  totalViews:any
+  totalViews:any = []
   isopenSettings:boolean = false
+  tempTotalViews:any = []
   @Input('child_data') set child_data({ totalViews,isopenSettings,selectedViewSettings }) {
-    this.totalViews = totalViews
+    this.totalViews = [...totalViews]
+    this.tempTotalViews = [...totalViews] 
     this.isopenSettings = isopenSettings
     this.selectedViewSettings = selectedViewSettings
     
@@ -82,4 +84,16 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     delete view['isRenamed']
   }
 
+  starView(view){
+    view['isStarred'] = true
+    this.totalViews.forEach((item,index)=>{
+      if(view.viewId == item.viewId){
+        this.totalViews.splice(0,0,this.totalViews.splice(index, 1)[0])
+      }
+  })
+  }
+  unStarView(view){
+   delete view['isStarred']
+    this.totalViews = this.tempTotalViews
+  }
 }
