@@ -27,6 +27,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   ) { }
 
   totalViews = [];
+  tempTotalViews = []
   selectedView: any = {}
   isopenSettings : boolean = true;
   selectedViewSettings : any ={};
@@ -118,6 +119,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
         if (result?.length > 0) {
           this.service_data.viewsData = result
           this.totalViews = result
+          this.tempTotalViews = result
           this.selectedViewSettings = this.totalViews.length == 0 ? {}:this.totalViews[0]
           this.onSettingsSelected.emit(this.selectedViewSettings)
         }
@@ -134,4 +136,21 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     });
   }
 
+  starView(view){
+    view['isStarred'] = true
+    this.totalViews.forEach((item,index)=>{
+      if(view.viewId == item.viewId){
+        this.totalViews.splice(0,0,this.totalViews.splice(index, 1)[0])
+      }
+  })
+  }
+  unStarView(view){
+   delete view['isStarred']
+   this.totalViews.forEach((item,index)=>{
+     if(view.viewId == item.viewId){
+      let newInd = this.tempTotalViews.findIndex(ele=> ele.viewId == view.viewId) 
+      this.totalViews.splice(newInd,0,this.totalViews.splice(index, 1)[0])
+    }
+})
+  }
 }

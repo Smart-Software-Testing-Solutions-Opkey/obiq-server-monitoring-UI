@@ -23,7 +23,18 @@
                             </ng-container>
                             <ng-template #nameOnly>
                                 <span class="name text-ellipsis" >
-                                    <i class="oci oci-star pe-1"></i>
+                                    <div (click)="unStarView(view)" *ngIf="view?.isStarred;else unStar">
+
+                                        <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
+                                      
+                                    </div>
+                                    <ng-template #unStar>
+                                        <div (click)="starView(view)">
+
+                                            <i class="oci oci-star pe-1"></i>
+                                          
+                                        </div>
+                                    </ng-template>
                                     {{view.viewName}}</span>
                            
                             <span class="flex-center ps-1">
