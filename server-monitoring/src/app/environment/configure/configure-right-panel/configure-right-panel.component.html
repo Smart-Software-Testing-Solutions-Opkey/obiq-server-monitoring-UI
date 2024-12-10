@@ -18,14 +18,14 @@
     </div>
 
     <div class="feature-rp-body has-footer pd-rp pt-3">
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
+        <div (click)="newChange('PRIVATE')" [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
             <div class="col-sm-12 px-0">
                 <i class="oci oci-public-off public-icon"></i>
                 Private
             </div>
         </div>
 
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PUBLIC'}"  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
+        <div  (click)="newChange('PUBLIC')" [ngClass]="{'active':this.accessTypeObj.AccessType == 'PUBLIC'}"  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
             <div class="col-sm-12 px-0 d-flex-between">
                 <span>
                     <i class="oci oci-public public-icon"></i>
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
+        <div (click)="newChange('SHARED')" [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
             <div class="col-sm-12 px-0 ">
                 <i class="oci oci-share public-icon"></i>
                 Shared
@@ -148,7 +148,7 @@
 
                 <kendo-grid-column [width]="50">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" class="btn p-2" (click)="deleteUser(rowIndex)">
+                        <button  type="button" class="btn p-2" (click)="deleteUser(rowIndex)">
                             <i class="oci oci-delete text-red"></i>
                         </button>
                     </ng-template>
@@ -160,9 +160,9 @@
     </div>
 
     <div class="feature-rp-footer" style="text-align: left;">
-        <button type="button" class="btn btn-layout btn-bg-theme"
+        <button [disabled]="isTrue" type="button" class="btn btn-layout btn-bg-theme"
             aria-label="Close" (click)="InviteUsers()">
-            Invite
+            {{isInvite}}
         </button>
     </div>
 </div>

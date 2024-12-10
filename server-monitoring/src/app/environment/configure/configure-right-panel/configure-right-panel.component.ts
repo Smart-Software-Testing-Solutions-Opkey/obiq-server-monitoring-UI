@@ -195,8 +195,9 @@ selectUser(user: any) {
  
     this.addedUsers = this.addedUsers.filter(u => u.U_ID !== user.U_ID);
   }
+  isTrue:boolean=true;
+  isInvite:string='Done'
   updateUserPermission(user: any, selectedPermission: string): void {
-   
     selectedPermission = selectedPermission === 'Can Edit' ? 'ALL' : (selectedPermission === 'Can View' ? 'VIEW' : selectedPermission);
     const userIndex = this.addedUsers.findIndex(u => u.U_ID === user.U_ID);
     if (userIndex !== -1) {
@@ -206,7 +207,12 @@ selectUser(user: any) {
     if (sharedUserIndex !== -1) {
       this.Shared_Access_Type_Obj[sharedUserIndex].permission = selectedPermission;
     }
-    console.log(this.Shared_Access_Type_Obj, 'Updated Shared_Access_Type_Obj');
+    console.log(this.Shared_Access_Type_Obj, 'Updated Shared_Access_Type_Obj============');
+  }
+  newChange(event){
+  console.log("event=================-",event)
+  if(this.accessTypeObj.AccessType!=event)this.isTrue=false;
+  if(event=='SHARED')this.isInvite='Invite'
   }
 
   InviteUsers() {
