@@ -9,13 +9,20 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
 
   constructor(){
   }
-  ngOnInit(): void {
+  view:any
+  // @Input() view:any
+  @Input('child_data') set child_data({ view }) {
+  this.view=view;
+  }
     
+  
+  ngOnInit(): void {
+    console.log("view form overview=========> ",this.view);
   }
   ngOnDestroy(): void {
     
   }
-  @Input() view:any
+  
   applicationTotalData:any = [{
     applicationName : 'Oracle Fusion',
     cpu:'02.68',

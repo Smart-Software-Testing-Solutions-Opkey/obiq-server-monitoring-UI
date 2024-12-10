@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -25,17 +25,24 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
     // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
   ]
 
-  @Input() view: any = null;
-  @Input() widgetData: any = null;
+
+  view:any = null;
+  widgetData: any = null;
+  
+  @Input('child_data') set child_data({widgetData, view }) {
+    this.widgetData = widgetData;
+   this.view=view;
+    if(this?.view?.viewId){
+      this.getWidgetData()
+    }
+  
+  }
   maxCount: number = 0;
 
   ngOnInit(){
-    if(this?.view?.viewId && this?.widgetData?.widgetType){
-      this.datasourceProgressBar = [];
-      this.getWidgetData()
-    }
+    
   }
-
+  
   getWidgetData(){
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
     const form_data = {
