@@ -89,10 +89,38 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
       }, 0);
   
   }
-  deleteSelectedView(view){
-    this.onViewDelete.emit(view)
+  // deleteSelectedView(view){
+  //   this.onViewDelete.emit(view)
 
+  // }
+  Delete_Selected_View(view) {
+
+    window.loadingStart("#navigator-left", "Please wait");
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/deleteView";
+
+    let form_data = {
+      viewId: view.viewId,
+      projectId: this.dataService.UserDto.ProjectDTO.P_ID
+    }
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+          this.getAllVIews();
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
   }
+
+
   renameView(view){
     
     delete view['isRenamed']
