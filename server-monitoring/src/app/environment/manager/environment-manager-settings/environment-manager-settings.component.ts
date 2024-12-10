@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-environment-manager-settings',
@@ -13,11 +10,8 @@ import { environment } from 'src/environments/environment';
 export class EnvironmentManagerSettingsComponent implements OnInit {
  
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     public service_data: AppDataService,
     public app_service: AppService,
-    private cdr: ChangeDetectorRef,
     public dataService: AppDataService,
    
   ) { 
