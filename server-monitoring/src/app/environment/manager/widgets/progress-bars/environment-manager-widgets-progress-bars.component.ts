@@ -2,6 +2,28 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } 
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexTitleSubtitle,
+  ApexStroke,
+  ApexGrid,
+  ApexYAxis
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+};
 
 @Component({
   selector: 'app-environment-manager-widgets-progress-bars',
@@ -29,10 +51,14 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
   @Input() widgetData: any = null;
   maxCount: number = 0;
 
+  @Input() chartData: any;
+  public chartOptions: Partial<ChartOptions>;
+
   ngOnInit(){
     if(this?.view?.viewId && this?.widgetData?.widgetType){
       this.datasourceProgressBar = [];
       this.getWidgetData()
+      this.createChart();
     }
   }
 
@@ -77,11 +103,20 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
             } 
             
           }
+          else{
+            // this.datasourceProgressBar = result.slice(0, 5);
+            this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
+              if(this?.widgetData?.widgetType == "USER_JOURNEY_MOST_COMMON_WIDGET"){}
+              const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
+              return {
+                ...item,
+                calculatedTime 
+              };
+            });
+          }
           this.cdRef.detectChanges();
         }
-        else{
-          this.datasourceProgressBar = result.slice(0, 5);
-        }
+       
       },
         error: (error: any) => {
           // window.loadingStop("#Env_manager_main_right");
@@ -105,4 +140,68 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
 
     return `${minutes}m ${seconds}s`;
 }
+
+
+createChart(): void {
+  this.chartOptions = {
+    series: [
+      {
+        data: [10, 41, 35, 51]
+      }
+    ],
+    chart: {
+      height: 35,
+      type: "line",
+      zoom: {
+        enabled: false
+      },
+      toolbar:{
+        show: false
+      },
+      sparkline: {
+        enabled: true
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    
+    stroke: {
+      curve: "straight",
+      width:2
+    },
+    title: {
+      text: "Product Trends by Month",
+      align: "left"
+    },
+    grid: {
+      show: false,
+      padding : {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+      }
+    },
+   
+    xaxis: {
+      
+      labels:{
+        show:false
+      },
+      axisBorder: {
+        show: false 
+      },
+      axisTicks: {
+        show: false 
+      }
+    },
+    yaxis:{
+      labels:{
+        show:false
+      }
+    }
+  };
+}
+
 }

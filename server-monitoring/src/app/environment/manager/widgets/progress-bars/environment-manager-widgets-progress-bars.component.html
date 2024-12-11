@@ -48,12 +48,29 @@
             </kendo-grid-column>
         }
         @else{
-            <kendo-grid-column title="" field="timeStampStr">
+          
+            <kendo-grid-column title="" field="timeStampStr"  >
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span class="k_grid_text text_wrap text-start">
-                        <i class="oci oci-clock pe-2"></i>
-                        <span>{{dataItem?.timeStampStr}}</span>
-                    </span>
+                  
+                        <div id="chart" class="graph-timeseries mb-3" style="height: 25px;width:100px;padding: 0 " >
+                            
+                            <apx-chart  *ngIf="chartOptions?.series?.length  > 0"
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [stroke]="chartOptions.stroke"
+                            [dataLabels]="chartOptions.dataLabels"
+                            [xaxis]="chartOptions.xaxis"
+                            [yaxis]="chartOptions.yaxis"
+                            [grid]="chartOptions.grid"
+                                
+                           
+                          ></apx-chart>
+                          </div>
+                       
+                  
+
+                   
+                   
                 </ng-template>
             </kendo-grid-column>
         }
