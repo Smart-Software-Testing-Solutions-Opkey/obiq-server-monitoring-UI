@@ -1,9 +1,11 @@
 <h6 class="mb-3 font-bold">
     Choose Execution Agent 
     <span *ngIf="obj_error.displayTestError" class="form-error">Execution agent selection is required.</span>
+    
 </h6>
 <kendo-grid 
-    [data]="datasource_agents" 
+    [data]="sorted_agents" 
+
     [selectable]="true" 
     [navigable]="true" 
     (selectionChange)="onSelectionChange($event)"
@@ -50,3 +52,4 @@
         </div>
     </ng-template>
 </kendo-grid>
+
