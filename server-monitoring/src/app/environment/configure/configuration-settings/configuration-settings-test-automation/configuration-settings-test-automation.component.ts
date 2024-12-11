@@ -28,6 +28,10 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
   obj_error = {
     displayTestError: false,
   }
+  online_agents  = [];
+  offline_agents = [];
+  sorted_agents = [];
+
 
   @Input('child_data') set child_data({ obj_configuration_setting,displayTestError }) {
    
@@ -58,6 +62,8 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
       
         if(result && result.length){
           this.datasource_agents = result;
+          
+        this.get_sorted_agents();
           this.cdRef.detectChanges();
         }
       },
@@ -65,6 +71,14 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
         console.warn(error);
       }
     });
+   
+  }
+
+  get_sorted_agents(){
+    this.datasource_agents.forEach((agent)=>{
+      agent.IsOnline == true ? this.online_agents.push(agent) : this.offline_agents.push(agent);
+    });
+    this.sorted_agents=[...this.online_agents,...this.offline_agents];
   }
 
   onSelectionChange(event){
