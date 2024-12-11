@@ -16,7 +16,7 @@
         </div>
 
     </div>
-
+ 
     <div class="feature-rp-body has-footer pd-rp pt-3">
         <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
             <div class="col-sm-12 px-0">
@@ -160,9 +160,9 @@
     </div>
 
     <div class="feature-rp-footer" style="text-align: left;">
-        <button type="button" class="btn btn-layout btn-bg-theme"
+        <button [disabled]="isTrue" type="button" class="btn btn-layout btn-bg-theme"
             aria-label="Close" (click)="InviteUsers()">
-            Invite
+            {{inviteType}}
         </button>
     </div>
 </div>

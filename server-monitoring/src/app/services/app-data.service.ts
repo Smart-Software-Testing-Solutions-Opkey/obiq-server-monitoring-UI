@@ -9,6 +9,7 @@ export class AppDataService {
 
   is_env_configure:boolean = false;
   showSelectedViewEnvironment: boolean = false;
+  changedAccessType:string="PRIVATE"
   UserDto :any = null;
   viewsData = []
   widgets_data:any = [

@@ -39,8 +39,14 @@ export class ConfigureRightPanelComponent {
     }
   };
   Shared_Access_Type_Obj: { U_ID: string, permission: string }[] = [];
+  isTrue:boolean=true
+  
+  inviteType:string='Done'
   selectAccessType(type: string): void {
-    
+    if(type=='SHARED')  this.inviteType='Invite'
+    else   this.inviteType='Done'
+    if(this.dataService.changedAccessType==type)this.isTrue=true
+    else this.isTrue=false
     this.showSharedInput = false;
     this.accessTypeObj.AccessType = type;
     this.Shared_Access_Type_Obj = [];
@@ -226,8 +232,11 @@ selectUser(user: any) {
     }
     this.app_service.dataTransmitter(finalAccessObj);
     this.close_model()
-     
-    this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+    
+     this.dataService.changedAccessType=finalAccessObj.AccessType
+     console.log("this===================",this.dataService.changedAccessType)
+   if(this.inviteType=='Invite') this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+   else if(this.inviteType=='Done'&& !this.isTrue) this.service_notification.notifier(NotificationType.success, 'New Access type selected successfully');
   }
   close_model() {
     this.activeModal.dismiss('close modal');

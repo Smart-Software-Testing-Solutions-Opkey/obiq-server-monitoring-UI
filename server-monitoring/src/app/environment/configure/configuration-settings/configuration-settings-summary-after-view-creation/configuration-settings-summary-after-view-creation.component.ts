@@ -73,6 +73,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     }
    
     this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
+    this.dataService.changedAccessType=this.selectedAccessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
   }
 
@@ -85,6 +86,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
         this.selectedAccessType = this.receivedAccessType.AccessType
+        this.dataService.changedAccessType=this.selectedAccessType
         this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
         if (this.obj_configuration_setting.AccessType == "SHARED") {
           this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
