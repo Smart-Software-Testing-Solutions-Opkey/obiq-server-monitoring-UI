@@ -21,7 +21,7 @@
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center executionAgent">               
                 <span class="status me-2" [ngClass]="dataItem['IsOnline']==true? 'online':'offline'"></span>
-                <span class="layout-text-obiq text-ellipsis ps-1"  [ngbTooltip]="dataItem?.AgentName">{{dataItem?.AgentName}}</span>
+                <span class="layout-text-obiq text-ellipsis px-2 "  [ngbTooltip]="dataItem?.AgentName">{{dataItem?.AgentName}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -30,7 +30,7 @@
         <ng-template kendoGridCellTemplate let-dataItem>
 
             <div class="flex-center">
-                <span class="layout-text-date text-ellipsis"  [ngbTooltip]="dataItem?.AgentName">{{dataItem?.AgentName}}</span>
+                <span class="layout-text-date text-ellipsis px-2"  [ngbTooltip]="dataItem?.AgentName">{{dataItem?.AgentName}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -38,7 +38,7 @@
     <kendo-grid-column field="ModifiedBy" title="Server URL">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
-                <span class="layout-text-date">myqlm.opkeyone.com</span>
+                <span class="layout-text-date px-2 text-ellipsis" >myqlm.opkeyone.com</span>
             </div>
         </ng-template>
     </kendo-grid-column>

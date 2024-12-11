@@ -51,18 +51,19 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   selectedTab: any = {}
   availableTabs: any
   timeFilter: Array<{name: string, value: string, timeValue: string}> = [
-    { name: '15min', value: '15 minutes', timeValue: "LAST_15_MINUTES"},
     { name: '30min', value: '30 minutes', timeValue: "LAST_30_MINUTES"},
-    { name: '1hr', value: '1 hour', timeValue: "LAST_1_HOUR"},
+    { name: '60min', value: '60 minutes', timeValue: "LAST_60_MINUTES"},
+    { name: '3hr', value: '3 hour', timeValue: "LAST_3_HOUR"},
+    { name: '6hrs', value: '6 hours', timeValue: "LAST_6_HOUR"},
     { name: '12hrs', value: '12 hours', timeValue: "LAST_12_HOUR"},
-    { name: '1day', value: '1 day', timeValue: "LAST_24_HOUR"},
-    { name: '2days', value: '2 days', timeValue: "LAST_2_DAYS"},
+    { name: '24hrs', value: '24 hours', timeValue: "LAST_24_HOUR"},
+    { name: '3days', value: '3 days', timeValue: "LAST_3_DAYS"},
     { name: '7days', value: '7 days', timeValue: "LAST_7_DAYS"},
-    { name: '1mon', value: '1 month', timeValue: "LAST_1_MONTH"},
+    { name: '1mons', value: '1 months', timeValue: "LAST_1_MONTH"},
     { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
     { name: 'setCustom', value: 'Set Custom', timeValue: ""},
   ];
-  selectedTime: string = 'setCustom';
+  selectedTime: string = '30min';
   public fromDatevalue: Date = new Date();
   public toDateValue: Date = new Date();
   public dateTimeFormat = "MM/dd/yyyy HH:mm";
