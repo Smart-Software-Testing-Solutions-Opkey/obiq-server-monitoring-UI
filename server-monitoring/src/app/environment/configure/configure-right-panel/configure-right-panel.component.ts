@@ -47,6 +47,10 @@ export class ConfigureRightPanelComponent {
     else   this.inviteType='Done'
     if(this.dataService.changedAccessType==type)this.isTrue=true
     else this.isTrue=false
+    if(this.dataService.changedAccessType=='SHARED' && this.addedUsers.length>0){
+      this.inviteType='Invite'
+      
+    }
     this.showSharedInput = false;
     this.accessTypeObj.AccessType = type;
     this.Shared_Access_Type_Obj = [];
@@ -120,6 +124,7 @@ selectViewOrEdit(option: string): void {
           this.showSharedInput = true
           // this.Show_Project_Access = true
            this.users = result;
+         
         },
         error: (error: any) => {
 
@@ -193,8 +198,9 @@ selectUser(user: any) {
                 permission: 'VIEW'
             });
         }
-    });
 
+    });
+    this.isTrue=false
     this.addedEmails = []; // Clear the temporary list after processing
 }
   removeUser(user: any): void {
