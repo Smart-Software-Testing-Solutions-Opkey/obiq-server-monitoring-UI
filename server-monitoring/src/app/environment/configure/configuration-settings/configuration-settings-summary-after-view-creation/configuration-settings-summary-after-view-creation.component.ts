@@ -26,7 +26,12 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   selectedUsers: any[] = [];
   Show_Project_Access: boolean = false;
   Selected_grid_dataSource: any;
+  selected_grid_System_Diagnostics : any  = []
+  selected_user_behaviour_component: any = []
+  selected_test_automation_analysis : any = []
   groupedDataSource: any = {};
+ 
+
   @Input('child_data')
   set child_data({ obj_configuration_setting }) {
   
@@ -37,6 +42,9 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       this.onConfigurationSettingChange();
     }
   }
+
+
+  
 
   onCellClick(event) {
 
@@ -61,6 +69,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
   }
   onConfigurationSettingChange(): void {
+    
+  
     if (this.obj_configuration_setting) {
 
       this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {
@@ -70,12 +80,18 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         };
       });
       this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics
+
+      
     }
    
     this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
     this.dataService.changedAccessType=this.selectedAccessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
-  }
+
+    
+  
+}
+
 
 
   ngOnInit(): void {
@@ -112,9 +128,11 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         this.cdr.detectChanges();
       }
     });
+
+    
   }
   ngAfterViewInit(): void {
-
+   
   }
   onAccessTypeChange(selectedOption: string) {
     
