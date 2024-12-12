@@ -5,6 +5,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ConfigurationSettingsUserBehaviourComponent } from './configure/configuration-settings/configuration-settings-user-behaviour/configuration-settings-user-behaviour.component';
 import { ConfigurationSettingsTestAutomationComponent } from './configure/configuration-settings/configuration-settings-test-automation/configuration-settings-test-automation.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnvironmentCommonModule } from './environment-common/environment-common.module';
 
 @NgModule({
   declarations: [    
@@ -16,7 +17,8 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     EnvironmentRoutingModule,
     NgApexchartsModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    EnvironmentCommonModule
   ]
 })
 export class EnvironmentModule { }

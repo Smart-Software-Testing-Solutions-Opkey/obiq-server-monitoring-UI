@@ -12,6 +12,7 @@ export class AppDataService {
   changedAccessType:string="PRIVATE"
   UserDto :any = null;
   viewsData = []
+  modalSubInstance:any
   widgets_data:any = [
     {
         "ID": "105265c0-e34f-4c2e-b8f1-adde9687fd9d",

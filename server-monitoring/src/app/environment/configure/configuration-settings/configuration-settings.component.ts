@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
 import { MsgBoxType, NotificationType } from 'src/app/global/enums';
+import { PersisterModalComponent } from '../../environment-common/persister-modal/persister-modal.component';
 
 @Component({
   selector: 'app-configuration-settings',
@@ -20,12 +21,29 @@ export class ConfigurationSettingsComponent {
     private route: ActivatedRoute,
     public service_data: AppDataService,
     public app_service: AppService,
-    public service_notification : NotificationsService
+    public service_notification : NotificationsService,
+    
+
     
     
   ) { }
   close_model() {
-    this.activeModal.dismiss('close modal');
+    this.service_notification.showPersister()
+    this.service_data.modalSubInstance.result.then((result) => {
+    }, (response) => {
+      if(response == 'Yes'){
+        this.activeModal.dismiss('close modal');
+        this.service_data.modalSubInstance = null
+        return
+      }
+      else if(response == 'No'){
+        this.service_data.modalSubInstance = null
+        return
+      }
+
+      
+    });
+    
   }
 
 
