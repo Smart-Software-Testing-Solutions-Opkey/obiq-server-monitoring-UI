@@ -238,7 +238,7 @@ selectUser(user: any) {
     }
     this.app_service.dataTransmitter(finalAccessObj);
     this.close_model()
-    
+    this.dataService.isEnablePersister = true
      this.dataService.changedAccessType=finalAccessObj.AccessType
      console.log("this===================",this.dataService.changedAccessType)
    if(this.inviteType=='Invite') this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');

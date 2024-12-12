@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -32,7 +32,10 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   selected_user_behaviour_component: any = []
   selected_test_automation_analysis : any = []
   groupedDataSource: any = {};
- 
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+
+  }
 
   @Input('child_data')
   set child_data({ obj_configuration_setting }) {
@@ -227,6 +230,51 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   }
 
   backToMenu(){
-    this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+    if(this.dataService.isEnablePersister){
+      
+      this.service_notification.showPersister('You have unsaved changes, wish to continue?')
+      this.dataService.modalSubInstance.result.then((result) => {
+      }, (response) => {
+        if(response == 'Yes'){
+          this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+          this.dataService.modalSubInstance = null
+          return
+        }
+        else if(response == 'No'){
+          this.dataService.modalSubInstance = null
+          return
+        }
+  
+        
+      });
+    }
+    else{
+      this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+    }
+   
+  }
+
+  updateSummaryData(){
+    if(this.dataService.isEnablePersister){
+      
+      this.service_notification.showPersister('You have unsaved changes, wish to continue?')
+      this.dataService.modalSubInstance.result.then((result) => {
+      }, (response) => {
+        if(response == 'Yes'){
+          this.Update_ViewAccess_Type()
+          this.dataService.modalSubInstance = null
+          return
+        }
+        else if(response == 'No'){
+          this.dataService.modalSubInstance = null
+          return
+        }
+  
+        
+      });
+    }
+    else{
+      this.Update_ViewAccess_Type()
+    }
   }
 }

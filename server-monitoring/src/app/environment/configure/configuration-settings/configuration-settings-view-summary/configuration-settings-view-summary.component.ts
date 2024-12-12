@@ -70,6 +70,10 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     this.get_all_summary(this.obj_configuration_setting)
   }
 
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+  }
+
   get_all_summary(selectionData) {
   
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
