@@ -39,14 +39,14 @@ export class ConfigureRightPanelComponent {
     }
   };
   Shared_Access_Type_Obj: { U_ID: string, permission: string }[] = [];
-  isTrue:boolean=true
+  isDisabled:boolean=true
   
   inviteType:string='Done'
   selectAccessType(type: string): void {
     if(type=='SHARED')  this.inviteType='Invite'
     else   this.inviteType='Done'
-    if(this.dataService.changedAccessType==type)this.isTrue=true
-    else this.isTrue=false
+    if(this.dataService.changedAccessType==type)this.isDisabled=true
+    else this.isDisabled=false
     if(this.dataService.changedAccessType=='SHARED' && this.addedUsers.length>0){
       this.inviteType='Invite'
       
@@ -200,7 +200,7 @@ selectUser(user: any) {
         }
 
     });
-    this.isTrue=false
+    this.isDisabled=false
     this.addedEmails = []; // Clear the temporary list after processing
 }
   removeUser(user: any): void {
@@ -242,7 +242,7 @@ selectUser(user: any) {
      this.dataService.changedAccessType=finalAccessObj.AccessType
      console.log("this===================",this.dataService.changedAccessType)
    if(this.inviteType=='Invite') this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
-   else if(this.inviteType=='Done'&& !this.isTrue) this.service_notification.notifier(NotificationType.success, 'Access type selected ');
+   else if(this.inviteType=='Done'&& !this.isDisabled) this.service_notification.notifier(NotificationType.success, 'Access type selected ');
   }
   close_model() {
     this.activeModal.dismiss('close modal');
