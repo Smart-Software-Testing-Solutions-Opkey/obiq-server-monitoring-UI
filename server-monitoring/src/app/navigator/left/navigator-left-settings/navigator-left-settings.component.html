@@ -22,7 +22,7 @@
                                 <input type="text" [(ngModel)]="view.viewName" (blur)="renameView(view)" id='renameInput'>
                             </ng-container>
                             <ng-template #nameOnly>
-                                <span class="name text-ellipsis" >
+                                <span class="name text-ellipsis" style="display:flex;" >
                                     <div (click)="unStarView(view)" *ngIf="view?.isStarred;else unStar">
 
                                         <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
@@ -35,7 +35,8 @@
                                           
                                         </div>
                                     </ng-template>
-                                    {{view.viewName}}</span>
+                                    <span  class="text-ellipsis">{{view.viewName}}</span>
+                                    </span>
                            
                             <span class="flex-center ps-1">
                                 <span class="label-status me-2 {{view.accessType}}" *ngIf="view.accessType != 'SHARED'">{{view.accessType | titlecase}} </span> 
