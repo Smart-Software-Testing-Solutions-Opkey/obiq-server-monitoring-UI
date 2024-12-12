@@ -28,16 +28,18 @@ export class ConfigurationSettingsComponent {
     
   ) { }
   close_model() {
-    this.service_notification.showPersister()
+    this.service_notification.showPersister("Are you sure you want close?")
     this.service_data.modalSubInstance.result.then((result) => {
     }, (response) => {
       if(response == 'Yes'){
         this.activeModal.dismiss('close modal');
         this.service_data.modalSubInstance = null
+        this.service_data.persistermsg = ''
         return
       }
       else if(response == 'No'){
         this.service_data.modalSubInstance = null
+        this.service_data.persistermsg = ''
         return
       }
 
