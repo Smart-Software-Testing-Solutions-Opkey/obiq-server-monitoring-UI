@@ -28,7 +28,7 @@ export class ConfigurationSettingsComponent {
     
   ) { }
   sureClose(){
-    this.service_notification.showPersister("Are you sure you want close?")
+    this.service_notification.showPersister("Are you sure you want to close?")
     this.service_data.modalSubInstance.result.then((result) => {
     }, (response) => {
       if(response == 'Yes'){
