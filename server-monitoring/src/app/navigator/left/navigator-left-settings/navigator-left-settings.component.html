@@ -19,7 +19,7 @@
                       
                         <div class="d-flex-between">
                             <ng-container *ngIf="view?.isRenamed;else nameOnly">
-                                <input type="text" [(ngModel)]="view.viewName" (blur)="renameView(view)" id='renameInput'>
+                                <input type="text" [(ngModel)]="view.viewName" (blur)="renameView(view)" (keyup.enter)="renameView(view)"  id='renameInput'>
                             </ng-container>
                             <ng-template #nameOnly>
                                 <span class="name text-ellipsis" style="display:flex;" >

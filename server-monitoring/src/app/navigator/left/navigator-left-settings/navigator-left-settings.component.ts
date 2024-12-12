@@ -81,7 +81,23 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   }
   renameView(view){
     
-    delete view['isRenamed']
+    
+   
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/renameView";
+
+    let form_data = { viewId: view.viewId,viewName:view.viewName,projectId:this.service_data.UserDto.ProjectDTO.P_ID };
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          delete view['isRenamed']
+         
+
+        },
+        error: (error: any) => {
+          delete view['isRenamed']
+        }
+      });
   }
 
   starView(view){
