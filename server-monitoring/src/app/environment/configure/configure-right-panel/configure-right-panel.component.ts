@@ -242,7 +242,7 @@ selectUser(user: any) {
      this.dataService.changedAccessType=finalAccessObj.AccessType
      console.log("this===================",this.dataService.changedAccessType)
    if(this.inviteType=='Invite') this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
-   else if(this.inviteType=='Done'&& !this.isTrue) this.service_notification.notifier(NotificationType.success, 'New Access type selected successfully');
+   else if(this.inviteType=='Done'&& !this.isTrue) this.service_notification.notifier(NotificationType.success, 'Access type selected ');
   }
   close_model() {
     this.activeModal.dismiss('close modal');

@@ -4,7 +4,8 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
-
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
+import { NotificationType } from 'src/app/global/enums';
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
   templateUrl: './configuration-settings-summary-after-view-creation.component.html',
@@ -16,7 +17,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     public app_service: AppService,
     public dataService: AppDataService,
     public modalService: NgbModal,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public service_notification : NotificationsService, 
   ) {
   }
   obj_configuration_setting: any;
@@ -194,6 +196,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         },
         complete: () => {
           console.log("Completed");
+          this.service_notification.notifier(NotificationType.success, 'Access Type Updated');
         }
       });
   }
