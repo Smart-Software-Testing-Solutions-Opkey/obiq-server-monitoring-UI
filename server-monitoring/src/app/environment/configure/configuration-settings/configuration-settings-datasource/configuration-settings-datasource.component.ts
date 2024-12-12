@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { AppDataService } from 'src/app/services/app-data.service';
 
 @Component({
   selector: 'app-configuration-settings-datasource',
@@ -14,7 +15,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public app_service: AppService
+    public app_service: AppService,
+    public data_service:AppDataService
   ) { }
 
 
@@ -24,7 +26,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     dispaly_viewName: false,
     dispaly_DataSource: false,
     display_ErpApplication: false,
-    display_SystemDiagnosticsData: false
+    display_SystemDiagnosticsData: false,
+    isDuplicateName:false
   }
 
   @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData }) {
@@ -210,10 +213,38 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
       });
   }
 
+ 
 
   onInputChange(event: any) {
+ 
     console.log(event.target.value);
     this.modal_name = event.target.value;
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/checkViewNameExists";
+
+    let form_data ={
+      "viewName":this.modal_name,
+      "userId":this.data_service.UserDto.UserDTO.U_ID,
+      "projectId":this.data_service.UserDto.ProjectDTO.P_ID
+      }
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+
+        this.obj_error.isDuplicateName=result
+          console.log("view=============",result);
+          
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
     this.obj_datasource_widget.viewName = event.target.value;
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
 
