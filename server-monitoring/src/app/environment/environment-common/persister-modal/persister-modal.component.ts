@@ -11,7 +11,10 @@ export class PersisterModalComponent {
   constructor(public service_data: AppDataService, private activeModal: NgbActiveModal){
 
   }
-
+  msg = ''
+  ngOnInit(): void {
+    this.msg = this.service_data.persistermsg
+  }
 
   closeModal(selected){
     this.activeModal.dismiss(selected)

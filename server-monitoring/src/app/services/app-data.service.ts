@@ -13,6 +13,7 @@ export class AppDataService {
   UserDto :any = null;
   viewsData = []
   modalSubInstance:any
+  persistermsg = ''
   widgets_data:any = [
     {
         "ID": "105265c0-e34f-4c2e-b8f1-adde9687fd9d",

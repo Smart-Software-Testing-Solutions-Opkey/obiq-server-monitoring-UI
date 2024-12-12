@@ -27,7 +27,8 @@ export class NotificationsService {
       closable: false,
     });
   }
-  public showPersister(){
+  public showPersister(msg){
+    this.service_data.persistermsg = msg
     this.service_data.modalSubInstance = this.modalService.open( PersisterModalComponent,{
       backdrop: 'static',
       keyboard: false,
