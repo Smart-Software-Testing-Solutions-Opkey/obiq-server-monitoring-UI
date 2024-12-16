@@ -51,7 +51,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   ) {
     
   }
-
+@Input()Editable:boolean
   ngOnInit(){
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
