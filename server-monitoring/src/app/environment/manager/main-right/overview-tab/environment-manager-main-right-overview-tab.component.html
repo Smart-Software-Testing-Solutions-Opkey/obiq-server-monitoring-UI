@@ -1,7 +1,7 @@
 
 <div class="main">
 
-    @if (notEditable) {
+    <!-- @if (notEditable) {
         
             <div class="row mx-0">
                 <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
@@ -56,19 +56,19 @@
                 </h6>
                 <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
             </div>
-            <!-- <div class="row mx-0">
-                <app-environment-manager-widgets-health-bars></app-environment-manager-widgets-health-bars>
-            </div> -->
+          
        
     }
-    @else {
+    @else { -->
         <div style="height: calc(100vh - 7rem) !important;" class="scrollable">
 
             <gridster [options]="options"  >
                 @for (item of dashboard; track item;let idx = $index;) {
         
                     <gridster-item [item]="item" style="border: 1px solid;">
-                        
+                        <div class="drag-handler" *ngIf="Editable">
+                            <i class="oci oci-drag-indicator drag-icon px-1"></i>
+                        </div>
                         <ng-container *ngIf="item.widId == 'total_errors_Error'">
                             <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
@@ -159,5 +159,5 @@
                 }
               </gridster>
         </div>
-    }
+    <!-- } -->
 </div>

@@ -67,10 +67,14 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
       emptyCellDragMaxRows: 50,
       ignoreMarginInRow: false,
       draggable: {
-        enabled: true
+        enabled: this.Editable,
+        ignoreContentClass: 'gridster-item-content',
+        ignoreContent: true,
+        dragHandleClass: 'drag-handler',
+        // stop: this.eventStop,
       },
       resizable: {
-        enabled: true
+        enabled: this.Editable
       },
       swap: false,
       pushItems: true,
@@ -184,5 +188,17 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
 addItem(): void {
   this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 1 });
 }
-@Input() notEditable = true
+Editable = false
+
+@Input('Editable') set setEditable(edit) {
+this.Editable = edit
+if(this.options && this.options.api){
+
+  this.options.draggable.enabled = this.Editable
+  this.options.resizable.enabled = this.Editable  
+  this.options.api.optionsChanged();
+}
+
+
+}
 }

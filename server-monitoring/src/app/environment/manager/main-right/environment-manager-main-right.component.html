@@ -24,7 +24,7 @@
 
                 <div class="filter-content">
                     <div class="EditToggle">
-    <button (click)="toggleEdit()" disabled>Edit</button>
+    <button (click)="toggleEdit()" >Edit</button>
                         
                     </div>
 
@@ -307,7 +307,7 @@
     
                 @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
                     <div class="overview">
-                        <app-environment-manager-main-right-overview-tab [view]="selectedView" [notEditable]="notEditable"></app-environment-manager-main-right-overview-tab>
+                        <app-environment-manager-main-right-overview-tab [view]="selectedView" [Editable]="Editable"></app-environment-manager-main-right-overview-tab>
                     </div>
                 }
                 @else if (selectedTab.enumType == 'LOG_TAB') {

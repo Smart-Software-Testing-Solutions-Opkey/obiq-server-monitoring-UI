@@ -257,7 +257,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   }
   toggleEdit(){
-    this.notEditable = !this.notEditable
+    this.Editable = !this.Editable
   }
-  notEditable = true
+  Editable = false
 }
