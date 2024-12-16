@@ -260,4 +260,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.Editable = !this.Editable
   }
   Editable = false
+  get isSelectedAnalyticsTypeEmpty(): boolean {
+    return Object.keys(this.selectedAnalyticsType).length === 0;
+  }
 }
