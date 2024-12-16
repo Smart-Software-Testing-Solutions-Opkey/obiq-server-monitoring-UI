@@ -5,7 +5,8 @@ import { ConfigurationSettingsComponent } from 'src/app/environment/configure/co
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
-
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
+import { NotificationType } from 'src/app/global/enums';
 
 @Component({
   selector: 'app-navigator-left-settings',
@@ -19,7 +20,8 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     private route: ActivatedRoute,
     private service_data: AppDataService,
     public app_service:AppService,
-    public dataService:AppDataService
+    public dataService:AppDataService,
+    public service_notification : NotificationsService,
 
 
   ) { }
@@ -81,8 +83,6 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   }
   renameView(view){
     
-    
-   
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/renameView";
 
     let form_data = { viewId: view.viewId,viewName:view.viewName,projectId:this.service_data.UserDto.ProjectDTO.P_ID,userId:this.service_data.UserDto.UserDTO.U_ID, };
@@ -91,7 +91,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
       .subscribe({
         next: (result: any) => {
           delete view['isRenamed']
-         
+          this.service_notification.notifier(NotificationType.success, 'View Name Changed');
 
         },
         error: (error: any) => {
