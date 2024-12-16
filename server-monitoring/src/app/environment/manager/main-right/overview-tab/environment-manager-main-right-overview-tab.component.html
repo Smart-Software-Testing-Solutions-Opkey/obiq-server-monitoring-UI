@@ -70,13 +70,13 @@
                             <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
                         </div>
                         <ng-container *ngIf="item.widId == 'total_errors_Error'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors'}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'total_errors_Warning'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total Warning'}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'total_errors_Success'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total Success'}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'TELEMETRY_REDIS_CPU_USAGE_WIDGET'">
                             <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
