@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-log-tab',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './e-m-mr-ds-erp-log-tab.component.scss'
 })
 export class EMMrDsErpLogTabComponent {
+  constructor(){
 
+  }
+   @Input() view:any
 }

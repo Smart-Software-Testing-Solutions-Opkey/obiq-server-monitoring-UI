@@ -380,6 +380,20 @@
                                 </app-e-m-mr-ds-erp-overview-tab>
                             </div>
                         }
+                        @else if(selectedTab.enumType === 'LOG_TAB'){
+                            <div class="log">
+                            <!-- <app-e-m-mr-ds-erp-log-tab  [view]="selectedView">
+
+                            </app-e-m-mr-ds-erp-log-tab> -->
+                            <app-environment-manager-main-right-log-tab
+                            [analyticsType]="selectedAnalyticsType"
+                            [view]="selectedView">
+                        </app-environment-manager-main-right-log-tab>
+                            </div>
+                        }
+
+                  
+
                     }
                     @else if(selectedAnalyticsType.type == "SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE"){
                         <div class="telemetry">
