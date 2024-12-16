@@ -38,6 +38,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-overview-tab.component';
 import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
 import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
@@ -89,7 +90,8 @@ import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/
     NgbTooltipModule,
     FormsModule,
     GridsterComponent,
-    GridsterItemComponent
+    GridsterItemComponent,
+    NgbModule
   
   ],
   providers: [DatePipe],
