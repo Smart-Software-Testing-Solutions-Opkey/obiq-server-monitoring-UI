@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-overview-tab',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class EMMrDsErpOverviewTabComponent {
 
+  constructor(){
+
+  }
+
+  @Input() view:any
 }

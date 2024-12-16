@@ -1,14 +1,6 @@
 <div class="total-errors-details" [id]="'stats-div-'+typeEnum" style="position: relative;" >
     <h6 class="font-bold mb-0">
-      @if (typeEnum == 'Error') {
-        Total Errors
-      }
-      @else if(typeEnum == 'Success'){
-        Total Success
-      }
-      @else if(typeEnum == 'Warning'){
-        Total Warnings
-      }
+      {{title}}
     </h6>
     <div class="row mx-0 align-items-end">
       <div class="col-sm-7 px-0">

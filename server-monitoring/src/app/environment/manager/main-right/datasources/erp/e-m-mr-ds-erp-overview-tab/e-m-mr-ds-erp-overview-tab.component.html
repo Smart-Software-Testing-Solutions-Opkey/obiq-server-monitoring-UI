@@ -1,1 +1,12 @@
-<p>e-m-mr-ds-erp-overview-tab works!</p>
+<div class="row mx-0">
+    <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
+        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors'}"></app-environment-manager-widgets-total-errors-area-widget>
+    </div>
+    <div class="col-sm-4 margin-bottom-2 px-3">
+        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warnings'}"></app-environment-manager-widgets-total-errors-area-widget>
+    </div>
+    <div class="col-sm-4 margin-bottom-2 ps-3 pe-0">
+        <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Success'}"></app-environment-manager-widgets-total-errors-area-widget>
+    </div>
+   
+</div>

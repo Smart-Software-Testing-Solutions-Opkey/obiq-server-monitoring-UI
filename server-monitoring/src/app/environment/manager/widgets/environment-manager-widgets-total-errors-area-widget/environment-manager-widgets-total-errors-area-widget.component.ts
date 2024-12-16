@@ -164,11 +164,12 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   chartColor:string = ''
   inverseColors = false
   view:any
-  @Input('child_data') set child_data({ typeEnum,view }) {
+  title = ''
+  @Input('child_data') set child_data({ typeEnum,view,title }) {
     
    this.typeEnum = typeEnum
    this.view = view
-  
+  this.title =title
  
 
   }
