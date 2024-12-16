@@ -38,6 +38,9 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
+import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-overview-tab.component';
+import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
+import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
     EnvironmentManagerWidgetsHealthBarsComponent,
     ManagerMainRightLogTabDetailsInfoComponent,
     EnvironmentManagerWidgetsProgressBarsComponent,
-    SelectedTraceInnerComponent
+    SelectedTraceInnerComponent,
+    EMMrDsErpOverviewTabComponent,
+    EMMrDsErpLogTabComponent,
+    EMMrDsErpFunctionalErrorTabComponent
 
 
   ],
