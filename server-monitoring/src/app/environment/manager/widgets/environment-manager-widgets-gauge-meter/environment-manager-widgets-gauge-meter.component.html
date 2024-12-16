@@ -1,8 +1,17 @@
 <div [id]="'gauge-div-'+ widgetType"  class="total-errors-details">
-  <span class="font-bold">
+  <div style="display: flex;">
+    <div *ngIf="Editable">
+      <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+      <span class="font-bold">
+        {{title}}
+      </span>
+      
+  </div>
+  </div>
+  <!-- <span class="font-bold">
     {{title}}
   </span>
-  
+   -->
   <div id="chart" *ngIf="chartOptions">
     <apx-chart
       [series]="chartOptions?.series"

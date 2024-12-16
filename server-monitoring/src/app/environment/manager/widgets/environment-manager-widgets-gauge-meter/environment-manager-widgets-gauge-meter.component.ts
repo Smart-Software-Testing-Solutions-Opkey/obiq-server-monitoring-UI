@@ -42,6 +42,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
    this.view = view;
    this.widgetType = widgetType;
   }
+  @Input() Editable:boolean
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];

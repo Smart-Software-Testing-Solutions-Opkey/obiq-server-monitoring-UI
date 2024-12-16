@@ -66,63 +66,88 @@
                 @for (item of dashboard; track item;let idx = $index;) {
         
                     <gridster-item [item]="item" style="border: 1px solid;">
-                        <div *ngIf="Editable">
+                        <!-- <div *ngIf="Editable">
                             <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
-                        </div>
+                        </div> -->
                         <ng-container *ngIf="item.widId == 'total_errors_Error'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'total_errors_Warning'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'total_errors_Success'">
-                            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'TELEMETRY_REDIS_CPU_USAGE_WIDGET'">
-                            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'">
-                            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
                         </ng-container>
     
                         <ng-container *ngIf="item.widId == 'TELEMETRY_VM_CPU_USAGE_WIDGET'">
-                            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
                         </ng-container>
                         <ng-container *ngIf="item.widId == 'TELEMETRY_VM_MEMORY_USAGE_WIDGET'">
-                            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_GUIDE_LIST_PER_PROCESS_WIDGET'">
                             <div class="overview-panel widget-section p-3">
                                 <div class="panel-header d-flex-between mb-3">
+                                    <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+                                   <div  style="display: flex;">
+                                    <div *ngIf="Editable">
+                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+                                        <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+                                    </div>
                                     <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6>
-                                 
+                                   </div>
+                                        <!-- <div *ngIf="Editable">
+                                            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+                                            <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6>
+                                        </div>
+                                        <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
                                     <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
                                         {{ progressBarArray[0]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
                                     </a>
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[0]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars  [widgetData]="progressBarArray[0]" [view]="view"></app-environment-manager-widgets-progress-bars>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
                             <div class="overview-panel widget-section p-3">
                                 <div class="panel-header d-flex-between mb-3">
-                                    <h6 class="mb-0">{{ progressBarArray[1]?.heading }}</h6>
-                                 
+                                    <!-- <h6 class="mb-0">{{ progressBarArray[1]?.heading }}</h6> -->
+                                    
+                                    <div  style="display: flex;">
+                                        <div *ngIf="Editable">
+                                            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+                                            <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+                                        </div>
+                                        <h6 class="mb-0">{{ progressBarArray[1]?.heading }}</h6>
+                                       </div>>
                                     <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
                                         {{ progressBarArray[1]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
                                     </a>
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[1]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars  [widgetData]="progressBarArray[1]" [view]="view"></app-environment-manager-widgets-progress-bars>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
                             <div class="overview-panel widget-section p-3">
                                 <div class="panel-header d-flex-between mb-3">
-                                    <h6 class="mb-0">{{ progressBarArray[2]?.heading }}</h6>
+                                    
+                                    <div  style="display: flex;">
+                                        <div *ngIf="Editable">
+                                            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+                                            <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+                                        </div>
+                                        <h6 class="mb-0">{{ progressBarArray[2]?.heading }}</h6>
+                                       </div>
                                  
                                     <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
                                         {{ progressBarArray[2]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
@@ -130,28 +155,40 @@
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[2]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars  [widgetData]="progressBarArray[2]" [view]="view"></app-environment-manager-widgets-progress-bars>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
                             <div class="overview-panel widget-section p-3">
                                 <div class="panel-header d-flex-between mb-3">
-                                    <h6 class="mb-0">{{ progressBarArray[3]?.heading }}</h6>
-                                 
+                                    <!-- <h6 class="mb-0">{{ progressBarArray[3]?.heading }}</h6> -->
+                                    <div  style="display: flex;">
+                                        <div *ngIf="Editable">
+                                            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+                                            <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+                                        </div>
+                                        <h6 class="mb-0">{{ progressBarArray[3]?.heading }}</h6>
+                                       </div>
                                     <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
                                         {{ progressBarArray[3]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
                                     </a>
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[3]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars  [widgetData]="progressBarArray[3]" [view]="view"></app-environment-manager-widgets-progress-bars>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                             <div class="widget-section">
-                                <h6 class="font-bold mb-0 p-2 pt-3">
-                                    Weekly Log Trends
-                                </h6>
+                                <div  style="display: flex;" class="mb-0 p-2">
+                                    <div *ngIf="Editable">
+                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler  mb-0 p-2  pt-3"></i>
+                                    </div>
+                                    <h6 class="font-bold mb-0 p-2 pt-3">
+                                        Weekly Log Trends
+                                    </h6>
+                                   </div>
+                               
                                 <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
                             </div>
                         </ng-container>
