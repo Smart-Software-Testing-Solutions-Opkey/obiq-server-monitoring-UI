@@ -16,6 +16,7 @@
             </ng-template>
           </h6>  
         </div>
+        <div *ngIf="Editable">
           <div class="dropdown">
             <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
                 <i class="oci oci-more-vertical"></i>
@@ -24,6 +25,7 @@
                 <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
                 <li><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-delete text-red pr-2"></i> Delete </a></li>
             </ul>
+        </div>
         </div>
    </div>
     <div class="row mx-0 align-items-end">
