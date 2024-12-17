@@ -62,10 +62,10 @@
     @else { -->
         <div style="height: calc(100vh - 7rem) !important;" class="scrollable">
 
-            <gridster [options]="options"  >
+            <gridster [options]="options" style="background-color: white;" >
                 @for (item of dashboard; track item;let idx = $index;) {
         
-                    <gridster-item [item]="item" style="border: 1px solid;">
+                    <gridster-item [item]="item" >
                         <!-- <div *ngIf="Editable">
                             <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
                         </div> -->
