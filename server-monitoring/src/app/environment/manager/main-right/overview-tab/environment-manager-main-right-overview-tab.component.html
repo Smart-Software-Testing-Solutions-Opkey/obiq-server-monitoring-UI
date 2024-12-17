@@ -133,7 +133,7 @@
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[2]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [view]="view"  title="5 Slowest Journeys"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
@@ -153,7 +153,7 @@
                                     
                                 
                                 </div>
-                                <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[3]" [view]="view"></app-environment-manager-widgets-progress-bars>
+                                <app-environment-manager-widgets-progress-bars-common-journeys  [view]="view" title="5 Most Common Journeys"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">

@@ -44,6 +44,8 @@ import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-d
 import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
 import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../widgets/environment-manager-widgets-progress-bars-user-guides/environment-manager-widgets-progress-bars-user-guides.component'; 
 
+import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
+import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -73,8 +75,9 @@ import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../wid
     EMMrDsErpOverviewTabComponent,
     EMMrDsErpLogTabComponent,
     EMMrDsErpFunctionalErrorTabComponent,
-    EnvironmentManagerWidgetsProgressBarsUserGuidesComponent
-
+    EnvironmentManagerWidgetsProgressBarsUserGuidesComponent,
+    EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
+    EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent
 
   ],
   imports: [

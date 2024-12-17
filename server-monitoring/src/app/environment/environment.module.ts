@@ -8,13 +8,14 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvironmentCommonModule } from './environment-common/environment-common.module';
 
 import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from './manager/widgets/environment-manager-widgets-progress-bars-fastest-journeys/environment-manager-widgets-progress-bars-fastest-journeys.component';
-import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from './manager/widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
-import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from './manager/widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
 
 
 @NgModule({
   declarations: [    
-    EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent, EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent, EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent
+  
+    
+  
+  
   ],
   imports: [
     CommonModule,
