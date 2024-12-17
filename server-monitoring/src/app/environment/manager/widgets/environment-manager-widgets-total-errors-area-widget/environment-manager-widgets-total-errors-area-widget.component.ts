@@ -386,14 +386,7 @@ dataDir = ''
 
   }
   renaming(){
-  
     this.isRename = false;
-    
-   
   }
 
-  func(){
-    document.getElementById('renameInput').style.border="none";
-   
-  }
 }

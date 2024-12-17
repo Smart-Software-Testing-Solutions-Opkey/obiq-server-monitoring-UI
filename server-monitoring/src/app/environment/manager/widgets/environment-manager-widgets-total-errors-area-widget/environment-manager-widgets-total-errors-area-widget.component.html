@@ -8,18 +8,18 @@
           </div>
           
             <h6 class="font-bold mb-0">
-                <ng-container *ngIf="isRename;else nameOnly">
-                <input type="text" [(ngModel)]="title" (keyup.enter)="renaming()" (blur)="renaming()" id='renameInput'>
-            </ng-container>
-            <ng-template #nameOnly>
-              {{title}}
-            </ng-template>
+              <ng-container *ngIf="isRename;else nameOnly">
+                 <input type="text" [(ngModel)]="title" (keyup.enter)="renaming()" (blur)="renaming()" id='renameInput'>
+              </ng-container>
+             <ng-template #nameOnly>
+                 {{title}}
+              </ng-template>
           </h6>  
         </div>
         <div *ngIf="Editable">
           <div class="dropdown">
             <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
-                <i class="oci oci-more-vertical"></i>
+                <i class="oci oci-more-vertical font-14px"></i>
             </button>
             <ul class="dropdown-menu">
                 <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
