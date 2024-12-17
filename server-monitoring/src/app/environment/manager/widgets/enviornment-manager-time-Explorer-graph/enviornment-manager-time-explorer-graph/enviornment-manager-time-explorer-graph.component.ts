@@ -35,6 +35,9 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
 
   }
   @Input() chartData: any;
+  @Input() Editable : boolean;
+  @Input() title :any;
+
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];
   ngOnInit(): void {
@@ -146,5 +149,17 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
       case 'Warning': return '#ff6833';
       default: return '#ff3333';
     }
+  }
+  isRename : boolean = false;
+  renameWidget(){
+      this.isRename = true;
+      setTimeout(() => {
+        let ele = document.getElementById('renameInput')
+        ele.focus()
+      }, 0);
+
+  }
+  renaming(){
+    this.isRename = false;
   }
 }

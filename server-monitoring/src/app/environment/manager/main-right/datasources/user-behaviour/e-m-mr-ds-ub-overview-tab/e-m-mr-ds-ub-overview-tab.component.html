@@ -43,15 +43,7 @@
                         </ng-container>
                     <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                         <div class="widget-section">
-                            <div  style="display: flex;" class="mb-0 p-2">
-                                <div *ngIf="Editable">
-                                    <i class="oci oci-bar-chart drag-icon px-1 drag-handler  mb-0 p-2  pt-3"></i>
-                                </div>
-                                <h6 class="font-bold mb-0 p-2 pt-3">
-                                    Weekly Log Trends
-                                </h6>
-                               </div>
-                            <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
+                            <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [view]="view" [title]="'Weekly Log Trends'"></app-enviornment-manager-time-explorer-graph>
                         </div>
                     </ng-container>
                 </gridster-item>
