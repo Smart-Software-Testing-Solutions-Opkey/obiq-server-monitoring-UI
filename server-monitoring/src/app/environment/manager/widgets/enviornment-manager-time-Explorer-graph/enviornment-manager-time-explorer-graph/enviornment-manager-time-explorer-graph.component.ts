@@ -56,7 +56,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   @Input() view: any
 
   getLogsChart(timeFilter?: any) {
-    window.loadingStart("#Env_manager_main_right", "Please wait");
+    window.loadingStart("#maintimeexplorer", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
@@ -76,12 +76,12 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-          window.loadingStop("#Env_manager_main_right");
+          window.loadingStop("#maintimeexplorer");
           this.chartData = result
           this.createChart();
         },
         error: (error: any) => {
-          window.loadingStop("#Env_manager_main_right");
+          window.loadingStop("#maintimeexplorer");
           console.warn(error);
         },
         complete: () => {
