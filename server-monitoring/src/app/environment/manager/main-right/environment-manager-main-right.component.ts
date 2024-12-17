@@ -121,14 +121,14 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   }
 
   get_Tab_Control_List(AnalysticsType) {
-    window.loadingStart("#Env_manager_main_right", "Please wait");
+    // window.loadingStart("#Env_manager_main_right", "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceTabControlList";
 
     let form_data = { systemId: AnalysticsType.systemId };
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-        window.loadingStop("#Env_manager_main_right");
+        // window.loadingStop("#Env_manager_main_right");
 
         result.forEach((item, index) => {
           if (item.enumType == "OVERVIEW_TAB") {
@@ -145,7 +145,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
         this.selectedTab = result[0]
       },
       error: (error: any) => {
-        window.loadingStop("#Env_manager_main_right");
+        // window.loadingStop("#Env_manager_main_right");
         console.warn(error);
       },
       complete: () => {
