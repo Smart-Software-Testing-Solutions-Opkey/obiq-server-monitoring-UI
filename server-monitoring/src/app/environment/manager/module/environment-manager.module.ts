@@ -43,6 +43,7 @@ import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m
 import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
 import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
 import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../widgets/environment-manager-widgets-progress-bars-user-guides/environment-manager-widgets-progress-bars-user-guides.component'; 
+import { EMMrDsUbOverviewTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-overview-tab/e-m-mr-ds-ub-overview-tab.component';
 
 import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
 import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
@@ -77,7 +78,9 @@ import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '..
     EMMrDsErpFunctionalErrorTabComponent,
     EnvironmentManagerWidgetsProgressBarsUserGuidesComponent,
     EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
-    EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent
+    EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent,
+    EMMrDsUbOverviewTabComponent
+
 
   ],
   imports: [

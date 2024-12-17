@@ -361,11 +361,13 @@
                 }
                 @else {
                     @if(selectedAnalyticsType.type == "USER_BEHAVIOUR_ANALYTICS_DATASOURCE"){
-                        <div class="telemetry">
-                            <!-- <app-environment-manager-main-right-DataSource->
- 
-                            </app-environment-manager-main-right-DataSource-UserBehaviour> -->
-                        </div>
+                        @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                            <div class="overview">
+                                <app-e-m-mr-ds-ub-overview-tab
+                                [view]="selectedView" [Editable]="Editable">
+                                </app-e-m-mr-ds-ub-overview-tab>
+                            </div>
+                        }
                     }
                     @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
                         <div class="telemetry">
