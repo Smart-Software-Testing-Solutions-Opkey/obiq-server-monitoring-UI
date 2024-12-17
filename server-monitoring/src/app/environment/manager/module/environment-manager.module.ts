@@ -42,6 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-overview-tab.component';
 import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
 import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
+import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../widgets/environment-manager-widgets-progress-bars-user-guides/environment-manager-widgets-progress-bars-user-guides.component'; 
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/
     SelectedTraceInnerComponent,
     EMMrDsErpOverviewTabComponent,
     EMMrDsErpLogTabComponent,
-    EMMrDsErpFunctionalErrorTabComponent
+    EMMrDsErpFunctionalErrorTabComponent,
+    EnvironmentManagerWidgetsProgressBarsUserGuidesComponent
 
 
   ],
