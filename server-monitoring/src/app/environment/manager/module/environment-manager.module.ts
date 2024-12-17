@@ -47,6 +47,9 @@ import { EMMrDsUbOverviewTabComponent } from '../main-right/datasources/user-beh
 import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-fastest-journeys/environment-manager-widgets-progress-bars-fastest-journeys.component';
 import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
 import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
+import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-error-widget/e-m-api-error-widget.component';
+import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
+import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -80,7 +83,10 @@ import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '..
     EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent,
     EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
     EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent,
-    EMMrDsUbOverviewTabComponent
+    EMMrDsUbOverviewTabComponent,
+    EMApiErrorWidgetComponent,
+    EMConsoleErrorWidgetComponent,
+    EMFunctionalErrorWidgetComponent
 
 
   ],
