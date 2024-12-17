@@ -58,6 +58,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   ]
 
   @Input() view: any = null;
+  @Input()Editable:boolean
    widgetData={
     widgetType: "USER_JOURNEY_TOP_SLOW_WIDGET"
    }

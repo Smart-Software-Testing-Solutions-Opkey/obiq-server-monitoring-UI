@@ -1,3 +1,19 @@
+
+<div class="panel-header d-flex-between mb-3">
+    <div  style="display: flex;">
+        <div *ngIf="Editable">
+            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+            <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
+        </div>
+        <h6 class="mb-0">{{ title }}</h6>
+       </div>
+ 
+    <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
+        {{ widgetData.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
+    </a>
+    
+
+</div>
 <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
         [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
 

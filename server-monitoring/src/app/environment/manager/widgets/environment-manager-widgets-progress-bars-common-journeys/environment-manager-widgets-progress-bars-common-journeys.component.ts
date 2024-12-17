@@ -48,6 +48,7 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
   ]
 
   @Input() view: any = null;
+  @Input()Editable:boolean
    widgetData={
     widgetType: "USER_JOURNEY_MOST_COMMON_WIDGET"
    }
