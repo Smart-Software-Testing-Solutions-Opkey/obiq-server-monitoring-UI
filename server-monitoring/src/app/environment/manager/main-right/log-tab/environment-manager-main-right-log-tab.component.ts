@@ -261,7 +261,8 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
 
   getLogsChart() {
-
+    debugger;
+    this.allDataLoaded = false;
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
