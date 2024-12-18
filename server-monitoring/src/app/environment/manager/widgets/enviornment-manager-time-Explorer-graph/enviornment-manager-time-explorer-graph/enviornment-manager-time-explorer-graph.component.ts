@@ -35,9 +35,14 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
 
   }
   @Input() chartData: any;
-  @Input() Editable : boolean;
-  @Input() title :any;
-
+  @Input() Editable : boolean = false
+  title :any;
+  widgetType = ''
+  @Input('child_data') set child_data({view,title,widgetType}) {
+   this.view = view;
+   this.title=title;
+   this.widgetType = widgetType
+  }
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];
   ngOnInit(): void {
@@ -53,7 +58,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-  @Input() view: any
+  view: any
 
   getLogsChart(timeFilter?: any) {
     window.loadingStart("#maintimeexplorer", "Please wait");

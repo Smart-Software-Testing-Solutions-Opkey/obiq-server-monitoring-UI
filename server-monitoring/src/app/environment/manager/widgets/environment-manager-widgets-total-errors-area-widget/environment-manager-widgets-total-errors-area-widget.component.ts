@@ -51,7 +51,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   ) {
     
   }
-@Input()Editable:boolean
+@Input()Editable:boolean = false
+widgetType=''
   ngOnInit(){
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
@@ -165,11 +166,12 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   inverseColors = false
   view:any
   title = ''
-  @Input('child_data') set child_data({ typeEnum,view,title }) {
+  @Input('child_data') set child_data({ typeEnum,view,title,widgetType }) {
     
    this.typeEnum = typeEnum
    this.view = view
   this.title =title
+  this.widgetType = widgetType
  
 
   }
