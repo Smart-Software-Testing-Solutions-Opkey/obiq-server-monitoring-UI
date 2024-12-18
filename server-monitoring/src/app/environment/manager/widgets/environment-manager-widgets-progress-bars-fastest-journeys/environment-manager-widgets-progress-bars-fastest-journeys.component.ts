@@ -51,7 +51,7 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
    this.view = view;
    this.title=title;
   }
-  @Input() Editable:boolean
+
 
   maxCount: number = 0;
 
@@ -183,5 +183,19 @@ createChart(): void {
     }
   };
 }
+@Input() Editable:boolean;
+isRename : boolean = false;
+renameWidget(){
+    this.isRename = true;
+    setTimeout(() => {
+      let ele = document.getElementById('renameInput')
+      ele.focus()
+    }, 0);
+
+}
+renaming(){
+  this.isRename = false;
+}
+
 
 }

@@ -22,81 +22,28 @@
                     </div> -->
                     <ng-container *ngIf="item.widId == 'total_errors_Error'">
                         <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors'}"></app-environment-manager-widgets-total-errors-area-widget>
-                    </ng-container>
-    
+                    </ng-container> 
                 
-           
-                    <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
-                        <div class="overview-panel widget-section p-3">
-                            <div class="panel-header d-flex-between mb-3">
-                                <div  style="display: flex;">
-                                    <div *ngIf="Editable">
-                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
-                                        <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
-                                    </div>
-                                    <h6 class="mb-0">{{ progressBarArray[1]?.heading }}</h6>
-                                   </div>
-                             
-                                <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                                    {{ progressBarArray[1]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
-                                </a>
-                                
-                            
+                     <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys  [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                             </div>
-                            <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[1]" [view]="view"></app-environment-manager-widgets-progress-bars>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
-                        <div class="overview-panel widget-section p-3">
-                            <div class="panel-header d-flex-between mb-3">
-                                <div  style="display: flex;">
-                                    <div *ngIf="Editable">
-                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
-                                        <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
-                                    </div>
-                                    <h6 class="mb-0">{{ progressBarArray[2]?.heading }}</h6>
-                                   </div>
-                             
-                                <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                                    {{ progressBarArray[2]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
-                                </a>
-                                
-                            
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                               
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [view]="view" [Editable]="Editable" title="5 Slowest Journeys"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
-                            <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[2]" [view]="view"></app-environment-manager-widgets-progress-bars>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
-                        <div class="overview-panel widget-section p-3">
-                            <div class="panel-header d-flex-between mb-3">
-                                <div  style="display: flex;">
-                                    <div *ngIf="Editable">
-                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
-                                        <!-- <h6 class="mb-0">{{ progressBarArray[0]?.heading }}</h6> -->
-                                    </div>
-                                    <h6 class="mb-0">{{ progressBarArray[3]?.heading }}</h6>
-                                   </div>
-                             
-                                <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                                    {{ progressBarArray[3]?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ? 'Filter' : 'View full Journey' }}
-                                </a>
-                                
-                            
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                               
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable"  [view]="view" title="5 Most Common Journeys"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
-                            <app-environment-manager-widgets-progress-bars [widgetData]="progressBarArray[3]" [view]="view"></app-environment-manager-widgets-progress-bars>
-                        </div>
-                    </ng-container>
+                        </ng-container>
                     <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                         <div class="widget-section">
-                            <div  style="display: flex;" class="mb-0 p-2">
-                                <div *ngIf="Editable">
-                                    <i class="oci oci-bar-chart drag-icon px-1 drag-handler  mb-0 p-2  pt-3"></i>
-                                </div>
-                                <h6 class="font-bold mb-0 p-2 pt-3">
-                                    Weekly Log Trends
-                                </h6>
-                               </div>
-                            <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
+                            <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [view]="view" [title]="'Weekly Log Trends'"></app-enviornment-manager-time-explorer-graph>
                         </div>
                     </ng-container>
                 </gridster-item>

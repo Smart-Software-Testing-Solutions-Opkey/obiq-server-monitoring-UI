@@ -218,4 +218,17 @@ createChart(): void {
   };
 }
 
+isRename : boolean = false;
+renameWidget(){
+    this.isRename = true;
+    setTimeout(() => {
+      let ele = document.getElementById('renameInput')
+      ele.focus()
+    }, 0);
+
+}
+renaming(){
+  this.isRename = false;
+}
+
 }

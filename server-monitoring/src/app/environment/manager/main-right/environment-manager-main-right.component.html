@@ -21,14 +21,16 @@
                         <span>Widget</span>
                     </button>
                 </div> -->
+                @if (!isSelectedAnalyticsTypeEmpty){
 
-                <div class="filter-content">
-                    <div class="EditToggle">
-    <button (click)="toggleEdit()" >Edit</button>
-                        
+                    <div class="filter-content">
+                        <div class="EditToggle">
+        <button (click)="toggleEdit()" >Edit</button>
+                            
+                        </div>
+    
                     </div>
-
-                </div>
+                }
                 <div class="filter-content">
                     <div class="search_panel searchToggle">
     
