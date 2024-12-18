@@ -61,6 +61,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   view: any
 
   getLogsChart(timeFilter?: any) {
+    debugger;
     window.loadingStart("#maintimeexplorer", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
