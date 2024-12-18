@@ -57,15 +57,19 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
     // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
   ]
 
-  @Input() view: any = null;
-  @Input()Editable:boolean
+  view: any = null;
+  @Input()Editable:boolean = false
    widgetData={
     widgetType: "USER_JOURNEY_TOP_SLOW_WIDGET"
    }
-  @Input() title:string
+  title:string = ''
   maxCount: number = 0;
-
-  @Input() chartData: any;
+  widgetType = ''
+  @Input('child_data') set child_data({view,title,widgetType}) {
+   this.view = view;
+   this.title=title;
+   this.widgetType = widgetType
+  }
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){

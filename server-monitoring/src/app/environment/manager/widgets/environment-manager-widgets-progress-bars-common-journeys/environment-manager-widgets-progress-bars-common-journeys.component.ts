@@ -47,15 +47,20 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
     // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
   ]
 
-  @Input() view: any = null;
+  view: any = null;
   @Input()Editable:boolean
    widgetData={
     widgetType: "USER_JOURNEY_MOST_COMMON_WIDGET"
    }
-  @Input() title:string
+  title:string
   maxCount: number = 0;
 
-  @Input() chartData: any;
+  widgetType = ''
+  @Input('child_data') set child_data({view,title,widgetType}) {
+   this.view = view;
+   this.title=title;
+   this.widgetType = widgetType
+  }
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){

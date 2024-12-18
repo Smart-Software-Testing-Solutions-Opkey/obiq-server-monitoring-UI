@@ -47,9 +47,11 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
 
   view: any = null;
   title: any = null;
-  @Input('child_data') set child_data({view,title}) {
+  widgetType = ''
+  @Input('child_data') set child_data({view,title,widgetType}) {
    this.view = view;
    this.title=title;
+   this.widgetType = widgetType
   }
 
 
@@ -183,7 +185,7 @@ createChart(): void {
     }
   };
 }
-@Input() Editable:boolean;
+@Input() Editable:boolean = false
 isRename : boolean = false;
 renameWidget(){
     this.isRename = true;
