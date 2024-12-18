@@ -51,6 +51,7 @@ import { EMMrDsERPDComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp
 import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-error-widget/e-m-api-error-widget.component';
 import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
 import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
+import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -88,7 +89,8 @@ import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-
     EMMrDsERPDComponent,
     EMApiErrorWidgetComponent,
     EMConsoleErrorWidgetComponent,
-    EMFunctionalErrorWidgetComponent
+    EMFunctionalErrorWidgetComponent,
+    EMMrDsErpAllJourneyComponent
 
 
   ],
