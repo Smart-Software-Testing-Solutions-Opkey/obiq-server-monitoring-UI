@@ -125,6 +125,7 @@
             }
             @else if (tabSelected == 'Journey') {
                 <div class="journey">
+                    <app-journey-grid [child_data]="{selectedData: selectedData}"></app-journey-grid>
                 </div>
             }
             @else if(tabSelected == "Full Log"){
