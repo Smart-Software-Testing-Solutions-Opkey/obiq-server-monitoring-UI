@@ -1,4 +1,6 @@
-<div class="panel-header d-flex-between mb-3">
+<div [id]="'fastest-journey-'+widgetType" style="position:relative;">
+
+    <div class="panel-header d-flex-between mb-3">  
         <div style="display:flex;justify-content: space-between;align-items: center;">
           <div *ngIf="Editable">
             <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
@@ -30,11 +32,9 @@
                 </div>
             </div>
         </div>
-  
+        </div>
     
-
-</div>
-<kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
+        <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
         [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
 
 
@@ -75,3 +75,6 @@
 
         
     </kendo-grid>
+
+
+</div>

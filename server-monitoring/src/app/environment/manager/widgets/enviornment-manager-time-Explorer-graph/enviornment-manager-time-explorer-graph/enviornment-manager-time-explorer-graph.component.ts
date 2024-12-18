@@ -53,6 +53,25 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     }))
     this.getLogsChart()
     // this.createChart();
+    this.startDataReceiving();
+  }
+
+  isRefresh: boolean = false;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if(data.callsource == 'widgetOperation'){ 
+          this.isRefresh = data.data;
+          this.refreshPage();  
+        }
+      } 
+    });
+  }
+  refreshPage(){
+    if(this.isRefresh == true){
+      this.getLogsChart();
+    }
+  
   }
 
   ngOnDestroy(): void {
@@ -61,7 +80,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   view: any
 
   getLogsChart(timeFilter?: any) {
-    window.loadingStart("#maintimeexplorer", "Please wait");
+    window.loadingStart("#maintimeexplorer"+this.widgetType, "Please wait..");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
@@ -81,12 +100,12 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-          window.loadingStop("#maintimeexplorer");
+          window.loadingStop("#maintimeexplorer"+this.widgetType);
           this.chartData = result
           this.createChart();
         },
         error: (error: any) => {
-          window.loadingStop("#maintimeexplorer");
+          window.loadingStop("#maintimeexplorer"+this.widgetType);
           console.warn(error);
         },
         complete: () => {

@@ -48,6 +48,7 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   constructor(
     public service_data: AppDataService,
     public app_service: AppService,
+    
   ) {
     
   }
@@ -59,6 +60,35 @@ widgetType=''
         this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
       }
     }))
+    this.startDataReceiving();
+    
+  }
+
+  
+  isRefresh: boolean = false;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if(data.callsource == 'widgetOperation'){
+          this.isRefresh = data.data;
+          this.refreshPage();
+        }
+      } 
+    });
+  }
+  refreshPage(){
+    if(this.isRefresh == true){
+      if(this.typeEnum == 'Error'){
+        this.getChartData('ESS_LOG_ERROR_WIDGET');
+      }
+      else if(this.typeEnum == 'Warning'){
+        this.getChartData('ESS_LOG_WARNING_WIDGET')
+      }
+      else if(this.typeEnum == 'Success'){
+        this.getChartData('ESS_LOG_SUCESS_WIDGET');
+      }
+    }
+  
   }
 
   ngOnDestroy(): void {
@@ -260,7 +290,7 @@ dataDir = ''
         form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
         form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
       }
-      window.loadingStart("#stats-div-"+this.typeEnum, "Please wait");
+      window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType, "Please wait");
       this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {
@@ -321,13 +351,13 @@ dataDir = ''
               }
 
               this.checkStyling();
-              window.loadingStop("#stats-div-"+this.typeEnum);
+              window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
 
             }
 
           },
           error: (error: any) => {
-            window.loadingStop("#stats-div-"+this.typeEnum);
+            window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
             console.warn(error);
           },
           complete: () => {
