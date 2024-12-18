@@ -42,6 +42,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
     ]
     view: any = null;
     title: any = null;
+    widgetType: any ="USER_GUIDE_LIST_PER_PROCESS_WIDGET";
     @Input('child_data') set child_data({view,title}) {
      this.view = view;
      this.title=title;
@@ -60,14 +61,33 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
         this.getWidgetData()
         this.createChart();
       }
+      this.startDataReceiving();
+    }
+    isRefresh: boolean = false;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if(data.callsource == 'widgetOperation'){
+          this.isRefresh = data.data;
+          this.refreshPage(); 
+        }
+      }
+    });
+  }
+  refreshPage(){
+    if(this.isRefresh == true){
+      this.getWidgetData();
     }
   
+  }
+  
     getWidgetData(){
+      window.loadingStart("#user-guides-"+this.widgetType, "Please wait");
       let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
       const form_data = {
         "appType": "ORACLEFUSION",
         "viewId": this?.view?.viewId,
-        "widgetType": "USER_GUIDE_LIST_PER_PROCESS_WIDGET",
+        "widgetType": this.widgetType,
       };
      
       this.app_service.make_post_server_call(ajax_url, form_data)
@@ -89,13 +109,13 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
                 };
               })
             }
-            
+            window.loadingStop("#user-guides-"+this.widgetType);
             this.cdRef.detectChanges();
           }
          
         },
           error: (error: any) => {
-            // window.loadingStop("#Env_manager_main_right");
+            window.loadingStop("#user-guides-"+this.widgetType);
             console.error(error);
           }
         });

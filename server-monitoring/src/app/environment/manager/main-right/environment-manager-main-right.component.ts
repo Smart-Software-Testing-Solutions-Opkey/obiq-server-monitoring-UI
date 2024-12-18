@@ -264,4 +264,11 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   get isSelectedAnalyticsTypeEmpty(): boolean {
     return Object.keys(this.selectedAnalyticsType).length === 0;
   }
+
+
+  isRefresh : boolean = false;
+  refreshPage(){
+      this.isRefresh = true;
+      this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
+  }
 }
