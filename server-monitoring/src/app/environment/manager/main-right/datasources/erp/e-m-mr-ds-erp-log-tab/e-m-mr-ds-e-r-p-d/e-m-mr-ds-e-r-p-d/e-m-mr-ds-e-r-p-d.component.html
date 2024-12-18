@@ -112,30 +112,24 @@
                 </li>
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
                     <a class="nav-link" 
-                        href="javascript:void(0)" [ngClass]="tabSelected == 'FullLog'?'active':''" (click)="changeSelectedTab('Full Log')">
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Full Log'?'active':''" (click)="changeSelectedTab('Full Log')">
                         <i class="oci oci-info pe-1"></i>
                         Full Log</a>
                 </li>
             </ul>
         </div>
 
-        <div class="tab_view_content">
+        <div class="tab_view_content" style="background-color: #DDDDDD;padding:10px;">
             @if (tabSelected == 'SummarizedLog') {
-               <app-selected-trace-inner [child_data]="{selectedData: selectedData}"></app-selected-trace-inner>
-            }
-            @else if (tabSelected == 'Metrics') {
-                <div class="metrics">
-                    Metrics widget
-                </div>
+               {{selectedData.summarizedLog}}
             }
             @else if (tabSelected == 'Journey') {
                 <div class="journey">
-                    <app-journey-grid [child_data]="{selectedData: selectedData}"></app-journey-grid>
                 </div>
             }
-            @else if(tabSelected == "FullLog"){
+            @else if(tabSelected == "Full Log"){
                 <div class="Info">
-                    <app-manager-main-right-log-tab-details-info [selectedData]="{fullLog: selectedData?.fullLog, summarizedLog: selectedData?.summarizedLog}"></app-manager-main-right-log-tab-details-info>
+                    {{selectedData.fullLog}}
                 </div>
             }
         </div>

@@ -35,6 +35,7 @@ constructor(
 
   }
    ngOnInit(): void {
+    this.tabSelected = 'SummarizedLog';
       this.app_service.dataReceiver().subscribe(data => {
         if (data !== null) {
           if(data.callsource == 'timeExplorerChart'){
@@ -47,7 +48,7 @@ constructor(
           }
         }
       });
-      this.getTraceData();
+      
     }
   
     onCellClick(event: any) {
@@ -56,32 +57,7 @@ constructor(
     on_trace_Selection_Change_(event: any) {
   
     }
-    getTraceData() {
-      debugger;
-      window.loadingStart("#Env_manager_main_right", "Please wait");
-      let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      this.app_service.make_post_server_call(ajax_url, {
-        "essLogId": this.selectedData.dataId,
-        "widgetType": "ESS_LOG_METADATA_WIDGET"
-      })
-        .subscribe({
-          next: (result: any) => {
-            window.loadingStop("#Env_manager_main_right");
-            console.log(result, "+++++++++++++++++++++++++++++++++++")
-            this.trace_Selected_data.push(result);
-  
-  
-          },
-          error: (error: any) => {
-            window.loadingStop("#Env_manager_main_right");
-            console.warn(error);
-          },
-          complete: () => {
-            console.log("Completed");
-          }
-        });
-  
-    }
+    
     ngOnDestroy(): void {
   
     }
