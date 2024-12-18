@@ -60,6 +60,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
 
   }
   getTraceData() {
+    debugger;
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     this.app_service.make_post_server_call(ajax_url, {

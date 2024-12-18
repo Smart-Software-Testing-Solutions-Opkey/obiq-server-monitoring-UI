@@ -47,6 +47,7 @@ import { EMMrDsUbOverviewTabComponent } from '../main-right/datasources/user-beh
 import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-fastest-journeys/environment-manager-widgets-progress-bars-fastest-journeys.component';
 import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
 import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
+import { EMMrDsERPDComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -80,7 +81,8 @@ import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '..
     EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent,
     EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
     EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent,
-    EMMrDsUbOverviewTabComponent
+    EMMrDsUbOverviewTabComponent,
+    EMMrDsERPDComponent
 
 
   ],
@@ -123,7 +125,8 @@ import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '..
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
     EnvironmentManagerWidgetsGaugeMeterComponent,
-    SelectedTraceInnerComponent
+    SelectedTraceInnerComponent,
+    EMMrDsERPDComponent
   ]
 })
 export class EnvironmentManagerModule { }

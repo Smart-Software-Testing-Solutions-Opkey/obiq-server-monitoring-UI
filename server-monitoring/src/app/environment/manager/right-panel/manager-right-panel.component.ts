@@ -25,6 +25,7 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
     this.activeModal.dismiss('close modal');
   }
   bindPanelData(){
+    debugger;
     if(this.selectedItem?.callsource == "environmentManagerLogDetails"){
       this.panelHeader = 'Log Details'
       this.selectedPanel = 'LogDetails'
@@ -33,6 +34,10 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
       this.panelHeader = 'Add Widgets'
       this.selectedPanel = 'AddWidgets'
 
+    }
+    else if(this.selectedItem?.callsource == "ErpDataSourceLogDetails"){
+     this.panelHeader = 'Ess Details'
+      this.selectedPanel = 'ErpLogDetails'
     }
   }
 

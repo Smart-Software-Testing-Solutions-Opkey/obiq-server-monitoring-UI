@@ -67,6 +67,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   selectedLogType: string = 'All';  // Default selection
   selectedTime:any;
   ngOnInit(): void {
+    console.log(this.analyticsType,"this is selected analytics type")
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
         this.selectedTime = data?.timeFilter
@@ -337,8 +338,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   onScroll() {
     this.getViewLogs(null, true); // Load more data and append it
 }
+get isSelectedAnalyticsTypeEmpty(): boolean {
+  return Object.keys(this.analyticsType).length === 0;
+}
   onSelectionChange(e) {
-   
+   console.log(this.analyticsType,"this is analytics type");
+   console.log(this.view,"this is the view")
+   if(this.isSelectedAnalyticsTypeEmpty){
     let dataItem = e.dataItem
     const modalRef = this.modalService.open(ManagerRightPanelComponent, {
       backdrop: 'static',
@@ -355,6 +361,26 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     });
     modalRef.componentInstance.selectedItem = { callsource: 'environmentManagerLogDetails', data: dataItem };
   }
+  else{
+    let dataItem = e.dataItem
+    const modalRef = this.modalService.open(ManagerRightPanelComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'full',
+      centered: true,
+      windowClass: 'layout-modal-right panel-end w-75'
+    });
+    modalRef.result.then((result) => {
+    }, (response) => {
+      if (response == 'close modal') {
+        return;
+      }
+    });
+    modalRef.componentInstance.selectedItem = { callsource: 'ErpDataSourceLogDetails', data: dataItem };
+  }
+   }
+  
+   
 
 
 }

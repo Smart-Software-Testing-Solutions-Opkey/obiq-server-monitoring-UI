@@ -24,6 +24,9 @@
         @else if(this.selectedPanel == 'AddWidgets'){
             <app-manager-right-pannel-widjet></app-manager-right-pannel-widjet>
         }
+        @else if(this.selectedPanel == "ErpLogDetails"){
+            <app-e-m-mr-ds-e-r-p-d [child_data]="{selectedData:selectedItem.data}"></app-e-m-mr-ds-e-r-p-d>
+        }
     </div>
 
 

@@ -30,6 +30,7 @@ export class JourneyGridComponent implements OnInit {
   datasource_grid_journey = [];
 
   get_getInsightWidgetData() {
+    debugger;
     window.loadingStart("#div-journey", "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     let form_data = {
