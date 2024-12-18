@@ -17,6 +17,12 @@ export class EnvironmentManagerComponent implements OnInit {
 
   ngOnInit(): void {
     // this.check_env_configuration();
+    if(this.service_data?.leftPanelTotalData){
+
+      this.objSettings = this.service_data.leftPanelTotalData.objSettings
+      this.selectedAnalyticsType =this.service_data.leftPanelTotalData.selectedAnalyticsType
+      this.selectedView = this.service_data.leftPanelTotalData.selectedView
+    }
   }
 
   selectedAnalyticsType: any = null
@@ -97,6 +103,7 @@ export class EnvironmentManagerComponent implements OnInit {
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
     this.selectedView = val.viewSelected
+
   }
 
 }
