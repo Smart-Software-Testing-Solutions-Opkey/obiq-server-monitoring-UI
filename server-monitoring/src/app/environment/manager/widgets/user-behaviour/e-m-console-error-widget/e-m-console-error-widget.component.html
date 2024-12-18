@@ -1,1 +1,82 @@
-<p>e-m-console-error-widget works!</p>
+<div class="panel-header d-flex-between mb-3">
+    <div  style="display: flex;">
+        <div *ngIf="Editable">
+            <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+          
+        </div>
+        <h6 class="mb-0">{{ title }}</h6>
+       </div>
+ 
+    <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
+        {{  'View All API Errors' }}
+    </a>
+    
+
+</div>
+<kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
+        [hideHeader]="false" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
+
+
+
+        <kendo-grid-column title="Name" field="subActivityName" [width]="200">
+
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span class="k_grid_text text_wrap" title="{{dataItem?.Name}}" container="body">
+                    {{dataItem?.subActivityName}}
+                </span>
+            </ng-template>
+
+
+        </kendo-grid-column>
+
+       
+
+          
+            <kendo-grid-column title="Error count" field="timeStampStr"  >
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  
+                        <div id="chart" class="graph-timeseries mb-3" style="height: 25px;width:100px;padding: 0 " >
+                            
+                            <apx-chart  *ngIf="chartOptions?.series?.length  > 0"
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [stroke]="chartOptions.stroke"
+                            [dataLabels]="chartOptions.dataLabels"
+                            [xaxis]="chartOptions.xaxis"
+                            [yaxis]="chartOptions.yaxis"
+                            [grid]="chartOptions.grid"
+                                
+                           
+                          ></apx-chart>
+                          </div>
+                       
+                  
+
+                   
+                   
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title="" field="countName" [width]="50">
+
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.countName}}" container="body">
+                        {{dataItem?.count}}
+                    </span>
+                </ng-template>
+    
+    
+            </kendo-grid-column>
+        <ng-template kendoGridNoRecordsTemplate>
+            <div class="no-data-found" style="height: 11rem !important;">
+                <div class="no-data-found-content">
+                    <img class="no-data-found-content-img"
+                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                    <p class="no-data-found-content-text">No data available</p>
+                </div>
+            </div>
+        </ng-template>
+
+
+        
+    </kendo-grid>
+

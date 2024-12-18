@@ -48,7 +48,12 @@
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_API_ERRORS_WIDGET'">
                         <div class="overview-panel widget-section p-3">
-                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 5 API Errors'}"></app-e-m-api-error-widget>
+                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors'}"></app-e-m-api-error-widget>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="item.widId=='TOP_CONSOLE_ERRORS_WIDGET'">
+                        <div class="overview-panel widget-section p-3">
+                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors'}"></app-e-m-console-error-widget>
                         </div>
                     </ng-container>
                 </gridster-item>
