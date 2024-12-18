@@ -3,17 +3,40 @@
     <div  style="display: flex;">
         <div *ngIf="Editable">
             <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
+          </div>
           
-        </div>
-        <h6 class="mb-0">{{ title }}</h6>
-       </div>
- 
-    <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-        {{  'View All API Errors' }}
-    </a>
+            <h6 class="font-bold mb-0">
+              <ng-container *ngIf="isRename;else nameOnly">
+                 <input type="text" [(ngModel)]="title" (keyup.enter)="renaming()" (blur)="renaming()" id='renameInput'>
+              </ng-container>
+             <ng-template #nameOnly>
+                 {{title}}
+              </ng-template>
+          </h6>  
+    </div>
+  
+    <div style="display:flex;justify-content: space-between;align-items: center;">
+            <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
+                {{ 'View All API Errors' }}
+            </a>
+            
+            <div *ngIf="Editable">
+                 <div class="dropdown">
+                        <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                            <i class="oci oci-more-vertical font-14px"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-delete text-red pr-2"></i> Delete </a></li>
+                        </ul>
+                </div>
+            </div>
+    </div>
+  
     
 
 </div>
+
 <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
         [hideHeader]="false" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
 
