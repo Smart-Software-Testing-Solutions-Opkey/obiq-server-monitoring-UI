@@ -46,6 +46,11 @@
                             <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [view]="view" [title]="'Weekly Log Trends'"></app-enviornment-manager-time-explorer-graph>
                         </div>
                     </ng-container>
+                    <ng-container *ngIf="item.widId=='TOP_API_ERRORS_WIDGET'">
+                        <div class="overview-panel widget-section p-3">
+                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 5 API Errors'}"></app-e-m-api-error-widget>
+                        </div>
+                    </ng-container>
                 </gridster-item>
             }
           </gridster>
