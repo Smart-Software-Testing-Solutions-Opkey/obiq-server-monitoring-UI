@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class AppService {
   private dataStream = new BehaviorSubject<any>(null);
   public dataStream$ = this.dataStream.asObservable();
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private router: Router,) {
     
     this.transfterSubject = new BehaviorSubject<any>(null);
   }
@@ -39,5 +40,9 @@ export class AppService {
 
   make_get_server_call(form_url: string, form_data: any) {
     return this.http.get(form_url, { params: form_data });
+  }
+  routeTo(portal,view){
+   let section = '(rightSection:'+view+')'
+    this.router.navigateByUrl('/'+portal+'/'+section)
   }
 }

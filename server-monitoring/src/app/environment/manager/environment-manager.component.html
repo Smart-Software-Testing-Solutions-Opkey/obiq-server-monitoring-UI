@@ -1,4 +1,4 @@
-<section class="app-section-main">
+<section class="app-section-main" id="totalSection">
 
    
 
@@ -19,13 +19,14 @@
              
                 <div class="right-section">
         
-                    @if (objSettings.isOpen) {
-                        <app-view-summary-details [Settings_View_Selection]="objSettings.selectedViewSettings" [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-view-summary-details>
+                    <!-- @if (objSettings.isOpen) {
+                        <app-view-summary-details ></app-view-summary-details>
                     }
                     @else if(selectedView && selectedAnalyticsType) {
                         <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
                         </app-environment-manager-main-right>
-                    }
+                    } -->
+                    <router-outlet name="rightSection"></router-outlet>
                 </div>
              
         </kendo-splitter-pane>

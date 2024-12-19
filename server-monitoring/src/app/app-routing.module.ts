@@ -16,7 +16,8 @@ const routes: Routes = [
      component: LoadingComponent
   },{
     path:'**',
-    component:LoadingComponent
+    loadChildren: () => import('./environment/environment.module').then(m => m.EnvironmentModule),
+    data: { title: 'Environment' ,breadcrumb:'Monitoring'}
   }
   
 ];

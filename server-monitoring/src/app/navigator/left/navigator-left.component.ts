@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './navigator-left.component.html',
   styleUrls: ['./navigator-left.component.scss']
 })
-export class NavigatorLeftComponent implements OnInit {
+export class NavigatorLeftComponent implements OnInit,AfterViewInit {
 
   constructor(
     private modalService: NgbModal,
@@ -28,7 +28,9 @@ export class NavigatorLeftComponent implements OnInit {
 
 
   ) { }
-
+ngAfterViewInit(): void {
+  this.app_service.routeTo('environment','summary')
+}
   // analyticsValueChange = output<any>()
   // onChangeView = output<any>()
   // onSettingsSelected = output<any>()
@@ -248,6 +250,7 @@ export class NavigatorLeftComponent implements OnInit {
 
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
+    this.app_service.routeTo('environment','settings')
 
   }
   backToMenu() {
@@ -257,6 +260,7 @@ export class NavigatorLeftComponent implements OnInit {
     this.dataChanged.viewSelected = this.selectedView
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
+    this.app_service.routeTo('environment','summary')
 
   }
 

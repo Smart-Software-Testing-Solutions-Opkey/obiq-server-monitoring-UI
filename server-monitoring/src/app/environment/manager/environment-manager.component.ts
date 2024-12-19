@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-environment-manager',
@@ -12,7 +13,8 @@ export class EnvironmentManagerComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public service_data: AppDataService
+    public service_data: AppDataService,
+    private app_service:AppService
   ) { }
 
   ngOnInit(): void {
@@ -97,6 +99,13 @@ export class EnvironmentManagerComponent implements OnInit {
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
     this.selectedView = val.viewSelected
+    this.service_data.selectedArtifactData = {
+      Settings_View_Selection:this.objSettings.selectedViewSettings,
+      obj_configuration_setting:this.obj_configuration_setting,
+      selectedAnalyticsType:this.selectedAnalyticsType,
+      selectedView:this.selectedView
+    }
+    this.app_service.dataTransmitter({callsource:'navigatorops',data:this.service_data.selectedArtifactData});
   }
 
 }

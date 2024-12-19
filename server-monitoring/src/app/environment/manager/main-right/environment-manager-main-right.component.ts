@@ -26,7 +26,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   ngOnDestroy(): void {
 
   }
-  
+  isDataLoaded = false
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
      
@@ -39,12 +39,29 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           // Manually trigger change detection
           this.cdr.detectChanges();
         }
+        else if(data.callsource == 'navigatorops'){
+          this.isDataLoaded = true
+         
+          if(this.service_data.selectedArtifactData.selectedAnalyticsType){
+
+            this.selectedAnalyticsType = this.service_data.selectedArtifactData.selectedAnalyticsType
+          }
+          // this.selectedAnalyticsType = selectedAnalyticsType;
+          if(this.service_data.selectedArtifactData.selectedView){
+
+            this.selectedView = this.service_data.selectedArtifactData.selectedView
+          }
+          // if (selectedView) {
+          //   this.selectedView = selectedView
+          // }
+          this.bindData()
+        }
       }
       
     });
   }
   ngAfterViewInit(): void {
-   this.calculateCurrentDate();
+    this.calculateCurrentDate();
   }
 
 
@@ -80,16 +97,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   public toDateValue: Date = new Date();
   public dateTimeFormat = "MM/dd/yyyy HH:mm";
   @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
-  @Input('child_data') set child_data({ selectedAnalyticsType, selectedView }) {
-    
-    this.selectedAnalyticsType = selectedAnalyticsType;
-    if (selectedView) {
-      this.selectedView = selectedView
-    }
-    this.bindData()
-
-  }
-
+  
   onSelctTime(timeItem){
     this.selectedTime = timeItem?.name;
     if(this.selectedTime == "setCustom"){
