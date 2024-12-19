@@ -1,34 +1,4 @@
-<section class="app-section-main">
 
-   
+<app-navigator-breadcrumb></app-navigator-breadcrumb>
 
-   
-
-    <kendo-splitter orientation="horizontal" style="border-color: transparent;">
-     
-        <kendo-splitter-pane  min="20%" max="40%" size="20%">
-              <div class="left-section">
-            
-                    @if (service_data.UserDto) {
-                        <app-navigator-left (onLeftPanelDataChange)="leftPanelDataUpdate($event)"></app-navigator-left>
-                    }
-                    
-              
-              </div>
-        </kendo-splitter-pane>
-        <kendo-splitter-pane >
-             
-                <div class="right-section">
-        
-                    <app-e-m-mr-ds-erp-all-journey></app-e-m-mr-ds-erp-all-journey>
-                </div>
-             
-        </kendo-splitter-pane>
-  
-      
-  
-     
-      </kendo-splitter>
-
-</section>
-
+<p>environment-selected works!</p>

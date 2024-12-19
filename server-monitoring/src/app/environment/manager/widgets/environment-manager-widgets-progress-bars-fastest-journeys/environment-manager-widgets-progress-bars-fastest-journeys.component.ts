@@ -14,7 +14,6 @@ import {
   ApexGrid,
   ApexYAxis
 } from "ng-apexcharts";
-import { Router } from '@angular/router';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -35,8 +34,7 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
   constructor(
     private app_service: AppService,
     private service_data: AppDataService,
-    private cdRef: ChangeDetectorRef,
-     private router: Router,
+    private cdRef: ChangeDetectorRef
   ){
 
   }
@@ -222,12 +220,6 @@ renameWidget(){
 }
 renaming(){
   this.isRename = false;
-}
-
-isOpenJourney : boolean=false;
-openFullJourney(){
-    this.isOpenJourney = true;
-    this.router.navigate(['/environment/selected']);
 }
 
 

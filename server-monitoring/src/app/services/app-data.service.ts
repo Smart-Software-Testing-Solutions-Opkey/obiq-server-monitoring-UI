@@ -15,7 +15,6 @@ export class AppDataService {
   modalSubInstance:any
   persistermsg = ''
   isEnablePersister = false
-  leftPanelTotalData : any = null;
   widgets_data:any = [
     {
         "ID": "105265c0-e34f-4c2e-b8f1-adde9687fd9d",
