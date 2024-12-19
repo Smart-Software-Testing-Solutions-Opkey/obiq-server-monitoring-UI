@@ -1,1 +1,10 @@
-<p>filter-erp-application works!</p>
+
+    <kendo-dropdownlist [data]="filterApplications" [(ngModel)]="selectedApplication" (selectionChange)="ApplicationChange($event)"  [filterable]="true"  (filterChange)="handleFilter($event)">
+        <ng-template kendoDropDownListValueTemplate let-dataItem>
+            <span class="template">Application : {{selectedApplication}}</span> 
+          </ng-template>
+          <!-- <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span class="template">{{ dataItem }}</span> 
+          </ng-template> -->
+    </kendo-dropdownlist>
+
