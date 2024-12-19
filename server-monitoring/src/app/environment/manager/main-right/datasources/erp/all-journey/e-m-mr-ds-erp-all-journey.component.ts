@@ -78,4 +78,7 @@ export class EMMrDsErpAllJourneyComponent {
     this.skip += this.pageSize;
     this.getRecentSubActivityJourneyOfUser()
   }
+  openInNewTab(){
+    
+  }
 }

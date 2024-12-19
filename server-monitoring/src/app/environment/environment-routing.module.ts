@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
    
   },{
-    path: ':id',
+    path: 'selected',
     loadChildren: () => import('./selected/module/environment-selected.module').then(m => m.EnvironmentSelectedModule),
   },
 

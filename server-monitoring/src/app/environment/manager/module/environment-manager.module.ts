@@ -53,6 +53,7 @@ import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-con
 import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
 import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
 import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey.component';
+import { EnvironmentCommonModule } from '../../environment-common/environment-common.module';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -112,7 +113,8 @@ import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-
     FormsModule,
     GridsterComponent,
     GridsterItemComponent,
-    NgbModule
+    NgbModule,
+    EnvironmentCommonModule
   
   ],
   providers: [DatePipe],
@@ -138,6 +140,7 @@ import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-
     SelectedTraceInnerComponent,
     EMMrDsERPDComponent,
     EMMrDsEFEJourneyComponent
+    
   ]
 })
 export class EnvironmentManagerModule { }

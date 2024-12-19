@@ -14,7 +14,10 @@ const routes: Routes = [
      path: '',
      pathMatch: 'full',
      component: LoadingComponent
-  },
+  },{
+    path:'**',
+    component:LoadingComponent
+  }
   
 ];
 

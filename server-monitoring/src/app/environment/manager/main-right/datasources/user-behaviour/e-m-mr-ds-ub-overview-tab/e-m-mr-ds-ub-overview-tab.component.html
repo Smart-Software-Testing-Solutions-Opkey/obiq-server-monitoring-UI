@@ -56,6 +56,11 @@
                             <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors'}"></app-e-m-console-error-widget>
                         </div>
                     </ng-container>
+                    <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
+                        <div class="overview-panel widget-section p-3">
+                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors'}"></app-e-m-console-error-widget>
+                        </div>
+                    </ng-container>
                 </gridster-item>
             }
           </gridster>
