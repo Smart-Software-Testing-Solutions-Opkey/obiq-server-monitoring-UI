@@ -39,6 +39,10 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
      this.panelHeader = 'Ess Details'
       this.selectedPanel = 'ErpLogDetails'
     }
+    else if(this.selectedItem?.callsource == "Erp_functional_logs_Journey_pannel"){
+      this.panelHeader = 'Functional Error Journey'
+      this.selectedPanel = 'ErpFunctionalJourney'
+    }
   }
 
 }

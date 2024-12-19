@@ -52,6 +52,7 @@ import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-err
 import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
 import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
 import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
+import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -90,7 +91,8 @@ import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-
     EMApiErrorWidgetComponent,
     EMConsoleErrorWidgetComponent,
     EMFunctionalErrorWidgetComponent,
-    EMMrDsErpAllJourneyComponent
+    EMMrDsErpAllJourneyComponent,
+    EMMrDsEFEJourneyComponent
 
 
   ],
@@ -134,7 +136,8 @@ import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-
     ViewJourneyErrorComponent,
     EnvironmentManagerWidgetsGaugeMeterComponent,
     SelectedTraceInnerComponent,
-    EMMrDsERPDComponent
+    EMMrDsERPDComponent,
+    EMMrDsEFEJourneyComponent
   ]
 })
 export class EnvironmentManagerModule { }
