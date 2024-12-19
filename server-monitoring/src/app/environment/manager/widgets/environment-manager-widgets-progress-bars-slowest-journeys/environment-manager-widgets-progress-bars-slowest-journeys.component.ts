@@ -254,5 +254,9 @@ renameWidget(){
 renaming(){
   this.isRename = false;
 }
-
+openFullJourney(){
+  if(this.widgetType == 'ERP'){
+    this.app_service.routeTo('environment','erpjourney')
+  }
+}
 }

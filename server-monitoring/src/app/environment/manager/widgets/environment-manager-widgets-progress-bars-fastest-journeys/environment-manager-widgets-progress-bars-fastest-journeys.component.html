@@ -17,8 +17,7 @@
         </div>
 
         <div style="display:flex;justify-content: space-between;align-items: center;">
-            <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                {{'View full Journey' }}
+            <a href="javascript:void(0)" class="view-full-journey" style="text-decoration: none; color: #1C7C92;" (click)="openFullJourney()">View full Journey
             </a>
             <div *ngIf="Editable">
                  <div class="dropdown">
