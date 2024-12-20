@@ -18,8 +18,12 @@ export class FilterErpEnvironmentComponent implements OnInit {
   selectedEnvironment: any = []
   appType : any= "ORACLEFUSION";
   @Input('child_data') set child_data({ selectedEnvironment , appType}) {
-    this.selectedEnvironment = selectedEnvironment;
-    this.appType= appType;
+    if(selectedEnvironment){
+      this.selectedEnvironment = JSON.parse(JSON.stringify(selectedEnvironment))
+    }
+    if(appType){
+      this.appType = JSON.parse(JSON.stringify(appType)) ;
+    }
   }
 
   filterEnvironments: any = []
@@ -38,7 +42,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
   get_application() {
     var ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getEnvironmentNamesByApplication";
-    let formData = { appType: this.appType }
+    let formData = { appType: this.appType.toUpperCase() }
     this.app_service.make_post_server_call(ajax_url, formData)
       .subscribe({
         next: (result: any) => {

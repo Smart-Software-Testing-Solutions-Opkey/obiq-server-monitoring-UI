@@ -15,7 +15,9 @@ export class FilterErpApplicationComponent implements OnInit {
   }
 
   @Input('child_data') set child_data({ selectedApplication }) {
-    this.selectedApplication = selectedApplication;
+    if(selectedApplication){
+      this.selectedApplication = selectedApplication;
+    }
   }
   filterApplications : any= []
   tempfilterApplications = []

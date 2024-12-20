@@ -32,17 +32,23 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   }
   changeEnvironment(val){
     let obj = {...this.modelObj}
-    obj.modelApplication = val
+    obj.modelEnvironment = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
   }
   modelObj = {
     modelApplication:null,
     modelSearch:null,
     modelEnvironment:null,
+    modelProcess:null,
+    modelStrModule:null
 
   }
 
-  changeProcess(val){}
+  changeProcess(val){
+    let obj = {...this.modelObj}
+    obj.modelProcess = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+  }
   changeErpModule(e){
     
   }

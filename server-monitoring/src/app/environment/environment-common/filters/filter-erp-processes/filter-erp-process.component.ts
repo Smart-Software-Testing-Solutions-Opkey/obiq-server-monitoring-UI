@@ -16,9 +16,15 @@ export class FilterErpProcessComponent {
     }
 
     @Input('child_data') set child_data({ selectedProcess,application,strmodules }) {
-      this.selectedProcess = selectedProcess;
-      this.application = application;
-      this.strmodules = strmodules;
+      if(selectedProcess){
+        this.selectedProcess = selectedProcess;
+      }
+      if(application){
+        this.application = application;
+      }
+      if(strmodules){
+        this.strmodules = strmodules;
+      }
 
     }
 
