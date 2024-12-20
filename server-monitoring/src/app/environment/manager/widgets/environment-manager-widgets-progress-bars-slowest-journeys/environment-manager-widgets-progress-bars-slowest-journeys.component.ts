@@ -1,13 +1,4 @@
-// import { Component } from '@angular/core';
 
-// @Component({
-//   selector: 'app-environment-manager-widgets-progress-bars-slowest-journeys',
-//   templateUrl: './environment-manager-widgets-progress-bars-slowest-journeys.component.html',
-//   styleUrl: './environment-manager-widgets-progress-bars-slowest-journeys.component.scss'
-// })
-// export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent {
-
-// }
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -52,28 +43,24 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   }
   datasourceProgressBar: Array<any> = [
     // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
-    // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
-    // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
-    // { Name: "GuideName01", passpercent: 30, failpercent: 70 },
+    
   ]
 
   view: any = null;
   @Input()Editable:boolean = false
-   widgetData={
-    widgetType: "USER_JOURNEY_TOP_SLOW_WIDGET"
-   }
+  
   title:string = ''
   maxCount: number = 0;
-  widgetType = ''
-  @Input('child_data') set child_data({view,title,widgetType}) {
+  widgetType =  "USER_JOURNEY_TOP_SLOW_WIDGET"
+  @Input('child_data') set child_data({view,title}) {
    this.view = view;
    this.title=title;
-   this.widgetType = widgetType
+  
   }
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){
-    if(this?.view?.viewId && this?.widgetData?.widgetType){
+    if(this?.view?.viewId && this.widgetType){
       this.datasourceProgressBar = [];
       this.getWidgetData()
       this.createChart();
@@ -104,33 +91,19 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
     const form_data = {
       "appType": "ORACLEFUSION",
       "viewId": this?.view?.viewId,
-      // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
-      "widgetType": this.widgetData?.widgetType,
+      "widgetType": this.widgetType,
     };
    
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
          if(result){
-          if(this?.widgetData?.widgetType == "USER_GUIDE_LIST_PER_PROCESS_WIDGET" && typeof result == 'object'){
-            this.maxCount = Math.max(...Object.values(result).map((item: any) => item.count));
-            this.datasourceProgressBar = Object.keys(result).map(item => {
-              const count = result[item].count;
-              const passPercent = (count / this.maxCount) * 100;
-              const failPercent = 100 - passPercent;
-              return {
-                subActivityName: item, 
-                passPercent: passPercent, 
-                failPercent: failPercent,
-                count:count
-              };
-            })
-          }
-            else 
-             if ((this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET" || this?.widgetData?.widgetType == "USER_JOURNEY_TOP_FAST_WIDGET") && typeof result == 'object') {
+         
+            
+             if ( typeof result == 'object') {
              { 
               this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
-                if(this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET"){}
+     
                 const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
                 return {
                   ...item,
@@ -143,7 +116,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
           else{
             // this.datasourceProgressBar = result.slice(0, 5);
             this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
-              if(this?.widgetData?.widgetType == "USER_JOURNEY_MOST_COMMON_WIDGET"){}
+              
               const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
               return {
                 ...item,
@@ -255,8 +228,8 @@ renaming(){
   this.isRename = false;
 }
 openFullJourney(){
-  if(this.widgetType == 'ERP'){
-    this.app_service.routeTo('environment','erpjourney')
-  }
+  // if(this.widgetType == 'ERP'){
+  //   this.app_service.routeTo('environment','erpjourney')
+  // }
 }
 }

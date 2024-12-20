@@ -246,8 +246,7 @@ ngAfterViewInit(): void {
     this.selectedView2 = this.totalViews[0];
     this.selectedViewSettings = this.selectedView2;
     this.dataChanged.viewSelected = this.selectedView2
-    // this.set_Selected_VIew(this.selectedView)
-   console.log("change===========",JSON.stringify(this.dataChanged.analyticsTypes)) 
+   
     this.dataChanged.analyticsTypes['isSelected']=false
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)

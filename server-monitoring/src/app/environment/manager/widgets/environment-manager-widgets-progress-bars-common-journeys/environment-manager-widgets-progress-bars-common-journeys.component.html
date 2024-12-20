@@ -56,30 +56,7 @@
 
         </kendo-grid-column>
 
-        @if(widgetData?.widgetType == 'USER_GUIDE_LIST_PER_PROCESS_WIDGET' ) {
-        <kendo-grid-column  title="" [width]="220">
 
-            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <div class="flex-center">
-                    <div class="progress w-100" style="border-radius: 25px; height: 0.5rem;">
-                        <div class="progress-bar bg-info" role="progressbar"
-                            [style.width]="dataItem?.passPercent  + '%'"
-                            style="background-color: #1C7C92 !important;" container="body"></div>
-                            <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
-                            container="body"></div>
-                    </div>
-                    <span class="ps-3 pe-2 text-end">
-                        <span>
-                            {{dataItem.count}}
-                        </span>
-                    </span>
-                </div>
-            </ng-template> 
-
-        </kendo-grid-column>
-        }  @else if(widgetData?.widgetType == 'USER_JOURNEY_TOP_SLOW_WIDGET' || widgetData?.widgetType ==  "USER_JOURNEY_TOP_FAST_WIDGET") {
-            <!-- <kendo-grid-column title="" field="timeStampStr" [width]="220">
-            </kendo-grid-column> -->
             <kendo-grid-column title="" field="timeStampStr">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                     <span class="k_grid_text text_wrap text-start">
@@ -88,8 +65,8 @@
                     </span>
                 </ng-template>
             </kendo-grid-column>
-        }
-        @else{
+        
+        
           
             <kendo-grid-column title="" field="timeStampStr"  >
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -115,7 +92,7 @@
                    
                 </ng-template>
             </kendo-grid-column>
-        }
+        
         <ng-template kendoGridNoRecordsTemplate>
             <div class="no-data-found" style="height: 11rem !important;">
                 <div class="no-data-found-content">
