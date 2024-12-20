@@ -11,6 +11,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from "../../pipes/search/search.pipe";
 import { StringArrayCutterPipe } from 'src/app/pipes/string-array-cutter/string-array-cutter.pipe';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnvrionmentCommonFilterComponent } from './envrionment-common-filter/envrionment-common-filter.component';
+import { FilterSearchComponent } from './filters/filter-search/filter-search.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     PersisterModalComponent,
     FilterErpApplicationComponent,
     FilterErpEnvironmentComponent,
+    EnvrionmentCommonFilterComponent,
+    FilterSearchComponent
 
   ],
   imports: [
@@ -34,7 +38,9 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
   exports:[
     PersisterModalComponent,
     FilterErpApplicationComponent,
-    FilterErpEnvironmentComponent
+    FilterErpEnvironmentComponent,
+    EnvrionmentCommonFilterComponent,
+    FilterSearchComponent
   ],
   providers:[
     SearchPipe,

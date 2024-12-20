@@ -1,10 +1,15 @@
 <div id="div-topJourneyComponent" class="app_container flex_box_column h-100">
 
- 
+ <div class="header d-flex">
+    <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="backtomenu()"><i class="oci oci-chevron-left text_muted"></i></button>
+<div class="left">
+    <h3 class="mb-0 text-ellipsis">All journey</h3>
+</div>
+ </div>
 
-    <div class="app_body scrollable">
-
-        <div id="alljourney" class="h-100 obiq-grid-layout">
+    <div class="app_body ">
+        <app-envrionment-common-filter></app-envrionment-common-filter>
+        <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
             <kendo-grid [data]="journeyDataSource" [navigable]="true" [hideHeader]="false" [pageable]="false"
                 (scrollBottom)="load_more()"
                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0 remove_right_padding">

@@ -81,4 +81,7 @@ export class EMMrDsErpAllJourneyComponent {
   openInNewTab(){
     
   }
+  backtomenu(){
+    this.app_service.routeTo('environment','summary')
+  }
 }

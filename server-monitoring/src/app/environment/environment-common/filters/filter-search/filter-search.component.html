@@ -1,0 +1,15 @@
+<div >
+    <span container="body" ngbtooltip="Search" (click)="toggleSearch()">
+        <i class="oci oci-search "></i>
+    </span>
+    @if(openSearch){
+
+        <input #searchInput autocomplete="off" class="" placeholder="Type and enter to search" type="text" [(ngModel)]="searchModel">
+    }
+    @if (searchModel?.length>0) {
+
+        <span container="body" ngbtooltip="Clear Search" (click)="clearSearch()">
+            <i class="oci oci-x"></i>
+        </span>
+    }
+</div>
