@@ -1,5 +1,5 @@
 
-    <kendo-dropdownlist [data]="filterApplications" [(ngModel)]="selectedApplication" (selectionChange)="ApplicationChange($event)"  [filterable]="true"  (filterChange)="handleFilter($event)">
+    <kendo-dropdownlist [data]="filterApplications" [(ngModel)]="selectedApplication" (selectionChange)="ApplicationChange($event)"  [filterable]="true"  (filterChange)="handleFilter($event)" style="width:200px;">
         <ng-template kendoDropDownListValueTemplate let-dataItem>
             <span class="template">Application : {{selectedApplication}}</span> 
           </ng-template>

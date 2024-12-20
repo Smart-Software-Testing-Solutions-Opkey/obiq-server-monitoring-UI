@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, output } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, output } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,8 +15,11 @@ export class FilterErpProcessComponent {
     ) {
     }
 
-    ngOnInit(): void {
-      this.get_process();
+    @Input('child_data') set child_data({ selectedProcess,application,strmodules }) {
+      this.selectedProcess = selectedProcess;
+      this.application = application;
+      this.strmodules = strmodules;
+
     }
 
     application= "ORACLEFUSION";
@@ -61,6 +64,14 @@ export class FilterErpProcessComponent {
     search_filter: string = '';
     selectedCheckboxes: any = {};
     obj_process = {}   
+
+   
+
+    ngOnInit(): void {
+      this.get_process();
+    }
+
+    
   
     get_process() {
       var ajax_url = environment.BASE_OBIQ_SERVER_URL + "testdiscovery/ERP/GetProcessesOfModules";
@@ -90,7 +101,7 @@ export class FilterErpProcessComponent {
   select_Process(e, item,ind) {
     if (e.target.checked) {
       this.selectedProcess.push(item);
-      this.onSelectedProcessChange.emit(item);
+      
     }
     else {
       this.selectedProcess.splice(ind,1);
@@ -98,7 +109,7 @@ export class FilterErpProcessComponent {
     
     let a = this.selectedProcess
     this.selectedProcess = JSON.parse(JSON.stringify(this.selectedProcess));
-
+    this.onSelectedProcessChange.emit(this.selectedProcess);
     
   }
 
@@ -107,8 +118,9 @@ export class FilterErpProcessComponent {
     this.filterProcess.forEach(item => {
       this.selectedCheckboxes[item] = false;
     });
-
-   
+    this.onSelectedProcessChange.emit(this.selectedProcess);
 
   }
+
+
 }

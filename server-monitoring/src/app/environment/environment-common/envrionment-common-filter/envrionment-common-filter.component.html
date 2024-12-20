@@ -3,6 +3,7 @@
     <app-filter-search (searchedText)="searched($event)"></app-filter-search>
     <app-filter-erp-application (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
     <app-filter-erp-environment (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+    <!-- <app-filter-erp-process (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process> -->
     <div class="filter_content">
         <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
             <span class="sp_dropdown">
@@ -27,6 +28,8 @@
 
              <app-filter-erp-application (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
              <app-filter-erp-environment (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+             <app-filter-erp-process (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
+
          </div>
 </kendo-window>
 

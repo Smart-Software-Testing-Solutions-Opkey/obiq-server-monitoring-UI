@@ -15,22 +15,30 @@ export class FilterErpEnvironmentComponent implements OnInit {
   ) {
   }
 
+  selectedEnvironment: any = []
+  appType : any= "ORACLEFUSION";
+  @Input('child_data') set child_data({ selectedEnvironment , appType}) {
+    this.selectedEnvironment = selectedEnvironment;
+    this.appType= appType;
+  }
+
   filterEnvironments: any = []
   tempfilterEnvironments = []
-  selectedEnvironment: any = []
+  
   onSelectedEnvironmentChange = output<any>();
   search_filter: string = '';
   selectedCheckboxes: any = {};
   obj_env = {}
+  
 
-  @Input()
+
   ngOnInit(): void {
     this.get_application();
   }
 
   get_application() {
     var ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/UserJourneyController/getEnvironmentNamesByApplication";
-    let formData = { appType: "ORACLEFUSION" }
+    let formData = { appType: this.appType }
     this.app_service.make_post_server_call(ajax_url, formData)
       .subscribe({
         next: (result: any) => {
@@ -52,8 +60,6 @@ export class FilterErpEnvironmentComponent implements OnInit {
         }
       });
   }
-
-
 
   clear_search() {
     this.search_filter = '';

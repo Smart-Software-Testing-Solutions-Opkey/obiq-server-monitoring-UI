@@ -31,4 +31,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   changeEnvironment(val){
 
   }
+
+  changeProcess(val){
+    
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, output, Output } from '@angular/core';
+import { Component, Input, OnInit, output, Output } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,9 @@ export class FilterErpApplicationComponent implements OnInit {
   ){
   }
 
+  @Input('child_data') set child_data({ selectedApplication }) {
+    this.selectedApplication = selectedApplication;
+  }
   filterApplications : any= []
   tempfilterApplications = []
   selectedApplication :any =null
