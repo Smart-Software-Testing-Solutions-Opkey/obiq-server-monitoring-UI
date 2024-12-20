@@ -11,15 +11,16 @@ import { environment } from 'src/environments/environment';
 export class FilterErpEnvironmentComponent implements OnInit {
   constructor(
     public app_service: AppService,
-     private cdr: ChangeDetectorRef
   ) {
   }
 
   selectedEnvironment: any = []
+  tempSelected = []
   appType : any= "ORACLEFUSION";
   @Input('child_data') set child_data({ selectedEnvironment , appType}) {
     if(selectedEnvironment){
-      this.selectedEnvironment = JSON.parse(JSON.stringify(selectedEnvironment))
+      this.tempSelected = JSON.parse(JSON.stringify(selectedEnvironment))
+    
     }
     if(appType){
       this.appType = JSON.parse(JSON.stringify(appType)) ;
@@ -54,9 +55,12 @@ export class FilterErpEnvironmentComponent implements OnInit {
               this.obj_env[val.envName] = val;
             })
 
-            console.log(this.obj_env)
-
-
+            if(this.tempSelected.length>0){
+              this.selectedEnvironment = this.tempSelected
+              this.selectedEnvironment.forEach(item => {
+                this.selectedCheckboxes[item.envName] = true;
+              });
+            }
           }
         },
         error: (error: any) => {
@@ -70,17 +74,23 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
   }
 
+  tempSelectedEnvString : any;
+  convert_to_string(selectedEnvironment){
+    this.tempSelectedEnvString = this.selectedEnvironment.map( item => item.envName);
+    return this.tempSelectedEnvString;
+  }
+  
   select_Environment(e, item,ind) {
     if (e.target.checked) {
-      this.selectedEnvironment.push(item);
+      this.selectedEnvironment.push(item); 
     }
     else {
       this.selectedEnvironment.splice(ind,1);
     }
     
     let a = this.selectedEnvironment
-    this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment));
-    this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
+    // this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment));
+    this.onSelectedEnvironmentChange.emit([...this.selectedEnvironment]);
 
     
   }
@@ -93,6 +103,8 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
    
     this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
+
+    
   }
  
 }

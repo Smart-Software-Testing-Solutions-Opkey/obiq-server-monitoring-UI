@@ -9,18 +9,21 @@ export class StringArrayCutterPipe implements PipeTransform {
  
     transform(dataItem1: any, dataItem2: any, dataItem3: any, dataItem4: any, type: any): any { 
         if (type == "string_array_cutter") {
+           
           return this.string_array_cutter(dataItem1, dataItem2);
         } 
         else if (type == "string_array_comma") {
           return this.string_array_comma(dataItem1);
         }
         else if (type == "obj_type_array_cutter") {
+            dataItem1= JSON.parse(JSON.stringify(dataItem1))
           return this.obj_type_array_cutter(dataItem1, dataItem2, dataItem3, dataItem4)
         }
         else if (type == "obj_array_comma") {
           return this.obj_array_comma(dataItem1, dataItem2, dataItem3);
         }
         else if (type == "obj_type_array_comma") {
+            dataItem1= JSON.parse(JSON.stringify(dataItem1))
           return this.obj_type_array_comma(dataItem1, dataItem2, dataItem3);
         }
       return null;
