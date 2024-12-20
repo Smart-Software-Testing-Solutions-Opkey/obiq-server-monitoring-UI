@@ -11,8 +11,7 @@ export class FilterSearchComponent {
   toggleSearch(){
     this.openSearch = !this.openSearch
     setTimeout(() => {
-      this.searchInput.nativeElement
-      .focus()
+      this.searchInput?.nativeElement?.focus()
     }, 200);
   }
   openSearch = false
