@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-filter:before {
+  content: "\e92e";
+}
+
 .oci-lightbulb:before {
   content: "\e92d";
 }
