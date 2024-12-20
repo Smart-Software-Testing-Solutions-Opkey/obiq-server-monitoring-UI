@@ -13,6 +13,9 @@ import { StringArrayCutterPipe } from 'src/app/pipes/string-array-cutter/string-
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvrionmentCommonFilterComponent } from './envrionment-common-filter/envrionment-common-filter.component';
 import { FilterSearchComponent } from './filters/filter-search/filter-search.component';
+import { FilterErpProcessComponent } from './filters/filter-erp-processes/filter-erp-process/filter-erp-process.component';
+
+
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import { FilterSearchComponent } from './filters/filter-search/filter-search.com
     FilterErpApplicationComponent,
     FilterErpEnvironmentComponent,
     EnvrionmentCommonFilterComponent,
-    FilterSearchComponent
+    FilterSearchComponent,
+    FilterErpProcessComponent,
+
 
   ],
   imports: [
@@ -40,7 +45,8 @@ import { FilterSearchComponent } from './filters/filter-search/filter-search.com
     FilterErpApplicationComponent,
     FilterErpEnvironmentComponent,
     EnvrionmentCommonFilterComponent,
-    FilterSearchComponent
+    FilterSearchComponent,
+    FilterErpProcessComponent
   ],
   providers:[
     SearchPipe,
