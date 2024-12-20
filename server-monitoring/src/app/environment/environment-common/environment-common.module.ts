@@ -14,9 +14,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnvrionmentCommonFilterComponent } from './envrionment-common-filter/envrionment-common-filter.component';
 import { FilterSearchComponent } from './filters/filter-search/filter-search.component';
 import { FilterErpProcessComponent } from './filters/filter-erp-processes/filter-erp-process/filter-erp-process.component';
-
-
-
+import { WindowModule } from "@progress/kendo-angular-dialog";
 
 @NgModule({
   declarations: [
@@ -38,6 +36,8 @@ import { FilterErpProcessComponent } from './filters/filter-erp-processes/filter
     SearchPipe,
     StringArrayCutterPipe,
     NgbTooltipModule,
+    WindowModule,
+
    
 ],
   exports:[

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { WindowState } from '@progress/kendo-angular-dialog';
 @Component({
   selector: 'app-envrionment-common-filter',
   templateUrl: './envrionment-common-filter.component.html',
@@ -17,6 +17,18 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     
   }
   searched(val){
+
+  }
+  showRightPanel = false
+  public windowState: WindowState = "default";
+  openRightPanel(){
+    this.showRightPanel = true
+
+  }
+  closeRightPanel(){
+    this.showRightPanel = false
+  }
+  changeEnvironment(val){
 
   }
 }

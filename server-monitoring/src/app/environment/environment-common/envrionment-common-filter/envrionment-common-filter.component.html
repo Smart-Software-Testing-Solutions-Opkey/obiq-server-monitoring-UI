@@ -2,8 +2,9 @@
 <div class="showndiv d-flex">
     <app-filter-search (searchedText)="searched($event)"></app-filter-search>
     <app-filter-erp-application (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+    <app-filter-erp-environment (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
     <div class="filter_content">
-        <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button">
+        <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
             <span class="sp_dropdown">
                 <i class="oci oci-trace font_16px" container="body" ngbtooltip="Filter"></i>
               <div class="filter_count">{{filterCount}}</div>
@@ -12,3 +13,21 @@
     </div>
     <button>Search</button>
 </div>
+
+
+<kendo-window *ngIf="showRightPanel" [draggable]="false" [resizable]="false"
+        [(state)]="windowState" class="inner_right_section_k_window">
+        <div class="header d-flex justify-content-between">
+        <div class="left">
+            <h3 class="mb-0 text-ellipsis">Advance Filter</h3>
+        </div>
+        <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="closeRightPanel()"><i class="oci oci-x text_muted"></i></button>
+         </div>
+         <div class="modalBody scrollable">
+
+             <app-filter-erp-application (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+             <app-filter-erp-environment (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+         </div>
+</kendo-window>
+
+    <div *ngIf="showRightPanel" class="sliderOverlay"></div>
