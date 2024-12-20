@@ -42,7 +42,9 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
 
   }
 
-  changeProcess(val){
+  changeProcess(val){}
+  changeErpModule(e){
     
   }
+  
 }

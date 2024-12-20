@@ -15,6 +15,7 @@ import { EnvrionmentCommonFilterComponent } from './envrionment-common-filter/en
 import { FilterSearchComponent } from './filters/filter-search/filter-search.component';
 import { FilterErpProcessComponent } from './filters/filter-erp-processes/filter-erp-process/filter-erp-process.component';
 import { WindowModule } from "@progress/kendo-angular-dialog";
+import { FilterErpModuleComponent } from './filters/filter-erp-module/filter-erp-module.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { WindowModule } from "@progress/kendo-angular-dialog";
     EnvrionmentCommonFilterComponent,
     FilterSearchComponent,
     FilterErpProcessComponent,
-
+    FilterErpModuleComponent
 
   ],
   imports: [
