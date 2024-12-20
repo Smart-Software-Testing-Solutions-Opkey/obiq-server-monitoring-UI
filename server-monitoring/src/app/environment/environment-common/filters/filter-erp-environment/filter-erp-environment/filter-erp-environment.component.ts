@@ -69,7 +69,6 @@ export class FilterErpEnvironmentComponent implements OnInit {
   select_Environment(e, item,ind) {
     if (e.target.checked) {
       this.selectedEnvironment.push(item);
-      this.onSelectedEnvironmentChange.emit(item);
     }
     else {
       this.selectedEnvironment.splice(ind,1);
@@ -77,6 +76,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
     
     let a = this.selectedEnvironment
     this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment));
+    this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
 
     
   }
@@ -88,7 +88,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
     });
 
    
-
+    this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
   }
  
 }

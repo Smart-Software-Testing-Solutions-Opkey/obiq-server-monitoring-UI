@@ -10,7 +10,9 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
 
   }
   changeApplication(val){
-    
+    let obj = {...this.modelObj}
+    obj.modelApplication = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
   }
   filterCount = 0
   ngOnInit(): void {
@@ -29,6 +31,14 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     this.showRightPanel = false
   }
   changeEnvironment(val){
+    let obj = {...this.modelObj}
+    obj.modelApplication = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+  }
+  modelObj = {
+    modelApplication:null,
+    modelSearch:null,
+    modelEnvironment:null,
 
   }
 
