@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { WindowState } from '@progress/kendo-angular-dialog';
 @Component({
   selector: 'app-envrionment-common-filter',
@@ -9,17 +9,20 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   constructor(){
 
   }
+
+  onFilterSelected = output<any>();
   changeApplication(val){
     let obj = {...this.modelObj}
     obj.modelApplication = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
+    this.sendFilterData()
   }
   filterCount = 0
   ngOnInit(): void {
-    
+    this.sendFilterData()
   }
   searched(val){
-
+    this.sendFilterData()
   }
   showRightPanel = false
   public windowState: WindowState = "default";
@@ -34,23 +37,34 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     let obj = {...this.modelObj}
     obj.modelEnvironment = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
+    this.sendFilterData()
   }
   modelObj = {
-    modelApplication:null,
+    modelApplication:"ORACLEFUSION",
     modelSearch:null,
     modelEnvironment:null,
     modelProcess:null,
-    modelStrModule:null
-
+    modelStrModule:null,
+    modelUser:null,
+    modelBrowserList:null,
+    modelStatus:null,
+    modelDate:{
+      from:null,
+      to:null
+    }
   }
 
   changeProcess(val){
     let obj = {...this.modelObj}
     obj.modelProcess = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
+    this.sendFilterData()
   }
   changeErpModule(e){
-    
+    this.sendFilterData()
   }
   
+  sendFilterData(){
+    this.onFilterSelected.emit(this.modelObj)
+  }
 }

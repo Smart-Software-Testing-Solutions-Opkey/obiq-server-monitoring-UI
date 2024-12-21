@@ -8,7 +8,7 @@
  </div>
 
     <div class="app_body ">
-        <app-envrionment-common-filter></app-envrionment-common-filter>
+        <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"></app-envrionment-common-filter>
         <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
             <kendo-grid [data]="journeyDataSource" [navigable]="true" [hideHeader]="false" [pageable]="false"
                 (scrollBottom)="load_more()"

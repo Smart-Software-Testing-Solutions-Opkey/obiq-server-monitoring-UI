@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { AppDataService } from 'src/app/services/app-data.service';
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-all-journey',
@@ -9,10 +10,11 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
   styleUrl: './e-m-mr-ds-erp-all-journey.component.scss'
 })
 export class EMMrDsErpAllJourneyComponent {
-  constructor(  public app_service: AppService,){}
+  constructor(  public app_service: AppService,
+    private dataService:AppDataService){}
 
   ngOnInit(): void {
-    this.getRecentSubActivityJourneyOfUser()
+   
   }
 
   journeyDataSourceTemp: any[] = [];
@@ -28,19 +30,19 @@ export class EMMrDsErpAllJourneyComponent {
    
 
     let formData = {
-      "appType": "ORACLEFUSION",
+      "appType": this.filterObj.modelApplication.toUpperCase(),
       "fromTimeInMillis": 1704047400000,
       "toTimeInMillis": 1734518432353,
-      "modules": [],
-      "process": [],
-      "userNameList": [],
-      "environments": [],
-      "browserList": [],
-      "status": [],
+      "modules": this.filterObj.modelStrModule?this.filterObj.modelStrModule:[],
+      "process": this.filterObj.modelProcess?this.filterObj.modelProcess:[],
+      "userNameList": this.filterObj.modelUser?this.filterObj.modelUser:[],
+      "environments": this.filterObj.modelEnvironment?this.filterObj.modelEnvironment:[],
+      "browserList": this.filterObj.modelBrowserList?this.filterObj.modelBrowserList:[],
+      "status": this.filterObj.modelStatus?this.filterObj.modelStatus:[],
       "limitBy": this.pageSize,
-      "offset": 0,
-      "projectId": "3f0e8a1d-f215-4f3e-90bc-b52911482520",
-      "textToSearch": "",
+      "offset": this.skip,
+      "projectId": this.dataService.UserDto.ProjectDTO.P_ID,
+      "textToSearch": this.filterObj.modelSearch?this.filterObj.modelSearch:'',
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET"
   }
 
@@ -83,5 +85,10 @@ export class EMMrDsErpAllJourneyComponent {
   }
   backtomenu(){
     this.app_service.routeTo('environment','summary')
+  }
+  filterObj:any = {}
+  filterChanged(val){
+    this.filterObj = val
+    this.getRecentSubActivityJourneyOfUser()
   }
 }
