@@ -69,6 +69,13 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     this.modelObj= JSON.parse(JSON.stringify(obj))
     this.sendFilterData()
   }
+
+  changeStatus(val){
+    let obj = {...this.modelObj}
+    obj.modelStatus = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+    this.sendFilterData() 
+  }
   
   sendFilterData(){
     this.onFilterSelected.emit(this.modelObj)

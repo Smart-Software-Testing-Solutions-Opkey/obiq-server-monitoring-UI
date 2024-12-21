@@ -31,6 +31,7 @@
              <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
             <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
              <app-filter-erp-module (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
+             <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
          </div> 
 </kendo-window>
 

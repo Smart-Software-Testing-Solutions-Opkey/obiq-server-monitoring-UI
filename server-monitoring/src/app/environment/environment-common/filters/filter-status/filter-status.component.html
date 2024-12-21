@@ -1,0 +1,72 @@
+<div ngbDropdown container="body" [autoClose]="'outside'" >
+    <button type="button" class="btn bt_dropdown bt_dropdown_filter btn-bg-white" ngbDropdownToggle [ngClass]="(selectedStatus.length>0)?'dropdown_focus' : ''" >
+        Status : &nbsp;
+ 
+        <span *ngIf="selectedStatus.length==0" class="sp_dropdown"
+            ngbTooltip="Selected Status All" container="body">
+            All
+        </span>
+ 
+        <span *ngIf=" selectedStatus.length>0" class="sp_dropdown" container="body"
+            ngbTooltip="Selected Status{{ selectedStatus| stringArrayCutter  : obj_display :'displayName' : '':'obj_type_array_comma'}}">
+            {{ selectedStatus | stringArrayCutter : '10': obj_display : 'displayName': 'obj_type_array_cutter' }}
+
+        </span>
+ 
+    </button>
+ 
+    <div ngbDropdownMenu>
+ 
+        <div class="p-1">
+            <div class="search_panel searchToggle" >
+                <span ngbTooltip="Search" container="body" class="search_icon"><i class="oci oci-search"></i></span>
+ 
+                <input type="text" class="form-control search_input layout_placeholder" placeholder="Search filters"
+                    aria-label="Search" name="search" [(ngModel)]="search_filter" autocomplete="off" style="width:100%;">
+ 
+                <span ngbTooltip="Clear Search" container="body" class="clear_search_icon" (click)="clear_search()">
+                    <i class="oci oci-x"></i>
+                </span>
+            </div>
+        </div>
+ 
+        <a *ngIf="selectedStatus.length>0" class="dropdown-item filter_clear" href="javascript:void(0)"
+            (click)="clear_filter()">
+            Clear All
+        </a>
+
+        <ng-container *ngIf="filterStatus.length != 0; else nodataTemplate">
+ 
+            <div class="scrollable dropdown_menu_filter">
+                <ng-container *ngFor=" let item of filterStatus | search : 'displayName' : search_filter;let i = index">
+ 
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <label>
+                            <input type="checkbox" 
+                                
+                                [(ngModel)]="selectedCheckboxes[item.displayName]"
+                                (change)="select_Status($event,item,i)">
+   
+                            <span class="word_wrap">{{item.displayName}}</span>
+                        </label>
+                    </a>
+   
+                </ng-container>
+            </div>
+ 
+        </ng-container>
+ 
+        <ng-template #nodataTemplate>
+ 
+            <div class="no_data_found" style="height: 8rem;">
+                <div class="no_data_found_content">
+                    <img class="no_data_found_content_img" src="/opkeyone/assets/icon-image/nodata-img.png" alt="img">
+                    <p class="no_data_found_content_text">No data available</p>
+                </div>
+            </div>
+ 
+        </ng-template>
+    </div>
+</div>
+
+
