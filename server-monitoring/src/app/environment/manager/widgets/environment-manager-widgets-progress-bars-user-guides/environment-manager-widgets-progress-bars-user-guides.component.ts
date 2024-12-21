@@ -13,6 +13,8 @@ import {
   ApexGrid,
   ApexYAxis
 } from "ng-apexcharts";
+import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -34,7 +36,8 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
   constructor(
       private app_service: AppService,
       private service_data: AppDataService,
-      private cdRef: ChangeDetectorRef
+      private cdRef: ChangeDetectorRef,
+      private modalService: NgbModal,
     ){
   
     }
@@ -196,4 +199,23 @@ renaming(){
   this.isRename = false;
 }
   
+onViewAllProcess(event: Event): void {
+  event.preventDefault();
+  console.log('View All Process clicked');
+   const modalRef = this.modalService.open(ManagerRightPanelComponent, {
+     backdrop: 'static',
+     keyboard: false,
+     size: 'full',
+     centered: true,
+     windowClass: 'layout-modal-right panel-end w-75'
+   });
+   modalRef.result.then((result) => {
+   }, (response) => {
+     if (response == 'close modal') {
+       return;
+     }
+   });
+   modalRef.componentInstance.selectedItem = { callsource: 'Erp_View_All_process_', data: "ErpViewAllProcess" };
+ 
+}
 }

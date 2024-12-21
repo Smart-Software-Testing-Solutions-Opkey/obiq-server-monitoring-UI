@@ -16,9 +16,13 @@
           </div>
     
           <div style="display:flex;justify-content: space-between;align-items: center;">
-            <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                {{  'Filter'  }}
-            </a>
+            <a
+            href="#"
+            class="view-full-journey"
+            style="text-decoration: none; color: #1C7C92;"
+            (click)="onViewAllProcess($event)">
+            {{ 'View All Process' }}
+          </a>
               <div *ngIf="Editable">
                    <div class="dropdown">
                           <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
