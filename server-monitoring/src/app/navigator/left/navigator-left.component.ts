@@ -170,7 +170,7 @@ ngAfterViewInit(): void {
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         if (result == null || result?.length == 0) {
-          this.router.navigate(['environment/configure']);
+          this.router.navigateByUrl('/environment/configure');
         }
         console.log(result, "get all  views resultS")
         if (result?.length > 0) {
@@ -292,6 +292,9 @@ ngAfterViewInit(): void {
         next: (result: any) => {
           window.loadingStop("#navigator-left");
           this.getAllVIews();
+          if(this.totalViews.length<1){
+            this.router.navigateByUrl('/environment/configure')
+          }
 
         },
         error: (error: any) => {
