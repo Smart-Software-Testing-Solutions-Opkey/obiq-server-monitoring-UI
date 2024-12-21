@@ -31,7 +31,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
   this.get_Functional_log_error();
   }
    onSelectionChange(e) {
-     console.log(this.analyticsType,"this is analytics type");
+     console.log(this.analyticsType,"this is analytics type ");
      console.log(this.view,"this is the view")
       let dataItem = e.dataItem
       const modalRef = this.modalService.open(ManagerRightPanelComponent, {
