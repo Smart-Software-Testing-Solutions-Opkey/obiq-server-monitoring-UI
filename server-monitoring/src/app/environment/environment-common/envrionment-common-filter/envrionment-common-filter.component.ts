@@ -63,6 +63,12 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   changeErpModule(e){
     this.sendFilterData()
   }
+  changeUser(val){
+    let obj = {...this.modelObj}
+    obj.modelUser = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+    this.sendFilterData()
+  }
   
   sendFilterData(){
     this.onFilterSelected.emit(this.modelObj)

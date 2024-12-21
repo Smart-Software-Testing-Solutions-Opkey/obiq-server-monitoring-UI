@@ -29,9 +29,9 @@
             <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
             <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
              <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
-
+            <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
              <app-filter-erp-module (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
-         </div>
+         </div> 
 </kendo-window>
 
     <div *ngIf="showRightPanel" class="sliderOverlay"></div>
