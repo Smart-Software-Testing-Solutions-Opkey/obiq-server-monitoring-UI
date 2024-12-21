@@ -66,7 +66,7 @@
     
            <div class="selection-right">
             <div *ngIf="obj_configuration_setting.tab=='datasource'">
-                <app-configuration-settings-datasource [child_data]="{obj_configuration_setting: obj_configuration_setting, dispaly_viewName: dispaly_viewName, dispaly_DataSource: dispaly_DataSource, display_ErpApplication: display_ErpApplication, display_SystemDiagnosticsData: display_SystemDiagnosticsData}" ></app-configuration-settings-datasource>
+                <app-configuration-settings-datasource (onViewNameInputChange)="viewNameInputChange($event)"[child_data]="{obj_configuration_setting: obj_configuration_setting, dispaly_viewName: dispaly_viewName, dispaly_DataSource: dispaly_DataSource, display_ErpApplication: display_ErpApplication, display_SystemDiagnosticsData: display_SystemDiagnosticsData,isDuplicateName:isDuplicateName}" ></app-configuration-settings-datasource>
               </div>
               
               <div *ngIf="obj_configuration_setting.tab=='ERP Analytics'">

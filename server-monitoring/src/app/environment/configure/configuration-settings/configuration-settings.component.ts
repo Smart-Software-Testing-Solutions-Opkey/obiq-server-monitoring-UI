@@ -73,6 +73,11 @@ export class ConfigurationSettingsComponent {
     visitedTabs:[]
   }
 
+  viewNameInputChange(data){
+  
+  this.isDuplicateName=data
+  
+  }
 
   datasource_item = [];
   next() {
@@ -80,7 +85,7 @@ export class ConfigurationSettingsComponent {
     if (!this.ValidationCheck()) {
       return;
     }
-
+  
     console.log("obj_configuration_setting==**********************", this.obj_configuration_setting);
 
     this.datasource_item = [];
@@ -333,7 +338,7 @@ export class ConfigurationSettingsComponent {
   display_ErpApplication: boolean = false;
   display_SystemDiagnosticsData: boolean = false;
   dispaly_Instances: boolean = false;
-
+  isDuplicateName:boolean=false;
 
   displayUserError: boolean = false;
   displayTestError: boolean = false;
@@ -348,7 +353,12 @@ export class ConfigurationSettingsComponent {
         this.dispaly_viewName = true;
         return false;
       }
-      else if (this.obj_configuration_setting.selected_datasource.select_datasource_item.length == 0) {
+      else if(this.isDuplicateName){
+        this.isDuplicateName=true
+        return false;
+      }
+      else if ( this.obj_configuration_setting.selected_datasource.select_datasource_item.length == 0) {
+       
         this.dispaly_DataSource = true;
         return false;
       }
@@ -424,6 +434,7 @@ export class ConfigurationSettingsComponent {
     this.display_SystemDiagnosticsData = false;
     this.dispaly_Instances = false;
     this.displayUserError = false
+  
   }
 
   //-------------------------------------------------------

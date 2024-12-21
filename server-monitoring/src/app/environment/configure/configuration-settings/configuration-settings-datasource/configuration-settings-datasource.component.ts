@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
@@ -30,15 +30,16 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     isDuplicateName:false
   }
 
-  @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData }) {
+  @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData ,isDuplicateName}) {
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.dispaly_viewName = dispaly_viewName;
     this.obj_error.dispaly_DataSource = dispaly_DataSource;
     this.obj_error.display_ErpApplication = display_ErpApplication;
     this.obj_error.display_SystemDiagnosticsData = display_SystemDiagnosticsData;
+    this.obj_error.isDuplicateName=isDuplicateName
     this.bindData()
   }
-
+   onViewNameInputChange=output<any>() ;
   ngOnInit() {
     this.get_all_datasource();
     this.restet_obj_datasource();
@@ -213,7 +214,42 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
       });
   }
 
+  onInputChanges(event: any){
+    this.modal_name = event.target.value;
+    if(this.modal_name!="")this.obj_error.dispaly_viewName=false;
+    else this.obj_error.dispaly_viewName=true;
+   
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/checkViewNameExists";
+
+    let form_data ={
+      "viewName":this.modal_name,
+      "userId":this.data_service.UserDto.UserDTO.U_ID,
+      "projectId":this.data_service.UserDto.ProjectDTO.P_ID
+      }
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+
+        this.obj_error.isDuplicateName=result
+        this.onViewNameInputChange.emit(result)
+        if(result==true)this.obj_error.dispaly_viewName=false
+        
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+    this.obj_datasource_widget.viewName = event.target.value;
+    this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
  
+  }
 
   onInputChange(event: any) {
     
@@ -236,8 +272,9 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           window.loadingStop("#navigator-left");
 
         this.obj_error.isDuplicateName=result
-         
-          
+        this.onViewNameInputChange.emit(result)
+        if(result==true)this.obj_error.dispaly_viewName=false
+        
 
         },
         error: (error: any) => {
