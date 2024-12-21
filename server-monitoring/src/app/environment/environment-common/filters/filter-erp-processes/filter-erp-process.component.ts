@@ -83,6 +83,12 @@ export class FilterErpProcessComponent {
       var ajax_url = environment.BASE_OBIQ_SERVER_URL + "testdiscovery/ERP/GetProcessesOfModules";
       let formData = { application: this.application, strmodules: this.strmodules }
 
+      if(this.selectedProcess.length>0){
+        this.selectedProcess.forEach(item => {
+          this.selectedCheckboxes[item] = true;
+        });
+      }
+
       this.app_service.make_post_server_call(ajax_url, formData)
         .subscribe({
           next: (result: any) => {
@@ -90,6 +96,12 @@ export class FilterErpProcessComponent {
               console.log("-----result", JSON.stringify(result))
               this.filterProcess = result;
               
+            }
+            
+            if(this.selectedProcess.length>0){
+              this.selectedProcess.forEach(item => {
+                this.selectedCheckboxes[item] = true;
+              });
             }
           },
           error: (error: any) => {
