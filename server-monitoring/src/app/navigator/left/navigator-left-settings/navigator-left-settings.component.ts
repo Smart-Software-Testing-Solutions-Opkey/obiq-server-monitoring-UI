@@ -79,7 +79,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
   }
   deleteSelectedView(view){
     this.onViewDelete.emit(view)
-
+    this.service_notification.notifier(NotificationType.success, 'View is Deleted');
   }
   renameView(view){
     
