@@ -36,7 +36,7 @@ export class EMMrDsErpAllJourneyComponent {
       "modules": this.filterObj.modelStrModule?this.filterObj.modelStrModule:[],
       "process": this.filterObj.modelProcess?this.filterObj.modelProcess:[],
       "userNameList": this.filterObj.modelUser?this.filterObj.modelUser:[],
-      "environments": this.filterObj.modelEnvironment?this.filterObj.modelEnvironment:[],
+      "environments": this.filterObj.modelEnvironment?this.filterObj.modelEnvironment.map(ele=>ele.fullUrl):[],
       "browserList": this.filterObj.modelBrowserList?this.filterObj.modelBrowserList:[],
       "status": this.filterObj.modelStatus?this.filterObj.modelStatus:[],
       "limitBy": this.pageSize,

@@ -60,7 +60,10 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     this.modelObj= JSON.parse(JSON.stringify(obj))
     this.sendFilterData()
   }
-  changeErpModule(e){
+  changeErpModule(val){
+    let obj = {...this.modelObj}
+    obj.modelStrModule = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
     this.sendFilterData()
   }
   changeUser(val){

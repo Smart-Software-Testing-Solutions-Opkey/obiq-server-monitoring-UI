@@ -14,20 +14,24 @@ export class FilterErpModuleComponent implements OnInit{
     ){
     }
   ngOnInit(): void {
-    this.get_erpmodules();
+    
   }
   application:any
  
    @Input('child_data') set child_data({application,selectedErpModule }) {
-  
-    this.application=application
-    this.selectedErpModule=selectedErpModule
+    if(application){
+      this.application=application
+    }
+    if(selectedErpModule){
+      this.selectedErpModule=selectedErpModule
+    }
+    this.get_erpmodules();
    }
   get_erpmodules() {
     var ajax_url = environment.BASE_OBIQ_SERVER_URL + "testdiscovery/ERP/GetModulesOfApplication";
     let formData = { application: this.application}
 
-    this.app_service.make_post_server_call(ajax_url, formData)
+    this.app_service.make_get_server_call(ajax_url, formData)
        .subscribe({
          next: (result: any) => {
            if(result && result.length){
@@ -80,18 +84,18 @@ export class FilterErpModuleComponent implements OnInit{
       this.selectedCheckboxes[item] = false;
     });
   }
-  select_Environment(e, item,ind) {
+  selectErpModule(e, item,ind) {
     if (e.target.checked) {
       this.selectedErpModule.push(item);
-      this.onSelectedErpModuleChange.emit(item);
+   
     }
     else {
       this.selectedErpModule.splice(ind,1);
     }
     
-    let a = this.selectedErpModule
-    this.selectedErpModule = JSON.parse(JSON.stringify(this.selectedErpModule));
 
+    // this.selectedErpModule = JSON.parse(JSON.stringify(this.selectedErpModule));
+    this.onSelectedErpModuleChange.emit(this.selectedErpModule );
     
   }
 }
