@@ -7,7 +7,7 @@
             All
         </span>
  
-        <span *ngIf=" selectedUser.length>0" class="sp_dropdown" container="body"
+        <span *ngIf=" selectedUser?.length>0" class="sp_dropdown" container="body"
             ngbTooltip="Selected User :{{ selectedUser| stringArrayCutter  : '' :'' : '':'string_array_comma'}}">
             {{ selectedUser | stringArrayCutter : '10': '' : '': 'string_array_cutter' }}
 
@@ -30,12 +30,12 @@
             </div>
         </div>
  
-        <a *ngIf="selectedUser.length>0" class="dropdown-item filter_clear" href="javascript:void(0)"
+        <a *ngIf="selectedUser?.length>0" class="dropdown-item filter_clear" href="javascript:void(0)"
             (click)="clear_filter()">
             Clear All
         </a>
 
-        <ng-container *ngIf="filterUser.length != 0; else nodataTemplate">
+        <ng-container *ngIf="filterUser?.length != 0; else nodataTemplate">
  
             <div class="scrollable dropdown_menu_filter">
                

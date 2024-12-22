@@ -41,7 +41,7 @@ export class EMMrDsErpAllJourneyComponent {
       "status": this.filterObj.modelStatus?this.filterObj.modelStatus:[],
       "limitBy": this.pageSize,
       "offset": this.skip,
-      "projectId": this.dataService.UserDto.ProjectDTO.P_ID,
+      "projectId": this.dataService?.UserDto?.ProjectDTO?.P_ID,
       "textToSearch": this.filterObj.modelSearch?this.filterObj.modelSearch:'',
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET"
   }
