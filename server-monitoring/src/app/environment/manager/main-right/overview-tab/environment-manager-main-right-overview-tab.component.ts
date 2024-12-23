@@ -185,7 +185,7 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
    this.view=view
    this.allSelectedAnalytics=allSelectedAnalytics
    this.reset_analytics()
-   this.allSelectedAnalytics.forEach(item=>{
+   this.allSelectedAnalytics?.forEach(item=>{
     if(item['name']=='User Behavior Analytics')  this.analyticsTypes.display_user_behaviour=true
     else if(item['name']=='Test Automation Analytics')this.analyticsTypes.display_test_automation=true
     else if(item['name']=='System Diagnostics Analytics')this.analyticsTypes.display_system_diagnostics=true
