@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 import {
   CompactType,
   DisplayGrid,
@@ -12,6 +13,8 @@ import {
   PushDirections,
   Resizable
 } from 'angular-gridster2';
+import { AppService } from 'src/app/services/app.service';
+import { AppDataService } from 'src/app/services/app-data.service';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -27,7 +30,16 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
 
   options: Safe;
   dashboard: any;
-  constructor(){
+  analyticsTypes={ 
+  display_user_behaviour: false,
+  display_test_automation: false,
+  display_system_diagnostics: false,
+  display_erp: false
+  }
+  constructor(
+     public app_service: AppService,
+     private service_data: AppDataService,
+  ){
     this.options = {
       gridType: GridType.ScrollVertical,
       compactType: CompactType.None,
@@ -145,13 +157,42 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
       // { cols: 1, rows: 1, y: 2, x: 6 }
     ];
   }
+  allSelectedAnalytics:any
   ngOnInit(): void {
-    
+
+    // this.selectedAnalytics=this.service_data.selectedArtifactData.selectedAnalyticsType
+    // console.log("selected=============",JSON.stringify(this.selectedAnalytics))
+    // this.selectedAnalytics.forEach(item=>{
+    //   if(item['name']=='User Behavior Analytics') this.analyticsTypes.display_user_behaviour=true
+    //   else if(item['name']=='Test Automation Analytics')this.analyticsTypes.display_test_automation=true
+    //   else if(item['name']=='System Diagnostics Analytics')this.analyticsTypes.display_system_diagnostics=true
+    //   else if(item['name']=='ERP Analytics')this.analyticsTypes.display_erp=true
+    // })
   }
   ngOnDestroy(): void {
     
   }
-  @Input() view:any
+  view:any
+  reset_analytics(){
+    
+     this.analyticsTypes.display_user_behaviour= false
+     this.analyticsTypes.display_test_automation= false
+     this.analyticsTypes.display_system_diagnostics= false
+     this.analyticsTypes.display_erp= false
+      
+  }
+  @Input ('child_data') set child_data({ view, allSelectedAnalytics }) {
+   this.view=view
+   this.allSelectedAnalytics=allSelectedAnalytics
+   this.reset_analytics()
+   this.allSelectedAnalytics.forEach(item=>{
+    if(item['name']=='User Behavior Analytics')  this.analyticsTypes.display_user_behaviour=true
+    else if(item['name']=='Test Automation Analytics')this.analyticsTypes.display_test_automation=true
+    else if(item['name']=='System Diagnostics Analytics')this.analyticsTypes.display_system_diagnostics=true
+    else if(item['name']=='ERP Analytics')this.analyticsTypes.display_erp=true
+  })
+  }
+
   applicationTotalData:any = [{
     applicationName : 'Oracle Fusion',
     cpu:'02.68',
@@ -201,4 +242,38 @@ if(this.options && this.options.api){
 
 
 }
+  // set_Selected_View_DataSource(selectedVIew) {
+  //   let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
+
+  //   let form_data = { viewId: selectedVIew.viewId };
+
+  //   this.app_service.make_post_server_call(form_url, form_data)
+  //     .subscribe({
+  //       next: (result: any) => {
+         
+
+  //         result.forEach((item, index) => {
+  //           item.display = index === 0
+  //         })
+          
+          
+  //         result.forEach(item=>{
+  //           if(item['name']=='User Behavior Analytics') this.analyticsTypes.display_user_behaviour=true
+  //           else if(item['name']=='Test Automation Analytics')this.analyticsTypes.display_test_automation=true
+  //           else if(item['name']=='System Diagnostics Analytics')this.analyticsTypes.display_system_diagnostics=true
+  //           else if(item['name']=='ERP Analytics')this.analyticsTypes.display_erp=true
+  //         })
+         
+
+  //       },
+  //       error: (error: any) => {
+  //         window.loadingStop("#navigator-left");
+  //         console.warn(error);
+  //       },
+  //       complete: () => {
+  //         console.log("Completed");
+  //       }
+  //     });
+  // }
+
 }

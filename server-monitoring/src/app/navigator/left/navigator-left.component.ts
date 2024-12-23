@@ -40,7 +40,8 @@ ngAfterViewInit(): void {
     "viewSelected": {},
     "settingsPanel": { isOpen: false, selectedViewSettings: {} },
     "analyticsTypes": {},
-    "selectedTab": {}
+    "selectedTab": {},
+    "allSelectedAnalytics":[]
   }
 
   ngOnInit(): void {
@@ -220,6 +221,7 @@ ngAfterViewInit(): void {
   viewChanged(val) {
    
     this.selectedView = val
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.dataChanged.viewSelected = this.selectedView
     this.set_Selected_VIew(this.selectedView)
     this.service_notification.notifier(NotificationType.success, 'View selected');
@@ -233,7 +235,7 @@ ngAfterViewInit(): void {
       }
     })
     this.dataChanged.analyticsTypes = this.selectedAnalyticsType
-  
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
@@ -246,7 +248,7 @@ ngAfterViewInit(): void {
     this.selectedView2 = this.totalViews[0];
     this.selectedViewSettings = this.selectedView2;
     this.dataChanged.viewSelected = this.selectedView2
-   
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.dataChanged.analyticsTypes['isSelected']=false
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -257,6 +259,7 @@ ngAfterViewInit(): void {
     this.isopenSettings = false
     // this.selectedView = this.totalViews[this.totalViews.length-1];
     this.selectedViewSettings = this.selectedView;
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.dataChanged.viewSelected = this.selectedView
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -267,7 +270,7 @@ ngAfterViewInit(): void {
   selectedViewSettings: any = {}
 
   settingsViewSelect(val) {
-   
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     // this.selectedViewSettings = val
     this.dataChanged.settingsPanel = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -308,7 +311,7 @@ ngAfterViewInit(): void {
   }
 
   selectionChanged(val) {
-    
+    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.dataChanged.analyticsTypes = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
    

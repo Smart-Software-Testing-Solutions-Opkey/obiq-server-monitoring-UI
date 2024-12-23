@@ -98,12 +98,14 @@ export class EnvironmentManagerComponent implements OnInit {
     
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
+   
     this.selectedView = val.viewSelected
     this.service_data.selectedArtifactData = {
       Settings_View_Selection:this.objSettings.selectedViewSettings,
       obj_configuration_setting:this.obj_configuration_setting,
       selectedAnalyticsType:this.selectedAnalyticsType,
-      selectedView:this.selectedView
+      selectedView:this.selectedView,
+      allSelectedAnalytics:val.allSelectedAnalytics
     }
     this.app_service.dataTransmitter({callsource:'navigatorops',data:this.service_data.selectedArtifactData});
   }

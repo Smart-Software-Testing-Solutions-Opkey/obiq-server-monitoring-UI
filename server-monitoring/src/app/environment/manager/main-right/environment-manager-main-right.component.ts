@@ -27,6 +27,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   }
   isDataLoaded = false
+
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
      
@@ -45,11 +46,16 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           if(this.service_data.selectedArtifactData.selectedAnalyticsType){
 
             this.selectedAnalyticsType = this.service_data.selectedArtifactData.selectedAnalyticsType
+            
           }
           // this.selectedAnalyticsType = selectedAnalyticsType;
           if(this.service_data.selectedArtifactData.selectedView){
 
             this.selectedView = this.service_data.selectedArtifactData.selectedView
+          }
+          if(this.service_data.selectedArtifactData.allSelectedAnalytics){
+
+            this.allSelectedAnalytics= this.service_data.selectedArtifactData.allSelectedAnalytics
           }
           // if (selectedView) {
           //   this.selectedView = selectedView
@@ -79,6 +85,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   selectedView: any
   selectedTab: any = {}
   availableTabs: any
+  allSelectedAnalytics:any=[]
   timeFilter: Array<{name: string, value: string, timeValue: string}> = [
     { name: '30min', value: '30 minutes', timeValue: "LAST_30_MINUTES"},
     { name: '60min', value: '60 minutes', timeValue: "LAST_60_MINUTES"},
