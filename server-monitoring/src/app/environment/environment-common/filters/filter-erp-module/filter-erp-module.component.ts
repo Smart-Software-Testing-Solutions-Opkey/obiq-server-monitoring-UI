@@ -83,9 +83,11 @@ export class FilterErpModuleComponent implements OnInit{
     this.filterErpModule.forEach(item => {
       this.selectedCheckboxes[item] = false;
     });
+    this.onSelectedErpModuleChange.emit(this.selectedErpModule );
   }
   selectErpModule(e, item,ind) {
     if (e.target.checked) {
+      
       this.selectedErpModule.push(item);
    
     }
@@ -93,7 +95,7 @@ export class FilterErpModuleComponent implements OnInit{
       this.selectedErpModule.splice(ind,1);
     }
     
-
+ 
     // this.selectedErpModule = JSON.parse(JSON.stringify(this.selectedErpModule));
     this.onSelectedErpModuleChange.emit(this.selectedErpModule );
     

@@ -1,23 +1,23 @@
 
 <div ngbDropdown container="body" [autoClose]="'outside'" >
-    <button type="button" class="btn bt_dropdown bt_dropdown_filter" ngbDropdownToggle [ngClass]="(selectedErpModule?.length>0)?'dropdown_focus' : ''" style="width:400px;">
+    <button type="button" class="btn bt_dropdown bt_dropdown_filter btn-bg-white" ngbDropdownToggle [ngClass]="(selectedErpModule?.length>0)?'dropdown_focus' : ''">
         ERP Modules : &nbsp;
  
       
-        @if(selectedErpModule?.length>0){
+        
 
-            <span *ngIf="" class="sp_dropdown" container="body"
+            <span *ngIf="selectedErpModule?.length>0" class="sp_dropdown" container="body"
                 ngbTooltip="Selected ERP Modules{{ selectedErpModule| stringArrayCutter  : '' :'' : '':'string_array_comma'}}">
                 {{ selectedErpModule | stringArrayCutter : '10': '' : '': 'string_array_cutter' }}
     
             </span>
-        }
-        @else {
-            <span class="sp_dropdown"
+        
+       
+            <span *ngIf="selectedErpModule?.length==0"class="sp_dropdown"
             ngbTooltip="Selected ERP Modules All" container="body">
             All
         </span>
-        }
+        
  
  
     </button>
