@@ -28,9 +28,9 @@
             <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
             <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
             <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
-             <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
+            <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
             <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
-             <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelUser,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
+             <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
              <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
          </div> 
 </kendo-window>
