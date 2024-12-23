@@ -1,0 +1,118 @@
+<div id="div-topJourneyComponent" class="app_container flex_box_column h-100">
+
+    <div class="header d-flex">
+       <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="backtomenu()"><i class="oci oci-chevron-left text_muted"></i></button>
+   <div class="left">
+       <h3 class="mb-0 text-ellipsis">User Behaviour All Journey</h3>
+   </div>
+    </div>
+   
+       <div class="app_body ">
+           <!-- <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"></app-envrionment-common-filter> -->
+           <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
+               <kendo-grid [data]="journeyDataSource" [navigable]="true" [hideHeader]="false" [pageable]="false"
+                   (scrollBottom)="load_more()"
+                   class="scrollable grid_remove_vertical_border k_grid_header_pr_0 remove_right_padding">
+   
+                   <kendo-grid-column title="Sub Activity">
+   
+                       <ng-template kendoGridCellTemplate let-dataItem>
+   
+                           <div class="d-flex">
+                       @if(dataItem.appType!=null){
+   
+                           <i class="oci oci-{{dataItem.appType | lowercase}} font_18px align-middle"
+                               ngbTooltip="{{dataItem.appType}}" container="body">
+                           </i>
+                       }
+   
+                               <div class="pl-2 d-inline-flex flex-column">
+                                   @if(dataItem.subActivityName != null){
+   
+                                       <span  class="k_grid_text text_wrap">
+                                           <span ngbTooltip="{{dataItem.subActivityName}}"
+                                               container="body">{{dataItem.subActivityName}}</span>
+                                       </span>
+                                   }
+           
+                                   
+           
+                               </div>
+                           </div>
+   
+                       </ng-template>
+                   </kendo-grid-column>
+   
+                   <kendo-grid-column title="Module" [width]="190">
+                       <ng-template kendoGridCellTemplate let-dataItem>
+                           <div class="k_grid_text text_wrap" [ngbTooltip]="dataItem.moduleName" container="body">
+                               {{dataItem.moduleName}}
+                           </div>
+                       </ng-template>
+                   </kendo-grid-column>
+   
+                   <kendo-grid-column title="Process" [width]="190">
+                       <ng-template kendoGridCellTemplate let-dataItem>
+                           <div class="k_grid_text text_wrap" [ngbTooltip]="dataItem.subModuleName" container="body">
+                               {{dataItem.subModuleName}}
+                           </div>
+                       </ng-template>
+                   </kendo-grid-column>
+   
+   
+                   <!-- <kendo-grid-column field="User" title="ERP User" [width]="200">
+                       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                           <span class="k_grid_text text_wrap" ngbTooltip="{{dataItem.userId}}" container="body">
+                               {{dataItem.userId}}
+                           </span>
+                       </ng-template>
+                   </kendo-grid-column> -->
+   
+                   <!-- <kendo-grid-column field="Time" title="Time" [width]="200">
+                       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                           <span class="k_grid_text text-ellipsis" ngbTooltip="{{dataItem.timeStampStr | date:'medium'}}"
+                               container="body">
+                               {{dataItem.timeStampStr | date:'medium'}}
+                           </span>
+                       </ng-template>
+                   </kendo-grid-column>
+   
+                   <kendo-grid-column title="Status" [width]="170">
+                       <ng-template kendoGridCellTemplate let-dataItem>
+                           <div class="k_grid_text text_wrap layout_status {{ dataItem.subActivityStatus | lowercase }}"
+                               [ngbTooltip]="dataItem.subActivityStatus" container="body">
+                               {{dataItem.subActivityStatus}}
+                           </div>
+                       </ng-template>
+                   </kendo-grid-column>
+   
+   
+                   <kendo-grid-column title="Action" class="td_overflow_visible text-center td_pb_0 pl-3" [width]="70"
+                       [headerClass]="'td_overflow_visible text-center'">
+                       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                           <div class="dropdown">
+                               <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                                   <i class="oci oci-more-vertical font-14px"></i>
+                               </button>
+                               <ul class="dropdown-menu">
+                                   <li (click)="openInNewTab()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Open in new Tab </a></li>
+                           
+                               </ul>
+                           </div>
+                       </ng-template>
+                   </kendo-grid-column> -->
+   
+                   <ng-template kendoGridNoRecordsTemplate>
+                       <div class="no_data_found" style="height: calc(100vh - 21.5rem) !important;">
+                           <div class="no_data_found_content">
+                               <p class="no_data_found_content_text"> No Journey available</p>
+                           </div>
+                       </div>
+                   </ng-template>
+   
+               </kendo-grid>
+           </div>
+   
+       </div>
+   
+   </div>

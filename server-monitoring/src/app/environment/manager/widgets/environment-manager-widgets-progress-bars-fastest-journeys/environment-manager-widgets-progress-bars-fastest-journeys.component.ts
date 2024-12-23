@@ -225,6 +225,9 @@ openFullJourney(){
   if(this.widgetType == 'ERP'){
     this.app_service.routeTo('environment','erpjourney')
   }
+  if(this.widgetType == 'userBehaviour'){
+    this.app_service.routeTo('environment','ubjourney')
+  }
 }
 
 }

@@ -5,6 +5,7 @@ import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-d
 import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/view-summary-details.component';
 import { EnvironmentManagerMainRightComponent } from '../main-right/environment-manager-main-right.component';
 import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
+import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component';
 
 const routes: Routes = [
   
@@ -26,6 +27,11 @@ const routes: Routes = [
     path:'erpjourney',
     component:EMMrDsErpAllJourneyComponent,
     outlet:'rightSection'
+  },
+  {
+    path :'ubjourney',
+    component: EMMrDsUbAllJourneyComponent,
+    outlet :'rightSection'
   }
 ]
 }
