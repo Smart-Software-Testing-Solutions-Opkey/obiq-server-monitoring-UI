@@ -43,6 +43,11 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
       this.panelHeader = 'Functional Error Journey'
       this.selectedPanel = 'ErpFunctionalJourney'
     }
+    else if(this.selectedItem?.callsource == "Erp_View_All_process"){
+      this.panelHeader = 'ERP All Process'
+      this.selectedPanel = 'ERPAllProcessWidget'
+    }
+
   }
 
 }
