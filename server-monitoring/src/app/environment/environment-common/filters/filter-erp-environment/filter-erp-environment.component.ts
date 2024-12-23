@@ -25,6 +25,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
     if(appType){
       this.appType = JSON.parse(JSON.stringify(appType)) ;
     }
+    this.get_application();
   }
 
   filterEnvironments: any = []
@@ -38,7 +39,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.get_application();
+   
   }
 
   get_application() {
@@ -90,7 +91,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
     
     let a = this.selectedEnvironment
     // this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment));
-    this.onSelectedEnvironmentChange.emit([...this.selectedEnvironment]);
+    this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
 
     
   }
