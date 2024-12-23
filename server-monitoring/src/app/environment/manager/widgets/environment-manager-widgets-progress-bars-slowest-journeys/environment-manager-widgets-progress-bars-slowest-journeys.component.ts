@@ -52,10 +52,10 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   title:string = ''
   maxCount: number = 0;
   widgetType =  "USER_JOURNEY_TOP_SLOW_WIDGET"
-  @Input('child_data') set child_data({view,title}) {
+  @Input('child_data') set child_data({view,title,widgetType}) {
    this.view = view;
    this.title=title;
-  
+    this.widgetType = widgetType;
   }
   public chartOptions: Partial<ChartOptions>;
 
@@ -228,8 +228,11 @@ renaming(){
   this.isRename = false;
 }
 openFullJourney(){
-  // if(this.widgetType == 'ERP'){
-  //   this.app_service.routeTo('environment','erpjourney')
-  // }
+  if(this.widgetType == 'ERP'){
+    this.app_service.routeTo('environment','erpjourney')
+  }
+  if(this.widgetType == 'userBehaviour'){
+    this.app_service.routeTo('environment','ubjourney')
+  }
 }
 }
