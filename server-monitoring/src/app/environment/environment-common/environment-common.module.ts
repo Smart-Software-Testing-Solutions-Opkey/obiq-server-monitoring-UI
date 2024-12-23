@@ -18,6 +18,7 @@ import { WindowModule } from "@progress/kendo-angular-dialog";
 import { FilterErpModuleComponent } from './filters/filter-erp-module/filter-erp-module.component';
 import { FilterUserComponent } from './filters/filter-user/filter-user.component';
 import { FilterStatusComponent } from './filters/filter-status/filter-status.component';
+import { ECommonFilterInnerComponent } from './envrionment-common-filter/filter-inner/e-common-filter-inner.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FilterStatusComponent } from './filters/filter-status/filter-status.com
     FilterErpProcessComponent,
     FilterErpModuleComponent,
     FilterUserComponent,
-    FilterStatusComponent
+    FilterStatusComponent,
+    ECommonFilterInnerComponent
 
   ],
   imports: [

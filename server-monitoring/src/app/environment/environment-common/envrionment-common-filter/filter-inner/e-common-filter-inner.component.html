@@ -1,0 +1,98 @@
+<div class="main">
+    <div class="form_fieldset" style="top: -0.7rem !important;">
+
+        <label class="fieldset_label" for="filter_name">
+            <i class="oci oci-filter_list align-middle font_14px font_bold pr-1"></i>
+            <span class="align-middle" container="body">Applied filter</span>
+        </label>
+
+    </div>
+
+    <div class="form_fieldset" style="left: auto !important; right: 0.875rem; top: -0.5rem !important;">
+        <button type="button"
+            class="btn btn-default ml-2 mr-1 bt_clearFilter" ngbTooltip="" container="body" (click)="clearAll()">
+            Clear All
+        </button>
+    </div>
+
+    <div class="filterShownDiv d-flex border">
+        @if (filterObj?.modelApplication) {
+            <div class="applicationFilter active border" style="background-color: cyan;">
+                Application: {{filterObj?.modelApplication}}
+            </div>
+        }
+        @if (filterObj?.modelSearch) {
+            <div class="applicationFilter active border" style="background-color: cyan;">
+                Search Text: {{filterObj?.modelSearch}}
+                <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelSearch',filterObj?.modelSearch,null)"><i
+                    class="oci oci-x"></i>
+                </span>
+            </div>
+        }
+        @if (filterObj?.modelEnvironment) {
+            @if (filterObj?.modelEnvironment.length>0) {
+                @for (item of filterObj?.modelEnvironment; track $index;let idx =$index) {
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        Environment: {{item.envName}}
+                        <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelEnvironment',item,idx)"><i
+                            class="oci oci-x"></i>
+                        </span>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelProcess) {
+            @if (filterObj?.modelProcess.length>0) {
+                @for (item of filterObj?.modelProcess; track $index;let idx =$index) {
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        Process: {{item}}
+                        <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelProcess',item,idx)"><i
+                            class="oci oci-x"></i>
+                        </span>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelStrModule) {
+            @if (filterObj?.modelStrModule.length>0) {
+                @for (item of filterObj?.modelStrModule; track $index;let idx =$index) {
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        Module: {{item}}
+                        <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelStrModule',item,idx)"><i
+                            class="oci oci-x"></i>
+                        </span>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelUser) {
+            @if (filterObj?.modelUser.length>0) {
+                @for (item of filterObj?.modelUser; track $index;let idx =$index) {
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        User: {{item}}
+                        <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelUser',item,idx)"><i
+                            class="oci oci-x"></i>
+                        </span>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelStatus) {
+            @if (filterObj?.modelStatus.length>0) {
+                @for (item of filterObj?.modelStatus; track $index;let idx =$index) {
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        Status: {{item.value}}
+                        <span ngbTooltip="Clear" container="body" (click)="clearSelected('modelStatus',item,idx)"><i
+                            class="oci oci-x"></i>
+                        </span>
+                    </div>
+                }
+            }
+           
+        }
+    </div>
+</div>

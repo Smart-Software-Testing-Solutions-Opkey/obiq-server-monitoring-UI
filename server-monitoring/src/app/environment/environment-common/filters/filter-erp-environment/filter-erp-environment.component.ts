@@ -16,7 +16,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
   selectedEnvironment: any = []
   tempSelected = []
-  appType : any= "ORACLEFUSION";
+  appType : any= "OracleFusion";
   @Input('child_data') set child_data({ selectedEnvironment , appType}) {
     if(selectedEnvironment){
       this.tempSelected = JSON.parse(JSON.stringify(selectedEnvironment))

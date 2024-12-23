@@ -8,7 +8,7 @@
         <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
             <span class="sp_dropdown">
                 <i class="oci oci-filter font_16px" container="body" ngbtooltip="Filter"></i>
-              <div class="filter_count">{{filterCount}}</div>
+              <div class="filter_count">{{returnCount()}}</div>
             </span>
         </button>
     </div>
@@ -25,7 +25,7 @@
         <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="closeRightPanel()"><i class="oci oci-x text_muted"></i></button>
          </div>
          <div class="modalBody scrollable">
-
+            <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
             <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
             <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
              <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>

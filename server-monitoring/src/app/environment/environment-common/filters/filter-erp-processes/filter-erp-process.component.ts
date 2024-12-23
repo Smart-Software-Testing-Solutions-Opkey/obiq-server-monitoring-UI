@@ -28,7 +28,7 @@ export class FilterErpProcessComponent {
 
     }
 
-    application= "ORACLEFUSION";
+    application= "OracleFusion";
     strmodules= [];
   
     filterProcess: any = [

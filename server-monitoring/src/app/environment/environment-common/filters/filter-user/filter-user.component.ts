@@ -14,7 +14,7 @@ constructor(
        private cdr: ChangeDetectorRef
     ) {
     }
-    appType : any= "ORACLEFUSION";
+    appType : any= "OracleFusion";
     @Input('child_data') set child_data({ selectedUser,appType }) {
       if(selectedUser){
         this.selectedUser = selectedUser;

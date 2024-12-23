@@ -40,7 +40,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     this.sendFilterData()
   }
   modelObj = {
-    modelApplication:"ORACLEFUSION",
+    modelApplication:"OracleFusion",
     modelSearch:null,
     modelEnvironment:null,
     modelProcess:null,
@@ -48,11 +48,20 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     modelUser:null,
     modelBrowserList:null,
     modelStatus:null,
-    modelDate:{
-      from:null,
-      to:null
-    }
+    modelDate:null
   }
+  tempObj = {
+    modelApplication:"OracleFusion",
+    modelSearch:null,
+    modelEnvironment:null,
+    modelProcess:null,
+    modelStrModule:null,
+    modelUser:null,
+    modelBrowserList:null,
+    modelStatus:null,
+    modelDate:null
+  }
+  
 
   changeProcess(val){
     let obj = {...this.modelObj}
@@ -82,5 +91,19 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   
   sendFilterData(){
     this.onFilterSelected.emit(this.modelObj)
+  }
+  innerOps(val){
+    if(val?.action == 'Clear All'){
+      this.modelObj = {...this.tempObj}
+    }
+    else if(val?.action == 'Clear one'){
+      if(typeof(this.modelObj[val?.data?.model]) != 'string'){
+
+        this.modelObj[val?.data?.model].splice(val?.data?.idx,1)
+      }
+    }
+  }
+  returnCount(){
+    return Object.values(this.modelObj).filter(ele=>ele != null).length
   }
 }
