@@ -15,11 +15,11 @@ export class FilterErpEnvironmentComponent implements OnInit {
   }
 
   selectedEnvironment: any = []
-  tempSelected = []
+ 
   appType : any= "OracleFusion";
   @Input('child_data') set child_data({ selectedEnvironment , appType}) {
     if(selectedEnvironment){
-      this.tempSelected = JSON.parse(JSON.stringify(selectedEnvironment))
+      this.selectedEnvironment = JSON.parse(JSON.stringify(selectedEnvironment))
     
     }
     if(appType){
@@ -33,7 +33,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
   
   onSelectedEnvironmentChange = output<any>();
   search_filter: string = '';
-  selectedCheckboxes: any = {};
+
   obj_env = {}
   
 
@@ -56,12 +56,7 @@ export class FilterErpEnvironmentComponent implements OnInit {
               this.obj_env[val.envName] = val;
             })
 
-            if(this.tempSelected.length>0){
-              this.selectedEnvironment = this.tempSelected
-              this.selectedEnvironment.forEach(item => {
-                this.selectedCheckboxes[item.envName] = true;
-              });
-            }
+            this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment))
           }
         },
         error: (error: any) => {
@@ -75,22 +70,18 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
   }
 
-  tempSelectedEnvString : any;
-  convert_to_string(selectedEnvironment){
-    this.tempSelectedEnvString = this.selectedEnvironment.map( item => item.envName);
-    return this.tempSelectedEnvString;
-  }
+ 
   
   select_Environment(e, item,ind) {
     if (e.target.checked) {
       this.selectedEnvironment.push(item); 
     }
     else {
-      this.selectedEnvironment.splice(ind,1);
+      
+     this.selectedEnvironment = this.selectedEnvironment.filter(ele=>ele.envName != item.envName)
     }
     
-    let a = this.selectedEnvironment
-    // this.selectedEnvironment = JSON.parse(JSON.stringify(this.selectedEnvironment));
+    
     this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
 
     
@@ -98,14 +89,14 @@ export class FilterErpEnvironmentComponent implements OnInit {
 
   clear_filter() {
     this.selectedEnvironment = [];
-    this.filterEnvironments.forEach(item => {
-      this.selectedCheckboxes[item.envName] = false;
-    });
-
+  
    
     this.onSelectedEnvironmentChange.emit(this.selectedEnvironment);
 
     
+  }
+  showSelected(item){
+    return this.selectedEnvironment.findIndex((ele)=>ele.envName == item.envName) > -1
   }
  
 }

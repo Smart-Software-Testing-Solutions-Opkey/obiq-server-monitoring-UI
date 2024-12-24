@@ -98,8 +98,10 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     }
     else if(val?.action == 'Clear one'){
       if(typeof(this.modelObj[val?.data?.model]) != 'string'){
-
-        this.modelObj[val?.data?.model].splice(val?.data?.idx,1)
+        let obj = {...this.modelObj}
+        obj = JSON.parse(JSON.stringify(obj))
+        obj[val?.data?.model].splice(val?.data?.idx,1)
+        this.modelObj = {...obj}
       }
     }
   }
