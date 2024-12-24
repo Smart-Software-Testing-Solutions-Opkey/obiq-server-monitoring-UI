@@ -91,7 +91,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
     const form_data = {
       "appType": "ORACLEFUSION",
       "viewId": this?.view?.viewId,
-      "widgetType": this.widgetType,
+      "widgetType": "USER_JOURNEY_TOP_SLOW_WIDGET",
     };
    
     this.app_service.make_post_server_call(ajax_url, form_data)

@@ -92,7 +92,7 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
       "appType": "ORACLEFUSION",
       "viewId": this?.view?.viewId,
       // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
-      "widgetType": this.widgetType,
+      "widgetType": "USER_JOURNEY_MOST_COMMON_WIDGET",
     };
    
     this.app_service.make_post_server_call(ajax_url, form_data)
