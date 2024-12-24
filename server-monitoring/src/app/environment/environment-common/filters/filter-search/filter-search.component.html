@@ -4,7 +4,7 @@
     </span>
     @if(openSearch){
 
-        <input #searchInput autocomplete="off" class="" placeholder="Type and enter to search" type="text" [(ngModel)]="searchModel">
+        <input #searchInput autocomplete="off" class="" (blur)="sendSearchvalue(searchInput.value)" (keyup.enter)="sendSearchvalue(searchInput.value)" placeholder="Type and enter to search" type="text" [(ngModel)]="searchModel">
     }
     @if (searchModel?.length>0) {
 
