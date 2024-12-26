@@ -43,5 +43,14 @@ export class FilterCalendarComponent {
 			this.isHovered(date)
 		);
 	}
+	formatRange(): string {
+		const from = this.fromDate
+			? `${this.fromDate.year}-${this.fromDate.month.toString().padStart(2, '0')}-${this.fromDate.day.toString().padStart(2, '0')}`
+			: '';
+		const to = this.toDate
+			? `${this.toDate.year}-${this.toDate.month.toString().padStart(2, '0')}-${this.toDate.day.toString().padStart(2, '0')}`
+			: '';
+		return this.toDate ? `${from} - ${to}` : from;
+	}
 
 }
