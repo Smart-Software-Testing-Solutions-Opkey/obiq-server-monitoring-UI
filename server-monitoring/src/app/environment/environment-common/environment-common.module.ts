@@ -7,7 +7,7 @@ import { PersisterModalComponent } from './persister-modal/persister-modal.compo
 import { FilterErpApplicationComponent } from './filters/filter-erp-application/filter-erp-application.component';
 import { FormsModule } from '@angular/forms';
 import { FilterErpEnvironmentComponent } from './filters/filter-erp-environment/filter-erp-environment.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from "../../pipes/search/search.pipe";
 import { StringArrayCutterPipe } from 'src/app/pipes/string-array-cutter/string-array-cutter.pipe';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,7 @@ import { FilterErpModuleComponent } from './filters/filter-erp-module/filter-erp
 import { FilterUserComponent } from './filters/filter-user/filter-user.component';
 import { FilterStatusComponent } from './filters/filter-status/filter-status.component';
 import { ECommonFilterInnerComponent } from './envrionment-common-filter/filter-inner/e-common-filter-inner.component';
+import { FilterCalendarComponent } from './filters/filter-calendar/filter-calendar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ECommonFilterInnerComponent } from './envrionment-common-filter/filter-
     FilterErpModuleComponent,
     FilterUserComponent,
     FilterStatusComponent,
-    ECommonFilterInnerComponent
+    ECommonFilterInnerComponent,
+    FilterCalendarComponent
 
   ],
   imports: [
@@ -44,6 +46,7 @@ import { ECommonFilterInnerComponent } from './envrionment-common-filter/filter-
     StringArrayCutterPipe,
     NgbTooltipModule,
     WindowModule,
+    NgbDatepickerModule
 
    
 ],
