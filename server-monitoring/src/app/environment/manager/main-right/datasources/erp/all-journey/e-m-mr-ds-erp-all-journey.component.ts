@@ -41,7 +41,7 @@ export class EMMrDsErpAllJourneyComponent {
       "status": this.filterObj.modelStatus?this.filterObj.modelStatus.map(ele=>ele.value):[],
       "limitBy": this.pageSize,
       "offset": this.skip,
-      "projectId": "3f0e8a1d-f215-4f3e-90bc-b52911482520",//this.dataService?.UserDto?.ProjectDTO?.P_ID,
+      "projectId": this.dataService?.UserDto?.ProjectDTO?.P_ID,//"3f0e8a1d-f215-4f3e-90bc-b52911482520",//this.dataService?.UserDto?.ProjectDTO?.P_ID,
       "textToSearch": this.filterObj.modelSearch?this.filterObj.modelSearch:'',
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET"
   }
