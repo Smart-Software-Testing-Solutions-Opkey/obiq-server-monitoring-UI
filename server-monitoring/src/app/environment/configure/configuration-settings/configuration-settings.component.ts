@@ -471,7 +471,8 @@ export class ConfigurationSettingsComponent {
           this.service_notification.notifier(NotificationType.success, 'View Created');
           console.log("after view creation: ",this.obj_configuration_setting); //
           this.app_service.dataTransmitter("viewCreated");
-          this.router.navigate(['/environment']);
+          // this.router.navigateByUrl('/environment');
+          this.app_service.routeTo('environment','summary')
 
         },
         error: (error: any) => {
