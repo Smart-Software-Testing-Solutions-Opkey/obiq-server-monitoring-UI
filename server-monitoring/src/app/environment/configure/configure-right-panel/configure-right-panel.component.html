@@ -148,7 +148,7 @@
 
                 <kendo-grid-column [width]="50">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" class="btn p-2" (click)="deleteUser(rowIndex)">
+                        <button type="button" class="btn p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" (click)="deleteUser(rowIndex)">
                             <i class="oci oci-delete text-red"></i>
                         </button>
                     </ng-template>
