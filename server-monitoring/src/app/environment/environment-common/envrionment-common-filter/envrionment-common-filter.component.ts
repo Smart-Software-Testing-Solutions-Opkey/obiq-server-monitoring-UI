@@ -11,6 +11,18 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   }
 
   onFilterSelected = output<any>();
+  FromDateChange(val){
+    let obj = {...this.modelObj}
+    obj.modelFromDate = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+
+  }
+  ToDateChange(val){
+    let obj = {...this.modelObj}
+    obj.modelToDate = val
+    this.modelObj= JSON.parse(JSON.stringify(obj))
+
+  }
   changeApplication(val){
     let obj = {...this.modelObj}
     obj.modelApplication = val
@@ -49,7 +61,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     modelUser:null,
     modelBrowserList:null,
     modelStatus:null,
-    modelDate:null
+    modelFromDate:null,
+    modelToDate:null
   }
   tempObj = {
     modelApplication:"OracleFusion",
@@ -60,7 +73,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     modelUser:null,
     modelBrowserList:null,
     modelStatus:null,
-    modelDate:null
+    modelFromDate:null,
+    modelToDate:null
   }
   
 

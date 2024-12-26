@@ -1,7 +1,7 @@
 
 <div class="showndiv d-flex">
     <app-filter-search (searchedText)="searched($event)"></app-filter-search>
-    <app-filter-calendar></app-filter-calendar>
+    <app-filter-calendar  [child_data]="{ selectedFromDate : modelObj.modelFromDate, selectedToDate: modelObj.modelToDate}"  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
     <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
     <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
   
@@ -28,7 +28,7 @@
          <div class="modalBody scrollable">
            
             <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
-            <app-filter-calendar></app-filter-calendar>
+            <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
             <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
             <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
             <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>

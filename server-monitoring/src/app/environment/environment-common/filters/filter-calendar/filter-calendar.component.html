@@ -7,6 +7,7 @@
     (dateSelect)="onDateSelection($event)"
     [dayTemplate]="t"
     [autoClose]="isClose"
+   
 />
 <button class="btn btn-outline-secondary oci oci-chevron-down" (click)="d.toggle()" type="button"></button>
 <ng-template #t let-date let-focused="focused">
@@ -17,6 +18,7 @@
         [class.faded]="isHovered(date) || isInside(date)"
         (mouseenter)="hoveredDate = date"
         (mouseleave)="hoveredDate = null"
+       
     >
         {{ date.day }}
     </span>
