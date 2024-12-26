@@ -8,7 +8,7 @@
     border: 1px solid #D0D5DD;
     padding: 1.5rem;
     border-radius: 0.5rem;
-    height: 14.5rem;
+    height: 13.5rem;
     position: relative;
 
     p {
@@ -16,6 +16,7 @@
         font-weight: 400;
         line-height: 1.25rem;
         color: #000;
+        font-size: small;
     }
 
     &.active {
@@ -44,8 +45,8 @@
     .header {
         position: relative;
         color: #116173;
-        font-size: 1.25rem;
-        height: 2.5rem;
+        font-size: 1rem;
+        height: 2rem;
         font-weight: 600 !important;
 
         &::after {

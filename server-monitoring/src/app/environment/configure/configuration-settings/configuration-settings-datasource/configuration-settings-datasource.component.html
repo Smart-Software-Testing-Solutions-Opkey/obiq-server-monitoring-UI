@@ -13,7 +13,7 @@
                 <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">View name is required.</span>
                 <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span>
             </label>
-            <input id="View_Name_Input" type="text" class="form-control" (blur)="onInputChanges($event)" (keyup.enter)="onInputChange($event)" [(ngModel)]="modal_name">
+            <input id="View_Name_Input" type="text" class="form-control" placeholder="Enter view name" (blur)="onInputChanges($event)" (keyup.enter)="onInputChange($event)" [(ngModel)]="modal_name">
             <!-- <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span> -->
         </div>
     </div>
@@ -42,10 +42,10 @@
                             <span class="d-block text-center">{{item.description}}</span>
                            
                             @if(item.type === 'ERP_ANALYTICS_DATASOURCE') {
-                                <span class="sp-sub-heading pt-2 pb-1 text-center d-block"><i class="oci oci-lightbulb pe-2"></i>{{item.shortDescription}}</span>
+                                <span class="sp-sub-heading pt-2 pb-1 text-center d-block mt-3"><i class="oci oci-lightbulb pe-2"></i>{{item.shortDescription}}<a href="https://www.example.com">Two Words</a></span>
                             }
                             @else {
-                                <span class="d-block text-red text-center pt-2">{{item.shortDescription}}</span>
+                                <span class="d-block text-red text-center pt-2 mt-3">{{item.shortDescription}}<a href="https://www.example.com">Two Words</a></span>
                             }
                            
                         </p>
