@@ -6,6 +6,7 @@
     (click)="d.toggle()"
     (dateSelect)="onDateSelection($event)"
     [dayTemplate]="t"
+    [autoClose]="isClose"
 />
 <button class="btn btn-outline-secondary oci oci-chevron-down" (click)="d.toggle()" type="button"></button>
 <ng-template #t let-date let-focused="focused">

@@ -14,8 +14,10 @@ export class FilterCalendarComponent {
 	hoveredDate: NgbDate | null = null;
 	fromDate: NgbDate = this.calendar.getToday();
 	toDate: NgbDate | null = this.calendar.getNext(this.fromDate, 'd', 10);
-
+    isClose:boolean=false
 	onDateSelection(date: NgbDate) {
+		if(this.fromDate && this.toDate)this.isClose=true;
+		if(!this.fromDate || !this.toDate ) this.isClose=false
 		if (!this.fromDate && !this.toDate) {
 			this.fromDate = date;
 		} else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
