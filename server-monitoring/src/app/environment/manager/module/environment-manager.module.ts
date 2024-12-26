@@ -56,6 +56,7 @@ import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-
 import { EnvironmentCommonModule } from '../../environment-common/environment-common.module';
 import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component';
 import { EMMrDsErpOVFPComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p.component';
+import { EMDsUbFunctionalErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-functional-error-tab.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -97,7 +98,8 @@ import { EMMrDsErpOVFPComponent } from '../main-right/datasources/erp/e-m-mr-ds-
     EMMrDsErpAllJourneyComponent,
     EMMrDsEFEJourneyComponent,
     EMMrDsErpOVFPComponent,
-    EMMrDsUbAllJourneyComponent
+    EMMrDsUbAllJourneyComponent,
+    EMDsUbFunctionalErrorTabComponent
 
 
   ],
