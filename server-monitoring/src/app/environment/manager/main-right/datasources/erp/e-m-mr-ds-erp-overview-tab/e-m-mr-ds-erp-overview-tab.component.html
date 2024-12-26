@@ -47,6 +47,9 @@
                         <app-enviornment-manager-time-explorer-graph [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP'}"></app-enviornment-manager-time-explorer-graph>
                 
                 </ng-container>
+                <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
+                    <app-e-m-functional-error-widget [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP'}"></app-e-m-functional-error-widget>
+                </ng-container>
             </gridster-item>
         }
       </gridster>

@@ -12,7 +12,7 @@
             </span>
         </button>
     </div>
-    <button>Search</button>
+    <button (click)="sendFilterData()">Search</button>
 </div>
 
 
@@ -33,6 +33,7 @@
              <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
              <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
          </div> 
+         <button (click)="sendFilterData()">APPLY</button>
 </kendo-window>
 
     <div *ngIf="showRightPanel" class="sliderOverlay"></div>

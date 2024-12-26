@@ -43,8 +43,7 @@
                     <a class="dropdown-item" href="javascript:void(0)">
                         <label>
                             <input type="checkbox" 
-                                
-                                [(ngModel)]="selectedCheckboxes[item.envName]"
+                                [checked]="showSelected(item)"
                                 (change)="select_Environment($event,item,i)">
    
                             <span class="word_wrap">{{item.envName}}</span>

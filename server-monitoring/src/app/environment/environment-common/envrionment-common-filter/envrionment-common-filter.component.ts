@@ -15,14 +15,15 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     let obj = {...this.modelObj}
     obj.modelApplication = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData()
+    // this.sendFilterData()
   }
   filterCount = 0
   ngOnInit(): void {
     this.sendFilterData()
   }
   searched(val){
-    this.sendFilterData()
+    this.modelObj.modelSearch=val;
+    // this.sendFilterData()
   }
   showRightPanel = false
   public windowState: WindowState = "default";
@@ -37,7 +38,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     let obj = {...this.modelObj}
     obj.modelEnvironment = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData()
+    // this.sendFilterData()
   }
   modelObj = {
     modelApplication:"OracleFusion",
@@ -67,26 +68,26 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     let obj = {...this.modelObj}
     obj.modelProcess = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData()
+    // this.sendFilterData()
   }
   changeErpModule(val){
     let obj = {...this.modelObj}
     obj.modelStrModule = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData()
+    // this.sendFilterData()
   }
   changeUser(val){
     let obj = {...this.modelObj}
     obj.modelUser = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData()
+    // this.sendFilterData()
   }
 
   changeStatus(val){
     let obj = {...this.modelObj}
     obj.modelStatus = val
     this.modelObj= JSON.parse(JSON.stringify(obj))
-    this.sendFilterData() 
+    // this.sendFilterData() 
   }
   
   sendFilterData(){
@@ -98,8 +99,10 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     }
     else if(val?.action == 'Clear one'){
       if(typeof(this.modelObj[val?.data?.model]) != 'string'){
-
-        this.modelObj[val?.data?.model].splice(val?.data?.idx,1)
+        let obj = {...this.modelObj}
+        obj = JSON.parse(JSON.stringify(obj))
+        obj[val?.data?.model].splice(val?.data?.idx,1)
+        this.modelObj = {...obj}
       }
     }
   }

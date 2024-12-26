@@ -45,22 +45,22 @@ export class EMApiErrorWidgetComponent implements OnInit {
   datasourceProgressBar: Array<any> = [
     {  subActivityName:'Assertion Error', count:20 },
     {  subActivityName:'Assertion Error', count:25},
-    { subActivityName:'Assertion Error', count:30 },
-    {  subActivityName:'Assertion Error',count:35  },
+    {  subActivityName:'Assertion Error', count:30 },
+    {  subActivityName:'Assertion Error', count:35  },
   ]
 
   view: any = null;
   @Input()Editable:boolean
   
-    widgetType: "TOP_API_ERRORS_WIDGET"
+    widgetType: ""
    
    title:string
-  @Input('child_data') set child_data({ view,title }) {
+  @Input('child_data') set child_data({ view,title,widgetType }) {
     
    
    this.view = view
    this.title =title
-  
+   this.widgetType=widgetType
    }
   maxCount: number = 0;
 
@@ -79,81 +79,34 @@ export class EMApiErrorWidgetComponent implements OnInit {
 //     let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
 //     const form_data = {
 //       "appType": "ORACLEFUSION",
-//       "viewId": this?.view?.viewId,
-      
-//       "widgetType": this.widgetData?.widgetType,
+      // "viewId": this?.view?.viewId,
+      // "widgetType":TOP_API_ERRORS_WIDGET,
 //     };
    
 //     this.app_service.make_post_server_call(ajax_url, form_data)
 //       .subscribe({
 //         next: (result: any) => {
 //          if(result){
-//           if(this?.widgetData?.widgetType == "USER_GUIDE_LIST_PER_PROCESS_WIDGET" && typeof result == 'object'){
-//             this.maxCount = Math.max(...Object.values(result).map((item: any) => item.count));
+//           
 //             this.datasourceProgressBar = Object.keys(result).map(item => {
 //               const count = result[item].count;
-//               const passPercent = (count / this.maxCount) * 100;
-//               const failPercent = 100 - passPercent;
+//             
 //               return {
-//                 subActivityName: item, 
-//                 passPercent: passPercent, 
-//                 failPercent: failPercent,
-//                 count:count
+                // subActivityName: item, 
+                // count:count
 //               };
 //             })
 //           }
-//             else 
-//              if ((this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET" || this?.widgetData?.widgetType == "USER_JOURNEY_TOP_FAST_WIDGET") && typeof result == 'object') {
-//              { 
-//               this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
-//                 if(this?.widgetData?.widgetType == "USER_JOURNEY_TOP_SLOW_WIDGET"){}
-//                 const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
-//                 return {
-//                   ...item,
-//                   calculatedTime 
-//                 };
-//               });
-//             } 
-            
-//           }
-//           else{
-//             // this.datasourceProgressBar = result.slice(0, 5);
-//             this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
-//               if(this?.widgetData?.widgetType == "USER_JOURNEY_MOST_COMMON_WIDGET"){}
-//               const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
-//               return {
-//                 ...item,
-//                 calculatedTime 
-//               };
-//             });
-//           }
-//           this.cdRef.detectChanges();
-//         }
+//            
        
 //       },
 //         error: (error: any) => {
-//           // window.loadingStop("#Env_manager_main_right");
+//           
 //           console.error(error);
 //         }
 //       });
 //   }
-//   calculateDuration(from: number, to: number): string {
-    
-//     const durationMillis = from - to;
-
-    
-//     if (durationMillis < 1000) {
-//         return `${durationMillis} ms`;
-//     }
-
-    
-//     const durationSeconds = Math.floor(durationMillis / 1000);
-//     const minutes = Math.floor(durationSeconds / 60);
-//     const seconds = durationSeconds % 60;
-
-//     return `${minutes}m ${seconds}s`;
-// }
-
+// 
 
 createChart(): void {
   this.chartOptions = {

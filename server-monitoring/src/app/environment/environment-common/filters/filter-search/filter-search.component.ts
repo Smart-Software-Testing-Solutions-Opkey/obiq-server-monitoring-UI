@@ -19,5 +19,8 @@ export class FilterSearchComponent {
   clearSearch(){
     this.searchModel = null
   }
+  sendSearchvalue(val){
+    this.searchedText.emit(val)
+  }
  
 }
