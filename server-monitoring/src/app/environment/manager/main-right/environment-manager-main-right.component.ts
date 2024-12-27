@@ -99,6 +99,13 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
     { name: 'setCustom', value: 'Set Custom', timeValue: ""},
   ];
+
+  //for showing border bottom after every category
+  showBorder(name: string): boolean {
+    const itemsWithBorder = ['60min', '24hrs', '7days', '3mons'];
+    return itemsWithBorder.includes(name); 
+}
+
   selectedTime: string = '30min';
   public fromDatevalue: Date = new Date();
   public toDateValue: Date = new Date();
