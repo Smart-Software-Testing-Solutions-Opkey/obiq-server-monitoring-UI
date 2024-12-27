@@ -21,36 +21,39 @@
                             <span>Widget</span>
                         </button>
                     </div> -->
+                    <div class="filter-content">
+                        <div class="search_panel searchToggle">
+                            
+                            <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+                            
+                            <input type="text" class="form-control search_input" placeholder="Search" #clearSearch>
+                            
+                            <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch.value=''"><i
+                                class="oci oci-x"></i>
+                                
+                            </span>
+                        </div>
+                        
+                    </div>
+                    
                     @if (!isSelectedAnalyticsTypeEmpty){
     
                         <div class="filter-content">
                             <div class="EditToggle">
-            <button (click)="toggleEdit()" >Edit</button>
+                            <button class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
+                                <i class="oci oci-edit"></i>
+                            </button>
                                 
                             </div>
         
                         </div>
                     }
+                    
                     <div class="filter-content">
-                        <div class="search_panel searchToggle">
-        
-                            <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
-                    
-                            <input type="text" class="form-control search_input" placeholder="Search" #clearSearch>
-                    
-                            <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch.value=''"><i
-                                    class="oci oci-x"></i>
-                    
-                            </span>
-                        </div>
-    
-                    </div>
-    
-                    
                         <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="refreshPage()">
                             <i class="oci oci-refresh-cw"></i>
                         </button>
-                    
+                    </div>  
     
                     <!-- <div class="filter-content">
                         <div class="btn-group layout-btn-group">
@@ -114,9 +117,10 @@
                                 
                                 <div class="d-flex" style="width: 35rem;">
                                     <div class="left border-box-shadow left-dropdown-menu" style="width: 9rem;">
-                                        <ul class="list-unstyled border-box-shadow mb-0">
+                                        <ul class="list-unstyled border-box-shadow category-bottom-border mb-0">
                                             @for(timeItem of timeFilter; track timeItem.name){
-                                                <li (click)="onSelctTime(timeItem)" class="dropdown-item li-dd-item" [ngClass]="{'active': selectedTime == timeItem?.name}">
+                                                <li (click)="onSelctTime(timeItem)" class="dropdown-item li-dd-item" 
+                                                [ngClass]="{'active': selectedTime == timeItem?.name, 'border-bottom': showBorder(timeItem.name)}">
                                                     {{ timeItem?.value }}
                                                 </li>
                                             }
