@@ -1,4 +1,4 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, Input, OnInit, output } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCalendar, NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import {  inject } from '@angular/core';
@@ -8,7 +8,7 @@ import {  inject } from '@angular/core';
   templateUrl: './filter-calendar.component.html',
   styleUrl: './filter-calendar.component.scss'
 })
-export class FilterCalendarComponent {
+export class FilterCalendarComponent implements OnInit{
 
   selectedFromDate : any;
   selectedToDate : any;
@@ -31,14 +31,18 @@ export class FilterCalendarComponent {
 		 
 
     }
+	ngOnInit(): void {
+		this.onToDateChange.emit(this.fromDate);
+		this.onFromDateChange.emit(this.toDate);
+	}
   calendar = inject(NgbCalendar);
 
 	hoveredDate: NgbDate | null = null;
 	fromDate: NgbDate = this.calendar.getToday();
 	toDate: NgbDate | null = this.calendar.getNext(this.fromDate, 'd', 10);
-  onFromDateChange : any = output<any>();
-  onToDateChange : any = output<any>();
-  isClose:boolean=false
+    onFromDateChange : any = output<any>();
+    onToDateChange : any = output<any>();
+    isClose:boolean=false
 
   
 	onDateSelection(date: NgbDate) {

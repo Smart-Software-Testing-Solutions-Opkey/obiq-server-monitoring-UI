@@ -94,5 +94,13 @@
             }
            
         }
+        @if (filterObj?.modelFromDate && filterObj?.modelToDate) {
+               
+                    <div class="applicationFilter active border" style="background-color: cyan;">
+                        CreatedOn: {{FromDate|date:"MMM"}} {{FromDay}} {{FromDate|date:"yyyy"}}-{{ToDate|date:"MMM"}} {{ToDay}} {{ToDate|date:"yyyy"}}
+                    
+                    </div>
+           
+        }
     </div>
 </div>

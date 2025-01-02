@@ -16,9 +16,19 @@ export class ECommonFilterInnerComponent implements OnInit {
   }
   innerOps = output<any>()
   filterObj:any = null
+  FromDate:any
+  ToDate:any
+  FromDay:any
+  ToDay:any
   @Input('child_data') set child_data({filterObj }) {
     if(filterObj){
       this.filterObj = filterObj
+    
+     if(filterObj?.modelFromDate!=null) this.FromDate = new Date(filterObj?.modelFromDate?.year, filterObj?.modelFromDate?.month - 1, filterObj?.modelFromDate?.day);
+     if(filterObj?.modelFromDate!=null)  this.ToDate=new Date(filterObj?.modelToDate?.year, filterObj?.modelToDate?.month - 1, filterObj?.modelToDate?.day);
+     if(filterObj?.modelFromDate!=null)  this.FromDay= this.getDay(this.FromDate)
+     if(filterObj?.modelFromDate!=null) this.ToDay=this.getDay(this.ToDate)
+     
     }
   }
   actions = {
@@ -32,6 +42,14 @@ export class ECommonFilterInnerComponent implements OnInit {
     },
 
   }
+  getDay(dateNew)
+{
+    let  day = dateNew.getDate(), ordinal = 'th';
+    if (day == 2 || day == 22) ordinal = 'nd';
+    if (day == 3 || day == 23) ordinal = 'rd';
+    if (day == 21 || day == 1 || day == 31) ordinal = 'st';
+    return day + '' + ordinal;
+}
 
   clearAll(){
 // this.filterObj =  {
