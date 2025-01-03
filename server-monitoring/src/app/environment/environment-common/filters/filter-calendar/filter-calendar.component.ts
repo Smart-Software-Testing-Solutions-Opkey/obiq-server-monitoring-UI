@@ -86,8 +86,6 @@ export class FilterCalendarComponent implements OnInit{
 
   
 	formatRange(): string {
-		debugger;
-		console.log("herereeeee")
 		const from = this.fromDate
 			? `${this.fromDate.day.toString().padStart(2, '0')}/${this.fromDate.month.toString().padStart(2, '0')}-/${this.fromDate.year}`
 			: '';

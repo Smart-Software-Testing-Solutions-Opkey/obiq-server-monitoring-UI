@@ -14,7 +14,7 @@ export class EMMrDsErpAllJourneyComponent {
     private dataService:AppDataService){}
 
   ngOnInit(): void {
-   this.getRecentSubActivityJourneyOfUser();
+   
   }
 
   journeyDataSourceTemp: any[] = [];
