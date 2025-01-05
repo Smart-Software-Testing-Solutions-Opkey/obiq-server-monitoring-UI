@@ -14,14 +14,14 @@
                     <h3 class="mb-0 text-ellipsis">{{this.selectedView.viewName}}</h3>
                 </div>
     
-                <div class="right flex-center justify-content-end flex-wrap">
+                <div class="right flex-center justify-content-end flex-wrap mt-1">
                     <!-- <div class="filter-content">
                         <button type="button" class="btn btn-layout btn-bg-theme filter-content-btn" (click)="addWidget()">
                             <i class="oci oci-plus me-2"></i>
                             <span>Widget</span>
                         </button>
                     </div> -->
-                    <div class="filter-content">
+                    <div class="filter-content mb-1">
                         <div class="search_panel searchToggle">
                             
                             <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
@@ -38,7 +38,7 @@
                     
                     @if (!isSelectedAnalyticsTypeEmpty){
     
-                        <div class="filter-content">
+                        <div class="filter-content mb-1">
                             <div class="EditToggle">
                             <button class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
                                 <i class="oci oci-edit"></i>
@@ -49,7 +49,7 @@
                         </div>
                     }
                     
-                    <div class="filter-content">
+                    <div class="filter-content mb-1">
                         <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="refreshPage()">
                             <i class="oci oci-refresh-cw"></i>
                         </button>
@@ -97,7 +97,7 @@
     
                     </div> -->
     
-                    <div class="filter-content">
+                    <div class="filter-content mb-1">
                         <div class="dropdown layout-btn-group-time" >
                             
                            <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside" (click)="getTimezones()" >
