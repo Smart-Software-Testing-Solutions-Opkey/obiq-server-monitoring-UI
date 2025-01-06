@@ -311,6 +311,11 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
     }
+    else{
+      this.selectedTime={"type":"setEnum","value":"LAST_7_DAYS"}
+       form_data.timeSpanEnum = timeFilter?.value;
+    }
+   
     this.app_service.make_post_server_call(ajax_url, form_data)
     .subscribe({
       next: (result: any) => {
