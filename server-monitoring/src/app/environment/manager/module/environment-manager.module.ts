@@ -58,6 +58,8 @@ import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-beha
 import { EMMrDsErpOVFPComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p.component';
 import { EMDsUbFunctionalErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-functional-error-tab.component';
 import { EMDsUbJourneyComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-Journey/e-m-ds-ub-journey/e-m-ds-ub-journey.component';
+import { EMMrDsUbConsoleErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-console-error-tab.component';
+import { EMMrDsUbApiErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-api-error-tab.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -101,7 +103,9 @@ import { EMDsUbJourneyComponent } from '../main-right/datasources/user-behaviour
     EMMrDsErpOVFPComponent,
     EMMrDsUbAllJourneyComponent,
     EMDsUbFunctionalErrorTabComponent,
-    EMDsUbJourneyComponent
+    EMDsUbJourneyComponent,
+    EMMrDsUbConsoleErrorTabComponent,
+    EMMrDsUbApiErrorTabComponent
 
 
   ],

@@ -1,7 +1,7 @@
-<div id="erp-err-logs-grid"  class="logs-grid-layout">
+<div id="ub-err-logs-grid"  class="logs-grid-layout">
     <!-- (cellClick)="onSelectionChange($event)" -->
     <kendo-grid 
-        [data]="ub_functional_err_log_Data_Source" 
+        [data]="ub_api_err_log_Data_Source" 
         [selectable]="true" 
         class="scrollable"
         (scrollBottom)="onScroll()"
@@ -19,20 +19,15 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="timeString" title="Time">
+        <kendo-grid-column field="date" title="Date">
         </kendo-grid-column>
-        <kendo-grid-column field="userId" title="User">
+        <kendo-grid-column field="host" title="Host">
         </kendo-grid-column>
-        <kendo-grid-column field="errorId" title="Error Id">
+        <kendo-grid-column field="service" title="Service">
         </kendo-grid-column>
-        <kendo-grid-column field="envName" title="Environment Name">
+        <kendo-grid-column field="content" title="Content">
         </kendo-grid-column>
-        <kendo-grid-column field="envHost" title="Environment Host">
-        </kendo-grid-column>
-        <kendo-grid-column field="appEventLog" title="App Log">
-        </kendo-grid-column>
-        <!-- <kendo-grid-column field="logName"  title="Log Name">
-        </kendo-grid-column> -->
+        
 
         <ng-template kendoGridNoRecordsTemplate>
             <div class="no-data-found" style="height: 17rem !important;">
