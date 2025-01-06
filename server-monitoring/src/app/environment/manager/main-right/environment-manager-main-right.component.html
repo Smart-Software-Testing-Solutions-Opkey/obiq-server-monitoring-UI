@@ -382,12 +382,20 @@
                             }
                             @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
                                 <div class="log">
-                                    <app-e-m-ds-ub-functional-error-tab >
-                                        [analyticsType]="selectedAnalyticsType"
-                                        [view]="selectedView">
+                                    <app-e-m-ds-ub-functional-error-tab [analyticsType]="selectedAnalyticsType"
+                                    [view]="selectedView">
                                     </app-e-m-ds-ub-functional-error-tab>
                                 </div>
                             }
+                             @else if(selectedTab.enumType === "JOURNEY_TAB"){
+                                <div class="log">
+                                    <app-e-m-ds-ub-journey [analyticsType]="selectedAnalyticsType"
+                                    [view]="selectedView">
+
+                                    </app-e-m-ds-ub-journey>
+                                </div>
+                             }
+                            
                           
                         }
                         @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
