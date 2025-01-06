@@ -388,7 +388,22 @@
                                     </app-e-m-ds-ub-functional-error-tab>
                                 </div>
                             }
-                          
+                            @else if(selectedTab.enumType === "LOG_APP_CONSOLE_ERROR"){
+                                <div class="log">
+                                    <app-e-m-mr-ds-ub-console-error-tab>
+                                        [analyticsType]="selectedAnalyticsType"
+                                        [view]="selectedView">
+                                    </app-e-m-mr-ds-ub-console-error-tab>
+                                </div>
+                            }
+                            @else if(selectedTab.enumType === "LOG_APP_API_ERROR"){
+                                <div class="log">
+                                    <app-e-m-mr-ds-ub-api-error-tab >
+                                        [analyticsType]="selectedAnalyticsType"
+                                        [view]="selectedView">
+                                    </app-e-m-mr-ds-ub-api-error-tab>
+                                </div>
+                            }
                         }
                         @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
                             <div class="telemetry">

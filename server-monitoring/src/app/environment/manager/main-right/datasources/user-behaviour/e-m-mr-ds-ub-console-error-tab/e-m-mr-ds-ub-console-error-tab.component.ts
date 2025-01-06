@@ -7,11 +7,12 @@ import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-e-m-ds-ub-functional-error-tab',
-  templateUrl: './e-m-ds-ub-functional-error-tab.component.html',
-  styleUrl: './e-m-ds-ub-functional-error-tab.component.scss'
+  selector: 'app-e-m-mr-ds-ub-console-error-tab',
+  templateUrl: './e-m-mr-ds-ub-console-error-tab.component.html',
+  styleUrl: './e-m-mr-ds-ub-console-error-tab.component.scss'
 })
-export class EMDsUbFunctionalErrorTabComponent {
+
+export class EMMrDsUbConsoleErrorTabComponent {
   constructor(
       public service_data: AppDataService,
       public app_service: AppService,
@@ -21,15 +22,15 @@ export class EMDsUbFunctionalErrorTabComponent {
 
   }
 @Input() analyticsType: any;
-@Input() view: any;
+  @Input() view: any;
  
   limit: number = 20; 
   offset: number = 0; 
-  ub_functional_err_log_Data_Source: any[] = []; 
+  ub_console_err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
 
   ngOnInit(): void {
-  this.get_Functional_log_error();
+  this.get_console_log_error();
   }
   //  onSelectionChange(e) {
   //    console.log(this.analyticsType,"this is analytics type ");
@@ -50,26 +51,26 @@ export class EMDsUbFunctionalErrorTabComponent {
   //     });
   //     modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
   //  }
-   get_Functional_log_error(timeFilter?: any, appendData: boolean = false): void {
+   get_console_log_error(timeFilter?: any, appendData: boolean = false): void {
     window.loadingStart("#ub-err-logs-grid", "Please wait");
 
     if (this.allDataLoaded) return; 
 
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
-      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppFunctionalErrorByFilter';
+      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppConsoleErrorByFilter';
 
     const form_data = {
       timeSpanEnum: 'LAST_7_DAYS',
+      userId:this.dataService.UserDto.UserDTO.U_ID,
       limitBy: this.limit,
-      userId:this.service_data.UserDto.UserDTO.U_ID,
       appType: 'ORACLEFUSION',
       offset: this.offset 
     };
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-        window.loadingStop("#ub-err-logs-grid", "Please wait");
+        window.loadingStop("#ub-err-logs-grid");
 
         result = result.map((log) => {
 
@@ -85,16 +86,16 @@ export class EMDsUbFunctionalErrorTabComponent {
         }
 
         if (appendData) {
-          this.ub_functional_err_log_Data_Source = [...this.ub_functional_err_log_Data_Source, ...result];
+          this.ub_console_err_log_Data_Source = [...this.ub_console_err_log_Data_Source, ...result];
         } else {
-          this.ub_functional_err_log_Data_Source = result;
+          this.ub_console_err_log_Data_Source = result;
         }
 
         this.offset += this.limit;
       },
       error: (error: any) => {
         console.warn(error);
-        window.loadingStop("#ub-err-logs-grid", "Please wait");
+        window.loadingStop("#ub-err-logs-grid");
 
       },
       complete: () => {
@@ -105,6 +106,6 @@ export class EMDsUbFunctionalErrorTabComponent {
   }
 
   onScroll(): void {
-    this.get_Functional_log_error(null, true); 
+    this.get_console_log_error(null, true); 
   }
 }
