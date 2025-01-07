@@ -52,9 +52,9 @@ export class EMMrDsUbApiErrorTabComponent {
   //     modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
   //  }
    get_api_log_error(timeFilter?: any, appendData: boolean = false): void {
-    window.loadingStart("#ub-err-logs-grid", "Please wait");
-
+  debugger;
     if (this.allDataLoaded) return; 
+    window.loadingStart("#ub-err-logs-grid", "Please wait1");
 
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
