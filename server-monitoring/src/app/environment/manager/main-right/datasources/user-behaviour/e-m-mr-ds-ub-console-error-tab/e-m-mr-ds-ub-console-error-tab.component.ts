@@ -52,10 +52,10 @@ export class EMMrDsUbConsoleErrorTabComponent {
   //     modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
   //  }
    get_console_log_error(timeFilter?: any, appendData: boolean = false): void {
-    window.loadingStart("#ub-err-logs-grid", "Please wait");
+    
 
     if (this.allDataLoaded) return; 
-
+    window.loadingStart("#ub-err-logs-grid", "Please wait");
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
       'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppConsoleErrorByFilter';
