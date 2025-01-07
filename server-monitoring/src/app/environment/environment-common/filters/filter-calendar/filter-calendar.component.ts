@@ -89,7 +89,7 @@ export class FilterCalendarComponent implements OnInit{
 		debugger;
 		console.log("herereeeee")
 		const from = this.fromDate
-			? `${this.fromDate.day.toString().padStart(2, '0')}/${this.fromDate.month.toString().padStart(2, '0')}-/${this.fromDate.year}`
+			? `${this.fromDate.day.toString().padStart(2, '0')}/${this.fromDate.month.toString().padStart(2, '0')}/${this.fromDate.year}`
 			: '';
 		const to = this.toDate
 			? `${this.toDate.day.toString().padStart(2, '0')}/${this.toDate.month.toString().padStart(2, '0')}/${this.toDate.year}`

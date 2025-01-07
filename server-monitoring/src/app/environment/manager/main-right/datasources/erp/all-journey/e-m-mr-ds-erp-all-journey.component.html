@@ -2,12 +2,12 @@
 
  <div class="header d-flex">
     <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="backtomenu()"><i class="oci oci-chevron-left text_muted"></i></button>
-<div class="left">
-    <h3 class="mb-0 text-ellipsis">All journey</h3>
-</div>
+    <div class="left">
+        <h3 class="mb-0 text-ellipsis">All journey</h3>
+    </div>
  </div>
 
-    <div class="app_body ">
+    <div class="app_body mx-2">
         <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"></app-envrionment-common-filter>
         <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
             <kendo-grid [data]="journeyDataSource" [navigable]="true" [hideHeader]="false" [pageable]="false"

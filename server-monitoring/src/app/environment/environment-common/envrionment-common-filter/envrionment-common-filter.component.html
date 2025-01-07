@@ -1,11 +1,19 @@
 
 <div class="showndiv d-flex">
-    <app-filter-search (searchedText)="searched($event)"></app-filter-search>
-    <app-filter-calendar  [child_data]="{ selectedFromDate : modelObj.modelFromDate, selectedToDate: modelObj.modelToDate}"  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
-    <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
-    <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+    <div class="filter-content search_md_width">
+        <app-filter-search (searchedText)="searched($event)"></app-filter-search>
+    </div>
+    <div class="filter-content input_date_picker date_picker_layout_2 created_on dropdown_focus">
+        <app-filter-calendar  [child_data]="{ selectedFromDate : modelObj.modelFromDate, selectedToDate: modelObj.modelToDate}"  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
+    </div>
+    <div class="filter-content">
+        <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+    </div>
+    <div class="filter-content">
+        <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+    </div>
   
-    <div class="filter_content">
+    <div class="filter-content">
         <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
             <span class="sp_dropdown">
                 <i class="oci oci-filter font_16px" container="body" ngbtooltip="Filter"></i>
@@ -13,7 +21,13 @@
             </span>
         </button>
     </div>
-    <button (click)="sendFilterData()">Search</button>
+    <!-- <button (click)="sendFilterData()">Search</button> -->
+    <div class="filter-content">
+        <button type="button" class="btn btn-bg-theme btn-search active" (click)="sendFilterData()" ngbTooltip="Search"
+                container="body" triggers="mouseenter:mouseleave">
+                <span class="btn_text line_h_1">Search</span>
+        </button>
+    </div>
 </div>
 
 

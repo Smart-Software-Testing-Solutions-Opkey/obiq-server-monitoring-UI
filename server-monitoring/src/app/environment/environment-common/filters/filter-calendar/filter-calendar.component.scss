@@ -17,3 +17,16 @@
     background-color: #dde2e4;
     color: #000;
 }
+
+.custom_width_datePicker{
+    width: 12rem !important;
+}
+
+.width_custom:placeholder-shown {
+    max-width: 7rem;
+    padding-right: 1.5rem !important;
+}
+
+.DateRangeWidth{
+    width: 11.6rem !important;
+}
