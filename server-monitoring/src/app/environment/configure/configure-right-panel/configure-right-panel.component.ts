@@ -39,17 +39,29 @@ export class ConfigureRightPanelComponent {
     }
   };
   Shared_Access_Type_Obj: { U_ID: string, permission: string }[] = [];
-  isDisabled:boolean=true
+  isDisabled:boolean
   
   inviteType:string='Done'
+  
   selectAccessType(type: string): void {
-    if(type=='SHARED')  this.inviteType='Invite'
-    else   this.inviteType='Done'
-    if(this.dataService.changedAccessType==type)this.isDisabled=true
-    else this.isDisabled=false
+    if(type=='SHARED') {
+      this.inviteType = 'Invite'
+      if (this.addedEmails.length === 0) {
+          this.isDisabled= true;
+      }  
+      else{
+        this.isDisabled= false;
+      }
+    }
+    else {
+      this.inviteType='Done'
+      this.isDisabled=false
+    }
+    // if(this.dataService.changedAccessType==type)this.isDisabled=true
+    // else this.isDisabled=false
+   
     if(this.dataService.changedAccessType=='SHARED' && this.addedUsers.length>0){
       this.inviteType='Invite'
-      
     }
     this.showSharedInput = false;
     this.accessTypeObj.AccessType = type;
@@ -145,6 +157,7 @@ selectViewOrEdit(option: string): void {
   ngOnInit(): void {
 
     this.getAllProjects();
+
   
     if(this.selectedItem?.AccessType){
       
