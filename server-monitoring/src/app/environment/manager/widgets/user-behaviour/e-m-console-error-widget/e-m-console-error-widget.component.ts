@@ -183,4 +183,7 @@ renaming(){
   this.isRename = false;
 }
 
+openAllConsoleErrors(){
+    this.app_service.routeTo('environment','ubConsoleError')
+}
 }

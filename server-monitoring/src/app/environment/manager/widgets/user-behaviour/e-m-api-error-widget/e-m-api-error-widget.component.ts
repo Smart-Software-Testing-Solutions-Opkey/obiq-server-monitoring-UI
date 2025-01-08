@@ -182,5 +182,8 @@ renameWidget(){
 renaming(){
   this.isRename = false;
 }
+openAllApiErrors(){
+  this.app_service.routeTo('environment','ubApiError')
+}
 
 }

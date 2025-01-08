@@ -6,6 +6,9 @@ import { ViewSummaryDetailsComponent } from '../main-right/view-summary-details/
 import { EnvironmentManagerMainRightComponent } from '../main-right/environment-manager-main-right.component';
 import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
 import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component';
+import { EMMrDsUbAllApiErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-api-error/e-m-mr-ds-ub-all-api-error.component';
+import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component';
+import { EMMrDsUbAllFunctionalErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component';
 
 const routes: Routes = [
   
@@ -32,6 +35,21 @@ const routes: Routes = [
     path :'ubjourney',
     component: EMMrDsUbAllJourneyComponent,
     outlet :'rightSection'
+  },
+  {
+    path: 'ubApiError',
+    component:  EMMrDsUbAllApiErrorComponent,
+    outlet: 'rightSection'
+  },
+  {
+    path: 'ubConsoleError',
+    component:  EMMrDsUbAllConsoleErrorComponent,
+    outlet: 'rightSection'
+  },
+  {
+    path: 'ubFunctionalError',
+    component:  EMMrDsUbAllFunctionalErrorComponent,
+    outlet: 'rightSection'
   }
 ]
 }

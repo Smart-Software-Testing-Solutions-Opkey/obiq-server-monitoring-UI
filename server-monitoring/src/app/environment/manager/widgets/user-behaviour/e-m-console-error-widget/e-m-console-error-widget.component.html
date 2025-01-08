@@ -15,8 +15,8 @@
     </div>
   
     <div style="display:flex;justify-content: space-between;align-items: center;">
-            <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">
-                {{ 'View All Console Errors' }}
+            <a href="javascript:void(0)" class="view-full-journey" style="text-decoration: none; color: #1C7C92;" (click)="openAllConsoleErrors()">
+                View All Console Errors
             </a>
             
             <div *ngIf="Editable">

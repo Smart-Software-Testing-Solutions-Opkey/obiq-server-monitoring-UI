@@ -182,4 +182,8 @@ renaming(){
   this.isRename = false;
 }
 
+openAllFunctionalErrors(){
+  this.app_service.routeTo('environment','ubFunctionalError')
+}
+
 }
