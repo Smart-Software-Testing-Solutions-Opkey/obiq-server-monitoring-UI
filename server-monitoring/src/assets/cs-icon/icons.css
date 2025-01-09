@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-drag-indicator:before {
+  content: "\e92f";
+}
+
 .oci-filter:before {
   content: "\e92e";
 }
