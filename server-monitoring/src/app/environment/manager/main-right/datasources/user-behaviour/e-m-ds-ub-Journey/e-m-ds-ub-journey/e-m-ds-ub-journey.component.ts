@@ -22,11 +22,16 @@ export class EMDsUbJourneyComponent  {
   
   @Input() analyticsType: any;
   @Input() view: any;
+  limit: number = 20; 
+  offset: number = 0; 
+  ub_User_Journey_Data_Source: any[] = []; 
+  allDataLoaded: boolean = false; 
+
 
   ngOnInit(): void {
     this.get_User_Behaviour_Journey();
     }
-    get_User_Behaviour_Journey(): void {
+    get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {
       debugger;
        const form_url =
             environment.BASE_OBIQ_SERVER_URL +
@@ -38,19 +43,45 @@ export class EMDsUbJourneyComponent  {
             };
             this.app_service.make_post_server_call(form_url, form_data).subscribe({
             next: (result: any) => {
-            window.loadingStop("#erp-err-logs-grid");
-              
+            window.loadingStop("#ub-user-Journey-logs-grid");
+            result = result.map((log) => {
+
+              const date = new Date(log.timestamp);
+              return {
+                ...log,
+                timeString: date.toLocaleString()
+              };
+            });
+    
+            if (result.length < this.limit) {
+              this.allDataLoaded = true;
+            }
+    
+            if (appendData) {
+              this.ub_User_Journey_Data_Source = [...this.ub_User_Journey_Data_Source, ...result];
+            } else {
+              this.ub_User_Journey_Data_Source = result;
+            }
+    
+            this.offset += this.limit;
              
             },
             error: (error: any) => {
               console.warn(error);
-              // window.loadingStop("#erp-err-logs-grid");
+               window.loadingStop("#ub-user-Journey-logs-grid");
       
             },
             complete: () => {
-              // window.loadingStop("#erp-err-logs-grid");
+               window.loadingStop("#ub-user-Journey-logs-grid");
               console.log('Completed loading functional error logs');
             }
           });
     }
+    onScroll(): void {
+      this.get_User_Behaviour_Journey(null, true); 
+    }
+    openInNewTab(e){
+      debugger;
+        window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
+      }
 }

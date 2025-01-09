@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-configuration-settings-user-behaviour',
@@ -23,6 +24,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
  obj_error = {
   displayUserError: false,
 }
+
   @Input('child_data') set child_data({ obj_configuration_setting,displayUserError }) {
     this.obj_configuration_setting = obj_configuration_setting;
 
@@ -43,6 +45,10 @@ export class ConfigurationSettingsUserBehaviourComponent {
       return 0;
     });
     this.bindData()
+  }
+  ngOnInit() {
+
+    this.get_all_Instance();
   }
   agent_lists = [
     {
@@ -91,7 +97,29 @@ export class ConfigurationSettingsUserBehaviourComponent {
       status: "offline"
     }
   ];
+ get_all_Instance() {
+   
+    let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
+    let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
+    //let form_url = "https://myqlm.preprod.opkeyone.com/Admin/GetAllUserBinding"
+    let form_data = {};
+
+    this.app_service.make_post_server_call(form_url,form_data)
+      .subscribe({
+        next: (result: any) => {
+         console.log(result)
+        },
+        error: (error: any) => {
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+
+
+  }
 
   on_Selection_Change_User_Behavious(event:any){
    
