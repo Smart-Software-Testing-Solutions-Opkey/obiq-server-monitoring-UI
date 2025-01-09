@@ -63,7 +63,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   offset: number = 0;
   allDataLoaded: boolean = false;
   subscriptions: Subscription[] = [];
-  logTypes: string[] = ['All', 'Success', 'Error', 'Warning', 'Blocked'];
+  logTypes: string[] = ['All', 'Success', 'Error', 'Warning'];
   selectedLogType: string = 'All';  // Default selection
   selectedTime:any;
   ngOnInit(): void {
@@ -188,7 +188,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   
   getSeriesData(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
       
-      const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning', 'Blocked'] : [selectedLogType];
+      const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
       const isHourly = this.chartData.groupedBy === 'Hour';
   
       return dataPoints.map(point => {
@@ -203,9 +203,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
               case 'Warning':
                   color = '#ff6833';
                   break;
-              case 'Blocked':
-                  color = '#ff3333';
-                  break;
+              // case 'Blocked':
+                  // color = '#ff3333';
+                  // break;
           }
   
           return {
