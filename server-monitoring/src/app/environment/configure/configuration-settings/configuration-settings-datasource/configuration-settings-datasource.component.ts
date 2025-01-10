@@ -63,7 +63,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   modal_name = '';
   data_Source_widjets = [];
-  Available_Application_Instances:any;
+  Available_Application_Instances:any = {};
 
   get_all_datasource() {
 
