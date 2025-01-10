@@ -33,82 +33,45 @@ export class ConfigurationSettingsUserBehaviourComponent {
     else
        this.obj_error.displayUserError = displayUserError;
     console.log("In User Behaviour", obj_configuration_setting);
-    this.agent_lists.sort((a, b) => {
-      const nameA = a.name.toUpperCase();
-      const nameB = b.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
+   
     this.bindData()
   }
   ngOnInit() {
 
     this.get_all_Instance();
   }
-  agent_lists = [
-    {
-      name: "Olivia Rhye",
-      email: "olivia.rhye@opkey.com",
-      status: "online"
-    },
-    {
-      name: "Phoenix Baker",
-      email: "phoenix.baker@opkey.com",
-      status: "online"
-    },
-    {
-      name: "Lana Steiner",
-      email: "lana.steiner@opkey.com",
-      status: "online"
-    },
-    {
-      name: "Demi Wilkinson",
-      email: "demi.wilkinson@opkey.com",
-      status: "online"
-    },
-    {
-      name: "Candice Wu",
-      email: "candice.wu@opkey.com",
-      status: "offline"
-    },
-    {
-      name: "Natali Craig",
-      email: "natali.craig@opkey.com",
-      status: "offline"
-    },
-    {
-      name: "Drew Cano",
-      email: "drew.cano@opkey.com",
-      status: "online"
-    },
-    {
-      name: "Orlando Diggs",
-      email: "orlando.diggs@opkey.com",
-      status: "offline"
-    },
-    {
-      name: "Andi Lane",
-      email: "andi.lane@opkey.com",
-      status: "offline"
-    }
-  ];
+
+  agent_lists= [];
+ 
+
  get_all_Instance() {
    
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
-    let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
-    //let form_url = "https://myqlm.preprod.opkeyone.com/Admin/GetAllUserBinding"
+    
+    let form_url = environment.BASE_OPKEY_URL + "Admin/GetAllUserBinding";
     let form_data = {};
 
-    this.app_service.make_post_server_call(form_url,form_data)
+    this.app_service.make_get_server_call(form_url,form_data)
       .subscribe({
         next: (result: any) => {
-         console.log(result)
+         if(result && result.length>0){
+          this.agent_lists= result;
+
+          this.agent_lists.sort((a, b) => {
+            const nameA = a.Name.toUpperCase();
+            const nameB = b.Name.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          });
+    
+          console.log(result)
+         }
         },
         error: (error: any) => {
           console.warn(error);
@@ -118,6 +81,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
         }
       });
 
+      
 
   }
 
@@ -150,6 +114,6 @@ export class ConfigurationSettingsUserBehaviourComponent {
   selectedKeys = []
 
   bindData(){
-    this.selectedKeys = this.obj_configuration_setting?.selected_user_behaviour_component?.map(ele =>ele.email);
+    this.selectedKeys = this.obj_configuration_setting?.selected_user_behaviour_component?.map(ele =>ele.email_ID);
   }
 }

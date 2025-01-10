@@ -11,7 +11,7 @@
     (selectionChange)="on_Selection_Change_User_Behavious($event)"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
-    kendoGridSelectBy="email"
+    kendoGridSelectBy="email_ID"
     [(selectedKeys)]="selectedKeys">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
@@ -25,8 +25,8 @@
                 </span>
 
                 <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.name}}</span>
-                    <span class="layout-text-date">{{dataItem.email}}</span>
+                    <span class="layout-text-name">{{dataItem.Name}}</span>
+                    <span class="layout-text-date">{{dataItem.email_ID}}</span>
                 </div>
             </div>
         </ng-template>
