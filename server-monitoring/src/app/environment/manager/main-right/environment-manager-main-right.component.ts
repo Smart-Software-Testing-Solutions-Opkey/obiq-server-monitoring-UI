@@ -179,7 +179,11 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
    
     if (Object.keys(this.selectedAnalyticsType).length != 0) {
       // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
-      this.get_Tab_Control_List(this.selectedAnalyticsType)
+      if(this.selectedAnalyticsType.hasOwnProperty('type') )
+      {
+        this.get_Tab_Control_List(this.selectedAnalyticsType)
+      }
+      
 
       // }
       // else if(this.selectedAnalyticsType.val == '"USER_BEHAVIOUR_ANALYTICS_DATASOURCE"'){
