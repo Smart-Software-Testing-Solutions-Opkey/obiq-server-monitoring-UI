@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -27,6 +27,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   selected_test_automation_analysis = []
   Show_Project_Access: boolean = false;
   receivedAccessType: any;
+  searchText : any;
   @Input('child_data') set child_data({ obj_configuration_setting }) {
 
     
@@ -76,7 +77,40 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
   }
+  clearSearch(){
+    this.searchText = ''
+    this.filterSearchResults()
+  }
+  filterSearchResults(){
 
+      if(this.searchText == null){
+        return
+      }
+      if(this.searchText == ''){
+        this.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component;
+        this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics;
+        this.selected_test_automation_analysis = this.obj_configuration_setting.selected_test_automation_analysis;
+        this.selected_grid_System_Diagnostics = this.obj_configuration_setting.selected_system_diagnostics;
+      }
+      if( this.searchText ){
+
+        // for user behaviour
+        this.selected_user_behaviour_component = this.obj_configuration_setting?.selected_user_behaviour_component.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) ||data?.CreatedBy.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
+
+        // for erp analytics
+        this.Selected_grid_dataSource = this.obj_configuration_setting?.selected_erp_analytics.filter( (data)=>
+          data?.SystemIdentifier.toLowerCase().includes(this.searchText.toLowerCase()) || data?.CreatedBy.toLowerCase().includes(this.searchText.toLowerCase()) || data?.CreatedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.CreatedOn.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedBy.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedOn.toLowerCase().includes(this.searchText.toLowerCase()))
+
+        // for test automation
+        this.selected_test_automation_analysis = this.obj_configuration_setting?.selected_test_automation_analysis.filter( (data)=>data?.AgentName.toLowerCase().includes(this.searchText.toLowerCase()))
+
+        // for system diagonostics
+        this.selected_grid_System_Diagnostics = this.obj_configuration_setting?.selected_system_diagnostics.filter( (data)=>data?.agentName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ipAddress.toLowerCase().includes(this.searchText.toLowerCase()))
+        
+      }
+        
+
+  }
   get_all_summary(selectionData) {
   
     this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
