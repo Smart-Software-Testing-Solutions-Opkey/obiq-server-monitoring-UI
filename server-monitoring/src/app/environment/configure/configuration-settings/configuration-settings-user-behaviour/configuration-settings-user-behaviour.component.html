@@ -17,7 +17,7 @@
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>
 
-    <kendo-grid-column field="SystemIdentifier" title="Users">
+    <kendo-grid-column field="SystemIdentifier" title="Name">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                 <span class="img-app-profile">
@@ -26,6 +26,15 @@
 
                 <div class="ps-2">
                     <span class="layout-text-name">{{dataItem.Name}}</span>
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="SystemIdentifier" title="Email address">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+
+                <div>
                     <span class="layout-text-date">{{dataItem.email_ID}}</span>
                 </div>
             </div>
