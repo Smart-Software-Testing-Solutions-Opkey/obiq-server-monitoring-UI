@@ -280,9 +280,28 @@ widgetType=''
   }
 dataDir = ''
   getChartData(type, timeFilter?: any){
+
+    let ajax_url : any;
+    let form_data : any ;
+    
+    if(this.widgetType == 'ERP'){
+      ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+      form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+    }
+
+    if( this.widgetType == 'userBehaviour'){
+       ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTotalErrorForUserAnalytics";
+       form_data = { 
+        "timeSpanEnum": "LAST_7_DAYS" , 
+        "appType": "ORACLEFUSION", 
+        "limitBy": 50,
+        "offset": 0, 
+        "userId": this.service_data.UserDto.UserDTO.U_ID
+      }
+
+    }
+       
       
-      let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      const form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
       if(timeFilter?.type == 'setEnum'){
         form_data.timeSpanEnum = timeFilter?.value;
        } else if(timeFilter?.type == "setCustom"){
