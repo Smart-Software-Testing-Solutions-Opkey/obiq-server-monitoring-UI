@@ -12,7 +12,8 @@ import {
   ApexTitleSubtitle,
   ApexStroke,
   ApexGrid,
-  ApexYAxis
+  ApexYAxis,
+  ApexTooltip
 } from "ng-apexcharts";
 
 
@@ -25,6 +26,7 @@ export type ChartOptions = {
   grid: ApexGrid;
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
+  tooltip:ApexTooltip;
 };
 
 @Component({
@@ -136,6 +138,13 @@ createChart(): void {
     stroke: {
       curve: "straight",
       width:2
+    },
+    tooltip:{
+      marker:{
+      
+        fillColors: ['#B42318'],
+        
+      }
     },
     title: {
       text: "Product Trends by Month",

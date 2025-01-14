@@ -12,7 +12,8 @@ import {
   ApexTitleSubtitle,
   ApexStroke,
   ApexGrid,
-  ApexYAxis
+  ApexYAxis,
+  ApexTooltip
 } from "ng-apexcharts";
 
 
@@ -25,6 +26,7 @@ export type ChartOptions = {
   grid: ApexGrid;
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
+  tooltip:ApexTooltip
 };
 
 @Component({
@@ -130,6 +132,13 @@ createChart(): void {
     },
     dataLabels: {
       enabled: false
+    },
+    tooltip:{
+      marker:{
+      
+        fillColors: ['#B42318'],
+        
+      }
     },
     
     stroke: {
