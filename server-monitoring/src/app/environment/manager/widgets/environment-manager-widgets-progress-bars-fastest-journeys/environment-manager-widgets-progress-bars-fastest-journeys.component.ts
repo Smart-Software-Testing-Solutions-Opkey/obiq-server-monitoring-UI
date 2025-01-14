@@ -129,21 +129,46 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
         }
       });
   }
-  calculateDuration(from: number, to: number): string {
+//   calculateDuration(from: number, to: number): string {
     
-    const durationMillis = from - to;
+//     const durationMillis = from - to;
 
     
-    if (durationMillis < 1000) {
-        return `${durationMillis} ms`;
+//     if (durationMillis < 1000) {
+//         return `${durationMillis} ms`;
+//     }
+
+    
+//     const durationSeconds = Math.floor(durationMillis / 1000);
+//     const minutes = Math.floor(durationSeconds / 60);
+//     const seconds = durationSeconds % 60;
+
+//     return `${minutes}min ${seconds}sec`;
+// }
+
+calculateDuration(from: number, to: number): string {
+  const durationMillis = from - to;
+
+  if (durationMillis < 1000) {
+      return `${durationMillis} ms`;
+  }
+
+  const durationSeconds = Math.floor(durationMillis / 1000);
+  const hours = Math.floor(durationSeconds / 3600);
+  const minutes = Math.floor((durationSeconds % 3600) / 60);
+  const seconds = durationSeconds % 60;
+
+  const formatWithLeadingZero = (value: number): string => value < 10 ? `0${value}` : `${value}`;
+  let duration = '';
+    if (hours > 0) {
+        duration += `${formatWithLeadingZero(hours)} hr `;
     }
+    if (minutes > 0 || hours > 0) {
+        duration += `${formatWithLeadingZero(minutes)} min `;
+    }
+    duration += `${formatWithLeadingZero(seconds)} sec`;
 
-    
-    const durationSeconds = Math.floor(durationMillis / 1000);
-    const minutes = Math.floor(durationSeconds / 60);
-    const seconds = durationSeconds % 60;
-
-    return `${minutes}m ${seconds}s`;
+    return duration;
 }
 
 
