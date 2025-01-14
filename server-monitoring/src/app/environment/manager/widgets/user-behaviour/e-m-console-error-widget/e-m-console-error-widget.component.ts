@@ -137,7 +137,8 @@ createChart(): void {
     
     stroke: {
       curve: "straight",
-      width:2
+      width:2,
+      colors: ['#B42318']
     },
     tooltip:{
       marker:{
