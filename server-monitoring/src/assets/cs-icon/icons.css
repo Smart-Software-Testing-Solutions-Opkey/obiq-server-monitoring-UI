@@ -36,6 +36,10 @@
 
 /***************************icon start here**************************/
 
+.oci-external-link:before {
+  content: "\e930";
+}
+
 .oci-drag-indicator:before {
   content: "\e92f";
 }
