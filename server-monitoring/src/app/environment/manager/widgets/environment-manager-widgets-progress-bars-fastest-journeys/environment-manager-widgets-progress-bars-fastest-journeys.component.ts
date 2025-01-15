@@ -60,6 +60,7 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
 
   @Input() chartData: any;
   public chartOptions: Partial<ChartOptions>;
+  searchText : any;
 
   ngOnInit(){
     if(this?.view?.viewId ){
@@ -68,6 +69,12 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
       this.createChart();
     }
     this.startDataReceiving();
+      
+  }
+
+  tempdatasourceProgressBar : any;
+  filterSearchResults(){
+      this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase())  )
   }
   isRefresh: boolean = false;
   startDataReceiving(){
@@ -76,6 +83,10 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
         if(data.callsource == 'widgetOperation'){
           this.isRefresh = data.data;
           this.refreshPage();
+        }
+        else if(data.callsource == 'searchOperation'){
+          this.searchText = data.data;
+          this.filterSearchResults();
         }
       }
     });
@@ -114,6 +125,8 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
                   calculatedTime 
                 };
               });
+
+              this.tempdatasourceProgressBar=this.datasourceProgressBar 
             
             
           }

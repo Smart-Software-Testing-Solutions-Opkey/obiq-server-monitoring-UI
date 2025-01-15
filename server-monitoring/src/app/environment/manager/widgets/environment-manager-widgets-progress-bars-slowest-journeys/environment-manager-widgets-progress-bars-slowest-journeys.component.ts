@@ -59,6 +59,8 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   }
   public chartOptions: Partial<ChartOptions>;
 
+  searchText : any;
+  tempdatasourceProgressBar : any = [];
   ngOnInit(){
     if(this?.view?.viewId && this.widgetType){
       this.datasourceProgressBar = [];
@@ -67,6 +69,13 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
     }
     this.startDataReceiving();
   }
+
+  filterSearchResults(){
+    this.datasourceProgressBar  = []
+    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase())  )
+    this.cdRef.detectChanges()
+
+  }
   isRefresh: boolean = false;
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
@@ -74,6 +83,10 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
         if(data.callsource == 'widgetOperation'){
           this.isRefresh = data.data;
           this.refreshPage();  
+        }
+        else if(data.callsource == 'searchOperation'){
+          this.searchText = data.data;
+          this.filterSearchResults();
         }
       }  
     });
@@ -111,6 +124,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
                 };
               });
             } 
+            this.tempdatasourceProgressBar = this.datasourceProgressBar
             
           }
           else{
@@ -123,6 +137,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
                 calculatedTime 
               };
             });
+            this.tempdatasourceProgressBar = this.datasourceProgressBar
           }
           window.loadingStop("#slowest-journey-"+this.widgetType);
           this.cdRef.detectChanges();

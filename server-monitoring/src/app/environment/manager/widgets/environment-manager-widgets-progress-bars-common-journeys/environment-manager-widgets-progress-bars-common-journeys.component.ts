@@ -68,6 +68,7 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
     this.startDataReceiving();
   }
   isRefresh: boolean = false;
+  searchText : any;
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
@@ -75,8 +76,17 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
           this.isRefresh = data.data;
           this.refreshPage(); 
         }
+        else if(data.callsource == 'searchOperation'){
+          this.searchText = data.data;
+          this.filterSearchResults();
+        }
       }  
     });
+  }
+  tempdatasourceProgressBar : any;
+  filterSearchResults(){
+    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) ||  data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase()))
+    this.cdRef.detectChanges()
   }
   refreshPage(){
     if(this.isRefresh == true){
@@ -109,7 +119,7 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
                 calculatedTime 
               };
             });
-          
+          this.tempdatasourceProgressBar = this.datasourceProgressBar
           window.loadingStop("#common-journey-"+this.widgetType);
           this.cdRef.detectChanges();
         }

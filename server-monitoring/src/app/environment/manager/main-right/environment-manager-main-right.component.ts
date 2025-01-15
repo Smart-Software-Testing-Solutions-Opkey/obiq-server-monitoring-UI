@@ -27,6 +27,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   }
   isDataLoaded = false
+  searchText : any;
 
   ngOnInit(): void {
     this.app_service.dataReceiver().subscribe(data => {
@@ -297,4 +298,19 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
       this.isRefresh = true;
       this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
   }
+
+  clearSearch(){
+    this.searchText = ''
+    this.filterSearchResults()
+  }
+  filterSearchResults(){
+
+      if(this.searchText == null){
+        return
+      }
+     
+     
+        this.app_service.dataTransmitter({callsource:'searchOperation',data:this.searchText});
+      
+    }
 }
