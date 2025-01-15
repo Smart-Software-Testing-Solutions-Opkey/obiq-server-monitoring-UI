@@ -66,6 +66,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   logTypes: string[] = ['All', 'Success', 'Error', 'Warning'];
   selectedLogType: string = 'All';  // Default selection
   selectedTime:any;
+  logToSearch : any = "";
   ngOnInit(): void {
     console.log(this.analyticsType,"this is selected analytics type")
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
@@ -77,7 +78,19 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     }))
     this.getLogsChart()
     this.getViewLogs()
+    this.startDataReceiving();
   }
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+       if(data.callsource == 'searchOperation'){
+          this.logToSearch = data.data;
+          this.getViewLogs()
+        }
+      }  
+    });
+  }
+ 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
@@ -261,7 +274,6 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
 
   getLogsChart() {
-    debugger;
     this.allDataLoaded = false;
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
@@ -297,13 +309,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         }
       });
   }
+  templogDataSource : any = [];
   getViewLogs(timeFilter?: any, appendData: boolean = false) {
    
     if (this.allDataLoaded) return;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET" };
+    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET" };
     if(this.selectedTime?.type == 'setEnum'){
      form_data.timeSpanEnum = timeFilter?.value;
     } else if(this.selectedTime?.type == "setCustom"){

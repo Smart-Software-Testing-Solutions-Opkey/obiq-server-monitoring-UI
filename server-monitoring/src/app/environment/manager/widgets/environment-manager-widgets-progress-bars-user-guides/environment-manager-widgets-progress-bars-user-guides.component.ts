@@ -67,7 +67,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
       this.startDataReceiving();
     }
     isRefresh: boolean = false;
-    searchText : any;
+    searchText : any = [];
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
