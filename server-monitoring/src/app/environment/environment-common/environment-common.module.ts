@@ -20,6 +20,8 @@ import { FilterUserComponent } from './filters/filter-user/filter-user.component
 import { FilterStatusComponent } from './filters/filter-status/filter-status.component';
 import { ECommonFilterInnerComponent } from './envrionment-common-filter/filter-inner/e-common-filter-inner.component';
 import { FilterCalendarComponent } from './filters/filter-calendar/filter-calendar.component';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { FilterDatetimeComponent } from './filters/filter-datetime/filter-datetime.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { FilterCalendarComponent } from './filters/filter-calendar/filter-calend
     FilterUserComponent,
     FilterStatusComponent,
     ECommonFilterInnerComponent,
-    FilterCalendarComponent
+    FilterCalendarComponent,
+    FilterDatetimeComponent
 
   ],
   imports: [
@@ -46,7 +49,8 @@ import { FilterCalendarComponent } from './filters/filter-calendar/filter-calend
     StringArrayCutterPipe,
     NgbTooltipModule,
     WindowModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    DateInputsModule,
 
    
 ],

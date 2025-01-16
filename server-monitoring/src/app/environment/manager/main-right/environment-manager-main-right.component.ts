@@ -112,7 +112,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     return itemsWithBorder.includes(name); 
 }
 
-  selectedTime: string = '30min';
+  selectedTime: string = '12hrs';
   public fromDatevalue: Date = new Date();
   public toDateValue: Date = new Date();
   public dateTimeFormat = "MM/dd/yyyy HH:mm";
