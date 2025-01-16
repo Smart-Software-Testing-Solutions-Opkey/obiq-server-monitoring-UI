@@ -71,14 +71,19 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.calculateCurrentDate();
   }
 
+  fromDateTime : any;
+  toDateTime : any;
 
   calculateCurrentDate(){
    
     this.fromDatevalue.setDate(this.fromDatevalue.getDate() - 1);
-    this.receivedTimeRange  = this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true}) + " to "+ this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+    this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+    this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
 
 
   }
+
+ 
   timezoneDatasource = []
   selectedTimezone:any
   receivedTimeRange: any
@@ -127,7 +132,43 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     // } else if(this.selectedTime.includes('mon')){
     //   toDateTime.setMonth(fromDateTime.getMonth() + timeItem?.timeValue);
     // }
+    
+    var currentDateObj = new Date();
+    var numberOfMlSeconds = currentDateObj.getTime();
 
+    if(this.selectedTime.includes('30min')){
+      var newDateObj = new Date(numberOfMlSeconds - (30*60*1000));
+    }
+    else if(this.selectedTime.includes('60min')){
+      var newDateObj = new Date(numberOfMlSeconds - (60*60*1000));
+    }
+    else if(this.selectedTime.includes('3hr')){
+      var newDateObj = new Date(numberOfMlSeconds - (3*60*60*1000));
+    }
+    else if(this.selectedTime.includes('6hr')){
+      var newDateObj = new Date(numberOfMlSeconds - (6*60*60*1000));
+    }
+    else if(this.selectedTime.includes('12hr')){
+      var newDateObj = new Date(numberOfMlSeconds - (12*60*60*1000));
+    }
+    else if(this.selectedTime.includes('24hr')){
+      var newDateObj = new Date(numberOfMlSeconds - (24*60*60*1000));
+    }
+    else if(this.selectedTime.includes('3day')){
+      var newDateObj = new Date(numberOfMlSeconds - (3*24*60*60*1000));
+    }
+    else if(this.selectedTime.includes('7day')){
+      var newDateObj = new Date(numberOfMlSeconds - (7*24*60*60*1000));
+    }
+    else if(this.selectedTime.includes('1mon')){
+      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1))
+    }
+    else if(this.selectedTime.includes('3mon')){
+      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3))
+    }
+    this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+ 
+    
     // console.log("from : ", fromDateTime, " To : ", toDateTime);
     this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
     this.closeTimeFilterDropdown();
@@ -136,6 +177,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   applyCustomFilter(){
     // console.log("fromDate: ", this.fromDatevalue, " toDate: ", this.toDateValue);
     this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
+    this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+    this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
     this.closeTimeFilterDropdown();
   }
 
