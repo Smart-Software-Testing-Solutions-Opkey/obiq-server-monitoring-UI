@@ -41,11 +41,11 @@
 
 
 <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
-        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
+        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid custom-journey-widget-height">
 
 
 
-        <kendo-grid-column title="Build Name" field="subActivityName" [width]="200">
+        <kendo-grid-column title="Build Name" field="subActivityName" [width]="290">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">

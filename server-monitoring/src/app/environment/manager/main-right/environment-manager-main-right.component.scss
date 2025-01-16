@@ -139,3 +139,15 @@
         border-bottom: 2px solid #F2F4F7;
     }
 }
+
+::ng-deep .custom-journey-widget-height {
+    height: 14.2rem !important;
+}
+
+::ng-deep .custom-error-widget-height {
+    height: 18rem !important;
+}
+
+::ng-deep .custom-process-widget-height{
+    height: 14.2rem !important;
+}
