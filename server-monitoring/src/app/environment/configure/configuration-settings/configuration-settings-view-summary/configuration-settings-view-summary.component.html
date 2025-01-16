@@ -219,7 +219,7 @@
                                                 [selectable]="false" [navigable]="true"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
 
-                                                <kendo-grid-column title="Agents">
+                                                <kendo-grid-column title="User">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                             <span class="img-app-profile">
@@ -227,6 +227,15 @@
                                                             </span>
                                                             <div class="ps-2">
                                                                 <span class="layout-text-name">{{dataItem.Name}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+                                                <kendo-grid-column title="Email address">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            
+                                                            <div>
                                                                 <span class="layout-text-date">{{dataItem.email_ID}}</span>
                                                             </div>
                                                         </div>
