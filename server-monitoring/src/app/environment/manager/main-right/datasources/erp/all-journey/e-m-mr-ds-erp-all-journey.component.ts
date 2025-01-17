@@ -15,14 +15,32 @@ export class EMMrDsErpAllJourneyComponent {
 
   ngOnInit(): void {
    this.getRecentSubActivityJourneyOfUser();
+   this.startDataReceiving();
   }
 
   journeyDataSourceTemp: any[] = [];
   public pageSize = 20;
   journeyDataSource: GridDataResult;
-
-
   grid_load_more = false;
+
+  
+  textToSearch : any = ''
+  isRefresh : boolean = false;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+       if(data.callsource == 'searchOperation'){
+        this.textToSearch =data.data;
+          this.getRecentSubActivityJourneyOfUser()
+        }
+        else if(data.callsource == 'journeyRefresh'){ 
+          this.isRefresh = data.data;
+          this.refreshPage();  
+        }
+      }  
+      
+    });
+  }
   getRecentSubActivityJourneyOfUser() {
 
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData";
@@ -42,7 +60,7 @@ export class EMMrDsErpAllJourneyComponent {
       "limitBy": this.pageSize,
       "offset": this.skip,
       "projectId": this.dataService?.UserDto?.ProjectDTO?.P_ID,//"3f0e8a1d-f215-4f3e-90bc-b52911482520",//this.dataService?.UserDto?.ProjectDTO?.P_ID,
-      "textToSearch": this.filterObj.modelSearch?this.filterObj.modelSearch:'',
+      "textToSearch": this.textToSearch,
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET"
   }
 
@@ -509,6 +527,11 @@ export class EMMrDsErpAllJourneyComponent {
 
       }
     );
+  }
+  refreshPage(){
+    if(this.isRefresh == true){
+      this.getRecentSubActivityJourneyOfUser();
+    }
   }
   private loadItems(): void {
     this.journeyDataSource = {

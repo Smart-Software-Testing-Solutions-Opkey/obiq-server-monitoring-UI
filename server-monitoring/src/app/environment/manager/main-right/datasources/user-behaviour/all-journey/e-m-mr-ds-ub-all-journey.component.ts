@@ -17,7 +17,7 @@ constructor(
 
   ngOnInit(): void {
     this.getRecentSubActivityJourneyOfUser();
-   
+    this.startDataReceiving();
   }
 
   journeyDataSourceTemp: any[] = [];
@@ -40,6 +40,23 @@ constructor(
     modelToDate:null
   }
 
+  textToSearch : any = ''
+  isRefresh : boolean = false;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+       if(data.callsource == 'searchOperation'){
+        this.textToSearch =data.data;
+          this.getRecentSubActivityJourneyOfUser()
+        }
+        else if(data.callsource == 'journeyRefresh'){ 
+          this.isRefresh = data.data;
+          this.refreshPage();  
+        }
+      }  
+      
+    });
+  }
   getRecentSubActivityJourneyOfUser() {
     
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData";
@@ -57,7 +74,7 @@ constructor(
       "limitBy": this.pageSize,
       "offset": this.skip,
       "projectId": this.dataService?.UserDto?.ProjectDTO?.P_ID,//"3f0e8a1d-f215-4f3e-90bc-b52911482520",//this.dataService?.UserDto?.ProjectDTO?.P_ID,
-      "textToSearch": this.modelObj.modelSearch?this.modelObj.modelSearch:'',
+      "textToSearch": this.textToSearch,
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
       "userId":this.dataService?.UserDto?.UserDTO.U_ID,
   }
@@ -83,6 +100,11 @@ constructor(
     );
   }
   
+  refreshPage(){
+    if(this.isRefresh == true){
+      this.getRecentSubActivityJourneyOfUser();
+    }
+  }
   private loadItems(): void {
     this.journeyDataSource = {
       data: this.journeyDataSourceTemp,
@@ -102,6 +124,11 @@ constructor(
   }
   backtomenu(){
     this.app_service.routeTo('environment','summary')
+  }
+  filterObj:any = {}
+  filterChanged(val){
+    this.filterObj = val
+    this.getRecentSubActivityJourneyOfUser()
   }
 
 }
