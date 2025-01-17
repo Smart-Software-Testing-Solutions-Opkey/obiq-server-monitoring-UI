@@ -82,10 +82,28 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   }
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
+      
       if (data !== null) {
        if(data.callsource == 'searchOperation'){
           this.logToSearch = data.data;
+          this.offset = 0;
+          this.allDataLoaded = false;
           this.getViewLogs()
+        }
+        else if (data.callsource == 'LOG_TAB'){
+          this.logToSearch = '';
+          this.offset = 0;
+          this.allDataLoaded= false;
+
+          if( data.action == 'refresh'){
+            this.getViewLogs()
+          }
+          else if ( data.action == 'filterChange'){
+            this.appType = data.objFilter.modelApplication.toUpperCase()
+            this.getViewLogs()
+
+          }
+
         }
       }  
     });
@@ -310,13 +328,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       });
   }
   templogDataSource : any = [];
+  appType : string = 'ORACLEFUSION'
   getViewLogs(timeFilter?: any, appendData: boolean = false) {
    
     if (this.allDataLoaded) return;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET" };
+    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET","appType":this.appType };
     if(this.selectedTime?.type == 'setEnum'){
      form_data.timeSpanEnum = timeFilter?.value;
     } else if(this.selectedTime?.type == "setCustom"){

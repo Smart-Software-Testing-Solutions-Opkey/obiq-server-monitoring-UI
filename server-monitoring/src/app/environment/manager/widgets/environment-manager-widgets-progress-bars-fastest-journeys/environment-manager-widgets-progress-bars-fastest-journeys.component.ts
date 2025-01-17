@@ -80,13 +80,8 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if(data.callsource == 'widgetOperation'){
-          this.isRefresh = data.data;
-          this.refreshPage();
-        }
-        else if(data.callsource == 'searchOperation'){
-          this.searchText = data.data;
-          this.filterSearchResults();
+        if( data.action == 'refresh'){
+          this.getWidgetData()
         }
       }
     });
@@ -283,6 +278,7 @@ openFullJourney(){
   if(this.widgetType == 'userBehaviour'){
     this.app_service.routeTo('environment','ubjourney')
   }
+  this.app_service.dataTransmitter({ callsource: 'journey', action: 'bindFilterData'});
 }
 
 }
