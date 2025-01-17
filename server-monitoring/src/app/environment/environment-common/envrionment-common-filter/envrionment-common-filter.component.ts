@@ -121,7 +121,13 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = true;
       this.obj_filter.filter_status.display = true;
-
+    }
+    else if(this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR' || this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'){
+      this.obj_filter.common_filter_inner.display = true;
+      this.obj_filter.filter_calendar.display = true;
+      this.obj_filter.erp_application.display = true;
+      this.obj_filter.user.display = true;
+      this.obj_filter.erp_environment.display = true;
     }
   }
   modelObj = {

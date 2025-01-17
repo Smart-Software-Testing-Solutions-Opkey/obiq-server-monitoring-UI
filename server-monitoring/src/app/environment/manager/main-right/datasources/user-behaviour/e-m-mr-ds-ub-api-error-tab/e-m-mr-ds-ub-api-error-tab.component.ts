@@ -51,6 +51,38 @@ export class EMMrDsUbApiErrorTabComponent {
   //     });
   //     modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
   //  }
+
+  logToSearch : any;
+  appType : string = 'ORACLEFUSION'
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      
+      if (data !== null) {
+        if(data.callsource == 'searchOperation'){
+            this.logToSearch = data.data;
+            this.offset = 0;
+            this.allDataLoaded = false;
+            this.get_api_log_error()
+          }
+        
+        if (data.callsource == 'LOG_TAB'){
+          this.logToSearch = '';
+          this.offset = 0;
+          this.allDataLoaded= false;
+
+          if( data.action == 'refresh'){
+            this.get_api_log_error()
+          }
+          else if ( data.action == 'filterChange'){
+            this.appType = data.objFilter.modelApplication.toUpperCase()
+            this.get_api_log_error()
+
+          }
+
+        }
+      }  
+    });
+  }
    get_api_log_error(timeFilter?: any, appendData: boolean = false): void {
   debugger;
     if (this.allDataLoaded) return; 
@@ -64,7 +96,7 @@ export class EMMrDsUbApiErrorTabComponent {
       timeSpanEnum: 'LAST_7_DAYS',
       userId:this.dataService.UserDto.UserDTO.U_ID,
       limitBy: this.limit,
-      appType: 'ORACLEFUSION',
+      appType: this.appType,
       offset: this.offset
     };
 
