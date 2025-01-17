@@ -285,19 +285,49 @@ dataDir = ''
     let form_data : any ;
     
     if(this.widgetType == 'ERP'){
-      ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+      // ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+      // form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+      if(type == "ESS_LOG_ERROR_WIDGET"){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        form_data = { 
+          "timeSpanEnum": "LAST_7_DAYS" , 
+          "appType": "ORACLEFUSION", 
+          "limitBy": 50,
+          "offset": 0, 
+        }
+      }
+      else if(type == 'ESS_LOG_WARNING_WIDGET'){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        form_data = { 
+          "timeSpanEnum": "LAST_7_DAYS" , 
+          "appType": "ORACLEFUSION", 
+          "limitBy": 50,
+          "offset": 0, 
+          "userId": this.service_data.UserDto.UserDTO.U_ID
+        }
+      }
+      else{
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        form_data = { 
+          "timeSpanEnum": "LAST_7_DAYS" , 
+          "appType": "ORACLEFUSION", 
+          "limitBy": 50,
+          "offset": 0, 
+          "userId": this.service_data.UserDto.UserDTO.U_ID
+        }
+      }
+      
     }
 
     if( this.widgetType == 'userBehaviour'){
-       ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTotalErrorForUserAnalytics";
-       form_data = { 
-        "timeSpanEnum": "LAST_7_DAYS" , 
-        "appType": "ORACLEFUSION", 
-        "limitBy": 50,
-        "offset": 0, 
-        "userId": this.service_data.UserDto.UserDTO.U_ID
-      }
+          ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+          form_data = { 
+            "timeSpanEnum": "LAST_7_DAYS" , 
+            "appType": "ORACLEFUSION", 
+            "limitBy": 50,
+            "offset": 0, 
+            "userId": this.service_data.UserDto.UserDTO.U_ID
+          }
 
     }
        
