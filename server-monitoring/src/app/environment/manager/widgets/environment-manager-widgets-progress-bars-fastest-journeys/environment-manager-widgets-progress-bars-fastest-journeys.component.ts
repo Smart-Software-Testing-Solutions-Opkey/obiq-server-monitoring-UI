@@ -101,14 +101,31 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
 
   getWidgetData(){
     window.loadingStart("#fastest-journey-"+this.widgetType, "Please wait");
+
+    let ajax_url : any;
+    let form_data : any ;
+    if(this.widgetType == 'ERP'){
+      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+      form_data = {
+          "appType": "ORACLEFUSION",
+          "viewId": this?.view?.viewId,
+          // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
+          "widgetType": "USER_JOURNEY_TOP_FAST_WIDGET",
+      };
+    }
+    else{
+      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+      form_data = {
+        "appType": "ORACLEFUSION",
+        "viewId": this?.view?.viewId,
+        // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
+        "widgetType": "USER_JOURNEY_TOP_FAST_WIDGET",
+        "userId": this.service_data.UserDto.UserDTO.U_ID
+      };
+
+    }
     
-    let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
-    const form_data = {
-      "appType": "ORACLEFUSION",
-      "viewId": this?.view?.viewId,
-      // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
-      "widgetType": "USER_JOURNEY_TOP_FAST_WIDGET",
-    };
+    
    
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
