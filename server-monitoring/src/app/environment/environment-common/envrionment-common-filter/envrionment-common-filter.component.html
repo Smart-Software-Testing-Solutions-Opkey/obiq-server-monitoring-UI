@@ -1,18 +1,30 @@
 
 <div class="showndiv d-flex">
-    <div class="filter-content search_md_width">
+    <!-- <div class="filter-content search_md_width">
         <app-filter-search (searchedText)="searched($event)"></app-filter-search>
-    </div>
-    <div class="filter-content input_date_picker date_picker_layout_2 created_on dropdown_focus">
+    </div> -->
+    <!-- <div class="filter-content input_date_picker date_picker_layout_2 created_on dropdown_focus">
         <app-filter-calendar  [child_data]="{ selectedFromDate : modelObj.modelFromDate, selectedToDate: modelObj.modelToDate}"  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
-    </div>
-    <div class="filter-content">
+    </div> -->
+    <!-- <div class="filter-content">
         <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
     </div>
     <div class="filter-content">
         <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+    </div> -->
+
+    
+    <div class="filter-content mb-1">
+        <div class="search_panel searchToggle">
+            <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+            <input type="text" class="form-control search_input" placeholder="Search" [(ngModel)]="searchText" (change)="filterSearchResults()">
+            <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch()"><i class="oci oci-x"></i>
+                
+            </span>
+        </div>
+        
     </div>
-  
+
     <div class="filter-content">
         <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
             <span class="sp_dropdown">
@@ -21,13 +33,23 @@
             </span>
         </button>
     </div>
+
+    <div class="filter-content mb-1">
+        <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="refreshPage()">
+            <i class="oci oci-refresh-cw"></i>
+        </button>
+    </div>  
+    
+   <app-filter-datetime></app-filter-datetime>
+  
+    
     <!-- <button (click)="sendFilterData()">Search</button> -->
-    <div class="filter-content">
+    <!-- <div class="filter-content">
         <button type="button" class="btn btn-bg-theme btn-search active" (click)="sendFilterData()" ngbTooltip="Search"
                 container="body" triggers="mouseenter:mouseleave">
                 <span class="btn_text line_h_1">Search</span>
         </button>
-    </div>
+    </div> -->
 </div>
 
 
@@ -39,18 +61,34 @@
         </div>
         <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="closeRightPanel()"><i class="oci oci-x text_muted"></i></button>
          </div>
-         <div class="modalBody scrollable">
-           
-            <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
-            <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
-            <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
-            <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
-            <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
-            <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
-             <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
-             <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
-            
-         </div> 
+        
+         @if(datasource == 'erpAnalytics'){
+            <div class="modalBody scrollable">
+                <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
+                <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
+                <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+                <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+                <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
+                <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
+                 <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
+                 <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
+             </div> 
+         }
+         @else if (datasource == 'userBehaviorAnalytics') {
+            <div class="modalBody scrollable">
+                <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
+                <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
+                <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+                <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+                <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
+                <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
+                 <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
+                 <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
+                
+             </div> 
+         }
+         
+         
          <button (click)="sendFilterData()">APPLY</button>
 </kendo-window>
 
