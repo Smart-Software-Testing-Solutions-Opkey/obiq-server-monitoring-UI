@@ -327,8 +327,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   }
-  toggleEdit(){
-    this.Editable = !this.Editable
+  toggleEdit(val){
+    this.Editable = !val
   }
   Editable = false
   get isSelectedAnalyticsTypeEmpty(): boolean {

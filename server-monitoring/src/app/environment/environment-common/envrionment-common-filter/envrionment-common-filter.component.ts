@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, output, ViewChild } from '@angular/core';
 import { WindowState } from '@progress/kendo-angular-dialog';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   }
 
   @Input() datasource : any;
+  @Input() selectedTab : any;
 
   onFilterSelected = output<any>();
   FromDateChange(val){
@@ -154,6 +155,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   refreshPage(){
       this.isRefresh = true;
       this.app_service.dataTransmitter({callsource:'journeyRefresh',data:this.isRefresh});
+      this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
   }
 
   clearSearch(){
@@ -176,7 +178,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     receivedTimeRange: any
     selectedAnalyticsType: any = {}
     selectedView: any
-    selectedTab: any = {}
+  
     availableTabs: any
     allSelectedAnalytics:any=[]
     timeFilter: Array<{name: string, value: string, timeValue: string}> = [
@@ -243,5 +245,15 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     
     
       }
+
+      @Output()   onEditableChange  = new EventEmitter<boolean>();
+      
+      Editable = false
+      toggleEdit(){
+        this.Editable = !this.Editable
+        this.onEditableChange.emit(this.Editable)
+
+      }
+      
   
 }
