@@ -105,37 +105,35 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     filter_status : {display:false}
   }
   bind_filter(call_source ?){
+    this.obj_filter.common_filter_inner.display = true;
+    this.obj_filter.filter_calendar.display = true;
+    this.obj_filter.erp_application.display = true;
+
     if(this.selectedTab == 'LOG_TAB'){
-      this.obj_filter.common_filter_inner.display = true;
-      this.obj_filter.erp_application.display = true;
-      this.obj_filter.filter_status.display = true;
-      this.obj_filter.filter_calendar.display = true;
+      this.obj_filter.erp_environment.display = false;
+      this.obj_filter.erp_process.display = false;
       this.obj_filter.user.display = true;
+      this.obj_filter.erp_module.display = false;
+      this.obj_filter.filter_status.display = true;
     }
     else if( this.selectedTab == 'JOURNEY_TAB' || call_source == 'journey'){
-      this.obj_filter.common_filter_inner.display = true;
-      this.obj_filter.filter_calendar.display = true;
-      this.obj_filter.erp_application.display = true;
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = true;
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = true;
       this.obj_filter.filter_status.display = true;
     }
-    else if(this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR' || this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'){
-      this.obj_filter.common_filter_inner.display = true;
-      this.obj_filter.filter_calendar.display = true;
-      this.obj_filter.erp_application.display = true;
-      this.obj_filter.user.display = true;
+    else if (this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR'  ||this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'){
       this.obj_filter.erp_environment.display = true;
-    }
-    else if(this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' && (this.selectedTab == 'LOG_TAB' || this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR' )){
-      this.obj_filter.common_filter_inner.display = true;
-      this.obj_filter.filter_calendar.display = true;
-      this.obj_filter.filter_status.display = true;
+      this.obj_filter.erp_process.display = false;
       this.obj_filter.user.display = true;
-
+      this.obj_filter.erp_module.display = false;
+      this.obj_filter.filter_status.display = false;    
+      
     }
+   
+
+    
   }
   modelObj = {
     modelApplication: "OracleFusion",

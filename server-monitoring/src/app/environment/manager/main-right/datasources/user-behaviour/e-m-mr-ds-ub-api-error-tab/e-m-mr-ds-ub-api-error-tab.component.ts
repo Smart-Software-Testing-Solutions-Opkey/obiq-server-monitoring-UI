@@ -30,7 +30,9 @@ export class EMMrDsUbApiErrorTabComponent {
   allDataLoaded: boolean = false; 
 
   ngOnInit(): void {
+  
   this.get_api_log_error();
+  this.startDataReceiving();
   }
   //  onSelectionChange(e) {
   //    console.log(this.analyticsType,"this is analytics type ");
@@ -65,7 +67,7 @@ export class EMMrDsUbApiErrorTabComponent {
             this.get_api_log_error()
           }
         
-        if (data.callsource == 'LOG_TAB'){
+        if (data.callsource == 'LOG_APP_API_ERROR'){
           this.logToSearch = '';
           this.offset = 0;
           this.allDataLoaded= false;

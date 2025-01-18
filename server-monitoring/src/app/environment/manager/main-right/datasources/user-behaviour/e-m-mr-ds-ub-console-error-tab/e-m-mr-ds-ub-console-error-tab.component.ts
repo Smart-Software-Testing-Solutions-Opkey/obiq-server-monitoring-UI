@@ -31,6 +31,7 @@ export class EMMrDsUbConsoleErrorTabComponent {
 
   ngOnInit(): void {
   this.get_console_log_error();
+  this.startDataReceiving();
   }
   //  onSelectionChange(e) {
   //    console.log(this.analyticsType,"this is analytics type ");
@@ -65,7 +66,7 @@ export class EMMrDsUbConsoleErrorTabComponent {
             this.get_console_log_error()
           }
         
-        if (data.callsource == 'LOG_TAB'){
+        if (data.callsource == 'LOG_APP_CONSOLE_ERROR'){
           this.logToSearch = '';
           this.offset = 0;
           this.allDataLoaded= false;

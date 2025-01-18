@@ -29,6 +29,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
 
   ngOnInit(): void {
   this.get_Functional_log_error();
+  this.startDataReceiving();
   }
    onSelectionChange(e) {
      console.log(this.analyticsType,"this is analytics type ");
@@ -49,6 +50,37 @@ export class EMMrDsErpFunctionalErrorTabComponent {
       });
       modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
    }
+   logToSearch : any;
+  appType : string = 'ORACLEFUSION'
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      
+      if (data !== null) {
+        if(data.callsource == 'searchOperation'){
+            this.logToSearch = data.data;
+            this.offset = 0;
+            this.allDataLoaded = false;
+            this.get_Functional_log_error()
+          }
+        
+        if (data.callsource == 'LOG_APP_FUNCTIONAL_ERROR'){
+          this.logToSearch = '';
+          this.offset = 0;
+          this.allDataLoaded= false;
+
+          if( data.action == 'refresh'){
+            this.get_Functional_log_error()
+          }
+          else if ( data.action == 'filterChange'){
+            this.appType = data.objFilter.modelApplication.toUpperCase()
+            this.get_Functional_log_error()
+
+          }
+
+        }
+      }  
+    });
+  }
    get_Functional_log_error(timeFilter?: any, appendData: boolean = false): void {
     window.loadingStart("#erp-err-logs-grid", "Please wait");
 
@@ -61,7 +93,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
     const form_data = {
       timeSpanEnum: 'LAST_7_DAYS',
       limitBy: this.limit,
-      appType: 'ORACLEFUSION',
+      appType: this.appType,
       offset: this.offset 
     };
 
