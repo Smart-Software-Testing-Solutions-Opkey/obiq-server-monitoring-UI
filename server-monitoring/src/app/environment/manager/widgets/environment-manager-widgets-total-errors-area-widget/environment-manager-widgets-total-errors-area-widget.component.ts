@@ -69,27 +69,36 @@ widgetType=''
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if(data.callsource == 'widgetOperation'){
-          this.isRefresh = data.data;
-          this.refreshPage();
+         if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            if(this.typeEnum == 'Error'){
+              this.getChartData('ESS_LOG_ERROR_WIDGET');
+            }
+            else if(this.typeEnum == 'Warning'){
+              this.getChartData('ESS_LOG_WARNING_WIDGET')
+            }
+            else if(this.typeEnum == 'Success'){
+              this.getChartData('ESS_LOG_SUCESS_WIDGET');
+            }
+          }
         }
       } 
     });
   }
-  refreshPage(){
-    if(this.isRefresh == true){
-      if(this.typeEnum == 'Error'){
-        this.getChartData('ESS_LOG_ERROR_WIDGET');
-      }
-      else if(this.typeEnum == 'Warning'){
-        this.getChartData('ESS_LOG_WARNING_WIDGET')
-      }
-      else if(this.typeEnum == 'Success'){
-        this.getChartData('ESS_LOG_SUCESS_WIDGET');
-      }
-    }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     if(this.typeEnum == 'Error'){
+  //       this.getChartData('ESS_LOG_ERROR_WIDGET');
+  //     }
+  //     else if(this.typeEnum == 'Warning'){
+  //       this.getChartData('ESS_LOG_WARNING_WIDGET')
+  //     }
+  //     else if(this.typeEnum == 'Success'){
+  //       this.getChartData('ESS_LOG_SUCESS_WIDGET');
+  //     }
+  //   }
   
-  }
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());

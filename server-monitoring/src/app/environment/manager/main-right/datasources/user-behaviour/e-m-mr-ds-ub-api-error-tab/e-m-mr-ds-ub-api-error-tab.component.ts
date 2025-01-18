@@ -60,12 +60,6 @@ export class EMMrDsUbApiErrorTabComponent {
     this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
-        if(data.callsource == 'searchOperation'){
-            this.logToSearch = data.data;
-            this.offset = 0;
-            this.allDataLoaded = false;
-            this.get_api_log_error()
-          }
         
         if (data.callsource == 'LOG_APP_API_ERROR'){
           this.logToSearch = '';
@@ -74,6 +68,13 @@ export class EMMrDsUbApiErrorTabComponent {
 
           if( data.action == 'refresh'){
             this.get_api_log_error()
+          }
+          if(data.action == 'search'){
+            this.logToSearch = data.data;
+            this.offset = 0;
+            this.allDataLoaded = false;
+            this.get_api_log_error()
+
           }
           else if ( data.action == 'filterChange'){
             this.appType = data.objFilter.modelApplication.toUpperCase()

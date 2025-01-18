@@ -74,7 +74,10 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
 
   tempdatasourceProgressBar : any;
   filterSearchResults(){
-      this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase())  )
+    this.datasourceProgressBar  = []
+    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase())  )
+    this.cdRef.detectChanges()
+
   }
   isRefresh: boolean = false;
   startDataReceiving(){
@@ -84,6 +87,10 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
         if (data.callsource == 'OVERVIEW_TAB'){
           if( data.action == 'refresh'){
             this.getWidgetData()
+          }
+          else if (data.action == 'search'){
+            this.searchText = data.data;
+            this.filterSearchResults()
           }
         }
        

@@ -244,8 +244,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
     if (this.searchText == null) {
       return
     }
-
-    this.app_service.dataTransmitter({ callsource: 'searchOperation', data: this.searchText });
+    this.app_service.dataTransmitter({ callsource: this.selectedTab, action: 'search', data: this.searchText });
+    // this.app_service.dataTransmitter({ callsource: 'searchOperation', data: this.searchText });
 
   }
   timezoneDatasource = []

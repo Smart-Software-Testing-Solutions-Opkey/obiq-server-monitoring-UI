@@ -62,19 +62,20 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if(data.callsource == 'widgetOperation'){ 
-          this.isRefresh = data.data;
-          this.refreshPage();   
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.get_Redis_Cpu_Usage(this.view,this.widgetType)
+          }
         }
       }  
     });
   }
-  refreshPage(){
-    if(this.isRefresh == true){
-      this.get_Redis_Cpu_Usage(this.view,this.widgetType)
-    }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.get_Redis_Cpu_Usage(this.view,this.widgetType)
+  //   }
   
-  }
+  // }
   ngAfterViewInit(): void {
     
   }

@@ -84,18 +84,19 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
-       if(data.callsource == 'searchOperation'){
-          this.logToSearch = data.data;
-          this.offset = 0;
-          this.allDataLoaded = false;
-          this.getViewLogs()
-        }
-        else if (data.callsource == 'LOG_TAB'){
+      
+        if (data.callsource == 'LOG_TAB'){
           this.logToSearch = '';
           this.offset = 0;
           this.allDataLoaded= false;
 
           if( data.action == 'refresh'){
+            this.getViewLogs()
+          }
+          else if(data.action == 'search'){
+            this.logToSearch = data.data;
+            this.offset = 0;
+            this.allDataLoaded = false;
             this.getViewLogs()
           }
           else if ( data.action == 'filterChange'){

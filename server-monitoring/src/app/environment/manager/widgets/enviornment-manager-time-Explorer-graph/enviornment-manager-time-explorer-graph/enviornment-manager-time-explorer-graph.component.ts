@@ -60,19 +60,20 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if(data.callsource == 'widgetOperation'){ 
-          this.isRefresh = data.data;
-          this.refreshPage();  
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.getLogsChart()
+          }
         }
       } 
     });
   }
-  refreshPage(){
-    if(this.isRefresh == true){
-      this.getLogsChart();
-    }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.getLogsChart();
+  //   }
   
-  }
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());

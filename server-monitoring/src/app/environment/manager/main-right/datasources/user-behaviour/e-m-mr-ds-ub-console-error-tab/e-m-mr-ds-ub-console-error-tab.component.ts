@@ -59,13 +59,7 @@ export class EMMrDsUbConsoleErrorTabComponent {
     this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
-        if(data.callsource == 'searchOperation'){
-            this.logToSearch = data.data;
-            this.offset = 0;
-            this.allDataLoaded = false;
-            this.get_console_log_error()
-          }
-        
+       
         if (data.callsource == 'LOG_APP_CONSOLE_ERROR'){
           this.logToSearch = '';
           this.offset = 0;
@@ -73,6 +67,13 @@ export class EMMrDsUbConsoleErrorTabComponent {
 
           if( data.action == 'refresh'){
             this.get_console_log_error()
+          }
+          else if(data.action == 'search'){
+            this.logToSearch = data.data;
+            this.offset = 0;
+            this.allDataLoaded = false;
+            this.get_console_log_error()
+
           }
           else if ( data.action == 'filterChange'){
             this.appType = data.objFilter.modelApplication.toUpperCase()

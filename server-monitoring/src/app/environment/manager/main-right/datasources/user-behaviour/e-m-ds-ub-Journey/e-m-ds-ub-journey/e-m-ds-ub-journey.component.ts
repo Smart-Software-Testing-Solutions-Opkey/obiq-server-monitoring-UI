@@ -38,12 +38,7 @@ export class EMDsUbJourneyComponent  {
       this.app_service.dataReceiver().subscribe(data => {
         
         if (data !== null) {
-          if(data.callsource == 'searchOperation'){
-              this.logToSearch = data.data;
-              this.offset = 0;
-              this.allDataLoaded = false;
-              this.get_User_Behaviour_Journey()
-            }
+        
           
           if (data.callsource == 'JOURNEY_TAB'){
             this.logToSearch = '';
@@ -57,6 +52,12 @@ export class EMDsUbJourneyComponent  {
               this.appType = data.objFilter.modelApplication.toUpperCase()
               this.get_User_Behaviour_Journey()
   
+            }
+            else if(data.action == 'search'){
+              this.logToSearch = data.data;
+              this.offset = 0;
+              this.allDataLoaded = false;
+              this.get_User_Behaviour_Journey()
             }
   
           }

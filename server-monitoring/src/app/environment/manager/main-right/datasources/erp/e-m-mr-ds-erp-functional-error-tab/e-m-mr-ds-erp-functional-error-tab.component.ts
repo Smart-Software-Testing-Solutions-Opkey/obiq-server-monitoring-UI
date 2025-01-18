@@ -56,12 +56,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
     this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
-        if(data.callsource == 'searchOperation'){
-            this.logToSearch = data.data;
-            this.offset = 0;
-            this.allDataLoaded = false;
-            this.get_Functional_log_error()
-          }
+      
         
         if (data.callsource == 'LOG_APP_FUNCTIONAL_ERROR'){
           this.logToSearch = '';
@@ -72,12 +67,19 @@ export class EMMrDsErpFunctionalErrorTabComponent {
             if( data.action == 'refresh'){
               this.get_Functional_log_error()
             }
+            else if(data.action == 'search'){
+              this.logToSearch = data.data;
+              this.offset = 0;
+              this.allDataLoaded = false;
+              this.get_Functional_log_error()
+            }
+            else if ( data.action == 'filterChange'){
+              this.appType = data.objFilter.modelApplication.toUpperCase()
+              this.get_Functional_log_error()
+  
+            }
           }
-          else if ( data.action == 'filterChange'){
-            this.appType = data.objFilter.modelApplication.toUpperCase()
-            this.get_Functional_log_error()
-
-          }
+          
 
         }
       }  

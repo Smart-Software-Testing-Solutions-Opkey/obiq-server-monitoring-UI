@@ -337,24 +337,24 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   isRefresh : boolean = false;
-  refreshPage(){
-      this.isRefresh = true;
-      this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
-  }
+  // refreshPage(){
+  //     this.isRefresh = true;
+  //     this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
+  // }
 
-  clearSearch(){
-    this.searchText = ''
-    this.filterSearchResults()
-  }
-  filterSearchResults(){
+  // clearSearch(){
+  //   this.searchText = ''
+  //   this.filterSearchResults()
+  // }
+  // filterSearchResults(){
 
-      if(this.searchText == null){
-        return
-      }
+  //     if(this.searchText == null){
+  //       return
+  //     }
 
-        this.app_service.dataTransmitter({callsource:'searchOperation',data:this.searchText});
+  //       this.app_service.dataTransmitter({callsource:'searchOperation',data:this.searchText});
       
-    }
+  //   }
     changeFilter(val){
       this.app_service.dataTransmitter({ callsource: this.selectedTab.enumType, action: 'filterChange', selectedAnalyticsType: this.selectedAnalyticsType, objFilter : val });
 

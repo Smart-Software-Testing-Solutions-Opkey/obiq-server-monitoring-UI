@@ -72,13 +72,14 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if(data.callsource == 'widgetOperation'){
-          this.isRefresh = data.data;
-          this.refreshPage(); 
-        }
-        else if(data.callsource == 'searchOperation'){
-          this.searchText = data.data;
-          this.filterSearchResults();
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.getWidgetData()
+          }
+          else if (data.action == 'search'){
+            this.searchText = data.data;
+            this.filterSearchResults()
+          }
         }
       }  
     });
@@ -88,12 +89,12 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
     this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) ||  data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase()))
     this.cdRef.detectChanges()
   }
-  refreshPage(){
-    if(this.isRefresh == true){
-      this.getWidgetData();
-    }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.getWidgetData();
+  //   }
   
-  }
+  // }
 
   getWidgetData(){
     window.loadingStart("#common-journey-"+this.widgetType, "Please wait");
