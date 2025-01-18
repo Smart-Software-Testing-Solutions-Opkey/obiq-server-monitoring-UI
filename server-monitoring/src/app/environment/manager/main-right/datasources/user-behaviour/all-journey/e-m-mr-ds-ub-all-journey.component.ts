@@ -45,13 +45,22 @@ constructor(
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-       if(data.callsource == 'searchOperation'){
-        this.textToSearch =data.data;
-          this.getRecentSubActivityJourneyOfUser()
-        }
-        else if(data.callsource == 'journeyRefresh'){ 
-          this.isRefresh = data.data;
-          this.refreshPage();  
+       
+        if (data.callsource == 'JOURNEY_TAB'){
+          this.textToSearch = '';
+          if( data.action == 'refresh'){
+            this.getRecentSubActivityJourneyOfUser()
+          }
+          else if( data.action == 'search'){
+            this.textToSearch =data.data;
+            this.getRecentSubActivityJourneyOfUser()
+          }
+          // else if ( data.action == 'filterChange'){
+            
+          //   this.getRecentSubActivityJourneyOfUser()
+
+          // }
+
         }
       }  
       
@@ -100,11 +109,11 @@ constructor(
     );
   }
   
-  refreshPage(){
-    if(this.isRefresh == true){
-      this.getRecentSubActivityJourneyOfUser();
-    }
-  }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.getRecentSubActivityJourneyOfUser();
+  //   }
+  // }
   private loadItems(): void {
     this.journeyDataSource = {
       data: this.journeyDataSourceTemp,
