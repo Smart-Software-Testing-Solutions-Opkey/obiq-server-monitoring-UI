@@ -65,7 +65,7 @@ export class EMDsUbFunctionalErrorTabComponent {
             this.get_Functional_log_error()
           }
         
-        if (data.callsource == 'LOG_TAB'){
+        if (data.callsource == 'LOG_APP_FUNCTIONAL_ERROR'){
           this.logToSearch = '';
           this.offset = 0;
           this.allDataLoaded= false;

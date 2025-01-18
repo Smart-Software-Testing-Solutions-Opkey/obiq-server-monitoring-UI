@@ -80,18 +80,22 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent {
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if( data.action == 'refresh'){
-          this.getWidgetData()
+
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.getWidgetData()
+          }
         }
+       
       }
     });
   }
-  refreshPage(){
-    if(this.isRefresh == true){
-      this.getWidgetData();
-    }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.getWidgetData();
+  //   }
   
-  }
+  // }
 
 
   getWidgetData(){
