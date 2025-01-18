@@ -68,8 +68,10 @@ export class EMMrDsErpFunctionalErrorTabComponent {
           this.offset = 0;
           this.allDataLoaded= false;
 
-          if( data.action == 'refresh'){
-            this.get_Functional_log_error()
+          if(data.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE'){
+            if( data.action == 'refresh'){
+              this.get_Functional_log_error()
+            }
           }
           else if ( data.action == 'filterChange'){
             this.appType = data.objFilter.modelApplication.toUpperCase()

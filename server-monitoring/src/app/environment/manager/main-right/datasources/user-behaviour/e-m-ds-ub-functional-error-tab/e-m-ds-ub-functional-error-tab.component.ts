@@ -70,8 +70,10 @@ export class EMDsUbFunctionalErrorTabComponent {
           this.offset = 0;
           this.allDataLoaded= false;
 
-          if( data.action == 'refresh'){
-            this.get_Functional_log_error()
+          if(data.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE'){
+            if( data.action == 'refresh'){
+              this.get_Functional_log_error()
+            }
           }
           else if ( data.action == 'filterChange'){
             this.appType = data.objFilter.modelApplication.toUpperCase()
