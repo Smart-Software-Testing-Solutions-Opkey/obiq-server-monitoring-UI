@@ -53,15 +53,15 @@ export class EMFunctionalErrorWidgetComponent implements OnInit {
   view: any = null;
   @Input()Editable:boolean
   
-    widgetType: "TOP_API_ERRORS_WIDGET"
-   
+   widgetType: string
    title:string
-  @Input('child_data') set child_data({ view,title }) {
+  
+  @Input('child_data') set child_data({ view,title,widgetType }) {
     
    
    this.view = view
    this.title =title
-  
+   this.widgetType=widgetType
    }
   maxCount: number = 0;
 
@@ -193,7 +193,8 @@ renaming(){
 }
 
 openAllFunctionalErrors(){
-  this.app_service.routeTo('environment','ubFunctionalError')
+  if(this.widgetType=='USER BEHAVIOR')this.app_service.routeTo('environment','ubFunctionalError')
+  else if(this.widgetType=='ERP')this.app_service.routeTo('environment','erpFunctionalError')
 }
 
 }

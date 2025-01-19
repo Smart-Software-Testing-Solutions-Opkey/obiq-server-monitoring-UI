@@ -116,7 +116,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
       this.obj_filter.erp_module.display = false;
       this.obj_filter.filter_status.display = true;
     }
-    else if( this.selectedTab == 'JOURNEY_TAB' || this.selectedTab == 'ubAllJourney' || this.selectedTab == 'erpAllJourney'){
+    else if( this.selectedTab == 'JOURNEY_TAB' || this.selectedTab == 'ubAllJourney' || this.selectedTab == 'erpAllJourney'||this.selectedTab=='erpAllFunctional'){
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = true;
       this.obj_filter.user.display = true;

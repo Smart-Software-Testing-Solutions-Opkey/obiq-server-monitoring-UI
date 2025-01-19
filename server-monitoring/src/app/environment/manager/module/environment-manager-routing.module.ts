@@ -9,6 +9,7 @@ import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-beha
 import { EMMrDsUbAllApiErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-api-error/e-m-mr-ds-ub-all-api-error.component';
 import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component';
 import { EMMrDsUbAllFunctionalErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component';
+import { EMMrDsErpAllFunctionalErrorComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component';
 
 const routes: Routes = [
   
@@ -50,6 +51,11 @@ const routes: Routes = [
     path: 'ubFunctionalError',
     component:  EMMrDsUbAllFunctionalErrorComponent,
     outlet: 'rightSection'
+  },
+  {
+    path:'erpFunctionalError',
+    component:EMMrDsErpAllFunctionalErrorComponent,
+     outlet: 'rightSection'
   }
 ]
 }
