@@ -63,7 +63,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           // }
           this.bindData()
         }
-        else if(data.callsource == 'ubAllJourney' || data.callsource == 'erpAllJourney' || data.callsource == 'ubAllFunctional'){
+        else if(data.callsource == 'ubAllJourney' || data.callsource == 'erpAllJourney' || data.callsource == 'ubAllFunctional' || data.callsource == 'ubAllConsole' || data.callsource == 'ubAllApi'){
           this.isDataLoaded = true
           if(this.service_data.selectedArtifactData.selectedAnalyticsType){
 
