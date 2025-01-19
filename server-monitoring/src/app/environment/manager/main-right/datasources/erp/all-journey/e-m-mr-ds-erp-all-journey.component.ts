@@ -29,13 +29,22 @@ export class EMMrDsErpAllJourneyComponent {
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-       if(data.callsource == 'searchOperation'){
-        this.textToSearch =data.data;
-          this.getRecentSubActivityJourneyOfUser()
-        }
-        else if(data.callsource == 'journeyRefresh'){ 
-          this.isRefresh = data.data;
-          this.refreshPage();  
+        if (data.callsource == 'erpAllJourney'){
+      
+          if( data.action == 'refresh'){
+            this.textToSearch = '';
+            this.getRecentSubActivityJourneyOfUser()
+          }
+          else if( data.action == 'search'){
+            this.textToSearch =data.data;
+            this.getRecentSubActivityJourneyOfUser()
+          }
+          // else if ( data.action == 'filterChange'){
+            
+          //   this.getRecentSubActivityJourneyOfUser()
+
+          // }
+
         }
       }  
       

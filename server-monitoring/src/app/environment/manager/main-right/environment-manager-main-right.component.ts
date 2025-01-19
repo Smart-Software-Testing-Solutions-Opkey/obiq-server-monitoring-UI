@@ -63,6 +63,26 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           // }
           this.bindData()
         }
+        else if(data.callsource == 'ubAllJourney' || data.callsource == 'erpAllJourney'){
+          this.isDataLoaded = true
+          if(this.service_data.selectedArtifactData.selectedAnalyticsType){
+
+            this.selectedAnalyticsType = this.service_data.selectedArtifactData.selectedAnalyticsType
+           
+            
+          }
+          // this.selectedAnalyticsType = selectedAnalyticsType;
+          if(this.service_data.selectedArtifactData.selectedView){
+
+            this.selectedView = this.service_data.selectedArtifactData.selectedView
+          }
+          if(this.service_data.selectedArtifactData.allSelectedAnalytics){
+
+            this.allSelectedAnalytics= this.service_data.selectedArtifactData.allSelectedAnalytics
+          }
+          this.bindData()
+
+        }
       }
       
     });

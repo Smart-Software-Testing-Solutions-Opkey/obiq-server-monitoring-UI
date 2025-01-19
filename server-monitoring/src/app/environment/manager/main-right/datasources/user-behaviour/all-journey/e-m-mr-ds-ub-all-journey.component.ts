@@ -46,9 +46,10 @@ constructor(
     this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
        
-        if (data.callsource == 'JOURNEY_TAB'){
-          this.textToSearch = '';
+        if (data.callsource == 'ubAllJourney'){
+         
           if( data.action == 'refresh'){
+            this.textToSearch = '';
             this.getRecentSubActivityJourneyOfUser()
           }
           else if( data.action == 'search'){

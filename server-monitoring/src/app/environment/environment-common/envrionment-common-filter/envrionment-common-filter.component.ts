@@ -45,7 +45,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   filterCount = 0
   // receivedTimeRange : any ;
   ngOnInit(): void {
-    this.sendFilterData()
+    // this.sendFilterData()
 
     this.app_service.dataReceiver().subscribe(data => {
 
@@ -116,14 +116,14 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
       this.obj_filter.erp_module.display = false;
       this.obj_filter.filter_status.display = true;
     }
-    else if( this.selectedTab == 'JOURNEY_TAB' || call_source == 'journey'){
+    else if( this.selectedTab == 'JOURNEY_TAB' || this.selectedTab == 'ubAllJourney' || this.selectedTab == 'erpAllJourney'){
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = true;
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = true;
       this.obj_filter.filter_status.display = true;
     }
-    else if (this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR'  ||this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'){
+    else if (this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR'  ||this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'|| call_source == 'functionalError' || call_source == 'apiError' || call_source == 'consoleError'){
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = false;
       this.obj_filter.user.display = true;

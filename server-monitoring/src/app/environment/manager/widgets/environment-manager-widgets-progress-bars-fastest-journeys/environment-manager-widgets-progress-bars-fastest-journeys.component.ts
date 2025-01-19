@@ -289,7 +289,7 @@ openFullJourney(){
   if(this.widgetType == 'userBehaviour'){
     this.app_service.routeTo('environment','ubjourney')
   }
-  this.app_service.dataTransmitter({ callsource: 'journey', action: 'bindFilterData'});
+  // this.app_service.dataTransmitter({ callsource: 'journey', action: 'bindFilterData'});
 }
 
 }
