@@ -15,6 +15,7 @@ import {
   ApexYAxis,
   ApexTooltip
 } from "ng-apexcharts";
+import { environment } from 'src/environments/environment';
 
 
 export type ChartOptions = {
@@ -43,12 +44,13 @@ export class EMConsoleErrorWidgetComponent implements OnInit {
   ){
 
   }
-  datasourceProgressBar: Array<any> = [
-    {  subActivityName:'Assertion Error', count:20 },
-    {  subActivityName:'Assertion Error', count:25},
-    { subActivityName:'Assertion Error', count:30 },
-    {  subActivityName:'Assertion Error',count:35  },
-  ]
+  datasourceProgressBar: Array<any> = []
+  // datasourceProgressBar: Array<any> = [
+  //   {  subActivityName:'Assertion Error', count:20 },
+  //   {  subActivityName:'Assertion Error', count:25},
+  //   { subActivityName:'Assertion Error', count:30 },
+  //   {  subActivityName:'Assertion Error',count:35  },
+  // ]
 
   view: any = null;
   @Input()Editable:boolean
@@ -71,52 +73,94 @@ export class EMConsoleErrorWidgetComponent implements OnInit {
   ngOnInit(){
     if(this?.view?.viewId ){
       // this.datasourceProgressBar = [];
-      // this.getWidgetData()
+      this.getWidgetData()
       this.createChart();
+      this.startDataReceiving();
     }
   }
+  searchText  : any ;
+  startDataReceiving(){
+    this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
 
-//   getWidgetData(){
-//     let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
-//     const form_data = {
-//       "appType": "ORACLEFUSION",
-      // "viewId": this?.view?.viewId,
-      // "widgetType":TOP_CONSOLE_ERRORS_WIDGET,
-//     };
-   
-//     this.app_service.make_post_server_call(ajax_url, form_data)
-//       .subscribe({
-//         next: (result: any) => {
-//          if(result){
-//           
-//             this.datasourceProgressBar = Object.keys(result).map(item => {
-//               const count = result[item].count;
-//             
-//               return {
-                // subActivityName: item, 
-                // count:count
-//               };
-//             })
-//           }
-//            
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.getWidgetData()
+          }
+          else if (data.action == 'search'){
+            this.searchText = data.data;
+            this.filterSearchResults()
+          }
+        }
        
-//       },
-//         error: (error: any) => {
-//           
-//           console.error(error);
-//         }
-//       });
-//   }
-// 
+      }
+    });
+  }
+
+  tempdatasourceProgressBar: any = []
+  filterSearchResults(){
+    this.datasourceProgressBar  = []
+    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) )
+    this.cdRef.detectChanges()
+
+  }
+
+
+getWidgetData() {
+    let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTopConsoleErrorByFilter`;
+   
+
+    const form_data ={
+      "timeSpanEnum":"LAST_7_DAYS",
+      "appType":"ORACLEFUSION",
+      "limitBy":50,
+      "userId":this.service_data.UserDto.UserDTO.U_ID,
+      "viewId": this?.view?.viewId,
+      // "userId":"2170f924-6ab5-4d91-b9cf-232a27cd08dc",
+      "offset":0
+      }
+    this.app_service.make_post_server_call(ajax_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+
+          
+          if (result) {
+
+            this.datasourceProgressBar = Object.keys(result).map(item => {
+              const count = result[item].count;
+              let dataPlotList = result[item].dataPlotList
+
+              return {
+                subActivityName: item,
+                count: count,
+                dataPlotList: dataPlotList
+
+              };
+            })
+            this.tempdatasourceProgressBar = this.datasourceProgressBar
+            this.datasourceProgressBar.map(val => {
+            val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
+            })
+
+            
+            this.cdRef.detectChanges();
+          }
+
+
+
+        },
+        error: (error: any) => {
+
+          console.error(error);
+        }
+      });
+  }
+
 
 
 createChart(): void {
   this.chartOptions = {
-    series: [
-      {
-        data: [10, 35, 40, 65]
-      }
-    ],
+   
     chart: {
       height: 35,
       width:100,

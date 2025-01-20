@@ -117,9 +117,9 @@ export class EMApiErrorWidgetComponent implements OnInit {
       "timeSpanEnum":"LAST_7_DAYS",
       "appType":"ORACLEFUSION",
       "limitBy":50,
-      // "userId":this.service_data.UserDto.UserDTO.U_ID,
+      "userId":this.service_data.UserDto.UserDTO.U_ID,
       "viewId": this?.view?.viewId,
-      "userId":"2170f924-6ab5-4d91-b9cf-232a27cd08dc",
+      // "userId":"2170f924-6ab5-4d91-b9cf-232a27cd08dc",
       "offset":0
       }
 
