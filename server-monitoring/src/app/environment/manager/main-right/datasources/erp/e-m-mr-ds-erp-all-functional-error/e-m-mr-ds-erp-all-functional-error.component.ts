@@ -79,7 +79,6 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
   const form_data = {
     timeSpanEnum: 'LAST_7_DAYS',
     limitBy: this.limit,
-    userId:this.service_data.UserDto.UserDTO.U_ID,
     appType: this.appType,
     offset: this.offset 
   };
