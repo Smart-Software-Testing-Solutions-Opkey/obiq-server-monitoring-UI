@@ -66,6 +66,7 @@ import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user
 import { EMMrDsErpAllFunctionalErrorComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component';
 import { EMDsUbFEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-f-e-panel/e-m-ds-ub-f-e-panel.component';
 import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-c-e-panel/e-m-mr-ds-ub-c-e-panel.component';
+import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-a-e-panel/e-m-mr-ds-ub-a-e-panel.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -116,7 +117,8 @@ import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behavio
     EMMrDsUbAllApiErrorComponent, 
     EMMrDsUbAllConsoleErrorComponent, EMMrDsErpAllFunctionalErrorComponent,
     EMDsUbFEPanelComponent,
-    EMMrDsUbCEPanelComponent
+    EMMrDsUbCEPanelComponent,
+    EMMrDsUbAEPanelComponent
 
 
   ],

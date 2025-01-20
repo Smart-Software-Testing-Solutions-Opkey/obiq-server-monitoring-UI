@@ -55,6 +55,10 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
       this.panelHeader = 'App Log Details'
       this.selectedPanel = 'ubAllConsoleWidget'
     }
+    else if(this.selectedItem?.callsource == "ub_api_logs_panel"){
+      this.panelHeader = 'App Log Details'
+      this.selectedPanel = 'ubAllApiWidget'
+    }
 
   }
 

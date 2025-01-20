@@ -34,25 +34,25 @@ export class EMMrDsUbApiErrorTabComponent {
   this.get_api_log_error();
   this.startDataReceiving();
   }
-  //  onSelectionChange(e) {
-  //    console.log(this.analyticsType,"this is analytics type ");
-  //    console.log(this.view,"this is the view")
-  //     let dataItem = e.dataItem
-  //     const modalRef = this.modalService.open(ManagerRightPanelComponent, {
-  //       backdrop: 'static',
-  //       keyboard: false,
-  //       size: 'full',
-  //       centered: true,
-  //       windowClass: 'layout-modal-right panel-end w-75'
-  //     });
-  //     modalRef.result.then((result) => {
-  //     }, (response) => {
-  //       if (response == 'close modal') {
-  //         return;
-  //       }
-  //     });
-  //     modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
-  //  }
+   onSelectionChange(e) {
+     console.log(this.analyticsType,"this is analytics type ");
+     console.log(this.view,"this is the view")
+      let dataItem = e.dataItem
+      const modalRef = this.modalService.open(ManagerRightPanelComponent, {
+        backdrop: 'static',
+        keyboard: false,
+        size: 'full',
+        centered: true,
+        windowClass: 'layout-modal-right panel-end w-75'
+      });
+      modalRef.result.then((result) => {
+      }, (response) => {
+        if (response == 'close modal') {
+          return;
+        }
+      });
+      modalRef.componentInstance.selectedItem = { callsource: 'ub_api_logs_panel', data: dataItem };
+   }
 
   logToSearch : any;
   appType : string = 'ORACLEFUSION'
