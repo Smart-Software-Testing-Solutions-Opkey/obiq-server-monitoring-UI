@@ -41,7 +41,7 @@
 
 
 
-        <kendo-grid-column title="Name" field="subActivityName" [width]="300">
+        <kendo-grid-column title="Name" field="subActivityName" [width]="150">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span class="k_grid_text text_wrap" title="{{dataItem?.Name}}" container="body">
@@ -55,13 +55,15 @@
        
 
           
-            <kendo-grid-column title="Error Count" field="timeStampStr">
+            <kendo-grid-column title="Error Count" field="timeStampStr" [width]="100">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                   
                         <div id="chart" class="graph-timeseries mb-3" style="height: 25px;width:100px;padding: 0 " >
                             
-                            <apx-chart  *ngIf="chartOptions?.series?.length  > 0"
-                            [series]="chartOptions.series"
+                            <apx-chart 
+                            [series]="[{
+                                data:dataItem.dataPlotList
+                            }]"
                             [chart]="chartOptions.chart"
                             [stroke]="chartOptions.stroke"
                             [dataLabels]="chartOptions.dataLabels"
