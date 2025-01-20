@@ -36,6 +36,30 @@ export class ConfigurationSettingsErpAnalyticsComponent {
     this.get_all_Instance()
   }
 
+  searchText: any ;
+  clearSearch(){
+    this.searchText = ''
+    this.filterSearchResults()
+  }
+  filterSearchResults(){
+
+      if(this.searchText == null){
+        return
+      }
+      if(this.searchText == ''){
+        this.Instance_list = this.temp_Instance_list;
+       
+      }
+      if( this.searchText ){
+        this.Instance_list = this.temp_Instance_list.filter( (data)=>
+          data?.SystemIdentifier.toLowerCase().includes(this.searchText.toLowerCase()) || data?.CreatedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedOn.toLowerCase().includes(this.searchText.toLowerCase())) 
+       
+      }
+        
+
+  }
+
+  temp_Instance_list: any;
   get_all_Instance() {
    
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
@@ -184,6 +208,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
         //     ]
         // }
           this.Instance_list = this.get_instance_item(result);
+          this.temp_Instance_list = this.Instance_list
         },
         error: (error: any) => {
           console.warn(error);

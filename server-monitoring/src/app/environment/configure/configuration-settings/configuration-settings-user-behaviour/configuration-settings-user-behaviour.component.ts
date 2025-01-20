@@ -43,7 +43,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
 
   agent_lists= [];
  
-
+ temp_agent_list : any;
  get_all_Instance() {
    
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
@@ -69,6 +69,9 @@ export class ConfigurationSettingsUserBehaviourComponent {
             }
             return 0;
           });
+          this.temp_agent_list = this.agent_lists
+
+
     
           console.log(result)
          }
@@ -85,6 +88,26 @@ export class ConfigurationSettingsUserBehaviourComponent {
 
   }
 
+  searchText: any ;
+  clearSearch(){
+    this.searchText = ''
+    this.filterSearchResults()
+  }
+  filterSearchResults(){
+
+      if(this.searchText == null){
+        return
+      }
+      if(this.searchText == ''){
+        this.agent_lists = this.temp_agent_list;
+       
+      }
+      if( this.searchText ){
+        this.agent_lists = this.temp_agent_list.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
+      }
+        
+
+  }
   on_Selection_Change_User_Behavious(event:any){
    
    

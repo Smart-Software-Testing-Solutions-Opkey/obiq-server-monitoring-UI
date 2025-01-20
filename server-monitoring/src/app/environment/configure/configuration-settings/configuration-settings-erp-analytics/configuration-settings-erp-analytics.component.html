@@ -1,10 +1,24 @@
-<h6 class="mb-3 font-bold">
-    <span>Choose Instances <span class="text-astric">*</span></span> 
-    <span class="sp-sub-heading pt-2 pb-1"><i class="oci oci-lightbulb pe-2"></i>To display more ERPs go to instance and select ESS logs.<a href="https://www.example.com">Two Words</a></span>
-    <span *ngIf="obj_error.dispaly_Instances" class="form-error"><span class="text-astric"></span>
-        Instance selection is required.
-    </span>
-</h6>
+<div class="row mx-0 mb-3 align-items-center">
+    <div class="d-flex-between ">
+         <div class="col-6 px-0">
+            <h6 class="mb-3 font-bold">
+                <span>Choose Instances <span class="text-astric">*</span></span> 
+                <span class="sp-sub-heading pt-2 pb-1"><i class="oci oci-lightbulb pe-2"></i>To display more ERPs go to instance and select ESS logs.<a href="https://www.example.com">Two Words</a></span>
+                <span *ngIf="obj_error.dispaly_Instances" class="form-error"><span class="text-astric"></span>
+                    Instance selection is required.
+                </span>
+            </h6>
+         </div>
+         <div class="filter-content mb-1">
+             <div class="search_panel searchToggle">
+                 <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+                 <input type="text" class="form-control search_input" placeholder="Search"  [(ngModel)]="searchText" (input)="filterSearchResults()" >
+                 <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch()"><i
+                     class="oci oci-x"></i>  
+                 </span>
+             </div>
+         </div>
+    </div>
 
 <kendo-grid 
     #grid_application 
