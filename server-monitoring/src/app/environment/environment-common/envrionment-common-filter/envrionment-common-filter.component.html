@@ -29,9 +29,11 @@
 
     <div class="filter-content">
         @if( this.selectedTab == "OVERVIEW_TAB"){
-            <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
-                <i class="oci oci-edit"></i>
-            </button>
+            @if( this.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'TEST_AUTOMATION_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE'){
+                <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
+                    <i class="oci oci-edit"></i>
+                </button>
+            }  
         }
         @else {
             <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
