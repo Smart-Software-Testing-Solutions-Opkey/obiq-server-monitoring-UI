@@ -33,6 +33,9 @@
         @else if(this.selectedPanel == "Erp_View_All_process"){
             <app-e-m-mr-ds-erp-o-v-f-p [child_data]="{selectedData:selectedItem.data}" ></app-e-m-mr-ds-erp-o-v-f-p>
         }
+        @else if(this.selectedPanel == 'ubAllFunctionalWidget'){
+            <app-e-m-ds-ub-f-e-panel [child_data]="{selectedData:selectedItem.data}"></app-e-m-ds-ub-f-e-panel>
+        }
     </div>
 
 

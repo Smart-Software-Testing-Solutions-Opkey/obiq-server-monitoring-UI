@@ -4,6 +4,7 @@
         [data]="ub_functional_err_log_Data_Source" 
         [selectable]="true" 
         class="scrollable"
+        (cellClick)="onSelectionChange($event)"
         (scrollBottom)="onScroll()"
         [height]="500"
         >

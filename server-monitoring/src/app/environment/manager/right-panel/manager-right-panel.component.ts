@@ -47,6 +47,10 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
       this.panelHeader = 'ERP All Process'
       this.selectedPanel = 'ERPAllProcessWidget'
     }
+    else if(this.selectedItem?.callsource == "ub_functional_logs_panel"){
+      this.panelHeader = 'App Log Details'
+      this.selectedPanel = 'ubAllFunctionalWidget'
+    }
 
   }
 
