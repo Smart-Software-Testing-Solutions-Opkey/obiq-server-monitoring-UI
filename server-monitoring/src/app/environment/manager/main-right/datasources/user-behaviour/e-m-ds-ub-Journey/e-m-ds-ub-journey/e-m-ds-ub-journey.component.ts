@@ -76,7 +76,7 @@ export class EMDsUbJourneyComponent  {
             };
             this.app_service.make_post_server_call(form_url, form_data).subscribe({
             next: (result: any) => {
-            window.loadingStop("#ub-user-Journey-logs-grid");
+            window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");
             result = result.map((log) => {
 
               const date = new Date(log.timestamp);

@@ -11,9 +11,67 @@
         </div>
     </div>
    
-       <div class="app_body mx-2">
+       <div class="app_body mx-2"  id="ub-user-Journey-logs-grid" >
+        <kendo-grid 
+        [data]="ub_User_Journey_Data_Source" 
+        [selectable]="true" 
+        class="scrollable"
+        (scrollBottom)="onScroll()"
+        [height]="500"
+        >
+
+        <kendo-grid-column title="" [width]="10">
+
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                <span class="layout-status-logs layout-status-color success">
+
+                </span>
+
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="timeString" title="Time">
+        </kendo-grid-column>
+        <kendo-grid-column field="userId" title="User">
+        </kendo-grid-column>
+        <kendo-grid-column field="appType" title="App">
+        </kendo-grid-column>
+        <kendo-grid-column field="envName" title="Environment Name">
+        </kendo-grid-column>
+        <kendo-grid-column field="envHost" title="Environment Host">
+        </kendo-grid-column>
+        <kendo-grid-column field="sessionId" title="Session Id">
+        </kendo-grid-column>
+        <kendo-grid-column title="Action" class="td_overflow_visible text-center td_pb_0 pl-3" [width]="70"
+                    [headerClass]="'td_overflow_visible text-center'">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <div class="dropdown">
+                            <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                                <i class="oci oci-more-vertical font-14px"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li (click)="openInNewTab(dataItem)"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Open in new Tab </a></li>
+                        
+                            </ul>
+                        </div>
+                    </ng-template>
+        </kendo-grid-column>
+
+       
+        
+
+        <ng-template kendoGridNoRecordsTemplate>
+            <div class="no-data-found" style="height: 17rem !important;">
+                <div class="no-data-found-content">
+                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                    <p class="no-data-found-content-text">No data available</p>
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid>
            <!-- <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"></app-envrionment-common-filter> -->
-           <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
+           <!-- <div id="alljourney" class="obiq-grid-layout scrollable" style="height: calc(100vh - 6rem);">
                <kendo-grid [data]="journeyDataSource" [navigable]="true" [hideHeader]="false" [pageable]="false"
                    (scrollBottom)="load_more()"
                    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 remove_right_padding">
@@ -61,7 +119,7 @@
                                {{dataItem.subModuleName}}
                            </div>
                        </ng-template>
-                   </kendo-grid-column>
+                   </kendo-grid-column> -->
    
    
                    <!-- <kendo-grid-column field="User" title="ERP User" [width]="200">
@@ -106,7 +164,7 @@
                        </ng-template>
                    </kendo-grid-column> -->
    
-                   <ng-template kendoGridNoRecordsTemplate>
+                   <!-- <ng-template kendoGridNoRecordsTemplate>
                        <div class="no_data_found" style="height: calc(100vh - 21.5rem) !important;">
                            <div class="no_data_found_content">
                                <p class="no_data_found_content_text"> No Journey available</p>
@@ -114,8 +172,8 @@
                        </div>
                    </ng-template>
    
-               </kendo-grid>
-           </div>
+               </kendo-grid> -->
+         
    
        </div>
    
