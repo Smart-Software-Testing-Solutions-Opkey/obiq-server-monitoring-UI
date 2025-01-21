@@ -1,6 +1,7 @@
 
 import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -28,9 +29,18 @@ export class EMMrDsUbApiErrorTabComponent {
   offset: number = 0; 
   ub_api_err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
+  subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
   
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.logToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_api_log_error(data?.timeFilter)
+      }
+    }))
   this.get_api_log_error();
   this.startDataReceiving();
   }
@@ -89,24 +99,37 @@ export class EMMrDsUbApiErrorTabComponent {
    get_api_log_error(timeFilter?: any, appendData: boolean = false): void {
   debugger;
     if (this.allDataLoaded) return; 
-    window.loadingStart("#ub-err-logs-grid", "Please wait1");
+    
 
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
       'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppApiErrorByFilter';
 
-    const form_data = {
-      timeSpanEnum: 'LAST_7_DAYS',
-      userId:this.dataService.UserDto.UserDTO.U_ID,
-      limitBy: this.limit,
-      appType: this.appType,
-      offset: this.offset
-    };
+      let form_data = {
+        limitBy: this.limit,
+        userId:this.service_data.UserDto.UserDTO.U_ID,
+        appType: this.appType,
+        offset: this.offset ,
+        "viewId": this.view.viewId,
+        "logToSearch": this.logToSearch
+      };
+
+      
+      if(timeFilter?.type == 'setEnum'){
+        form_data["timeSpanEnum"] = timeFilter?.value;
+      }
+      else if(timeFilter?.type == "setCustom"){
+        form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+        form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+      }
+      else{
+        form_data["timeSpanEnum"] ="LAST_24_HOUR";
+      }
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-        window.loadingStop("#ub-err-logs-grid");
-
+        window.loadingStart("#ub-err-logs-grid", "Please wait")
+        
         result = result.map((log) => {
 
           const date = new Date(log.timestamp);

@@ -241,7 +241,7 @@ export class EMApiErrorWidgetComponent implements OnInit {
     this.isRename = false;
   }
   openAllApiErrors() {
-    this.app_service.routeTo('environment', 'ubApiError')
+    this.app_service.routeTo('environment', 'ubApiError',`viewId=${this.view.viewId}`)
   }
 
 }

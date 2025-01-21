@@ -52,6 +52,9 @@ export class EMConsoleErrorWidgetComponent implements OnInit {
   //   {  subActivityName:'Assertion Error',count:35  },
   // ]
 
+  logToSearch : any = "";
+  limit: number = 20; 
+  offset: number = 0; 
   view: any = null;
   @Input()Editable:boolean
   
@@ -238,6 +241,6 @@ renaming(){
 }
 
 openAllConsoleErrors(){
-    this.app_service.routeTo('environment','ubConsoleError')
+    this.app_service.routeTo('environment','ubConsoleError',`viewId=${this.view.viewId}`)
 }
 }
