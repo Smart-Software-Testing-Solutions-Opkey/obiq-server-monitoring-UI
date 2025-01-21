@@ -25,7 +25,6 @@ export class ManagerRightPanelComponent implements OnInit,OnDestroy {
     this.activeModal.dismiss('close modal');
   }
   bindPanelData(){
-    debugger;
     if(this.selectedItem?.callsource == "environmentManagerLogDetails"){
       this.panelHeader = 'Log Details'
       this.selectedPanel = 'LogDetails'

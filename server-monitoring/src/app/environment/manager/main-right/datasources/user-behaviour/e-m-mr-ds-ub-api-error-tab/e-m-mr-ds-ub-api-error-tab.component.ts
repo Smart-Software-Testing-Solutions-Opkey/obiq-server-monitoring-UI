@@ -97,9 +97,9 @@ export class EMMrDsUbApiErrorTabComponent {
     });
   }
    get_api_log_error(timeFilter?: any, appendData: boolean = false): void {
-  debugger;
-    if (this.allDataLoaded) return; 
     
+    window.loadingStart("#ub-err-logs-grid", "Please wait")
+    if (this.allDataLoaded) return;   
 
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
@@ -128,7 +128,8 @@ export class EMMrDsUbApiErrorTabComponent {
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-        window.loadingStart("#ub-err-logs-grid", "Please wait")
+
+        window.loadingStop("#ub-err-logs-grid", "Please wait");
         
         result = result.map((log) => {
 

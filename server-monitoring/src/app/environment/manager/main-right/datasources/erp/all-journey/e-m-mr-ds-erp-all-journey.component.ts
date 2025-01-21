@@ -96,7 +96,7 @@ export class EMMrDsErpAllJourneyComponent {
   }
 
   get_erp_Journey(timeFilter?: any, appendData: boolean = false): void {
-    debugger;
+    
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
       'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
@@ -173,7 +173,6 @@ export class EMMrDsErpAllJourneyComponent {
     this.get_erp_Journey(null, true);
   }
   openInNewTab(e) {
-    debugger;
     window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
   }
   backtomenu(){

@@ -300,7 +300,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   changeSelectedTab(tab) {
-    debugger;
+    
     // this.selectedTab = val
     this.availableTabs.forEach((ele) => {
       if (ele.isSelected) {

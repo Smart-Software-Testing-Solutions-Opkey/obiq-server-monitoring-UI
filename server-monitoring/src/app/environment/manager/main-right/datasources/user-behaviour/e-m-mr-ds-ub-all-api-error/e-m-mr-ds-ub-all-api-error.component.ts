@@ -104,7 +104,7 @@ export class EMMrDsUbAllApiErrorComponent {
     });
   }
   get_api_log_error(timeFilter?: any, appendData: boolean = false): void {
-    debugger;
+    window.loadingStop("#ub-err-logs-grid", "Please wait");
     if (this.allDataLoaded) return;
   
 

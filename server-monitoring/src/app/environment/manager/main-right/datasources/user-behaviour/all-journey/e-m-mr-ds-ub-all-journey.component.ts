@@ -97,7 +97,6 @@ constructor(
   }
 
   get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {
-    debugger;
      const form_url =
           environment.BASE_OBIQ_SERVER_URL +
           'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
@@ -171,7 +170,6 @@ constructor(
     this.get_User_Behaviour_Journey(null, true); 
   }
   openInNewTab(e){
-    debugger;
       window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
     }
   // getRecentSubActivityJourneyOfUser() {
