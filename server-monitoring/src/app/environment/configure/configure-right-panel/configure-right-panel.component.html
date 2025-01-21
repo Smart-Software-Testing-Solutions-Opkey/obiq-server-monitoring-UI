@@ -115,7 +115,7 @@
                 <kendo-grid-column [width]="60">
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <span class="sp-user-image">
-                            <img alt="{{ dataItem.Name }}" src="assets/images/default/profile.png">
+                            <img alt="{{ dataItem.Name }}" src="/user/getavatar/{{dataItem.U_ID}}">
                         </span>
                     </ng-template>
                 </kendo-grid-column>
