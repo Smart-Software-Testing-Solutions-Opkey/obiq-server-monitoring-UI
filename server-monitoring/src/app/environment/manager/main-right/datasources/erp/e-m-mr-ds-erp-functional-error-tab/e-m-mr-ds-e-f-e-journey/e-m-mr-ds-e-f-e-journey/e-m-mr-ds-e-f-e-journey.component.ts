@@ -11,6 +11,9 @@ import { environment } from 'src/environments/environment';
   styleUrl: './e-m-mr-ds-e-f-e-journey.component.scss'
 })
 export class EMMrDsEFEJourneyComponent {
+
+  trace_Selected_data: any;
+  tabSelected: any;
 constructor(
   public activeModal: NgbActiveModal,
   private router: Router,
@@ -31,17 +34,46 @@ constructor(
     this.selectedData = selectedData
     this.dataKeys = Object.keys(this.selectedData)
     this.dataValues = Object.values(this.selectedData);
-    this.obj_selected_journey.datasource = this.selectedData;
-    this.calsource = "single_journey"
-    console.log(this.selectedData, "this is selected Data in Functional journey tab")
+    // this.obj_selected_journey.datasource = this.selectedData;
+    // this.calsource = "single_journey"
+    // console.log(this.selectedData, "this is selected Data in Functional journey tab")
 
   }
-  obj_selected_journey = {
-    datasource: [],
-    isDisplay_main: false
-  }
+  // obj_selected_journey = {
+  //   datasource: [],
+  //   isDisplay_main: false
+  // }
+ 
   ngOnInit(): void {
-  }
+    // this.tabSelected = 'ubFunctionalError';
+      this.app_service.dataReceiver().subscribe(data => {
+        if (data !== null) {
+          if(data.callsource == 'timeExplorerChart'){
+  
+            this.receivedTimeRange = data.data;
+            console.log('Received Data:', this.receivedTimeRange);
+    
+            // Manually trigger change detection
+            this.cdr.detectChanges();
+          }
+        }
+      });
+      
+    }
+  
+    onCellClick(event: any) {
+  
+    }
+    on_trace_Selection_Change_(event: any) {
+  
+    }
+    
+    ngOnDestroy(): void {
+  
+    }
+    changeSelectedTab(tab) {
+      this.tabSelected = tab
+    }
 
  
 }
