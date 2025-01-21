@@ -21,9 +21,18 @@
 .filter-content {
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
-
+    
     .btn-search{
         height: 2rem;
         font-size: small;
+    }
+}
+
+.advance-filter{
+    .filter-content {
+        ::ng-deep .application-selected-filter{
+            background-color: #e6fbfe !important;
+            border: 0;
+        }
     }
 }

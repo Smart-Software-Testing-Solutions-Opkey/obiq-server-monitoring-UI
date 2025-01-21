@@ -1,5 +1,5 @@
 
-<div class="showndiv d-flex">
+<div class="showndiv flex-center">
     <!-- <div class="filter-content search_md_width">
         <app-filter-search (searchedText)="searched($event)"></app-filter-search>
     </div> -->
@@ -27,7 +27,7 @@
 
     
 
-    <div class="filter-content">
+    <div class="filter-content mb-1">
         @if( this.selectedTab == "OVERVIEW_TAB"){
             @if( this.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'TEST_AUTOMATION_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE'){
                 <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
@@ -38,7 +38,7 @@
         @else {
             <button  class="btn bt_dropdown bt_dropdown_filter bt_more_filter position-relative" type="button" (click)="openRightPanel()">
                 <span class="sp_dropdown">
-                    <i class="oci oci-filter font_16px" container="body" ngbtooltip="Filter"></i>
+                    <i class="oci oci-filter font-16px" container="body" ngbtooltip="Filter"></i>
                   <div class="filter_count">{{returnCount()}}</div>
                 </span>
             </button>
@@ -65,45 +65,71 @@
 
 
 <kendo-window *ngIf="showRightPanel" [draggable]="false" [resizable]="false"
-        [(state)]="windowState" class="inner_right_section_k_window">
-        <div class="header d-flex justify-content-between">
-        <div class="left">
+        [(state)]="windowState" class="inner_right_section_k_window feature-right-panel">
+        <div class="feature-rp-header mb-0 border-bottom header d-flex justify-content-between">
+        <div class="rp-header-left left">
             <h3 class="mb-0 text-ellipsis">Advance Filter</h3>
         </div>
-        <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="closeRightPanel()"><i class="oci oci-x text_muted"></i></button>
+        <div class="rp-header-right">
+            <button class="btn bt_back" aria-label="Close" ngbTooltip="Close" container="body" ngbtooltip="Back" type="button" (click)="closeRightPanel()">
+                <i class="oci oci-x text_muted"></i>
+            </button>
+        </div>
          </div>
         
-         <div class="modalBody scrollable">
-                @if(obj_filter.common_filter_inner.display  ){
-                    <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
-                }
-                @if(obj_filter.filter_calendar.display  ){
-                    <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
-                }
-                @if(obj_filter.erp_application.display  ){
-                    <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
-                }
-                @if(obj_filter.erp_environment.display  ){
-                    <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
-                }
-                @if(obj_filter.erp_process.display  ){
-                    <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
-                }
-                @if(obj_filter.user.display  ){
-                    <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
-                }
-                @if(obj_filter.erp_module.display  ){
-                    <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
-                }
-                @if(obj_filter.filter_status.display  ){
-                    <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
+         <div class="feature-rp-body has-footer pd-rp pt-3 modalBody scrollable">
+                <div class="view_applied_filter">
 
-                }
+                    @if(obj_filter.common_filter_inner.display  ){
+                        <app-e-common-filter-inner [child_data]="{ filterObj:modelObj}" (innerOps)="innerOps($event)"></app-e-common-filter-inner>
+                    }
+                </div>
+                <div class="advance-filter d-flex align-items-start flex-wrap w-100">
+
+                    @if(obj_filter.filter_calendar.display  ){
+                        <div class="input-date-picker date-picker-layout-2 created_on filter-content align-box dropdown-focus">
+                            <app-filter-calendar  (onFromDateChange)="FromDateChange($event)" (onToDateChange)="ToDateChange($event)"></app-filter-calendar>
+                        </div>
+                    }
+
+                    @if(obj_filter.erp_application.display  ){
+                        <div class="filter-content">
+                            <app-filter-erp-application [child_data]="{ selectedApplication:modelObj.modelApplication}" (onSelectedApplicationChange)="changeApplication($event)"></app-filter-erp-application>
+                        </div>
+                    }
+                    @if(obj_filter.erp_environment.display  ){
+                        <div class="filter-content">
+                            <app-filter-erp-environment [child_data]="{ selectedEnvironment:modelObj.modelEnvironment , appType:modelObj.modelApplication}" (onSelectedEnvironmentChange)="changeEnvironment($event)"></app-filter-erp-environment>
+                        </div>
+                    }
+                    @if(obj_filter.erp_process.display  ){
+                        <div class="filter-content">
+                            <app-filter-erp-process [child_data]="{ selectedProcess:modelObj.modelProcess ,application:modelObj.modelApplication ,strmodules:modelObj.modelStrModule }" (onSelectedProcessChange)="changeProcess($event)"></app-filter-erp-process>
+                        </div>
+                    }
+                    @if(obj_filter.user.display  ){
+                        <div class="filter-content">
+                            <app-filter-user [child_data]="{ selectedUser: modelObj.modelUser,  appType:modelObj.modelApplication}" (onSelectedUserChange)="changeUser($event)"></app-filter-user>
+                        </div>
+                    }
+                    @if(obj_filter.erp_module.display  ){
+                        <div class="filter-content">
+                            <app-filter-erp-module [child_data]="{ selectedErpModule: modelObj.modelStrModule,  application:modelObj.modelApplication}" (onSelectedErpModuleChange)="changeErpModule($event)" ></app-filter-erp-module>
+                        </div>
+                    }
+                    @if(obj_filter.filter_status.display  ){
+                        <div class="filter-content">
+                            <app-filter-status [child_data]="{ selectedStatus: modelObj.modelStatus}" (onSelectedStatusChange)="changeStatus($event)"></app-filter-status>
+                        </div>
+    
+                    }
+                </div>
          </div>
          
-         
-         
-         <button (click)="sendFilterData()">APPLY</button>
+         <div class="feature-rp-footer border-top">
+             <button type="button" class="btn btn-layout btn-bg-theme"
+              (click)="sendFilterData()">APPLY</button>
+         </div>
 </kendo-window>
 
     <div *ngIf="showRightPanel" class="sliderOverlay"></div>
