@@ -108,7 +108,7 @@ export class EMDsUbFunctionalErrorTabComponent {
       userId:this.service_data.UserDto.UserDTO.U_ID,
       appType: this.appType,
       offset: this.offset ,
-      "viewId": this.view.viewId,
+      "viewId": this.view?.viewId,
       "logToSearch": this.logToSearch
     };
     if(timeFilter?.type == 'setEnum'){

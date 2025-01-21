@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -17,6 +19,8 @@ export class EMMrDsErpAllFunctionalErrorComponent {
     public app_service: AppService,
     public dataService: AppDataService,
     private modalService: NgbModal,
+    private route: ActivatedRoute
+
 ){
 
 }
@@ -28,7 +32,24 @@ offset: number = 0;
 erp_functional_err_log_Data_Source: any[] = []; 
 allDataLoaded: boolean = false; 
 
+
+subscriptions: Subscription[] = [];
+ 
+viewId: any;
 ngOnInit(): void {
+  this.route.queryParams.subscribe(params => {
+    this.viewId = params['viewId'];  
+  });
+  
+
+  this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    if(data?.type == "getDataWithTime"){
+      this.logToSearch = '';
+      this.allDataLoaded = false
+      this.offset = 0;
+      this.get_all_Functional_log_error(data?.timeFilter)
+    }
+  }))
 this.get_all_Functional_log_error();
 this.startDataReceiving();
 }
@@ -96,12 +117,23 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
     environment.BASE_OBIQ_SERVER_URL +
     'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppFunctionalErrorByFilter';
 
-  const form_data = {
-    timeSpanEnum: 'LAST_7_DAYS',
-    limitBy: this.limit,
-    appType: this.appType,
-    offset: this.offset 
-  };
+    let form_data = {
+      limitBy: this.limit,
+      appType: this.appType,
+      offset: this.offset,
+      "viewId": this.viewId,
+      "logToSearch": this.logToSearch
+    };
+    if(timeFilter?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = timeFilter?.value;
+    }
+    else if(timeFilter?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    else{
+      form_data["timeSpanEnum"] ="LAST_24_HOUR";
+    }
 
   this.app_service.make_post_server_call(form_url, form_data).subscribe({
     next: (result: any) => {

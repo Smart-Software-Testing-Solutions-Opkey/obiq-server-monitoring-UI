@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -14,12 +16,16 @@ import { Subscription } from 'rxjs';
 export class EMMrDsErpAllJourneyComponent {
   constructor(public app_service: AppService,
     private dataService: AppDataService,
-  
+    private route: ActivatedRoute
   ) { }
 
- 
+  viewId: any ;
+  
   ngOnInit(): void {
     //  this.getRecentSubActivityJourneyOfUser();
+    this.route.queryParams.subscribe(params => {
+      this.viewId = params['viewId'];  
+    });
      
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
@@ -111,6 +117,7 @@ export class EMMrDsErpAllJourneyComponent {
       "offset": this.offset,
       "textToSearch": this.textToSearch,
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
+      "viewId": this.viewId,
     };
     
     if(timeFilter?.type == 'setEnum'){

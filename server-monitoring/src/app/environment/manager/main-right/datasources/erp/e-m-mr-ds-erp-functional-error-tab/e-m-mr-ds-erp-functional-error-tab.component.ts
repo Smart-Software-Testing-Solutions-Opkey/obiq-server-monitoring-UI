@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -22,12 +23,22 @@ export class EMMrDsErpFunctionalErrorTabComponent {
 @Input() analyticsType: any;
   @Input() view: any;
  
+  logToSearch : any = "";
   limit: number = 20; 
   offset: number = 0; 
   err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
+   subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.logToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_Functional_log_error(data?.timeFilter)
+      }
+    }))
   this.get_Functional_log_error();
   this.startDataReceiving();
   }
@@ -50,7 +61,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
       });
       modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
    }
-   logToSearch : any;
+  
   appType : string = 'ORACLEFUSION'
   startDataReceiving(){
     this.app_service.dataReceiver().subscribe(data => {
@@ -94,12 +105,23 @@ export class EMMrDsErpFunctionalErrorTabComponent {
       environment.BASE_OBIQ_SERVER_URL +
       'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppFunctionalErrorByFilter';
 
-    const form_data = {
-      timeSpanEnum: 'LAST_7_DAYS',
+    let form_data = {
       limitBy: this.limit,
       appType: this.appType,
-      offset: this.offset 
+      offset: this.offset ,
+      "viewId": this.view?.viewId,
+      "logToSearch": this.logToSearch
     };
+    if(timeFilter?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = timeFilter?.value;
+    }
+    else if(timeFilter?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    else{
+      form_data["timeSpanEnum"] ="LAST_24_HOUR";
+    }
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
