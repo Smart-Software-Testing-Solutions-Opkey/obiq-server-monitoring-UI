@@ -243,8 +243,8 @@ renaming(){
 }
 
 openAllFunctionalErrors(){
-  if(this.widgetType=='USER BEHAVIOR')this.app_service.routeTo('environment','ubFunctionalError')
-  else if(this.widgetType=='ERP')this.app_service.routeTo('environment','erpFunctionalError')
+  if(this.widgetType=='USER BEHAVIOR')this.app_service.routeTo('environment','ubFunctionalError',{viewId:this.view.viewId})
+  else if(this.widgetType=='ERP')this.app_service.routeTo('environment','erpFunctionalError',{viewId:this.view.viewId})
 }
 
 }

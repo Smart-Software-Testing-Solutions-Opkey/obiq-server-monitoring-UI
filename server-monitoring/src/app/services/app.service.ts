@@ -41,8 +41,8 @@ export class AppService {
   make_get_server_call(form_url: string, form_data: any) {
     return this.http.get(form_url, { params: form_data });
   }
-  routeTo(portal,view){
+  routeTo(portal,view,queryParam?){
    let section = '(rightSection:'+view+')'
-    this.router.navigateByUrl('/'+portal+'/'+section)
+    this.router.navigateByUrl('/'+portal+'/'+section, queryParam)
   }
 }

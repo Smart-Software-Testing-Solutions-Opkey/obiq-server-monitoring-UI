@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -31,13 +32,21 @@ offset: number = 0;
 ub_functional_err_log_Data_Source: any[] = []; 
 allDataLoaded: boolean = false; 
 
-ngOnInit(): void {
-this.get_Functional_log_error();
-this.startDataReceiving();
-}
+subscriptions: Subscription[] = [];
+ 
+  ngOnInit(): void {
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.logToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_Functional_log_error(data?.timeFilter)
+      }
+    }))
+  this.get_Functional_log_error();
+  this.startDataReceiving();
+  }
  onSelectionChange(e) {
-   console.log(this.analyticsType,"this is analytics type ");
-   console.log(this.view,"this is the view")
     let dataItem = e.dataItem
     const modalRef = this.modalService.open(ManagerRightPanelComponent, {
       backdrop: 'static',
@@ -55,7 +64,7 @@ this.startDataReceiving();
     modalRef.componentInstance.selectedItem = { callsource: 'ub_functional_logs_panel', data: dataItem };
  }
 
-logToSearch : any;
+logToSearch : any = "";
 appType : string = 'ORACLEFUSION'
 startDataReceiving(){
   this.app_service.dataReceiver().subscribe(data => {
@@ -93,18 +102,28 @@ startDataReceiving(){
   window.loadingStart("#ub-err-logs-grid", "Please wait");
 
   if (this.allDataLoaded) return; 
-
   const form_url =
     environment.BASE_OBIQ_SERVER_URL +
     'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllAppFunctionalErrorByFilter';
 
-  const form_data = {
-    timeSpanEnum: 'LAST_7_DAYS',
-    limitBy: this.limit,
-    userId:this.service_data.UserDto.UserDTO.U_ID,
-    appType: this.appType,
-    offset: this.offset 
-  };
+    let form_data = {
+      limitBy: this.limit,
+      userId:this.service_data.UserDto.UserDTO.U_ID,
+      appType: this.appType,
+      offset: this.offset,
+      "viewId": this.view?.viewId,
+      "logToSearch": this.logToSearch
+    };
+    if(timeFilter?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = timeFilter?.value;
+    }
+    else if(timeFilter?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    else{
+      form_data["timeSpanEnum"] ="LAST_24_HOUR";
+    }
 
   this.app_service.make_post_server_call(form_url, form_data).subscribe({
     next: (result: any) => {

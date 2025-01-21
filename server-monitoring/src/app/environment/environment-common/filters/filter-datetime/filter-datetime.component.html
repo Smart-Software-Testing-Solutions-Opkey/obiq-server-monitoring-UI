@@ -1,7 +1,7 @@
 <div class="filter-content mb-1">
     <div class="dropdown layout-btn-group-time" >
         
-       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside" (click)="getTimezones()" >
+       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside">
             <button type="button" class="btn btn-default">
                 <i class="oci oci-chevron-left font-12px"></i>
             </button>
@@ -20,7 +20,7 @@
                 <div class="left border-box-shadow left-dropdown-menu" style="width: 9rem;">
                     <ul class="list-unstyled border-box-shadow category-bottom-border mb-0">
                         @for(timeItem of timeFilter; track timeItem.name){
-                            <li (click)="onSelctTime(timeItem)" class="dropdown-item li-dd-item" 
+                            <li (click)="onSelctTime(timeItem) ;" class="dropdown-item li-dd-item" 
                             [ngClass]="{'active': selectedTime == timeItem?.name, 'border-bottom': showBorder(timeItem.name)}">
                                 {{ timeItem?.value }}
                             </li>

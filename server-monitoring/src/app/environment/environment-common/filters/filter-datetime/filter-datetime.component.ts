@@ -38,7 +38,7 @@ export class FilterDatetimeComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-   
+   this.getTimezones();
     this.app_service.dataReceiver().subscribe(data => {
        
         if (data !== null) {
