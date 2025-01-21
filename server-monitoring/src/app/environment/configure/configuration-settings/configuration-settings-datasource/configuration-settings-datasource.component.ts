@@ -76,6 +76,12 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
         next: (result: any) => {
           window.loadingStop("#div-datasource-slection");
+
+          // To Remove "System Diagnostics" and "Test Automation Analytics"
+          result = result.filter((widget: any) => 
+            widget.name !== "System Diagnostics" && widget.name !== "Test Automation Analytics"
+          );
+
           result.forEach((widjet: any) => {
           
             if (widjet.name === "ERP Analytics") {
