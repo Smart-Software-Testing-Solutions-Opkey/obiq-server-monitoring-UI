@@ -43,6 +43,12 @@ export class AppService {
   }
   routeTo(portal,view,queryParam?){
    let section = '(rightSection:'+view+')'
-    this.router.navigateByUrl('/'+portal+'/'+section, queryParam)
+
+   if(!queryParam){
+    this.router.navigateByUrl('/'+portal+'/'+section)
+   }else{
+    this.router.navigateByUrl('/'+portal+'/'+section+'?'+queryParam)
+   }
+    
   }
 }

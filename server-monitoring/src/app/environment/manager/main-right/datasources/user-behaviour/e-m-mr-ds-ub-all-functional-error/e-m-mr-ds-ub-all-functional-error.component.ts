@@ -5,6 +5,7 @@ import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-pa
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class EMMrDsUbAllFunctionalErrorComponent {
     public app_service: AppService,
     public dataService: AppDataService,
     private modalService: NgbModal,
+    private route: ActivatedRoute
 ){
 
 }
@@ -34,7 +36,15 @@ allDataLoaded: boolean = false;
 
 subscriptions: Subscription[] = [];
  
+  viewId: any;
   ngOnInit(): void {
+
+    
+    this.route.queryParams.subscribe(params => {
+      this.viewId = params['viewId'];  
+    });
+    
+  
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
         this.logToSearch = '';
@@ -111,7 +121,7 @@ startDataReceiving(){
       userId:this.service_data.UserDto.UserDTO.U_ID,
       appType: this.appType,
       offset: this.offset,
-      "viewId": this.view?.viewId,
+      "viewId": this.viewId,
       "logToSearch": this.logToSearch
     };
     if(timeFilter?.type == 'setEnum'){
