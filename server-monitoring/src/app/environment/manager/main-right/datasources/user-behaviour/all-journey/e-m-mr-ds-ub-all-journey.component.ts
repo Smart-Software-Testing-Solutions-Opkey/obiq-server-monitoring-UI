@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { GridDataResult } from '@progress/kendo-angular-grid';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -13,10 +15,24 @@ export class EMMrDsUbAllJourneyComponent {
 
 constructor(  
     public app_service: AppService,
-    private dataService:AppDataService){}
+    private dataService:AppDataService,
+    private route: ActivatedRoute
+  ){}
 
+  viewId: any ;
   ngOnInit(): void {
     // this.getRecentSubActivityJourneyOfUser();
+    this.route.queryParams.subscribe(params => {
+      this.viewId = params['viewId'];  
+    });
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.textToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_User_Behaviour_Journey(data?.timeFilter)
+      }
+    }))
     this.get_User_Behaviour_Journey()
     this.startDataReceiving();
   }
@@ -27,6 +43,7 @@ constructor(
   offset: number = 0; 
   ub_User_Journey_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
+  subscriptions: Subscription[] = [];
   
 
   journeyDataSourceTemp: any[] = [];
@@ -89,8 +106,6 @@ constructor(
             userId: this.dataService?.UserDto.UserDTO.U_ID,
             projectId: this.dataService?.UserDto.ProjectDTO.P_ID,
             "appType": this.modelObj.modelApplication.toUpperCase(),
-            "fromTimeInMillis": 1704047400000,
-            "toTimeInMillis": 1734518432353,
             "modules": this.modelObj.modelStrModule?this.modelObj.modelStrModule:[],
             "process": this.modelObj.modelProcess?this.modelObj.modelProcess:[],
             "userNameList": this.modelObj.modelUser?this.modelObj.modelUser:[],
@@ -101,7 +116,20 @@ constructor(
             "offset": this.offset,
             "textToSearch": this.textToSearch,
             "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
+            "viewId": this.viewId,
+
           };
+
+          if(timeFilter?.type == 'setEnum'){
+            form_data["timeSpanEnum"] = timeFilter?.value;
+          }
+          else if(timeFilter?.type == "setCustom"){
+            form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+            form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+          }
+          else{
+            form_data["timeSpanEnum"] ="LAST_24_HOUR";
+          }
           this.app_service.make_post_server_call(form_url, form_data).subscribe({
           next: (result: any) => {
      

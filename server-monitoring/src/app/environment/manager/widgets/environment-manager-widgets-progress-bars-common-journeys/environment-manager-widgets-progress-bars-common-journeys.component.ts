@@ -239,10 +239,10 @@ renaming(){
 }
 openFullJourney(){
   if(this.widgetType == 'ERP'){
-    this.app_service.routeTo('environment','erpjourney')
+    this.app_service.routeTo('environment','erpjourney',`viewId=${this.view.viewId}`)
   }
   if(this.widgetType == 'userBehaviour'){
-    this.app_service.routeTo('environment','ubjourney')
+    this.app_service.routeTo('environment','ubjourney',`viewId=${this.view.viewId}`)
   }
 }
 

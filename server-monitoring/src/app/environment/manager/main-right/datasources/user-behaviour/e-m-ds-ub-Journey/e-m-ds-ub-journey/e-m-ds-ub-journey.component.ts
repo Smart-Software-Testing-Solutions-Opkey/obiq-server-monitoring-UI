@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -26,9 +27,18 @@ export class EMDsUbJourneyComponent  {
   offset: number = 0; 
   ub_User_Journey_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
+  subscriptions: Subscription[] = [];
 
 
   ngOnInit(): void {
+     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.logToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_User_Behaviour_Journey(data?.timeFilter)
+      }
+    }))
     this.get_User_Behaviour_Journey();
     this.startDataReceiving();
     }
@@ -70,10 +80,28 @@ export class EMDsUbJourneyComponent  {
             environment.BASE_OBIQ_SERVER_URL +
             'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
       
+            
             let form_data = {
-              userId: this.dataService.UserDto.UserDTO.U_ID,
-              projectId: this.dataService.UserDto.ProjectDTO.P_ID
+              limitBy: this.limit,
+              userId:this.dataService.UserDto.UserDTO.U_ID,
+              projectId: this.dataService.UserDto.ProjectDTO.P_ID,
+              appType: this.appType,
+              offset: this.offset ,
+              "viewId": this.view.viewId,
+              "logToSearch": this.logToSearch
             };
+
+            
+            if(timeFilter?.type == 'setEnum'){
+              form_data["timeSpanEnum"] = timeFilter?.value;
+            }
+            else if(timeFilter?.type == "setCustom"){
+              form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+              form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+            }
+            else{
+              form_data["timeSpanEnum"] ="LAST_24_HOUR";
+            }
             this.app_service.make_post_server_call(form_url, form_data).subscribe({
             next: (result: any) => {
             window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");

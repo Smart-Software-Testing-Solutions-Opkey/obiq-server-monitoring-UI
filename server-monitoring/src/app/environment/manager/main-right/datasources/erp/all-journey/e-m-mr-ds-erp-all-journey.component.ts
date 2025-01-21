@@ -3,6 +3,8 @@ import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-all-journey',
@@ -11,10 +13,22 @@ import { AppDataService } from 'src/app/services/app-data.service';
 })
 export class EMMrDsErpAllJourneyComponent {
   constructor(public app_service: AppService,
-    private dataService: AppDataService) { }
+    private dataService: AppDataService,
+  
+  ) { }
 
+ 
   ngOnInit(): void {
     //  this.getRecentSubActivityJourneyOfUser();
+     
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.textToSearch = '';
+        this.allDataLoaded = false
+        this.offset = 0;
+        this.get_erp_Journey(data?.timeFilter)
+      }
+    }))
     this.get_erp_Journey()
     this.startDataReceiving();
   }
@@ -25,6 +39,7 @@ export class EMMrDsErpAllJourneyComponent {
   offset: number = 0;
   erp_User_Journey_Data_Source: any[] = [];
   allDataLoaded: boolean = false;
+  subscriptions: Subscription[] = [];
 
   journeyDataSourceTemp: any[] = [];
   public pageSize = 20;
@@ -97,11 +112,23 @@ export class EMMrDsErpAllJourneyComponent {
       "textToSearch": this.textToSearch,
       "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
     };
+    
+    if(timeFilter?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = timeFilter?.value;
+    }
+    else if(timeFilter?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    else{
+      form_data["timeSpanEnum"] ="LAST_24_HOUR";
+    }
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
 
         window.loadingStart("#erp-user-Journey-logs-grid", "Please Wait");
  
+        
         result = result.map((log) => {
 
           const date = new Date(log.timestamp);
