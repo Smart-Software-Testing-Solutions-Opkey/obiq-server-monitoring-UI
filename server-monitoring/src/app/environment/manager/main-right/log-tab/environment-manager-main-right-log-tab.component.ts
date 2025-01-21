@@ -68,12 +68,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   selectedTime:any;
   logToSearch : any = "";
   ngOnInit(): void {
-    console.log(this.analyticsType,"this is selected analytics type")
+   
+    
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
         this.selectedTime = data?.timeFilter
         this.getLogsChart();
-        this.getViewLogs();
+        this.getViewLogs(data?.timeFilter);
       }
     }))
     this.getLogsChart()
@@ -345,7 +346,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
     }
     else{
-      this.selectedTime={"type":"setEnum","value":"LAST_7_DAYS"}
+      this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
        form_data.timeSpanEnum = timeFilter?.value;
     }
    
