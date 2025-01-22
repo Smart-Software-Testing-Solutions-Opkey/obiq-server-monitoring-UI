@@ -107,10 +107,20 @@ ngAfterViewInit(): void {
         next: (result: any) => {
           window.loadingStop("#navigator-left");
 
-          result.forEach((item, index) => {
-            item.display = index === 0
-          })
-          this.analyticsTypes = result;
+          //hidding Test Automation Analytics and System Diagnostics Analytics
+          this.analyticsTypes = result.filter(item => 
+            item.name !== "Test Automation Analytics" && item.name !== "System Diagnostics Analytics"
+          );
+
+          this.analyticsTypes.forEach((item, index) => {
+            item.display = index === 0;
+          });
+
+          // result.forEach((item, index) => {
+          //   item.display = index === 0
+          // })
+          // this.analyticsTypes = result;
+
           // this.selectedAnalyticsType = result[0];
           // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
           // this.onLeftPanelDataChange.emit(this.dataChanged)

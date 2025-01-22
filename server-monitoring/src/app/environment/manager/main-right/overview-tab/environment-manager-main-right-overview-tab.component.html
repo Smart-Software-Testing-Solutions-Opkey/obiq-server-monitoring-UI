@@ -35,14 +35,16 @@
                  
                     </div>
                 
-                    <div class="widget-section">
+                    <!-- hidded weekly log -->
+                    <!-- <div class="widget-section">
                         <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour'}"></app-enviornment-manager-time-explorer-graph>
-                    </div>
+                    </div> -->
     
                 </div>
             </div>
         </div>
-        <div *ngIf="analyticsTypes.display_test_automation" class="card">
+        <!-- hidded Test Automation Analytics -->
+        <div *ngIf="analyticsTypes.display_test_automation" class="card d-none">
             <div class="card-header">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_TA">
                     Test Automation Analytics
@@ -130,14 +132,16 @@
                  
                     </div>
                 
-                    <div class="widget-section">
+                    <!-- hidded weekly log -->
+                    <!-- <div class="widget-section">
                         <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP'}"></app-enviornment-manager-time-explorer-graph>
-                    </div>
+                    </div> -->
     
                 </div>
             </div>
         </div>
-        <div *ngIf="analyticsTypes.display_system_diagnostics" class="card">
+        <!-- hidded System Diagnostics Analytics -->
+        <div *ngIf="analyticsTypes.display_system_diagnostics" class="card d-none">
             <div class="card-header mb-1">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_SD">
                     System Diagnostics Analytics
