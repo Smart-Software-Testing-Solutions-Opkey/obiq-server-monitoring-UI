@@ -42,9 +42,14 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
         console.log(this.receivedAccessType, "recived==========")
         if(this.receivedAccessType == "viewCreated"){
           this.selectedAccessType = this.receivedAccessType?.AccessType
+          this.dataService.changedAccessType=this.selectedAccessType
           this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
         }
         else{
+          if(this.receivedAccessType?.AccessType != null){
+            this.selectedAccessType = this.receivedAccessType?.AccessType
+          }
+          this.dataService.changedAccessType=this.selectedAccessType
           this.obj_configuration_setting.AccessType = this.selectedAccessType;
         }
         if (this.obj_configuration_setting.AccessType == "SHARED") {
