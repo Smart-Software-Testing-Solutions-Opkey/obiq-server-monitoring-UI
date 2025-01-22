@@ -41,7 +41,7 @@
 
 
 
-        <kendo-grid-column title="Build Name" field="subActivityName" [width]="310">
+        <kendo-grid-column title="Build Name" field="subActivityName">
 
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
@@ -54,7 +54,7 @@
 
        
            
-            <kendo-grid-column title="" field="timeStampStr">
+            <kendo-grid-column title="" field="timeStampStr"  [width]="210">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                     <span class="k_grid_text text_wrap text-start">
                         <i class="oci oci-clock pe-2"></i>
