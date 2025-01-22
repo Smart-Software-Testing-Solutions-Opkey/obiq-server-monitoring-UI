@@ -96,7 +96,8 @@ export class EMMrDsErpOverviewTabComponent {
       { cols: 3, rows: 2, y: 1, x: 2 ,widId:'USER_JOURNEY_TOP_FAST_WIDGET'},
       { cols: 3, rows: 2, y: 2, x: 0 ,widId:'USER_JOURNEY_TOP_SLOW_WIDGET'},
       { cols: 3, rows: 2, y: 2, x: 2 ,widId:'USER_JOURNEY_MOST_COMMON_WIDGET'},
-      { cols: 6, rows: 2, y: 3, x: 0 ,widId:'Weekly_Log_Trends'},
+      //hidded weekly log
+      //{ cols: 6, rows: 2, y: 3, x: 0 ,widId:'Weekly_Log_Trends'},
       { cols: 3, rows: 2, y: 1, x: 0 ,widId:'TOP_FUNCTIONAL_ERRORS_WIDGET'},
     ];
   }

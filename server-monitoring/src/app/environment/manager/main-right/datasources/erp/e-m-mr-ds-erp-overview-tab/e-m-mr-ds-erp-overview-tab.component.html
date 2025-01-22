@@ -56,13 +56,14 @@
                         <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'5 Most Common Journeys', widgetType:'ERP'}"></app-environment-manager-widgets-progress-bars-common-journeys>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
+                 <!-- hidded weekly log -->
+                <!-- <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                  
                     <div class="widget-section margin-bottom-2 mx-1 mt-5">
                         <app-enviornment-manager-time-explorer-graph  [Editable]="Editable"[child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP'}"></app-enviornment-manager-time-explorer-graph>
                     </div>
                 
-                </ng-container>
+                </ng-container> -->
                 <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
                     <div class="widget-section margin-bottom-2 mx-1">
                         <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP'}"></app-e-m-functional-error-widget>
