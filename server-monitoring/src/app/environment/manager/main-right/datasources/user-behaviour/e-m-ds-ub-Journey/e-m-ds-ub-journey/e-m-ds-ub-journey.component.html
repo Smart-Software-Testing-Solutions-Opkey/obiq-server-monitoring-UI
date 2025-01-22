@@ -20,16 +20,34 @@
         </kendo-grid-column>
 
         <kendo-grid-column field="timeString" title="Time">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.timeString}}">{{dataItem?.timeString}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column field="userId" title="User">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.userId}}">{{dataItem?.userId}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column field="appType" title="App">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.appType}}">{{dataItem?.appType}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column field="envName" title="Environment Name">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.envName}}">{{dataItem?.envName}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column field="envHost" title="Environment Host">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.envHost}}">{{dataItem?.envHost}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column field="sessionId" title="Session Id">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.sessionId}}">{{dataItem?.sessionId}}</span>
+            </ng-template>
         </kendo-grid-column>
         <kendo-grid-column title="Action" class="td_overflow_visible text-center td_pb_0 pl-3" [width]="70"
                     [headerClass]="'td_overflow_visible text-center'">
