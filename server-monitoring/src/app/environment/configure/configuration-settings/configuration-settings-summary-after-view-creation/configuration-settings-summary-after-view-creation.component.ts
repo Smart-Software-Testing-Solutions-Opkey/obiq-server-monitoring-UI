@@ -176,7 +176,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       obj_Update_View["accessType"] = this.selectedAccessType,
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
       obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
-      obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
+      obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: "", permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
       return obj_Update_View;
   }
   Update_ViewAccess_Type() {
