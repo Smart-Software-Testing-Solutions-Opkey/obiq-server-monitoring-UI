@@ -5,7 +5,7 @@
         <button class="btn bt_back px-2" container="body" ngbtooltip="Back" type="button" (click)="backtomenu()"><i class="oci oci-chevron-left font-14px pt-1 text_muted"></i></button>
         <h5 class="mb-0 text-ellipsis">All journey</h5>
     </div>
-    <div class="right-filter me-3 mt-2">
+    <div class="right right-filter me-3 mt-2">
         <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"  [selected_tab]= '{selectedTab: "erpAllJourney"}'></app-envrionment-common-filter>
     </div>
  </div>
