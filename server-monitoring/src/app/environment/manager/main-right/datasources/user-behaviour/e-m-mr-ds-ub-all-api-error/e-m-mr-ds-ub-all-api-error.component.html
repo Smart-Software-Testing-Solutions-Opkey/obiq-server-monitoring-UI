@@ -1,9 +1,9 @@
 <div id="div-FunctionalErrorComponent" class="app_container flex_box_column h-100">
 
     <div class="header d-flex-between" style="height: 4rem;">
-        <div class="left d-flex">
+        <div class="left flex-center">
             <button class="btn bt_back" container="body" ngbtooltip="Back" type="button" (click)="backToMenu()"><i class="oci oci-chevron-left text_muted"></i></button>
-            <h3 class="mb-0 text-ellipsis">All API Errors</h3>
+            <h5 class="mb-0 text-ellipsis">All API Errors</h5>
         </div>
 
         <div class="right-filter me-3 mt-2">
@@ -11,7 +11,7 @@
         </div>
     </div>
    
-    <div class="app_body ">
+    <div class="app_body mx-2">
         <div id="ub-err-logs-grid"  class="logs-grid-layout">
             <!-- (cellClick)="onSelectionChange($event)" -->
             <kendo-grid 
@@ -20,7 +20,7 @@
                 class="scrollable"
                 (cellClick)="onSelectionChange($event)"
                 (scrollBottom)="onScroll()"
-                [height]="500"
+                [style.height]="'calc(100vh - 8rem)'"
                 >
         
                 <kendo-grid-column title="" [width]="10">

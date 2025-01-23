@@ -29,9 +29,9 @@
             [data]="logDataSource" 
             [selectable]="true" 
             (cellClick)="onSelectionChange($event)"
-            class="scrollable"
+            class="scrollable custom-grid-height"
             (scrollBottom)="onScroll()"
-            [height]="500"
+            [style.height]="'calc(100vh - 10rem)'"
             >
 
             <kendo-grid-column title="" [width]="10">
