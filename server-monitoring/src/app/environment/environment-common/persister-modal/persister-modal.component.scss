@@ -12,9 +12,12 @@
     flex-direction: column;
 }
 
-.main .upper{
-    flex: 1;
-    display : flex;
+.main .upper .confirm-iconBox {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background-color: #fef0c7 !important;
+    padding: 0.875rem;
 }
 .main .upper .upper-left{
     padding-top:10px;
