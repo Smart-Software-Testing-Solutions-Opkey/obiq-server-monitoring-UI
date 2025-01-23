@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './e-m-mr-ds-ub-all-journey.component.html',
   styleUrl: './e-m-mr-ds-ub-all-journey.component.scss'
 })
-export class EMMrDsUbAllJourneyComponent {
+export class EMMrDsUbAllJourneyComponent implements OnInit, OnDestroy{
 
 constructor(  
     public app_service: AppService,
@@ -22,6 +22,7 @@ constructor(
   viewId: any ;
   ngOnInit(): void {
     // this.getRecentSubActivityJourneyOfUser();
+    this.dataService.isUserAllJourneyOpen = true
     this.route.queryParams.subscribe(params => {
       this.viewId = params['viewId'];  
     });
@@ -36,6 +37,15 @@ constructor(
     this.get_User_Behaviour_Journey()
     this.startDataReceiving();
   }
+
+  ngOnDestroy(): void {
+    this.dataService.isUserAllJourneyOpen = false
+    this.disposeAllSubscriptions();
+  }
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+ 
 
   @Input() analyticsType: any;
   @Input() view: any;
@@ -69,7 +79,7 @@ constructor(
   textToSearch : any = ''
   isRefresh : boolean = false;
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver =this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
        
         if (data.callsource == 'ubAllJourney'){
@@ -90,10 +100,15 @@ constructor(
 
           // }
 
-        }
-      }  
+        } 
+        else if(data.callsource == 'navigatorAll'){
+          this.backtomenu();
+        }  
+      }
+      
       
     });
+    this.subscriptions.push(data_receiver)
   }
 
   get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {

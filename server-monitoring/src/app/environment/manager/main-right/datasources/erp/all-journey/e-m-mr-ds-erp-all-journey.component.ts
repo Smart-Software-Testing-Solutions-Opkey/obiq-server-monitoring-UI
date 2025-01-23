@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './e-m-mr-ds-erp-all-journey.component.html',
   styleUrl: './e-m-mr-ds-erp-all-journey.component.scss'
 })
-export class EMMrDsErpAllJourneyComponent {
+export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
   constructor(public app_service: AppService,
     private dataService: AppDataService,
     private route: ActivatedRoute
@@ -23,6 +23,7 @@ export class EMMrDsErpAllJourneyComponent {
   
   ngOnInit(): void {
     //  this.getRecentSubActivityJourneyOfUser();
+    this.dataService.isUserAllJourneyOpen = true
     this.route.queryParams.subscribe(params => {
       this.viewId = params['viewId'];  
     });
@@ -39,6 +40,10 @@ export class EMMrDsErpAllJourneyComponent {
     this.startDataReceiving();
   }
 
+  ngOnDestroy(): void {
+    this.dataService.isUserAllJourneyOpen = false
+    this.disposeAllSubscriptions();
+  }
   @Input() analyticsType: any;
   @Input() view: any;
   limit: number = 20;
@@ -69,7 +74,7 @@ export class EMMrDsErpAllJourneyComponent {
   textToSearch: any = ''
   isRefresh: boolean = false;
   startDataReceiving() {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data.callsource == 'erpAllJourney') {
 
@@ -90,10 +95,18 @@ export class EMMrDsErpAllJourneyComponent {
           // }
 
         }
+        else if(data.callsource == 'navigatorAll'){
+          this.backtomenu();
+        }  
       }
 
     });
+    this.subscriptions.push(data_receiver);
   }
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+ 
 
   get_erp_Journey(timeFilter?: any, appendData: boolean = false): void {
     

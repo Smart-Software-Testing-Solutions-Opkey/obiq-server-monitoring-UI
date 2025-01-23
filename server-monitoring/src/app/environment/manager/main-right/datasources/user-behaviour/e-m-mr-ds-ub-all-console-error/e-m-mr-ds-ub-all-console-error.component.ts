@@ -37,6 +37,7 @@ export class EMMrDsUbAllConsoleErrorComponent {
   viewId: any;
   ngOnInit(): void {
 
+    this.dataService.isAllErrorOpen = true
     this.route.queryParams.subscribe(params => {
       this.viewId = params['viewId'];  
     });
@@ -50,6 +51,13 @@ export class EMMrDsUbAllConsoleErrorComponent {
     }))
     this.get_console_log_error();
     this.startDataReceiving();
+  }
+  ngOnDestroy(): void {
+    this.dataService.isAllErrorOpen = false
+    this.disposeAllSubscriptions();
+  }
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
    onSelectionChange(e) {
      console.log(this.analyticsType,"this is analytics type ");
@@ -74,7 +82,7 @@ export class EMMrDsUbAllConsoleErrorComponent {
   logToSearch: any;
   appType: string = 'ORACLEFUSION'
   startDataReceiving() {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver=this.app_service.dataReceiver().subscribe(data => {
 
       if (data !== null) {
 
@@ -100,8 +108,12 @@ export class EMMrDsUbAllConsoleErrorComponent {
           }
 
         }
+        else if(data.callsource == 'navigatorAll'){
+          this.backToMenu();
+        }
       }
     });
+    this.subscriptions.push(data_receiver);
   }
   get_console_log_error(timeFilter?: any, appendData: boolean = false): void {
 

@@ -96,6 +96,9 @@ export class EnvironmentManagerComponent implements OnInit {
   }
   leftPanelDataUpdate(val) {
     
+    if(this.service_data.isUserAllJourneyOpen == true || this.service_data.isAllErrorOpen == true){
+      this.app_service.dataTransmitter({callsource : 'navigatorAll'})
+    }
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
    
@@ -108,6 +111,8 @@ export class EnvironmentManagerComponent implements OnInit {
       allSelectedAnalytics:val.allSelectedAnalytics
     }
     this.app_service.dataTransmitter({callsource:'navigatorops',data:this.service_data.selectedArtifactData});
+
+    
   }
 
 }
