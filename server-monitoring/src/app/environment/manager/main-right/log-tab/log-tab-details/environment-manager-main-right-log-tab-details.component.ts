@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -16,8 +17,9 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
     public activeModal: NgbActiveModal,
     private router: Router,
     private route: ActivatedRoute,
-    public service_data: AppDataService,
+    //public service_data: AppDataService,
     public app_service: AppService,
+    public dataService: AppDataService,
     private cdr: ChangeDetectorRef
 
   ) {
@@ -37,8 +39,20 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
     console.log(this.selectedData, "this is selected Data in Log tab details main right")
 
   }
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if(data.callsource == 'timeExplorerChart'){
 
@@ -51,6 +65,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
       }
     });
     this.getTraceData();
+    this.subscriptions.push(data_receiver);
   }
 
   onCellClick(event: any) {
@@ -84,9 +99,7 @@ export class EnvironmentManagerMainRightLogTabDetailsComponent implements OnInit
       });
 
   }
-  ngOnDestroy(): void {
 
-  }
   changeSelectedTab(tab) {
     this.tabSelected = tab
   }

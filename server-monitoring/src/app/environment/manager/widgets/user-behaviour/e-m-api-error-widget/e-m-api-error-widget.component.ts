@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 
@@ -16,6 +16,7 @@ import {
   ApexTooltip,
 } from "ng-apexcharts";
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 
 export type ChartOptions = {
@@ -36,11 +37,12 @@ export type ChartOptions = {
   styleUrl: './e-m-api-error-widget.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EMApiErrorWidgetComponent implements OnInit {
+export class EMApiErrorWidgetComponent implements OnInit, OnDestroy {
 
   constructor(
     private app_service: AppService,
     private service_data: AppDataService,
+    public dataService: AppDataService,
     private cdRef: ChangeDetectorRef
   ) {
 
@@ -80,9 +82,20 @@ export class EMApiErrorWidgetComponent implements OnInit {
     this.startDataReceiving();
   }
 
+ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   searchText  : any ;
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
 
         if (data.callsource == 'OVERVIEW_TAB'){
@@ -97,6 +110,7 @@ export class EMApiErrorWidgetComponent implements OnInit {
        
       }
     });
+    this.subscriptions.push(data_receiver);
   }
 
   tempdatasourceProgressBar: any = []

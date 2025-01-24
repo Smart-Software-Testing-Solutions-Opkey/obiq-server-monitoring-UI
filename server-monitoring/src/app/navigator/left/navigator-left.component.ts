@@ -1,6 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
 import { NotificationType } from 'src/app/global/enums';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -14,7 +15,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './navigator-left.component.html',
   styleUrls: ['./navigator-left.component.scss']
 })
-export class NavigatorLeftComponent implements OnInit,AfterViewInit {
+export class NavigatorLeftComponent implements OnInit,AfterViewInit, OnDestroy{
 
   constructor(
     private modalService: NgbModal,
@@ -44,8 +45,19 @@ ngAfterViewInit(): void {
     "allSelectedAnalytics":[]
   }
 
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data == "viewCreated") {
           this.getAllVIews();
@@ -61,6 +73,7 @@ ngAfterViewInit(): void {
       }
     });
     this.getAllVIews();
+    this.subscriptions.push(data_receiver);
   }
   selectedView: any = {}
 

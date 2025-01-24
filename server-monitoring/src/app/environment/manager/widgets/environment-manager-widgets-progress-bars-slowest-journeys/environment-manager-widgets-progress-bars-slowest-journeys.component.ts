@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,7 @@ import {
   ApexGrid,
   ApexYAxis
 } from "ng-apexcharts";
+import { Subscription } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -32,11 +33,12 @@ export type ChartOptions = {
   styleUrl: './environment-manager-widgets-progress-bars-slowest-journeys.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent implements OnInit {
+export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent implements OnInit, OnDestroy {
 
   constructor(
     private app_service: AppService,
     private service_data: AppDataService,
+    public dataService: AppDataService,
     private cdRef: ChangeDetectorRef
   ){
 
@@ -76,9 +78,20 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
     this.cdRef.detectChanges()
 
   }
+ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   isRefresh: boolean = false;
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         
         if (data.callsource == 'OVERVIEW_TAB'){
@@ -92,6 +105,7 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
         }
       }  
     });
+    this.subscriptions.push(data_receiver);
   }
   // refreshPage(){
   //   if(this.isRefresh == true){

@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './e-m-mr-ds-e-f-e-journey.component.html',
   styleUrl: './e-m-mr-ds-e-f-e-journey.component.scss'
 })
-export class EMMrDsEFEJourneyComponent {
+export class EMMrDsEFEJourneyComponent implements OnDestroy{
 
   trace_Selected_data: any;
   tabSelected: any;
@@ -20,6 +21,7 @@ constructor(
   private route: ActivatedRoute,
   public service_data: AppDataService,
   public app_service: AppService,
+  public dataService: AppDataService,
   private cdr: ChangeDetectorRef
 ){
 
@@ -43,10 +45,21 @@ constructor(
   //   datasource: [],
   //   isDisplay_main: false
   // }
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
  
   ngOnInit(): void {
     // this.tabSelected = 'ubFunctionalError';
-      this.app_service.dataReceiver().subscribe(data => {
+      let data_receiver = this.app_service.dataReceiver().subscribe(data => {
         if (data !== null) {
           if(data.callsource == 'timeExplorerChart'){
   
@@ -58,7 +71,7 @@ constructor(
           }
         }
       });
-      
+      this.subscriptions.push(data_receiver);
     }
   
     onCellClick(event: any) {
@@ -68,9 +81,6 @@ constructor(
   
     }
     
-    ngOnDestroy(): void {
-  
-    }
     changeSelectedTab(tab) {
       this.tabSelected = tab
     }

@@ -46,9 +46,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
+
   ngOnInit(): void {
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
@@ -58,9 +56,22 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     this.get_Redis_Cpu_Usage(this.view,this.widgetType)
     this.startDataReceiving();
   }
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
   isRefresh: boolean = false;
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data.callsource == 'OVERVIEW_TAB'){
           if( data.action == 'refresh'){
@@ -69,6 +80,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
         }
       }  
     });
+    this.subscriptions1.push(data_receiver);
   }
   // refreshPage(){
   //   if(this.isRefresh == true){

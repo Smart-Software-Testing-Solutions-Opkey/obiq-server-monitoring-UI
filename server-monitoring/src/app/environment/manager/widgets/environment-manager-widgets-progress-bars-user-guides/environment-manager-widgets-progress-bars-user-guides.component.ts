@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,7 @@ import {
 } from "ng-apexcharts";
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -32,10 +33,11 @@ export type ChartOptions = {
   templateUrl: './environment-manager-widgets-progress-bars-user-guides.component.html',
   styleUrl: './environment-manager-widgets-progress-bars-user-guides.component.scss'
 })
-export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
+export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements OnDestroy{
   constructor(
       private app_service: AppService,
       private service_data: AppDataService,
+      public dataService: AppDataService,
       private cdRef: ChangeDetectorRef,
       private modalService: NgbModal,
     ){
@@ -66,10 +68,22 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
       }
       this.startDataReceiving();
     }
+
+ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
     isRefresh: boolean = false;
     searchText : any = [];
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data.callsource == 'OVERVIEW_TAB'){
           if( data.action == 'refresh'){
@@ -82,6 +96,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent {
         }
       }
     });
+    this.subscriptions.push(data_receiver);
   }
   tempdatasourceProgressBar : any;
   filterSearchResults(){

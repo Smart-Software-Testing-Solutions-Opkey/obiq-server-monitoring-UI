@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -6,12 +6,13 @@ import { environment } from 'src/environments/environment';
 import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { NotificationType } from 'src/app/global/enums';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
   templateUrl: './configuration-settings-summary-after-view-creation.component.html',
   styleUrl: './configuration-settings-summary-after-view-creation.component.scss'
 })
-export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit {
+export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit, OnDestroy {
   receivedAccessType: any;
   constructor(
     public app_service: AppService,
@@ -34,7 +35,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   groupedDataSource: any = {};
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
-
+    this.disposeAllSubscriptions();
   }
 
   @Input('child_data')
@@ -98,9 +99,14 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 }
 
 
+subscriptions: Subscription[] = [];
+
+disposeAllSubscriptions() {
+  this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+}
 
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
       
@@ -134,7 +140,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       }
     });
 
-    
+    this.subscriptions.push(data_receiver);
   }
   ngAfterViewInit(): void {
    

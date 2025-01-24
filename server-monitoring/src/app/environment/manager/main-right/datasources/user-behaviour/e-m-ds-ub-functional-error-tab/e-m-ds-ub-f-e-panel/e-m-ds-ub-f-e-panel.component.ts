@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 
@@ -9,7 +10,7 @@ import { AppService } from 'src/app/services/app.service';
   templateUrl: './e-m-ds-ub-f-e-panel.component.html',
   styleUrl: './e-m-ds-ub-f-e-panel.component.scss'
 })
-export class EMDsUbFEPanelComponent {
+export class EMDsUbFEPanelComponent implements OnDestroy{
    trace_Selected_data: any;
     tabSelected: any;
   constructor(
@@ -18,6 +19,7 @@ export class EMDsUbFEPanelComponent {
         private route: ActivatedRoute,
         public service_data: AppDataService,
         public app_service: AppService,
+        public dataService: AppDataService,
         private cdr: ChangeDetectorRef
   ){
   
@@ -34,9 +36,21 @@ export class EMDsUbFEPanelComponent {
       console.log(this.selectedData, "this is selected Data in Log tab details main right")
   
     }
+
+    ngOnDestroy() {
+      this.dataService.isEnablePersister = false
+      this.disposeAllSubscriptions();
+    }
+   
+    subscriptions: Subscription[] = [];
+   
+    disposeAllSubscriptions() {
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }
+
      ngOnInit(): void {
       // this.tabSelected = 'ubFunctionalError';
-        this.app_service.dataReceiver().subscribe(data => {
+        let data_receiver = this.app_service.dataReceiver().subscribe(data => {
           if (data !== null) {
             if(data.callsource == 'timeExplorerChart'){
     
@@ -48,7 +62,7 @@ export class EMDsUbFEPanelComponent {
             }
           }
         });
-        
+        this.subscriptions.push(data_receiver);
       }
     
       onCellClick(event: any) {
@@ -58,9 +72,6 @@ export class EMDsUbFEPanelComponent {
     
       }
       
-      ngOnDestroy(): void {
-    
-      }
       changeSelectedTab(tab) {
         this.tabSelected = tab
       }

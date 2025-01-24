@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './e-m-mr-ds-erp-functional-error-tab.component.html',
   styleUrl: './e-m-mr-ds-erp-functional-error-tab.component.scss'
 })
-export class EMMrDsErpFunctionalErrorTabComponent {
+export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
   constructor(
       public service_data: AppDataService,
       public app_service: AppService,
@@ -62,9 +62,21 @@ export class EMMrDsErpFunctionalErrorTabComponent {
       modalRef.componentInstance.selectedItem = { callsource: 'Erp_functional_logs_Journey_pannel', data: dataItem };
    }
   
+   ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
   appType : string = 'ORACLEFUSION'
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
       
@@ -95,6 +107,7 @@ export class EMMrDsErpFunctionalErrorTabComponent {
         }
       }  
     });
+    this.subscriptions1.push(data_receiver);
   }
    get_Functional_log_error(timeFilter?: any, appendData: boolean = false): void {
     window.loadingStart("#erp-err-logs-grid", "Please wait");

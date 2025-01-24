@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './e-m-ds-ub-journey.component.html',
   styleUrl: './e-m-ds-ub-journey.component.scss'
 })
-export class EMDsUbJourneyComponent  {
+export class EMDsUbJourneyComponent  implements OnDestroy{
 
    constructor(
         public service_data: AppDataService,
@@ -42,10 +42,23 @@ export class EMDsUbJourneyComponent  {
     this.get_User_Behaviour_Journey();
     this.startDataReceiving();
     }
+
+    ngOnDestroy() {
+      this.dataService.isEnablePersister = false
+      this.disposeAllSubscriptions();
+    }
+   
+    subscriptions1: Subscription[] = [];
+   
+    disposeAllSubscriptions() {
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+      this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+    }
+
     logToSearch : any;
     appType : string = 'ORACLEFUSION'
     startDataReceiving(){
-      this.app_service.dataReceiver().subscribe(data => {
+      let data_receiver = this.app_service.dataReceiver().subscribe(data => {
         
         if (data !== null) {
         
@@ -73,6 +86,7 @@ export class EMDsUbJourneyComponent  {
           }
         }  
       });
+      this.subscriptions1.push(data_receiver);
     }
     get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {
        const form_url =

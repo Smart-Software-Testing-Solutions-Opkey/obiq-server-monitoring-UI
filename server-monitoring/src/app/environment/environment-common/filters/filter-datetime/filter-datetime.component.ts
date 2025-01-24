@@ -1,4 +1,6 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 
@@ -7,12 +9,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './filter-datetime.component.html',
   styleUrl: './filter-datetime.component.scss'
 })
-export class FilterDatetimeComponent implements OnInit{
+export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
   constructor(
      public app_service: AppService,
+     public dataService: AppDataService,
      private cdr: ChangeDetectorRef
   ){}
+  
 
   filterCount = 0
   timezoneDatasource = []
@@ -37,9 +41,20 @@ export class FilterDatetimeComponent implements OnInit{
     { name: 'setCustom', value: 'Set Custom', timeValue: ""},
   ];
 
+  ngOnDestroy(): void {
+    this.dataService.isEnablePersister = false;
+    this.disposeAllSubscriptions();
+  }
+
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   ngOnInit(): void {
    this.getTimezones();
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
        
         if (data !== null) {
           if(data.callsource == 'timeExplorerChart'){
@@ -51,7 +66,9 @@ export class FilterDatetimeComponent implements OnInit{
             this.cdr.detectChanges();
           }
         }})
+        this.subscriptions.push(data_receiver);
   }
+
   ngAfterViewInit(): void {
     this.calculateCurrentDate();
   }

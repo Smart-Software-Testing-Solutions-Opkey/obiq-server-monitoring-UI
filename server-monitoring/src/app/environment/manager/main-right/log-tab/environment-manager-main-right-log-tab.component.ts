@@ -49,6 +49,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     private modalService: NgbModal,
     public service_data: AppDataService,
     public app_service: AppService,
+    public dataService: AppDataService,
     private datePipe: DatePipe
   ) { }
   @Input() analyticsType: any;
@@ -81,8 +82,21 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.getViewLogs()
     this.startDataReceiving();
   }
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       
       if (data !== null) {
       
@@ -109,11 +123,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         }
       }  
     });
+    this.subscriptions1.push(data_receiver);
   }
  
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
   createChart(): void {
       
       const isHourly = this.chartData.groupedBy === 'Hour';

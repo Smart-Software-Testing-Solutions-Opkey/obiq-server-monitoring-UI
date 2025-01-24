@@ -30,6 +30,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   constructor(
     public app_service: AppService,
     public service_data: AppDataService,
+    public dataService: AppDataService
 
   ) {
 
@@ -56,9 +57,21 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     this.startDataReceiving();
   }
 
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
   isRefresh: boolean = false;
   startDataReceiving(){
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data.callsource == 'OVERVIEW_TAB'){
           if( data.action == 'refresh'){
@@ -67,6 +80,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
         }
       } 
     });
+    this.subscriptions1.push(data_receiver);
   }
   // refreshPage(){
   //   if(this.isRefresh == true){
@@ -75,9 +89,6 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   
   // }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
   view: any
 
   getLogsChart(timeFilter?: any) {

@@ -5,6 +5,7 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-environment-manager-main-right',
@@ -24,13 +25,20 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   ) { }
 
   ngOnDestroy(): void {
-
+    this.dataService.isEnablePersister = false;
+    this.disposeAllSubscriptions();
   }
   isDataLoaded = false
   searchText : any;
+  
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
      
       if (data !== null) {
         if(data.callsource == 'timeExplorerChart'){
@@ -86,6 +94,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
       }
       
     });
+    this.subscriptions.push(data_receiver);
   }
   ngAfterViewInit(): void {
     this.calculateCurrentDate();

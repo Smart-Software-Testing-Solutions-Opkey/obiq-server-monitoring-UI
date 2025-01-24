@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, output, ViewChild } from '@angular/core';
 import { WindowState } from '@progress/kendo-angular-dialog';
+import { Subscription } from 'rxjs';
+import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -7,9 +9,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './envrionment-common-filter.component.html',
   styleUrl: './envrionment-common-filter.component.scss'
 })
-export class EnvrionmentCommonFilterComponent implements OnInit {
+export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   constructor(
     public app_service: AppService,
+    public dataService: AppDataService,
     private cdr: ChangeDetectorRef
   ) {
 
@@ -44,10 +47,22 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
   }
   filterCount = 0
   // receivedTimeRange : any ;
+
+  ngOnDestroy(): void {
+    this.dataService.isEnablePersister = false;
+    this.disposeAllSubscriptions();
+  }
+  
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   ngOnInit(): void {
     // this.sendFilterData()
 
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
 
       if (data !== null) {
         if (data.callsource == 'timeExplorerChart') {
@@ -63,6 +78,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit {
         }
       }
     })
+    this.subscriptions.push(data_receiver);
   }
   ngAfterViewInit(): void {
     this.calculateCurrentDate();

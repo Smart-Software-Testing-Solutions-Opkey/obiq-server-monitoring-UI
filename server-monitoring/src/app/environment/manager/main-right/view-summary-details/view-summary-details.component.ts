@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './view-summary-details.component.html',
   styleUrl: './view-summary-details.component.scss'
 })
-export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
+export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public app_service: AppService,
     public dataService: AppDataService,
@@ -18,8 +19,21 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
 
   
   Settings_View_Selection: any
+
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+  
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
      
       if (data !== null) {
         if(data.callsource == 'navigatorops'){
@@ -37,6 +51,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit {
       }
       
     });
+    this.subscriptions.push(data_receiver);
   }
 
   get_All_Summary_of_Selected_View(view) {

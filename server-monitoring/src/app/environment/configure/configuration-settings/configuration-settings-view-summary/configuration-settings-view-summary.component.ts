@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -10,7 +10,7 @@ import { ConfigureRightPanelComponent } from '../../configure-right-panel/config
   templateUrl: './configuration-settings-view-summary.component.html',
   styleUrl: './configuration-settings-view-summary.component.scss'
 })
-export class ConfigurationSettingsViewSummaryComponent implements OnInit {
+export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     public app_service: AppService,
@@ -34,8 +34,15 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
     this.obj_configuration_setting = obj_configuration_setting;
     console.log("obj_configuration_setting===++++++++++++++++++++++++++++++++++++++++++++", obj_configuration_setting);
   }
+
+  subscriptions: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+  
   ngOnInit() {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
        
         this.receivedAccessType = data;
@@ -77,10 +84,12 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit {
       }
     });
     this.get_all_summary(this.obj_configuration_setting)
+    this.subscriptions.push(data_receiver);
   }
 
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
   }
   clearSearch(){
     this.searchText = ''
