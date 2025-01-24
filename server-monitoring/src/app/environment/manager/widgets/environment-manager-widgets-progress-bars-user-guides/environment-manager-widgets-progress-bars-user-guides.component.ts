@@ -127,6 +127,8 @@ ngOnDestroy() {
             console.log("result -------------",result);
             if( typeof result == 'object'){
               this.maxCount = Math.max(...Object.values(result).map((item: any) => item.count));
+
+              result = Object.fromEntries(Object.entries(result).slice(0, 5))
               this.datasourceProgressBar = Object.keys(result).map(item => {
                 const count = result[item].count;
                 const passPercent = (count / this.maxCount) * 100;

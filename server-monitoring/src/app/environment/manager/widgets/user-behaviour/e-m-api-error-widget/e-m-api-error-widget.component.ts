@@ -140,8 +140,8 @@ ngOnDestroy() {
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-
           if (result) {
+            result = Object.fromEntries(Object.entries(result).slice(0, 10))
 
             this.datasourceProgressBar = Object.keys(result).map(item => {
               const count = result[item].count;
