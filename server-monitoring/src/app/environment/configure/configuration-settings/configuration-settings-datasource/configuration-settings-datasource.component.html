@@ -46,10 +46,10 @@
                         </div>
                         <div class="card-footer py-3">
                             @if(item.type === 'ERP_ANALYTICS_DATASOURCE') {
-                                <span class="sp-sub-heading pt-2 pb-1 text-center d-block" style="height: 2rem; overflow: hidden;"><i class="oci oci-lightbulb pe-2"></i>{{item.shortDescription}}<a href="https://www.example.com">Two Words</a></span>
+                                <span class="sp-sub-heading pt-2 pb-1 text-center d-block" style="height: 2rem; overflow: hidden;"><i class="oci oci-lightbulb pe-2"></i>{{item.shortDescription}}<a style="display: none;" href="https://www.example.com">Two Words</a></span>
                             }
                             @else {
-                                <span class="d-block text-red text-center" style="height: 2rem; overflow: hidden;">{{item.shortDescription}}<a href="https://www.example.com">Two Words</a></span>
+                                <span class="d-block text-red text-center" style="height: 2rem; overflow: hidden;">{{item.shortDescription}}<a style="display: none;" href="https://www.example.com">Two Words</a></span>
                             }
                         </div>
                         <span class="checked-data-source">
