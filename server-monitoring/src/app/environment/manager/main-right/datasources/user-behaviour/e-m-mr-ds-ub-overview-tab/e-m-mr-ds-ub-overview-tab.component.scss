@@ -81,3 +81,20 @@
     height: auto !important;
     min-height: 10rem;
 }
+
+::ng-deep .custom-journey-widget-height {
+    height: calc(100% - 6rem) !important;
+}
+
+::ng-deep .custom-error-widget-height {
+    height: calc(100% - 4rem) !important;
+}
+
+::ng-deep .custom-process-widget-height{
+    height: 14.2rem !important;
+    height: calc(100% - 6rem) !important;
+}
+
+::ng-deep .k-grid-table .k-master-row .k-table-td{
+    height: 2rem !important;
+}
