@@ -31,7 +31,7 @@ export class EMMrDsErpOverviewTabComponent {
     this.options = {
       gridType: GridType.ScrollVertical,
       compactType: CompactType.None,
-      margins:  [20, 20],
+      margins:  [15, 15],
       outerMargin: true,
       outerMarginTop: null,
       outerMarginRight: null,

@@ -131,14 +131,14 @@
     }
 }
 
-::ng-deep .custom-journey-widget-height {
-    height: 14.2rem !important;
-}
+// ::ng-deep .custom-journey-widget-height {
+//     height: calc(100% - 4rem) !important;
+// }
 
-::ng-deep .custom-error-widget-height {
-    height: 18rem !important;
-}
+// ::ng-deep .custom-error-widget-height {
+//     height: calc(100% - 3rem) !important;
+// }
 
-::ng-deep .custom-process-widget-height{
-    height: 14.2rem !important;
-}
+// ::ng-deep .custom-process-widget-height{
+//     height: calc(100% - 4rem) !important;
+// }
