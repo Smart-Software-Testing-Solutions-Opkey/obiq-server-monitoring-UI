@@ -17,6 +17,7 @@ import {
 import { AppDataService } from "src/app/services/app-data.service";
 import { AppService } from "src/app/services/app.service";
 import { Subscription } from "rxjs";
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -48,7 +49,8 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   constructor(
     public service_data: AppDataService,
     public app_service: AppService,
-    public dataService: AppDataService
+    public dataService: AppDataService,
+    private msgbox: MsgboxService 
     
   ) {
     
@@ -359,7 +361,7 @@ dataDir = ''
         form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
       }
       window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType, "Please wait");
-      this.app_service.make_post_server_call(ajax_url, form_data)
+      this.app_service.make_post_server_call(ajax_url,form_data)
         .subscribe({
           next: (result: any) => {
             
@@ -426,6 +428,7 @@ dataDir = ''
           },
           error: (error: any) => {
             window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
+            this.msgbox.display_error_message(error);
             console.warn(error);
           },
           complete: () => {

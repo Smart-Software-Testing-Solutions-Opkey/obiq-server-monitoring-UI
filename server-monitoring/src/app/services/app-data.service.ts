@@ -14,6 +14,7 @@ export class AppDataService {
   viewsData = []
   modalSubInstance:any
   persistermsg = ''
+  errorObj : any 
   isEnablePersister = false
   selectedArtifactData:any = {}
   isUserAllJourneyOpen = false;
