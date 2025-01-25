@@ -517,7 +517,22 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.selected_erp_analytics.forEach(selectedRow => {
           linkedDataObject.linkedData.push({
             name: selectedRow.SystemIdentifier,
-            value: selectedRow.SettingsID
+            value: selectedRow.SettingsID,
+            createdBy: selectedRow.createdBy,
+            createdByName: selectedRow.CreatedByName,
+            createdOn: selectedRow.CreatedOn,
+            mofifiedBy: selectedRow.modifiedBy,
+            modifiedByName: selectedRow.ModifiedByName,
+            modifiedOn: selectedRow.ModifiedOn
+          });
+        });
+      }
+      else if( widget.name == "User Behaviour Analytics"){
+        this.obj_configuration_setting.selected_user_behaviour_component.forEach( selectedRow =>{
+          linkedDataObject.linkedData.push({
+            name: selectedRow.Name,
+            email: selectedRow.email_ID,
+            value : selectedRow.U_ID,
           });
         });
       }
