@@ -39,7 +39,11 @@
 
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
 
-                    <span class="layout-status-logs layout-status-color success">
+                    <span class="layout-status-logs layout-status-color" 
+                            [ngClass]="{'error': dataItem?.logType == 'Error',
+                                        'success': dataItem?.logType == 'Success',
+                                        'warning': dataItem?.logType == 'Warning',
+                                        'blocked': dataItem?.logType == 'Blocked'}">
 
                     </span>
 
