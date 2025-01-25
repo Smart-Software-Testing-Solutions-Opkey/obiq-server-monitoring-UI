@@ -23,6 +23,7 @@
           </div>
     }
    
+   
 
     <div id="logs-grid"  class="logs-grid-layout">
         <kendo-grid 
@@ -31,7 +32,7 @@
             (cellClick)="onSelectionChange($event)"
             class="scrollable custom-grid-height"
             (scrollBottom)="onScroll()"
-            [style.height]="'calc(100vh - 8rem)'"
+            [style.height]="logHeight"
             >
 
             <kendo-grid-column title="" [width]="10">
