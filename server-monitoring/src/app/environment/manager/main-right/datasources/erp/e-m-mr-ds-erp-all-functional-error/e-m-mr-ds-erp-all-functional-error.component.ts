@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -19,7 +20,8 @@ export class EMMrDsErpAllFunctionalErrorComponent {
     public app_service: AppService,
     public dataService: AppDataService,
     private modalService: NgbModal,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private msgbox: MsgboxService 
 
 ){
 
@@ -70,7 +72,7 @@ onSelectionChange(e) {
         keyboard: false,
         size: 'full',
         centered: true,
-        windowClass: 'layout-modal-right panel-end w-75'
+        windowClass: 'layout-modal-right panel-end'
       });
       modalRef.result.then((result) => {
       }, (response) => {
@@ -174,7 +176,9 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
     },
     error: (error: any) => {
       console.warn(error);
+
       window.loadingStop("#erp-err-logs-grid", "Please wait");
+      this.msgbox.display_error_message(error);
 
     },
     complete: () => {

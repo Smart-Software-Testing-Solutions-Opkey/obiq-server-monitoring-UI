@@ -17,6 +17,7 @@ import {
 } from 'ng-apexcharts';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -50,7 +51,8 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     public service_data: AppDataService,
     public app_service: AppService,
     public dataService: AppDataService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private msgbox: MsgboxService 
   ) { }
   @Input() analyticsType: any;
   @Input() view: any;
@@ -343,6 +345,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");
@@ -389,6 +392,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");
@@ -411,7 +415,7 @@ get isSelectedAnalyticsTypeEmpty(): boolean {
       keyboard: false,
       size: 'full',
       centered: true,
-      windowClass: 'layout-modal-right panel-end w-75'
+      windowClass: 'layout-modal-right panel-end w-50'
     });
     modalRef.result.then((result) => {
     }, (response) => {
@@ -428,7 +432,7 @@ get isSelectedAnalyticsTypeEmpty(): boolean {
       keyboard: false,
       size: 'full',
       centered: true,
-      windowClass: 'layout-modal-right panel-end w-75'
+      windowClass: 'layout-modal-right panel-end'
     });
     modalRef.result.then((result) => {
     }, (response) => {

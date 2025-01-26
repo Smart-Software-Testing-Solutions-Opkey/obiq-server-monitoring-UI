@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,6 +18,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
       public app_service: AppService,
       public dataService: AppDataService,
       private modalService: NgbModal,
+      private msgbox: MsgboxService      
   ){
 
   }
@@ -51,7 +53,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
         keyboard: false,
         size: 'full',
         centered: true,
-        windowClass: 'layout-modal-right panel-end w-75'
+        windowClass: 'layout-modal-right panel-end'
       });
       modalRef.result.then((result) => {
       }, (response) => {
@@ -164,6 +166,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
       error: (error: any) => {
         console.warn(error);
         window.loadingStop("#erp-err-logs-grid");
+        this.msgbox.display_error_message(error);
 
       },
       complete: () => {
