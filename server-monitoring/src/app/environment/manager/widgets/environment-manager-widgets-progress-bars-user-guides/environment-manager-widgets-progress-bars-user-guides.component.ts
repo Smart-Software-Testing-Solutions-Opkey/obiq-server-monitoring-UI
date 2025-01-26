@@ -230,8 +230,9 @@ renaming(){
 }
   
 onViewAllProcess(event: Event): void {
+  let dataItem = { view : this.view , widgetType : this.widgetType }
+
   event.preventDefault();
-  console.log('View All Process clicked');
    const modalRef = this.modalService.open(ManagerRightPanelComponent, {
      backdrop: 'static',
      keyboard: false,
@@ -245,7 +246,7 @@ onViewAllProcess(event: Event): void {
        return;
      }
    });
-   modalRef.componentInstance.selectedItem = { callsource: 'Erp_View_All_process_', data: "ErpViewAllProcess" };
+   modalRef.componentInstance.selectedItem = { callsource: 'Erp_View_All_process', data: dataItem };
  
 }
 }

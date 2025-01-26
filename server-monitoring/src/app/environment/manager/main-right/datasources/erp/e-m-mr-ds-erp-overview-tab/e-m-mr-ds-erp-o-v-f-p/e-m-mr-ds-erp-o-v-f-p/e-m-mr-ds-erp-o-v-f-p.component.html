@@ -1,1 +1,75 @@
-<p>e-m-mr-ds-erp-o-v-f-p works!</p>
+<div [id]="'user-guides-'+widgetType" style="position:relative;height: 100%;">
+    <!-- <div class="panel-header d-flex-between py-2 mb-3">
+          <div style="display:flex;justify-content: space-between;align-items: center;">
+            <a
+            href="#"
+            class="view-full-journey"
+            style="text-decoration: none; color: #1C7C92;"
+            (click)="onViewAllProcess($event)">
+            {{ 'View All Process' }}
+          </a>
+              
+                   <div class="dropdown">
+                          <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                              <i class="oci oci-more-vertical font-14px"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                              <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
+                              <li><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-delete text-red pr-2"></i> Delete </a></li>
+                          </ul>
+                  </div>
+              </div>
+          </div>
+    </div> -->
+    <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
+            [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid"
+            [style.height]="'calc(100vh -8rem)'">
+    
+    
+    
+            <kendo-grid-column title="Build Name" field="subActivityName" [width]="200">
+    
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
+                        {{dataItem?.subActivityName}}
+                    </span>
+                </ng-template>
+    
+    
+            </kendo-grid-column>
+    
+          
+            <kendo-grid-column  title="" [width]="220">
+    
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <div class="flex-center">
+                        <div class="progress w-100" style="border-radius: 25px; height: 0.5rem;">
+                            <div class="progress-bar bg-info" role="progressbar"
+                                [style.width]="dataItem?.passPercent  + '%'"
+                                style="background-color: #1C7C92 !important;" container="body"></div>
+                                <div class="progress-bar" role="progressbar" [style.width]="dataItem?.failPercent + '% '" style="background-color: #E6FBFE !important;" 
+                                container="body"></div>
+                        </div>
+                        <span class="ps-3 pe-2 text-end">
+                            <span>
+                                {{dataItem.count}}
+                            </span>
+                        </span>
+                    </div>
+                </ng-template> 
+    
+            </kendo-grid-column>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div class="no-data-found" style="height: 11rem !important;">
+                    <div class="no-data-found-content">
+                        <img class="no-data-found-content-img"
+                            src="/assets/icon-image/nodata-img.png" alt="No data">
+                        <p class="no-data-found-content-text">No data available</p>
+                    </div>
+                </div>
+            </ng-template>
+    
+    
+            
+        </kendo-grid>
+</div>
