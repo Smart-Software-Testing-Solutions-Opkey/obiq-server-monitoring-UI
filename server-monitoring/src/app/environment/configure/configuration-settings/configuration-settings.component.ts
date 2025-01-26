@@ -7,6 +7,7 @@ import { NotificationsService } from 'src/app/services/notification-service/noti
 import { environment } from 'src/environments/environment';
 import { MsgBoxType, NotificationType } from 'src/app/global/enums';
 import { PersisterModalComponent } from '../../environment-common/persister-modal/persister-modal.component';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-configuration-settings',
@@ -22,6 +23,7 @@ export class ConfigurationSettingsComponent {
     public service_data: AppDataService,
     public app_service: AppService,
     public service_notification : NotificationsService,
+    private msgbox: MsgboxService 
     
 
     
@@ -477,6 +479,7 @@ export class ConfigurationSettingsComponent {
         },
         error: (error: any) => {
           window.loadingStop("#div-datasource-slection");
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

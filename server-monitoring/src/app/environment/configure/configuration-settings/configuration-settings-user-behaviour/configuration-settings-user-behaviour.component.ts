@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +17,8 @@ export class ConfigurationSettingsUserBehaviourComponent {
    private router: Router,
    private route: ActivatedRoute,
    public service_data: AppDataService,
-   public app_service: AppService,){
+   public app_service: AppService,
+   private msgbox: MsgboxService ){
 
  }
  obj_configuration_setting:any;
@@ -77,6 +79,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
          }
         },
         error: (error: any) => {
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

@@ -5,6 +5,7 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 @Component({
   selector: 'app-configuration-settings-view-summary',
   templateUrl: './configuration-settings-view-summary.component.html',
@@ -16,7 +17,8 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
     public app_service: AppService,
     public dataService: AppDataService,
     private modalService: NgbModal,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private msgbox: MsgboxService 
   ) {
   }
 
@@ -208,7 +210,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
           this.users = result;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

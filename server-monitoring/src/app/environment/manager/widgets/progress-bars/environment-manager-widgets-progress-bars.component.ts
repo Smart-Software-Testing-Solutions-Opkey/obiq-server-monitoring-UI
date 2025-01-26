@@ -13,6 +13,7 @@ import {
   ApexGrid,
   ApexYAxis
 } from "ng-apexcharts";
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -36,7 +37,8 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
   constructor(
     private app_service: AppService,
     private service_data: AppDataService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private msgbox: MsgboxService 
   ){
 
   }
@@ -121,6 +123,7 @@ export class EnvironmentManagerWidgetsProgressBarsComponent implements OnInit {
         error: (error: any) => {
           // window.loadingStop("#Env_manager_main_right");
           console.error(error);
+          this.msgbox.display_error_message(error);
         }
       });
   }

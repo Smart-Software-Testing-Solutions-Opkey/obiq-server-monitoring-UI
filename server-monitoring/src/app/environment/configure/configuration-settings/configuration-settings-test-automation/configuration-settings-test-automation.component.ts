@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,7 +19,8 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
    private route: ActivatedRoute,
    public service_data: AppDataService,
    public app_service: AppService,
-   private cdRef: ChangeDetectorRef
+   private cdRef: ChangeDetectorRef,
+   private msgbox: MsgboxService 
   ){
 
  }
@@ -68,6 +70,7 @@ export class ConfigurationSettingsTestAutomationComponent implements OnInit {
         }
       },
       error: (error: any) => {
+        this.msgbox.display_error_message(error);
         console.warn(error);
       }
     });

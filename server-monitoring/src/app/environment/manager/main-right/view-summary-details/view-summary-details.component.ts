@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit, SimpleChanges } fro
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,7 +14,8 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
   constructor(
     public app_service: AppService,
     public dataService: AppDataService,
-    private service_data: AppDataService) {
+    private service_data: AppDataService,
+    private msgbox: MsgboxService ) {
   }
   obj_configuration_setting: any;
 
@@ -71,6 +73,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
         error: (error: any) => {
           window.loadingStop("#totalSection");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         }
       });
   }

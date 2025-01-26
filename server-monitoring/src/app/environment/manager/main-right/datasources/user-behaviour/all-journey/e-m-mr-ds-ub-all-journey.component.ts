@@ -4,6 +4,7 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +17,8 @@ export class EMMrDsUbAllJourneyComponent implements OnInit, OnDestroy{
 constructor(  
     public app_service: AppService,
     private dataService:AppDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private msgbox: MsgboxService 
   ){}
 
   viewId: any ;
@@ -173,6 +175,7 @@ constructor(
           error: (error: any) => {
             console.warn(error);
              window.loadingStop("#ub-user-Journey-logs-grid");
+             this.msgbox.display_error_message(error);
     
           },
           complete: () => {

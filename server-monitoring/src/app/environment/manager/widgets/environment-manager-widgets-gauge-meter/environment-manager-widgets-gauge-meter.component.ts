@@ -12,6 +12,7 @@ import {
 } from "ng-apexcharts";
 import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
+import { MsgboxService } from "src/app/services/msgbox.service";
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -30,6 +31,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   constructor(    
     public dataService: AppDataService,
      public app_service: AppService,
+     private msgbox: MsgboxService 
   ) { }
   title:string = ''
   public data: number = 0;
@@ -112,6 +114,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
       error: (error: any) => {
        window.loadingStop("#gauge-div-"+widgetType);
         console.warn(error);
+        this.msgbox.display_error_message(error);
       },
       complete: () => {
         console.log("Completed");

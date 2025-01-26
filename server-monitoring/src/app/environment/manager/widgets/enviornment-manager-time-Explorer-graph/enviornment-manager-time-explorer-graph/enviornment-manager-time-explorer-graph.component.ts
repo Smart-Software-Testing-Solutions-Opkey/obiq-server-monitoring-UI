@@ -7,6 +7,7 @@ import {
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -30,7 +31,8 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   constructor(
     public app_service: AppService,
     public service_data: AppDataService,
-    public dataService: AppDataService
+    public dataService: AppDataService,
+    private msgbox: MsgboxService 
 
   ) {
 
@@ -119,6 +121,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
         error: (error: any) => {
           window.loadingStop("#maintimeexplorer"+this.widgetType);
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");

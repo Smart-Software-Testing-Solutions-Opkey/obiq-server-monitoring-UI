@@ -6,6 +6,7 @@ import { ConfigurationSettingsComponent } from 'src/app/environment/configure/co
 import { NotificationType } from 'src/app/global/enums';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +26,8 @@ export class NavigatorLeftComponent implements OnInit,AfterViewInit, OnDestroy{
     public app_service: AppService,
     public dataService: AppDataService,
     private cdr: ChangeDetectorRef,
-    public service_notification : NotificationsService
+    public service_notification : NotificationsService,
+    private msgbox: MsgboxService 
 
 
   ) { }
@@ -142,7 +144,9 @@ ngAfterViewInit(): void {
         },
         error: (error: any) => {
           window.loadingStop("#navigator-left");
-          console.warn(error);
+          console.warn(error);  
+          this.msgbox.display_error_message(error);
+
         },
         complete: () => {
           console.log("Completed");
@@ -172,6 +176,7 @@ ngAfterViewInit(): void {
       error: (error: any) => {
         window.loadingStop("#navigator-left");
         console.warn(error);
+        this.msgbox.display_error_message(error);
       },
       complete: () => {
         console.log("Completed");
@@ -211,6 +216,7 @@ ngAfterViewInit(): void {
       error: (error: any) => {
         window.loadingStop("#navigator-left");
         console.warn(error);
+        this.msgbox.display_error_message(error);
       },
       complete: () => {
         console.log("Completed");
@@ -326,6 +332,7 @@ ngAfterViewInit(): void {
         error: (error: any) => {
           window.loadingStop("#navigator-left");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");

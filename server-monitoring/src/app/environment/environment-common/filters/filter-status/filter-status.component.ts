@@ -1,5 +1,6 @@
 import { Component, Input, output } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment'; 
 
 @Component({
@@ -11,6 +12,7 @@ export class FilterStatusComponent {
 
  constructor(
     public app_service: AppService,
+    private msgbox: MsgboxService 
   ) {
   }
 
@@ -60,6 +62,7 @@ export class FilterStatusComponent {
           }
         },
         error: (error: any) => {
+          this.msgbox.display_error_message(error);
           console.warn(error);
         }
       });

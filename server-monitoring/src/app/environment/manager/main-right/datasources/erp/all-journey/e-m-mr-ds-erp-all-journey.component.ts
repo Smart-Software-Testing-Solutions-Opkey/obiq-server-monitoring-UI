@@ -5,6 +5,7 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 
 
@@ -16,7 +17,8 @@ import { ActivatedRoute } from '@angular/router';
 export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
   constructor(public app_service: AppService,
     private dataService: AppDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private msgbox: MsgboxService 
   ) { }
 
   viewId: any ;
@@ -173,6 +175,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
       },
       error: (error: any) => {
         console.warn(error);
+        this.msgbox.display_error_message(error);
         window.loadingStop("#erp-user-Journey-logs-grid");
 
       },

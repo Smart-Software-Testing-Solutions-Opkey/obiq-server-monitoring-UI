@@ -6,6 +6,7 @@ import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
 import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-environment-manager-main-right',
@@ -21,7 +22,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     public service_data: AppDataService,
     public app_service: AppService,
     public dataService: AppDataService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private msgbox: MsgboxService 
   ) { }
 
   ngOnDestroy(): void {
@@ -241,6 +243,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
       },
       error: (error: any) => {
         // window.loadingStop("#Env_manager_main_right");
+        this.msgbox.display_error_message(error);
         console.warn(error);
       },
       complete: () => {

@@ -15,6 +15,7 @@ import {
   ApexYAxis
 } from "ng-apexcharts";
 import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -36,7 +37,8 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
     private app_service: AppService,
     private service_data: AppDataService,
     public dataService: AppDataService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private msgbox: MsgboxService 
   ){
 
   }
@@ -177,6 +179,7 @@ ngOnDestroy() {
         error: (error: any) => {
           window.loadingStop("#fastest-journey-"+this.widgetType);
           console.error(error);
+          this.msgbox.display_error_message(error);
         }
       });
   }

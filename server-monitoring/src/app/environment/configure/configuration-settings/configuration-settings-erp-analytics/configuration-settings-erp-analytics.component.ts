@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,7 +26,8 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public app_service: AppService) {
+    public app_service: AppService,
+    private msgbox: MsgboxService ) {
 
   }
 
@@ -211,6 +213,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
           this.temp_Instance_list = this.Instance_list
         },
         error: (error: any) => {
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

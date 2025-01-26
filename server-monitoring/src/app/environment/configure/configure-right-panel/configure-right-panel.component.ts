@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
  
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { NotificationType } from 'src/app/global/enums';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-configure-right-panel',
@@ -18,7 +19,7 @@ export class ConfigureRightPanelComponent {
     public dataService: AppDataService,
     public app_service: AppService,
     private activeModal: NgbActiveModal,
-     
+    private msgbox: MsgboxService, 
     public service_notification : NotificationsService
   ) { }
   @Input() selectedItem: any;
@@ -139,7 +140,7 @@ selectViewOrEdit(option: string): void {
          
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

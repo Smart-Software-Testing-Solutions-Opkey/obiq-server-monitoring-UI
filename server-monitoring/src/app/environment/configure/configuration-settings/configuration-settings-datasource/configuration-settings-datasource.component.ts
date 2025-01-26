@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-configuration-settings-datasource',
@@ -16,7 +17,9 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     public app_service: AppService,
-    public data_service:AppDataService
+    public data_service:AppDataService,
+    private msgbox: MsgboxService 
+
   ) { }
 
 
@@ -118,6 +121,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
         },
         error: (error: any) => {
           window.loadingStop("#div-datasource-slection");
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -161,7 +165,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           console.log(this.Available_Application_Instances,"A---------------------");
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -189,6 +193,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
            
           },
           error: (error: any) => {
+            this.msgbox.display_error_message(error);
             console.warn(error);
           },
           complete: () => {
@@ -211,7 +216,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           this.datasource_system_diagnostics = result;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -246,6 +251,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
         },
         error: (error: any) => {
           window.loadingStop("#navigator-left");
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -285,6 +291,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
         },
         error: (error: any) => {
           window.loadingStop("#navigator-left");
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {

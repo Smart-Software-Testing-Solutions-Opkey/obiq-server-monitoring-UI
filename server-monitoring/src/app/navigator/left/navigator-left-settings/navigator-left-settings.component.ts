@@ -7,6 +7,7 @@ import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { NotificationType } from 'src/app/global/enums';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-navigator-left-settings',
@@ -22,7 +23,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     public app_service:AppService,
     public dataService:AppDataService,
     public service_notification : NotificationsService,
-
+    private msgbox: MsgboxService 
 
   ) { }
   ngOnInit(): void {
@@ -96,6 +97,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
         },
         error: (error: any) => {
           delete view['isRenamed']
+          this.msgbox.display_error_message(error);
         }
       });
   }

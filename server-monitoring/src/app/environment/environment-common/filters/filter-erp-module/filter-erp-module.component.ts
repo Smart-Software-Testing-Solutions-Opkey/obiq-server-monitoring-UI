@@ -1,6 +1,7 @@
 import { Component ,OnInit,output,Input} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-filter-erp-module',
@@ -10,7 +11,8 @@ import { AppService } from 'src/app/services/app.service';
 export class FilterErpModuleComponent implements OnInit{
 
    constructor(
-      public app_service : AppService
+      public app_service : AppService,
+      private msgbox: MsgboxService 
     ){
     }
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class FilterErpModuleComponent implements OnInit{
              
          }},
          error: (error: any) => {
+          this.msgbox.display_error_message(error);
            console.warn(error);
          }
       });

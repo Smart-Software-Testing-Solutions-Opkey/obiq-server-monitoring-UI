@@ -16,6 +16,7 @@ import {
   ApexGrid,
   ApexYAxis
 } from "ng-apexcharts";
+import { MsgboxService } from 'src/app/services/msgbox.service';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -39,7 +40,8 @@ constructor(
       private route: ActivatedRoute,
       public service_data: AppDataService,
       public app_service: AppService,
-      private cdr: ChangeDetectorRef
+      private cdr: ChangeDetectorRef,
+      private msgbox: MsgboxService 
 ){
 
 }
@@ -123,6 +125,7 @@ constructor(
             error: (error: any) => {
               window.loadingStop("#user-guides-"+this.widgetType);
               console.error(error);
+              this.msgbox.display_error_message(error);
             }
           });
       }

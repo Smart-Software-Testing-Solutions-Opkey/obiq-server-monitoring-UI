@@ -16,6 +16,7 @@ import {
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -40,6 +41,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
       public dataService: AppDataService,
       private cdRef: ChangeDetectorRef,
       private modalService: NgbModal,
+      private msgbox: MsgboxService 
     ){
   
     }
@@ -150,6 +152,7 @@ ngOnDestroy() {
           error: (error: any) => {
             window.loadingStop("#user-guides-"+this.widgetType);
             console.error(error);
+            this.msgbox.display_error_message(error);
           }
         });
     }

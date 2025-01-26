@@ -7,6 +7,7 @@ import { ConfigureRightPanelComponent } from '../../configure-right-panel/config
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { NotificationType } from 'src/app/global/enums';
 import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
   templateUrl: './configuration-settings-summary-after-view-creation.component.html',
@@ -20,6 +21,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     public modalService: NgbModal,
     private cdr: ChangeDetectorRef,
     public service_notification : NotificationsService, 
+    private msgbox: MsgboxService 
   ) {
   }
   obj_configuration_setting: any;
@@ -200,7 +202,7 @@ disposeAllSubscriptions() {
           this.selectedAccessType = form_data?.accessType;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -226,7 +228,7 @@ disposeAllSubscriptions() {
           this.users = result;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
