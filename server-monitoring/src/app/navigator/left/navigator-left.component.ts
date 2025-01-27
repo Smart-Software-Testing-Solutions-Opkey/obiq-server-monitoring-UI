@@ -344,9 +344,10 @@ ngAfterViewInit(): void {
     this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     this.dataChanged.analyticsTypes = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
-   
- 
-  
+  }
+
+  Favorite_View(views){
+    this.totalViews = views
   }
 
 }

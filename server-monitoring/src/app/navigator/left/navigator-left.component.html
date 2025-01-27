@@ -16,7 +16,7 @@
                 
             </div>
         </div> -->
-        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)">
+        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)" (onTotalViewsChange)="Favorite_View($event)">
         </app-navigator-left-settings>
     }
     @else {
@@ -27,17 +27,24 @@
             <div class="row mx-0 align-items-center">
 
                 <div class="col-9 ps-0 pe-1">
+
+                   
                     <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
                         (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId" class="k-dropdown-height"
                         [popupSettings]="{ popupClass:'dropdown-view-anaytics'}">
                         <ng-template kendoDropDownListItemTemplate let-dataItem>
 
                             <span class="item-template-text text-ellipsis font-14px">
-                                <i class="oci oci-star pe-2"></i>
+                                @if(dataItem.favourite){
+                                    <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
+                                }
+                                @else{
+                                    <i class="oci oci-star pe-1"></i>
+                                }
                                 {{dataItem.viewName}}
                             </span>
                         </ng-template>
-
+                            
                         <ng-template kendoDropDownListValueTemplate let-dataItem>
                             <span class="value-template">
                                 <span class="value-template-text text-ellipsis font-14px">

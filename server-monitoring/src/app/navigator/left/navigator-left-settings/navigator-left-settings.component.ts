@@ -1,4 +1,4 @@
-import { Component, Input, OnInit ,output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit ,Output,output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationSettingsComponent } from 'src/app/environment/configure/configuration-settings/configuration-settings.component';
@@ -60,6 +60,8 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.selectedViewSettings = selectedViewSettings
     
   }
+
+  @Output() onTotalViewsChange  = new EventEmitter<any>();
   selectedViewSettings:any = {}
   onSettingsSelected = output<any>()
   onViewDelete = output<any>()
@@ -104,19 +106,57 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
 
   starView(view){
     view['isStarred'] = true
+    view['favourite'] = true
     this.totalViews.forEach((item,index)=>{
       if(view.viewId == item.viewId){
         this.totalViews.splice(0,0,this.totalViews.splice(index, 1)[0])
       }
-  })
+    })
+
+    
+    this.onTotalViewsChange.emit(this.totalViews)
+     
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/markViewAsFavourite";
+    let form_data = { viewId: view.viewId,projectId:this.service_data.UserDto.ProjectDTO.P_ID,userId:this.service_data.UserDto.UserDTO.U_ID, userName :this.service_data.UserDto.UserDTO.UserName};
+    this.app_service.make_post_server_call(form_url, form_data)
+    .subscribe({
+      next: (result: any) => {
+        this.service_notification.notifier(NotificationType.success, 'View starred');
+
+      },
+      error: (error: any) => {
+        this.msgbox.display_error_message(error);
+      }
+    });
+
+
   }
   unStarView(view){
    delete view['isStarred']
+   view['favourite'] = false
    this.totalViews.forEach((item,index)=>{
      if(view.viewId == item.viewId){
       let newInd = this.tempTotalViews.findIndex(ele=> ele.viewId == view.viewId) 
       this.totalViews.splice(newInd,0,this.totalViews.splice(index, 1)[0])
     }
-})
+    })
+
+    this.onTotalViewsChange.emit(this.totalViews)
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/removeViewFromFavourite";
+    let form_data = { viewId: view.viewId,projectId:this.service_data.UserDto.ProjectDTO.P_ID};
+    this.app_service.make_post_server_call(form_url, form_data)
+    .subscribe({
+      next: (result: any) => {
+        this.service_notification.notifier(NotificationType.success, 'View unstarred');
+
+      },
+      error: (error: any) => {
+        this.msgbox.display_error_message(error);
+      }
+    });
   }
+  
+
+  
 }
