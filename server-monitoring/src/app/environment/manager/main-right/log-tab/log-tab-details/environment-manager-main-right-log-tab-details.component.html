@@ -60,31 +60,35 @@
         </div>
         <div class="col-sm-3">
             <div class="datakeys-box">
-                <span class="font-bold">Host</span>
+                <span class="font-bold">Log Name</span>
                 <span class="d-block text-ellipsis font-14px">
                     <i class="oci oci-host ps-1 pe-2"></i>
-                    <span ngbTooltip="{{selectedData?.dataId}}" container="body">{{selectedData?.dataId}}</span>
+                    <span ngbTooltip="{{selectedData?.logName}}" container="body">{{selectedData?.logName}}</span>
                 </span>
             </div> 
         </div>
         <div class="col-sm-3">
             <div class="datakeys-box">
-                <span class="font-bold">Service</span>
+                <span class="font-bold">Time</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <span ngbTooltip="{{selectedData?.appName}}" container="body">{{selectedData?.appName}}</span>
+                    <span ngbTooltip="{{selectedData?.timeStampString}}" container="body">{{selectedData?.timeStampString}}</span>
                 </span>
             </div>
         </div>
-        <div class="col-sm-3 pe-0">
-            <div class="datakeys-box">
-                <span class="font-bold">Name</span>
-                <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-shelf-position ps-1 pe-2"></i>
-                    <span ngbTooltip="{{selectedData?.logName}}" container="body">{{selectedData?.logName}}</span>
-                </span>
-            </div> 
-        </div>
     </div>
+
+    
+    <div class="col-sm-3 pe-0">
+        <div class="datakeys-box">
+            <span class="font-bold">User</span>
+            <span class="d-block text-ellipsis font-14px">
+                <i class="oci oci-shelf-position ps-1 pe-2"></i>
+                <span ngbTooltip="{{selectedData?.userId}}" container="body">{{selectedData?.userId}}</span>
+            </span>
+        </div> 
+    </div>
+
+
 
     <!-- <div class="status-message mb-3 error-details d-flex-between">
         <span>
