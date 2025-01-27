@@ -241,7 +241,7 @@ onViewAllProcess(event: Event): void {
      keyboard: false,
      size: 'full',
      centered: true,
-     windowClass: 'layout-modal-right panel-end w-75'
+     windowClass: 'layout-modal-right panel-end'
    });
    modalRef.result.then((result) => {
    }, (response) => {
