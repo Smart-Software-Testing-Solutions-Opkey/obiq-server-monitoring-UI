@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationType } from '../global/enums';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
+import { guid } from '@progress/kendo-angular-dropdowns/common/util';
 
 
 @Injectable({
@@ -26,18 +27,26 @@ export class MsgboxService {
   display_error_message(errorObj) {
 
 
-    let errorId = errorObj.errorId ? errorObj.errorId : '404';
+    let errorId = errorObj.errorId ? errorObj.errorId : this.uuidv4();
     if (errorObj.hasOwnProperty('error')) {
       this.service_data.errorObj = errorObj;
       let errMsg = 'Something went wrong.An unexpected error occured.'
       this.confirm_msg_box('error', `${errMsg} <br> Trace : ${errorId}`, [{ text: "Report Issue", primaryBtn: true, value: "report" }, { text: "Close", primaryBtn: false, value: "close" }]).then((result => {
         if (result == "report") {
-          this.reportErrorViaMail(errorObj.errorId)
+          this.reportErrorViaMail(errorId)
         }
       }));
     }
   }
 
+  uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+    .replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 | 0, 
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 
   confirm_msg_box(type, msg, buttons) {
 
