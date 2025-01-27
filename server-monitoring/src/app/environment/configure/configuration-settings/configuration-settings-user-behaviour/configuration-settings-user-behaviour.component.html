@@ -40,7 +40,7 @@
                 </span>
 
                 <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.Name}}</span>
+                    <span class="layout-text-name" ngbTooltip="{{dataItem?.Name}}">{{dataItem.Name}}</span>
                 </div>
             </div>
         </ng-template>
@@ -50,7 +50,7 @@
             <div class="flex-center">
 
                 <div>
-                    <span class="layout-text-date">{{dataItem.email_ID}}</span>
+                    <span class="layout-text-date" ngbTooltip="{{dataItem?.email_ID}}">{{dataItem.email_ID}}</span>
                 </div>
             </div>
         </ng-template>
