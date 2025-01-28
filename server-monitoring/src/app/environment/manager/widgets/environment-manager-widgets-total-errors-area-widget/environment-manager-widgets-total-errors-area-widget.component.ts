@@ -360,6 +360,11 @@ dataDir = ''
         form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
         form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
       }
+      else{
+        let timeFilter={"type":"setEnum","value":"LAST_24_HOUR"}
+        form_data["timeSpanEnum"] = timeFilter?.value;
+  
+      }
       window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType, "Please wait");
       this.app_service.make_post_server_call(ajax_url,form_data)
         .subscribe({

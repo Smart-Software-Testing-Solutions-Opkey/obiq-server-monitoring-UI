@@ -66,6 +66,12 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){
+
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+        this.getWidgetData( data?.timeFilter)
+      }
+    }))
     if(this?.view?.viewId && this?.widgetType){
       this.datasourceProgressBar = [];
       this.getWidgetData()
@@ -115,7 +121,7 @@ ngOnDestroy() {
   
   // }
 
-  getWidgetData(){
+  getWidgetData(timeFilter?: any){
     window.loadingStart("#common-journey-"+this.widgetType, "Please wait");
    
     let ajax_url : any;
@@ -137,6 +143,18 @@ ngOnDestroy() {
         "widgetType": "USER_JOURNEY_MOST_COMMON_WIDGET",
         "userId": this.service_data.UserDto.UserDTO.U_ID
       };
+
+    }
+    if(timeFilter?.type == 'setEnum'){
+      form_data.timeSpanEnum = timeFilter?.value;
+     } else if(timeFilter?.type == "setCustom"){
+      delete form_data?.timeSpanEnum;
+      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    }
+    else{
+      let timeFilter={"type":"setEnum","value":"LAST_24_HOUR"}
+      form_data["timeSpanEnum"] = timeFilter?.value;
 
     }
     this.app_service.make_post_server_call(ajax_url, form_data)
