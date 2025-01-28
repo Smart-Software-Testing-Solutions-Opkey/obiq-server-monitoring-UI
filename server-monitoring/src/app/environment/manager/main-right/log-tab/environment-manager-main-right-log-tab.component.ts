@@ -84,7 +84,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
         this.selectedTime = data?.timeFilter
-        this.getLogsChart();
+        this.getLogsChart(data?.timeFilter);
         this.getViewLogs(data?.timeFilter);
       }
     }))
@@ -140,7 +140,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       
       const isHourly = this.chartData.groupedBy === 'Hour';
       const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
-  
+
       const timestamps = seriesData.flatMap(series => series.data.map(point => point[0]));
       const minTimestamp = Math.min(...timestamps);
       const maxTimestamp = Math.max(...timestamps);
@@ -275,7 +275,8 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
                 if (isHourly) {
                     const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
                     timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
-                } else {
+                } 
+                else {
                     const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
                     timestamp = Date.UTC(year, month - 1, day);
                 }
@@ -315,7 +316,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
 
 
 
-  getLogsChart() {
+  getLogsChart(timeFilter?: any) {
     this.allDataLoaded = false;
     window.loadingStart("#Env_manager_main_right", "Please wait");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
@@ -328,12 +329,16 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
     };
     if(this.selectedTime?.type == 'setEnum'){
-      form_data.timeSpanEnum = this.selectedTime?.value;
-    } else if(this.selectedTime?.type == "setCustom"){
-      delete form_data?.timeSpanEnum;
-      form_data["fromTimeInMillis"] = this.selectedTime?.fromTimeInMillis;
-      form_data["toTimeInMillis"] = this.selectedTime?.toTimeInMillis;
-    }
+      form_data.timeSpanEnum = timeFilter?.value;
+     } else if(this.selectedTime?.type == "setCustom"){
+       delete form_data?.timeSpanEnum;
+       form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+     }
+     else{
+       this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
+        form_data.timeSpanEnum = timeFilter?.value;
+     }
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
@@ -360,7 +365,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    const form_data =  { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET","appType":this.appType };
+    const form_data =  { "timeSpanEnum": "LAST_24_HOUR", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET","appType":this.appType };
     if(this.selectedTime?.type == 'setEnum'){
      form_data.timeSpanEnum = timeFilter?.value;
     } else if(this.selectedTime?.type == "setCustom"){
