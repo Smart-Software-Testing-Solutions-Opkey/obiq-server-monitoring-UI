@@ -21,7 +21,8 @@
          </div>
     </div>
 
-<kendo-grid 
+<div id="erp-loader">
+    <kendo-grid 
     #grid_application 
     [data]="Instance_list" 
     (cellClick)="onCellClick($event)"
@@ -86,4 +87,6 @@
             </div>
         </div>
     </ng-template>
-</kendo-grid>
+    </kendo-grid>
+
+</div>

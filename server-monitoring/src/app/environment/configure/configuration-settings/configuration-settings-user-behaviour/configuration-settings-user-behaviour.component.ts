@@ -48,6 +48,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
  temp_agent_list : any;
  get_all_Instance() {
    
+    window.loadingStart("#ub-loader", "Please wait");
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     
@@ -79,10 +80,12 @@ export class ConfigurationSettingsUserBehaviourComponent {
          }
         },
         error: (error: any) => {
+          window.loadingStop("#ub-loader");
           this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
+          window.loadingStop("#ub-loader");
           console.log("Completed");
         }
       });

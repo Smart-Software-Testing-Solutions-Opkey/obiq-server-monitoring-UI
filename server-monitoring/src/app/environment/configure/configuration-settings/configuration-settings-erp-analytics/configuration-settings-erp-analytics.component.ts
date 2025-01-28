@@ -64,6 +64,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   temp_Instance_list: any;
   get_all_Instance() {
    
+    window.loadingStart("#erp-loader", "Please wait");
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
@@ -213,10 +214,12 @@ export class ConfigurationSettingsErpAnalyticsComponent {
           this.temp_Instance_list = this.Instance_list
         },
         error: (error: any) => {
+          window.loadingStop("#erp-loader");
           this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
+          window.loadingStop("#erp-loader");
           console.log("Completed");
         }
       });
