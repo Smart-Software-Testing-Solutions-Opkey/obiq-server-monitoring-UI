@@ -78,6 +78,12 @@ export class EMConsoleErrorWidgetComponent implements OnInit, OnDestroy {
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){
+    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+      if(data?.type == "getDataWithTime"){
+       this.getWidgetData( data?.timeFilter)
+       this.createChart();
+      }
+    }))
     if(this?.view?.viewId ){
       // this.datasourceProgressBar = [];
       this.getWidgetData()
@@ -127,7 +133,7 @@ ngOnDestroy() {
   }
 
 
-getWidgetData() {
+getWidgetData(timeFilter?: any) {
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTopConsoleErrorByFilter`;
    
 
@@ -139,6 +145,18 @@ getWidgetData() {
       "viewId": this?.view?.viewId,
       // "userId":"2170f924-6ab5-4d91-b9cf-232a27cd08dc",
       "offset":0
+      }
+      if(timeFilter?.type == 'setEnum'){
+        form_data.timeSpanEnum = timeFilter?.value;
+       } else if(timeFilter?.type == "setCustom"){
+        delete form_data?.timeSpanEnum;
+        form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
+        form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+      }
+      else{
+        let timeFilter={"type":"setEnum","value":"LAST_24_HOUR"}
+        form_data["timeSpanEnum"] = timeFilter?.value;
+  
       }
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
