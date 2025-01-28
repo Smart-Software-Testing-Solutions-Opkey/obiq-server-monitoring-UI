@@ -11,7 +11,8 @@ import {
   ApexTitleSubtitle,
   ApexStroke,
   ApexGrid,
-  ApexYAxis
+  ApexYAxis,
+  ApexTooltip
 } from "ng-apexcharts";
 import { Subscription } from 'rxjs';
 import { MsgboxService } from 'src/app/services/msgbox.service';
@@ -25,6 +26,7 @@ export type ChartOptions = {
   grid: ApexGrid;
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
+  tooltip:ApexTooltip
 };
 
 @Component({
@@ -119,7 +121,8 @@ ngOnDestroy() {
     let ajax_url : any;
     let form_data : any ;
     if(this.widgetType == 'ERP'){
-      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+
+      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerInsightWidgetrController/getInsightWidgetData`;
       form_data = {
         "appType": "ORACLEFUSION",
         "viewId": this?.view?.viewId,
@@ -127,7 +130,7 @@ ngOnDestroy() {
       };
     }
     else{
-      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+      ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerInsightWidgetrController/getInsightWidgetData`;
       form_data = {
         "appType": "ORACLEFUSION",
         "viewId": this?.view?.viewId,
@@ -139,18 +142,33 @@ ngOnDestroy() {
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
+          
          if(result){
          
-         
-            this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
+            // this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
              
-              const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
+            //   const calculatedTime = this.calculateDuration(item.journeyFromTimeInMillis, item.journeyToTimeInMillis);
+            //   return {
+            //     ...item,
+            //     calculatedTime 
+            //   };
+            // });
+
+            result = Object.fromEntries(Object.entries(result).slice(0, 5))
+            this.datasourceProgressBar = Object.keys(result).map(item => {
+              const count = result[item].count;
+              let dataPlotList = result[item].dataPlotList
+
               return {
-                ...item,
-                calculatedTime 
+                subActivityName: item,
+                count: count,
+                dataPlotList: dataPlotList
               };
-            });
+            })
           this.tempdatasourceProgressBar = this.datasourceProgressBar
+          this.datasourceProgressBar.map(val => {
+            val.dataPlotList = val.dataPlotList.map(item=>item.percentDiff)
+            })
           window.loadingStop("#common-journey-"+this.widgetType);
           this.cdRef.detectChanges();
         }
@@ -163,31 +181,27 @@ ngOnDestroy() {
         }
       });
   }
-  calculateDuration(from: number, to: number): string {
+//   calculateDuration(from: number, to: number): string {
     
-    const durationMillis = from - to;
+//     const durationMillis = from - to;
 
     
-    if (durationMillis < 1000) {
-        return `${durationMillis} ms`;
-    }
+//     if (durationMillis < 1000) {
+//         return `${durationMillis} ms`;
+//     }
 
     
-    const durationSeconds = Math.floor(durationMillis / 1000);
-    const minutes = Math.floor(durationSeconds / 60);
-    const seconds = durationSeconds % 60;
+//     const durationSeconds = Math.floor(durationMillis / 1000);
+//     const minutes = Math.floor(durationSeconds / 60);
+//     const seconds = durationSeconds % 60;
 
-    return `${minutes}m ${seconds}s`;
-}
+//     return `${minutes}m ${seconds}s`;
+// }
 
 
 createChart(): void {
   this.chartOptions = {
-    series: [
-      {
-        data: [10, 41, 35, 51]
-      }
-    ],
+   
     chart: {
       height: 35,
       type: "line",
@@ -204,14 +218,15 @@ createChart(): void {
     dataLabels: {
       enabled: false
     },
-    
+    tooltip:{
+      marker:{
+        fillColors: ['#268144'],
+      }
+    },
     stroke: {
       curve: "straight",
-      width:2
-    },
-    title: {
-      text: "Product Trends by Month",
-      align: "left"
+      width:2,
+      colors: ['#268144']
     },
     grid: {
       show: false,

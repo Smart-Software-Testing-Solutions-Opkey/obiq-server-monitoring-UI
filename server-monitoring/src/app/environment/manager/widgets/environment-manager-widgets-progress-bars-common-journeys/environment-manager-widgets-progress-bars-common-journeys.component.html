@@ -57,14 +57,14 @@
         </kendo-grid-column>
 
 
-            <kendo-grid-column title="" field="timeStampStr">
+            <!-- <kendo-grid-column title="" field="timeStampStr">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                     <span class="k_grid_text text_wrap text-start">
                         <i class="oci oci-clock pe-2"></i>
                         <span>{{dataItem?.calculatedTime}}</span>
                     </span>
                 </ng-template>
-            </kendo-grid-column>
+            </kendo-grid-column> -->
         
         
           
@@ -73,24 +73,30 @@
                   
                         <div id="chart" class="graph-timeseries mb-3" style="height: 25px;width:100px;padding: 0 " >
                             
-                            <apx-chart  *ngIf="chartOptions?.series?.length  > 0"
-                            [series]="chartOptions.series"
+                            <apx-chart  
+                            [series]="[{
+                                data:dataItem.dataPlotList
+                            }]"
                             [chart]="chartOptions.chart"
                             [stroke]="chartOptions.stroke"
                             [dataLabels]="chartOptions.dataLabels"
                             [xaxis]="chartOptions.xaxis"
                             [yaxis]="chartOptions.yaxis"
                             [grid]="chartOptions.grid"
-                                
-                           
+                            [tooltip]="chartOptions.tooltip" 
                           ></apx-chart>
-                          </div>
-                       
-                  
-
-                   
-                   
+                          </div> 
                 </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title="Error Count" field="countName" [width]="50">
+
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.countName}}" container="body">
+                        {{dataItem?.count}}
+                    </span>
+                </ng-template>
+    
+    
             </kendo-grid-column>
         
         <ng-template kendoGridNoRecordsTemplate>
