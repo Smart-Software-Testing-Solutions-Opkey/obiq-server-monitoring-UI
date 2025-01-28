@@ -1,7 +1,8 @@
 <div class="logs-panel">
 
     @if(analyticsType.type != 'ERP_ANALYTICS_DATASOURCE'){
-        <div id="chart" class="graph-timeseries mb-3 position-relative" >
+        <!-- d-none class added to hide -->
+        <div id="chart" class="graph-timeseries mb-3 position-relative d-none" >
     
         
             <!-- <h2>Log Usage Over Time</h2> -->
@@ -26,13 +27,14 @@
    
 
     <div id="logs-grid"  class="logs-grid-layout">
+        <!-- [style.height]="logHeight" -->
         <kendo-grid 
             [data]="logDataSource" 
             [selectable]="true" 
             (cellClick)="onSelectionChange($event)"
             class="scrollable custom-grid-height"
             (scrollBottom)="onScroll()"
-            [style.height]="logHeight"
+            [style.height]="'calc(100vh - 8rem)'"
             >
 
             <kendo-grid-column title="" [width]="10">
