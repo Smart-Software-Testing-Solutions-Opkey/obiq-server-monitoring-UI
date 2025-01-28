@@ -102,7 +102,7 @@
                                                                 <img src="assets/images/default/application/{{dataItem.Application}}.png"
                                                                     alt="{{dataItem.Application}}">
                                                             </span>
-                                                            <span class="layout-text-obiq">{{dataItem.SystemIdentifier}}</span>
+                                                            <span class="layout-text-obiq" ngbTooltip="{{dataItem?.SystemIdentifier}}">{{dataItem.SystemIdentifier}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
@@ -113,7 +113,7 @@
                                                             <span class="img-app-profile">
                                                                 <img src="/user/getavatar/{{dataItem.CreatedBy}}" alt="">
                                                             </span>
-                                                            <div class="ps-2">
+                                                            <div class="ps-2" ngbTooltip="{{dataItem?.CreatedByName}},{{ dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}">
                                                                 <span class="layout-text-name">{{dataItem.CreatedByName}}</span>
                                                                 <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                                             </div>
@@ -127,7 +127,7 @@
                                                             <span class="img-app-profile">
                                                                 <img src="/user/getavatar/{{dataItem.ModifiedBy}}" alt="">
                                                             </span>
-                                                            <div class="ps-2">
+                                                            <div class="ps-2" ngbTooltip="{{dataItem?.ModifiedByName}},{{ dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}">
                                                                 <span class="layout-text-name">{{dataItem.ModifiedByName}}</span>
                                                                 <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                                             </div>
@@ -170,7 +170,7 @@
                                                 <kendo-grid-column field="SystemIdentifier" title="OBIQ Agent">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.agentName}}</span>
+                                                            <span class="layout-text-obiq ps-2"  ngbTooltip="{{dataItem?.agentName}}">{{dataItem.agentName}}</span>
                                                            
                                                         </div>
                                                     </ng-template>
@@ -181,7 +181,7 @@
                                                         <div class="flex-center">
                                                           
                                                             <div>
-                                                                <span class="layout-text-date">{{dataItem.ipAddress}}</span>
+                                                                <span class="layout-text-date"  ngbTooltip="{{dataItem?.ipAddress}}">{{dataItem.ipAddress}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
