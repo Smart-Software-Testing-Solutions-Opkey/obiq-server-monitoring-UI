@@ -36,6 +36,14 @@
 
 /***************************icon start here**************************/
 
+.oci-alert-circle:before {
+  content: "\e931";
+}
+
+.oci-check-circle:before {
+  content: "\e932";
+}
+
 .oci-external-link:before {
   content: "\e930";
 }
