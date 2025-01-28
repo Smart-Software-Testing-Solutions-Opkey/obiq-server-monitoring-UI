@@ -30,7 +30,9 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
   offset: number = 0; 
   err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
-   subscriptions: Subscription[] = [];
+  subscriptions: Subscription[] = [];
+  timeFilter : any;
+  
 
   ngOnInit(): void {
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
@@ -38,7 +40,8 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
         this.logToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_Functional_log_error(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_Functional_log_error(this.timeFilter)
       }
     }))
   this.get_Functional_log_error();
@@ -177,6 +180,6 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
   }
 
   onScroll(): void {
-    this.get_Functional_log_error(null, true); 
+    this.get_Functional_log_error(this.timeFilter, true); 
   }
 }

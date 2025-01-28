@@ -33,13 +33,15 @@ export class EMMrDsUbConsoleErrorTabComponent implements OnDestroy{
   allDataLoaded: boolean = false; 
   subscriptions: Subscription[] = [];
 
+  timeFilter : any;
   ngOnInit(): void {
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
         this.logToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_console_log_error(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_console_log_error(this.timeFilter)
       }
     }))
   this.get_console_log_error();
@@ -175,6 +177,6 @@ export class EMMrDsUbConsoleErrorTabComponent implements OnDestroy{
   }
 
   onScroll(): void {
-    this.get_console_log_error(null, true); 
+    this.get_console_log_error(this.timeFilter, true); 
   }
 }

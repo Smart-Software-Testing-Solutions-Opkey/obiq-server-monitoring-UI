@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class AppService {
 
   private transfterSubject: BehaviorSubject<any>;
 
-  private dataStream = new BehaviorSubject<any>(null);
+  private dataStream = new Subject<any>();
   public dataStream$ = this.dataStream.asObservable();
 
   constructor(public http: HttpClient, private router: Router,) {

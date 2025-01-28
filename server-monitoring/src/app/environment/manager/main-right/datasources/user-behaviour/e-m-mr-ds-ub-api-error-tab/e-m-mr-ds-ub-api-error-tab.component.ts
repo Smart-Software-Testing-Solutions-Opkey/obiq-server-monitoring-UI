@@ -32,6 +32,7 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
   ub_api_err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
   subscriptions: Subscription[] = [];
+  timeFilter : any;
 
   ngOnInit(): void {
   
@@ -40,7 +41,8 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
         this.logToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_api_log_error(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_api_log_error(this.timeFilter)
       }
     }))
   this.get_api_log_error();
@@ -181,6 +183,6 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
   }
 
   onScroll(): void {
-    this.get_api_log_error(null, true); 
+    this.get_api_log_error(this.timeFilter, true); 
   }
 }

@@ -32,6 +32,7 @@ export class EMDsUbFunctionalErrorTabComponent implements OnDestroy{
   ub_functional_err_log_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
   subscriptions: Subscription[] = [];
+  timeFilter : any;
   ngOnInit(): void {
 
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
@@ -39,7 +40,8 @@ export class EMDsUbFunctionalErrorTabComponent implements OnDestroy{
         this.logToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_Functional_log_error(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_Functional_log_error(this.timeFilter)
       }
     }))
   this.get_Functional_log_error();
@@ -177,6 +179,6 @@ export class EMDsUbFunctionalErrorTabComponent implements OnDestroy{
   }
 
   onScroll(): void {
-    this.get_Functional_log_error(null, true); 
+    this.get_Functional_log_error(this.timeFilter, true); 
   }
 }
