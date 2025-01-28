@@ -315,6 +315,7 @@ dataDir = ''
           "appType": "ORACLEFUSION", 
           "limitBy": 50,
           "offset": 0, 
+          "viewId": this?.view?.viewId,
         }
       }
       else if(type == 'ESS_LOG_WARNING_WIDGET'){
@@ -324,7 +325,9 @@ dataDir = ''
           "appType": "ORACLEFUSION", 
           "limitBy": 50,
           "offset": 0, 
-          "userId": this.service_data.UserDto.UserDTO.U_ID
+          "userId": this.service_data.UserDto.UserDTO.U_ID,
+          "viewId": this?.view?.viewId,
+
         }
       }
       else{
@@ -334,7 +337,8 @@ dataDir = ''
           "appType": "ORACLEFUSION", 
           "limitBy": 50,
           "offset": 0, 
-          "userId": this.service_data.UserDto.UserDTO.U_ID
+          "userId": this.service_data.UserDto.UserDTO.U_ID,
+          "viewId": this?.view?.viewId
         }
       }
       
@@ -347,7 +351,8 @@ dataDir = ''
             "appType": "ORACLEFUSION", 
             "limitBy": 50,
             "offset": 0, 
-            "userId": this.service_data.UserDto.UserDTO.U_ID
+            "userId": this.service_data.UserDto.UserDTO.U_ID,
+            "viewId": this?.view?.viewId
           }
 
     }
