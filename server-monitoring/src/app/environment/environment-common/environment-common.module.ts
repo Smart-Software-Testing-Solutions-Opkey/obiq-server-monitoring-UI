@@ -23,6 +23,7 @@ import { FilterCalendarComponent } from './filters/filter-calendar/filter-calend
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { FilterDatetimeComponent } from './filters/filter-datetime/filter-datetime.component';
 import { MsgboxDialogComponent } from './msgbox-dialog/msgbox-dialog.component';
+import { CommonEmailComponent } from './common-email/common-email.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MsgboxDialogComponent } from './msgbox-dialog/msgbox-dialog.component';
     ECommonFilterInnerComponent,
     FilterCalendarComponent,
     FilterDatetimeComponent,
-    MsgboxDialogComponent
+    MsgboxDialogComponent,
+    CommonEmailComponent
 
   ],
   imports: [
