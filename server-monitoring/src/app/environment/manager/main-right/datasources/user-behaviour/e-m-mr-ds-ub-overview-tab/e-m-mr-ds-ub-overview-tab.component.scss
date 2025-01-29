@@ -98,3 +98,11 @@
 ::ng-deep .k-grid-table .k-master-row .k-table-td{
     height: 2rem !important;
 }
+
+.overview-error-panel{
+    ::ng-deep .total-errors-details{
+        height: 90% !important;
+        justify-content: flex-start;
+    }
+    
+}

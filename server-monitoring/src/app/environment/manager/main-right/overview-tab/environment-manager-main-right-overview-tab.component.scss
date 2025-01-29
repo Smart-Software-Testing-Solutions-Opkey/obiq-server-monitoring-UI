@@ -166,6 +166,14 @@
 //     }
 // }
 
+.overview-error-panel{
+    ::ng-deep .total-errors-details{
+        height: 100% !important;
+        justify-content: flex-start;
+    }
+    
+}
+
 ::ng-deep .custom-journey-widget-height {
     height: 14.2rem !important;
 }

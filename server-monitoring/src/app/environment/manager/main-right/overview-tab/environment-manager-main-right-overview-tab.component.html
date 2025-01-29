@@ -11,8 +11,10 @@
             <div id="collapse_UB" class="collapse show">
                 <div class="card-body px-0 pb-0">
                     <div class="row mx-0">
-                        <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
-                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour'}"></app-environment-manager-widgets-total-errors-area-widget>
+                        <div class="col-sm-6 margin-bottom-2 pe-3 ps-0">
+                            <div class="overview-error-panel" style="height: 100%;">
+                                <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour'}"></app-environment-manager-widgets-total-errors-area-widget>
+                            </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
