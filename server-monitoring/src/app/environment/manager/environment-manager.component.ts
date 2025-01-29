@@ -99,6 +99,8 @@ export class EnvironmentManagerComponent implements OnInit {
     if(this.service_data.isUserAllJourneyOpen == true || this.service_data.isAllErrorOpen == true){
       this.app_service.dataTransmitter({callsource : 'navigatorAll'})
     }
+
+    this.app_service.dataTransmitter({callsource: 'stopEdit',selectedAnalyticsType :this.selectedAnalyticsType})
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
    

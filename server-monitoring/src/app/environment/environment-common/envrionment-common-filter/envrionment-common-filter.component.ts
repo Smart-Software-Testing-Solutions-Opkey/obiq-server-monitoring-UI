@@ -76,6 +76,10 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
         else if( data.action == "bindFilterData"){
           this.bind_filter(data.callsource)
         }
+        else if(data.callsource == "stopEdit"){
+          this.Editable = true
+          this.toggleEdit() 
+      }
       }
     })
     this.subscriptions.push(data_receiver);
@@ -345,6 +349,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     this.onEditableChange.emit(this.Editable)
 
   }
+
 
 
 }

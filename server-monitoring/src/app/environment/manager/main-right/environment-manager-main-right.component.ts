@@ -93,7 +93,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           this.bindData()
 
         }
-      }
+    }
       
     });
     this.subscriptions.push(data_receiver);
@@ -360,7 +360,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   }
   toggleEdit(val){
-    this.Editable = !val
+    this.Editable = val
   }
   Editable = false
   get isSelectedAnalyticsTypeEmpty(): boolean {
