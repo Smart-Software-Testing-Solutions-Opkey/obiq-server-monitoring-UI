@@ -38,7 +38,7 @@
     </div>
 
     <div class="row mx-0 mb-3 align-items-center">
-       <div class="d-flex-between ">
+       <div class="d-flex-between px-0">
             <div class="col-6 px-0">
                 <h4 class="text-header mb-0">View Summary</h4>
             </div>
@@ -226,7 +226,7 @@
                                                                 <img src="/user/getavatar/{{dataItem.U_ID}}" alt="">
                                                             </span>
                                                             <div class="ps-2">
-                                                                <span class="layout-text-name">{{dataItem.Name}}</span>
+                                                                <span class="layout-text-name" ngbTooltip="{{dataItem?.Name}}">{{dataItem.Name}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -236,7 +236,7 @@
                                                         <div class="flex-center">
                                                             
                                                             <div>
-                                                                <span class="layout-text-date">{{dataItem.email_ID}}</span>
+                                                                <span class="layout-text-date" ngbTooltip="{{dataItem?.email_ID}}">{{dataItem.email_ID}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -277,7 +277,7 @@
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center executionAgent">               
                                                             <span class="status me-2" [ngClass]="dataItem['IsOnline']== true ? 'online':'offline'"></span>
-                                                            <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
+                                                            <span class="layout-text-obiq ps-1" ngbTooltip="{{dataItem?.AgentName}}">{{dataItem?.AgentName}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
@@ -286,7 +286,7 @@
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                             
                                                         <div class="flex-center">
-                                                            <span class="layout-text-date">{{dataItem?.AgentName}}</span>
+                                                            <span class="layout-text-date" ngbTooltip="{{dataItem?.AgentName}}">{{dataItem?.AgentName}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
