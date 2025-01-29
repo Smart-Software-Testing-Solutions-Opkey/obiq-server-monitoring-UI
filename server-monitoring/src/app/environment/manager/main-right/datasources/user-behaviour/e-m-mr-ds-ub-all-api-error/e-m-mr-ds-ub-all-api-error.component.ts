@@ -38,6 +38,7 @@ export class EMMrDsUbAllApiErrorComponent {
   subscriptions: Subscription[] = [];
   viewId: any;
 
+  timeFilter: any;
   ngOnInit(): void {
 
     this.dataService.isAllErrorOpen = true
@@ -49,7 +50,8 @@ export class EMMrDsUbAllApiErrorComponent {
         this.logToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_api_log_error(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_api_log_error(this.timeFilter)
       }
     }))
     this.get_api_log_error();
@@ -101,7 +103,7 @@ export class EMMrDsUbAllApiErrorComponent {
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.get_api_log_error()
+            this.get_api_log_error(this.timeFilter)
 
           }
           else if (data.action == 'filterChange') {
@@ -186,7 +188,7 @@ export class EMMrDsUbAllApiErrorComponent {
   }
 
   onScroll(): void {
-    this.get_api_log_error(null, true);
+    this.get_api_log_error(this.timeFilter, true);
   }
 
   backToMenu() {

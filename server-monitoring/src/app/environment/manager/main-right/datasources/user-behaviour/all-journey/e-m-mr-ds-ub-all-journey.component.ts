@@ -22,6 +22,7 @@ constructor(
   ){}
 
   viewId: any ;
+  timeFilter : any;
   ngOnInit(): void {
     // this.getRecentSubActivityJourneyOfUser();
     this.dataService.isUserAllJourneyOpen = true
@@ -33,7 +34,8 @@ constructor(
         this.textToSearch = '';
         this.allDataLoaded = false
         this.offset = 0;
-        this.get_User_Behaviour_Journey(data?.timeFilter)
+        this.timeFilter = data?.timeFilter
+        this.get_User_Behaviour_Journey(this.timeFilter)
       }
     }))
     this.get_User_Behaviour_Journey()
@@ -94,7 +96,7 @@ constructor(
           else if( data.action == 'search'){
             this.textToSearch =data.data;
             // this.getRecentSubActivityJourneyOfUser()
-            this.get_User_Behaviour_Journey()
+            this.get_User_Behaviour_Journey(this.timeFilter)
           }
           // else if ( data.action == 'filterChange'){
             
@@ -185,7 +187,7 @@ constructor(
         });
   }
   onScroll(): void {
-    this.get_User_Behaviour_Journey(null, true); 
+    this.get_User_Behaviour_Journey(this.timeFilter, true); 
   }
   openInNewTab(e){
       window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
