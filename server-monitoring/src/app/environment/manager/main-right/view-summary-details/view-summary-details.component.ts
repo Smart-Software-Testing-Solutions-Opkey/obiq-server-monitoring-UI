@@ -56,6 +56,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
     this.subscriptions.push(data_receiver);
   }
 
+  
   get_All_Summary_of_Selected_View(view) {
    
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceLinkedServiceList";
@@ -66,7 +67,22 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#totalSection");
-          this.obj_configuration_setting.selected_erp_analytics = result;
+
+          let erpList : any = []
+          let ubList : any = []
+        
+
+        result.forEach((res)=>{
+            if( res.type == "ERP_ANALYTIC_SERVICE"){
+              erpList.push(res)
+            }
+            else{
+              ubList.push(res)
+            }
+        })
+          this.obj_configuration_setting.selected_erp_analytics = erpList
+          this.obj_configuration_setting.selected_user_behaviour_component = ubList
+          
           this.obj_configuration_setting.selected_view = view;
           this.obj_configuration_setting = JSON.parse(JSON.stringify(this.obj_configuration_setting))
         },

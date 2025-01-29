@@ -71,12 +71,14 @@
                         <kendo-grid-column field="CreatedBy" title="Created">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
-                                    <!-- <span class="img-app-profile">
-                                        <img src="assets/images/default/profile.png" alt="">
-                                    </span> -->
+
+                                    
+                                    <span class="img-app-profile">
+                                        <img src="/user/getavatar/{{dataItem.value.createdBy}}" alt="">
+                                    </span>
                                     <div class="ps-2">
-                                        <!-- <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
-                                        <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                        <span class="layout-text-name">{{dataItem.value.createdByName}}</span>
+                                        <span class="layout-text-date">{{dataItem.value.createdOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                     </div>
                                 </div>
                             </ng-template>
@@ -85,12 +87,14 @@
                         <kendo-grid-column field="ModifiedBy" title="Last Modified">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
-                                    <!-- <span class="img-app-profile">
-                                        <img src="assets/images/default/profile.png" alt="">
-                                    </span> -->
+                                    <span class="img-app-profile">
+                                        <!-- <img src="assets/images/default/profile.png" alt=""> -->
+                                        <img src="/user/getavatar/{{dataItem.value.modifiedBy}}" alt="">
+                                    </span>
+                                    
                                     <div class="ps-2">
-                                        <!-- <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
-                                        <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span> -->
+                                        <span class="layout-text-name">{{dataItem.value.modifiedByName}}</span>
+                                        <span class="layout-text-date">{{dataItem.value.modifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                     </div>
                                 </div>
                             </ng-template>
@@ -172,19 +176,30 @@
                         [selectable]="false" [navigable]="true"
                         class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
 
-                        <kendo-grid-column  field="name" title="Agents">
-                            <ng-template kendoGridCellTemplate let-dataItem >
+
+                        <kendo-grid-column title="User">
+                            <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
                                     <span class="img-app-profile">
-                                        <img src="/user/getavatar/{{dataItem.CreatedBy}}" alt="">
+                                        <img src="/user/getavatar/{{dataItem.value.U_ID}}" alt="">
                                     </span>
                                     <div class="ps-2">
-                                        <span class="layout-text-name">{{dataItem.Name}}</span>
-                                        <span class="layout-text-date">{{dataItem.email_ID}}</span>
+                                        <span class="layout-text-name">{{dataItem.value.name}}</span>
                                     </div>
                                 </div>
                             </ng-template>
                         </kendo-grid-column>
+                        <kendo-grid-column title="Email address">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center">
+                                    
+                                    <div>
+                                        <span class="layout-text-date">{{dataItem.value.email}}</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
+                        
 
                         <ng-template kendoGridNoRecordsTemplate>
                             <div class="no-data-found" style="height: 17rem !important;">
