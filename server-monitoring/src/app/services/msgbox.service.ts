@@ -39,7 +39,7 @@ export class MsgboxService {
         errMsg = 'Something went wrong.An unexpected error occured.'
       }
      
-      this.confirm_msg_box('error', `${errMsg} <br> Trace : ${errorId}`, [{ text: "Report Issue", primaryBtn: true, value: "report" }, { text: "Close", primaryBtn: false, value: "close" }]).then((result => {
+      this.confirm_msg_box('error', `${errMsg}`, [{ text: "Report Issue", primaryBtn: true, value: "report" }, { text: "Close", primaryBtn: false, value: "close" }],errorId).then((result => {
         if (result == "report") {
           this.reportErrorViaMail(errorId)
         }
@@ -56,7 +56,7 @@ export class MsgboxService {
     });
 }
 
-  confirm_msg_box(type, msg, buttons) {
+  confirm_msg_box(type, msg, buttons,errorId?) {
 
 
     let modalInstance = this.modalService.open(MsgboxDialogComponent, {
@@ -70,6 +70,7 @@ export class MsgboxService {
     modalInstance.componentInstance.buttons = buttons
     modalInstance.componentInstance.type = type
     modalInstance.componentInstance.msg = msg
+    modalInstance.componentInstance.errorId = errorId
     return modalInstance.result.then((result) => result).catch(() => null);
   }
 

@@ -17,13 +17,18 @@ export class MsgboxDialogComponent implements OnInit {
   ) {
   }
 
-  errorId: any = ''
-
+ 
+  traceId: any;
   @Input() type: string;
   @Input() msg: string;
+  @Input() errorId: any;
   @Input() buttons: Array<any>
+  
 
   ngOnInit(): void { 
+    if(this.errorId){
+      this.traceId = this.errorId
+    }
   }
   
   closeModal(selected) {

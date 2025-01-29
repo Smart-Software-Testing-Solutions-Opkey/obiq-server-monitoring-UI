@@ -10,10 +10,15 @@
             <div class="text-start">
                 <div class="" style="white-space: pre-line;">
                     <div class="scrollable" style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem;">
-                        <div class="msgBoxContent" [innerHTML]="msg">
-                            <!-- {{msg}}
-                                <br>
-                                Trace : {{errorId}} -->
+                        <div class="msgBoxContent" >
+                            {{msg}}
+                            <div>
+                                @if(traceId){
+                                    <br>
+                                    Trace : <span style="color:blue;">{{traceId}}</span>
+                                }
+                            </div>
+                               
                         </div>
                     </div>
                 </div>
