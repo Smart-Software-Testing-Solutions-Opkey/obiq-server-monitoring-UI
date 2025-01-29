@@ -1,11 +1,11 @@
 <div class="logs-details">
 
-    <div class="status-strip mb-3 d-flex-between">
+    <!-- <div class="status-strip mb-3 d-flex-between">
         <div class="left">
-            <!-- <span class="error-details">
+            <span class="error-details">
                 <i class="oci oci-WARNING pe-1"></i>
                 Error
-            </span> -->
+            </span> 
             <span>
                 <span class="text-theme font-bold">
                     {{receivedTimeRange}}
@@ -15,13 +15,13 @@
                 </span>
             </span>
         </div>
-        <!-- <div class="right">
+        <div class="right">
             <button type="button" class="btn btn-bg-white btn-layout-export"> 
                 <i class="oci oci-export pe-2"></i>
                 Export
             </button>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
 
     <!-- <div class="details-strip mb-3 d-flex align-items-start flex-wrap">
 
@@ -51,41 +51,41 @@
 
     <div class="row mx-0 mb-3">
         <div class="col-sm-3 ps-0">
-            <div class="datakeys-box">
+            <!-- <div class="datakeys-box"> -->
                 <span class="font-bold">Domain</span>
                 <span class="d-block text-ellipsis font-14px link-color">
                     <span ngbTooltip="{{selectedData?.domainName}}" container="body">{{selectedData?.domainName}}</span>
                 </span>
-            </div>
+            <!-- </div> -->
         </div>
         <div class="col-sm-3">
-            <div class="datakeys-box">
+            <!-- <div class="datakeys-box"> -->
                 <span class="font-bold">Log Name</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-host ps-1 pe-2"></i>
+                    <!-- <i class="oci oci-host ps-1 pe-2"></i> -->
                     <span ngbTooltip="{{selectedData?.logName}}" container="body">{{selectedData?.logName}}</span>
                 </span>
-            </div> 
+            <!-- </div>  -->
         </div>
         <div class="col-sm-3">
-            <div class="datakeys-box">
+            <!-- <div class="datakeys-box"> -->
                 <span class="font-bold">Time</span>
                 <span class="d-block text-ellipsis font-14px">
                     <span ngbTooltip="{{selectedData?.timeStampString}}" container="body">{{selectedData?.timeStampString}}</span>
                 </span>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 
     
     <div class="col-sm-3 pe-0">
-        <div class="datakeys-box">
+        <!-- <div class="datakeys-box"> -->
             <span class="font-bold">User</span>
             <span class="d-block text-ellipsis font-14px">
-                <i class="oci oci-shelf-position ps-1 pe-2"></i>
+                <!-- <i class="oci oci-shelf-position ps-1 pe-2"></i> -->
                 <span ngbTooltip="{{selectedData?.userId}}" container="body">{{selectedData?.userId}}</span>
             </span>
-        </div> 
+        <!-- </div>  -->
     </div>
 
 
