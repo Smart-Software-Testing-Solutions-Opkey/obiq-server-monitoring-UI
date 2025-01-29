@@ -144,7 +144,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.onTotalViewsChange.emit(this.totalViews)
 
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/removeViewFromFavourite";
-    let form_data = { viewId: view.viewId,projectId:this.service_data.UserDto.ProjectDTO.P_ID};
+    let form_data = { viewId: view.viewId,projectId:this.service_data.UserDto.ProjectDTO.P_ID,userId:this.service_data.UserDto.UserDTO.U_ID};
     this.app_service.make_post_server_call(form_url, form_data)
     .subscribe({
       next: (result: any) => {
