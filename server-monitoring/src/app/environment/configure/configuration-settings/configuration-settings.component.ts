@@ -521,10 +521,10 @@ export class ConfigurationSettingsComponent {
           linkedDataObject.linkedData.push({
             name: selectedRow.SystemIdentifier,
             value: selectedRow.SettingsID,
-            createdBy: selectedRow.createdBy,
+            createdBy: selectedRow.CreatedBy,
             createdByName: selectedRow.CreatedByName,
             createdOn: selectedRow.CreatedOn,
-            mofifiedBy: selectedRow.modifiedBy,
+            modifiedBy: selectedRow.ModifiedBy,
             modifiedByName: selectedRow.ModifiedByName,
             modifiedOn: selectedRow.ModifiedOn
           });
