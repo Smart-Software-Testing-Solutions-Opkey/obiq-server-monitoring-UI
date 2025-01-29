@@ -30,7 +30,15 @@ export class MsgboxService {
     let errorId = errorObj.errorId ? errorObj.errorId : this.uuidv4();
     if (errorObj.hasOwnProperty('error')) {
       this.service_data.errorObj = errorObj;
-      let errMsg = 'Something went wrong.An unexpected error occured.'
+
+      let errMsg = ''
+      if(errorObj && errorObj.error && errorObj.error.message ){
+         errMsg =  errorObj?.error?.message
+      }
+      else{
+        errMsg = 'Something went wrong.An unexpected error occured.'
+      }
+     
       this.confirm_msg_box('error', `${errMsg} <br> Trace : ${errorId}`, [{ text: "Report Issue", primaryBtn: true, value: "report" }, { text: "Close", primaryBtn: false, value: "close" }]).then((result => {
         if (result == "report") {
           this.reportErrorViaMail(errorId)
