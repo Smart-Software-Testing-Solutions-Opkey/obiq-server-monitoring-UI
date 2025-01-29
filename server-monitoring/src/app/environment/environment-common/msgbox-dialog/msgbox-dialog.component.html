@@ -3,19 +3,19 @@
     <div class="upper d-flex mb-4">
 
         <span class="exception-iconBox d-inline-block mt-2"> <i class="oci oci-alert-circle element-center"
-                style="font-size: 1.5rem;"></i> </span>
-        <span class="d-block ps-4 pt-3 msg_content_width">
+                style="font-size: 1.75rem;"></i> </span>
+        <span class="d-block ps-2 pt-3 msg_content_width">
             <span class="d-block text-start pb-3"
                 style="font-weight: 500; color:#D92D20;text-transform: capitalize;font-size: 1.5rem;">Oops!!</span>
             <div class="text-start">
                 <div class="" style="white-space: pre-line;">
-                    <div class="scrollable" style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem;">
+                    <div class="scrollable" style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem; font-weight: 600;">
                         <div class="msgBoxContent" >
                             {{msg}}
                             <div>
                                 @if(traceId){
                                     <br>
-                                    Trace : <span style="color:blue;">{{traceId}}</span>
+                                    Trace ID : <span style="color:blue;">{{traceId}}</span>
                                 }
                             </div>
                                
