@@ -91,7 +91,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
           this.offset = 0;
           this.allDataLoaded= false;
 
-          if(data.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE'){
+          if(data.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || data.hasOwnProperty('selectedAnalyticsType') == false){
             if( data.action == 'refresh'){
               this.get_Functional_log_error()
             }
@@ -99,7 +99,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
               this.logToSearch = data.data;
               this.offset = 0;
               this.allDataLoaded = false;
-              this.get_Functional_log_error()
+              this.get_Functional_log_error(this.timeFilter)
             }
             else if ( data.action == 'filterChange'){
               this.appType = data.objFilter.modelApplication.toUpperCase()

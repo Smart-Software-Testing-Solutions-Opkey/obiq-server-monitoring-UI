@@ -122,7 +122,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.getViewLogs()
+            this.getViewLogs(this.selectedTime)
           }
           else if ( data.action == 'filterChange'){
             this.appType = data.objFilter.modelApplication.toUpperCase()
@@ -405,7 +405,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       });
   }
   onScroll() {
-    this.getViewLogs(null, true); // Load more data and append it
+    this.getViewLogs(this.selectedTime, true); // Load more data and append it
 }
 get isSelectedAnalyticsTypeEmpty(): boolean {
   return Object.keys(this.analyticsType).length === 0;

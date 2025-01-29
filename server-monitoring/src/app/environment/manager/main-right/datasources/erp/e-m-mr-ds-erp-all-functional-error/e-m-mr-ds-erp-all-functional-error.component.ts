@@ -38,6 +38,7 @@ allDataLoaded: boolean = false;
 subscriptions: Subscription[] = [];
  
 viewId: any;
+timeFilter: any;
 ngOnInit(): void {
   this.dataService.isAllErrorOpen = true
   this.route.queryParams.subscribe(params => {
@@ -50,7 +51,8 @@ ngOnInit(): void {
       this.logToSearch = '';
       this.allDataLoaded = false
       this.offset = 0;
-      this.get_all_Functional_log_error(data?.timeFilter)
+      this.timeFilter = data?.timeFilter
+      this.get_all_Functional_log_error(this.timeFilter)
     }
   }))
 this.get_all_Functional_log_error();
@@ -109,7 +111,7 @@ startDataReceiving(){
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.get_all_Functional_log_error()
+            this.get_all_Functional_log_error(this.timeFilter)
           }
         }
         
@@ -189,7 +191,7 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
 }
 
 onScroll(): void {
-  this.get_all_Functional_log_error(null, true); 
+  this.get_all_Functional_log_error(this.timeFilter, true); 
 }
 
 
