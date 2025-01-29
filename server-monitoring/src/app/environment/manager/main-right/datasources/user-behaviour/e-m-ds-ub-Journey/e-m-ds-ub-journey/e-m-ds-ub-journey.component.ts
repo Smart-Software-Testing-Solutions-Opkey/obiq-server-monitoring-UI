@@ -93,7 +93,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
       this.subscriptions1.push(data_receiver);
     }
     get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {
-      window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");
+     
        const form_url =
             environment.BASE_OBIQ_SERVER_URL +
             'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
@@ -120,6 +120,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
             else{
               form_data["timeSpanEnum"] ="LAST_24_HOUR";
             }
+            window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");
             this.app_service.make_post_server_call(form_url, form_data).subscribe({
             next: (result: any) => {
             window.loadingStop("#ub-user-Journey-logs-grid");
