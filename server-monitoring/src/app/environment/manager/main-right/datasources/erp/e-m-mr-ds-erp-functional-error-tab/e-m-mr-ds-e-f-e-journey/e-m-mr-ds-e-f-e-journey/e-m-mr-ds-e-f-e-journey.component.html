@@ -34,7 +34,7 @@
             <div class="datakeys-box">
                 <span class="font-bold"> Environment Name</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-shelf-position ps-1 pe-2"></i>
+                    <!-- <i class="oci oci-shelf-position ps-1 pe-2"></i> -->
                     <span ngbTooltip="{{selectedData?.envName}}" container="body">{{selectedData?.envName}}</span>
                 </span>
             </div> 
@@ -43,13 +43,24 @@
             <div class="datakeys-box">
                 <span class="font-bold">Time</span>
                 <span class="d-block text-ellipsis font-14px">
-                    <i class="oci oci-host ps-1 pe-2"></i>
+                    <!-- <i class="oci oci-host ps-1 pe-2"></i> -->
                     <span ngbTooltip="{{selectedData?.userId}}" container="body">{{selectedData.timeString}}</span>
                 </span>
             </div> 
         </div>
     </div>
 
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-3 ps-0">
+            <div class="datakeys-box">
+                <span class="font-bold">User</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <!-- <i class="oci oci-host ps-1 pe-2"></i> -->
+                    <span ngbTooltip="{{selectedData?.userId}}" container="body">{{selectedData.userId}}</span>
+                </span>
+            </div> 
+        </div>
+    </div>
    
 
     <div class="lowerPart">
@@ -58,7 +69,7 @@
             <ul class="nav-tabs mb-0" role="tablist">
 
                 <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                    <i class="oci oci-trace pe-1"></i>
+                    <!-- <i class="oci oci-trace pe-1"></i> -->
                         AppLog
                 </li>
 
@@ -91,7 +102,7 @@
         </div>
 
         
-         <div class="tab_view_content" style="background-color: #DDDDDD;padding:10px;">
+         <div class="tab_view_content" style="background-color: #DDDDDD;padding:10px; word-wrap: break-word;">
            
                {{selectedData.appEventLog}}
          </div>
