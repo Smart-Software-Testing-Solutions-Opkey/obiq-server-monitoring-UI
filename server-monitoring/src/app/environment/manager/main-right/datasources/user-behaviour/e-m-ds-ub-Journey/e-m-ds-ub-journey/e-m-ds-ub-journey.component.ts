@@ -84,7 +84,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
               this.logToSearch = data.data;
               this.offset = 0;
               this.allDataLoaded = false;
-              this.get_User_Behaviour_Journey()
+              this.get_User_Behaviour_Journey(this.timeFilter)
             }
   
           }

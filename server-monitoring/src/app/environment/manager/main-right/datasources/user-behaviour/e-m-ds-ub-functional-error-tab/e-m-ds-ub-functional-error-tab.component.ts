@@ -101,7 +101,7 @@ export class EMDsUbFunctionalErrorTabComponent implements OnDestroy{
               this.logToSearch = data.data;
               this.offset = 0;
               this.allDataLoaded = false;
-              this.get_Functional_log_error()
+              this.get_Functional_log_error(this.timeFilter)
             }
           }
           

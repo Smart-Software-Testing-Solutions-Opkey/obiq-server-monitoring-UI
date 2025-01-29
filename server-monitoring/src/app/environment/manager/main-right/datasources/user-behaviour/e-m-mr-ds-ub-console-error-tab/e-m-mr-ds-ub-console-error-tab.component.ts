@@ -97,7 +97,7 @@ export class EMMrDsUbConsoleErrorTabComponent implements OnDestroy{
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.get_console_log_error()
+            this.get_console_log_error(this.timeFilter)
 
           }
           else if ( data.action == 'filterChange'){

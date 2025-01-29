@@ -99,7 +99,7 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.get_api_log_error()
+            this.get_api_log_error(this.timeFilter)
 
           }
           else if ( data.action == 'filterChange'){
