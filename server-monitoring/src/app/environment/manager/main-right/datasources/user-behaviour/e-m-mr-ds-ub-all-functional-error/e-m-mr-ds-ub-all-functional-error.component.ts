@@ -125,7 +125,7 @@ startDataReceiving(){
   this.subscriptions.push(data_receiver);
 }
  get_Functional_log_error(timeFilter?: any, appendData: boolean = false): void {
-  window.loadingStart("#ub-err-logs-grid", "Please wait");
+  //window.loadingStart("#ub-err-logs-grid", "Please wait");
 
   if (this.allDataLoaded) return; 
   const form_url =
@@ -150,6 +150,8 @@ startDataReceiving(){
     else{
       form_data["timeSpanEnum"] ="LAST_24_HOUR";
     }
+
+    window.loadingStart("#ub-err-logs-grid", "Please wait");
 
   this.app_service.make_post_server_call(form_url, form_data).subscribe({
     next: (result: any) => {

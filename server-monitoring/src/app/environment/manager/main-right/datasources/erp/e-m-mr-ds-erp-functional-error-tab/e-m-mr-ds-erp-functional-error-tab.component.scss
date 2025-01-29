@@ -29,7 +29,7 @@
 
                     .layout-status-logs {
                         // padding: .2rem .5rem;
-                        background: #dfdfdf;
+                        background: #C4320A;
                         color: #344054;
                         border-radius: 1rem;
                         font-weight: 500;
@@ -38,18 +38,6 @@
                         height: 3rem;
                         display: block;
                         width: 0.35rem;
-
-                        &.error, &.blocked {
-                            background-color: #B42318;
-                        }
-
-                        &.warning {
-                            background-color: #EB8D00;
-                        }
-
-                        &.success {
-                            background-color: #268144;
-                        }
                     }
                 }
             }
