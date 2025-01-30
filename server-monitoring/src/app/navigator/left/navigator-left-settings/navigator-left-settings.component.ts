@@ -121,7 +121,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.app_service.make_post_server_call(form_url, form_data)
     .subscribe({
       next: (result: any) => {
-        this.service_notification.notifier(NotificationType.success, 'View starred');
+        this.service_notification.notifier(NotificationType.success, 'Added to favorites');
 
       },
       error: (error: any) => {
@@ -148,7 +148,7 @@ export class NavigatorLeftSettingsComponent implements OnInit  {
     this.app_service.make_post_server_call(form_url, form_data)
     .subscribe({
       next: (result: any) => {
-        this.service_notification.notifier(NotificationType.success, 'View unstarred');
+        this.service_notification.notifier(NotificationType.success, 'Removed from favorites');
 
       },
       error: (error: any) => {
