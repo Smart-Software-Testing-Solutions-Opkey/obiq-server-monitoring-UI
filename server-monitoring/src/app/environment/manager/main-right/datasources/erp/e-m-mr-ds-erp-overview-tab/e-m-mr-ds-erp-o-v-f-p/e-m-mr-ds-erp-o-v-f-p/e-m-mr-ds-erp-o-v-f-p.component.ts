@@ -108,8 +108,9 @@ constructor(
                   const count = result[item].count;
                   const passPercent = (count / this.maxCount) * 100;
                   const failPercent = 100 - passPercent;
+                
                   return {
-                    subActivityName: item, 
+                    subActivityName: item.toLowerCase(), 
                     passPercent: passPercent, 
                     failPercent: failPercent,
                     count:count

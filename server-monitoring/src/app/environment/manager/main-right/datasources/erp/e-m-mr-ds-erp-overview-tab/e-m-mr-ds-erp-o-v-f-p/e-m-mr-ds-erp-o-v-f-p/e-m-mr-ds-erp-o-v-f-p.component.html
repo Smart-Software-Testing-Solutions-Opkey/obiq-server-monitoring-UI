@@ -22,15 +22,15 @@
           </div>
     </div> -->
     <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
-            [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid"
+            class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid"
             [style.height]="'calc(100vh -8rem)'">
     
     
     
-            <kendo-grid-column title="Build Name" field="subActivityName" [width]="200">
+            <kendo-grid-column title="Process" field="subActivityName" [width]="200">
     
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body" style="text-transform: capitalize;">
                         {{dataItem?.subActivityName}}
                     </span>
                 </ng-template>
@@ -39,7 +39,7 @@
             </kendo-grid-column>
     
           
-            <kendo-grid-column  title="" [width]="220">
+            <kendo-grid-column  title="User Guides" [width]="220">
     
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                     <div class="flex-center">
