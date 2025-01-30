@@ -46,7 +46,7 @@
             <kendo-grid-column title="Build Name" field="subActivityName" [width]="200">
     
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body" style="text-transform: capitalize;">
                         {{dataItem?.subActivityName}}
                     </span>
                 </ng-template>
