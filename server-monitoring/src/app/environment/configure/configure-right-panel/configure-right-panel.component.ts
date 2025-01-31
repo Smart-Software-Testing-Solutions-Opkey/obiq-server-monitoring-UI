@@ -23,6 +23,7 @@ export class ConfigureRightPanelComponent {
     public service_notification : NotificationsService
   ) { }
   @Input() selectedItem: any;
+  @Input() typeSelectedItem: any = "";
   Public_dropdown_Items = ['Can View', 'Can Edit'];
   selectedValue = 'Can View';
   shared_selected_value = 'Can View';
@@ -156,7 +157,8 @@ selectViewOrEdit(option: string): void {
   }
 
   ngOnInit(): void {
-
+    console.log(this.typeSelectedItem);
+    
     this.getAllProjects();
 
   
@@ -254,9 +256,71 @@ selectUser(user: any) {
     this.close_model()
     this.dataService.isEnablePersister = true
      this.dataService.changedAccessType=finalAccessObj.AccessType
+
+     
+     let authorizedUsersObj = finalAccessObj
+     delete authorizedUsersObj["AccessType"]
+
+     let authorizedUsers= []
+     for (let key in authorizedUsersObj) {
+      if (authorizedUsersObj.hasOwnProperty(key)) {
+        authorizedUsers.push(authorizedUsersObj[key])  
+      }
+   }
+   
+    authorizedUsers= authorizedUsers.map(function (obj) {
+        obj['UserId'] = obj['U_ID']; 
+        obj['Permission'] = obj['permission']; 
+
+        // Delete old key
+        delete obj['U_ID']; 
+        delete obj['permission']; 
+
+        return obj;
+    });
+
+
      console.log("this===================",this.dataService.changedAccessType)
-   if(this.inviteType=='Invite') this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+   if(this.inviteType=='Invite') {
+    this.sendEmailInvite(authorizedUsers)
+    authorizedUsers = []
+    this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+    
+   }
    else if(this.inviteType=='Done'&& !this.isDisabled) this.service_notification.notifier(NotificationType.success, 'Access type selected ');
+  }
+
+  sendEmailInvite(authorizedUsers : any){
+    let form_url = environment.BASE_OPKEY_URL + "Observability/SendSharedViewMail";
+
+    let obj = {
+      "UserID": this.dataService.UserDto.UserDTO.U_ID,
+      "ViewName": this.selectedItem.selected_view.viewName,
+      "UserName": this.dataService.UserDto.UserDTO.Name,
+      "AccessType" : this.dataService.changedAccessType,
+      "AuthorizedUsers": authorizedUsers,
+      "ProjectID": this.dataService.UserDto.ProjectDTO.P_ID
+      
+    }
+
+  
+    let form_data = {SendViewData : JSON.stringify(obj)}
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
+
+      next: (result: any) => {
+       
+      },
+      error: (error: any) => {
+        
+        console.warn(error);
+        this.msgbox.display_error_message(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+
   }
   close_model() {
     this.activeModal.dismiss('close modal');

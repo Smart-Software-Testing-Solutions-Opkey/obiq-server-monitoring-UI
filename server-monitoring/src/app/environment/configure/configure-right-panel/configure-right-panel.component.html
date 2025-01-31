@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')" *ngIf="typeSelectedItem != 'create'">
             <div class="col-sm-12 px-0 ">
                 <i class="oci oci-share public-icon"></i>
                 Shared
