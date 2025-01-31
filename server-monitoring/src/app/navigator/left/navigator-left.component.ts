@@ -70,6 +70,10 @@ ngAfterViewInit(): void {
         else if(data?.callsource == 'settings'){
           if(data?.data == 'backToMenu'){
             this.backToMenu()
+          }else if(data?.data?.selected_view){
+            this.selectedViewSettings = data.data.selected_view;
+            this.getAllVIews("settings");
+            this.cdr.detectChanges();
           }
         }
       }
@@ -188,7 +192,7 @@ ngAfterViewInit(): void {
 
   @Output() viewsData =  new EventEmitter<any>();
 
-  getAllVIews() {
+  getAllVIews( callsource? ) {
 
     window.loadingStart("#navigator-left", "Please wait");
 
@@ -214,8 +218,14 @@ ngAfterViewInit(): void {
      
           this.totalViews = result;
           this.selectedView = this.totalViews[this.totalViews.length-1];
-          this.app_service.dataTransmitter({data :result,action :"editDisabled" , selectedView:this.selectedView});
-          this.selectedViewSettings = this.selectedView;
+          if(callsource == "settings"){
+            this.selectedViewSettings = this.selectedViewSettings  
+          }
+          else{
+            this.selectedViewSettings = this.selectedView;
+          }
+          this.app_service.dataTransmitter({data :result,action :"editDisabled" , selectedView:this.selectedViewSettings});
+          
           this.dataChanged.viewSelected = this.selectedView
           this.set_Selected_VIew(this.selectedView)
         }
@@ -309,6 +319,7 @@ ngAfterViewInit(): void {
   selectedViewSettings: any = {}
 
   settingsViewSelect(val) {
+    // this.selectedViewSettings = val;
     this.dataChanged.allSelectedAnalytics=this.analyticsTypes
     // this.selectedViewSettings = val
     this.dataChanged.settingsPanel = val

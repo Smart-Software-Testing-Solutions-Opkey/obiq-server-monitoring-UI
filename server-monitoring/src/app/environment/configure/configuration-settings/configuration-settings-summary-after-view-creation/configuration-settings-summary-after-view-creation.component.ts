@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, output, SimpleChanges } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -20,8 +20,8 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     public dataService: AppDataService,
     public modalService: NgbModal,
     private cdr: ChangeDetectorRef,
-    public service_notification : NotificationsService, 
-    private msgbox: MsgboxService 
+    public service_notification: NotificationsService,
+    private msgbox: MsgboxService
   ) {
   }
   obj_configuration_setting: any;
@@ -31,28 +31,33 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   selectedUsers: any[] = [];
   Show_Project_Access: boolean = false;
   Selected_grid_dataSource: any;
-  selected_grid_System_Diagnostics : any  = []
+  selected_grid_System_Diagnostics: any = []
   selected_user_behaviour_component: any = []
-  selected_test_automation_analysis : any = []
+  selected_test_automation_analysis: any = []
   groupedDataSource: any = {};
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
     this.disposeAllSubscriptions();
   }
 
+  isDisabled: boolean = false;
   @Input('child_data')
-  set child_data({ obj_configuration_setting }) {
-  
+  set child_data({ obj_configuration_setting, isDisabled }) {
+
+    console.log("from after view       :",obj_configuration_setting)
     if (obj_configuration_setting !== this.obj_configuration_setting) {
       this.obj_configuration_setting = obj_configuration_setting;
 
 
       this.onConfigurationSettingChange();
     }
+    if (isDisabled) {
+      this.isDisabled = isDisabled
+    }
   }
 
 
-  
+
 
   onCellClick(event) {
 
@@ -72,13 +77,15 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         return;
       }
     });
-    modalRef.componentInstance.selectedItem = this.obj_configuration_setting 
-   
+    modalRef.componentInstance.selectedItem = this.obj_configuration_setting;
+    modalRef.componentInstance.typeSelectedItem = "update";
+
+
 
   }
   onConfigurationSettingChange(): void {
-    
-  
+
+
     if (this.obj_configuration_setting) {
 
       this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {
@@ -97,35 +104,49 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       });
       this.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component
 
-      
 
-      
+
+
     }
-   
+
     this.selectedAccessType = this.obj_configuration_setting?.selected_view?.accessType
-    this.dataService.changedAccessType=this.selectedAccessType
+    this.dataService.changedAccessType = this.selectedAccessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
 
-    
-  
-}
 
 
-subscriptions: Subscription[] = [];
+  }
 
-disposeAllSubscriptions() {
-  this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-}
+
+  subscriptions: Subscription[] = [];
+
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   ngOnInit(): void {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
-      
+
       if (data !== null) {
-      
+
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
-        this.selectedAccessType = this.receivedAccessType?.AccessType
-        this.dataService.changedAccessType=this.selectedAccessType
+        if(data.callsource == 'settings'){
+          this.selectedAccessType = this.receivedAccessType?.data?.selected_view?.accessType
+        }
+        else if(data.action == 'editDisabled'){
+          this.selectedAccessType = this.receivedAccessType?.selectedView?.accessType
+        }
+        else if(data.callsource == 'navigatorops'){
+          this.selectedAccessType = this.receivedAccessType?.data?.selectedView?.accessType
+        }
+        else{
+          this.selectedAccessType = this.receivedAccessType?.AccessType
+        }
+
+        
+        
+        this.dataService.changedAccessType = this.selectedAccessType
         this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
         if (this.obj_configuration_setting.AccessType == "SHARED") {
           this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
@@ -155,11 +176,11 @@ disposeAllSubscriptions() {
     this.subscriptions.push(data_receiver);
   }
   ngAfterViewInit(): void {
-   
+
   }
   onAccessTypeChange(selectedOption: string) {
-    
-   if(selectedOption) this.selectedAccessType = selectedOption;
+
+    if (selectedOption) this.selectedAccessType = selectedOption;
     if (this.selectedAccessType == "SHARED") {
       this.getAllProjects()
     }
@@ -172,7 +193,7 @@ disposeAllSubscriptions() {
   }
 
   onUserSelect(user: any, event: Event): void {
-  
+
     if ((event.target as HTMLInputElement).checked) {
 
       this.selectedUsers.push({
@@ -187,15 +208,15 @@ disposeAllSubscriptions() {
     console.log(this.selectedUsers);
   }
   create_to_update_object() {
-  
+
     var obj_Update_View = new Object();
     obj_Update_View["viewId"] = this.obj_configuration_setting.selected_view.viewId,
       obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
       obj_Update_View["accessType"] = this.selectedAccessType,
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
-      obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
-      obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
-      return obj_Update_View;
+    obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
+    obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission }] : this.obj_configuration_setting.selectedUids;
+    return obj_Update_View;
   }
   Update_ViewAccess_Type() {
 
@@ -208,8 +229,15 @@ disposeAllSubscriptions() {
       .subscribe({
 
         next: (result: any) => {
-          this.app_service.dataTransmitter("viewCreated");
-          this.selectedAccessType = form_data?.accessType;
+          // this.app_service.dataTransmitter("viewCreated");
+          // this.selectedAccessType = form_data?.accessType;
+          console.log(this.selectedAccessType);
+          
+          this.obj_configuration_setting.selected_view.accessType = this.selectedAccessType;
+          // this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
+          console.log(this.selectedAccessType);
+          this.app_service.dataTransmitter({ callsource: 'settings', data: this.obj_configuration_setting });
+          
         },
         error: (error: any) => {
           this.msgbox.display_error_message(error);
@@ -223,8 +251,8 @@ disposeAllSubscriptions() {
   }
 
   getAllProjects() {
-   
-   
+
+
     let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
@@ -247,51 +275,54 @@ disposeAllSubscriptions() {
       });
   }
 
-  backToMenu(){
-    if(this.dataService.isEnablePersister){
-      
+  backToMenu() {
+    if (this.dataService.isEnablePersister) {
+
       this.service_notification.showPersister('You have unsaved changes, wish to continue?')
       this.dataService.modalSubInstance.result.then((result) => {
       }, (response) => {
-        if(response == 'Yes'){
-          this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+        if (response == 'Yes') {
+          this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
           this.dataService.modalSubInstance = null
           return
         }
-        else if(response == 'No'){
+        else if (response == 'No') {
           this.dataService.modalSubInstance = null
           return
         }
-  
-        
+
+
       });
     }
-    else{
-      this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+    else {
+      this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
     }
-   
+
   }
 
-  updateSummaryData(){
-    if(this.dataService.isEnablePersister){
-      
+  onSettingsSelectedData = output<any>()
+
+  updateSummaryData() {
+    if (this.dataService.isEnablePersister) {
+
       this.service_notification.showPersister('You have unsaved changes, wish to continue?')
       this.dataService.modalSubInstance.result.then((result) => {
       }, (response) => {
-        if(response == 'Yes'){
+        if (response == 'Yes') {
+          this.onSettingsSelectedData.emit({ isOpen: 'Settings', selectedViewSettings: this.obj_configuration_setting })
           this.Update_ViewAccess_Type()
           this.dataService.modalSubInstance = null
           return
         }
-        else if(response == 'No'){
+        else if (response == 'No') {
           this.dataService.modalSubInstance = null
           return
         }
-  
-        
+
+
       });
     }
-    else{
+    else {
       this.Update_ViewAccess_Type()
     }
   }

@@ -3,12 +3,15 @@
 <div class="row mx-0 mb-4">
     <div class="col-sm-5 ps-0">
         <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
-        
+
         <div class="dropdown access-type-layout">
-            <button (click)="OnAccessTypeClick()"type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
-              <span>
-                {{ selectedAccessType }}
-              </span>
+            <button (click)="OnAccessTypeClick()" type="button"
+                class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}"
+                data-bs-toggle="dropdown"
+                [disabled]="obj_configuration_setting?.selected_view?.viewAccessTypePermision == 'VIEW' ? true : false">
+                <span>
+                    {{ selectedAccessType }}
+                </span>
             </button>
             <!-- <ul class="dropdown-menu w-100">
                 <li *ngFor="let option of accessTypes" class="dropdown-item" (click)="onAccessTypeChange(option)">
@@ -44,7 +47,7 @@
 
 <!-- <div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 15.1rem);"> -->
 <div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 17.1rem);">
-      <div class="card" *ngIf="Selected_grid_dataSource.length > 0">
+    <div class="card" *ngIf="Selected_grid_dataSource.length > 0">
         <div class="card-header">
             <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
                 ERP Analytics
@@ -56,7 +59,8 @@
                 <div class="kendo_grid">
                     <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
                         (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
-                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0" style="max-height: calc(100vh - 20.2rem);">
+                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0"
+                        style="max-height: calc(100vh - 20.2rem);">
                         <kendo-grid-column field="SystemIdentifier" title="Name">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
@@ -72,18 +76,19 @@
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
 
-                                    
+
                                     <span class="img-app-profile">
                                         <img src="/user/getavatar/{{dataItem.value.createdBy}}" alt="">
                                     </span>
                                     <div class="ps-2">
                                         <span class="layout-text-name">{{dataItem.value.createdByName}}</span>
-                                        <span class="layout-text-date">{{dataItem.value.createdOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                                        <span class="layout-text-date">{{dataItem.value.createdOn | date:'MMM d, y,
+                                            h:mm:ss a'}}</span>
                                     </div>
                                 </div>
                             </ng-template>
                         </kendo-grid-column>
-                    
+
                         <kendo-grid-column field="ModifiedBy" title="Last Modified">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
@@ -91,10 +96,11 @@
                                         <!-- <img src="assets/images/default/profile.png" alt=""> -->
                                         <img src="/user/getavatar/{{dataItem.value.modifiedBy}}" alt="">
                                     </span>
-                                    
+
                                     <div class="ps-2">
                                         <span class="layout-text-name">{{dataItem.value.modifiedByName}}</span>
-                                        <span class="layout-text-date">{{dataItem.value.modifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
+                                        <span class="layout-text-date">{{dataItem.value.modifiedOn | date:'MMM d, y,
+                                            h:mm:ss a'}}</span>
                                     </div>
                                 </div>
                             </ng-template>
@@ -103,8 +109,8 @@
                         <ng-template kendoGridNoRecordsTemplate>
                             <div class="no-data-found" style="height: 17rem !important;">
                                 <div class="no-data-found-content">
-                                    <img class="no-data-found-content-img"
-                                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png"
+                                        alt="No data">
                                     <p class="no-data-found-content-text">No data available</p>
                                 </div>
                             </div>
@@ -114,15 +120,15 @@
 
             </div>
         </div>
-    </div>       
-    
-    <div class="card"  *ngIf="selected_grid_System_Diagnostics.length > 0">
+    </div>
+
+    <div class="card" *ngIf="selected_grid_System_Diagnostics.length > 0">
         <div class="card-header">
             <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
                 System Diagnostics
             </a>
         </div>
-        <div id="collapse_systemDiagnostics" class="collapse show"  >
+        <div id="collapse_systemDiagnostics" class="collapse show">
             <div class="card-body px-0">
                 <div class="kendo_grid">
                     <kendo-grid #grid_Selected_Instance_list [data]="selected_grid_System_Diagnostics"
@@ -132,7 +138,7 @@
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
                                     <span class="layout-text-obiq ps-2">{{dataItem.agentName}}</span>
-                                   
+
                                 </div>
                             </ng-template>
                         </kendo-grid-column>
@@ -140,7 +146,7 @@
                         <kendo-grid-column field="CreatedBy" title="IP Address">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
-                                  
+
                                     <div>
                                         <span class="layout-text-date">{{dataItem.ipAddress}}</span>
                                     </div>
@@ -151,8 +157,8 @@
                         <ng-template kendoGridNoRecordsTemplate>
                             <div class="no-data-found" style="height: 17rem !important;">
                                 <div class="no-data-found-content">
-                                    <img class="no-data-found-content-img"
-                                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png"
+                                        alt="No data">
                                     <p class="no-data-found-content-text">No data available</p>
                                 </div>
                             </div>
@@ -163,7 +169,7 @@
         </div>
     </div>
 
-    <div class="card"  *ngIf="selected_user_behaviour_component.length > 0">
+    <div class="card" *ngIf="selected_user_behaviour_component.length > 0">
         <div class="card-header">
             <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
                 User Behavior Analytics
@@ -172,8 +178,7 @@
         <div id="collapse_user" class="collapse show">
             <div class="card-body px-0">
                 <div class="kendo_grid">
-                    <kendo-grid [data]="selected_user_behaviour_component"
-                        [selectable]="false" [navigable]="true"
+                    <kendo-grid [data]="selected_user_behaviour_component" [selectable]="false" [navigable]="true"
                         class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
 
 
@@ -192,20 +197,20 @@
                         <kendo-grid-column title="Email address">
                             <ng-template kendoGridCellTemplate let-dataItem>
                                 <div class="flex-center">
-                                    
+
                                     <div>
                                         <span class="layout-text-date">{{dataItem.value.email}}</span>
                                     </div>
                                 </div>
                             </ng-template>
                         </kendo-grid-column>
-                        
+
 
                         <ng-template kendoGridNoRecordsTemplate>
                             <div class="no-data-found" style="height: 17rem !important;">
                                 <div class="no-data-found-content">
-                                    <img class="no-data-found-content-img"
-                                        src="/assets/icon-image/nodata-img.png" alt="No data">
+                                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png"
+                                        alt="No data">
                                     <p class="no-data-found-content-text">No data available</p>
                                 </div>
                             </div>
@@ -216,65 +221,64 @@
         </div>
     </div>
 
-  
 
 
-     <div class="card"  *ngIf="selected_test_automation_analysis.length > 0">
-         <div class="card-header">
+
+    <div class="card" *ngIf="selected_test_automation_analysis.length > 0">
+        <div class="card-header">
             <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
                 Test Automation Analytics
             </a>
-            </div>
-                <div id="collapse_testAutomation" class="collapse show" >
-                    <div class="card-body px-0">
-                        <div class="kendo_grid"  >
-                                <kendo-grid [data]="selected_test_automation_analysis"
-                                    [selectable]="false" [navigable]="true"
-                                    class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-                                    <kendo-grid-column field="AgentName" title="User Name">
-                                         <ng-template kendoGridCellTemplate let-dataItem>
-                                                <div class="flex-center executionAgent">               
-                                                    <span class="status me-2" [ngClass]="dataItem['IsOnline']== true ? 'online':'offline'"></span>
-                                                        <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
-                                                </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
-                                                
-                                    <kendo-grid-column field="AgentName" title="Agent Name">
-                                        <ng-template kendoGridCellTemplate let-dataItem>
-                                                
-                                            <div class="flex-center">
-                                                <span class="layout-text-date">{{dataItem?.AgentName}}</span>
-                                            </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
-                                                
-                                    <kendo-grid-column field="ModifiedBy" title="Server URL">
-                                        <ng-template kendoGridCellTemplate let-dataItem>
-                                            <div class="flex-center">
-                                                <span class="layout-text-date">myqlm.opkeyone.com</span>
-                                            </div>
-                                        </ng-template>
-                                    </kendo-grid-column>
-                
-                                    <ng-template kendoGridNoRecordsTemplate>
-                                        <div class="no-data-found" style="height: 17rem !important;">
-                                            <div class="no-data-found-content">
-                                                <img class="no-data-found-content-img"
-                                                     src="/assets/icon-image/nodata-img.png" alt="No data">
-                                                        <p class="no-data-found-content-text">No data available</p>
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                </kendo-grid>
-                            </div>
-                        </div>
-                    </div>
-                </div>                            
-                            
         </div>
+        <div id="collapse_testAutomation" class="collapse show">
+            <div class="card-body px-0">
+                <div class="kendo_grid">
+                    <kendo-grid [data]="selected_test_automation_analysis" [selectable]="false" [navigable]="true"
+                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                        <kendo-grid-column field="AgentName" title="User Name">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center executionAgent">
+                                    <span class="status me-2"
+                                        [ngClass]="dataItem['IsOnline']== true ? 'online':'offline'"></span>
+                                    <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
+
+                        <kendo-grid-column field="AgentName" title="Agent Name">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+
+                                <div class="flex-center">
+                                    <span class="layout-text-date">{{dataItem?.AgentName}}</span>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
+
+                        <kendo-grid-column field="ModifiedBy" title="Server URL">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <div class="flex-center">
+                                    <span class="layout-text-date">myqlm.opkeyone.com</span>
+                                </div>
+                            </ng-template>
+                        </kendo-grid-column>
+
+                        <ng-template kendoGridNoRecordsTemplate>
+                            <div class="no-data-found" style="height: 17rem !important;">
+                                <div class="no-data-found-content">
+                                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png"
+                                        alt="No data">
+                                    <p class="no-data-found-content-text">No data available</p>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 <div class="p-3 border-top-0">
     <button type="button" class="btn btn-layout btn-bg-white me-2" (click)="backToMenu()">Cancel</button>
     <button type="button" class="btn btn-layout btn-bg-theme" (click)="updateSummaryData()">Update</button>
 </div>
-

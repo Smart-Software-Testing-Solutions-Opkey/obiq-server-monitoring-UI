@@ -33,7 +33,8 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-  
+
+  isDisabled = false;
   ngOnInit(): void {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
      
@@ -54,6 +55,46 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
       
     });
     this.subscriptions.push(data_receiver);
+
+
+    if(this.service_data.totalViews.source == "editDisabled"){
+
+
+      if(this.service_data.totalViews){
+        this.service_data.totalViews.forEach((views) => {
+          if(views && views.viewAccessTypePermision && views.viewAccessTypePermision != null){
+        //     views.authorizedUsers.forEach( (val)=>{
+        //       if(val.permmission == 'VIEW'){
+        //          this.isDisabled = true
+        //       }
+        //       else if(val.permmission == 'EDIT'){
+        //          this.isDisabled = false
+        //       }
+        //   }
+        // )
+           
+              if (views.viewAccessTypePermision == 'VIEW') {
+                    this.isDisabled = true
+              }
+              else if (views.viewAccessTypePermision == 'EDIT' || views.viewAccessTypePermision == 'ALL') {
+                    this.isDisabled = false
+              }
+            
+          }
+          
+        });
+      }
+    }
+  }
+
+  onSettingsSelectedDataObject(val){
+
+    this.service_data.selectedArtifactData.selectedView = val.selectedViewSettings.selected_view;
+    this.service_data.selectedArtifactData.AccessType = val.selectedViewSettings.selected_view.accessType;
+
+    this.obj_configuration_setting.AccessType =  this.service_data.selectedArtifactData.selectedView.accessType
+    // this.obj_configuration_setting = this.service_data.selectedArtifactData
+
   }
 
   
