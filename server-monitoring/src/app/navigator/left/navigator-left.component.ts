@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -184,6 +184,10 @@ ngAfterViewInit(): void {
     });
   }
 
+  
+
+  @Output() viewsData =  new EventEmitter<any>();
+
   getAllVIews() {
 
     window.loadingStart("#navigator-left", "Please wait");
@@ -194,8 +198,8 @@ ngAfterViewInit(): void {
       userId: this.dataService.UserDto.UserDTO.U_ID,
       projectId: this.dataService.UserDto.ProjectDTO.P_ID
     }
-
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
+
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         if (result == null || result?.length == 0) {
@@ -203,9 +207,14 @@ ngAfterViewInit(): void {
         }
         console.log(result, "get all  views resultS")
         if (result?.length > 0) {
-          this.service_data.viewsData = result
-          this.totalViews = result
+          this.service_data.viewsData = result;
+
+          this.viewsData.emit(result);
+        
+     
+          this.totalViews = result;
           this.selectedView = this.totalViews[this.totalViews.length-1];
+          this.app_service.dataTransmitter({data :result,action :"editDisabled" , selectedView:this.selectedView});
           this.selectedViewSettings = this.selectedView;
           this.dataChanged.viewSelected = this.selectedView
           this.set_Selected_VIew(this.selectedView)
@@ -254,6 +263,7 @@ ngAfterViewInit(): void {
     this.dataChanged.viewSelected = this.selectedView
     this.set_Selected_VIew(this.selectedView)
     this.service_notification.notifier(NotificationType.success, 'View selected');
+    this.app_service.dataTransmitter({data : this.totalViews,action :"editDisabled" , selectedView : val});
   }
 
   changeToView() {

@@ -78,6 +78,12 @@ export class EnvironmentManagerComponent implements OnInit {
     this.objSettings = val
   }
 
+  viewUserData(val){
+    return;
+    this.app_service.dataTransmitter({data : val,action :"editDisabled"});
+
+  }
+  
   obj_configuration_setting = {
     tab: "datasource",
     title: "Add View",

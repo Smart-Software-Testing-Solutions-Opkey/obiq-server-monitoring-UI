@@ -10,7 +10,7 @@
               <div class="left-section">
             
                     @if (service_data.UserDto) {
-                        <app-navigator-left (onLeftPanelDataChange)="leftPanelDataUpdate($event)"></app-navigator-left>
+                        <app-navigator-left (onLeftPanelDataChange)="leftPanelDataUpdate($event)" (viewsData)="viewUserData($event)"></app-navigator-left>
                     }
               
               </div>

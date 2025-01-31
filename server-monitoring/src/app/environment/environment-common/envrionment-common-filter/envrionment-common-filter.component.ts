@@ -20,10 +20,45 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
   @Input() datasource: any;
   selectedTab = ''
-  @Input('selected_tab') set selected_tab ({selectedTab}){
+  @Input('selected_tab') set selected_tab({ selectedTab, forDisablePermissionData }) {
+    if (forDisablePermissionData) {
+      this.disablePermission(forDisablePermissionData);
+    }
     this.selectedTab = selectedTab
     this.bind_filter()
 
+  }
+
+  disablePermission(forDisablePermissionData : any){
+    forDisablePermissionData.data.forEach((users) => {
+      // users.authorizedUsers.forEach((val) => {
+      //   // if(val.userId == this.dataService.UserDto.U_ID)
+      //   if (val.permmission == 'VIEW') {
+      //     this.isDisabled = true
+      //   }
+      //   else if (val.permmission == 'EDIT') {
+      //     this.isDisabled = false
+      //   }
+      // })
+
+      if(forDisablePermissionData.selectedView.accessType == "PRIVATE"){
+        this.isDisabled = false
+      }
+      else{
+        if(forDisablePermissionData.selectedView.viewId == users.viewId){
+          if(users.viewAccessTypePermision && users.viewAccessTypePermision != null){
+            if (users.viewAccessTypePermision == 'VIEW') {
+                  this.isDisabled = true
+            }
+            else if (users.viewAccessTypePermision == 'EDIT' || users.viewAccessTypePermision == 'ALL') {
+                  this.isDisabled = false
+            }
+          }
+        }
+      }
+      
+      
+    });
   }
   @Input() selectedAnalyticsType: any;
 
@@ -52,13 +87,14 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     this.dataService.isEnablePersister = false;
     this.disposeAllSubscriptions();
   }
-  
+
   subscriptions: Subscription[] = [];
- 
+
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  isDisabled = false;
   ngOnInit(): void {
     // this.sendFilterData()
 
@@ -73,13 +109,13 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
           // Manually trigger change detection
           this.cdr.detectChanges();
         }
-        else if( data.action == "bindFilterData"){
+        else if (data.action == "bindFilterData") {
           this.bind_filter(data.callsource)
         }
-        else if(data.callsource == "stopEdit"){
+        else if (data.callsource == "stopEdit") {
           this.Editable = true
-          this.toggleEdit() 
-      }
+          this.toggleEdit()
+        }
       }
     })
     this.subscriptions.push(data_receiver);
@@ -114,46 +150,46 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     this.modelObj = JSON.parse(JSON.stringify(obj))
   }
 
-  obj_filter ={
-    common_filter_inner : { display : false},
-    filter_calendar : {display:false},
-    erp_application  : {display:false},
-    erp_environment  : {display:false},
-    erp_process  : {display:false},
-    user : {display:false},
-    erp_module : {display:false},
-    filter_status : {display:false}
+  obj_filter = {
+    common_filter_inner: { display: false },
+    filter_calendar: { display: false },
+    erp_application: { display: false },
+    erp_environment: { display: false },
+    erp_process: { display: false },
+    user: { display: false },
+    erp_module: { display: false },
+    filter_status: { display: false }
   }
-  bind_filter(call_source ?){
+  bind_filter(call_source?) {
     this.obj_filter.common_filter_inner.display = true;
     this.obj_filter.filter_calendar.display = true;
     this.obj_filter.erp_application.display = true;
 
-    if(this.selectedTab == 'LOG_TAB'){
+    if (this.selectedTab == 'LOG_TAB') {
       this.obj_filter.erp_environment.display = false;
       this.obj_filter.erp_process.display = false;
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = false;
       this.obj_filter.filter_status.display = true;
     }
-    else if( this.selectedTab == 'JOURNEY_TAB' || this.selectedTab == 'ubAllJourney' || this.selectedTab == 'erpAllJourney'||this.selectedTab=='erpAllFunctional'){
+    else if (this.selectedTab == 'JOURNEY_TAB' || this.selectedTab == 'ubAllJourney' || this.selectedTab == 'erpAllJourney' || this.selectedTab == 'erpAllFunctional') {
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = true;
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = true;
       this.obj_filter.filter_status.display = true;
     }
-    else if (this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR'  ||this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab =='LOG_APP_API_ERROR'|| this.selectedTab == 'ubAllFunctional' || this.selectedTab == 'ubAllApi' || this.selectedTab == 'ubAllConsole' || this.selectedTab == 'erpAllFunctional'){
+    else if (this.selectedTab == 'LOG_APP_FUNCTIONAL_ERROR' || this.selectedTab == 'LOG_APP_CONSOLE_ERROR' || this.selectedTab == 'LOG_APP_API_ERROR' || this.selectedTab == 'ubAllFunctional' || this.selectedTab == 'ubAllApi' || this.selectedTab == 'ubAllConsole' || this.selectedTab == 'erpAllFunctional') {
       this.obj_filter.erp_environment.display = true;
       this.obj_filter.erp_process.display = false;
       this.obj_filter.user.display = true;
       this.obj_filter.erp_module.display = false;
-      this.obj_filter.filter_status.display = false;    
-      
-    }
-   
+      this.obj_filter.filter_status.display = false;
 
-    
+    }
+
+
+
   }
   modelObj = {
     modelApplication: "OracleFusion",
@@ -205,7 +241,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
   sendFilterData() {
     this.onFilterSelected.emit(this.modelObj)
-    this.showRightPanel= false
+    this.showRightPanel = false
   }
   innerOps(val) {
     if (val?.action == 'Clear All') {
@@ -226,7 +262,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
 
   refreshPage() {
-    this.searchText= ''
+    this.searchText = ''
     this.app_service.dataTransmitter({ callsource: this.selectedTab, action: 'refresh', selectedAnalyticsType: this.selectedAnalyticsType });
   }
 

@@ -29,8 +29,10 @@
 
     <div class="filter-content mb-1">
         @if( this.selectedTab == "OVERVIEW_TAB"){
+
+            {{isDisabled}}
             @if( this.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'TEST_AUTOMATION_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE'){
-                <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" >
+                <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" [disabled]= "isDisabled" >
                     <i class="oci oci-edit"></i>
                 </button>
             }  

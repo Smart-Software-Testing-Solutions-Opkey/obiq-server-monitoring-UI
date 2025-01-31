@@ -34,6 +34,8 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   searchText : any;
   
   subscriptions: Subscription[] = [];
+
+  forDisablePermissionData:any;
  
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
@@ -93,6 +95,11 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
           this.bindData()
 
         }
+        else if(data.action == 'editDisabled'){
+
+         this.forDisablePermissionData = data;
+            
+         }
     }
       
     });

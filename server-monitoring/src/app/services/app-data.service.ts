@@ -315,4 +315,9 @@ export class AppDataService {
   setSelectedViewEnvironmentVisibility(visible: boolean) {
     this.showSelectedViewEnvironment = visible;
   }
+  totalViews:any = {
+    data:[],
+    source:''
+  };
 }
+
