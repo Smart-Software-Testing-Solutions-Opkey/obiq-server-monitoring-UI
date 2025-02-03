@@ -309,7 +309,7 @@ dataDir = ''
       // ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
       // form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
       if(type == "ESS_LOG_ERROR_WIDGET"){
-        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageErrorCount";
         form_data = { 
           "timeSpanEnum": "LAST_7_DAYS" , 
           "appType": "ORACLEFUSION", 
@@ -319,7 +319,7 @@ dataDir = ''
         }
       }
       else if(type == 'ESS_LOG_WARNING_WIDGET'){
-        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageWarningCount";
         form_data = { 
           "timeSpanEnum": "LAST_7_DAYS" , 
           "appType": "ORACLEFUSION", 
@@ -331,7 +331,7 @@ dataDir = ''
         }
       }
       else{
-        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageSuccessCount";
         form_data = { 
           "timeSpanEnum": "LAST_7_DAYS" , 
           "appType": "ORACLEFUSION", 
