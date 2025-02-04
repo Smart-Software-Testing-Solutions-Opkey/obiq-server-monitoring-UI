@@ -89,11 +89,12 @@ constructor(
 
   getWidgetData(){
         window.loadingStart("#user-guides-"+this.widgetType, "Please wait");
-        let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+        let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData`;
         const form_data = {
           "appType": "ORACLEFUSION",
           "viewId": this?.view?.viewId,
           "widgetType": this.widgetType,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
         };
        
         this.app_service.make_post_server_call(ajax_url, form_data)

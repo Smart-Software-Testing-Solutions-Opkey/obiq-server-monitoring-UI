@@ -49,7 +49,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
     ]
     view: any = null;
     title: any = null;
-    widgetType: any ="USER_GUIDE_LIST_PER_PROCESS_WIDGET";
+    widgetType: any ="USERGUIDE_PER_PROCESS";
     @Input('child_data') set child_data({view,title}) {
      this.view = view;
      this.title=title;
@@ -119,12 +119,13 @@ ngOnDestroy() {
   
     getWidgetData(timeFilter?: any){
       window.loadingStart("#user-guides-"+this.widgetType, "Please wait");
-      let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData`;
+      let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData`;
       let form_data : any ;
       form_data = {
         "appType": "ORACLEFUSION",
         "viewId": this?.view?.viewId,
         "widgetType": this.widgetType,
+        "projectId":this.service_data.UserDto.ProjectDTO.P_ID
       };
       if(timeFilter?.type == 'setEnum'){
         form_data.timeSpanEnum = timeFilter?.value;
