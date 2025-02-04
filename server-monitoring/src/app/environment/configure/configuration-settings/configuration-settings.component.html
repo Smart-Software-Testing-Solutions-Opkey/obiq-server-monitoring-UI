@@ -93,7 +93,7 @@
 
     </div>
 
-    <div class="p-3 border-top-0" style="padding-left: 26rem !important;">
+    <div class="p-3 border-top-0 text-end pe-5" style="padding-left: 26rem !important;">
         <button *ngIf="obj_configuration_setting.tab != 'datasource'" type="button" class="btn btn-layout btn-bg-white me-2" (click)="back()">Back</button>
         <button  *ngIf="this.obj_configuration_setting.tab !== 'view_summary'" type="button" class="btn btn-layout btn-bg-theme" (click)="next()">Next</button>
         <button  *ngIf="this.obj_configuration_setting.tab == 'view_summary'" type="button" class="btn btn-layout btn-bg-theme" (click)="finish()">Finish</button>
