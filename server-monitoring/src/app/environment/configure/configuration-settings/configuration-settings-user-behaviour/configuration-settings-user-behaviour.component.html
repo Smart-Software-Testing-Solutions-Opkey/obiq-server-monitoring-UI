@@ -1,5 +1,5 @@
 
-<div class="row mx-0 mb-3 align-items-center">
+<div class="row mx-0 align-items-center">
     <div class="d-flex-between mb-2 px-0">
          <div class="col-8 px-0">
             <h6 class="mb-3 font-bold">
@@ -33,7 +33,8 @@
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo px-0"
     kendoGridSelectBy="email_ID"
-    [(selectedKeys)]="selectedKeys">
+    [(selectedKeys)]="selectedKeys"
+    [style.max-height]="'calc(100vh - 17rem)'">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column>
