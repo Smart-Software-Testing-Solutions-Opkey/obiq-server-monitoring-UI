@@ -139,7 +139,7 @@ ngOnDestroy() {
       form_data = {
           "appType": "ORACLEFUSION",
           "viewId": this?.view?.viewId,
-          // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
+          "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
           "widgetType": "USER_JOURNEY_TOP_FAST_WIDGET",
       };
     }
@@ -148,7 +148,7 @@ ngOnDestroy() {
       form_data = {
         "appType": "ORACLEFUSION",
         "viewId": this?.view?.viewId,
-        // "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
+        "projectId": this?.service_data?.UserDto?.ProjectDTO?.P_ID,
         "widgetType": "USER_JOURNEY_TOP_FAST_WIDGET",
         "userId": this.service_data.UserDto.UserDTO.U_ID
       };

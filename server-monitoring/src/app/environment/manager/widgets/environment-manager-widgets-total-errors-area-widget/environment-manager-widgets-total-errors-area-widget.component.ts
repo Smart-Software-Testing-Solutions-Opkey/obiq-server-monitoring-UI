@@ -316,6 +316,7 @@ dataDir = ''
           "limitBy": 50,
           "offset": 0, 
           "viewId": this?.view?.viewId,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
         }
       }
       else if(type == 'ESS_LOG_WARNING_WIDGET'){
@@ -327,6 +328,7 @@ dataDir = ''
           "offset": 0, 
           "userId": this.service_data.UserDto.UserDTO.U_ID,
           "viewId": this?.view?.viewId,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
 
         }
       }
@@ -338,7 +340,8 @@ dataDir = ''
           "limitBy": 50,
           "offset": 0, 
           "userId": this.service_data.UserDto.UserDTO.U_ID,
-          "viewId": this?.view?.viewId
+          "viewId": this?.view?.viewId,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
         }
       }
       
@@ -352,7 +355,8 @@ dataDir = ''
             "limitBy": 50,
             "offset": 0, 
             "userId": this.service_data.UserDto.UserDTO.U_ID,
-            "viewId": this?.view?.viewId
+            "viewId": this?.view?.viewId,
+            "projectId":this.service_data.UserDto.ProjectDTO.P_ID
           }
 
     }
