@@ -10,10 +10,10 @@
         <div class="col-sm-6 ps-0 pe-3">
              
             <label for="name" class="form-label">Name <span class="text-astric">*</span>
-                <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">View name is required.</span>
-                <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span>
             </label>
             <input id="View_Name_Input" type="text" class="form-control" placeholder="Enter view name" (blur)="onInputChanges($event)" (keyup.enter)="onInputChange($event)" [(ngModel)]="modal_name">
+            <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">View name is required.</span>
+            <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span>
             <!-- <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span> -->
         </div>
     </div>
@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <h3 class="text-center pb-3 header mb-0">{{item.name}}</h3>
                             <p>
-                                <span class="d-block text-center" style="height: 5rem; overflow: hidden;">{{item.description}}</span>
+                                <span class="d-block text-center" style="height: 5rem; overflow: hidden; opacity: 0.6;">{{item.description}}</span>
                             </p>
                         </div>
                         <div class="card-footer py-2">
