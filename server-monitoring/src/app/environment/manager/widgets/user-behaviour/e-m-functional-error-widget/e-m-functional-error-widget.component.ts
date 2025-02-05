@@ -141,7 +141,8 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
           "userId":this.service_data.UserDto.UserDTO.U_ID,
           "viewId": this?.view?.viewId,
           // "userId":"2170f924-6ab5-4d91-b9cf-232a27cd08dc",
-          "offset":0
+          "offset":0,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
           }
       }
       else if(this.widgetType=='ERP'){
@@ -150,7 +151,8 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
           "appType":"ORACLEFUSION",
           "limitBy":50,
           "viewId": this?.view?.viewId,
-          "offset":0
+          "offset":0,
+          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
           }
 
       }
