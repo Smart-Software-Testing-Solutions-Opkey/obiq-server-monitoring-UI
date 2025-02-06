@@ -270,7 +270,12 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
     this.obj_configuration_setting.selected_erp_analytics = this.selectedRows;
   
-    if(this.obj_configuration_setting.selected_erp_analytics.length>0)this.obj_error.dispaly_Instances = false;
+    if(this.obj_configuration_setting.selected_erp_analytics.length>0){
+      this.obj_error.dispaly_Instances = false;
+    }
+    else{
+      this.obj_error.dispaly_Instances = true;
+    }
 
   }
   selectedKeys = []
