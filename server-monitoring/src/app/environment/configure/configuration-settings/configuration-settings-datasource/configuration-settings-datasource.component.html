@@ -11,9 +11,10 @@
              
             <label for="name" class="form-label">Name <span class="text-astric">*</span>
             </label>
-            <input id="View_Name_Input" type="text" class="form-control" placeholder="Enter view name" (blur)="onInputChanges($event)" (keyup.enter)="onInputChange($event)" [(ngModel)]="modal_name">
-            <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">View name is required.</span>
+            <input id="View_Name_Input" (input)="validateViewName(modal_name)" type="text" class="form-control" placeholder="Enter view name" (blur)="onInputChanges($event)" (keyup.enter)="onInputChanges($event)" [(ngModel)]="modal_name">
+            <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">{{error_message}}</span>
             <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span>
+
             <!-- <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span> -->
         </div>
     </div>
