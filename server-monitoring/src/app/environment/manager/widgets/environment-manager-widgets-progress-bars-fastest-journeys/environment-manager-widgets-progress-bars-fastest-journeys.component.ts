@@ -74,7 +74,7 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
       }
     }))
     
-    if(this?.view?.viewId ){
+    if(this.view && this.view.viewId ){
       this.datasourceProgressBar = [];
       this.getWidgetData()
       this.createChart();

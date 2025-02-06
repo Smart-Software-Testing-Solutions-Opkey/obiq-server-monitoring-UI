@@ -96,13 +96,15 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       });
       this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics
 
-      this.obj_configuration_setting.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component.map(item => {
-        return {
-          ...item,
-          value: JSON.parse(item.value)
-        };
-      });
-      this.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component
+      if(this.obj_configuration_setting && this.obj_configuration_setting.selected_user_behaviour_component){
+        this.obj_configuration_setting.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component.map(item => {
+          return {
+            ...item,
+            value: JSON.parse(item.value)
+          };
+        });
+        this.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component
+      }
 
 
 

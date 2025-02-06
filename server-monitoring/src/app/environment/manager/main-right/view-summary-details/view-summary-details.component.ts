@@ -57,11 +57,11 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
     this.subscriptions.push(data_receiver);
 
 
-    if(this.service_data.totalViews.source == "editDisabled"){
+    if(this.service_data!.totalViews.source == "editDisabled"){
 
 
-      if(this.service_data.totalViews){
-        this.service_data.totalViews.forEach((views) => {
+      if(this.service_data && this.service_data.totalViews && this.service_data.totalViews.data){
+        this.service_data.totalViews.data.forEach((views) => {
           if(views && views.viewAccessTypePermision && views.viewAccessTypePermision != null){
         //     views.authorizedUsers.forEach( (val)=>{
         //       if(val.permmission == 'VIEW'){

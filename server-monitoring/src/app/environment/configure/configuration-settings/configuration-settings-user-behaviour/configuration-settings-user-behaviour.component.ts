@@ -52,7 +52,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     
-    let form_url = environment.BASE_OPKEY_URL + "Admin/GetAllUserBinding";
+    let form_url = environment.BASE_OPKEY_URL + "Base/getAllEnabledUsersLight";
     let form_data = {};
 
     this.app_service.make_get_server_call(form_url,form_data)
