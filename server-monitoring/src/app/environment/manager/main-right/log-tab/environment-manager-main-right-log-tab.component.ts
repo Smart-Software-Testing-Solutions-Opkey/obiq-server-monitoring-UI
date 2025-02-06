@@ -70,16 +70,16 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   selectedLogType: string = 'All';  // Default selection
   selectedTime:any;
   logToSearch : any = "";
-  //logHeight : string =''
+  logHeight : string =''
 
   ngOnInit(): void {
    
-    // if(this.analyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
-    //   this.logHeight = 'calc(100vh - 8rem)' 
-    // }
-    // else{
-    //   this.logHeight = 'calc(100vh - 25rem)'
-    // }
+    if(this.analyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
+      this.logHeight = 'calc(100vh - 8rem)' 
+    }
+    else{
+      this.logHeight = 'calc(100vh - 25rem)'
+    }
     
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){

@@ -26,14 +26,13 @@
    
 
     <div id="logs-grid"  class="logs-grid-layout">
-        <!-- [style.height]="logHeight" -->
         <kendo-grid 
-            [data]="logDataSource" 
-            [selectable]="true" 
-            (cellClick)="onSelectionChange($event)"
-            class="scrollable custom-grid-height"
-            (scrollBottom)="onScroll()"
-            [style.height]="'calc(100vh - 9rem)'"
+        [data]="logDataSource" 
+        [selectable]="true" 
+        (cellClick)="onSelectionChange($event)"
+        class="scrollable custom-grid-height"
+        (scrollBottom)="onScroll()"
+        [style.height]="logHeight"
             >
 
             <kendo-grid-column title="" [width]="10">
