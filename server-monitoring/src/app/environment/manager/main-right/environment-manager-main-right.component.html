@@ -1,62 +1,63 @@
-@if(isDataLoaded){
-    <div id="Env_manager_main_right" class="feature-container h-100">
+<div id="Env_manager_main_right" class="feature-container h-100">
+    <div class="feature-breadcrumb">
+        <app-navigator-breadcrumb></app-navigator-breadcrumb>
 
-        <div class="feature-breadcrumb">
-            <app-navigator-breadcrumb></app-navigator-breadcrumb>
-            
-        </div>
-    
-       
-        <div class="feature-body feature-body-height flex-box-column">
-    
-            <div class="app-filter app-filter-content px-4">
-    
-                <div class="left">
-                    <h3 class="mb-0 text-ellipsis">{{this.selectedView.viewName}}</h3>
-                </div>
+    </div>
 
-                
-                <div class="right flex-center justify-content-end flex-wrap" style="margin-top: 0.5rem;">
-                    <app-envrionment-common-filter [selected_tab]= '{selectedTab: selectedTab.enumType , forDisablePermissionData:forDisablePermissionData}' [selectedAnalyticsType]=selectedAnalyticsType.type (onEditableChange)="toggleEdit($event)" (onFilterSelected)="changeFilter($event)"></app-envrionment-common-filter>
-                </div>
-  
-                
+
+    <div class="feature-body feature-body-height flex-box-column">
+
+        <div class="app-filter app-filter-content px-4">
+
+            <div class="left">
+                <h3 class="mb-0 text-ellipsis">{{selectedView.viewName || selectedView.name}}</h3>
             </div>
-    
-            <div class="app-body flex-box-column scrollable">
-    
-                <div class="tab_panel position-relative px-4" role="tabpanel" aria-label="Tab Panel">
-    
-                    <ul class="nav-tabs mb-0" role="tablist">
-                        @for (tab of availableTabs; track $index) {
-        
-                            @if (tab.isVisible) {
-        
-                                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                                    <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
-                                        href="javascript:void(0)" (click)="changeSelectedTab(tab)">
-                                        @if (tab.text == 'Overview') {
-                                            <i class="oci oci-map pr-1"></i>
-                                        }
-    
-                                        @else if  (tab.text == 'Log') {
-                                            <i class="oci oci-logs pr-1"></i>
-                                        }
-                                        
-                                        @else if  (tab.text == 'Time Explorer') {
-                                            <i class="oci oci-time-explorer pr-1"></i>
-                                        }
-    
-                                        @else if  (tab.text == 'Telemetry') {
-                                            <i class="oci oci-bar-chart pr-1"></i>
-                                        }
-                                        {{tab.text}}
-                                    </a>
-                                </li>
+
+
+            <div class="right flex-center justify-content-end flex-wrap" style="margin-top: 0.5rem;">
+                <app-envrionment-common-filter
+                    [selected_tab]='{selectedTab: selectedTab.enumType , forDisablePermissionData:forDisablePermissionData}'
+                    [selectedAnalyticsType]=selectedAnalyticsType.type (onEditableChange)="toggleEdit($event)"
+                    (onFilterSelected)="changeFilter($event)"></app-envrionment-common-filter>
+            </div>
+
+
+        </div>
+
+        <div class="app-body flex-box-column scrollable">
+
+            <div class="tab_panel position-relative px-4" role="tabpanel" aria-label="Tab Panel">
+
+                <ul class="nav-tabs mb-0" role="tablist">
+                    @for (tab of availableTabs; track $index) {
+
+                    @if (tab.isVisible) {
+
+                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                        <a class="nav-link" [ngClass]="tab.isSelected?'active':''" href="javascript:void(0)"
+                            (click)="changeSelectedTab(tab)">
+                            @if (tab.text == 'Overview') {
+                            <i class="oci oci-map pr-1"></i>
                             }
-        
-                        }
-                        <!-- <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
+
+                            @else if (tab.text == 'Log') {
+                            <i class="oci oci-logs pr-1"></i>
+                            }
+
+                            @else if (tab.text == 'Time Explorer') {
+                            <i class="oci oci-time-explorer pr-1"></i>
+                            }
+
+                            @else if (tab.text == 'Telemetry') {
+                            <i class="oci oci-bar-chart pr-1"></i>
+                            }
+                            {{tab.text}}
+                        </a>
+                    </li>
+                    }
+
+                    }
+                    <!-- <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
                             <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"
                                 href="javascript:void(0)" (click)="changeSelectedTab('overview')">
                                 <i class="oci oci-journey pr-1"></i>
@@ -83,16 +84,16 @@
                                 <i class="oci oci-journey pr-1"></i>
                                 Telemetry</a>
                         </li> -->
-        
-                    </ul>
-    
-                    <!-- <div class="error-details-count">
+
+                </ul>
+
+                <!-- <div class="error-details-count">
                         <span>
                             <i class="oci oci-WARNING pe-2"></i>4
                         </span>
                     </div> -->
-                </div>
-    <!--     
+            </div>
+            <!--     
                 <div class="tab_view_content h-100 scrollable px-4 pb-2">
         
                     @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
@@ -121,123 +122,113 @@
                     }
         
                 </div>  -->
-                <div class="tab_view_content h-100 scrollable px-4 pb-2">
-                    @if (isSelectedAnalyticsTypeEmpty) {
-                        @if (selectedTab.enumType === 'OVERVIEW_TAB') {
-                            <div class="overview">
-                                <app-environment-manager-main-right-overview-tab
-                            [child_data]="{view:selectedView,allSelectedAnalytics:allSelectedAnalytics}"   [Editable]="Editable">
-                                </app-environment-manager-main-right-overview-tab>
-                            </div>
-                        }
-                        @else if (selectedTab.enumType === 'LOG_TAB') {
-                            <div class="log">
-                                <app-environment-manager-main-right-log-tab
-                                    [analyticsType]="selectedAnalyticsType"
-                                    [view]="selectedView">
-                                </app-environment-manager-main-right-log-tab>
-                            </div>
-                        }
-                        @else if (selectedTab.enumType === 'TIME_EXPLORER_TAB') {
-                            <div class="timeexplorer">
-                                Time explorer component here
-                            </div>
-                        }
-                        @else if (selectedTab.enumType === 'telemetry') {
-                            <div class="telemetry">
-                                Telemetry component here
-                            </div>
-                        }
-                    }
-                    @else {
-                        @if(selectedAnalyticsType.type == "USER_BEHAVIOUR_ANALYTICS_DATASOURCE"){
-                            @if (selectedTab.enumType === 'OVERVIEW_TAB') {
-                                <div class="overview">
-                                    <app-e-m-mr-ds-ub-overview-tab
-                                    [view]="selectedView" [Editable]="Editable">
-                                    </app-e-m-mr-ds-ub-overview-tab>
-                                </div>
-                            }
-                            @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
-                                <div class="log">
-                                    <app-e-m-ds-ub-functional-error-tab [analyticsType]="selectedAnalyticsType"
-                                    [view]="selectedView">
-                                    </app-e-m-ds-ub-functional-error-tab>
-                                </div>
-                            }
-                             @else if(selectedTab.enumType === "JOURNEY_TAB"){
-                                <div class="log">
-                                    <app-e-m-ds-ub-journey [analyticsType]="selectedAnalyticsType"
-                                    [view]="selectedView">
-
-                                    </app-e-m-ds-ub-journey>
-                                </div>
-                             }
-                            
-                          
-                            @else if(selectedTab.enumType === "LOG_APP_CONSOLE_ERROR"){
-                                <div class="log">
-                                    <app-e-m-mr-ds-ub-console-error-tab
-                                        [analyticsType]="selectedAnalyticsType"
-                                        [view]="selectedView">
-                                    </app-e-m-mr-ds-ub-console-error-tab>
-                                </div>
-                            }
-                            @else if(selectedTab.enumType === "LOG_APP_API_ERROR"){
-                                <div class="log">
-                                    <app-e-m-mr-ds-ub-api-error-tab 
-                                        [analyticsType]="selectedAnalyticsType"
-                                        [view]="selectedView">
-                                    </app-e-m-mr-ds-ub-api-error-tab>
-                                </div>
-                            }
-                        }
-                        @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
-                            <div class="telemetry">
-                                TEST_AUTOMATION_ANALYTICS Selected
-                            </div>
-                        }
-                        @else if(selectedAnalyticsType.type == "ERP_ANALYTICS_DATASOURCE"){
-                            @if (selectedTab.enumType === 'OVERVIEW_TAB') {
-                                <div class="overview">
-                                    <app-e-m-mr-ds-erp-overview-tab
-                                    [view]="selectedView" [Editable]="Editable">
-                                    </app-e-m-mr-ds-erp-overview-tab>
-                                </div>
-                            }
-                            @else if(selectedTab.enumType === 'LOG_TAB'){
-                                <div class="log">
-                                <app-environment-manager-main-right-log-tab
-                                [analyticsType]="selectedAnalyticsType"
-                                [view]="selectedView">
-                                </app-environment-manager-main-right-log-tab>
-                                </div>
-                            }
-                            @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
-                                <div class="log">
-                                    <app-e-m-mr-ds-erp-functional-error-tab [analyticsType]="selectedAnalyticsType"
-                                    [view]="selectedView">
-    
-                                    </app-e-m-mr-ds-erp-functional-error-tab>
-                                </div>
-                            }
-    
-                        }
-                        @else if(selectedAnalyticsType.type == "SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE"){
-                            <div class="telemetry">
-                                SYSTEM_DIAGNOSTICS_ANALYTICS Selected
-                            </div>
-                        }
-                      
-                     
-                    }
-                   
-       
+            <div class="tab_view_content h-100 scrollable px-4 pb-2">
+                @if (isSelectedAnalyticsTypeEmpty) {
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-environment-manager-main-right-overview-tab
+                        [child_data]="{view:selectedView,allSelectedAnalytics:allSelectedAnalytics}"
+                        [Editable]="Editable">
+                    </app-environment-manager-main-right-overview-tab>
                 </div>
-    
+                }
+                @else if (selectedTab.enumType === 'LOG_TAB') {
+                <div class="log">
+                    <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView">
+                    </app-environment-manager-main-right-log-tab>
+                </div>
+                }
+                @else if (selectedTab.enumType === 'TIME_EXPLORER_TAB') {
+                <div class="timeexplorer">
+                    Time explorer component here
+                </div>
+                }
+                @else if (selectedTab.enumType === 'telemetry') {
+                <div class="telemetry">
+                    Telemetry component here
+                </div>
+                }
+                }
+                @else {
+                @if(selectedAnalyticsType.type == "USER_BEHAVIOUR_ANALYTICS_DATASOURCE"){
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-e-m-mr-ds-ub-overview-tab [view]="selectedView" [Editable]="Editable">
+                    </app-e-m-mr-ds-ub-overview-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
+                <div class="log">
+                    <app-e-m-ds-ub-functional-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView">
+                    </app-e-m-ds-ub-functional-error-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "JOURNEY_TAB"){
+                <div class="log">
+                    <app-e-m-ds-ub-journey [analyticsType]="selectedAnalyticsType" [view]="selectedView">
+
+                    </app-e-m-ds-ub-journey>
+                </div>
+                }
+
+
+                @else if(selectedTab.enumType === "LOG_APP_CONSOLE_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-ub-console-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView">
+                    </app-e-m-mr-ds-ub-console-error-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_API_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-ub-api-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView">
+                    </app-e-m-mr-ds-ub-api-error-tab>
+                </div>
+                }
+                }
+                @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
+                <div class="telemetry">
+                    TEST_AUTOMATION_ANALYTICS Selected
+                </div>
+                }
+                @else if(selectedAnalyticsType.type == "ERP_ANALYTICS_DATASOURCE"){
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-e-m-mr-ds-erp-overview-tab [view]="selectedView" [Editable]="Editable">
+                    </app-e-m-mr-ds-erp-overview-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === 'LOG_TAB'){
+                <div class="log">
+                    <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView">
+                    </app-environment-manager-main-right-log-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-erp-functional-error-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView">
+
+                    </app-e-m-mr-ds-erp-functional-error-tab>
+                </div>
+                }
+
+                }
+                @else if(selectedAnalyticsType.type == "SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE"){
+                <div class="telemetry">
+                    SYSTEM_DIAGNOSTICS_ANALYTICS Selected
+                </div>
+                }
+
+
+                }
+
+
             </div>
-    
+
         </div>
-    
+
     </div>
-}
+
+</div>

@@ -23,85 +23,85 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     public app_service: AppService,
     public dataService: AppDataService,
     private cdr: ChangeDetectorRef,
-    private msgbox: MsgboxService 
+    private msgbox: MsgboxService
   ) { }
 
+  @Input('viewId') set viewId(val) {
+    this.service_data.selected_view_data.viewSelected['viewId'] = val
+  }
+  @Input('viewType') set viewChange(val) {
+    this.service_data.selected_view_data.viewSelected['viewName'] = val 
+    this.bind_view()
+  }
+
+
+  bind_view() {
+    debugger
+    this.selectedView = this.service_data.selected_view_data.viewSelected;
+    this.selectedAnalyticsType = this.service_data.selected_view_data.analyticsTypes;
+    this.allSelectedAnalytics = this.service_data.selected_view_data.allSelectedAnalytics;
+
+    this.bindData()
+  }
   ngOnDestroy(): void {
     this.dataService.isEnablePersister = false;
     this.disposeAllSubscriptions();
   }
   isDataLoaded = false
-  searchText : any;
-  
+  searchText: any;
+
   subscriptions: Subscription[] = [];
 
-  forDisablePermissionData:any;
- 
+  forDisablePermissionData: any;
+
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   ngOnInit(): void {
+    this.data_reciver()
+
+  }
+
+  data_reciver() {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
-     
+
       if (data !== null) {
-        if(data.callsource == 'timeExplorerChart'){
+        if (data.callsource == 'timeExplorerChart') {
 
           this.receivedTimeRange = data.data;
           console.log('Received Data:', this.receivedTimeRange);
-  
+
           // Manually trigger change detection
           this.cdr.detectChanges();
         }
-        else if(data.callsource == 'navigatorops'){
+        else if (data.callsource == 'ubAllJourney' || data.callsource == 'erpAllJourney' || data.callsource == 'ubAllFunctional' || data.callsource == 'ubAllConsole' || data.callsource == 'ubAllApi' || data.callsource == 'erpAllFunctional') {
           this.isDataLoaded = true
-         
-          if(this.service_data.selectedArtifactData.selectedAnalyticsType){
+          if (this.service_data.selectedArtifactData.selectedAnalyticsType) {
 
             this.selectedAnalyticsType = this.service_data.selectedArtifactData.selectedAnalyticsType
-            
+
+
           }
           // this.selectedAnalyticsType = selectedAnalyticsType;
-          if(this.service_data.selectedArtifactData.selectedView){
+          if (this.service_data.selectedArtifactData.selectedView) {
 
             this.selectedView = this.service_data.selectedArtifactData.selectedView
           }
-          if(this.service_data.selectedArtifactData.allSelectedAnalytics){
+          if (this.service_data.selectedArtifactData.allSelectedAnalytics) {
 
-            this.allSelectedAnalytics= this.service_data.selectedArtifactData.allSelectedAnalytics
-          }
-          // if (selectedView) {
-          //   this.selectedView = selectedView
-          // }
-          this.bindData()
-        }
-        else if(data.callsource == 'ubAllJourney' || data.callsource == 'erpAllJourney' || data.callsource == 'ubAllFunctional' || data.callsource == 'ubAllConsole' || data.callsource == 'ubAllApi'||data.callsource=='erpAllFunctional'){
-          this.isDataLoaded = true
-          if(this.service_data.selectedArtifactData.selectedAnalyticsType){
-
-            this.selectedAnalyticsType = this.service_data.selectedArtifactData.selectedAnalyticsType
-           
-            
-          }
-          // this.selectedAnalyticsType = selectedAnalyticsType;
-          if(this.service_data.selectedArtifactData.selectedView){
-
-            this.selectedView = this.service_data.selectedArtifactData.selectedView
-          }
-          if(this.service_data.selectedArtifactData.allSelectedAnalytics){
-
-            this.allSelectedAnalytics= this.service_data.selectedArtifactData.allSelectedAnalytics
+            this.allSelectedAnalytics = this.service_data.selectedArtifactData.allSelectedAnalytics
           }
           this.bindData()
 
         }
-        else if(data.action == 'editDisabled'){
+        else if (data.action == 'editDisabled') {
 
-         this.forDisablePermissionData = data;
-            
-         }
-    }
-      
+          this.forDisablePermissionData = data;
+
+        }
+      }
+
     });
     this.subscriptions.push(data_receiver);
   }
@@ -109,56 +109,56 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.calculateCurrentDate();
   }
 
-  fromDateTime : any;
-  toDateTime : any;
+  fromDateTime: any;
+  toDateTime: any;
 
-  calculateCurrentDate(){
-   
+  calculateCurrentDate() {
+
     this.fromDatevalue.setDate(this.fromDatevalue.getDate() - 1);
-    this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
-    this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+    this.fromDateTime = this.fromDatevalue.toLocaleString('en-us', { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true })
+    this.toDateTime = this.toDateValue.toLocaleString('en-us', { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true });
 
 
   }
 
- 
+
   timezoneDatasource = []
-  selectedTimezone:any
+  selectedTimezone: any
   receivedTimeRange: any
   selectedAnalyticsType: any = {}
-  selectedView: any
+  selectedView: any = {}
   selectedTab: any = {}
   availableTabs: any
-  allSelectedAnalytics:any=[]
-  timeFilter: Array<{name: string, value: string, timeValue: string}> = [
-    { name: '30min', value: '30 minutes', timeValue: "LAST_30_MINUTES"},
-    { name: '60min', value: '60 minutes', timeValue: "LAST_60_MINUTES"},
-    { name: '3hr', value: '3 hour', timeValue: "LAST_3_HOUR"},
-    { name: '6hrs', value: '6 hours', timeValue: "LAST_6_HOUR"},
-    { name: '12hrs', value: '12 hours', timeValue: "LAST_12_HOUR"},
-    { name: '24hrs', value: '24 hours', timeValue: "LAST_24_HOUR"},
-    { name: '3days', value: '3 days', timeValue: "LAST_3_DAYS"},
-    { name: '7days', value: '7 days', timeValue: "LAST_7_DAYS"},
-    { name: '1mons', value: '1 months', timeValue: "LAST_1_MONTH"},
-    { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
-    { name: 'setCustom', value: 'Set Custom', timeValue: ""},
+  allSelectedAnalytics: any = []
+  timeFilter: Array<{ name: string, value: string, timeValue: string }> = [
+    { name: '30min', value: '30 minutes', timeValue: "LAST_30_MINUTES" },
+    { name: '60min', value: '60 minutes', timeValue: "LAST_60_MINUTES" },
+    { name: '3hr', value: '3 hour', timeValue: "LAST_3_HOUR" },
+    { name: '6hrs', value: '6 hours', timeValue: "LAST_6_HOUR" },
+    { name: '12hrs', value: '12 hours', timeValue: "LAST_12_HOUR" },
+    { name: '24hrs', value: '24 hours', timeValue: "LAST_24_HOUR" },
+    { name: '3days', value: '3 days', timeValue: "LAST_3_DAYS" },
+    { name: '7days', value: '7 days', timeValue: "LAST_7_DAYS" },
+    { name: '1mons', value: '1 months', timeValue: "LAST_1_MONTH" },
+    { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH" },
+    { name: 'setCustom', value: 'Set Custom', timeValue: "" },
   ];
 
   //for showing border bottom after every category
   showBorder(name: string): boolean {
     const itemsWithBorder = ['60min', '24hrs', '7days', '3mons'];
-    return itemsWithBorder.includes(name); 
-}
+    return itemsWithBorder.includes(name);
+  }
 
   selectedTime: string = '12hrs';
   public fromDatevalue: Date = new Date();
   public toDateValue: Date = new Date();
   public dateTimeFormat = "MM/dd/yyyy HH:mm";
   @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
-  
-  onSelctTime(timeItem){
+
+  onSelctTime(timeItem) {
     this.selectedTime = timeItem?.name;
-    if(this.selectedTime == "setCustom"){
+    if (this.selectedTime == "setCustom") {
       return;
     }
     // const fromDateTime = new Date();
@@ -170,57 +170,57 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     // } else if(this.selectedTime.includes('mon')){
     //   toDateTime.setMonth(fromDateTime.getMonth() + timeItem?.timeValue);
     // }
-    
+
     var currentDateObj = new Date();
     var numberOfMlSeconds = currentDateObj.getTime();
 
-    if(this.selectedTime.includes('30min')){
-      var newDateObj = new Date(numberOfMlSeconds - (30*60*1000));
+    if (this.selectedTime.includes('30min')) {
+      var newDateObj = new Date(numberOfMlSeconds - (30 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('60min')){
-      var newDateObj = new Date(numberOfMlSeconds - (60*60*1000));
+    else if (this.selectedTime.includes('60min')) {
+      var newDateObj = new Date(numberOfMlSeconds - (60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('3hr')){
-      var newDateObj = new Date(numberOfMlSeconds - (3*60*60*1000));
+    else if (this.selectedTime.includes('3hr')) {
+      var newDateObj = new Date(numberOfMlSeconds - (3 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('6hr')){
-      var newDateObj = new Date(numberOfMlSeconds - (6*60*60*1000));
+    else if (this.selectedTime.includes('6hr')) {
+      var newDateObj = new Date(numberOfMlSeconds - (6 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('12hr')){
-      var newDateObj = new Date(numberOfMlSeconds - (12*60*60*1000));
+    else if (this.selectedTime.includes('12hr')) {
+      var newDateObj = new Date(numberOfMlSeconds - (12 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('24hr')){
-      var newDateObj = new Date(numberOfMlSeconds - (24*60*60*1000));
+    else if (this.selectedTime.includes('24hr')) {
+      var newDateObj = new Date(numberOfMlSeconds - (24 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('3day')){
-      var newDateObj = new Date(numberOfMlSeconds - (3*24*60*60*1000));
+    else if (this.selectedTime.includes('3day')) {
+      var newDateObj = new Date(numberOfMlSeconds - (3 * 24 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('7day')){
-      var newDateObj = new Date(numberOfMlSeconds - (7*24*60*60*1000));
+    else if (this.selectedTime.includes('7day')) {
+      var newDateObj = new Date(numberOfMlSeconds - (7 * 24 * 60 * 60 * 1000));
     }
-    else if(this.selectedTime.includes('1mon')){
-      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1))
+    else if (this.selectedTime.includes('1mon')) {
+      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth() - 1))
     }
-    else if(this.selectedTime.includes('3mon')){
-      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3))
+    else if (this.selectedTime.includes('3mon')) {
+      var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth() - 3))
     }
-    this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
- 
-    
+    this.fromDateTime = newDateObj.toLocaleString('en-us', { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true })
+
+
     // console.log("from : ", fromDateTime, " To : ", toDateTime);
-    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
+    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: { type: 'setEnum', value: timeItem?.timeValue } });
     this.closeTimeFilterDropdown();
   }
 
-  applyCustomFilter(){
+  applyCustomFilter() {
     // console.log("fromDate: ", this.fromDatevalue, " toDate: ", this.toDateValue);
-    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
-    this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
-    this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+    this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: { type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() } });
+    this.fromDateTime = this.fromDatevalue.toLocaleString('en-us', { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true })
+    this.toDateTime = this.toDateValue.toLocaleString('en-us', { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true });
     this.closeTimeFilterDropdown();
   }
 
-  closeTimeFilterDropdown(){
+  closeTimeFilterDropdown() {
     this.toggleButton.nativeElement.click();
   }
 
@@ -259,40 +259,12 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     });
   }
   bindData() {
-   
+
     if (Object.keys(this.selectedAnalyticsType).length != 0) {
-      // if(this.selectedAnalyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
-      if(this.selectedAnalyticsType.hasOwnProperty('type') )
-      {
+
+      if (this.selectedAnalyticsType.hasOwnProperty('type')) {
         this.get_Tab_Control_List(this.selectedAnalyticsType)
       }
-      
-
-      // }
-      // else if(this.selectedAnalyticsType.val == '"USER_BEHAVIOUR_ANALYTICS_DATASOURCE"'){
-      //   this.availableTabs = [
-      //     {name:'Overview',val:'overview',isVisible:true,isSelected:true},
-      //     {name:'Log',val:'log',isVisible:true,isSelected:false},
-      //     {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
-      //     {name:'Telemetry',val:'telemetry',isVisible:true,isSelected:false},
-      //   ]
-      // }
-      // else if(this.selectedAnalyticsType.val == 'userbehaviour'){
-      //   this.availableTabs = [
-      //     {name:'Overview',val:'overview',isVisible:true,isSelected:true},
-      //     {name:'Log',val:'log',isVisible:true,isSelected:false},
-      //     {name:'Time Explorer',val:'timeexplorer',isVisible:false,isSelected:false},
-      //     {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
-      //   ]
-      // }
-      // else {
-      //   this.availableTabs = [
-      //     {name:'Overview',val:'overview',isVisible:true,isSelected:true},
-      //     {name:'Log',val:'log',isVisible:true,isSelected:false},
-      //     {name:'Time Explorer',val:'timeexplorer',isVisible:true,isSelected:false},
-      //     {name:'Telemetry',val:'telemetry',isVisible:false,isSelected:false},
-      //   ]
-      // }
 
     }
     else {
@@ -319,7 +291,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   changeSelectedTab(tab) {
-    
+
     // this.selectedTab = val
     this.availableTabs.forEach((ele) => {
       if (ele.isSelected) {
@@ -354,9 +326,9 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
-      
+
         this.timezoneDatasource = result;
-        this.selectedTimezone =  this.timezoneDatasource.find(ele=>ele.Id == 'India Standard Time' );
+        this.selectedTimezone = this.timezoneDatasource.find(ele => ele.Id == 'India Standard Time');
         this.cdr.detectChanges();
       },
       (error) => {
@@ -366,7 +338,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   }
-  toggleEdit(val){
+  toggleEdit(val) {
     this.Editable = val
   }
   Editable = false
@@ -375,7 +347,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   }
 
 
-  isRefresh : boolean = false;
+  isRefresh: boolean = false;
   // refreshPage(){
   //     this.isRefresh = true;
   //     this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
@@ -392,10 +364,10 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   //     }
 
   //       this.app_service.dataTransmitter({callsource:'searchOperation',data:this.searchText});
-      
-  //   }
-    changeFilter(val){
-      this.app_service.dataTransmitter({ callsource: this.selectedTab.enumType, action: 'filterChange', selectedAnalyticsType: this.selectedAnalyticsType, objFilter : val });
 
-    }
+  //   }
+  changeFilter(val) {
+    this.app_service.dataTransmitter({ callsource: this.selectedTab.enumType, action: 'filterChange', selectedAnalyticsType: this.selectedAnalyticsType, objFilter: val });
+
+  }
 }

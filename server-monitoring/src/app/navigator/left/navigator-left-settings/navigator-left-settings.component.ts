@@ -55,6 +55,7 @@ export class NavigatorLeftSettingsComponent implements OnInit {
   tempTotalViews: any = []
   isDisabled = false;
   @Input('child_data') set child_data({ totalViews, isopenSettings, selectedViewSettings }) {
+    console.log("this is view tree",totalViews)
     this.totalViews = [...totalViews]
     this.tempTotalViews = JSON.parse(JSON.stringify(totalViews))
     this.isopenSettings = isopenSettings
@@ -103,6 +104,7 @@ export class NavigatorLeftSettingsComponent implements OnInit {
   onViewDelete = output<any>()
 
   settingsViewSelect(val) {
+    debugger
     if(val.accessType == "PUBLIC")
     {
       this.isDisabled = true;

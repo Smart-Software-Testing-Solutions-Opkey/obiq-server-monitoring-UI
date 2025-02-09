@@ -1,39 +1,36 @@
 <section class="app-section-main pt-3" id="totalSection">
 
-   
 
-   
+
+
 
     <kendo-splitter orientation="horizontal" style="border-color: transparent;">
-     
-        <kendo-splitter-pane  min="20%" max="40%" size="20%">
-              <div class="left-section">
-            
-                    @if (service_data.UserDto) {
-                        <app-navigator-left (onLeftPanelDataChange)="leftPanelDataUpdate($event)" (viewsData)="viewUserData($event)"></app-navigator-left>
-                    }
-              
-              </div>
+
+        <kendo-splitter-pane min="20%" max="40%" size="20%">
+            <div class="left-section">
+
+
+                <!-- <app-navigator-left (onLeftPanelDataChange)="leftPanelDataUpdate($event)"></app-navigator-left> -->
+                <app-navigator-left ></app-navigator-left>
+
+
+            </div>
         </kendo-splitter-pane>
-        <kendo-splitter-pane >
-             
-                <div class="right-section">
-        
-                    <!-- @if (objSettings.isOpen) {
-                        <app-view-summary-details ></app-view-summary-details>
-                    }
-                    @else if(selectedView && selectedAnalyticsType) {
-                        <app-environment-manager-main-right [child_data]="{selectedAnalyticsType: selectedAnalyticsType,selectedView:selectedView}">
-                        </app-environment-manager-main-right>
-                    } -->
-                    <router-outlet name="rightSection"></router-outlet>
-                </div>
-             
+        <kendo-splitter-pane>
+
+            <div class="right-section">
+
+
+                <!-- <router-outlet name="rightSection"></router-outlet> -->
+                <router-outlet></router-outlet>
+
+            </div>
+
         </kendo-splitter-pane>
-  
-      
-  
-     
-      </kendo-splitter>
+
+
+
+
+    </kendo-splitter>
 
 </section>

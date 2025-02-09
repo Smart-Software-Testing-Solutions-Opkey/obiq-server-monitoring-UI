@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './navigator-left.component.html',
   styleUrls: ['./navigator-left.component.scss']
 })
-export class NavigatorLeftComponent implements OnInit,AfterViewInit, OnDestroy{
+export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private modalService: NgbModal,
@@ -26,17 +26,15 @@ export class NavigatorLeftComponent implements OnInit,AfterViewInit, OnDestroy{
     public app_service: AppService,
     public dataService: AppDataService,
     private cdr: ChangeDetectorRef,
-    public service_notification : NotificationsService,
-    private msgbox: MsgboxService 
+    public service_notification: NotificationsService,
+    private msgbox: MsgboxService
 
 
   ) { }
-ngAfterViewInit(): void {
-  this.app_service.routeTo('environment','summary')
-}
-  // analyticsValueChange = output<any>()
-  // onChangeView = output<any>()
-  // onSettingsSelected = output<any>()
+  ngAfterViewInit(): void {
+    // this.app_service.routeTo('environment', 'summary')
+  }
+
   onLeftPanelDataChange = output<any>()
 
   dataChanged = {
@@ -44,33 +42,33 @@ ngAfterViewInit(): void {
     "settingsPanel": { isOpen: false, selectedViewSettings: {} },
     "analyticsTypes": {},
     "selectedTab": {},
-    "allSelectedAnalytics":[]
+    "allSelectedAnalytics": []
   }
 
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
     this.disposeAllSubscriptions();
   }
- 
+
   subscriptions: Subscription[] = [];
- 
+
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  ngOnInit(): void {
+  data_reciver() {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
         if (data == "viewCreated") {
           this.getAllVIews();
-          
+
           this.cdr.detectChanges();
-          
+
         }
-        else if(data?.callsource == 'settings'){
-          if(data?.data == 'backToMenu'){
+        else if (data?.callsource == 'settings') {
+          if (data?.data == 'backToMenu') {
             this.backToMenu()
-          }else if(data?.data?.selected_view){
+          } else if (data?.data?.selected_view) {
             this.selectedViewSettings = data.data.selected_view;
             this.getAllVIews("settings");
             this.cdr.detectChanges();
@@ -78,8 +76,12 @@ ngAfterViewInit(): void {
         }
       }
     });
-    this.getAllVIews();
     this.subscriptions.push(data_receiver);
+  }
+  ngOnInit(): void {
+    this.getAllVIews();
+    this.data_reciver();
+
   }
   selectedView: any = {}
 
@@ -88,20 +90,13 @@ ngAfterViewInit(): void {
   selectedAnalyticsType: any = {}
 
 
+
   change_view(selected_item: any) {
 
     console.log("selected_item==", selected_item);
   }
   changeAnalyticsSelection(item) {
 
-
-    // this.analyticsTypes.forEach((ele)=>{
-    //   if(ele.isSelected){
-    //     ele.isSelected = false
-    //   }
-    // })
-
-    //   item.isSelected = true
     this.selectedAnalyticsType = item
     this.dataChanged.analyticsTypes = this.selectedAnalyticsType
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -115,19 +110,19 @@ ngAfterViewInit(): void {
   ]
 
   totalViews = [];
-  set_Selected_View_DataSource(selectedVIew) {
-    window.loadingStart("#navigator-left", "Please wait");
+  get_Selected_View_DataSource(selectedVIew) {
+
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqAgentServerTraceController/getDataSourceListByViewId";
 
     let form_data = { viewId: selectedVIew.viewId };
-
+    window.loadingStart("#navigator-left", "Please wait");
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#navigator-left");
 
           //hidding Test Automation Analytics and System Diagnostics Analytics
-          this.analyticsTypes = result.filter(item => 
+          this.analyticsTypes = result.filter(item =>
             item.name !== "Test Automation Analytics" && item.name !== "System Diagnostics Analytics"
           );
 
@@ -135,20 +130,13 @@ ngAfterViewInit(): void {
             item.display = index === 0;
           });
 
-          // result.forEach((item, index) => {
-          //   item.display = index === 0
-          // })
-          // this.analyticsTypes = result;
+          this.bind_selected_view(this.selectedView)
 
-          // this.selectedAnalyticsType = result[0];
-          // this.dataChanged.analyticsTypes = this.selectedAnalyticsType
-          // this.onLeftPanelDataChange.emit(this.dataChanged)
-         
 
         },
         error: (error: any) => {
           window.loadingStop("#navigator-left");
-          console.warn(error);  
+          console.warn(error);
           this.msgbox.display_error_message(error);
 
         },
@@ -158,7 +146,17 @@ ngAfterViewInit(): void {
       });
   }
 
-  set_Selected_VIew(selectedVIew) {
+
+  bind_selected_view(selectedView) {
+    this.dataChanged.allSelectedAnalytics = this.analyticsTypes
+    this.dataChanged.viewSelected = selectedView;
+    this.service_data.selected_view_data = this.dataChanged
+    this.router.navigate([`summary/${selectedView.viewId}`], {
+      relativeTo: this.route,
+      queryParams:{viewType:selectedView.name || selectedView.viewName}
+    });
+  }
+  set_Selected_VIew(selectedVIew, source) {
 
     window.loadingStart("#navigator-left", "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/setSelectedView";
@@ -172,8 +170,11 @@ ngAfterViewInit(): void {
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
         window.loadingStop("#navigator-left");
-        this.set_Selected_View_DataSource(result)
-      
+        if (source != 'init') {
+          this.service_notification.notifier(NotificationType.success, 'View selected');
+        }
+        this.get_Selected_View_DataSource(result)
+
 
 
       },
@@ -188,13 +189,12 @@ ngAfterViewInit(): void {
     });
   }
 
-  
 
-  @Output() viewsData =  new EventEmitter<any>();
 
-  getAllVIews( callsource? ) {
 
-    window.loadingStart("#navigator-left", "Please wait");
+  getAllVIews(callsource?) {
+
+
 
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
 
@@ -202,33 +202,31 @@ ngAfterViewInit(): void {
       userId: this.dataService.UserDto.UserDTO.U_ID,
       projectId: this.dataService.UserDto.ProjectDTO.P_ID
     }
+    window.loadingStart("#navigator-left", "Please wait");
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
 
       next: (result: any) => {
         window.loadingStop("#navigator-left");
         if (result == null || result?.length == 0) {
           this.router.navigateByUrl('/environment/configure');
+          return;
         }
-        console.log(result, "get all  views resultS")
-        if (result?.length > 0) {
-          this.service_data.viewsData = result;
 
-          this.viewsData.emit(result);
-        
-     
-          this.totalViews = result;
-          this.selectedView = this.totalViews[this.totalViews.length-1];
-          if(callsource == "settings"){
-            this.selectedViewSettings = this.selectedViewSettings  
-          }
-          else{
-            this.selectedViewSettings = this.selectedView;
-          }
-          this.app_service.dataTransmitter({data :result,action :"editDisabled" , selectedView:this.selectedViewSettings});
-          
-          this.dataChanged.viewSelected = this.selectedView
-          this.set_Selected_VIew(this.selectedView)
-        }
+        this.service_data.viewsData = result;
+        this.totalViews = result;
+        this.viewChanged(this.totalViews[this.totalViews.length - 1], 'init')
+        // this.selectedView = this.totalViews[this.totalViews.length - 1];
+        // if (callsource == "settings") {
+        //   this.selectedViewSettings = this.selectedViewSettings
+        // }
+        // else {
+        //   this.selectedViewSettings = this.selectedView;
+        // }
+        // this.app_service.dataTransmitter({ data: result, action: "editDisabled", selectedView: this.selectedViewSettings });
+
+        // this.dataChanged.viewSelected = this.selectedView
+        // this.set_Selected_VIew(this.selectedView)
+
 
 
       },
@@ -266,14 +264,10 @@ ngAfterViewInit(): void {
     this.router.navigate(['/environment']);
   }
 
-  viewChanged(val) {
-   
+  viewChanged(val, source?) {
+
     this.selectedView = val
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
-    this.dataChanged.viewSelected = this.selectedView
-    this.set_Selected_VIew(this.selectedView)
-    this.service_notification.notifier(NotificationType.success, 'View selected');
-    this.app_service.dataTransmitter({data : this.totalViews,action :"editDisabled" , selectedView : val});
+    this.set_Selected_VIew(this.selectedView, source)
   }
 
   changeToView() {
@@ -284,7 +278,7 @@ ngAfterViewInit(): void {
       }
     })
     this.dataChanged.analyticsTypes = this.selectedAnalyticsType
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
+    this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     this.onLeftPanelDataChange.emit(this.dataChanged)
 
   }
@@ -297,22 +291,22 @@ ngAfterViewInit(): void {
     this.selectedView2 = this.totalViews[0];
     this.selectedViewSettings = this.selectedView2;
     this.dataChanged.viewSelected = this.selectedView2
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
-    this.dataChanged.analyticsTypes['isSelected']=false
+    this.dataChanged.allSelectedAnalytics = this.analyticsTypes
+    this.dataChanged.analyticsTypes['isSelected'] = false
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
-    this.app_service.routeTo('environment','settings')
+    this.router.navigateByUrl('/environment/settings')
 
   }
   backToMenu() {
     this.isopenSettings = false
     // this.selectedView = this.totalViews[this.totalViews.length-1];
     this.selectedViewSettings = this.selectedView;
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
+    this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     this.dataChanged.viewSelected = this.selectedView
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
-    this.app_service.routeTo('environment','summary')
+    this.app_service.routeTo('environment', 'summary')
 
   }
 
@@ -320,7 +314,7 @@ ngAfterViewInit(): void {
 
   settingsViewSelect(val) {
     // this.selectedViewSettings = val;
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
+    this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     // this.selectedViewSettings = val
     this.dataChanged.settingsPanel = val
     this.onLeftPanelDataChange.emit(this.dataChanged)
@@ -345,7 +339,7 @@ ngAfterViewInit(): void {
         next: (result: any) => {
           window.loadingStop("#navigator-left");
           this.getAllVIews();
-          if(this.totalViews.length<1){
+          if (this.totalViews.length < 1) {
             this.router.navigateByUrl('/environment/configure')
           }
 
@@ -362,12 +356,12 @@ ngAfterViewInit(): void {
   }
 
   selectionChanged(val) {
-    this.dataChanged.allSelectedAnalytics=this.analyticsTypes
-    this.dataChanged.analyticsTypes = val
-    this.onLeftPanelDataChange.emit(this.dataChanged)
+    this.dataChanged.analyticsTypes = val || {}
+    this.bind_selected_view(val|| this.selectedView);
+    // this.onLeftPanelDataChange.emit(this.dataChanged)
   }
 
-  Favorite_View(views){
+  Favorite_View(views) {
     this.totalViews = views
   }
 

@@ -42,12 +42,12 @@ export class AppService {
     return this.http.get(form_url, { params: form_data });
   }
   routeTo(portal,view,queryParam?){
-   let section = '(rightSection:'+view+')'
+  //  let section = '(rightSection:'+view+')'
 
    if(!queryParam){
-    this.router.navigateByUrl('/'+portal+'/'+section)
+    this.router.navigateByUrl('/'+portal+'/'+view)
    }else{
-    this.router.navigateByUrl('/'+portal+'/'+section+'?'+queryParam)
+    this.router.navigateByUrl('/'+portal+'/'+view+'?'+queryParam)
    }
     
   }

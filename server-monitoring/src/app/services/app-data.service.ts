@@ -319,5 +319,13 @@ export class AppDataService {
     data:[],
     source:''
   };
+
+  selected_view_data :any=  {
+    "viewSelected": {},
+    "settingsPanel": { isOpen: false, selectedViewSettings: {} },
+    "analyticsTypes": {},
+    "selectedTab": {},
+    "allSelectedAnalytics": []
+  }
 }
 

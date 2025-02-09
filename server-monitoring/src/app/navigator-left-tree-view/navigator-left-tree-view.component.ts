@@ -25,7 +25,6 @@ export class NavigatorLeftTreeViewComponent {
       this.selectedView = selectedView
       this.analyticsTypes = analyticsTypes
       this.selectedView.selected = true
-      this.treeSelectionChange.emit({})
     }
   }
   selectedAnalyticsType:any = {}
@@ -52,7 +51,7 @@ export class NavigatorLeftTreeViewComponent {
         ele.isSelected = false
     })
     this.selectedView.selected = true
-    this.treeSelectionChange.emit({})
+    this.treeSelectionChange.emit(null)
 
   }
   isOpenNode = true

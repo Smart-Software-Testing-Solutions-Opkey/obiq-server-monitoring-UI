@@ -18,44 +18,45 @@ const routes: Routes = [
   component: EnvironmentManagerComponent,
   data: { title: 'Environment Manager' ,breadcrumb:'Manager'},
   children:[{
-    path:'summary',
+    path:'summary/:viewId',
     component:EnvironmentManagerMainRightComponent,
-    outlet:'rightSection'
+    
+    // outlet:'rightSection'
   },
   {
     path:'settings',
     component:ViewSummaryDetailsComponent,
-    outlet:'rightSection'
+    // outlet:'rightSection'
   },
   {
     path:'erpjourney',
     component:EMMrDsErpAllJourneyComponent,
-    outlet:'rightSection'
+    // outlet:'rightSection'
   },
   {
     path :'ubjourney',
     component: EMMrDsUbAllJourneyComponent,
-    outlet :'rightSection'
+    // outlet :'rightSection'
   },
   {
     path: 'ubApiError',
     component:  EMMrDsUbAllApiErrorComponent,
-    outlet: 'rightSection'
+    // outlet: 'rightSection'
   },
   {
     path: 'ubConsoleError',
     component:  EMMrDsUbAllConsoleErrorComponent,
-    outlet: 'rightSection'
+    // outlet: 'rightSection'
   },
   {
     path: 'ubFunctionalError',
     component:  EMMrDsUbAllFunctionalErrorComponent,
-    outlet: 'rightSection'
+    // outlet: 'rightSection'
   },
   {
     path:'erpFunctionalError',
     component:EMMrDsErpAllFunctionalErrorComponent,
-     outlet: 'rightSection'
+    //  outlet: 'rightSection'
   }
 ]
 }
