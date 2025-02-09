@@ -67,7 +67,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
         }
         else if (data?.callsource == 'settings') {
           if (data?.data == 'backToMenu') {
-            this.backToMenu()
+            // this.backToMenu()
           } else if (data?.data?.selected_view) {
             this.selectedViewSettings = data.data.selected_view;
             this.getAllVIews("settings");
@@ -79,8 +79,10 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscriptions.push(data_receiver);
   }
   ngOnInit(): void {
-    this.getAllVIews();
     this.data_reciver();
+    this.isopenSettings = window.location.href.includes('settings');
+
+    this.getAllVIews(this.isopenSettings);
 
   }
   selectedView: any = {}
@@ -150,11 +152,10 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   bind_selected_view(selectedView) {
     this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     this.dataChanged.viewSelected = selectedView;
-    this.service_data.selected_view_data = this.dataChanged
-    this.router.navigate([`summary/${selectedView.viewId}`], {
-      relativeTo: this.route,
-      queryParams:{viewType:selectedView.name || selectedView.viewName}
-    });
+    this.service_data.selected_view_data = this.dataChanged;
+
+    let queryParams = `viewType=${selectedView.name || selectedView.viewName}`
+    this.app_service.routeTo('environment', `summary/${selectedView.viewId}`, queryParams)
   }
   set_Selected_VIew(selectedVIew, source) {
 
@@ -214,6 +215,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
 
         this.service_data.viewsData = result;
         this.totalViews = result;
+        if(this.isopenSettings ){return}
         this.viewChanged(this.totalViews[this.totalViews.length - 1], 'init')
         // this.selectedView = this.totalViews[this.totalViews.length - 1];
         // if (callsource == "settings") {
@@ -295,7 +297,8 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
     this.dataChanged.analyticsTypes['isSelected'] = false
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
-    this.router.navigateByUrl('/environment/settings')
+    this.service_data.selected_view_data = this.dataChanged;
+    this.app_service.routeTo('environment', `settings/${this.selectedViewSettings.viewId}`)
 
   }
   backToMenu() {
@@ -357,7 +360,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
 
   selectionChanged(val) {
     this.dataChanged.analyticsTypes = val || {}
-    this.bind_selected_view(val|| this.selectedView);
+    this.bind_selected_view(val || this.selectedView);
     // this.onLeftPanelDataChange.emit(this.dataChanged)
   }
 

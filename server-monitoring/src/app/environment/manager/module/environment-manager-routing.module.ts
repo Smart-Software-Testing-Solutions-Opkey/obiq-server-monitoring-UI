@@ -24,7 +24,7 @@ const routes: Routes = [
     // outlet:'rightSection'
   },
   {
-    path:'settings',
+    path:'settings/:viewId',
     component:ViewSummaryDetailsComponent,
     // outlet:'rightSection'
   },

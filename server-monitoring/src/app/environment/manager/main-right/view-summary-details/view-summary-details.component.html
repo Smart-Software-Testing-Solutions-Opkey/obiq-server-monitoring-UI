@@ -14,9 +14,9 @@
 
         <div class="app-body scrollable">
             <!-- <app-configuration-settings-view-summary [child_data]="{obj_configuration_setting: obj_configuration_setting}"></app-configuration-settings-view-summary> -->
-            <!-- @if (obj_configuration_setting?.selected_erp_analytics) { -->
+            @if (obj_configuration_setting?.selected_erp_analytics) {
                 <app-configuration-settings-summary-after-view-creation [child_data]="{obj_configuration_setting: obj_configuration_setting, isDisabled: isDisabled}" (onSettingsSelectedData)="onSettingsSelectedDataObject($event)" ></app-configuration-settings-summary-after-view-creation>
-            <!-- } -->
+            }
          
         </div>
 
