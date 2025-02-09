@@ -67,7 +67,8 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
         }
         else if (data?.callsource == 'settings') {
           if (data?.data == 'backToMenu') {
-            // this.backToMenu()
+            this.backToMenu()
+
           } else if (data?.data?.selected_view) {
             this.selectedViewSettings = data.data.selected_view;
             this.getAllVIews("settings");
@@ -215,7 +216,8 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
 
         this.service_data.viewsData = result;
         this.totalViews = result;
-        if(this.isopenSettings ){return}
+        if (this.isopenSettings) { return }
+
         this.viewChanged(this.totalViews[this.totalViews.length - 1], 'init')
         // this.selectedView = this.totalViews[this.totalViews.length - 1];
         // if (callsource == "settings") {
@@ -303,13 +305,12 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   backToMenu() {
     this.isopenSettings = false
-    // this.selectedView = this.totalViews[this.totalViews.length-1];
     this.selectedViewSettings = this.selectedView;
     this.dataChanged.allSelectedAnalytics = this.analyticsTypes
-    this.dataChanged.viewSelected = this.selectedView
+    this.dataChanged.analyticsTypes = {}
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
-    this.onLeftPanelDataChange.emit(this.dataChanged)
-    this.app_service.routeTo('environment', 'summary')
+    this.service_data.selected_view_data = this.dataChanged
+    this.viewChanged(this.selectedView, 'init')
 
   }
 

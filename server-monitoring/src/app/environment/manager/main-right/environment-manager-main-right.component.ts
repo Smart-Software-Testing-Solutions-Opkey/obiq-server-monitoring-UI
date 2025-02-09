@@ -36,7 +36,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
 
   bind_view() {
-    debugger
+
     this.selectedView = this.service_data.selected_view_data.viewSelected;
     this.selectedAnalyticsType = this.service_data.selected_view_data.analyticsTypes;
     this.allSelectedAnalytics = this.service_data.selected_view_data.allSelectedAnalytics;
