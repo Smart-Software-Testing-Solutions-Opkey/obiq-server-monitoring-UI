@@ -35,6 +35,8 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   error_message = ""
   @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData, isDuplicateName, isIncorrectName, isIncorrectLength }) {
+    console.log(obj_configuration_setting);
+    
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.dispaly_viewName = dispaly_viewName;
     this.obj_error.dispaly_DataSource = dispaly_DataSource;
@@ -312,7 +314,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     if (dataItem.isChecked) {
       this.obj_datasource_widget.select_datasource_item.push(dataItem);
     } else {
-      let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item == dataItem);
+      let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item.id == dataItem.id);
       this.obj_datasource_widget.select_datasource_item.splice(index, 1);
     }
 
