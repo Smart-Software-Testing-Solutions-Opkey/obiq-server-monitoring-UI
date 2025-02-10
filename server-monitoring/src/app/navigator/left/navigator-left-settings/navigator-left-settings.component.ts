@@ -109,9 +109,10 @@ export class NavigatorLeftSettingsComponent implements OnInit {
       this.isDisabled = true;
       
     }
-    this.selectedViewSettings = val
+    this.selectedViewSettings = val;
+    this.service_data.selected_view_data.viewSelected = val
     this.app_service.routeTo('environment',`settings/${this.selectedViewSettings.viewId}`)
-    this.onSettingsSelected.emit({ isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings })
+    // this.onSettingsSelected.emit({ isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings })
 
   }
   renameSelectedView(view) {
