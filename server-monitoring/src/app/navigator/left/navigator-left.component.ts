@@ -59,11 +59,14 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   data_reciver() {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
-        if (data == "viewCreated") {
-          this.getAllVIews();
-
-          this.cdr.detectChanges();
-
+        // if (data == "viewCreated") {
+        //   this.getAllVIews();
+        //   this.cdr.detectChanges();
+        // }
+        if (data.type == "view_ops") {
+          if (data.data.action == "view_created") {
+            this.totalViews.push(data.data.selected_view);
+          }
         }
         else if (data?.callsource == 'settings') {
           if (data?.data == 'backToMenu') {
@@ -342,10 +345,12 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
       .subscribe({
         next: (result: any) => {
           window.loadingStop("#navigator-left");
-          this.getAllVIews();
+          this.totalViews = this.totalViews.filter(item => item.viewId !== view.viewId)
+
           if (this.totalViews.length < 1) {
             this.router.navigateByUrl('/environment/configure')
           }
+          this.selectedView = this.totalViews[this.totalViews.length - 1]
 
         },
         error: (error: any) => {

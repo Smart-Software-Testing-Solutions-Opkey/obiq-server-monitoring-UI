@@ -472,7 +472,8 @@ export class ConfigurationSettingsComponent {
           this.close_model();   // calling GetAllViewds after View Creation
           this.service_notification.notifier(NotificationType.success, 'View Created');
           console.log("after view creation: ",this.obj_configuration_setting); //
-          this.app_service.dataTransmitter("viewCreated");
+          // this.app_service.dataTransmitter("viewCreated");
+          this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
           // this.router.navigateByUrl('/environment');
           this.app_service.routeTo('environment','summary')
 

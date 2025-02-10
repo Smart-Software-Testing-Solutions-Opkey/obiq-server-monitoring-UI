@@ -104,7 +104,6 @@ export class NavigatorLeftSettingsComponent implements OnInit {
   onViewDelete = output<any>()
 
   settingsViewSelect(val) {
-    debugger
     if(val.accessType == "PUBLIC")
     {
       this.isDisabled = true;
