@@ -2,13 +2,14 @@
 <div class="main">
 
     <div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 17.1rem);">
-        <div *ngIf="analyticsTypes.display_user_behaviour" class="card">
-            <div class="card-header">
+        <div class="card">
+        <ng-container *ngIf="analyticsTypes.display_user_behaviour">
+            <div class="card-header py-2" style="top: 0;">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_UB">
                    User Behaviour
                 </a>
             </div>
-            <div id="collapse_UB" class="collapse show">
+            <div id="collapse_UB" class="collapse mx-1 show">
                 <div class="card-body px-0 pb-0">
                     <div class="row mx-0">
                         <div class="col-sm-6 margin-bottom-2 pe-3 ps-0">
@@ -62,10 +63,10 @@
     
                 </div>
             </div>
-        </div>
+        </ng-container>
         <!-- hidded Test Automation Analytics -->
-        <div *ngIf="analyticsTypes.display_test_automation" class="card d-none">
-            <div class="card-header">
+        <ng-container *ngIf="analyticsTypes.display_test_automation" class="d-none">
+            <div class="card-header py-2">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_TA">
                     Test Automation Analytics
                 </a>
@@ -103,14 +104,14 @@
     
                 </div>
             </div>
-        </div>
-        <div *ngIf="analyticsTypes.display_erp" class="card">
-            <div class="card-header">
+        </ng-container>
+        <ng-container *ngIf="analyticsTypes.display_erp">
+            <div class="card-header py-2" style="top: 3rem;">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERP">
                     ERP Analytics
                 </a>
             </div>
-            <div id="collapse_ERP" class="collapse show">
+            <div id="collapse_ERP" class="collapse mx-1 show">
                 <div class="card-body px-0 pb-0">
                     <div class="row mx-0">
                         <div class="col-sm-4 margin-bottom-2 pe-3 ps-0 h-100">
@@ -164,9 +165,9 @@
     
                 </div>
             </div>
-        </div>
+        </ng-container>
         <!-- hidded System Diagnostics Analytics -->
-        <div *ngIf="analyticsTypes.display_system_diagnostics" class="card d-none">
+        <ng-container *ngIf="analyticsTypes.display_system_diagnostics" class="d-none">
             <div class="card-header mb-1">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_SD">
                     System Diagnostics Analytics
@@ -192,8 +193,8 @@
     
                 </div>
             </div>
-        </div>
-       
+        </ng-container>
+    </div>
     </div>
          
           

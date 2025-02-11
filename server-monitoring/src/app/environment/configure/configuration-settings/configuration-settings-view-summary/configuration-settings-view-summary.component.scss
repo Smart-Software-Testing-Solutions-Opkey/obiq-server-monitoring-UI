@@ -5,7 +5,7 @@
 }
 
 .custom-bt-dropdown-icon.dropdown-toggle{
-    
+
     &::after{
         border-width: 0 !important;
         font-family: cs-icon !important;
@@ -27,7 +27,10 @@
         .card-header {
             padding: 0rem;
             border: none;
-            background-color: transparent;
+            // background-color: transparent;
+            background: #fff !important;
+            position: sticky;
+            z-index: 9;
 
             .btn-accordion {
                 width: 100%;

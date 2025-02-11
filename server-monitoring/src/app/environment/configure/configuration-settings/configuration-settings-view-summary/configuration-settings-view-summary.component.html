@@ -77,12 +77,13 @@
 
                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
 
+                   <div class="card">
                     @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 
                         @if(item.name == 'ERP Analytics') {
 
-                            <div class="card">
-                                <div class="card-header">
+                            <!-- <div class="card"> -->
+                                <div class="card-header py-2" style="top: 3rem;">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
                                         ERP Analytics
                                     </a>
@@ -149,13 +150,13 @@
             
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
                         @if(item.name == 'System Diagnostics') {
                             
-                            <div class="card">
+                            <!-- <div class="card"> -->
                                 <div class="card-header">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
                                         System Diagnostics
@@ -200,14 +201,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
                         @if(item.name == 'User Behaviour Analytics') {
                             
-                            <div class="card">
-                                <div class="card-header">
+                            <!-- <div class="card"> -->
+                                <div class="card-header py-2" style="top: 0;">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
                                         User Behavior Analytics
                                     </a>
@@ -255,13 +256,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
                         @if(item.name == 'Test Automation Analytics') {
 
-                            <div class="card">
+                            <!-- <div class="card"> -->
                                 <div class="card-header">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
                                         Test Automation Analytics
@@ -312,12 +313,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                             
                         }
 
-
+                        
                     }
+                </div>
 
                 }
 
