@@ -63,13 +63,14 @@ export class ConfigureRightPanelComponent {
       this.accessTypeObj.AccessPermissions = this.selectedItem.selected_view.viewAccessTypePermision;
      
     }
-    // else if (this.typeSelectedItem == 'update') {
-    //   let obj = {
-    //     AccessType: this.selectedItem?.selected_view?.accessType,
-    //     AccessPermissions: this.selectedItem?.AccessPermisions
-    //   }
-    //   this.accessTypeObj = obj
-    // }
+    else if (this.typeSelectedItem == 'create') {
+
+      // this.accessTypeObj.AccessType = this.selectedItem.AccessType
+      this.accessTypeObj.AccessType = "PRIVATE"
+      // this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions
+      this.accessTypeObj.AccessPermissions = "EDIT"
+      
+    }
   }
 
   selectAccessType(type: string): void {
@@ -242,11 +243,39 @@ export class ConfigureRightPanelComponent {
     this.activeModal.dismiss('close modal');
   }
 
+
+
+
   updatePermission() {
     this.dataService.isEnablePersister = true
-    if (this.accessTypeObj.AccessType == this.selectedItem.selected_view.accessType && this.accessTypeObj.AccessPermissions == this.selectedItem.AccessPermissions) 
-      { return }
-    this.updateSummaryData();
+      if (this.accessTypeObj.AccessType == this.selectedItem.selected_view.accessType && this.accessTypeObj.AccessPermissions == this.selectedItem.AccessPermissions) 
+        { return }
+      this.updateSummaryData();
+  
+    
+  }
+
+  createPermission(){
+    
+    // store data to send in create view
+    
+
+    let authorizedUsers : any =[];
+    if (this.accessTypeObj.AccessType == 'PRIVATE') {
+      authorizedUsers = [ ]
+    }
+    else if (this.accessTypeObj.AccessType == 'PUBLIC') {
+      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions }]
+    }
+    else {
+      authorizedUsers = this.addedUsers.map(val => {
+        let obj = { userId: val.U_ID, permmission: val.permission }
+        return obj;
+      })
+    }
+    this.app_service.dataTransmitter( {type : "accesstype_ops", data : {action : "update_accesstype", accesstype_obj:this.accessTypeObj , authorizedUsers :authorizedUsers}})
+    this.close_model();
+
   }
 
   create_to_update_object() {

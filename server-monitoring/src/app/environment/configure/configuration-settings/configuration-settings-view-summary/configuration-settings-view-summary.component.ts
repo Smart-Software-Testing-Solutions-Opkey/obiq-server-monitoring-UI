@@ -47,40 +47,50 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
       if (data !== null) {
        
-        this.receivedAccessType = data;
-        console.log(this.receivedAccessType, "recived==========")
-        if(this.receivedAccessType == "viewCreated"){
-          this.selectedAccessType = this.receivedAccessType?.AccessType
-          this.dataService.changedAccessType=this.selectedAccessType
-          this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
-        }
-        else{
-          if(this.receivedAccessType?.AccessType != null){
-            this.selectedAccessType = this.receivedAccessType?.AccessType
-          }
-          this.dataService.changedAccessType=this.selectedAccessType
-          this.obj_configuration_setting.AccessType = this.selectedAccessType;
-        }
-        if (this.obj_configuration_setting.AccessType == "SHARED") {
-          this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
-            userId: item.U_ID,
-            permmission: item.permission === "EDIT" ? "ALL" : item.permission
-          }));
-        }
-        else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
+        // this.receivedAccessType = data;
+        // console.log(this.receivedAccessType, "recived==========")
+        // if(this.receivedAccessType == "viewCreated"){
+        //   this.selectedAccessType = this.receivedAccessType?.AccessType
+        //   this.dataService.changedAccessType=this.selectedAccessType
+        //   this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
+        // }
+        // else{
+        //   if(this.receivedAccessType?.AccessType != null){
+        //     this.selectedAccessType = this.receivedAccessType?.AccessType
+        //   }
+        //   this.dataService.changedAccessType=this.selectedAccessType
+        //   this.obj_configuration_setting.AccessType = this.selectedAccessType;
+        // }
+        // if (this.obj_configuration_setting.AccessType == "SHARED") {
+        //   this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
+        //     userId: item.U_ID,
+        //     permmission: item.permission === "EDIT" ? "ALL" : item.permission
+        //   }));
+        // }
+        // else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
 
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          if (this.receivedAccessType.AccessPermisions.EDIT == true) {
-            this.obj_configuration_setting.selectedUids.permmission = "ALL";
-          }
-          else {
-            this.obj_configuration_setting.selectedUids.permmission = "VIEW"
-          }
-        }
-        else {
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          this.obj_configuration_setting.selectedUids.permmission = "ALL";
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   if (this.receivedAccessType.AccessPermisions.EDIT == true) {
+        //     this.obj_configuration_setting.selectedUids.permmission = "ALL";
+        //   }
+        //   else {
+        //     this.obj_configuration_setting.selectedUids.permmission = "VIEW"
+        //   }
+        // }
+        // else {
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   this.obj_configuration_setting.selectedUids.permmission = "ALL";
 
+        // }
+
+       
+        if(data.type == "accesstype_ops"){
+          if(data.data.action == "update_accesstype"){
+            this.selectedAccessType=data.data.accesstype_obj.AccessType
+            this.obj_configuration_setting.AccessType = this.selectedAccessType
+            this.obj_configuration_setting.selectedUids = data.data.authorizedUsers
+            
+          }
         }
         this.cdr.detectChanges();
       }

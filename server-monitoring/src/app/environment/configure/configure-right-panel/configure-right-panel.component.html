@@ -54,7 +54,7 @@
         </div>
 
         <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}" class="row mx-0 mb-3 private-div"
-            (click)="selectAccessType('SHARED')" *ngIf="typeSelectedItem != 'create'">
+            (click)="selectAccessType('SHARED')" >
             <div class="col-sm-12 px-0 ">
                 <i class="oci oci-share public-icon"></i>
                 Shared
@@ -151,7 +151,7 @@
 
     <div class="feature-rp-footer text-end" style="text-align: left;">
         <button [disabled]="isDisabled" type="button" class="btn btn-layout btn-bg-theme" aria-label="Close"
-            (click)="updatePermission()">
+            (click)="typeSelectedItem == 'update' ? updatePermission() : createPermission()">
             {{accessTypeObj.AccessType == 'SHARED' ?'Invite':'Done'}}
         </button>
     </div>
