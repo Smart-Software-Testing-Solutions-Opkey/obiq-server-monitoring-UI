@@ -34,30 +34,17 @@
                 </span>
 
                 <div class="dropdown dropdown-text-color">
-                    <!-- <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
-                        data-bs-toggle="dropdown" data-bs-auto-close= "outside">
-                        Can View
-                    </button> -->
-                    <!-- <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('VIEW', $event)">
-                                <i class="oci oci-eye pe-2"></i>Can View
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="selectViewOrEdit('EDIT', $event)">
-                                <i class="oci oci-edit pe-2"></i>Can Edit
-                            </a>
-                        </li>
-                    </ul> -->
-                    <kendo-dropdownlist class="canView-dd-list" [data]="Public_dropdown_Items" [(value)]="selectedValue"
+                    
+                    <kendo-dropdownlist class="canView-dd-list" [data]="Public_dropdown_Items" textField="text" 
+                        valueField="value" [(ngModel)]="selected_dropdown_Item"
                         (valueChange)="selectViewOrEdit($event)">
+                        
                         <ng-template kendoDropDownListItemTemplate let-dataItem>
-                            <span *ngIf="dataItem === 'Can View'">
-                                <i class="oci oci-eye pe-2"></i> {{ dataItem }}
+                            <span *ngIf="dataItem.text === 'Can View'">
+                                <i class="oci oci-eye pe-2"></i> {{ dataItem.text }}
                             </span>
-                            <span *ngIf="dataItem === 'Can Edit'">
-                                <i class="oci oci-edit pe-2"></i> {{ dataItem }}
+                            <span *ngIf="dataItem.text === 'Can Edit'">
+                                <i class="oci oci-edit pe-2"></i> {{ dataItem.text }}
                             </span>
                         </ng-template>
                     </kendo-dropdownlist>
@@ -83,8 +70,7 @@
                 </div>
 
                 <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers($event)"
-                    class="form-control w-100 user-input" placeholder="Invite by name or email"
-                    (keydown.enter)="addEmailToTempList()">
+                    class="form-control w-100 user-input" placeholder="Invite by name or email">
                 <div *ngIf="filteredUsers.length" class="suggestions-dropdown">
                     <ul class="ul-suggestion-box scrollable p-0">
                         <li ngbDropdownItem class="flex-center suggestion-item px-3 py-2"
@@ -98,6 +84,8 @@
                 </div>
 
             </div>
+
+
 
             <div class="col-sm-2 pe-0 text-end">
                 <button type="button" class="btn btn-layout btn-bg-grey " [ngClass]="{'active': addedEmails?.length}"
@@ -132,14 +120,15 @@
 
                 <kendo-grid-column [width]="140">
                     <ng-template kendoGridCellTemplate let-dataItem>
-                        <kendo-dropdownlist [data]="Public_dropdown_Items" class="canView-dd-list"
-                            [(value)]="shared_selected_value" (valueChange)="updateUserPermission(dataItem, $event)">
+                        <kendo-dropdownlist [data]="Public_dropdown_Items" class="canView-dd-list" textField="text"
+                            [valuePrimitive]="true"
+                            valueField="value" [(ngModel)]="dataItem.permission">
                             <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                <span *ngIf="dataItem === 'Can View'">
-                                    <i class="oci oci-eye pe-2"></i> {{ dataItem }}
+                                <span *ngIf="dataItem.text === 'Can View'">
+                                    <i class="oci oci-eye pe-2"></i> {{ dataItem.text }}
                                 </span>
-                                <span *ngIf="dataItem === 'Can Edit'">
-                                    <i class="oci oci-edit pe-2"></i> {{ dataItem }}
+                                <span *ngIf="dataItem.text === 'Can Edit'">
+                                    <i class="oci oci-edit pe-2"></i> {{ dataItem.text }}
                                 </span>
                             </ng-template>
                         </kendo-dropdownlist>
@@ -163,7 +152,7 @@
     <div class="feature-rp-footer text-end" style="text-align: left;">
         <button [disabled]="isDisabled" type="button" class="btn btn-layout btn-bg-theme" aria-label="Close"
             (click)="updatePermission()">
-            {{inviteType}}
+            {{accessTypeObj.AccessType == 'SHARED' ?'Invite':'Done'}}
         </button>
     </div>
 </div>

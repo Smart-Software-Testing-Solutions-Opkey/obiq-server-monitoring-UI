@@ -43,7 +43,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   isDisabled: boolean = false;
   @Input('child_data')
   set child_data({ obj_configuration_setting, isDisabled }) {
-
+   debugger
     console.log("from after view       :",obj_configuration_setting)
     if (obj_configuration_setting !== this.obj_configuration_setting) {
       this.obj_configuration_setting = obj_configuration_setting;
@@ -77,6 +77,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         return;
       }
     });
+    // this.obj_configuration_setting.AccessPermissions = 'VIEW'
     modalRef.componentInstance.selectedItem = this.obj_configuration_setting;
     modalRef.componentInstance.typeSelectedItem = "update";
 
@@ -146,17 +147,11 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
           this.selectedAccessType = this.receivedAccessType?.AccessType
         }
 
-        // if(this.receivedAccessType.type= "accesstype_ops"){
-        //   if(this.receivedAccessType.action = "accesstype_updated"){
-        //     this.selectedAccessType = this.receivedAccessType.selected_accesstype_obj
-        //   }
-
-        // }
-
+       
         
         
-        this.dataService.changedAccessType = this.selectedAccessType
-        this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
+        // this.dataService.changedAccessType = this.selectedAccessType
+        // this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
         // if (this.obj_configuration_setting.AccessType == "SHARED") {
         //   this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
         //     userId: item.U_ID,
@@ -187,19 +182,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   ngAfterViewInit(): void {
 
   }
-  onAccessTypeChange(selectedOption: string) {
-
-    if (selectedOption) this.selectedAccessType = selectedOption;
-    if (this.selectedAccessType == "SHARED") {
-      this.getAllProjects()
-    }
-    else {
-      this.Show_Project_Access = false
-    }
-    this.obj_configuration_setting.AccessType = this.selectedAccessType
-    console.log('Access Type Changed:', selectedOption);
-
-  }
+ 
 
   onUserSelect(user: any, event: Event): void {
 
