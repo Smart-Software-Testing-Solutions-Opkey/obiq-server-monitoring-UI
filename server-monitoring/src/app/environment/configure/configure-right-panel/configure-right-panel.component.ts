@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -24,6 +24,7 @@ export class ConfigureRightPanelComponent {
   ) { }
   @Input() selectedItem: any;
   @Input() typeSelectedItem: any = "";
+
   Public_dropdown_Items = ['Can View', 'Can Edit'];
   selectedValue = 'Can View';
   shared_selected_value = 'Can View';
@@ -46,62 +47,16 @@ export class ConfigureRightPanelComponent {
   inviteType:string='Done'
   
   selectAccessType(type: string): void {
-    if(type=='SHARED') {
-      this.inviteType = 'Invite'
-      if (this.addedEmails.length === 0) {
-          this.isDisabled= true;
-      }  
-      else{
-        this.isDisabled= false;
-      }
-    }
-    else {
-      this.inviteType='Done'
-      this.isDisabled=false
-    }
-    // if(this.dataService.changedAccessType==type)this.isDisabled=true
-    // else this.isDisabled=false
-   
-    if(this.dataService.changedAccessType=='SHARED' && this.addedUsers.length>0){
-      this.inviteType='Invite'
-    }
-    this.showSharedInput = false;
-    this.accessTypeObj.AccessType = type;
-    this.Shared_Access_Type_Obj = [];
-    if (type == "PUBLIC") {
-      this.accessTypeObj = {
-        AccessType: "PUBLIC",
-        AccessPermisions: {
-          "VIEW": true,
-          "EDIT": false
-        }
-      };
-      this.addedUsers = []
-    }
-    else if (type == "PRIVATE") {
-      this.accessTypeObj = {
-        AccessType: "PRIVATE",
-        AccessPermisions: {
-          "VIEW": true,
-          "EDIT": false
-        }
-      };
-      this.addedUsers = [];
-    }
-
-    else if (type == "SHARED") {
-      this.showSharedInput = true;
-      this.Shared_Access_Type_Obj["AccessType"] = type;
-      this.perform_Shared_Access_Operation();
-    }
+    this.accessTypeObj.AccessType = type
 
   }
+
   addEmailToTempList(): void {
-    if (this.searchQuery.trim()) {
-        this.addedEmails.push(this.searchQuery.trim());
-        this.searchQuery = ''; 
-    }
-}
+      if (this.searchQuery.trim()) {
+          this.addedEmails.push(this.searchQuery.trim());
+          this.searchQuery = ''; 
+      }
+  }
 removeTempEmail(email: string): void {
   this.addedEmails = this.addedEmails.filter(e => e !== email);
 }
@@ -125,8 +80,12 @@ selectViewOrEdit(option: string): void {
     this.addedUsers.splice(index, 1);
 }
   getAllProjects() {
-   
 
+    if(this.dataService.assignedUser.length != 0){
+      this.users =this.dataService.assignedUser ;
+      return 
+    }
+   
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
@@ -134,10 +93,11 @@ selectViewOrEdit(option: string): void {
     this.app_service.make_get_server_call(form_url, form_data)
       .subscribe({
 
-        next: (result: any) => {
+        next: (result: any) => {;
           // this.showSharedInput = true
           // this.Show_Project_Access = true
            this.users = result;
+           this.dataService.assignedUser = result
          
         },
         error: (error: any) => {
@@ -157,21 +117,19 @@ selectViewOrEdit(option: string): void {
   }
 
   ngOnInit(): void {
-    console.log(this.typeSelectedItem);
+  
+    console.log("sElected Items :" , this.selectedItem);
     
     this.getAllProjects();
-
-  
-    if(this.selectedItem?.AccessType){
-      
+    
+    if(this.typeSelectedItem == 'create'){
       let obj = {
         AccessType: this.selectedItem?.AccessType,
         AccessPermisions: this.selectedItem?.AccessPermisions
       }
       this.accessTypeObj = obj
     }
-    else  if(this.selectedItem?.selected_view?.accessType){
-      
+    else if(this.typeSelectedItem == 'update'){
       let obj = {
         AccessType: this.selectedItem?.selected_view?.accessType,
         AccessPermisions: this.selectedItem?.AccessPermisions
@@ -237,28 +195,36 @@ selectUser(user: any) {
     console.log(this.Shared_Access_Type_Obj, 'Updated Shared_Access_Type_Obj');
   }
 
+  finalAccessObj : any ={};
+
   InviteUsers() {
    
-    let finalAccessObj;
-
+    
     if (this.Shared_Access_Type_Obj.length === 0) {
       if(this.accessTypeObj.AccessType == "SHARED"){
         this.service_notification.notifier(NotificationType.error, 'Please select At least one person to share.');
         return
       }
-
-      finalAccessObj = this.accessTypeObj;
+      this.finalAccessObj = this.accessTypeObj;
     } else {
 
-      finalAccessObj = this.Shared_Access_Type_Obj;
+      this.finalAccessObj = this.Shared_Access_Type_Obj;
     }
-    this.app_service.dataTransmitter(finalAccessObj);
-    this.close_model()
+
+    console.log("this.finalAccessObj:", this.finalAccessObj);   
+    
+
+    // this.app_service.dataTransmitter({type: "accesstype_ops",data : {action : "accesstype_updated", selected_accesstype_obj:finalAccessObj }})
+    this.app_service.dataTransmitter(this.finalAccessObj )
+
+
+    
+   
     this.dataService.isEnablePersister = true
-     this.dataService.changedAccessType=finalAccessObj.AccessType
+     this.dataService.changedAccessType=this.finalAccessObj.AccessType
 
      
-     let authorizedUsersObj = finalAccessObj
+     let authorizedUsersObj = this.finalAccessObj
      delete authorizedUsersObj["AccessType"]
 
      let authorizedUsers= []
@@ -280,14 +246,26 @@ selectUser(user: any) {
     });
 
 
-     console.log("this===================",this.dataService.changedAccessType)
+    console.log("this===================",this.dataService.changedAccessType)
    if(this.inviteType=='Invite') {
-    this.sendEmailInvite(authorizedUsers)
-    authorizedUsers = []
-    this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+
+      if(this.typeSelectedItem == 'update'){
+        this.sendEmailInvite(authorizedUsers)
+        authorizedUsers = []
+        this.service_notification.notifier(NotificationType.success, 'Invite sent successfully');
+      }
+      else if(this.typeSelectedItem == 'create'){
+
+      }
     
    }
    else if(this.inviteType=='Done'&& !this.isDisabled) this.service_notification.notifier(NotificationType.success, 'Access type selected ');
+
+   if(this.inviteType == 'Invite' || this.inviteType == 'Done'){
+    this.dataService.isEnablePersister = true;
+      this.updateSummaryData();
+
+   }
   }
 
   sendEmailInvite(authorizedUsers : any){
@@ -329,5 +307,122 @@ selectUser(user: any) {
   close_right_panel() {
     this.activeModal.dismiss('close modal');
   }
+
+  create_to_update_object() {
+
+    var obj_Update_View = new Object();
+
+    obj_Update_View["viewId"] = this.selectedItem.selected_view.viewId,
+    obj_Update_View["viewName"] = this.selectedItem.selected_view.viewName,
+    obj_Update_View["accessType"] = this.accessTypeObj.AccessType,
+    obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
+    obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
+    if( this.accessTypeObj.AccessType == 'PRIVATE'){
+      obj_Update_View["authorizedUsers"] = []
+    }
+    else if (this.accessTypeObj.AccessType == 'PUBLIC'){
+      obj_Update_View["authorizedUsers"]= { userId: "00000000-0000-0000-0000-000000000000", permmission: this.accessTypeObj.AccessPermisions.VIEW ? 'VIEW' : 'EDIT'}
+    }
+    else{
+      obj_Update_View["authorizedUsers"] =this.addedUsers.map(val=>{ 
+          let obj ={ userId: val.U_ID, permmission:val.permmision?'VIEW':'VIEW'} 
+          return obj;
+         })
+    }
+    // obj_Update_View["authorizedUsers"] = this.accessTypeObj.AccessType === 'PRIVATE' ? [] : this.accessTypeObj.AccessType === 'PUBLIC' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.selectedItem.selectedUids.permmission }] : this.selectedItem.selectedUids;
+    return obj_Update_View;
+  }
+  Update_ViewAccess_Type() {
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/updateView";
+    let form_data = this.create_to_update_object() as any;
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+         
+          if(result){
+            // if (this.Shared_Access_Type_Obj.length === 0) {
+            //   this.finalAccessObj = this.accessTypeObj;
+            // }
+            // else{
+            //   this.finalAccessObj = this.Shared_Access_Type_Obj;
+            // }
+
+            this.selectedItem.selected_view.accessType = this.finalAccessObj.AccessType
+
+            this.selectedItem.selected_view =  this.dataService.selected_view_data.viewSelected;
+            console.log("this.selectedItsm: ",this.selectedItem);
+
+            if (this.selectedItem.selected_view.accessType == "SHARED") {
+              this.selectedItem.selectedUids = this.finalAccessObj.map(item => ({
+                userId: item.U_ID,
+                permmission: item.permission === "EDIT" ? "ALL" : item.permission
+              }));
+            }
+            else if (this.selectedItem.selected_view.accessType == "PUBLIC") {
+    
+              this.selectedItem.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+              if (this.finalAccessObj.AccessPermisions.EDIT == true) {
+                this.selectedItem.selectedUids.permmission = "ALL";
+              }
+              else {
+                this.selectedItem.selectedUids.permmission = "VIEW"
+              }
+            }
+            else {
+              this.selectedItem.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+              this.selectedItem.selectedUids.permmission = "ALL";
+    
+            }
+            
+            
+            this.app_service.dataTransmitter({ callsource: 'settings', data: this.selectedItem });
+            this.close_model()
+          }
+          
+        },
+        error: (error: any) => {
+          this.msgbox.display_error_message(error);
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+          this.service_notification.notifier(NotificationType.success, 'Access Type Updated');
+        }
+      });
+  }
+  onSettingsSelectedData = output<any>()
+  updateSummaryData() {
+    
+    if (this.dataService.isEnablePersister) {
+
+      this.service_notification.showPersister('You have unsaved changes, wish to continue?')
+      this.dataService.modalSubInstance.result.then((result) => {
+      }, (response) => {
+        if (response == 'Yes') {
+          // this.onSettingsSelectedData.emit({ isOpen: 'Settings', selectedViewSettings: this.selectedItem })
+          this.dataService.selectedArtifactData.selectedView = this.selectedItem.selected_view;
+          this.dataService.selectedArtifactData.AccessType = this.selectedItem.selected_view.accessType;
+          this.Update_ViewAccess_Type()
+          this.dataService.modalSubInstance = null
+          return
+        }
+        else if (response == 'No') {
+          this.dataService.modalSubInstance = null
+          return
+        }
+      });
+    }
+    else {
+      this.Update_ViewAccess_Type()
+    }
+  }
+
+  updatePermission(){
+    this.Update_ViewAccess_Type()
+
+  }
+
+
   
 }

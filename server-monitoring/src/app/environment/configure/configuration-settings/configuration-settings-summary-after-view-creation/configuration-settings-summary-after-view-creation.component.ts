@@ -146,31 +146,38 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
           this.selectedAccessType = this.receivedAccessType?.AccessType
         }
 
+        // if(this.receivedAccessType.type= "accesstype_ops"){
+        //   if(this.receivedAccessType.action = "accesstype_updated"){
+        //     this.selectedAccessType = this.receivedAccessType.selected_accesstype_obj
+        //   }
+
+        // }
+
         
         
         this.dataService.changedAccessType = this.selectedAccessType
         this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
-        if (this.obj_configuration_setting.AccessType == "SHARED") {
-          this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
-            userId: item.U_ID,
-            permmission: item.permission === "EDIT" ? "ALL" : item.permission
-          }));
-        }
-        else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
+        // if (this.obj_configuration_setting.AccessType == "SHARED") {
+        //   this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
+        //     userId: item.U_ID,
+        //     permmission: item.permission === "EDIT" ? "ALL" : item.permission
+        //   }));
+        // }
+        // else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
 
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          if (this.receivedAccessType.AccessPermisions.EDIT == true) {
-            this.obj_configuration_setting.selectedUids.permmission = "ALL";
-          }
-          else {
-            this.obj_configuration_setting.selectedUids.permmission = "VIEW"
-          }
-        }
-        else {
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          this.obj_configuration_setting.selectedUids.permmission = "ALL";
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   if (this.receivedAccessType.AccessPermisions.EDIT == true) {
+        //     this.obj_configuration_setting.selectedUids.permmission = "ALL";
+        //   }
+        //   else {
+        //     this.obj_configuration_setting.selectedUids.permmission = "VIEW"
+        //   }
+        // }
+        // else {
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   this.obj_configuration_setting.selectedUids.permmission = "ALL";
 
-        }
+        // }
         this.cdr.detectChanges();
       }
     });

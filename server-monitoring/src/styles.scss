@@ -804,7 +804,7 @@ a:focus-visible {
 /**************scss for bs-modal right panel************/
 .layout-modal-right {
     &.panel-end {
-        z-index: 1079;
+        // z-index: 1079;
         left: auto;
         right: 0;
         width: 45%;

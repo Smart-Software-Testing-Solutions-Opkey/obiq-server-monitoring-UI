@@ -37,6 +37,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
 
   Settings_View_Selection: any;
   @Input('viewId') set viewId(val) {
+    this.service_data.selected_view_data.viewSelected['id'] = val;
     this.get_All_Summary_of_Selected_View(val)
   }
 
@@ -88,8 +89,9 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
 
   onSettingsSelectedDataObject(val) {
 
-    this.service_data.selectedArtifactData.selectedView = val.selectedViewSettings.selected_view;
-    this.service_data.selectedArtifactData.AccessType = val.selectedViewSettings.selected_view.accessType;
+
+    // this.service_data.selectedArtifactData.selectedView = val.selectedViewSettings.selected_view;
+    // this.service_data.selectedArtifactData.AccessType = val.selectedViewSettings.selected_view.accessType;
 
     // this.obj_configuration_setting.AccessType = this.service_data.selectedArtifactData.selectedView.accessType
     // this.obj_configuration_setting = this.service_data.selectedArtifactData

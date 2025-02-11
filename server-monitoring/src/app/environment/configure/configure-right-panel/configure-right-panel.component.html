@@ -1,4 +1,3 @@
-
 <div class="feature-right-panel">
 
     <div class="feature-rp-header mb-0 border-bottom">
@@ -8,25 +7,26 @@
         </div>
 
         <div class="rp-header-right">
-            <button type="button" class="btn btn-rp"
-                aria-label="Close" (click)="close_right_panel()" container="body">
-                    <span ngbTooltip="Close" triggers="mouseenter:mouseleave">
-                        <i class="oci oci-x"></i>
-                    </span>
+            <button type="button" class="btn btn-rp" aria-label="Close" (click)="close_right_panel()" container="body">
+                <span ngbTooltip="Close" triggers="mouseenter:mouseleave">
+                    <i class="oci oci-x"></i>
+                </span>
             </button>
         </div>
 
     </div>
- 
+
     <div class="feature-rp-body has-footer pd-rp pt-3">
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3" (click)="selectAccessType('PRIVATE')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PRIVATE'}" class="row mx-0 private-div mb-3"
+            (click)="selectAccessType('PRIVATE')">
             <div class="col-sm-12 px-0">
                 <i class="oci oci-public-off public-icon"></i>
                 Private
             </div>
         </div>
 
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PUBLIC'}"  class="row mx-0 private-div mb-3" (click)="selectAccessType('PUBLIC')">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'PUBLIC'}" class="row mx-0 private-div mb-3"
+            (click)="selectAccessType('PUBLIC')">
             <div class="col-sm-12 px-0 d-flex-between">
                 <span>
                     <i class="oci oci-public public-icon"></i>
@@ -50,31 +50,30 @@
                             </a>
                         </li>
                     </ul> -->
-                    <kendo-dropdownlist class="canView-dd-list"
-                    [data]="Public_dropdown_Items"
-                    [(value)]="selectedValue"
-                    (valueChange)="selectViewOrEdit($event)">
-                    <ng-template kendoDropDownListItemTemplate let-dataItem>
-                        <span *ngIf="dataItem === 'Can View'">
-                            <i class="oci oci-eye pe-2"></i> {{ dataItem }}
-                        </span>
-                        <span *ngIf="dataItem === 'Can Edit'">
-                            <i class="oci oci-edit pe-2"></i> {{ dataItem }}
-                        </span>
-                    </ng-template>
-                </kendo-dropdownlist>
+                    <kendo-dropdownlist class="canView-dd-list" [data]="Public_dropdown_Items" [(value)]="selectedValue"
+                        (valueChange)="selectViewOrEdit($event)">
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                            <span *ngIf="dataItem === 'Can View'">
+                                <i class="oci oci-eye pe-2"></i> {{ dataItem }}
+                            </span>
+                            <span *ngIf="dataItem === 'Can Edit'">
+                                <i class="oci oci-edit pe-2"></i> {{ dataItem }}
+                            </span>
+                        </ng-template>
+                    </kendo-dropdownlist>
                 </div>
 
             </div>
         </div>
 
-        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}"  class="row mx-0 mb-3 private-div" (click)="selectAccessType('SHARED')" *ngIf="typeSelectedItem != 'create'">
+        <div [ngClass]="{'active':this.accessTypeObj.AccessType == 'SHARED'}" class="row mx-0 mb-3 private-div"
+            (click)="selectAccessType('SHARED')" *ngIf="typeSelectedItem != 'create'">
             <div class="col-sm-12 px-0 ">
                 <i class="oci oci-share public-icon"></i>
                 Shared
             </div>
         </div>
-        <div *ngIf="showSharedInput" class="row mx-0 mt-3">
+        <div *ngIf="accessTypeObj.AccessType == 'SHARED'" class="row mx-0 mt-3">
             <div class="col-sm-10 px-0 d-flex flex-wrap" [ngClass]="{'added-users-container': addedEmails?.length}">
                 <div *ngFor="let email of addedEmails" class="user-chip">
                     <span>{{ email }}</span>
@@ -82,14 +81,14 @@
                         &times;
                     </button>
                 </div>
-        
-                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers($event)" class="form-control w-100 user-input"
-                       placeholder="Invite by name or email"
-                       (keydown.enter)="addEmailToTempList()">
+
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers($event)"
+                    class="form-control w-100 user-input" placeholder="Invite by name or email"
+                    (keydown.enter)="addEmailToTempList()">
                 <div *ngIf="filteredUsers.length" class="suggestions-dropdown">
                     <ul class="ul-suggestion-box scrollable p-0">
-                        <li ngbDropdownItem class="flex-center suggestion-item px-3 py-2" *ngFor="let user of filteredUsers" 
-                            (click)="selectUser(user)" >
+                        <li ngbDropdownItem class="flex-center suggestion-item px-3 py-2"
+                            *ngFor="let user of filteredUsers" (click)="selectUser(user)">
                             <span class="text-ellipsis" ngbTooltip="{{ user.Name }} ({{ user.email_ID }})"
                                 container="body">
                                 {{ user.Name }} ({{ user.email_ID }})
@@ -97,16 +96,17 @@
                         </li>
                     </ul>
                 </div>
-                       
+
             </div>
-        
+
             <div class="col-sm-2 pe-0 text-end">
-                <button type="button" class="btn btn-layout btn-bg-grey " [ngClass]="{'active': addedEmails?.length}" (click)="addAllEmailsToGrid()">
+                <button type="button" class="btn btn-layout btn-bg-grey " [ngClass]="{'active': addedEmails?.length}"
+                    (click)="addAllEmailsToGrid()">
                     Add
                 </button>
             </div>
         </div>
-        
+
 
         <div class="shared-to-panel" *ngIf="addedUsers.length > 0">
             <h6 class="mt-3 mb-2 font-bold">Shared to</h6>
@@ -121,7 +121,7 @@
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-column >
+                <kendo-grid-column>
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <div class="user-details">
                             <span class="layout-text-name">{{ dataItem.Name }}</span>
@@ -133,8 +133,7 @@
                 <kendo-grid-column [width]="140">
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <kendo-dropdownlist [data]="Public_dropdown_Items" class="canView-dd-list"
-                                            [(value)]="shared_selected_value"
-                                           (valueChange)="updateUserPermission(dataItem, $event)">
+                            [(value)]="shared_selected_value" (valueChange)="updateUserPermission(dataItem, $event)">
                             <ng-template kendoDropDownListItemTemplate let-dataItem>
                                 <span *ngIf="dataItem === 'Can View'">
                                     <i class="oci oci-eye pe-2"></i> {{ dataItem }}
@@ -149,20 +148,21 @@
 
                 <kendo-grid-column [width]="50">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button ngbTooltip="Delete" type="button" class="btn p-2" triggers="mouseenter:mouseleave" (click)="deleteUser(rowIndex)">
+                        <button ngbTooltip="Delete" type="button" class="btn p-2" triggers="mouseenter:mouseleave"
+                            (click)="deleteUser(rowIndex)">
                             <i class="oci oci-delete text-red"></i>
                         </button>
                     </ng-template>
                 </kendo-grid-column>
             </kendo-grid>
         </div>
-        
+
 
     </div>
 
     <div class="feature-rp-footer text-end" style="text-align: left;">
-        <button [disabled]="isDisabled" type="button" class="btn btn-layout btn-bg-theme"
-            aria-label="Close" (click)="InviteUsers()">
+        <button [disabled]="isDisabled" type="button" class="btn btn-layout btn-bg-theme" aria-label="Close"
+            (click)="updatePermission()">
             {{inviteType}}
         </button>
     </div>

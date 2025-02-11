@@ -55,48 +55,52 @@ export class NavigatorLeftSettingsComponent implements OnInit {
   tempTotalViews: any = []
   isDisabled = false;
   @Input('child_data') set child_data({ totalViews, isopenSettings, selectedViewSettings }) {
-    console.log("this is view tree",totalViews)
+    console.log("this is view tree", totalViews)
     this.totalViews = [...totalViews]
     this.tempTotalViews = JSON.parse(JSON.stringify(totalViews))
-    this.isopenSettings = isopenSettings
-    this.selectedViewSettings = selectedViewSettings
+    this.isopenSettings = isopenSettings;
+    let view = this.totalViews.find(val => val.viewId == this.service_data.selected_view_data.viewSelected.id);
+    if(view){
+      this.service_data.selected_view_data.viewSelected = view;
+    }
+    this.selectedViewSettings = view ? view : selectedViewSettings
 
     if (totalViews) {
       this.changeAccessPermission(totalViews)
-      
+
     }
 
   }
 
-  changeAccessPermission(totalViews : any){
+  changeAccessPermission(totalViews: any) {
     this.service_data.totalViews.data = this.totalViews;
-      this.service_data.totalViews.source = 'editDisabled';
-      // this.app_service.dataTransmitter({data : this.totalViews,action :"editDisabled"});
-      totalViews.forEach((users) => {
-        // users.authorizedUsers.forEach((val) => {
-        //   if (val.permmission == 'VIEW') {
-        //     this.isDisabled = true
-        //   }
-        //   else if (val.permmission == 'EDIT') {
-        //     this.isDisabled = false
-        //   }
-        // })
-        
-        if(users.accessType == "SHARED" || users.accessType == "PUBLIC"){
-          if(users.viewAccessTypePermision ){
-            if (users.viewAccessTypePermision == 'VIEW') {
-                  this.isDisabled = true
-            }
-            else if (users.viewAccessTypePermision == 'EDIT' || users.viewAccessTypePermision == 'ALL') {
-                  this.isDisabled = false
-            }
+    this.service_data.totalViews.source = 'editDisabled';
+    // this.app_service.dataTransmitter({data : this.totalViews,action :"editDisabled"});
+    totalViews.forEach((users) => {
+      // users.authorizedUsers.forEach((val) => {
+      //   if (val.permmission == 'VIEW') {
+      //     this.isDisabled = true
+      //   }
+      //   else if (val.permmission == 'EDIT') {
+      //     this.isDisabled = false
+      //   }
+      // })
+
+      if (users.accessType == "SHARED" || users.accessType == "PUBLIC") {
+        if (users.viewAccessTypePermision) {
+          if (users.viewAccessTypePermision == 'VIEW') {
+            this.isDisabled = true
+          }
+          else if (users.viewAccessTypePermision == 'EDIT' || users.viewAccessTypePermision == 'ALL') {
+            this.isDisabled = false
           }
         }
-        else{
-          this.isDisabled = false
-        }
-        
-      })
+      }
+      else {
+        this.isDisabled = false
+      }
+
+    })
   }
   @Output() onTotalViewsChange = new EventEmitter<any>();
   selectedViewSettings: any = {}
@@ -104,14 +108,13 @@ export class NavigatorLeftSettingsComponent implements OnInit {
   onViewDelete = output<any>()
 
   settingsViewSelect(val) {
-    if(val.accessType == "PUBLIC")
-    {
+    if (val.accessType == "PUBLIC") {
       this.isDisabled = true;
-      
+
     }
     this.selectedViewSettings = val;
     this.service_data.selected_view_data.viewSelected = val
-    this.app_service.routeTo('environment',`settings/${this.selectedViewSettings.viewId}`)
+    this.app_service.routeTo('environment', `settings/${this.selectedViewSettings.viewId}`)
     // this.onSettingsSelected.emit({ isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings })
 
   }
@@ -162,9 +165,9 @@ export class NavigatorLeftSettingsComponent implements OnInit {
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/markViewAsFavourite";
     let form_data = { viewId: view.viewId, projectId: this.service_data.UserDto.ProjectDTO.P_ID, userId: this.service_data.UserDto.UserDTO.U_ID, userName: this.service_data.UserDto.UserDTO.UserName };
     this.app_service.make_post_server_call(form_url, form_data)
-    .subscribe({
-      next: (result: any) => {
-        this.service_notification.notifier(NotificationType.success, 'Added to favorites');
+      .subscribe({
+        next: (result: any) => {
+          this.service_notification.notifier(NotificationType.success, 'Added to favorites');
 
         },
         error: (error: any) => {
@@ -189,9 +192,9 @@ export class NavigatorLeftSettingsComponent implements OnInit {
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/removeViewFromFavourite";
     let form_data = { viewId: view.viewId, projectId: this.service_data.UserDto.ProjectDTO.P_ID, userId: this.service_data.UserDto.UserDTO.U_ID };
     this.app_service.make_post_server_call(form_url, form_data)
-    .subscribe({
-      next: (result: any) => {
-        this.service_notification.notifier(NotificationType.success, 'Removed from favorites');
+      .subscribe({
+        next: (result: any) => {
+          this.service_notification.notifier(NotificationType.success, 'Removed from favorites');
 
         },
         error: (error: any) => {

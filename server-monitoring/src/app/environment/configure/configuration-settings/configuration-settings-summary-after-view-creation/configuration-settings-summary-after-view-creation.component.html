@@ -10,7 +10,7 @@
                 data-bs-toggle="dropdown"
                 [disabled]="obj_configuration_setting?.selected_view?.viewAccessTypePermision == 'VIEW' ? true : false">
                 <span>
-                    {{ selectedAccessType }}
+                    {{selectedAccessType}}
                 </span>
             </button>
             <!-- <ul class="dropdown-menu w-100">
@@ -99,8 +99,7 @@
 
                                     <div class="ps-2">
                                         <span class="layout-text-name">{{dataItem.value.modifiedByName}}</span>
-                                        <span class="layout-text-date">{{dataItem.value.modifiedOn | date:'MMM d, y,
-                                            h:mm:ss a'}}</span>
+                                        <span class="layout-text-date">{{dataItem.value.modifiedOn | date:'MMM d, y,h:mm:ss a'}}</span>
                                     </div>
                                 </div>
                             </ng-template>
@@ -279,6 +278,9 @@
 
 </div>
 <div class="p-3 border-top-0">
+    
     <button type="button" class="btn btn-layout btn-bg-white me-2" (click)="backToMenu()">Cancel</button>
-    <button type="button" class="btn btn-layout btn-bg-theme" (click)="updateSummaryData()">Update</button>
+    <!--
+        <button type="button" class="btn btn-layout btn-bg-theme" (click)="updateSummaryData()">Update</button>
+     -->  
 </div>

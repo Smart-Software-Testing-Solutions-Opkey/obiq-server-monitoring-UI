@@ -158,7 +158,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
         return;
       }
     });
-    modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting , type : "create"};
+    modalRef.componentInstance.selectedItem = this.obj_configuration_setting 
     modalRef.componentInstance.typeSelectedItem = "create";
   }
   selectedAccessType: string = 'PRIVATE';
