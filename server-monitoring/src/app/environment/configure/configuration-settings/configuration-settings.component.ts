@@ -452,6 +452,39 @@ export class ConfigurationSettingsComponent {
   finish() {
     
     this.createView()
+  }
+  
+  sendEmailInvite() {
+    let form_url = environment.BASE_OPKEY_URL + "Observability/SendSharedViewMail";
+
+    let obj = {
+      "UserID": this.service_data.UserDto.UserDTO.U_ID,
+      "ViewName": this.obj_configuration_setting.selected_datasource.viewName,
+      "UserName": this.service_data.UserDto.UserDTO.Name,
+      "AccessType": this.obj_configuration_setting.AccessType,
+      "AuthorizedUsers":this.obj_configuration_setting.selectedUids,
+      "ProjectID": this.service_data.UserDto.ProjectDTO.P_ID
+
+    }
+
+    let form_data = { SendViewData: JSON.stringify(obj) }
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
+
+      next: (result: any) => {
+        if (result) {
+          this.close_model();
+        }
+      },
+      error: (error: any) => {
+
+        console.warn(error);
+        this.msgbox.display_error_message(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
 
   }
 
@@ -467,15 +500,23 @@ export class ConfigurationSettingsComponent {
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
         next: (result: any) => {
-          window.loadingStop("#modal-view-bilder");
-          this.service_data.is_env_configure = true;
-          this.close_model();   // calling GetAllViewds after View Creation
-          this.service_notification.notifier(NotificationType.success, 'View Created');
-          console.log("after view creation: ",this.obj_configuration_setting); //
-          // this.app_service.dataTransmitter("viewCreated");
-          this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
-          // this.router.navigateByUrl('/environment');
-          this.app_service.routeTo('environment','summary')
+
+          if(result){
+            if(this.obj_configuration_setting.AccessType == 'SHARED'){
+              this.sendEmailInvite();
+            }
+            
+            window.loadingStop("#modal-view-bilder");
+            this.service_data.is_env_configure = true;
+            this.close_model();   // calling GetAllViewds after View Creation
+            this.service_notification.notifier(NotificationType.success, 'View Created');
+            console.log("after view creation: ",this.obj_configuration_setting); //
+            // this.app_service.dataTransmitter("viewCreated");
+            this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
+            // this.router.navigateByUrl('/environment');
+            this.app_service.routeTo('environment','summary')
+          }
+         
 
         },
         error: (error: any) => {
