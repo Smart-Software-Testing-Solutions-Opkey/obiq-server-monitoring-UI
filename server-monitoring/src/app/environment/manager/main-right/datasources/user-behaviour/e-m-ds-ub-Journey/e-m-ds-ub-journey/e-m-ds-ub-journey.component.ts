@@ -25,6 +25,15 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
   
   @Input() analyticsType: any;
   @Input() view: any;
+  @Input('dataTimeData') set dataTimeData({obj_filter}){
+
+    this.logToSearch = '';
+    this.allDataLoaded = false
+    this.offset = 0;
+    this.timeFilter = obj_filter
+    this.get_User_Behaviour_Journey(this.timeFilter)
+   
+}
   limit: number = 20; 
   offset: number = 0; 
   ub_User_Journey_Data_Source: any[] = []; 
@@ -34,16 +43,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
   timeFilter : any;
 
   ngOnInit(): void {
-     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.logToSearch = '';
-        this.allDataLoaded = false
-        this.offset = 0;
-        this.timeFilter = data?.timeFilter
-        this.get_User_Behaviour_Journey(this.timeFilter)
-      }
-    }))
-    this.get_User_Behaviour_Journey();
+  
     this.startDataReceiving();
     }
 

@@ -24,8 +24,17 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
   ){
 
   }
-@Input() analyticsType: any;
+  @Input() analyticsType: any;
   @Input() view: any;
+  @Input('dataTimeData') set dataTimeData({obj_filter}){
+
+    this.logToSearch = '';
+    this.allDataLoaded = false
+    this.offset = 0;
+    this.timeFilter = obj_filter
+    this.get_api_log_error(this.timeFilter);
+   
+}
  
   limit: number = 20; 
   offset: number = 0; 
@@ -36,16 +45,16 @@ export class EMMrDsUbApiErrorTabComponent implements OnDestroy {
 
   ngOnInit(): void {
   
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.logToSearch = '';
-        this.allDataLoaded = false
-        this.offset = 0;
-        this.timeFilter = data?.timeFilter
-        this.get_api_log_error(this.timeFilter)
-      }
-    }))
-  this.get_api_log_error();
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //     this.logToSearch = '';
+    //     this.allDataLoaded = false
+    //     this.offset = 0;
+    //     this.timeFilter = data?.timeFilter
+    //     this.get_api_log_error(this.timeFilter)
+    //   }
+    // }))
+  // this.get_api_log_error();
   this.startDataReceiving();
   }
    onSelectionChange(e) {
