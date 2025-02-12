@@ -64,12 +64,18 @@ export class EMApiErrorWidgetComponent implements OnInit, OnDestroy {
   widgetType: ""
 
   title: string
-  @Input('child_data') set child_data({ view, title, widgetType }) {
+  obj_filter : any ;
+  @Input('child_data') set child_data({ view, title, widgetType ,obj_filter}) {
 
 
     this.view = view
     this.title = title
     this.widgetType = widgetType
+    this.obj_filter = obj_filter
+    if (this?.view?.viewId) {
+      this.getWidgetData(this.obj_filter);
+      this.createChart();
+    }
   }
   maxCount: number = 0;
 
@@ -77,16 +83,16 @@ export class EMApiErrorWidgetComponent implements OnInit, OnDestroy {
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit() {
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-       this.getWidgetData( data?.timeFilter)
-       this.createChart();
-      }
-    }))
-    if (this?.view?.viewId) {
-      this.getWidgetData();
-      this.createChart();
-    }
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //    this.getWidgetData( data?.timeFilter)
+    //    this.createChart();
+    //   }
+    // }))
+    // if (this?.view?.viewId) {
+    //   this.getWidgetData();
+    //   this.createChart();
+    // }
     this.startDataReceiving();
   }
 

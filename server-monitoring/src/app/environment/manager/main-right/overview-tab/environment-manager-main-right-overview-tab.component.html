@@ -14,12 +14,12 @@
                     <div class="row mx-0">
                         <div class="col-sm-6 margin-bottom-2 pe-3 ps-0">
                             <div class="overview-error-panel" style="height: 100%;">
-                                <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour'}"></app-environment-manager-widgets-total-errors-area-widget>
+                                <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour', obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                             </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-fastest-journeys  [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys  [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                             </div>
                         </div>
                  
@@ -27,38 +27,38 @@
                     <div class="row mx-0">
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </div>
 
 
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors'}"></app-e-m-api-error-widget>
+                                <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter}"></app-e-m-api-error-widget>
                             </div>
                         </div>
 
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors'}"></app-e-m-console-error-widget>
+                                <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors',obj_filter: obj_filter}"></app-e-m-console-error-widget>
                             </div>
                         </div>
 
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing ps-0">
                             <div class="overview-panel widget-section p-3">
-                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR'}"></app-e-m-functional-error-widget> 
+                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR',obj_filter: obj_filter}"></app-e-m-functional-error-widget> 
                             </div>
                         </div>
                  
                     </div>
                 
                     <div class="widget-section">
-                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour'}"></app-enviornment-manager-time-explorer-graph>
+                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
                     </div>
     
                 </div>
@@ -115,13 +115,13 @@
                 <div class="card-body px-0 pb-0">
                     <div class="row mx-0">
                         <div class="col-sm-4 margin-bottom-2 pe-3 ps-0 h-100">
-                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP'}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                         </div>
                         <div class="col-sm-4 margin-bottom-2 px-3 h-100">
-                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warning', widgetType:'ERP'}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warning', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                         </div>
                         <div class="col-sm-4 margin-bottom-2 ps-3 pe-0 h-100">
-                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Success', widgetType:'ERP'}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Success', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                         </div>
                 
                  
@@ -129,12 +129,12 @@
                     <div class="row mx-0">
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-user-guides [Editable]="Editable" [child_data]="{view:view,title:'Top 5 User Guides Per Process'}" ></app-environment-manager-widgets-progress-bars-user-guides>
+                                <app-environment-manager-widgets-progress-bars-user-guides [Editable]="Editable" [child_data]="{view:view,title:'Top 5 User Guides Per Process',obj_filter: obj_filter}" ></app-environment-manager-widgets-progress-bars-user-guides>
                             </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable"  [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'ERP'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable"  [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                             </div>
                         </div>
                  
@@ -142,25 +142,25 @@
                     <div class="row mx-0">
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'ERP'}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'ERP'}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </div>
 
                         <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
                             <div class="overview-panel widget-section p-3">
-                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP'}"></app-e-m-functional-error-widget>
+                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP',obj_filter: obj_filter}"></app-e-m-functional-error-widget>
                             </div>
                         </div>
                  
                     </div>
                 
                     <div class="widget-section">
-                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP'}"></app-enviornment-manager-time-explorer-graph>
+                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
                     </div>
     
                 </div>

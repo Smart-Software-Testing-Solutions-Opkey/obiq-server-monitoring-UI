@@ -52,11 +52,19 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
   view: any = null;
   title: any = null;
   widgetType = ''
-  @Input('child_data') set child_data({view,title,widgetType}) {
+  obj_filter: any ;
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
    this.view = view;
    this.title=title;
    this.widgetType = widgetType
-   console.log("thsssssssss    ",this.widgetType);
+   this.obj_filter = obj_filter
+
+   if(this.view && this.view.viewId ){
+    this.datasourceProgressBar = [];
+    this.getWidgetData(this.obj_filter)
+    this.createChart();
+  }
+   
   }
 
 
@@ -68,17 +76,6 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
 
   ngOnInit(){
 
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.getWidgetData( data?.timeFilter)
-      }
-    }))
-    
-    if(this.view && this.view.viewId ){
-      this.datasourceProgressBar = [];
-      this.getWidgetData()
-      this.createChart();
-    }
     this.startDataReceiving();
       
   }

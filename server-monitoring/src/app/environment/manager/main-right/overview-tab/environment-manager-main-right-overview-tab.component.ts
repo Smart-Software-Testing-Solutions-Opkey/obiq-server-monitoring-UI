@@ -181,9 +181,11 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
      this.analyticsTypes.display_erp= false
       
   }
-  @Input ('child_data') set child_data({ view, allSelectedAnalytics }) {
+  obj_filter : any ;
+  @Input ('child_data') set child_data({ view, allSelectedAnalytics,obj_filter }) {
    this.view=view
    this.allSelectedAnalytics=allSelectedAnalytics
+    this.obj_filter = obj_filter
    this.reset_analytics()
    this.allSelectedAnalytics?.forEach(item=>{
     if(item['name']=='User Behavior Analytics')  this.analyticsTypes.display_user_behaviour=true

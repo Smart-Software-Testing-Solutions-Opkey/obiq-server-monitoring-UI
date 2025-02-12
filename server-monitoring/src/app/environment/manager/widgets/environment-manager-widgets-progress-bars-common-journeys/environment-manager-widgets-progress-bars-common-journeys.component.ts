@@ -57,26 +57,29 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
   maxCount: number = 0;
 
   widgetType = 'USER_JOURNEY_MOST_COMMON_WIDGET'
-  @Input('child_data') set child_data({view,title,widgetType}) {
+  obj_filter : any ;
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
    this.view = view;
    this.title=title;
    this.widgetType= widgetType;
+   this.obj_filter= obj_filter
+   if(this?.view?.viewId && this?.widgetType){
+    this.datasourceProgressBar = [];
+    this.getWidgetData(this.obj_filter)
+    this.createChart();
+  }
  
   }
   public chartOptions: Partial<ChartOptions>;
 
   ngOnInit(){
 
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.getWidgetData( data?.timeFilter)
-      }
-    }))
-    if(this?.view?.viewId && this?.widgetType){
-      this.datasourceProgressBar = [];
-      this.getWidgetData()
-      this.createChart();
-    }
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //     this.getWidgetData( data?.timeFilter)
+    //   }
+    // }))
+    
     this.startDataReceiving();
   }
 

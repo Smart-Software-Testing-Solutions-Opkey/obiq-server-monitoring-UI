@@ -128,7 +128,7 @@
                 @if (selectedTab.enumType === 'OVERVIEW_TAB') {
                 <div class="overview">
                     <app-environment-manager-main-right-overview-tab
-                        [child_data]="{view:selectedView,allSelectedAnalytics:allSelectedAnalytics}"
+                        [child_data]="{view:selectedView,allSelectedAnalytics:allSelectedAnalytics,obj_filter: obj_filter}" 
                         [Editable]="Editable">
                     </app-environment-manager-main-right-overview-tab>
                 </div>

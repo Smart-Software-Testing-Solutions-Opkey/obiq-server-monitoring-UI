@@ -58,11 +58,11 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
 @Input()Editable:boolean = false
 widgetType=''
   ngOnInit(){
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
-      }
-    }))
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //     this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
+    //   }
+    // }))
     this.startDataReceiving();
     
   }
@@ -217,12 +217,15 @@ widgetType=''
   inverseColors = false
   view:any
   title = ''
-  @Input('child_data') set child_data({ typeEnum,view,title,widgetType }) {
+  obj_filter: any;
+  @Input('child_data') set child_data({ typeEnum,view,title,widgetType ,obj_filter}) {
     
    this.typeEnum = typeEnum
    this.view = view
   this.title =title
   this.widgetType = widgetType
+  this.obj_filter = obj_filter
+  this.getChartData('ESS_LOG_ERROR_WIDGET', this.obj_filter)
  
 
   }

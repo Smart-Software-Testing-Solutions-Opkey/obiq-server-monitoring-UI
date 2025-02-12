@@ -56,10 +56,20 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   title:string = ''
   maxCount: number = 0;
   widgetType =  "USER_JOURNEY_TOP_SLOW_WIDGET"
-  @Input('child_data') set child_data({view,title,widgetType}) {
+  obj_filter: any ;
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
    this.view = view;
    this.title=title;
-    this.widgetType = widgetType;
+  this.widgetType = widgetType;
+  this.obj_filter= obj_filter
+  if(this?.view?.viewId && this.widgetType){
+    this.datasourceProgressBar = [];
+    this.getWidgetData(obj_filter)
+    this.createChart();
+  }
+  
+
+
   }
   public chartOptions: Partial<ChartOptions>;
 
@@ -67,16 +77,12 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   tempdatasourceProgressBar : any = [];
   ngOnInit(){
 
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.getWidgetData( data?.timeFilter)
-      }
-    }))
-    if(this?.view?.viewId && this.widgetType){
-      this.datasourceProgressBar = [];
-      this.getWidgetData()
-      this.createChart();
-    }
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //     this.getWidgetData( data?.timeFilter)
+    //   }
+    // }))
+    
     this.startDataReceiving();
   }
 
