@@ -22,45 +22,45 @@
                     </div> -->
                     <ng-container *ngIf="item.widId == 'total_errors_Error'">
                         <div class="overview-error-panel mx-2" style="height: 100%;">
-                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour'}"></app-environment-manager-widgets-total-errors-area-widget>
+                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                         </div>
                     </ng-container> 
                 
                      <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
                             <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
-                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
                             <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
                                
-                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
                             <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
                                
-                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </ng-container>
                     <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                         <div class="widget-section mx-2 px-1 py-3">
-                            <app-enviornment-manager-time-explorer-graph [Editable]="Editable"  [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour'}"></app-enviornment-manager-time-explorer-graph>
+                            <app-enviornment-manager-time-explorer-graph [Editable]="Editable"  [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_API_ERRORS_WIDGET'">
                         <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
-                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors'}"></app-e-m-api-error-widget>
+                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter}"></app-e-m-api-error-widget>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_CONSOLE_ERRORS_WIDGET'">
                         <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
-                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors'}"></app-e-m-console-error-widget>
+                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors',obj_filter: obj_filter}"></app-e-m-console-error-widget>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
                         <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
-                            <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR'}"></app-e-m-functional-error-widget>
+                            <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR',obj_filter: obj_filter}"></app-e-m-functional-error-widget>
                         </div>
                     </ng-container>
                 </gridster-item>

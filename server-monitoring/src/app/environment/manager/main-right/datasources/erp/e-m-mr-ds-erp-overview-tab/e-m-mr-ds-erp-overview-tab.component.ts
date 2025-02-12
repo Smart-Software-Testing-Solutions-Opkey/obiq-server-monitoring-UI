@@ -107,6 +107,10 @@ export class EMMrDsErpOverviewTabComponent {
     
   }
   @Input() view:any
+  obj_filter : any;
+  @Input ('child_data') set child_data({ obj_filter }) {
+    this.obj_filter= obj_filter
+  }
   applicationTotalData:any = [{
     applicationName : 'Oracle Fusion',
     cpu:'02.68',
