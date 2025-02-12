@@ -199,7 +199,7 @@ onScroll(): void {
 
   
   backToMenu(){
-    this.app_service.routeTo('environment','summary')
+    this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
   }
   filterObj:any = {}
   filterChanged(val){

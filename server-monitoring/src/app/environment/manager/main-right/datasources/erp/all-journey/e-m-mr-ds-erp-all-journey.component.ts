@@ -192,7 +192,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
   }
   backtomenu(){
-    this.app_service.routeTo('environment','summary')
+    this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
   }
   filterObj:any = {}
   filterChanged(val){
