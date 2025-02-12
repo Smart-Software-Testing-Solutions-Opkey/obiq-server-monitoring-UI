@@ -60,7 +60,7 @@ export class ConfigureRightPanelComponent {
     if (this.typeSelectedItem == 'update') {
 
       this.accessTypeObj.AccessType = this.selectedItem.selected_view.accessType;
-      this.accessTypeObj.AccessPermissions = this.selectedItem.selected_view.viewAccessTypePermision;
+      this.accessTypeObj.AccessPermissions = this.selectedItem.selected_view.viewAccessTypePermision ? this.selectedItem.selected_view.viewAccessTypePermision : 'VIEW';
      
     }
     else if (this.typeSelectedItem == 'create') {
@@ -68,13 +68,15 @@ export class ConfigureRightPanelComponent {
       // this.accessTypeObj.AccessType = this.selectedItem.AccessType
       this.accessTypeObj.AccessType = "PRIVATE"
       // this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions
-      this.accessTypeObj.AccessPermissions = "EDIT"
+      this.accessTypeObj.AccessPermissions = "VIEW"
       
     }
   }
 
   selectAccessType(type: string): void {
     this.accessTypeObj.AccessType = type
+    console.log(this.accessTypeObj.AccessPermissions);
+    
 
     if (this.accessTypeObj.AccessType == 'SHARED') {
       this.isDisabled = true;
