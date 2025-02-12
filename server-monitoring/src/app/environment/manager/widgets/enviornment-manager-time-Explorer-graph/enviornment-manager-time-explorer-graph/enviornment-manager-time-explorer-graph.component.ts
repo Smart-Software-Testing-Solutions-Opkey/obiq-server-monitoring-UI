@@ -133,7 +133,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
       series: this.getSeriesData(this.chartData.essServerLogUsageDtoList),
       chart: {
         type: 'bar',
-        height: 200,
+        height: 280,
         stacked: true,
         toolbar: {
           show: true,
