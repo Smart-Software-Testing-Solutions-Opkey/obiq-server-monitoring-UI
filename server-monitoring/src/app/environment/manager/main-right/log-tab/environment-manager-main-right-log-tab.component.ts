@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -52,10 +52,18 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     public app_service: AppService,
     public dataService: AppDataService,
     private datePipe: DatePipe,
-    private msgbox: MsgboxService 
+    private msgbox: MsgboxService, 
+    private cdr : ChangeDetectorRef
   ) { }
   @Input() analyticsType: any;
   @Input() view: any;
+
+  
+  @Input('dataTimeData') set dataTimeData({obj_filter}){
+      this.selectedTime=obj_filter
+      this.getLogsChart(this.selectedTime);
+      this.getViewLogs(this.selectedTime);
+  }
   startTime: Date | null = null;
   endTime: Date | null = null;
   public chartOptions: Partial<ChartOptions>;
@@ -81,17 +89,29 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       this.logHeight = 'calc(100vh - 25rem)'
     }
     
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.selectedTime = data?.timeFilter
-        this.getLogsChart(data?.timeFilter);
-        this.getViewLogs(data?.timeFilter);
-      }
-    }))
-    this.getLogsChart()
-    this.getViewLogs()
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+
+    //   if( data != null){
+    //     if(data?.type == "getDataWithTime"){
+    //       this.selectedTime = data?.timeFilter
+    //       this.getLogsChart(data?.timeFilter);
+    //       this.getViewLogs(data?.timeFilter);
+    //     }
+    //     else{
+         
+    //     }
+       
+    //   }
+      
+    // }))
+
+  
+    
+    
     this.startDataReceiving();
   }
+
+  
 
   ngOnDestroy() {
     this.dataService.isEnablePersister = false
@@ -335,10 +355,10 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
        form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
        form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
      }
-     else{
-       this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
-        form_data.timeSpanEnum = timeFilter?.value;
-     }
+    //  else{
+    //    this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
+    //     form_data.timeSpanEnum = timeFilter?.value;
+    //  }
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
@@ -373,10 +393,10 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
       form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
     }
-    else{
-      this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
-       form_data.timeSpanEnum = timeFilter?.value;
-    }
+    // else{
+    //   this.selectedTime={"type":"setEnum","value":"LAST_24_HOUR"}
+    //    form_data.timeSpanEnum = timeFilter?.value;
+    // }
    
     this.app_service.make_post_server_call(ajax_url, form_data)
     .subscribe({

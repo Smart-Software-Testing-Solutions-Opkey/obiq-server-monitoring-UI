@@ -201,7 +201,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     modelBrowserList: null,
     modelStatus: null,
     modelFromDate: null,
-    modelToDate: null
+    modelToDate: null,
+    modelDateTime : null,
   }
   tempObj = {
     modelApplication: "OracleFusion",
@@ -213,7 +214,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     modelBrowserList: null,
     modelStatus: null,
     modelFromDate: null,
-    modelToDate: null
+    modelToDate: null,
+    modelDateTime : null,
   }
 
 
@@ -237,6 +239,15 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
     let obj = { ...this.modelObj }
     obj.modelStatus = val
     this.modelObj = JSON.parse(JSON.stringify(obj))
+  }
+
+  ondateTimeFilteremit = output<any>();
+  sendTimeFilterData(val){
+    // let obj = {...this.modelObj}
+    // obj.modelDateTime = val
+    // this.modelObj = JSON.parse(JSON.stringify(obj))
+    this.ondateTimeFilteremit.emit(val)
+
   }
 
   sendFilterData() {

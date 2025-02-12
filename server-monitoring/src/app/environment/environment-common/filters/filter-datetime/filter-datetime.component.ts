@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -40,6 +40,8 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
     { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
     { name: 'setCustom', value: 'Set Custom', timeValue: ""},
   ];
+
+  onDateTimeChange = output<any>();
 
   ngOnDestroy(): void {
     this.dataService.isEnablePersister = false;
@@ -137,6 +139,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
 
       this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
+      this.onDateTimeChange.emit({type: 'setEnum', value: timeItem?.timeValue})
       this.closeTimeFilterDropdown();
     }
   
@@ -145,6 +148,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
       this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
       this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
+      this.onDateTimeChange.emit( {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() })
       this.closeTimeFilterDropdown();
     }
   

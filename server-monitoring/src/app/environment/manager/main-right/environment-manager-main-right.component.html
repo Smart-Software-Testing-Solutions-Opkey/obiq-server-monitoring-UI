@@ -18,6 +18,7 @@
                 <app-envrionment-common-filter
                     [selected_tab]='{selectedTab: selectedTab.enumType , forDisablePermissionData:forDisablePermissionData}'
                     [selectedAnalyticsType]=selectedAnalyticsType.type (onEditableChange)="toggleEdit($event)"
+                    (ondateTimeFilteremit)="changeTimeFilter($event)"
                     (onFilterSelected)="changeFilter($event)"></app-envrionment-common-filter>
             </div>
 
@@ -135,7 +136,7 @@
                 @else if (selectedTab.enumType === 'LOG_TAB') {
                 <div class="log">
                     <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
-                        [view]="selectedView">
+                        [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
                     </app-environment-manager-main-right-log-tab>
                 </div>
                 }
@@ -201,7 +202,7 @@
                 @else if(selectedTab.enumType === 'LOG_TAB'){
                 <div class="log">
                     <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
-                        [view]="selectedView">
+                        [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
                     </app-environment-manager-main-right-log-tab>
                 </div>
                 }

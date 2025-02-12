@@ -366,8 +366,18 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   //       this.app_service.dataTransmitter({callsource:'searchOperation',data:this.searchText});
 
   //   }
+   obj_filter = null
   changeFilter(val) {
-    this.app_service.dataTransmitter({ callsource: this.selectedTab.enumType, action: 'filterChange', selectedAnalyticsType: this.selectedAnalyticsType, objFilter: val });
+
+    this.obj_filter =((val)) ;
+    // this.app_service.dataTransmitter({ callsource: this.selectedTab.enumType, action: 'filterChange', selectedAnalyticsType: this.selectedAnalyticsType, objFilter: val });
+
 
   }
+
+  changeTimeFilter(val){
+    this.obj_filter = JSON.parse(JSON.stringify(val))
+  }
+
+
 }
