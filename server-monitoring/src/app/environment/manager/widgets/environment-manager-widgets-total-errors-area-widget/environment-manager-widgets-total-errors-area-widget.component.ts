@@ -225,8 +225,16 @@ widgetType=''
   this.title =title
   this.widgetType = widgetType
   this.obj_filter = obj_filter
-  this.getChartData('ESS_LOG_ERROR_WIDGET', this.obj_filter)
- 
+  if(this.typeEnum == 'Error'){
+    this.getChartData('ESS_LOG_ERROR_WIDGET',this.obj_filter);
+  }
+  else if(this.typeEnum == 'Warning'){
+    this.getChartData('ESS_LOG_WARNING_WIDGET',this.obj_filter)
+  }
+  else if(this.typeEnum == 'Success'){
+    this.getChartData('ESS_LOG_SUCESS_WIDGET',this.obj_filter);
+  }
+  
 
   }
 
@@ -307,61 +315,34 @@ dataDir = ''
 
     let ajax_url : any;
     let form_data : any ;
+    form_data = { 
+      "timeSpanEnum": "LAST_7_DAYS" , 
+      "appType": "ORACLEFUSION", 
+      "limitBy": 50,
+      "offset": 0, 
+      "viewId": this?.view?.viewId,
+      "projectId":this.service_data.UserDto.ProjectDTO.P_ID
+    }
     
     if(this.widgetType == 'ERP'){
       // ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
       // form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
       if(type == "ESS_LOG_ERROR_WIDGET"){
         ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageErrorCount";
-        form_data = { 
-          "timeSpanEnum": "LAST_7_DAYS" , 
-          "appType": "ORACLEFUSION", 
-          "limitBy": 50,
-          "offset": 0, 
-          "viewId": this?.view?.viewId,
-          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
-        }
       }
       else if(type == 'ESS_LOG_WARNING_WIDGET'){
         ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageWarningCount";
-        form_data = { 
-          "timeSpanEnum": "LAST_7_DAYS" , 
-          "appType": "ORACLEFUSION", 
-          "limitBy": 50,
-          "offset": 0, 
-          "userId": this.service_data.UserDto.UserDTO.U_ID,
-          "viewId": this?.view?.viewId,
-          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
 
-        }
       }
       else{
         ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageSuccessCount";
-        form_data = { 
-          "timeSpanEnum": "LAST_7_DAYS" , 
-          "appType": "ORACLEFUSION", 
-          "limitBy": 50,
-          "offset": 0, 
-          "userId": this.service_data.UserDto.UserDTO.U_ID,
-          "viewId": this?.view?.viewId,
-          "projectId":this.service_data.UserDto.ProjectDTO.P_ID
-        }
       }
       
     }
 
     if( this.widgetType == 'userBehaviour'){
           ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
-          form_data = { 
-            "timeSpanEnum": "LAST_7_DAYS" , 
-            "appType": "ORACLEFUSION", 
-            "limitBy": 50,
-            "offset": 0, 
-            "userId": this.service_data.UserDto.UserDTO.U_ID,
-            "viewId": this?.view?.viewId,
-            "projectId":this.service_data.UserDto.ProjectDTO.P_ID
-          }
-
+          form_data["userId"] = this.service_data.UserDto.UserDTO.U_ID
     }
        
       
@@ -438,6 +419,8 @@ dataDir = ''
               }
 
               this.checkStyling();
+              this.bind_chart();
+              this.bindChart();
               window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
 
             }
@@ -456,25 +439,28 @@ dataDir = ''
   }
   @ViewChild('resizableDiv', { static: true }) resizableDiv: ElementRef<any>;
   ngAfterViewInit(): void {
+ 
+   
+  }
+  bind_chart(){
     if (this.typeEnum == 'Error') {
       this.chartColor = '#B42318'
      
-      this.bindChartData('Error')
+      // this.bindChartData('Error')
     }
     else if(this.typeEnum == 'Success'){
       this.chartColor = '#268144'
    
 
-      this.bindChartData('Success')
+      // this.bindChartData('Success')
   
     }
     else if(this.typeEnum == 'Warning'){
       this.chartColor = '#FFBF00'
    
-      this.bindChartData('Warning')
+      // this.bindChartData('Warning')
   
     }
-   
   }
   width = 0
   height = 0
