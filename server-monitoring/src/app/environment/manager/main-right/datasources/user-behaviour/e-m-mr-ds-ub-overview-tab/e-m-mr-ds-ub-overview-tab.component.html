@@ -43,11 +43,12 @@
                                 <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </ng-container>
-                    <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
+                        <!-- hidded weekly log -->
+                    <!-- <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
                         <div class="widget-section mx-2 px-1 py-3">
                             <app-enviornment-manager-time-explorer-graph [Editable]="Editable"  [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
                         </div>
-                    </ng-container>
+                    </ng-container> -->
                     <ng-container *ngIf="item.widId=='TOP_API_ERRORS_WIDGET'">
                         <div class="overview-panel widget-section p-3 mx-2" style="height: 90%;">
                             <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter}"></app-e-m-api-error-widget>
