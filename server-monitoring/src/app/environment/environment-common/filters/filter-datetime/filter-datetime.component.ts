@@ -20,6 +20,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
   filterCount = 0
   timezoneDatasource = []
+  displayFormat = "(GMT+5:30)"
   selectedTimezone:any
   receivedTimeRange: any
   selectedAnalyticsType: any = {}
@@ -143,10 +144,39 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.closeTimeFilterDropdown();
     }
   
+    timeZoneConversion(currDateTime){
+        // remove last seconds
+        let offset =this.selectedTimezone.BaseUtcOffset
+        offset = offset.split(":")
+        offset.splice(offset.length -1,1)
+        offset= offset.join(":")
+       
+        //check + / -
+        // offset = offset.includes("-")? offset : "+"+offset     // case 1
+        offset = offset.includes('-')? offset.replace('-','+'):'-'+offset
+        console.log("offset :",offset)
+
+        // need to convert date to GMT
+        let newcurrDateTime= new Date(currDateTime)
+       
+        //convert to date type for addition , to check do toString()
+        let newcurrDateTimeString = new Date(newcurrDateTime.toString() + offset).toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true})
+       
+        return newcurrDateTimeString
+      
+
+    }
     applyCustomFilter(){
-      // console.log("fromDate: ", this.fromDatevalue, " toDate: ", this.toDateValue);
+     
       this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+      // this.fromDateTime=this.timeZoneConversion(this.fromDateTime)  
+    
       this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+      // this.toDateTime =this.timeZoneConversion(this.toDateTime)
+
+      this.displayFormat = this.selectedTimezone.DisplayName
+     this.displayFormat=  this.displayFormat.substring( 0,this.displayFormat.indexOf(")") +1    )
+
       this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
       this.onDateTimeChange.emit( {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() })
       this.closeTimeFilterDropdown();

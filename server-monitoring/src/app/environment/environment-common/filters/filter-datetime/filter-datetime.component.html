@@ -1,5 +1,5 @@
 <div class="filter-content mb-1">
-    <div class="dropdown layout-btn-group-time" >
+    <div class="dropdown layout-btn-group-time"  >
         
        <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false">
             <button type="button" class="btn btn-default">
@@ -7,7 +7,7 @@
             </button>
             <span class="time-text-color px-2">
                 <i class="oci oci-clock font-14px pe-2"></i>
-                from  <span class="font-bold text-theme">{{fromDateTime}}</span> to <span class="font-bold text-theme">{{toDateTime}}</span> (GMT+5:30)
+                from  <span class="font-bold text-theme">{{fromDateTime}}</span> to <span class="font-bold text-theme">{{toDateTime}}</span> {{displayFormat}}
             </span>
             <button type="button" class="btn btn-default">
                 <i class="oci oci-chevron-right font-12px"></i>
