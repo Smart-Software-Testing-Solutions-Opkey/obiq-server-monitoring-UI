@@ -93,7 +93,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   
     fromDateTime : any;
     toDateTime : any;
-    selectedTime: string = '12hrs';
+    selectedTime: string = '24hrs';
     public fromDatevalue: Date = new Date();
     public toDateValue: Date = new Date();
     public dateTimeFormat = "MM/dd/yyyy HH:mm";
