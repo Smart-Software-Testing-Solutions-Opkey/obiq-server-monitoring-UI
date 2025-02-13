@@ -204,4 +204,15 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
     
     
       }
+
+      resetTimeDate(){
+      this.fromDatevalue = new Date();
+      this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+      
+      this.toDateValue = new Date();
+      this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+
+      this.displayFormat = "(GMT+5:30)"
+
+      }
 }
