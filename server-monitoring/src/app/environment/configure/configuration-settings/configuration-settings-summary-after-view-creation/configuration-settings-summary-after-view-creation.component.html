@@ -5,11 +5,12 @@
 
         <div class="dropdown access-type-layout">
             <button (click)="OnAccessTypeClick()" type="button"
-                class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ obj_configuration_setting?.selected_view.accessType }}"
+                class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ obj_configuration_setting?.selected_view?.accessType }}"
                 data-bs-toggle="dropdown"
-                [disabled]="obj_configuration_setting?.selected_view?.viewAccessTypePermision == 'VIEW' ? true : false">
+                [disabled]="obj_configuration_setting?.selected_view?.userId != dataService.UserDto.UserDTO.U_ID ? true : false">
                 <span>
-                    {{obj_configuration_setting?.selected_view.accessType}}
+                  
+                    {{obj_configuration_setting?.selected_view?.accessType}}
                 </span>
             </button>
             <!-- <ul class="dropdown-menu w-100">
