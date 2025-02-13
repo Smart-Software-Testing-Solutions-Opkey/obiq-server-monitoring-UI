@@ -33,7 +33,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     isDuplicateName: false,
   }
 
-  error_message = ""
+  error_message = "View name is required"
   @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData, isDuplicateName, isIncorrectName, isIncorrectLength }) {
     console.log(obj_configuration_setting);
     
