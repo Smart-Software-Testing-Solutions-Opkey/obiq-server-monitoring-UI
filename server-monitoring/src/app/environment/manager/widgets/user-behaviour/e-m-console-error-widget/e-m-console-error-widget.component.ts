@@ -168,6 +168,7 @@ getWidgetData(timeFilter?: any) {
         form_data["timeSpanEnum"] = timeFilter?.value;
   
       }
+      window.loadingStart("#ub-console-tab", "Please wait");
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {          
@@ -190,7 +191,7 @@ getWidgetData(timeFilter?: any) {
             val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
             })
 
-            
+            window.loadingStop("#ub-console-tab");
             this.cdRef.detectChanges();
           }
 
@@ -198,7 +199,7 @@ getWidgetData(timeFilter?: any) {
 
         },
         error: (error: any) => {
-
+          window.loadingStop("#ub-console-tab");
           console.error(error);
           this.msgbox.display_error_message(error);
         }

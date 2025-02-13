@@ -178,6 +178,7 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
   
       }
       
+      window.loadingStart("#ub-functional-tab", "Please wait");
       this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {           
@@ -199,12 +200,13 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
               this.datasourceProgressBar.map(val => {
               val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
               })
-              
+              window.loadingStop("#ub-functional-tab");
               this.cdRef.detectChanges();
             }
 
           },
           error: (error: any) => {
+            window.loadingStop("#ub-functional-tab");
             console.error(error);
             this.msgbox.display_error_message(error);
           }

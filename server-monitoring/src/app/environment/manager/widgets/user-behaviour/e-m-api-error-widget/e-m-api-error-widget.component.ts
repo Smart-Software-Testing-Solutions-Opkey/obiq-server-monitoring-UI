@@ -163,6 +163,7 @@ ngOnDestroy() {
         form_data["timeSpanEnum"] = timeFilter?.value;
   
       }
+    window.loadingStart("#ub-api-tab", "Please wait");
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
@@ -184,7 +185,7 @@ ngOnDestroy() {
             this.datasourceProgressBar.map(val => {
             val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
             })
-
+            window.loadingStop("#ub-api-tab");
             this.cdRef.detectChanges();
           }
 
@@ -192,7 +193,7 @@ ngOnDestroy() {
 
         },
         error: (error: any) => {
-
+          window.loadingStop("#ub-api-tab");
           console.error(error);
           this.msgbox.display_error_message(error);
         }
