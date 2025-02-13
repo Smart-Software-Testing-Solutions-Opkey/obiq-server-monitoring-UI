@@ -22,6 +22,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
     title: "Add View",
     selected_datasource: [],
     selected_erp_analytics: [],
+    selected_user_behaviour_component: [],
     selected_view: null,
     AccessPermisions: {
       "canView": true,
@@ -123,7 +124,7 @@ export class ViewSummaryDetailsComponent implements OnInit, AfterViewInit, OnDes
             }
           })
           this.obj_configuration_setting.selected_erp_analytics = erpList
-          // this.obj_configuration_setting.selected_user_behaviour_component = ubList
+          this.obj_configuration_setting.selected_user_behaviour_component = ubList
 
           this.obj_configuration_setting.selected_view = this.service_data.selected_view_data.viewSelected;
           this.obj_configuration_setting = JSON.parse(JSON.stringify(this.obj_configuration_setting))
