@@ -65,10 +65,10 @@ export class ConfigureRightPanelComponent {
     }
     else if (this.typeSelectedItem == 'create') {
 
-      // this.accessTypeObj.AccessType = this.selectedItem.AccessType
-      this.accessTypeObj.AccessType = "PRIVATE"
-      // this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions
-      this.accessTypeObj.AccessPermissions = "VIEW"
+      this.accessTypeObj.AccessType = this.selectedItem.AccessType == "PRIVATE" ? "PRIVATE" : this.selectedItem.AccessType
+      // this.accessTypeObj.AccessType = "PRIVATE"
+      this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions == "VIEW" ? "VIEW" : this.selectedItem.AccessType
+      // this.accessTypeObj.AccessPermissions = "VIEW"
       
     }
   }
