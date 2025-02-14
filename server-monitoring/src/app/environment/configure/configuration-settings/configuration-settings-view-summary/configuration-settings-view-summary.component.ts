@@ -121,7 +121,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
       if( this.searchText ){
 
         // for user behaviour
-        this.selected_user_behaviour_component = this.obj_configuration_setting?.selected_user_behaviour_component.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) ||data?.CreatedBy.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
+        this.selected_user_behaviour_component = this.obj_configuration_setting?.selected_user_behaviour_component.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
 
         // for erp analytics
         this.Selected_grid_dataSource = this.obj_configuration_setting?.selected_erp_analytics.filter( (data)=>
