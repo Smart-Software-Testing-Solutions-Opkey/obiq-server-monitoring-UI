@@ -267,7 +267,7 @@ export class ConfigureRightPanelComponent {
       authorizedUsers = [ ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
-      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions }]
+      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions ? this.accessTypeObj.AccessPermissions : "VIEW" }]
     }
     else {
       authorizedUsers = this.addedUsers.map(val => {
