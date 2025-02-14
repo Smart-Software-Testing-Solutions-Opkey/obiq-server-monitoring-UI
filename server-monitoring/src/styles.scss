@@ -822,6 +822,11 @@ a:focus-visible {
         }
     }
 
+    &.custom-access-modal{
+        width: 40% !important;
+    }
+    
+
     &.modal-static {
         .modal-dialog {
             transform: none;
