@@ -69,7 +69,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       keyboard: false,
       size: 'full',
       centered: true,
-      windowClass: 'layout-modal-right panel-end'
+      windowClass: 'layout-modal-right panel-end custom-access-modal'
     });
     modalRef.result.then((result) => {
     }, (response) => {
