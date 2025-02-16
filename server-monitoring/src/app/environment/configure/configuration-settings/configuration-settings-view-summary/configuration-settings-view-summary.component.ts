@@ -139,7 +139,12 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
   }
   get_all_summary(selectionData) {
   
-    this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
+    selectionData.selected_erp_analytics = selectionData.selected_erp_analytics.filter(item =>
+      selectionData.selected_datasource.select_applicaton_item.includes(item.Application)
+  );
+  this.Selected_grid_dataSource = selectionData.selected_erp_analytics;
+
+   
     this.selected_grid_System_Diagnostics = selectionData.selected_system_diagnostics;
     if(selectionData?.selected_user_behaviour_component){
 
