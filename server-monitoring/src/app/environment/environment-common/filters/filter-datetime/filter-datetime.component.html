@@ -1,7 +1,7 @@
 <div class="filter-content mb-1">
     <div class="dropdown layout-btn-group-time"  >
         
-       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false">
+       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false" (click)="getRecentHistory()">
             <button type="button" class="btn btn-default">
                 <i class="oci oci-chevron-left font-12px"></i>
             </button>
@@ -109,10 +109,21 @@
                         <div class="p-2">
                             <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
                         </div>
-                        <div class="position-relative" style="height: 10rem;">
-                            <span class="d-flex-center h-100 font-14px text-grey-2">
-                                You don’t have any history yet.
-                            </span>
+                        <div class="position-relative " style="height: 10rem;overflow-y:scroll;overflow-x: hidden;">
+                            @if( recentDataPerView.length > 0){
+
+                               <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
+                                 {{ timeItem.fromTime }} - {{timeItem.toTime}}      
+                               </div>
+                            }
+                            @else {
+                                <span class="d-flex-center h-100 font-14px text-grey-2" >
+                                    You don’t have any history yet.
+                                </span> 
+                            }
+                           
+
+                           
                         </div>
                     </div>
                 </div>

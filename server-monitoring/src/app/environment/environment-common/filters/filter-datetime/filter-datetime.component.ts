@@ -4,11 +4,16 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 
+
+interface TimeData{
+  [key : string] : Array<any>;
+}
 @Component({
   selector: 'app-filter-datetime',
   templateUrl: './filter-datetime.component.html',
   styleUrl: './filter-datetime.component.scss'
 })
+
 export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
   constructor(
@@ -17,7 +22,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
      private cdr: ChangeDetectorRef
   ){}
   
-
+  
   filterCount = 0
   timezoneDatasource = []
   displayFormat = "(GMT+5:30)"
@@ -54,6 +59,9 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
+
+  filterCustomTime : any;
+  viewDataStorageObj : TimeData ={}
 
   ngOnInit(): void {
    this.getTimezones();
@@ -176,13 +184,45 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
       this.displayFormat = this.selectedTimezone.DisplayName
      this.displayFormat=  this.displayFormat.substring( 0,this.displayFormat.indexOf(")") +1    )
+     
 
       this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
       this.onDateTimeChange.emit( {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() })
       this.closeTimeFilterDropdown();
     }
+
+    
+    addToHistory(){  
+      let viewId = this.dataService.selected_view_data.viewSelected.viewId;
+      if(  this.recentDataPerView. length > 9){
+         this.recentDataPerView.splice(0,1)
+         
+      }
+      this.recentDataPerView.push({"fromTime": this.fromDateTime, "toTime":this.toDateTime});
+      this.viewDataStorageObj [viewId ] = this.recentDataPerView
+
+      localStorage.setItem("filterCustomTime",JSON.stringify(this.viewDataStorageObj))
+    }
+
+    
+    recentDateTimeObj: TimeData = {};
+    recentDataPerView : any 
+
+    getRecentHistory(){
+      this.viewDataStorageObj  = localStorage.getItem('filterCustomTime') ? JSON.parse(localStorage.getItem('filterCustomTime')) : {};
+
+      if(this.viewDataStorageObj.hasOwnProperty(this.dataService.selected_view_data.viewSelected.viewId) ){
+        this.recentDataPerView =this.viewDataStorageObj[this.dataService.selected_view_data.viewSelected.viewId] 
+      }
+      else{
+        this.recentDataPerView = []
+      }
+
+    }
   
     closeTimeFilterDropdown(){
+      this.addToHistory();
+      this.getRecentHistory();
       this.toggleButton.nativeElement.click();
     }
     getTimezones() {
