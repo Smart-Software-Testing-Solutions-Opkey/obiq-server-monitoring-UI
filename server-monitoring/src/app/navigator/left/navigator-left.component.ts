@@ -370,6 +370,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   selectionChanged(val) {
    if(val){
     val["viewAccessTypePermision"]  = this.selectedView.viewAccessTypePermision
+    val["userId"]  = this.selectedView.userId
    }
     this.dataChanged.analyticsTypes = val || {}
     this.bind_selected_view(val || this.selectedView);

@@ -20,46 +20,14 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
   @Input() datasource: any;
   selectedTab = ''
-  @Input('selected_tab') set selected_tab({ selectedTab, forDisablePermissionData }) {
-    if (forDisablePermissionData) {
-      this.disablePermission(forDisablePermissionData);
-    }
+  @Input('selected_tab') set selected_tab({ selectedTab,}) {
+   
     this.selectedTab = selectedTab
     this.bind_filter()
 
   }
 
-  disablePermission(forDisablePermissionData : any){
-    forDisablePermissionData.data.forEach((users) => {
-      // users.authorizedUsers.forEach((val) => {
-      //   // if(val.userId == this.dataService.UserDto.U_ID)
-      //   if (val.permmission == 'VIEW') {
-      //     this.isDisabled = true
-      //   }
-      //   else if (val.permmission == 'EDIT') {
-      //     this.isDisabled = false
-      //   }
-      // })
-
-      if(forDisablePermissionData.selectedView.accessType == "PRIVATE"){
-        this.isDisabled = false
-      }
-      else{
-        if(forDisablePermissionData.selectedView.viewId == users.viewId){
-          if(users.viewAccessTypePermision && users.viewAccessTypePermision != null){
-            if (users.viewAccessTypePermision == 'VIEW') {
-                  this.isDisabled = true
-            }
-            else if (users.viewAccessTypePermision == 'EDIT' || users.viewAccessTypePermision == 'ALL') {
-                  this.isDisabled = false
-            }
-          }
-        }
-      }
-      
-      
-    });
-  }
+ 
   @Input() selectedAnalyticsType: any;
 
   onFilterSelected = output<any>();
