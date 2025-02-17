@@ -165,22 +165,40 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
         console.log("offset :",offset)
 
         // need to convert date to GMT
+        // let newcurrDateTime= new Date(currDateTime)
         let newcurrDateTime= new Date(currDateTime)
+
+
+        let correctUTCDate = new Date(newcurrDateTime.toUTCString()+offset)  // added time
+
+       
+        // console.log("newcurrDateTime.toUTCString()+ offset new Date",new Date(newcurrDateTime.toUTCString()+offset).toUTCString())
+      
+        // let correctUTCDATESTRing =correctUTCDate.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true})
+        let correctUTCDATESTRing =new Intl.DateTimeFormat("en-US", {day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}).format(correctUTCDate)   // either 1
        
         //convert to date type for addition , to check do toString()
-        let newcurrDateTimeString = new Date(newcurrDateTime.toString() + offset).toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true})
+        let newcurrDateTimeString = new Date(newcurrDateTime.toUTCString() + offset).toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true})    //either 2
        
+        console.log("newcurrDateTimeString",newcurrDateTimeString)
         return newcurrDateTimeString
       
 
     }
     applyCustomFilter(){
      
+
       this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
-      // this.fromDateTime=this.timeZoneConversion(this.fromDateTime)  
+      
+      if(this.selectedTimezone.Id != "India Standard Time"){
+        // this.fromDateTime=this.timeZoneConversion(this.fromDateTime) 
+      }
     
       this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
-      // this.toDateTime =this.timeZoneConversion(this.toDateTime)
+     
+      if(this.selectedTimezone.Id != "India Standard Time"){
+         // this.toDateTime =this.timeZoneConversion(this.toDateTime)
+      }
 
       this.displayFormat = this.selectedTimezone.DisplayName
      this.displayFormat=  this.displayFormat.substring( 0,this.displayFormat.indexOf(")") +1    )
