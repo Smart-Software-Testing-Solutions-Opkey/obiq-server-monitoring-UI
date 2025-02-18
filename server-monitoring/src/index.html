@@ -21,20 +21,13 @@
   <script>
 
     window.opkeyone_callsource = "Default"
-    window.base_url = window.location.href.indexOf("localhost:4200") > -1 ? "https://localhost:44350/" : "/";
+    window.base_url = window.location.href.indexOf("localhost") > -1 ? "https://localhost:44350/" : "/";
     window.base_obiq_server_url = "/";
 
-    if(  window.location.href.indexOf("localhost:4200")){
-      document.write('<script src="' + window.base_url + '/Assets/js/keycloak.js"><\/script>'); 
-    }
-    else{
-      document.write('<script src="/Assets/js/keycloak.js"><\/script>');
-    }
-    
+    { document.write('<script src="' + window.base_url + '/Assets/js/keycloak.js"><\/script>'); }
     { document.write('<script src="assets/keycloak/opkey_keycloak_functions.js")"><\/script>'); }
 
   </script>
-  
 
   <script type="text/javascript" src="assets/js/loader.js"></script>
 
