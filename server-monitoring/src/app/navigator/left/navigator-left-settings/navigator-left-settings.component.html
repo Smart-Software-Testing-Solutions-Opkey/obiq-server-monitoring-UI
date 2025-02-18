@@ -7,7 +7,7 @@
         </button>
     </div>
 
-    <div class="sidebar-menu-content scrollable pt-3" style="height: calc(100vh - 7.5rem);">
+    <div class="sidebar-menu-content scrollable pt-3" style="height: calc(100vh - 7.5rem);" >
         <nav>
             <ul class="nav nav-pills menu-category">
 
@@ -15,7 +15,7 @@
                 <li class="nav-item">
 
                     <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
-                        [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''">
+                        [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''" [id]="view.viewId">
                       
                         <div class="d-flex-between">
                             <ng-container *ngIf="view?.isRenamed;else nameOnly">

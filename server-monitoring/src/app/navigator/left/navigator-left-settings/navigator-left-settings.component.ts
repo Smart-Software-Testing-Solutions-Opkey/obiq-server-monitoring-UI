@@ -64,6 +64,7 @@ export class NavigatorLeftSettingsComponent implements OnInit {
       this.service_data.selected_view_data.viewSelected = view;
     }
     this.selectedViewSettings = view ? view : selectedViewSettings
+    this.dataService.scrollToParticularElement(this.selectedViewSettings.viewId)
 
     if (totalViews) {
       this.changeAccessPermission(totalViews)

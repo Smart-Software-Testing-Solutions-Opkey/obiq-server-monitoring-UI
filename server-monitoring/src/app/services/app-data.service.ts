@@ -328,5 +328,13 @@ export class AppDataService {
     "selectedTab": {},
     "allSelectedAnalytics": []
   }
+
+  scrollToParticularElement(id : any){
+    setTimeout(() => {
+        const element = document.getElementById(id);
+        element.scrollIntoView({ behavior: "instant", block: "end" });
+      }, 20);   
+  }
+
 }
 

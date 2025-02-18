@@ -295,9 +295,10 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   openSettings() {
 
     this.isopenSettings = true
-    this.selectedView2 = this.totalViews[0];
-    this.selectedViewSettings = this.selectedView2;
-    this.dataChanged.viewSelected = this.selectedView2
+
+    this.selectedView2 =this.totalViews.filter( view=> view.viewId == this.selectedView.viewId)
+    this.selectedViewSettings = this.selectedView2[0];
+    this.dataChanged.viewSelected = this.selectedView2[0]
     this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     this.dataChanged.analyticsTypes['isSelected'] = false
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
