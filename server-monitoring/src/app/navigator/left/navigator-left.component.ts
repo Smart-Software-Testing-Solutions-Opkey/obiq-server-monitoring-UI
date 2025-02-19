@@ -272,7 +272,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   viewChanged(val, source?) {
-
+    this.service_data.selected_view_data.analyticsTypes = {}
     this.selectedView = val
     this.set_Selected_VIew(this.selectedView, source)
   }
