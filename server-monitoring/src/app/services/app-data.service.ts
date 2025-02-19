@@ -336,5 +336,12 @@ export class AppDataService {
       }, 20);   
   }
 
+  selectedDataSourceData :any={
+    userBehaviourdata : [],
+    erpAnalyticsData : [],
+    testAutomationData : [],
+    systemDiagonosticsData :[] 
+  }
+
 }
 

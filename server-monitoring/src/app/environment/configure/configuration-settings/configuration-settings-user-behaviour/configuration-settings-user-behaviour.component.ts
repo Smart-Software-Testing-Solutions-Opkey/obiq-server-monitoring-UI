@@ -22,7 +22,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
 
  }
  obj_configuration_setting:any;
- selected_System_User_behaviour: any[] = [];
+ selected_System_User_behaviour: any = {};
  obj_error = {
   displayUserError: false,
 }
@@ -30,24 +30,34 @@ export class ConfigurationSettingsUserBehaviourComponent {
   @Input('child_data') set child_data({ obj_configuration_setting,displayUserError }) {
     this.obj_configuration_setting = obj_configuration_setting;
 
-    if(this.obj_configuration_setting.selected_user_behaviour_component.length>0)
+    if(this.obj_configuration_setting.selected_user_behaviour_component.length>0){
+
+      this.obj_configuration_setting.selected_user_behaviour_component.map((ele)=>{
+        this.selected_System_User_behaviour[ele.U_ID] = ele
+      })
       this.obj_error.displayUserError=false;
-    else
-       this.obj_error.displayUserError = displayUserError;
+    } else{
+      this.obj_error.displayUserError = displayUserError;
+    }
+       
   
    
-    this.bindData()
+    this.selectedKeys = Object.keys(this.selected_System_User_behaviour);
   }
   ngOnInit() {
-
-    this.get_all_Instance();
+     this.get_all_users()
   }
 
-  agent_lists= [];
+  user_lists= [];
  
- temp_agent_list : any;
- get_all_Instance() {
+ temp_user_list : any;
+ get_all_users() {
    
+    if(this.service_data?.selectedDataSourceData?.userBehaviourdata.length != 0){
+      this.user_lists = this.service_data.selectedDataSourceData.userBehaviourdata
+      this.temp_user_list = this.user_lists
+      return
+    }
     window.loadingStart("#ub-loader", "Please wait");
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
@@ -59,9 +69,9 @@ export class ConfigurationSettingsUserBehaviourComponent {
       .subscribe({
         next: (result: any) => {
          if(result && result.length>0){
-          this.agent_lists= result;
+          this.user_lists= result;
 
-          this.agent_lists.sort((a, b) => {
+          this.user_lists.sort((a, b) => {
             const nameA = a.Name.toUpperCase();
             const nameB = b.Name.toUpperCase();
             if (nameA < nameB) {
@@ -72,11 +82,10 @@ export class ConfigurationSettingsUserBehaviourComponent {
             }
             return 0;
           });
-          this.temp_agent_list = this.agent_lists
 
-
-    
-          console.log(result)
+          this.temp_user_list = this.user_lists
+          this.service_data.selectedDataSourceData.userBehaviourdata = this.user_lists
+         
          }
         },
         error: (error: any) => {
@@ -105,49 +114,55 @@ export class ConfigurationSettingsUserBehaviourComponent {
         return
       }
       if(this.searchText == ''){
-        this.agent_lists = this.temp_agent_list;
+        this.user_lists = this.temp_user_list;
        
       }
       if( this.searchText ){
-        this.agent_lists = this.temp_agent_list.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
+        this.user_lists = this.temp_user_list.filter( (data)=>data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()) )
       }
         
 
   }
-  on_Selection_Change_User_Behavious(event:any){
+  on_Selection_Change_User_Behaviour(event:any,dataItem){
    
-   
+  
+    if(event.target.checked){
+      this.selected_System_User_behaviour[dataItem.U_ID] = dataItem
+    }else{
+      delete this.selected_System_User_behaviour[dataItem.U_ID] 
+    }
+    this.bindData()
+  
 
-    const selectedRow = event.selectedRows;
-    const deselectedRow = event.deselectedRows;
-
-    selectedRow.forEach((row: any) => {
-      this.selected_System_User_behaviour.push(row.dataItem);
-    });
-
-    deselectedRow.forEach((row: any) => {
-      const index = this.selected_System_User_behaviour.findIndex(item => item.SystemIdentifier === row.dataItem.SystemIdentifier);
-      if (index !== -1) {
-        this.selected_System_User_behaviour.splice(index, 1);
-      }
-    });
-
-
-    console.log('Selected Rows:', this.selected_System_User_behaviour);
-
-    this.obj_configuration_setting.selected_user_behaviour_component = this.selected_System_User_behaviour;
-    if(this.obj_configuration_setting.selected_user_behaviour_component.length>0){
-      this.obj_error.displayUserError=false;
+  }
+  checkAllUsers(){
+    return ( Object.keys(this.selected_System_User_behaviour).length == this.user_lists.length)
+  }
+  on_AllSelection_Change_User_Behaviour(event: any){
+    if(event.target.checked){
+      this.user_lists.forEach((user)=>{
+        this.selected_System_User_behaviour[user.U_ID] = user
+      })
+      
     }
     else{
-      this.obj_error.displayUserError=true;
+      this.selected_System_User_behaviour = {}
     }
-    this.selectedKeys
+    this.bindData()
+   
+
   }
   
   selectedKeys = []
 
   bindData(){
-    this.selectedKeys = this.obj_configuration_setting?.selected_user_behaviour_component?.map(ele =>ele.email_ID);
+    this.obj_configuration_setting.selected_user_behaviour_component = Object.values(this.selected_System_User_behaviour);
+    if(Object.keys(this.selected_System_User_behaviour).length>0){
+      this.obj_error.displayUserError=false;
+    }
+    else{
+      this.obj_error.displayUserError=true;
+    }
+    this.selectedKeys = Object.keys(this.selected_System_User_behaviour);
   }
 }

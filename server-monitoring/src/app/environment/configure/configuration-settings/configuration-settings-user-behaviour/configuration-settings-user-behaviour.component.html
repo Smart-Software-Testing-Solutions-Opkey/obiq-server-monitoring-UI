@@ -26,18 +26,30 @@
 <div id="ub-loader" class="px-0">
     <kendo-grid 
     #grid_application 
-    [data]="agent_lists" 
+    [data]="user_lists" 
     [selectable]="true"         
     [navigable]="true"   
-    (selectionChange)="on_Selection_Change_User_Behavious($event)"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo px-0"
-    kendoGridSelectBy="email_ID"
+    kendoGridSelectBy="U_ID"
     [(selectedKeys)]="selectedKeys"
     [style.max-height]="'calc(100vh - 17rem)'">
     
-    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
-    </kendo-grid-checkbox-column>
+    <!-- <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
+    </kendo-grid-checkbox-column> -->
+
+    <kendo-grid-column >
+        <ng-template kendoGridHeaderTemplate >
+            <input type="checkbox" [checked]="checkAllUsers()" (change)="on_AllSelection_Change_User_Behaviour($event)">
+         </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <div>
+                   <input type="checkbox" [checked]="selected_System_User_behaviour[dataItem.U_ID]" (change)="on_Selection_Change_User_Behaviour($event,dataItem)" >
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
 
     <kendo-grid-column field="SystemIdentifier" title="Name">
         <ng-template kendoGridCellTemplate let-dataItem>

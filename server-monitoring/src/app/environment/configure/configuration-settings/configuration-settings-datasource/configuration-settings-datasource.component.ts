@@ -47,6 +47,14 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   }
   onViewNameInputChange = output<any>();
   ngOnInit() {
+
+      if(this.obj_configuration_setting?.selected_datasource?.select_datasource_item.length > 0){
+        this.obj_configuration_setting.selected_datasource.select_datasource_item.forEach((selectedData)=>{
+          if(selectedData.name == "ERP Analytics"){
+            this.get_AllApplications();
+          }
+        })
+      }
     this.get_all_datasource();
     this.restet_obj_datasource();
   }
@@ -93,7 +101,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   
               if (widjet.name === "ERP Analytics") {
   
-                this.get_AllApplications();
+                // this.get_AllApplications();
               }
               if (widjet.name === "User Behaviour Analytics") {
   
@@ -310,8 +318,12 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   select_datasource(dataItem) {
 
     // this.datasource_item_name = dataItem.name;
+   
     dataItem.isChecked = !dataItem.isChecked;
     if (dataItem.isChecked) {
+      if( dataItem.name == 'ERP Analytics'){
+        this.get_AllApplications();
+      }
       this.obj_datasource_widget.select_datasource_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item.id == dataItem.id);
