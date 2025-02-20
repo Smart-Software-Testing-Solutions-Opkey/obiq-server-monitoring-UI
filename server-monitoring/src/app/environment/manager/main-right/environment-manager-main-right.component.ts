@@ -31,6 +31,11 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   }
   @Input('viewType') set viewChange(val) {
     this.service_data.selected_view_data.viewSelected['viewName'] = val 
+    if(this.Editable){
+      this.Editable= false;
+      this.toggleEdit(this.Editable)
+    }
+    
     this.bind_view()
   }
 
