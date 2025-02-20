@@ -42,7 +42,7 @@
             <div class="col-6 px-0">
                 <h4 class="text-header mb-0">View Summary</h4>
             </div>
-            <div class="filter-content mb-1 me-2">
+            <div class="filter-content mb-1 me-3">
                 <div class="search_panel searchToggle">
                     <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
                     <input type="text" class="form-control search_input" placeholder="Search"  [(ngModel)]="searchText" (input)="filterSearchResults()" >
@@ -73,7 +73,7 @@
     <div class="row mx-0">
         <div class="col-12 px-0">
 
-            <div id="accordion_summary" class="accordion-view-summary pe-2" style="height: calc(100vh - 22rem); overflow: auto;">
+            <div id="accordion_summary" class="accordion-view-summary pe-3" style="height: calc(100vh - 22rem); overflow: auto;">
 
                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
 
