@@ -20,8 +20,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
   @Input() datasource: any;
   selectedTab = ''
-  @Input('selected_tab') set selected_tab({ selectedTab,}) {
-   
+  @Input('selected_tab') set selected_tab({ selectedTab,Editable}) {
+   this.Editable = Editable
     this.selectedTab = selectedTab
     this.bind_filter()
 
