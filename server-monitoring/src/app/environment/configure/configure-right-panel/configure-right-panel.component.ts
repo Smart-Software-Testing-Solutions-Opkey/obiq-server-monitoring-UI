@@ -264,15 +264,23 @@ export class ConfigureRightPanelComponent {
 
     let authorizedUsers : any =[];
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      authorizedUsers = [ ]
+      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL"} ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions ? this.accessTypeObj.AccessPermissions : "VIEW" }]
     }
     else {
       authorizedUsers = this.addedUsers.map(val => {
-        let obj = { userId: val.U_ID, permmission: val.permission }
+
+        let obj;
+        if(val.U_ID != this.dataService.UserDto.UserDTO.U_ID){
+           obj = { userId: val.U_ID, permmission: val.permission }
+        }
+        else{
+           obj = { userId: val.U_ID, permmission: "ALL"}
+        }
         return obj;
+        
       })
     }
     this.app_service.dataTransmitter( {type : "accesstype_ops", data : {action : "update_accesstype", accesstype_obj:this.accessTypeObj , authorizedUsers :authorizedUsers}})
@@ -289,15 +297,23 @@ export class ConfigureRightPanelComponent {
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
     obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      obj_Update_View["authorizedUsers"] = []
+      obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL"} ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions }]
     }
     else {
       obj_Update_View["authorizedUsers"] = this.addedUsers.map(val => {
-        let obj = { userId: val.U_ID, permmission: val.permission }
+
+        let obj;
+        if(val.U_ID != this.dataService.UserDto.UserDTO.U_ID){
+           obj = { userId: val.U_ID, permmission: val.permission }
+        }
+        else{
+           obj = { userId: val.U_ID, permmission: "ALL"}
+        }
         return obj;
+       
       })
     }
     return obj_Update_View;
