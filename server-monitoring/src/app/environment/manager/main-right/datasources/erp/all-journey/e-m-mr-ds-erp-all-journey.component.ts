@@ -114,7 +114,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
-      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
+      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsersInErpApp';
 
     let form_data = {
       // userId: this.dataService?.UserDto.UserDTO.U_ID,
