@@ -43,9 +43,18 @@
 
                                 <div class="message-list pe-2" *ngIf="view.accessType == 'SHARED'">
                                     <!-- for 3 to 4 images start loop in img tag -->
-                                    <img src="assets/images/default/profile.png" class="profile-pic" alt="User 1">
+                                        @for(user of view.authorizedUsers ; track user;let index = $index){
+                                            @if(index < 2 || index == 2 ){
+                                                <img src="/user/getavatar/user.userId" class="profile-pic" alt="User {{index+1}}">
+                                            }
+                                       }
+                                    
                                     <!-- ---loop end here---- -->
-                                    <div class="more-count">+1</div>
+                                    @if(view.authorizedUsers.length > 3){
+                                        <div class="more-count">
+                                            +{{view.authorizedUsers.length-3}}
+                                        </div>
+                                    }
                                 </div>
 
                              
