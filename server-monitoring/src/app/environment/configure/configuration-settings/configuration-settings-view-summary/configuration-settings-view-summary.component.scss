@@ -24,6 +24,29 @@
             margin-top: 1rem;
         }
 
+        &.sticky-1 {
+            .card-header{
+                top: 0 !important;
+            }
+        }
+        
+        &.sticky-2 {
+            .card-header{
+                top: 3rem !important;
+            }
+        }
+        
+        &.sticky-3 {
+            .card-header{
+                top: 6rem !important;
+            }
+        }
+        &.sticky-4 {
+            .card-header{
+                top: 9rem !important;
+            }
+        }
+
         .card-header {
             padding: 0rem;
             border: none;

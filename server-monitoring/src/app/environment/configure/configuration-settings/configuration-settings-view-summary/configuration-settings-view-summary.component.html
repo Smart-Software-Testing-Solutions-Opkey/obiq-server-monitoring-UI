@@ -77,13 +77,13 @@
 
                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
 
-                   <div class="card">
+                   <div class="card" [ngClass]="'sticky-' + cardheader">
                     @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 
                         @if(item.name == 'ERP Analytics') {
 
                             <!-- <div class="card"> -->
-                                <div class="card-header py-2" style="top: 3rem;">
+                                <div class="card-header py-2">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
                                         ERP Analytics
                                     </a>
@@ -208,7 +208,7 @@
                         @if(item.name == 'User Behaviour Analytics') {
                             
                             <!-- <div class="card"> -->
-                                <div class="card-header py-2" style="top: 0;">
+                                <div class="card-header py-2">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
                                         User Behavior Analytics
                                     </a>
