@@ -3,3 +3,9 @@
     font-size: 0.875rem;
     font-weight: 400;
 }
+
+.user-b-loader{
+    ::ng-deep .k-grid .k-cell-inner>.k-link{
+        padding: 0.625rem !important;
+    }
+}

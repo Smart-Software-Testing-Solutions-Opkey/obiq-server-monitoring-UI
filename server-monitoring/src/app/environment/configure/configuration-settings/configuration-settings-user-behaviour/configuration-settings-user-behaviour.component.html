@@ -23,7 +23,7 @@
     </div>
 
 
-<div id="ub-loader" class="px-0">
+<div id="ub-loader" class="px-0 user-b-loader">
     <kendo-grid 
     #grid_application 
     [data]="user_lists" 
@@ -38,7 +38,7 @@
     <!-- <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
     </kendo-grid-checkbox-column> -->
 
-    <kendo-grid-column >
+    <kendo-grid-column [width]="50">
         <ng-template kendoGridHeaderTemplate >
             <input type="checkbox" [checked]="checkAllUsers()" (change)="on_AllSelection_Change_User_Behaviour($event)">
          </ng-template>

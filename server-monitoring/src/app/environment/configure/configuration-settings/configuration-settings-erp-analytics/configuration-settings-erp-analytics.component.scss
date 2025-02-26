@@ -22,3 +22,9 @@
 #erp-loader .k-grid .k-grid-header .k-table-th{
     padding-left: 0.625rem !important;
 }
+
+.erp-anl-loader{
+    ::ng-deep .k-grid .k-cell-inner>.k-link{
+        padding: 0.625rem !important;
+    }
+}
