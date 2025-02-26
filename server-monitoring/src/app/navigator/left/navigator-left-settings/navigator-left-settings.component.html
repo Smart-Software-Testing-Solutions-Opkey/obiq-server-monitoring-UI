@@ -45,7 +45,7 @@
                                     <!-- for 3 to 4 images start loop in img tag -->
                                         @for(user of view.authorizedUsers ; track user;let index = $index){
                                             @if(index < 2 || index == 2 ){
-                                                <img src="/user/getavatar/user.userId" class="profile-pic" alt="User {{index+1}}">
+                                                <img src="/user/getavatar/{{user.userId}}" class="profile-pic" alt="User {{index+1}}">
                                             }
                                        }
                                     
