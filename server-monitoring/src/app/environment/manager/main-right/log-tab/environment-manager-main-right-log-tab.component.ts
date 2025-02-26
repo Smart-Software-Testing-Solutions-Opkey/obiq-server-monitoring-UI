@@ -83,7 +83,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   ngOnInit(): void {
    
     if(this.analyticsType.type == 'ERP_ANALYTICS_DATASOURCE'){
-      this.logHeight = 'calc(100vh - 8rem)' 
+      this.logHeight = 'calc(100vh - 9rem)' 
     }
     else{
       this.logHeight = 'calc(100vh - 25rem)'
