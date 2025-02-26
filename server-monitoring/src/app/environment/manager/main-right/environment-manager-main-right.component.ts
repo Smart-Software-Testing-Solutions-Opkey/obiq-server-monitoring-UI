@@ -29,12 +29,16 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
   @Input('viewId') set viewId(val) {
     this.service_data.selected_view_data.viewSelected['viewId'] = val
   }
+
+  isShowSearchText : boolean = false;
   @Input('viewType') set viewChange(val) {
     this.service_data.selected_view_data.viewSelected['viewName'] = val 
     if(this.Editable){
       this.Editable= false;
       this.toggleEdit(this.Editable)
     }
+    this.isShowSearchText = !this.isShowSearchText;
+    
     
     this.bind_view()
   }
@@ -53,7 +57,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.disposeAllSubscriptions();
   }
   isDataLoaded = false
-  searchText: any;
+  searchText: any = "";
 
   subscriptions: Subscription[] = [];
 

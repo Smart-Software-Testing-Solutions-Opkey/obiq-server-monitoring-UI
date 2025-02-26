@@ -80,7 +80,7 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
       
   }
 
-  tempdatasourceProgressBar : any;
+  tempdatasourceProgressBar : any = [];
   filterSearchResults(){
     this.datasourceProgressBar  = []
     this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.calculatedTime.toLowerCase().includes(this.searchText.toLowerCase())  )

@@ -19,12 +19,18 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   }
 
   @Input() datasource: any;
+  
   selectedTab = ''
   @Input('selected_tab') set selected_tab({ selectedTab,Editable}) {
    this.Editable = Editable
     this.selectedTab = selectedTab
+    this.clearSearch()
     this.bind_filter()
 
+  }
+
+  @Input('isShowSearchText') set isShowSearchText ({isShowSearchText}){
+      this.searchText = "" 
   }
 
  
@@ -268,12 +274,13 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   // this.app_service.dataTransmitter({callsource:'widgetOperation',data:this.isRefresh});
 
 
+  searchText : any;
   clearSearch() {
     this.searchText = ''
     this.filterSearchResults()
   }
 
-  searchText: any;
+ 
   filterSearchResults() {
 
     if (this.searchText == null) {
