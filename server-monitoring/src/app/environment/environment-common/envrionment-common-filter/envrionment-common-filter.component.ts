@@ -26,7 +26,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
    this.Editable = Editable
     this.selectedTab = selectedTab
     
-    if(selectedTab == 'ubAllJourney' || selectedTab == 'ubAllJourney' || selectedTab == 'ubAllApi' || selectedTab == 'ubAllConsole' || selectedTab == 'ubAllFunctional'){
+    if(selectedTab == 'ubAllJourney' || selectedTab == 'ubAllJourney' || selectedTab == 'ubAllApi' || selectedTab == 'ubAllConsole' || selectedTab == 'ubAllFunctional' || selectedTab == 'erpAllFunctional'){
       this.selectedDateTime = selectedDateTime
     }
     this.searchText = ''

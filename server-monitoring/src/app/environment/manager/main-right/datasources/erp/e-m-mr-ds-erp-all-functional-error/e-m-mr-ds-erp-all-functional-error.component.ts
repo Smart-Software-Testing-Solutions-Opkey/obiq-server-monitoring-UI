@@ -39,22 +39,17 @@ subscriptions: Subscription[] = [];
  
 viewId: any;
 timeFilter: any;
+selectedTimeDate: any = {
+  type :'setEnum',
+  value : "LAST_24_HOUR",
+};
 ngOnInit(): void {
   this.dataService.isAllErrorOpen = true
   this.route.queryParams.subscribe(params => {
     this.viewId = params['viewId'];  
   });
   
-
-  this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-    if(data?.type == "getDataWithTime"){
-      this.logToSearch = '';
-      this.allDataLoaded = false
-      this.offset = 0;
-      this.timeFilter = data?.timeFilter
-      this.get_all_Functional_log_error(this.timeFilter)
-    }
-  }))
+this.selectedTimeDate = this.dataService.selectedDateTime
 this.get_all_Functional_log_error();
 this.startDataReceiving();
 }
@@ -111,7 +106,7 @@ startDataReceiving(){
             this.logToSearch = data.data;
             this.offset = 0;
             this.allDataLoaded = false;
-            this.get_all_Functional_log_error(this.timeFilter)
+            this.get_all_Functional_log_error()
           }
         }
         
@@ -140,17 +135,14 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
       "viewId": this.viewId,
       "logToSearch": this.logToSearch
     };
-    if(timeFilter?.type == 'setEnum'){
-      form_data["timeSpanEnum"] = timeFilter?.value;
+    if(this.selectedTimeDate?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = this.selectedTimeDate?.value;
     }
-    else if(timeFilter?.type == "setCustom"){
-      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
-      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    else if(this.selectedTimeDate?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = this.selectedTimeDate?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = this.selectedTimeDate?.toTimeInMillis;
     }
-    else{
-      form_data["timeSpanEnum"] ="LAST_24_HOUR";
-    }
-
+   
     window.loadingStart("#erp-err-logs-grid", "Please wait");
 
   this.app_service.make_post_server_call(form_url, form_data).subscribe({
@@ -193,7 +185,7 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
 }
 
 onScroll(): void {
-  this.get_all_Functional_log_error(this.timeFilter, true); 
+  this.get_all_Functional_log_error(true); 
 }
 
 
@@ -202,8 +194,16 @@ onScroll(): void {
     this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
   }
   filterObj:any = {}
-  filterChanged(val){
-    this.filterObj = val
-   this.get_all_Functional_log_error();
+  // filterChanged(val){
+  //   this.filterObj = val
+  //  this.get_all_Functional_log_error();
+  // }
+
+  obj_filter = null
+  changeTimeFilter(val){
+    this.obj_filter = JSON.parse(JSON.stringify(val))
+    this.selectedTimeDate = val
+    this.allDataLoaded = false;
+    this.get_all_Functional_log_error();
   }
 }
