@@ -200,6 +200,7 @@ export class EMMrDsUbAllConsoleErrorComponent {
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
     this.allDataLoaded = false;
+    this.offset= 0;
     this.get_console_log_error();
   }
 }

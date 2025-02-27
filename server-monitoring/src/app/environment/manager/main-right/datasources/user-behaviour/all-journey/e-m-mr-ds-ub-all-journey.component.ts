@@ -90,7 +90,9 @@ constructor(
          
           if( data.action == 'refresh'){
             this.textToSearch = '';
+            this.offset= 0;
             // this.getRecentSubActivityJourneyOfUser()
+            
             this.get_User_Behaviour_Journey()
           }
           else if( data.action == 'search'){
@@ -269,6 +271,7 @@ constructor(
   changeTimeFilter(val){
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
+    this.offset = 0;
     this.get_User_Behaviour_Journey();
   }
 

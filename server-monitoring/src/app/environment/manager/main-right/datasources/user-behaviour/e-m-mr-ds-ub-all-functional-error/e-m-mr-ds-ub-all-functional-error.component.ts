@@ -205,6 +205,7 @@ onScroll(): void {
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
     this.allDataLoaded = false;
+    this.offset= 0;
     this.get_Functional_log_error();
   }
 

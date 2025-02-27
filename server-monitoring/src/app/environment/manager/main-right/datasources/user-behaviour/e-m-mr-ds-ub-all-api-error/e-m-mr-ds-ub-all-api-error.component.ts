@@ -203,6 +203,7 @@ export class EMMrDsUbAllApiErrorComponent {
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
     this.allDataLoaded = false;
+    this.offset= 0;
     this.get_api_log_error();
   }
 

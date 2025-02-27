@@ -204,6 +204,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
   changeTimeFilter(val){
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
+    this.offset = 0;
     this.get_erp_Journey();
   }
 
