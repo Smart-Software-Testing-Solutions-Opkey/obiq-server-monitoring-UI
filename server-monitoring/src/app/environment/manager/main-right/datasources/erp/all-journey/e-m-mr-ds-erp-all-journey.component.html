@@ -6,7 +6,8 @@
         <h5 class="mb-0 text-ellipsis">All journey</h5>
     </div>
     <div class="right right-filter me-3 mt-2">
-        <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"  [selected_tab]= '{selectedTab: "erpAllJourney"}'></app-envrionment-common-filter>
+        <!-- <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"  [selected_tab]= '{selectedTab: "erpAllJourney"}'></app-envrionment-common-filter> -->
+        <app-envrionment-common-filter (ondateTimeFilteremit)="changeTimeFilter($event)" [selected_tab]= '{selectedTab: "erpAllJourney", selectedDateTime: selectedTimeDate}'></app-envrionment-common-filter>
     </div>
  </div>
 

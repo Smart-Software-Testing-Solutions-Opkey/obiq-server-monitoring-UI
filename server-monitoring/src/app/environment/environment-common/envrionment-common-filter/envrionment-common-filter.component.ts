@@ -21,12 +21,24 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   @Input() datasource: any;
   
   selectedTab = ''
-  @Input('selected_tab') set selected_tab({ selectedTab,Editable}) {
+  selectedDateTime : any;
+  @Input('selected_tab') set selected_tab({ selectedTab,Editable,selectedDateTime}) {
    this.Editable = Editable
     this.selectedTab = selectedTab
-    this.clearSearch()
+    
+    if(selectedTab == 'ubAllJourney' || selectedTab == 'ubAllJourney'){
+      this.selectedDateTime = selectedDateTime
+      console.log(selectedDateTime);
+    
+    }
+    this.searchText = ''
     this.bind_filter()
 
+  }
+
+  @Input('selectedTimeDate') set selectedTimeDate({selectedTimeDate})
+  {
+    this.selectedDateTime = selectedTimeDate
   }
 
   @Input('isShowSearchText') set isShowSearchText ({isShowSearchText}){
@@ -217,9 +229,8 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
 
   ondateTimeFilteremit = output<any>();
   sendTimeFilterData(val){
-    // let obj = {...this.modelObj}
-    // obj.modelDateTime = val
-    // this.modelObj = JSON.parse(JSON.stringify(obj))
+   
+    this.modelObj.modelDateTime = val
     this.ondateTimeFilteremit.emit(val)
 
   }

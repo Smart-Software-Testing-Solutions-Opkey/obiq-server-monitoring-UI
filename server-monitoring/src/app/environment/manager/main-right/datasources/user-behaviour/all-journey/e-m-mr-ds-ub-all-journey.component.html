@@ -7,7 +7,9 @@
         </div>
 
         <div class="right-filter me-3 mt-2">
-            <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)" [selected_tab]= '{selectedTab: "ubAllJourney"}'></app-envrionment-common-filter>
+            
+            <!-- <app-envrionment-common-filter (onFilterSelected)="filterChanged($event)"  (ondateTimeFilteremit)="changeTimeFilter($event)" [selected_tab]= '{selectedTab: "ubAllJourney", selectedDateTime: selectedTimeDate}'></app-envrionment-common-filter> -->
+            <app-envrionment-common-filter   (ondateTimeFilteremit)="changeTimeFilter($event)" [selected_tab]= '{selectedTab: "ubAllJourney", selectedDateTime: selectedTimeDate}'></app-envrionment-common-filter>
         </div>
     </div>
    

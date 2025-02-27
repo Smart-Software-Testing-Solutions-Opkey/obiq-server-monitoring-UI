@@ -67,8 +67,13 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  selectedTimeDate: any;
   ngOnInit(): void {
     this.data_reciver()
+    if(Object.keys(this.dataService.selectedDateTime).length != 0){
+      this.selectedTimeDate = this.dataService.selectedDateTime
+      this.obj_filter = this.dataService.selectedDateTime
+    }
 
   }
 

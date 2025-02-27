@@ -343,5 +343,11 @@ export class AppDataService {
     systemDiagonosticsData :[] 
   }
 
+  selectedDateTime : any = {
+    type: 'setEnum',
+    value : 'LAST_24_HOUR'
+
+  }
+
 }
 

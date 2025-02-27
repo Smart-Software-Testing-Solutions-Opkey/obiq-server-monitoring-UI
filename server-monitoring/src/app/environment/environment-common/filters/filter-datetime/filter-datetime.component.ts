@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -44,9 +44,15 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
     { name: '7days', value: '7 days', timeValue: "LAST_7_DAYS"},
     { name: '1mons', value: '1 months', timeValue: "LAST_1_MONTH"},
     { name: '3mons', value: '3 months', timeValue: "LAST_3_MONTH"},
-    { name: 'setCustom', value: 'Set Custom', timeValue: ""},
+    { name: 'setCustom', value: 'Set Custom', timeValue: "setCustom"},
   ];
 
+  
+  
+  // @Input('selectedDateTime') set selectedDateTime({selectedDateTime}){
+  
+  //   console.log(selectedDateTime);
+  // }
   onDateTimeChange = output<any>();
 
   ngOnDestroy(): void {
@@ -78,10 +84,22 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
           }
         }})
         this.subscriptions.push(data_receiver);
+        
+        
+        
   }
+  
 
   ngAfterViewInit(): void {
-    this.calculateCurrentDate();
+    if(this.dataService.selectedDateTime.type == 'setEnum'){
+      this.selectedTime = this.dataService.selectedDateTime.value;
+      this.setTimeValue(this.selectedTime);
+
+   }
+   else{
+
+   }
+    // this.calculateCurrentDate();
   }
 
 
@@ -101,54 +119,64 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   
     fromDateTime : any;
     toDateTime : any;
-    selectedTime: string = '24hrs';
+    selectedTime: string = "LAST_24_HOUR";
     public fromDatevalue: Date = new Date();
     public toDateValue: Date = new Date();
     public dateTimeFormat = "MM/dd/yyyy HH:mm";
      @ViewChild('timeFilterToggleButton') toggleButton: ElementRef<HTMLButtonElement>;
+
+    setTimeValue(selectedTime){
+      let currentDateObj = new Date();
+      let numberOfMlSeconds = currentDateObj.getTime();
+      let newDateObj = null
+
+          if(selectedTime == "LAST_30_MINUTES"){
+             newDateObj = new Date(numberOfMlSeconds - (30*60*1000));
+          }
+          else if(selectedTime == "LAST_60_MINUTES"){
+             newDateObj = new Date(numberOfMlSeconds - (60*60*1000));
+          }
+          else if(selectedTime == "LAST_3_HOUR"){
+             newDateObj = new Date(numberOfMlSeconds - (3*60*60*1000));
+          }
+          else if(selectedTime == "LAST_6_HOUR"){
+             newDateObj = new Date(numberOfMlSeconds - (6*60*60*1000));
+          }
+          else if(selectedTime == "LAST_12_HOUR"){
+             newDateObj = new Date(numberOfMlSeconds - (12*60*60*1000));
+          }
+          else if(selectedTime == "LAST_24_HOUR"){
+             newDateObj = new Date(numberOfMlSeconds - (24*60*60*1000));
+          }
+          else if(selectedTime == "LAST_3_DAYS"){
+             newDateObj = new Date(numberOfMlSeconds - (3*24*60*60*1000));
+          }
+          else if(selectedTime == "LAST_7_DAYS"){
+             newDateObj = new Date(numberOfMlSeconds - (7*24*60*60*1000));
+          }
+          else if(selectedTime == "LAST_1_MONTH"){
+             newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1))
+          }
+          else if(selectedTime == "LAST_3_MONTH"){
+             newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3))
+          }
+        
+      this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+      this.toDateTime = currentDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
+    }
     
     onSelctTime(timeItem){
-      this.selectedTime = timeItem?.name;
+      this.selectedTime = timeItem?.timeValue;
       if(this.selectedTime == "setCustom"){
         return;
       }
-      var currentDateObj = new Date();
-      var numberOfMlSeconds = currentDateObj.getTime();
-  
-      if(this.selectedTime.includes('30min')){
-        var newDateObj = new Date(numberOfMlSeconds - (30*60*1000));
-      }
-      else if(this.selectedTime.includes('60min')){
-        var newDateObj = new Date(numberOfMlSeconds - (60*60*1000));
-      }
-      else if(this.selectedTime.includes('3hr')){
-        var newDateObj = new Date(numberOfMlSeconds - (3*60*60*1000));
-      }
-      else if(this.selectedTime.includes('6hr')){
-        var newDateObj = new Date(numberOfMlSeconds - (6*60*60*1000));
-      }
-      else if(this.selectedTime.includes('12hr')){
-        var newDateObj = new Date(numberOfMlSeconds - (12*60*60*1000));
-      }
-      else if(this.selectedTime.includes('24hr')){
-        var newDateObj = new Date(numberOfMlSeconds - (24*60*60*1000));
-      }
-      else if(this.selectedTime.includes('3day')){
-        var newDateObj = new Date(numberOfMlSeconds - (3*24*60*60*1000));
-      }
-      else if(this.selectedTime.includes('7day')){
-        var newDateObj = new Date(numberOfMlSeconds - (7*24*60*60*1000));
-      }
-      else if(this.selectedTime.includes('1mon')){
-        var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1))
-      }
-      else if(this.selectedTime.includes('3mon')){
-        var newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3))
-      }
-      this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
+      
+      this.setTimeValue(this.selectedTime);
 
-      this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
+      // this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
       this.onDateTimeChange.emit({type: 'setEnum', value: timeItem?.timeValue})
+      this.dataService.selectedDateTime ={type: 'setEnum', value: this.selectedTime}
+
       this.closeTimeFilterDropdown();
     }
   
@@ -196,6 +224,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
       this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }});
       this.onDateTimeChange.emit( {type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() })
+      this.dataService.selectedDateTime ={type: 'setCustom', fromTimeInMillis: this.fromDatevalue.getTime(), toTimeInMillis: this.toDateValue.getTime() }
       this.closeTimeFilterDropdown();
     }
 

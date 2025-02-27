@@ -23,6 +23,10 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
 
   viewId: any ;
   
+  selectedTimeDate: any = {
+    type :'setEnum',
+    value : "LAST_24_HOUR",
+  };
   ngOnInit(): void {
     //  this.getRecentSubActivityJourneyOfUser();
     this.dataService.isUserAllJourneyOpen = true
@@ -30,14 +34,10 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
       this.viewId = params['viewId'];  
     });
      
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.textToSearch = '';
-        this.allDataLoaded = false
-        this.offset = 0;
-        this.get_erp_Journey(data?.timeFilter)
-      }
-    }))
+   
+    this.selectedTimeDate = this.dataService.selectedDateTime
+ 
+  
     this.get_erp_Journey()
     this.startDataReceiving();
   }
@@ -135,16 +135,16 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
       "viewId": this.viewId,
     };
     
-    if(timeFilter?.type == 'setEnum'){
-      form_data["timeSpanEnum"] = timeFilter?.value;
+    if(this.selectedTimeDate?.type == 'setEnum'){
+      form_data["timeSpanEnum"] = this.selectedTimeDate?.value;
     }
-    else if(timeFilter?.type == "setCustom"){
-      form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
-      form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
+    else if(this.selectedTimeDate?.type == "setCustom"){
+      form_data["fromTimeInMillis"] = this.selectedTimeDate?.fromTimeInMillis;
+      form_data["toTimeInMillis"] = this.selectedTimeDate?.toTimeInMillis;
     }
-    else{
-      form_data["timeSpanEnum"] ="LAST_24_HOUR";
-    }
+    // else{
+    //   form_data["timeSpanEnum"] ="LAST_24_HOUR";
+    // }
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
 
@@ -186,7 +186,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     });
   }
   onScroll(): void {
-    this.get_erp_Journey(null, true);
+    this.get_erp_Journey( true);
   }
   openInNewTab(e) {
     window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
@@ -195,11 +195,19 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
   }
   filterObj:any = {}
-  filterChanged(val){
-    this.filterObj = val
-    this.get_erp_Journey()
-    // this.getRecentSubActivityJourneyOfUser()
+  // filterChanged(val){
+  //   this.filterObj = val
+  //   this.get_erp_Journey()
+  //   // this.getRecentSubActivityJourneyOfUser()
+  // }
+  obj_filter = null
+  changeTimeFilter(val){
+    this.obj_filter = JSON.parse(JSON.stringify(val))
+    this.selectedTimeDate = val
+    this.get_erp_Journey();
   }
+
+
   // getRecentSubActivityJourneyOfUser() {
 
   //   let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData";
