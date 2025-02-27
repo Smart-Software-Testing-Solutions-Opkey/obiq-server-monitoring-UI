@@ -8,4 +8,12 @@
     ::ng-deep .k-grid .k-cell-inner>.k-link{
         padding: 0.625rem !important;
     }
+
+    ::ng-deep .k-grid .k-grid-header-wrap{
+        padding-right: 0.8rem !important;
+    }
+
+    ::ng-deep .k-grid .k-grid-container .k-grid-content.k-virtual-content{
+        overflow-y: scroll !important;
+    }
 }
