@@ -97,6 +97,12 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
    }
    else{
+    this.selectedTime = this.dataService.selectedDateTime.type;
+
+    this.fromDatevalue = new Date(this.dataService.selectedDateTime.fromTimeInMillis);
+    this.toDateValue = new Date(this.dataService.selectedDateTime.toTimeInMillis);
+    this.fromDateTime = new Date(this.dataService.selectedDateTime.fromTimeInMillis).toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true});
+    this.toDateTime = new Date(this.dataService.selectedDateTime.toTimeInMillis).toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true});
 
    }
     // this.calculateCurrentDate();
@@ -231,7 +237,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
     
     addToHistory(){  
       let viewId = this.dataService.selected_view_data.viewSelected.viewId;
-      if(  this.recentDataPerView. length > 9){
+      if(  this.recentDataPerView.length > 9){
          this.recentDataPerView.splice(0,1)
          
       }
@@ -243,7 +249,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
     
     recentDateTimeObj: TimeData = {};
-    recentDataPerView : any 
+    recentDataPerView : any =[]
 
     getRecentHistory(){
       this.viewDataStorageObj  = localStorage.getItem('filterCustomTime') ? JSON.parse(localStorage.getItem('filterCustomTime')) : {};
