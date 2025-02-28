@@ -391,6 +391,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
 
   changeTimeFilter(val){
     this.obj_filter = JSON.parse(JSON.stringify(val))
+    this.cdr.detectChanges();
   }
 
 

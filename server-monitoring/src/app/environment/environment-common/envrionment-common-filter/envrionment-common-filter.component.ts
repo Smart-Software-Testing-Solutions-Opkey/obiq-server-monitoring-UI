@@ -229,7 +229,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   sendTimeFilterData(val){
    
     this.modelObj.modelDateTime = val
-    this.ondateTimeFilteremit.emit(val)
+    this.ondateTimeFilteremit.emit(JSON.parse(JSON.stringify(val)))
 
   }
 
@@ -255,9 +255,13 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   }
 
 
+  isRefresh : boolean = false;
+  isRefreshInitial : boolean = false;
   refreshPage() {
     this.searchText = ''
-    this.app_service.dataTransmitter({ callsource: this.selectedTab, action: 'refresh', selectedAnalyticsType: this.selectedAnalyticsType });
+    this.isRefreshInitial = !this.isRefreshInitial;
+    this.isRefresh = true;
+    // this.app_service.dataTransmitter({ callsource: this.selectedTab, action: 'refresh', selectedAnalyticsType: this.selectedAnalyticsType });
   }
 
 

@@ -53,6 +53,19 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   
   //   console.log(selectedDateTime);
   // }
+ 
+
+  @Input('isRefresh') set isRefresh ({isRefresh}){
+   
+    if(!isRefresh){
+      return ;
+    }
+    this.selectedTime = 'LAST_24_HOUR';
+
+    this.onSelctTime(this.selectedTime,'refresh')
+    
+
+  }
   onDateTimeChange = output<any>();
 
   ngOnDestroy(): void {
@@ -171,8 +184,8 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.toDateTime = currentDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
     }
     
-    onSelctTime(timeItem){
-      this.selectedTime = timeItem?.timeValue;
+    onSelctTime(timeItem, callsource ?){
+      this.selectedTime = timeItem;
       if(this.selectedTime == "setCustom"){
         return;
       }
@@ -180,10 +193,13 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.setTimeValue(this.selectedTime);
 
       // this.app_service.setStreamData({ type: "getDataWithTime", timeFilter: {type: 'setEnum', value: timeItem?.timeValue}});
-      this.onDateTimeChange.emit({type: 'setEnum', value: timeItem?.timeValue})
+      this.onDateTimeChange.emit({type: 'setEnum', value: timeItem})
       this.dataService.selectedDateTime ={type: 'setEnum', value: this.selectedTime}
 
-      this.closeTimeFilterDropdown();
+      if(callsource != 'refresh'){
+        this.closeTimeFilterDropdown();
+      }
+     
     }
   
     timeZoneConversion(currDateTime){
