@@ -140,9 +140,10 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
   
   
   getWidgetData(timeFilter?: any) {
-      let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTopFunctionalErrorByFilter`;
+      let ajax_url : any;
       let form_data : any;
       if(this.widgetType=='USER BEHAVIOR'){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTopFunctionalErrorByFilter`;
         form_data ={
           "timeSpanEnum":"LAST_7_DAYS",
           "appType":"ORACLEFUSION",
@@ -155,6 +156,7 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
           }
       }
       else if(this.widgetType=='ERP'){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getTopFunctionalErrorByFilterForErp`;
         form_data ={
           "timeSpanEnum":"LAST_7_DAYS",
           "appType":"ORACLEFUSION",
