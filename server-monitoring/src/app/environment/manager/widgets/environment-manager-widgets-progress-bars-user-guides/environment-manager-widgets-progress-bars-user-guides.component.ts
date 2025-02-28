@@ -107,7 +107,7 @@ ngOnDestroy() {
   tempdatasourceProgressBar : any = [];
   filterSearchResults(){
     this.datasourceProgressBar= []
-    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName?.toLowerCase()?.includes(this.searchText?.toLowerCase())  || data?.calculatedTime?.toLowerCase()?.includes(this.searchText?.toLowerCase()))
+    this.datasourceProgressBar = this.tempdatasourceProgressBar.filter( (data)=>data?.subActivityName?.toLowerCase().includes(this.searchText?.toLowerCase())  || data?.calculatedTime?.toLowerCase()?.includes(this.searchText?.toLowerCase()))
     this.cdRef.detectChanges()
   }
   // refreshPage(){
