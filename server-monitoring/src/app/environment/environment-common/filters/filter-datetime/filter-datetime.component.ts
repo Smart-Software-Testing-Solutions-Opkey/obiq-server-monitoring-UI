@@ -314,4 +314,30 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.displayFormat = "(GMT+5:30)"
 
       }
+
+      
+      checkToDate = (date) => { 
+        let fromDatevalueDate = new Date(this.fromDatevalue)
+        let tempDate = new Date(JSON.parse(JSON.stringify(fromDatevalueDate)))
+        let threeMonthsFromNow = tempDate.setMonth(tempDate.getMonth()+3);
+        if( date < fromDatevalueDate || date > threeMonthsFromNow){
+          return true;
+        }
+        else{
+          return false;
+        }
+    } 
+
+    checkFromDate = (date) => { 
+      let toDateValueDate = new Date(this.toDateValue)
+      let tempDate = new Date(JSON.parse(JSON.stringify(toDateValueDate)))
+      let threeMonthsBeforeNow = tempDate.setMonth(tempDate.getMonth()-3);
+      if( date > toDateValueDate || date < threeMonthsBeforeNow){
+        return true;
+      }
+      else{
+        return false;
+      }
+  } 
+      
 }

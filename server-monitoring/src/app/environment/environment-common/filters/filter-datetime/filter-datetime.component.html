@@ -47,6 +47,7 @@
                                                 <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
                                                 [format]="dateTimeFormat"
                                                 [(value)]="fromDatevalue"
+                                                [disabledDates]="checkFromDate"
                                                 ></kendo-datetimepicker>
                                           </kendo-label>
 
@@ -70,11 +71,13 @@
                             <div class="row mx-0">
                                 <div class="col-sm-12 px-0">
                                     <div class="date-time-text" >
-                                        <!-- sep 13, 2024 -->
+                                        <!-- sep 13, 2024 --> 
                                         <kendo-label>
                                             <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
                                               [format]="dateTimeFormat"
-                                              [(value)]="toDateValue">
+                                              [(value)]="toDateValue"
+                                              [disabledDates]="checkToDate">
+                                              
                                             </kendo-datetimepicker>
                                         </kendo-label>
                                     </div>
