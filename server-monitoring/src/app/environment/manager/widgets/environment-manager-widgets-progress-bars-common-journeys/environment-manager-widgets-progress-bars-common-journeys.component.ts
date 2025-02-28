@@ -166,38 +166,7 @@ ngOnDestroy() {
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-          result = {
-            "Create Debit Memo From Spreadsheet": {
-                "count": 12,
-                "dataPlotList": [
-                    {
-                        "count": 3,
-                        "percentDiff": 0.0,
-                        "direction": "up"
-                    },
-                    {
-                        "count": 9,
-                        "percentDiff": 200.0,
-                        "direction": "up"
-                    }
-                ]
-            },
-            "Create Invoice From Spreadsheet": {
-                "count": 4,
-                "dataPlotList": [
-                    {
-                        "count": 1,
-                        "percentDiff": 0.0,
-                        "direction": "up"
-                    },
-                    {
-                        "count": 3,
-                        "percentDiff": 200.0,
-                        "direction": "up"
-                    }
-                ]
-            }
-        }
+          
          if(result){
          
             // this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
