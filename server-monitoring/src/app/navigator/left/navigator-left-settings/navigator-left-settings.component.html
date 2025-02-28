@@ -38,10 +38,10 @@
                                     <span  class="text-ellipsis">{{view.viewName}}</span>
                                     </span>
                            
-                            <span class="flex-center ps-1">
+                            <span class="flex-center ps-1" style="min-width: 6.6rem;">
                                 <span class="label-status me-2 {{view.accessType}}" *ngIf="view.accessType != 'SHARED'">{{view.accessType | titlecase}} </span> 
 
-                                <div class="message-list pe-2" *ngIf="view.accessType == 'SHARED'">
+                                <div class="message-list pe-2 mx-auto" *ngIf="view.accessType == 'SHARED'">
                                     <!-- for 3 to 4 images start loop in img tag -->
                                         @for(user of view.authorizedUsers ; track user;let index = $index){
                                             @if(index < 2 || index == 2 ){
@@ -59,7 +59,7 @@
 
                              
                               
-                                <div class="dropdown" *ngIf="view.viewAccessTypePermision == 'EDIT' || view.viewAccessTypePermision == 'ALL' || dataService.UserDto.UserDTO.U_ID  == view.userId">
+                                <div class="dropdown ms-auto" *ngIf="view.viewAccessTypePermision == 'EDIT' || view.viewAccessTypePermision == 'ALL' || dataService.UserDto.UserDTO.U_ID  == view.userId">
                                     <button type="button" class="btn dropdown-toggle remove-icon-drop btn-layout-more"
                                         data-bs-toggle="dropdown" [disabled]= "view.viewAccessTypePermision != 'EDIT' && dataService.UserDto.UserDTO.U_ID  != view.userId">
                                         
