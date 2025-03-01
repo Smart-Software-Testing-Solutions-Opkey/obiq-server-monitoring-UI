@@ -20,7 +20,8 @@ export class ConfigureRightPanelComponent {
     public app_service: AppService,
     private activeModal: NgbActiveModal,
     private msgbox: MsgboxService,
-    public service_notification: NotificationsService
+    public service_notification: NotificationsService,
+    public msgboxService :MsgboxService,
   ) { }
   @Input() selectedItem: any;
   @Input() typeSelectedItem: any = "";
@@ -36,8 +37,10 @@ export class ConfigureRightPanelComponent {
     },
   ];
 
-  selected_dropdown_Item = this.Public_dropdown_Items[0]
+ 
+  
 
+  
 
 
   filteredUsers: any[] = [];
@@ -57,18 +60,24 @@ export class ConfigureRightPanelComponent {
 
     this.getAllProjects();
 
+   
+
     if (this.typeSelectedItem == 'update') {
 
       this.accessTypeObj.AccessType = this.selectedItem.selected_view.accessType;
-      this.accessTypeObj.AccessPermissions = this.selectedItem.selected_view.viewAccessTypePermision ? this.selectedItem.selected_view.viewAccessTypePermision : 'VIEW';
+      this.accessTypeObj.AccessPermissions = this.selectedItem.selected_view.viewAccessTypePermision && this.selectedItem.selected_view.viewAccessTypePermision!= 'ALL' ? this.selectedItem.selected_view.viewAccessTypePermision : 'EDIT';
+     
      
     }
     else if (this.typeSelectedItem == 'create') {
 
       this.accessTypeObj.AccessType = this.selectedItem.AccessType == "" ? "PRIVATE" : this.selectedItem.AccessType
       // this.accessTypeObj.AccessType = "PRIVATE"
-      this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions == "VIEW" ? "VIEW" : this.selectedItem.AccessType
+      this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions 
       // this.accessTypeObj.AccessPermissions = "VIEW"
+
+      
+     
       
     }
   }
@@ -77,7 +86,7 @@ export class ConfigureRightPanelComponent {
     this.accessTypeObj.AccessType = type
     console.log(this.accessTypeObj.AccessPermissions);
     
-
+   
     if (this.accessTypeObj.AccessType == 'SHARED') {
       this.isDisabled = true;
     }
@@ -87,7 +96,7 @@ export class ConfigureRightPanelComponent {
   }
 
   selectViewOrEdit(event): void {
-    this.accessTypeObj.AccessPermissions = event.value
+    this.accessTypeObj.AccessPermissions = event
     console.log(this.accessTypeObj)
 
   }
@@ -257,14 +266,17 @@ export class ConfigureRightPanelComponent {
     
   }
 
+
   createPermission(){
-    
     // store data to send in create view
-    
+    this.dataService.isEnablePersister = true
+    if(this.accessTypeObj.AccessType == 'SHARED'){
+      this.createSummaryData();
+    }
 
     let authorizedUsers : any =[];
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL"} ]
+      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"} ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions ? this.accessTypeObj.AccessPermissions : "VIEW" }]
@@ -277,12 +289,14 @@ export class ConfigureRightPanelComponent {
            obj = { userId: val.U_ID, permmission: val.permission }
         }
         else{
-           obj = { userId: val.U_ID, permmission: "ALL"}
+           obj = { userId: val.U_ID, permmission: "EDIT"}
         }
         return obj;
         
       })
     }
+
+    
     this.app_service.dataTransmitter( {type : "accesstype_ops", data : {action : "update_accesstype", accesstype_obj:this.accessTypeObj , authorizedUsers :authorizedUsers}})
     this.close_model();
 
@@ -297,7 +311,7 @@ export class ConfigureRightPanelComponent {
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
     obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL"} ]
+      obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"} ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions }]
@@ -310,7 +324,7 @@ export class ConfigureRightPanelComponent {
            obj = { userId: val.U_ID, permmission: val.permission }
         }
         else{
-           obj = { userId: val.U_ID, permmission: "ALL"}
+           obj = { userId: val.U_ID, permmission: "EDIT"}
         }
         return obj;
        
@@ -330,7 +344,9 @@ export class ConfigureRightPanelComponent {
 
           if (result) {
             this.selectedItem.selected_view = result;
+            this.selectedItem.selected_view.viewAccessTypePermision = this.accessTypeObj.AccessPermissions;
             this.dataService.selected_view_data.viewSelected.accessType = result.accessType
+            this.dataService.selected_view_data.viewSelected.viewAccessTypePermision= this.accessTypeObj.AccessPermissions
            
             if (this.accessTypeObj.AccessType == 'SHARED') {
               this.sendEmailInvite();
@@ -377,6 +393,25 @@ export class ConfigureRightPanelComponent {
     // else {
     //   this.Update_ViewAccess_Type()
     // }
+  }
+
+  createSummaryData() {
+
+
+    this.msgboxService.confirm_msg_box('confirm','Invitation will be sent to the selected user once the view is created',[{ text: "Ok", primaryBtn: true, value: "ok" }]);
+    // if (this.dataService.isEnablePersister) {
+    //   this.service_notification.showPersister('Invitation will be sent to the selected user once the view is created')
+    //   this.dataService.modalSubInstance.result.then((result) => {
+    //   }, (response) => {
+      
+    //     if (response == 'ok') {
+    //       this.dataService.modalSubInstance = null
+    //       return
+    //     }
+        
+    //   });
+    // }
+   
   }
 
 

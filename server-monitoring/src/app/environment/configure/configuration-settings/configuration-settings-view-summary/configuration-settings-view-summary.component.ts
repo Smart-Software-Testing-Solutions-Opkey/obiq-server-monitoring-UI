@@ -90,6 +90,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
           if(data.data.action == "update_accesstype"){
             this.selectedAccessType=data.data.accesstype_obj.AccessType
             this.obj_configuration_setting.AccessType = this.selectedAccessType
+            this.obj_configuration_setting.AccessPermisions = data.data.accesstype_obj.AccessPermissions
             this.obj_configuration_setting.selectedUids = data.data.authorizedUsers
             
           }

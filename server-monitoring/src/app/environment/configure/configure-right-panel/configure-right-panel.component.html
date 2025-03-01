@@ -36,7 +36,7 @@
                 <div class="dropdown dropdown-text-color">
                     
                     <kendo-dropdownlist class="canView-dd-list" [data]="Public_dropdown_Items" textField="text" 
-                        valueField="value" [(ngModel)]="selected_dropdown_Item"
+                        valueField="value" [(ngModel)]="accessTypeObj.AccessPermissions" [valuePrimitive] ="true"
                         (valueChange)="selectViewOrEdit($event)">
                         
                         <ng-template kendoDropDownListItemTemplate let-dataItem>

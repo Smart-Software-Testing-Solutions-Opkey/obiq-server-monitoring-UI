@@ -90,10 +90,7 @@ export class EnvironmentManagerComponent implements OnInit {
     selected_datasource: [],
     selected_erp_analytics: [],
     selected_view: null,
-    AccessPermisions: {
-      "canView": true,
-      "canEdit": true
-    },
+    AccessPermisions: 'VIEW',
     selectedUids: {
       "userId":"00000000-0000-0000-0000-000000000000",
       "permmission":"ALL"
