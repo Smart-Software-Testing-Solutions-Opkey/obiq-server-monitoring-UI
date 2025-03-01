@@ -55,7 +55,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
    
     if(this.service_data?.selectedDataSourceData?.userBehaviourdata.length != 0){
       this.user_lists = this.service_data.selectedDataSourceData.userBehaviourdata
-      this.temp_user_list = this.user_lists
+      this.temp_user_list = JSON.parse(JSON.stringify(this.user_lists))
       return
     }
     window.loadingStart("#ub-loader", "Please wait");
@@ -115,6 +115,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
       }
       if(this.searchText == ''){
         this.user_lists = this.temp_user_list;
+        return;
        
       }
       if( this.searchText ){
