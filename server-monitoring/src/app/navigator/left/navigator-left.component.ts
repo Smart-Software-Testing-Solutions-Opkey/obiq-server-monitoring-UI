@@ -221,7 +221,9 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
         this.totalViews = result;
         if (this.isopenSettings) { return }
 
-        this.viewChanged(this.totalViews[this.totalViews.length - 1], 'init')
+        let selectedView =this.totalViews.find( (view)=> view.selected)
+
+        this.viewChanged(selectedView ? selectedView :this.totalViews[this.totalViews.length - 1] , 'init')
         // this.selectedView = this.totalViews[this.totalViews.length - 1];
         // if (callsource == "settings") {
         //   this.selectedViewSettings = this.selectedViewSettings
