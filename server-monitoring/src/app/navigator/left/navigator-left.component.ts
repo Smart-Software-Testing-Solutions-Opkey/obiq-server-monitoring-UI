@@ -65,7 +65,14 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
         // }
         if (data.type == "view_ops") {
           if (data.data.action == "view_created") {
+
+           
             this.totalViews.push(data.data.selected_view);
+            if(this.isopenSettings){
+              this.resetValue();
+            }
+            this.selectedView = data.data.selected_view;
+            this.set_Selected_VIew(data.data.selected_view, 'init');
           }
         }
         else if (data?.callsource == 'settings') {
@@ -309,13 +316,17 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
     this.app_service.routeTo('environment', `settings/${this.selectedViewSettings.viewId}`)
 
   }
-  backToMenu() {
+
+  resetValue(){
     this.isopenSettings = false
     this.selectedViewSettings = this.selectedView;
     this.dataChanged.allSelectedAnalytics = this.analyticsTypes
     this.dataChanged.analyticsTypes = {}
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.service_data.selected_view_data = this.dataChanged
+  }
+  backToMenu() {
+    this.resetValue();
     this.viewChanged(this.selectedView, 'init')
 
   }
