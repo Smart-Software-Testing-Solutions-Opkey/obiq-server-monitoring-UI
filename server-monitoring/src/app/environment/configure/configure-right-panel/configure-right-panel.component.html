@@ -61,35 +61,90 @@
             </div>
         </div>
         <div *ngIf="accessTypeObj.AccessType == 'SHARED'" class="row mx-0 mt-3">
-            <div class="col-sm-10 px-0 d-flex flex-wrap" [ngClass]="{'added-users-container': addedEmails?.length}">
-                <div *ngFor="let email of addedEmails" class="user-chip">
-                    <span>{{ email }}</span>
-                    <button type="button" class="remove-user" (click)="removeTempEmail(email)">
-                        &times;
-                    </button>
-                </div>
+            <kendo-dropdownlist [data]="users" [filterable]="true" [defaultItem]="user_default" (selectionChange)="select_user($event)"
+            [(ngModel)]="model_user" [valuePrimitive]="true"
+            textField="email_ID" valueField="U_ID" [kendoDropDownFilter]="filterSettings"
+            [popupSettings]="{ width: 250 }">
 
-                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers($event)"
-                    class="form-control w-100 user-input" placeholder="Invite by name or email">
-                <div *ngIf="filteredUsers.length" class="suggestions-dropdown">
-                    <ul class="ul-suggestion-box scrollable p-0">
-                        <li ngbDropdownItem class="flex-center suggestion-item px-3 py-2"
-                            *ngFor="let user of filteredUsers" (click)="selectUser(user)">
-                            <span class="text-ellipsis" ngbTooltip="{{ user.Name }} ({{ user.email_ID }})"
-                                container="body">
-                                {{ user.Name }} ({{ user.email_ID }})
+            <ng-template kendoDropDownListItemTemplate let-dataItem>
+
+                <span *ngIf="dataItem.U_ID != null && dataItem.U_ID != '00000000-0000-0000-0000-000000000000'" class="d-block">
+
+                    <span class="items-template">
+
+
+                        <span class="items-img">
+                            <img class="img_avatar_profile"
+                                [attr.src]="'/user/getavatar/'+dataItem?.U_ID"
+                                alt="User profile image">
+                        </span>
+
+                        <span class="d-block pl-2 line_h_normal" style="width: calc(100% - 1.3rem);">
+                            <span class="item-template-text text-ellipsis" ngbTooltip="{{dataItem?.Name}}"
+                                container="body">{{dataItem?.Name}}</span>
+                            <span class="d-block">
+                                <span class="item-template-subtext text-ellipsis"
+                                    ngbTooltip="{{dataItem?.email_ID}}"
+                                    container="body">{{dataItem?.email_ID}}</span>
                             </span>
-                        </li>
-                    </ul>
-                </div>
+                        </span>
 
-            </div>
+                    </span>
+
+                </span>
+
+
+                <span *ngIf="dataItem?.U_ID=='00000000-0000-0000-0000-000000000000'" class="user_unassigned">
+                    <i class="oci oci-user "></i>
+                    <span> {{dataItem?.email_ID}}</span>
+                </span>
+
+
+            </ng-template>
+
+            <ng-template kendoDropDownListValueTemplate let-dataItem>
+
+                <span *ngIf="dataItem.U_ID != null && dataItem.U_ID != '00000000-0000-0000-0000-000000000000'"
+                    class="d-flex align-items-center w-100">
+
+                    <span class="items-img">
+                        <img class="img_avatar_profile"
+                            [attr.src]="'/user/getavatar/'+dataItem?.U_ID"
+                            alt="User profile image">
+                    </span>
+
+                    <span class="d-block pl-2" style="width: calc(100% - 1.3rem);">
+                        <span class="value-template-text align-middle text-ellipsis"
+                            ngbTooltip="{{dataItem?.Name}}" container="body">{{dataItem?.Name}}</span>
+                    </span>
+
+                </span>
+
+                <span *ngIf="dataItem?.U_ID=='00000000-0000-0000-0000-000000000000'" class="user_unassigned">
+                    <i class="oci oci-user "></i>
+                    <span> {{dataItem?.email_ID}}</span>
+                </span>
+
+
+            </ng-template>
+
+            <ng-template kendoDropDownListNoDataTemplate>
+                <div class="div_ddl_noData">
+                    <div class="ddl_no_Data_content">
+                        <img class="ddl_noData_img" src="/opkeyone/assets/icon-image/nodata-img.png" alt="img">
+                        <p class="ddl_noData_text"> No user available</p>
+                    </div>
+                </div>
+            </ng-template>
+
+        </kendo-dropdownlist>
+
 
 
 
             <div class="col-sm-2 pe-0 text-end">
-                <button type="button" class="btn btn-layout btn-bg-grey " [ngClass]="{'active': addedEmails?.length}"
-                    (click)="addAllEmailsToGrid()">
+                <button type="button" class="btn btn-layout btn-bg-grey " [disabled]="model_user == null"
+                    (click)="add_user()">
                     Add
                 </button>
             </div>
@@ -138,7 +193,7 @@
                 <kendo-grid-column [width]="50">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                         <button ngbTooltip="Delete" type="button" class="btn p-2" triggers="mouseenter:mouseleave"
-                            (click)="deleteUser(rowIndex)">
+                            (click)="deleteUser(rowIndex,dataItem.U_ID)">
                             <i class="oci oci-delete text-red"></i>
                         </button>
                     </ng-template>

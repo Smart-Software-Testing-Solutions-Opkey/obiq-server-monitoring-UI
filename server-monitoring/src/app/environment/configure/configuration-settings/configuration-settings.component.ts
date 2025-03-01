@@ -59,10 +59,7 @@ export class ConfigurationSettingsComponent {
     title: "Add View",
     AccessType: "",
     AccessPermisions: 'VIEW',
-    selectedUids: {
-      "userId":"00000000-0000-0000-0000-000000000000",
-      "permmission":"ALL"
-    },
+    authorizedUsers: [],
     selected_datasource: null,
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
@@ -454,12 +451,14 @@ export class ConfigurationSettingsComponent {
   sendEmailInvite() {
     let form_url = environment.BASE_OPKEY_URL + "Observability/SendSharedViewMail";
 
+
+    this.obj_configuration_setting.authorizedUsers =this.obj_configuration_setting.authorizedUsers.filter((user)=> user.userId != this.service_data.UserDto.UserDTO.U_ID)
     let obj = {
       "UserID": this.service_data.UserDto.UserDTO.U_ID,
       "ViewName": this.obj_configuration_setting.selected_datasource.viewName,
       "UserName": this.service_data.UserDto.UserDTO.Name,
       "AccessType": this.obj_configuration_setting.AccessType,
-      "AuthorizedUsers":this.obj_configuration_setting.selectedUids,
+      "AuthorizedUsers":this.obj_configuration_setting.authorizedUsers,
       "ProjectID": this.service_data.UserDto.ProjectDTO.P_ID
 
     }
@@ -511,13 +510,14 @@ export class ConfigurationSettingsComponent {
             // this.app_service.dataTransmitter("viewCreated");
             this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
             // this.router.navigateByUrl('/environment');
-            this.app_service.routeTo('environment','summary')
+            // this.app_service.routeTo('environment','summary')
           }
          
 
         },
         error: (error: any) => {
-          window.loadingStop("#div-datasource-slection");
+          window.loadingStop("#modal-view-bilder");
+
           this.msgbox.display_error_message(error);
           console.warn(error);
         },
@@ -527,6 +527,7 @@ export class ConfigurationSettingsComponent {
       });
   }
 
+  
   create_View_object() {
     
     console.log(this.obj_configuration_setting, "create Object Config settings")
@@ -536,8 +537,8 @@ export class ConfigurationSettingsComponent {
     obj_Create_View["userId"] = this.service_data.UserDto.UserDTO.U_ID
     obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
     obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
-    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType == "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType
-    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType == "" ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.selectedUids
+    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType == "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType 
+    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType == "" ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.authorizedUsers
     // obj_Create_View["authorizedUsers"] = (this.obj_configuration_setting.AccessType === 'PRIVATE' || this.obj_configuration_setting.AccessType === '') ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids?.permmission}] : this.obj_configuration_setting.selectedUids;
     obj_Create_View["linkedDataSource"] = this.createLinkedDataSourceObject();
     return obj_Create_View;

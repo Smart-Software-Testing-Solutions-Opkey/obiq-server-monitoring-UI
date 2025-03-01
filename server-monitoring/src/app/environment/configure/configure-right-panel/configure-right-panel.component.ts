@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { NotificationType } from 'src/app/global/enums';
 import { MsgboxService } from 'src/app/services/msgbox.service';
+import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 
 @Component({
   selector: 'app-configure-right-panel',
@@ -36,9 +37,21 @@ export class ConfigureRightPanelComponent {
       value: 'EDIT'
     },
   ];
-
- 
+    public filterSettings: DropDownFilterSettings = {
+      caseSensitive: false,
+      operator: "contains",
+    };
+    model_user = null
+    selected_user = null;
+    select_user(event) {
+        event["permission"] = "VIEW"
   
+      this.model_user = event;
+      this.selected_user = event;
+    }
+    user_default = { email_ID: 'Select user and add', U_ID: '00000000-0000-0000-0000-000000000000' };
+    datasource_added_item = {};
+    objDatasourceUser = {};
 
   
 
@@ -58,10 +71,6 @@ export class ConfigureRightPanelComponent {
 
   ngOnInit(): void {
 
-    this.getAllProjects();
-
-   
-
     if (this.typeSelectedItem == 'update') {
 
       this.accessTypeObj.AccessType = this.selectedItem.selected_view.accessType;
@@ -74,12 +83,10 @@ export class ConfigureRightPanelComponent {
       this.accessTypeObj.AccessType = this.selectedItem.AccessType == "" ? "PRIVATE" : this.selectedItem.AccessType
       // this.accessTypeObj.AccessType = "PRIVATE"
       this.accessTypeObj.AccessPermissions = this.selectedItem.AccessPermisions 
-      // this.accessTypeObj.AccessPermissions = "VIEW"
-
-      
-     
+      // this.accessTypeObj.AccessPermissions = "VIEW" 
       
     }
+    this.getAllProjects();
   }
 
   selectAccessType(type: string): void {
@@ -99,6 +106,25 @@ export class ConfigureRightPanelComponent {
     this.accessTypeObj.AccessPermissions = event
     console.log(this.accessTypeObj)
 
+  }
+
+  add_user() {
+ 
+    if (this.model_user == null || this.model_user == "00000000-0000-0000-0000-000000000000") {
+      this.service_notification.notifier(NotificationType.warning, "Please select atleast one user.");
+      return;
+    }
+ 
+    if (this.datasource_added_item[this.model_user]) {
+      this.service_notification.notifier(NotificationType.warning, "This user already added. Please select another user");
+      return;
+    }
+    this.datasource_added_item[this.model_user] = this.selected_user;
+    this.addedUsers=Object.values(this.datasource_added_item );
+  
+    this.model_user = "00000000-0000-0000-0000-000000000000"
+    this.isDisabled = false;
+ 
   }
   filterUsers(query: string) {
     if (!query) {
@@ -123,29 +149,63 @@ export class ConfigureRightPanelComponent {
 
 
 
-  deleteUser(index: number): void {
+
+  deleteUser(index: number,U_ID): void {
     this.addedUsers.splice(index, 1);
+    delete this.datasource_added_item[U_ID];
+  }
+
+  bind_data(result){
+    this.users = []
+    this.objDatasourceUser = {}
+    result.forEach((user)=>{
+      if(user.U_ID != this.dataService.UserDto.UserDTO.U_ID){
+        this.users.push(user);
+        this.objDatasourceUser[user.U_ID]= user
+      }
+    })
+
+    if (this.typeSelectedItem == 'update') {
+      this.selectedItem.selected_view.authorizedUsers.forEach(user=>{
+        if(user.userId != this.dataService.UserDto.UserDTO.U_ID){
+          this.objDatasourceUser[user.userId]['permission'] = user.permmission;
+          this.datasource_added_item[user.userId] =  this.objDatasourceUser[user.userId]
+        }
+    })
+  }
+  else if( this.typeSelectedItem == 'create'){
+    this.selectedItem.authorizedUsers.forEach( user =>{
+      if(user.userId != this.dataService.UserDto.UserDTO.U_ID){
+        this.objDatasourceUser[user.userId]['permission'] = user.permmission;
+        this.datasource_added_item[user.userId] =  this.objDatasourceUser[user.userId]
+      }
+    })
+
+  }
+    this.addedUsers = Object.values(this.datasource_added_item)
+
   }
   getAllProjects() {
 
     if (this.dataService.assignedUser.length != 0) {
-      this.users = this.dataService.assignedUser;
+      this.bind_data(this.dataService.assignedUser);
+    
       return
     }
 
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
-
+    
     this.app_service.make_get_server_call(form_url, form_data)
       .subscribe({
 
         next: (result: any) => {
-          ;
+        
 
-          // this.Show_Project_Access = true
-          this.users = result;
-          this.dataService.assignedUser = result
+        
+          this.bind_data(result);
+         
+          this.dataService.assignedUser = this.users
 
         },
         error: (error: any) => {
@@ -275,25 +335,21 @@ export class ConfigureRightPanelComponent {
     }
 
     let authorizedUsers : any =[];
+    let currentUserObj = { userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"}
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"} ]
+      authorizedUsers = [currentUserObj ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       authorizedUsers = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions ? this.accessTypeObj.AccessPermissions : "VIEW" }]
     }
     else {
       authorizedUsers = this.addedUsers.map(val => {
-
-        let obj;
-        if(val.U_ID != this.dataService.UserDto.UserDTO.U_ID){
-           obj = { userId: val.U_ID, permmission: val.permission }
-        }
-        else{
-           obj = { userId: val.U_ID, permmission: "EDIT"}
-        }
+        
+        let obj = { userId: val.U_ID, permmission: val.permission }
         return obj;
         
       })
+      authorizedUsers.push(currentUserObj)
     }
 
     
@@ -310,8 +366,9 @@ export class ConfigureRightPanelComponent {
       obj_Update_View["accessType"] = this.accessTypeObj.AccessType,
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
     obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
+    let currentUserObj = { userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"}
     if (this.accessTypeObj.AccessType == 'PRIVATE') {
-      obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "EDIT"} ]
+      obj_Update_View["authorizedUsers"] = [currentUserObj ]
     }
     else if (this.accessTypeObj.AccessType == 'PUBLIC') {
       obj_Update_View["authorizedUsers"] = [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.accessTypeObj.AccessPermissions }]
@@ -319,16 +376,13 @@ export class ConfigureRightPanelComponent {
     else {
       obj_Update_View["authorizedUsers"] = this.addedUsers.map(val => {
 
-        let obj;
-        if(val.U_ID != this.dataService.UserDto.UserDTO.U_ID){
-           obj = { userId: val.U_ID, permmission: val.permission }
-        }
-        else{
-           obj = { userId: val.U_ID, permmission: "EDIT"}
-        }
+        let obj = { userId: val.U_ID, permmission: val.permission }
+        
+
         return obj;
        
       })
+      obj_Update_View['authorizedUsers'].push(currentUserObj)
     }
     return obj_Update_View;
   }

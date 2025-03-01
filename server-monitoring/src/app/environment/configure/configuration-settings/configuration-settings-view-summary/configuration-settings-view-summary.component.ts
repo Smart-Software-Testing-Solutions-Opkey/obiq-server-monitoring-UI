@@ -91,7 +91,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
             this.selectedAccessType=data.data.accesstype_obj.AccessType
             this.obj_configuration_setting.AccessType = this.selectedAccessType
             this.obj_configuration_setting.AccessPermisions = data.data.accesstype_obj.AccessPermissions
-            this.obj_configuration_setting.selectedUids = data.data.authorizedUsers
+            this.obj_configuration_setting.authorizedUsers = data.data.authorizedUsers
             
           }
         }
@@ -209,7 +209,7 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
     } else {
       this.selectedUsers = this.selectedUsers.filter(selectedUser => selectedUser.userId !== user.U_ID);
     }
-    this.obj_configuration_setting.selectedUids = this.selectedUsers;
+    this.obj_configuration_setting.authorizedUsers = this.selectedUsers;
 
     console.log(this.selectedUsers);
   }
