@@ -74,8 +74,8 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   offset: number = 0;
   allDataLoaded: boolean = false;
   subscriptions: Subscription[] = [];
-  logTypes: string[] = ['All', 'Success', 'Error', 'Warning'];
-  selectedLogType: string = 'All';  // Default selection
+  // logTypes: string[] = ['All', 'Success', 'Error', 'Warning'];
+  selectedLogType: string = 'Error';  // Default selection
   selectedTime:any;
   logToSearch : any = "";
   logHeight : string =''
@@ -156,14 +156,51 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.subscriptions1.push(data_receiver);
   }
  
-  createChart(): void {
+  // getMaxTimestamp(timeduration,maxTimestamp){
+  //   let currentDateObj = new Date();
+  //   var minTimestamp;
+  
+  //   if(timeduration == 'LAST_30_MINUTES')
+  //     minTimestamp  = maxTimestamp - (30*60*1000);
+  //   else if(timeduration == 'LAST_60_MINUTES')
+  //     minTimestamp  = maxTimestamp - (60*60*1000);
+  //   else if(timeduration == 'LAST_3_HOUR')
+  //     minTimestamp  = maxTimestamp - (3*60*60*1000);
+  //   else if(timeduration == 'LAST_6_HOUR')
+  //     minTimestamp  = maxTimestamp - (6*60*60*1000);
+  //   else if(timeduration == 'LAST_12_HOUR')
+  //     minTimestamp  = maxTimestamp - (12*60*60*1000);
+  //   else if(timeduration == 'LAST_24_HOUR')
+  //     minTimestamp  = maxTimestamp - (24*60*60*1000);
+  //   else if(timeduration == 'LAST_3_DAYS')
+  //     minTimestamp  = maxTimestamp - (3*24*60*60*1000);
+  //   else if(timeduration == 'LAST_7_DAYS')
+  //     minTimestamp  = maxTimestamp - (7*24*60*60*1000)
+  //   else if(timeduration == 'LAST_1_MONTH')
+  //     minTimestamp= new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1)).getTime()
+  //   else if(timeduration == 'LAST_3_MONTH')
+  //     minTimestamp= new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3)).getTime()
+
+  //   return minTimestamp;
+  // }
+  createChart(timeduration?: any): void {
       
       const isHourly = this.chartData.groupedBy === 'Hour';
-      const seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
+      const isTimely = this.chartData.groupedBy;
+      let seriesData ,timestamps,minTimestamp,maxTimestamp;
+    
+      if(isTimely != 'Weeks'){
+        seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
+        
+        timestamps = seriesData.flatMap(series => series.data.map(point => point[0]));
+        minTimestamp = Math.min(...timestamps);
+        maxTimestamp = Math.max(...timestamps);
+      }
+      else{
+          seriesData =this.getSeriesDataCategory(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
+      }
 
-      const timestamps = seriesData.flatMap(series => series.data.map(point => point[0]));
-      const minTimestamp = Math.min(...timestamps);
-      const maxTimestamp = Math.max(...timestamps);
+      
   
       this.chartOptions = {
           series: seriesData,
@@ -177,6 +214,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
                       download: true,
                       selection: true,
                       zoom: true,
+                      
                   },
                   offsetX: 0,
                   offsetY: 0
@@ -218,12 +256,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
               }
           },
           xaxis: {
-              type: 'datetime',
+            
+              type: isTimely == 'Weeks' ? 'category': 'datetime',
               min: minTimestamp,
               max: maxTimestamp,
               tickAmount: isHourly ? 24 : undefined,
               labels: {
-                  format: isHourly ? 'HH:mm' : 'dd MMM',
+                  format : isHourly ? 'HH:mm' : 'dd MMM',
+                  // format: this.getXaxisFormat(isTimely),
                   show: true,
                   rotate: 0,
               },
@@ -261,10 +301,97 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       };
   }
   
+  // getXaxisdivision(timeduration? :any){
+  //   let tickAmount;
+  //   if(timeduration == 'LAST_30_MINUTES')
+  //     tickAmount = 30
+  //   else if(timeduration == 'LAST_60_MINUTES')
+  //     tickAmount = 60
+  //   else if(timeduration == 'LAST_3_HOUR')
+  //     tickAmount = 3
+  //   else if(timeduration == 'LAST_6_HOUR')
+  //     tickAmount = 6
+  //   else if(timeduration == 'LAST_12_HOUR')
+  //     tickAmount = 12
+  //   else if(timeduration == 'LAST_24_HOUR')
+  //     tickAmount = 24
+  //   else if(timeduration == 'LAST_3_DAYS')
+  //     tickAmount = 3
+  //   else if(timeduration == 'LAST_7_DAYS')
+  //     tickAmount = 7
+  //   else if(timeduration == 'LAST_1_MONTH')
+  //     tickAmount = 30
+  //   else if(timeduration == 'LAST_3_MONTH')
+  //     tickAmount = 90
+  //   else
+  //     tickAmount = undefined
+  //    return tickAmount;
+  // }
+
+  // getXaxisFormat(isTimely){
+  //   let format ='' 
+  //   if(isTimely == 'Minute'){
+  //     format = 'mm:ss'
+  //   }
+  //   else if(isTimely == 'Hour'){
+  //     format = 'HH:mm:ss'
+  //   }
+  //   else if(isTimely == 'Days'){
+  //     format = 'dd MMM'
+  //   }
+  //   else if(isTimely == 'Month'){
+  //     format = "MMM 'yy"
+  //   }
+  //   else{
+  //     format = 'dd MMM'
+  //   }
+  //   return format;
+  // }
+
+  getSeriesDataCategory(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
+
+    const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
+    // const isHourly = this.chartData.groupedBy === 'Hour';
+    const isTimely = this.chartData.groupedBy;
+
+    return dataPoints.map(point => {
+      let color;
+      switch (point) {
+          case 'Success':
+              color = '#268144';
+              break;
+          case 'Error':
+              color = '#ff4c33';
+              break;
+          case 'Warning':
+              color = '#ff6833';
+              break;
+          // case 'Blocked':
+              // color = '#ff3333';
+              // break;
+      }
+
+      return {
+        name: point,
+        data: dataList.map(item => {
+            const pointData = item.dataPointList.find(d => d.name === point);
+            return {  
+
+              x: item.displayText, 
+              y: pointData ? pointData.value : 0
+
+            };
+        }).filter(dataPoint => dataPoint[0] !== null),
+        color: color,
+    };
+  });
+    
+  }
   getSeriesData(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
       
       const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
-      const isHourly = this.chartData.groupedBy === 'Hour';
+      // const isHourly = this.chartData.groupedBy === 'Hour';
+      const isTimely = this.chartData.groupedBy;
   
       return dataPoints.map(point => {
           let color;
@@ -286,16 +413,21 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
           return {
             name: point,
             data: dataList.map(item => {
-                if (!item.fromTimeInStr) {
+                // if (!item.fromTimeInStr) {
                
-                    return [null, 0];
-                }
+                //     return [null, 0];
+                // }
 
                 let timestamp;
-                if (isHourly) {
+                if (isTimely == 'Hour') {
                     const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
                     timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
                 } 
+                else if(isTimely == 'Minute'){
+                  const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
+                  timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
+                }
+               
                 else {
                     const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
                     timestamp = Date.UTC(year, month - 1, day);
@@ -316,14 +448,6 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       this.createChart();
   }
   
-
-
-
-
-  
-
-
-
 
   displayTimeRange(): void {
     const formattedStartTime = this.datePipe.transform(this.startTime, 'MMM d, hh:mm a', '+0530');
@@ -365,7 +489,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
           window.loadingStop("#Env_manager_main_right");
        
           this.chartData = result
-          this.createChart();
+          if(this.selectedTime?.type == 'setEnum'){
+            this.createChart(timeFilter?.value);
+          }
+          else{
+            this.createChart();
+          }
+          
         },
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
