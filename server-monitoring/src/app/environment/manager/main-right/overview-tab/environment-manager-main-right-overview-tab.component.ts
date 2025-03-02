@@ -172,6 +172,9 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
   ngOnDestroy(): void {
     
   }
+
+  cardheader = 1;
+
   view:any
   reset_analytics(){
     

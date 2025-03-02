@@ -90,6 +90,25 @@
             margin-top: 1rem;
         }
 
+        &.sticky-1 {
+            top: 0rem;
+            .card-header:nth-child(1) {
+                top: 0rem !important;
+            }
+        
+            .card-header:nth-child(2) {
+                top: 3rem !important;
+            }
+        
+            .card-header:nth-child(3) {
+                top: 6rem !important;
+            }
+        
+            .card-header:nth-child(4) {
+                top: 9rem !important;
+            }
+        }
+
         .card-header {
             padding: 0rem;
             border: none;
