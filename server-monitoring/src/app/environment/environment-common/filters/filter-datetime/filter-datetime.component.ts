@@ -305,12 +305,12 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       }
 
       resetTimeDate(){
-      this.fromDatevalue = new Date();
-      this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
-      
-      this.toDateValue = new Date();
-      this.toDateTime = this.toDateValue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric',  hour12: true}) ;
 
+      this.selectedTime = 'LAST_24_HOUR';
+      this.onSelctTime(this.selectedTime)
+      this.toDateValue = new Date();
+      let numberOfMlSeconds = this.toDateValue.getTime();
+      this.fromDatevalue =  new Date(numberOfMlSeconds - (24*60*60*1000));
       this.displayFormat = "(GMT+5:30)"
 
       }
