@@ -26,13 +26,13 @@
 <div id="ub-loader" class="px-0 user-b-loader">
     <kendo-grid 
     #grid_application 
-    [data]="user_lists" 
+    [kendoGridBinding]="user_lists" 
     [selectable]="true"         
     [navigable]="true"   
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo px-0"
     kendoGridSelectBy="U_ID"
-    [(selectedKeys)]="selectedKeys"
+    [(selectedKeys)]="selectedKeys" 
     [pageable]="true"
     [pageSize]="10"
     [style.max-height]="'calc(100vh - 15rem)'">
