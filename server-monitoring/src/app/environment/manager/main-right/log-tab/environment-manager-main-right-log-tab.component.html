@@ -52,22 +52,22 @@
 
             <kendo-grid-column field="timeStampString" title="Time">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span ngbTooltip="{{dataItem?.timeStampString}}">{{dataItem?.timeStampString}}</span>
+                    <span ngbTooltip="{{dataItem?.timeStampString}}" container="body">{{dataItem?.timeStampString}}</span>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="userId" title="User">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span ngbTooltip="{{dataItem?.timeStampString}}">{{dataItem?.userId}}</span>
+                    <span ngbTooltip="{{dataItem?.timeStampString}}" container="body">{{dataItem?.userId}}</span>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="domainName" title="Domain">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span ngbTooltip="{{dataItem?.domainName}}">{{dataItem?.domainName}}</span>
+                    <span ngbTooltip="{{dataItem?.domainName}}" container="body">{{dataItem?.domainName}}</span>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="logName"  title="Log Name">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span ngbTooltip="{{dataItem?.logName}}">{{dataItem?.logName}}</span>
+                    <span ngbTooltip="{{dataItem?.logName}}" container="body">{{dataItem?.logName}}</span>
                 </ng-template>
             </kendo-grid-column>
 
