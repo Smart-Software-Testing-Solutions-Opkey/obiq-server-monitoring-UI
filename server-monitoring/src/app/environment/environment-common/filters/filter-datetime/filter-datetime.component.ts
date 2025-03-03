@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NotificationType } from 'src/app/global/enums';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -19,7 +21,8 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   constructor(
      public app_service: AppService,
      public dataService: AppDataService,
-     private cdr: ChangeDetectorRef
+     private cdr: ChangeDetectorRef,
+     public service_notification : NotificationsService,
   ){}
   
   
@@ -240,6 +243,12 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
          this.toDateTime =this.timeZoneConversion(this.toDateTime)
       }
 
+      if(this.fromDateTime == this.toDateTime){
+        this.service_notification.notifier(NotificationType.error, 'Start Date and End Date cannot be same');
+        this.closeTimeFilterDropdown();
+        return;
+      }
+
       this.displayFormat = this.selectedTimezone.DisplayName
      this.displayFormat=  this.displayFormat.substring( 0,this.displayFormat.indexOf(")") +1    )
      
@@ -313,14 +322,12 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.fromDatevalue =  new Date(numberOfMlSeconds - (24*60*60*1000));
       this.displayFormat = "(GMT+5:30)"
 
-      }
-
-      
+      } 
       checkToDate = (date) => { 
         let fromDatevalueDate = new Date(this.fromDatevalue)
         let tempDate = new Date(JSON.parse(JSON.stringify(fromDatevalueDate)))
         let threeMonthsFromNow = tempDate.setMonth(tempDate.getMonth()+3);
-        if( date < fromDatevalueDate || date > threeMonthsFromNow){
+        if( date < fromDatevalueDate || date > threeMonthsFromNow || date > new Date()){
           return true;
         }
         else{

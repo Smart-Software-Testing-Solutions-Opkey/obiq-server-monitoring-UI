@@ -38,6 +38,7 @@
                         </button>
                     </div>
 
+                    {{fromDatevalue}}
                     <div class="row mx-0 mb-3">
                         <div class="col-sm-5 p-0">
                             <div class="row mx-0">
@@ -67,6 +68,8 @@
                             <span class="sp-eperator"></span>
                         </div>
                         
+
+                        {{toDateValue}}
                         <div class="col-sm-5 p-0">
                             <div class="row mx-0">
                                 <div class="col-sm-12 px-0">
@@ -76,7 +79,8 @@
                                             <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
                                               [format]="dateTimeFormat"
                                               [(value)]="toDateValue"
-                                              [disabledDates]="checkToDate">
+                                              [disabledDates]="checkToDate"
+                                              >
                                               
                                             </kendo-datetimepicker>
                                         </kendo-label>
