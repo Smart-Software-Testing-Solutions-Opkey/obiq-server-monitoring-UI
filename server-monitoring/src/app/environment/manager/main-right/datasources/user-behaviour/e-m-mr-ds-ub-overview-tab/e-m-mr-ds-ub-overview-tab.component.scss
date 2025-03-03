@@ -104,4 +104,14 @@
         padding-bottom: 3rem;
     }
     
+    
+    ::ng-deep .total-errors-details .widget-header{
+        padding-top: .5rem !important;
+        padding-bottom: .5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    ::ng-deep .total-errors-details .graph-custom-wh{
+        padding-bottom: 3rem !important;
+    }
 }

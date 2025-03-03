@@ -1,6 +1,6 @@
 <div class="total-errors-details custom-view-height" [id]="'stats-div-'+typeEnum+widgetType" style="position: relative;" >
   
-   <div style="display:flex;justify-content: space-between;align-items: center;">
+   <div class="widget-header d-flex-between">
 
         <div style="display:flex;justify-content: space-between;align-items: center;">
           <div *ngIf="Editable">
@@ -29,15 +29,15 @@
         </div>
    </div>
     <div class="row mx-0 align-items-end graph-custom-wh">
-      <div class="col-sm-7 px-0">
-        <div class="row mx-0 align-items-center line_h_1">
-          <div class="col-sm-3 ps-0">
+      <div class="col-sm-7 px-0 mb-3">
+        <div class="row mx-0 flex-column align-items-center line_h_1">
+          <div class="col-sm-3 ps-0 w-100 mb-3">
             <!-- @if(this.typeEnum !="Success"){
               
             } -->
-            <span class="error-value" style="font-size: 1.2rem;">{{dataObj.total}}</span>
+            <span class="error-value" style="font-size: 1.8rem;">{{dataObj.total}}</span>
           </div>
-          <div class="col-sm-9 ps-2 px-0">
+          <div class="col-sm-9 ps-1 px-0 w-100">
             <div class="error-value-last" style="color: #667085;">
               @if(this.dataDir == 'up'){
               <span class="success-percentage">
