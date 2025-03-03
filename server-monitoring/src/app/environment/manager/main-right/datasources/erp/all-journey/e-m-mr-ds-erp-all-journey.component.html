@@ -20,6 +20,8 @@
     [style.height]="'calc(100vh - 7rem)'"
     >
 
+
+
     <kendo-grid-column title="" [width]="10">
 
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -31,34 +33,47 @@
         </ng-template>
     </kendo-grid-column>
 
+    <kendo-grid-column field="subActivityName" title="Sub Activity">
+
+           
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+            <span class="application-images">  
+                <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
+                alt="{{application_list[dataItem?.appType]}}">
+            </span>
+            <span ngbTooltip="{{dataItem?.subActivityName}}"  class="text-ellipsis">{{dataItem?.subActivityName}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="moduleName" title="Module">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+            <span ngbTooltip="{{dataItem?.moduleName}}">{{dataItem?.moduleName}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="subModuleName" title="Process">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+            <span ngbTooltip="{{dataItem?.subModuleName}}">{{dataItem?.subModuleName}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="userId" title="ERP User">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+            <span ngbTooltip="{{dataItem?.userId}}">{{dataItem?.userId}}</span>
+        </ng-template>
+    </kendo-grid-column>
+
     <kendo-grid-column field="timeString" title="Time">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <span ngbTooltip="{{dataItem?.timeString}}">{{dataItem?.timeString}}</span>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="userId" title="User">
+
+    <kendo-grid-column field="subActivityStatus" title="Status">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-            <span ngbTooltip="{{dataItem?.userId}}">{{dataItem?.userId}}</span>
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="appType" title="App">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-            <span ngbTooltip="{{dataItem?.appType}}">{{dataItem?.appType}}</span>
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="envName" title="Environment Name">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-            <span ngbTooltip="{{dataItem?.envName}}">{{dataItem?.envName}}</span>
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="envHost" title="Environment Host">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-            <span ngbTooltip="{{dataItem?.envHost}}">{{dataItem?.envHost}}</span>
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="sessionId" title="Session Id">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-            <span ngbTooltip="{{dataItem?.sessionId}}">{{dataItem?.sessionId}}</span>
+            <span ngbTooltip="{{dataItem?.subActivityStatus}}" class="layout-status" [ngClass]="{'error': dataItem?.subActivityStatus == 'InCompleteWithError',
+            'success': dataItem?.subActivityStatus == 'Complete'}">{{dataItem?.subActivityStatus}}</span>
         </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Action" class="td_overflow_visible text-center td_pb_0 pl-3" [width]="70"

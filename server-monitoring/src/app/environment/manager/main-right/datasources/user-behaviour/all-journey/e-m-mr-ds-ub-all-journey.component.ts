@@ -27,6 +27,19 @@ constructor(
     type :'setEnum',
     value : "LAST_24_HOUR",
   };
+  application_list={
+    "ORACLEFUSION":"OracleFusion",
+    "SAP":"SAP",
+    "SALESFORCE":"Salesforce",
+    "PEOPLESOFT":"PeopleSoft",
+    "WORKDAY":"Workday",
+    "ORACLEEBS":"OracleEBS",
+    "MSDYNAMICSFSO":"MSDynamicsFSO",
+    "VEEVAVAULT":"VeevaVault",
+    "COUPA":"Coupa",
+    "ORACLEINTEGRATIONCLOUD":"OracleIntegrationCloud"
+}
+
   ngOnInit(): void {
     // this.getRecentSubActivityJourneyOfUser();
     this.dataService.isUserAllJourneyOpen = true
@@ -118,9 +131,12 @@ constructor(
   }
 
   get_User_Behaviour_Journey(timeFilter?: any, appendData: boolean = false): void {
+    if(!appendData ){
+      this.ub_User_Journey_Data_Source = [];
+    }
      const form_url =
           environment.BASE_OBIQ_SERVER_URL +
-          'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
+          'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData';
     
           let form_data = {
             userId: this.dataService?.UserDto.UserDTO.U_ID,
@@ -135,7 +151,7 @@ constructor(
             "limitBy": this.pageSize,
             "offset": this.offset,
             "textToSearch": this.textToSearch,
-            "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
+            "widgetType": "GET_USERJOURNEY_LIST_WIDGET_FOR_USER_BEHAVIOUR_ANALYTICS",
             "viewId": this.viewId,
 
           };
@@ -172,7 +188,6 @@ constructor(
           } else {
             this.ub_User_Journey_Data_Source = result;
           }
-  
           this.offset += this.limit;
            
           },

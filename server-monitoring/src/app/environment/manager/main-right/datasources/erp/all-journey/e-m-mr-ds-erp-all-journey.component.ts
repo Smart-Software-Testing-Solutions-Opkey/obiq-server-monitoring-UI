@@ -27,6 +27,18 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     type :'setEnum',
     value : "LAST_24_HOUR",
   };
+  application_list={
+    "ORACLEFUSION":"OracleFusion",
+    "SAP":"SAP",
+    "SALESFORCE":"Salesforce",
+    "PEOPLESOFT":"PeopleSoft",
+    "WORKDAY":"Workday",
+    "ORACLEEBS":"OracleEBS",
+    "MSDYNAMICSFSO":"MSDynamicsFSO",
+    "VEEVAVAULT":"VeevaVault",
+    "COUPA":"Coupa",
+    "ORACLEINTEGRATIONCLOUD":"OracleIntegrationCloud"
+}
   ngOnInit(): void {
     //  this.getRecentSubActivityJourneyOfUser();
     this.dataService.isUserAllJourneyOpen = true
@@ -112,16 +124,19 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
 
   get_erp_Journey(timeFilter?: any, appendData: boolean = false): void {
     
+    if(!appendData ){
+      this.erp_User_Journey_Data_Source = [];
+    }
     const form_url =
       environment.BASE_OBIQ_SERVER_URL +
-      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsersInErpApp';
+      'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData';
 
     let form_data = {
-      // userId: this.dataService?.UserDto.UserDTO.U_ID,
+      userId: this.dataService?.UserDto.UserDTO.U_ID,
       projectId: this.dataService?.UserDto.ProjectDTO.P_ID,
       "appType": this.modelObj.modelApplication.toUpperCase(),
-      "fromTimeInMillis": 1704047400000,
-      "toTimeInMillis": 1734518432353,
+      // "fromTimeInMillis": 1704047400000,
+      // "toTimeInMillis": 1734518432353,
       "modules": this.modelObj.modelStrModule ? this.modelObj.modelStrModule : [],
       "process": this.modelObj.modelProcess ? this.modelObj.modelProcess : [],
       "userNameList": this.modelObj.modelUser ? this.modelObj.modelUser : [],
@@ -131,7 +146,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
       "limitBy": this.pageSize,
       "offset": this.offset,
       "textToSearch": this.textToSearch,
-      "widgetType": "GET_USERJOURNEY_LIST_WIDGET",
+      "widgetType": "GET_USERJOURNEY_LIST_WIDGET_FOR_ERP_ANALYTICS",
       "viewId": this.viewId,
     };
     
