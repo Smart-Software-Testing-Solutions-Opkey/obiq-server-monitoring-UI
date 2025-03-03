@@ -39,11 +39,14 @@
            
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
 
-                <span class="application-images">
-                    <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
-                        alt="{{application_list[dataItem?.appType]}}">
-                </span>
-                <span ngbTooltip="{{dataItem?.subActivityName}}" class="text-ellipsis">{{dataItem?.subActivityName}}</span>
+                <div class="flex-center">
+
+                    <span class="application-images">
+                        <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
+                            alt="{{application_list[dataItem?.appType]}}">
+                    </span>
+                    <span ngbTooltip="{{dataItem?.subActivityName}}" class="text-ellipsis ps-2">{{dataItem?.subActivityName}}</span>
+                </div>
             </ng-template>
         </kendo-grid-column>
 
