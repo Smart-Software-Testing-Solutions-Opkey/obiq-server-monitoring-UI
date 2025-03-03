@@ -276,3 +276,17 @@
 .td_overflow_visible {
     overflow: visible !important;
 }
+
+/* ---------------------remove right padding in user management --------------------------- */
+
+.remove-right-padding.k-grid.k-grid-header-pr-0 .k-grid-header {
+    padding-right: 12px !important;
+}
+
+.k-grid.grid-remove-right-border .k-grid-header-wrap{
+    border-right: none !important;
+}
+
+.k-grid-scrolled-y .k-grid-content {
+    overflow-y: scroll !important;
+}
