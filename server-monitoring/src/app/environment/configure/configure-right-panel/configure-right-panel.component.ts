@@ -153,6 +153,10 @@ export class ConfigureRightPanelComponent {
   deleteUser(index: number,U_ID): void {
     this.addedUsers.splice(index, 1);
     delete this.datasource_added_item[U_ID];
+
+    if(Object.keys(this.datasource_added_item).length == 0){
+      this.model_user = null;
+    }
   }
 
   bind_data(result){

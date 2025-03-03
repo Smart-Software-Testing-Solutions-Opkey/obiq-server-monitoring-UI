@@ -145,7 +145,7 @@
 
 
             <div class="col-sm-2 pe-0 text-end">
-                <button type="button" class="btn btn-layout btn-bg-grey " [disabled]="model_user == null"
+                <button type="button" class="btn btn-layout btn-bg-grey " [disabled]="model_user == null" [ngClass] = "{'active':model_user?.length}"
                     (click)="add_user()">
                     Add
                 </button>
