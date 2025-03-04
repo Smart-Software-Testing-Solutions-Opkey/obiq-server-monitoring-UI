@@ -36,6 +36,7 @@ export type ChartOptions = {
   grid: any; //ApexGrid;
   colors: any;
   toolbar: any;
+  labels: any;
 };
 
 @Component({
@@ -53,7 +54,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     public dataService: AppDataService,
     private datePipe: DatePipe,
     private msgbox: MsgboxService, 
-    private cdr : ChangeDetectorRef
+    private cdr : ChangeDetectorRef,
   ) { }
   @Input() analyticsType: any;
   @Input() view: any;
@@ -156,6 +157,20 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.subscriptions1.push(data_receiver);
   }
  
+  dateTimeFormat(val){
+    
+      if(val && this.chartData.groupedBy == 'Hour'){
+        const [hours, minutes] = val.split(":");
+        return `${hours}:${minutes}`;
+      }
+      else if(val && this.chartData.groupedBy =="Days"){
+        let date= new Date(val)
+        return this.datePipe.transform(date, 'd MMM'); 
+
+      }
+      return val;
+    
+  }
   // getMaxTimestamp(timeduration,maxTimestamp){
   //   let currentDateObj = new Date();
   //   var minTimestamp;
@@ -187,23 +202,13 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       
       const isHourly = this.chartData.groupedBy === 'Hour';
       const isTimely = this.chartData.groupedBy;
-      let seriesData ,timestamps,minTimestamp,maxTimestamp;
-    
-      if(isTimely != 'Weeks'){
-        seriesData = this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
-        
-        timestamps = seriesData.flatMap(series => series.data.map(point => point[0]));
-        minTimestamp = Math.min(...timestamps);
-        maxTimestamp = Math.max(...timestamps);
-      }
-      else{
-          seriesData =this.getSeriesDataCategory(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
-      }
 
       
-  
+      let chartObj =this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
+      
       this.chartOptions = {
-          series: seriesData,
+          series: chartObj.arraySeries,
+          colors :['#ff4c33'],
           chart: {
               type: 'bar',
               height: 200,
@@ -214,6 +219,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
                       download: true,
                       selection: true,
                       zoom: true,
+                      zoomin: true,
                       
                   },
                   offsetX: 0,
@@ -255,18 +261,15 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
                   horizontal: false,
               }
           },
+   
+          // labels: chartObj.arrayCategory,
           xaxis: {
-            
-              type: isTimely == 'Weeks' ? 'category': 'datetime',
-              min: minTimestamp,
-              max: maxTimestamp,
-              tickAmount: isHourly ? 24 : undefined,
-              labels: {
-                  format : isHourly ? 'HH:mm' : 'dd MMM',
-                  // format: this.getXaxisFormat(isTimely),
-                  show: true,
-                  rotate: 0,
-              },
+            categories: chartObj.arrayCategory,
+            labels: {
+              formatter: (val) => this.dateTimeFormat(val)
+            },
+            tickAmount: chartObj.arrayCategory.length, 
+            tickPlacement : 'on',
           },
           fill: {
               opacity: 1,
@@ -285,10 +288,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
               shared: false,
               intersect: true,
               x: {
-                  formatter: (value) => {
-                      const date = new Date(value);
-                      return isHourly ? date.toISOString().substr(11, 5) : date.toLocaleDateString();
-                  }
+                formatter: (val,{ series, seriesIndex, dataPointIndex, w }) => {       
+                return  w.globals.categoryLabels[dataPointIndex]
+                }
               }
           },
           yaxis: {
@@ -299,7 +301,8 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
               },
           }
       };
-  }
+  
+    }
   
   // getXaxisdivision(timeduration? :any){
   //   let tickAmount;
@@ -348,6 +351,45 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   //   return format;
   // }
 
+  getSeriesDataTime(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
+
+    const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
+    // const isHourly = this.chartData.groupedBy === 'Hour';
+    const isTimely = this.chartData.groupedBy;
+
+    return dataPoints.map(point => {
+      let color;
+      switch (point) {
+          case 'Success':
+              color = '#268144';
+              break;
+          case 'Error':
+              color = '#ff4c33';
+              break;
+          case 'Warning':
+              color = '#ff6833';
+              break;
+          // case 'Blocked':
+              // color = '#ff3333';
+              // break;
+      }
+
+      return {
+        name: point,
+        data: dataList.map(item => {
+            const pointData = item.dataPointList.find(d => d.name === point);
+            return {  
+
+              x: item.fromTimeInStr, 
+              y: pointData ? pointData.value : 0
+
+            };
+        }).filter(dataPoint => dataPoint[0] !== null),
+        color: color,
+    };
+  });
+    
+  }
   getSeriesDataCategory(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
 
     const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
@@ -387,61 +429,33 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   });
     
   }
-  getSeriesData(dataList: any[], selectedLogType: string): ApexAxisChartSeries {
+  getSeriesData(dataList: any[], selectedLogType: string) : any{
       
-      const dataPoints = selectedLogType === 'All' ? ['Success', 'Error', 'Warning'] : [selectedLogType];
-      // const isHourly = this.chartData.groupedBy === 'Hour';
-      const isTimely = this.chartData.groupedBy;
-  
-      return dataPoints.map(point => {
-          let color;
-          switch (point) {
-              case 'Success':
-                  color = '#268144';
-                  break;
-              case 'Error':
-                  color = '#ff4c33';
-                  break;
-              case 'Warning':
-                  color = '#ff6833';
-                  break;
-              // case 'Blocked':
-                  // color = '#ff3333';
-                  // break;
-          }
-  
-          return {
-            name: point,
-            data: dataList.map(item => {
-                // if (!item.fromTimeInStr) {
-               
-                //     return [null, 0];
-                // }
-
-                let timestamp;
-                if (isTimely == 'Hour') {
-                    const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
-                    timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
-                } 
-                else if(isTimely == 'Minute'){
-                  const [hours, minutes, seconds] = item.fromTimeInStr.split(':').map(Number);
-                  timestamp = Date.UTC(1970, 0, 1, hours, minutes, seconds);
-                }
-               
-                else {
-                    const [year, month, day] = item.fromTimeInStr.split('-').map(Number);
-                    timestamp = Date.UTC(year, month - 1, day);
-                }
-
-                const pointData = item.dataPointList.find(d => d.name === point);
-                return [
-                    timestamp,
-                    pointData ? pointData.value : 0
-                ];
-            }).filter(dataPoint => dataPoint[0] !== null),
-            color: color,
-        };
+    const array_category = [];
+    const obj_series = {};
+    const array_series = [];
+    
+    dataList.forEach(item => {
+      let val = item.fromTimeInStr || item.displayText
+      array_category.push(val)
+    
+      item.dataPointList.forEach(series => {
+          let array_s = obj_series[series.name]?.data || [];
+          array_s.push(series.value);
+          obj_series[series.name] = { name: series.name, data: array_s };
       });
+    });
+    
+    
+    // Object.keys(obj_series).forEach(key => {
+    //   const value = obj_series[key];
+    //   array_series.push(value);
+    // });
+
+    
+
+    return {'arrayCategory':array_category , 'arraySeries': [obj_series["Error"]]};
+    
   }
   
   updateChart() {
@@ -486,6 +500,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
+      
           window.loadingStop("#Env_manager_main_right");
        
           this.chartData = result
