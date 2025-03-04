@@ -39,7 +39,18 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
   ub_User_Journey_Data_Source: any[] = []; 
   allDataLoaded: boolean = false; 
   subscriptions: Subscription[] = [];
-
+  application_list={
+    "ORACLEFUSION":"OracleFusion",
+    "SAP":"SAP",
+    "SALESFORCE":"Salesforce",
+    "PEOPLESOFT":"PeopleSoft",
+    "WORKDAY":"Workday",
+    "ORACLEEBS":"OracleEBS",
+    "MSDYNAMICSFSO":"MSDynamicsFSO",
+    "VEEVAVAULT":"VeevaVault",
+    "COUPA":"Coupa",
+    "ORACLEINTEGRATIONCLOUD":"OracleIntegrationCloud"
+}
   timeFilter : any;
 
   ngOnInit(): void {
@@ -96,7 +107,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
      
        const form_url =
             environment.BASE_OBIQ_SERVER_URL +
-            'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ObiqJourneyController/getAllJourneyUsers';
+            'OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData';
       
             
             let form_data = {
@@ -106,7 +117,8 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
               appType: this.appType,
               offset: this.offset ,
               "viewId": this.view.viewId,
-              "logToSearch": this.logToSearch
+              "logToSearch": this.logToSearch,
+              "widgetType": "GET_USERJOURNEY_LIST_WIDGET_FOR_USER_BEHAVIOUR_ANALYTICS",
             };
 
             
