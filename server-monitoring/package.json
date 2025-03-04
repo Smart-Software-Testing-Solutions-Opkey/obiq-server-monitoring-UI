@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=12000 node_modules/@angular/cli/bin/ng serve --ssl --host 0.0.0.0 --disable-host-check",
-    "release": "node --max_old_space_size=25000 --max-http-header-size=100000 node_modules/@angular/cli/bin/ng build --configuration production --build-optimizer --optimization --base-href / --deploy-url /",
+    "release": "node --max_old_space_size=25000 --max-http-header-size=100000 node_modules/@angular/cli/bin/ng build --configuration production --build-optimizer --optimization --base-href /servermonitoring/ --deploy-url /servermonitoring/",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
