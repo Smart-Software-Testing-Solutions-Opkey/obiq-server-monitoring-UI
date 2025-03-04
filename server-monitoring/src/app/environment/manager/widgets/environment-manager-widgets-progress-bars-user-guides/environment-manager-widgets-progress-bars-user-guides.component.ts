@@ -49,10 +49,19 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
     ]
     view: any = null;
     title: any = null;
+    obj_filter : any;
     widgetType: any ="USERGUIDE_PER_PROCESS";
-    @Input('child_data') set child_data({view,title}) {
+    @Input('child_data') set child_data({view,title,obj_filter}) {
      this.view = view;
      this.title=title;
+     this.obj_filter = obj_filter;
+
+     if(this?.view?.viewId ){
+      this.datasourceProgressBar = [];
+      this.getWidgetData(this.obj_filter)
+      this.createChart();
+    }
+
     }
     @Input() Editable:boolean
   
@@ -62,16 +71,7 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
     public chartOptions: Partial<ChartOptions>;
   
     ngOnInit(){
-      this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-        if(data?.type == "getDataWithTime"){
-          this.getWidgetData( data?.timeFilter)
-        }
-      }))
-      if(this?.view?.viewId ){
-        this.datasourceProgressBar = [];
-        this.getWidgetData()
-        this.createChart();
-      }
+      
       this.startDataReceiving();
     }
 
