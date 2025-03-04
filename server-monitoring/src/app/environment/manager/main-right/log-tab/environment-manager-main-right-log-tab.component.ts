@@ -63,6 +63,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   @Input('dataTimeData') set dataTimeData({obj_filter}){
       this.selectedTime=obj_filter
       this.getLogsChart(this.selectedTime);
+      this.offset = 0;
       this.getViewLogs(this.selectedTime);
   }
   startTime: Date | null = null;
