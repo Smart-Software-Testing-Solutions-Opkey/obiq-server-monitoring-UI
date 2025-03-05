@@ -460,7 +460,7 @@ export class ConfigureRightPanelComponent {
   createSummaryData() {
 
 
-    this.msgboxService.confirm_msg_box('confirm','Invitation will be sent to the selected user once the view is created',[{ text: "Ok", primaryBtn: true, value: "ok" }]);
+    this.msgboxService.confirm_msg_box('confirm','Invitation will be sent to the selected user once the view is created',[{ text: "OK", primaryBtn: true, value: "ok" }]);
     // if (this.dataService.isEnablePersister) {
     //   this.service_notification.showPersister('Invitation will be sent to the selected user once the view is created')
     //   this.dataService.modalSubInstance.result.then((result) => {
