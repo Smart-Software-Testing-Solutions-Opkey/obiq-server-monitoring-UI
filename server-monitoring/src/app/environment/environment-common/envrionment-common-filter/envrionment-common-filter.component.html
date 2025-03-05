@@ -14,7 +14,7 @@
     </div> -->
 
     
-    <div class="filter-content mb-1">
+    <div class="filter-content mb-1" style="display: none;">
         <div class="search_panel searchToggle">
             <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
             <input type="text" class="form-control search_input" placeholder="Search" [(ngModel)]="searchText" (change)="filterSearchResults()">
@@ -48,7 +48,7 @@
     </div>
 
     <div class="filter-content mb-1">
-        <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="refreshPage()">
+        <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:34px;height:34px;" (click)="refreshPage()">
             <i class="oci oci-refresh-cw"></i>
         </button>
     </div>  
