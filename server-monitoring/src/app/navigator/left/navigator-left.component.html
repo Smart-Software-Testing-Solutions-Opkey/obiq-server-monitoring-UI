@@ -34,7 +34,7 @@
                         [popupSettings]="{ popupClass:'dropdown-view-anaytics'}">
                         <ng-template kendoDropDownListItemTemplate let-dataItem>
 
-                            <span class="item-template-text text-ellipsis font-14px">
+                            <span class="item-template-text text-ellipsis font-14px" [ngbTooltip]="dataItem.favourite ? 'favourite': null">
                                 @if(dataItem.favourite){
                                     <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
                                 }
