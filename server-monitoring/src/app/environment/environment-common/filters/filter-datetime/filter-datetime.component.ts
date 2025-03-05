@@ -177,10 +177,12 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
              newDateObj = new Date(numberOfMlSeconds - (7*24*60*60*1000));
           }
           else if(selectedTime == "LAST_1_MONTH"){
-             newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-1))
+            let currDate = new Date();
+             newDateObj = new Date(currDate.setMonth(currDate.getMonth()-1))
           }
           else if(selectedTime == "LAST_3_MONTH"){
-             newDateObj = new Date(currentDateObj.setMonth(currentDateObj.getMonth()-3))
+            let currDate = new Date();
+             newDateObj = new Date(currDate.setMonth(currDate.getMonth()-3))
           }
         
       this.fromDateTime = newDateObj.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
