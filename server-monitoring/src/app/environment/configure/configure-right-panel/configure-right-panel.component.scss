@@ -112,7 +112,7 @@
         border-width: 0px !important;
       }
     }
-  
+
     .btn-bg-grey {
       background: #8F9191;
       color: #fff;
@@ -180,6 +180,21 @@
 }
 ::ng-deep .k-notification-group {
   z-index: 9999 !important;
+}
+
+.shared-dropdown{
+  .sp-user-image{
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  
 }
 
 

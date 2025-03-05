@@ -37,6 +37,7 @@
                                     </ng-template>
                                     <span  class="text-ellipsis">{{view.viewName}}</span>
                                     </span>
+
                            
                             <span class="flex-center ps-1" style="min-width: 6.6rem;">
                                 <span class="label-status me-2 {{view.accessType}}" *ngIf="view.accessType != 'SHARED'">{{view.accessType | titlecase}} </span> 
@@ -44,7 +45,7 @@
                                 <div class="message-list pe-2 mx-auto" *ngIf="view.accessType == 'SHARED'">
                                     <!-- for 3 to 4 images start loop in img tag -->
                                         @for(user of view.authorizedUsers ; track user;let index = $index){
-                                            @if(index < 2 || index == 2 ){
+                                            @if((index <  3) && user.userId != view.userId){
                                                 <img src="/user/getavatar/{{user.userId}}" class="profile-pic" alt="User {{index+1}}">
                                             }
                                        }

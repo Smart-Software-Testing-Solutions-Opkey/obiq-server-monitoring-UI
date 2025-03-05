@@ -96,6 +96,8 @@ export class ConfigureRightPanelComponent {
    
     if (this.accessTypeObj.AccessType == 'SHARED') {
       this.isDisabled = true;
+      this.addedUsers = []
+      this.datasource_added_item ={}
     }
     else {
       this.isDisabled = false;
@@ -405,6 +407,8 @@ export class ConfigureRightPanelComponent {
             this.selectedItem.selected_view.viewAccessTypePermision = this.accessTypeObj.AccessPermissions;
             this.dataService.selected_view_data.viewSelected.accessType = result.accessType
             this.dataService.selected_view_data.viewSelected.viewAccessTypePermision= this.accessTypeObj.AccessPermissions
+
+            this.dataService.selected_view_data.viewSelected.authorizedUsers = result.authorizedUsers.filter( (user)=> user.userId != this.dataService.UserDto.UserDTO.U_ID)
            
             if (this.accessTypeObj.AccessType == 'SHARED') {
               this.sendEmailInvite();

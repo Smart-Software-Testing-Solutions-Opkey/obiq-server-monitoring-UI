@@ -69,18 +69,18 @@
 
             <ng-template kendoDropDownListItemTemplate let-dataItem>
 
-                <span *ngIf="dataItem.U_ID != null && dataItem.U_ID != '00000000-0000-0000-0000-000000000000'" class="d-block">
+                <span *ngIf="dataItem.U_ID != null && dataItem.U_ID != '00000000-0000-0000-0000-000000000000'" class="d-block shared-dropdown">
 
-                    <span class="items-template">
+                    <span class="items-template shared-dropdown d-flex">
 
 
-                        <span class="items-img">
+                        <span class="sp-user-image">
                             <img class="img_avatar_profile"
                                 [attr.src]="'/user/getavatar/'+dataItem?.U_ID"
                                 alt="User profile image">
                         </span>
 
-                        <span class="d-block pl-2 line_h_normal" style="width: calc(100% - 1.3rem);">
+                        <span class="d-block pl-2 line_h_normal" style="width: calc(100% - 1.3rem);padding:10px;">
                             <span class="item-template-text text-ellipsis" ngbTooltip="{{dataItem?.Name}}"
                                 container="body">{{dataItem?.Name}}</span>
                             <span class="d-block">
@@ -106,15 +106,15 @@
             <ng-template kendoDropDownListValueTemplate let-dataItem>
 
                 <span *ngIf="dataItem.U_ID != null && dataItem.U_ID != '00000000-0000-0000-0000-000000000000'"
-                    class="d-flex align-items-center w-100">
+                    class="d-flex align-items-center w-100 shared-dropdown">
 
-                    <span class="items-img">
+                    <span class="sp-user-image">
                         <img class="img_avatar_profile"
                             [attr.src]="'/user/getavatar/'+dataItem?.U_ID"
                             alt="User profile image">
                     </span>
 
-                    <span class="d-block pl-2" style="width: calc(100% - 1.3rem);">
+                    <span class="d-block pl-2" style="width: calc(100% - 1.3rem);padding:10px;">
                         <span class="value-template-text align-middle text-ellipsis"
                             ngbTooltip="{{dataItem?.Name}}" container="body">{{dataItem?.Name}}</span>
                     </span>
@@ -153,7 +153,7 @@
         </div>
 
 
-        <div class="shared-to-panel" *ngIf="addedUsers.length > 0">
+        <div class="shared-to-panel" *ngIf="addedUsers.length > 0 && accessTypeObj.AccessType == 'SHARED'">
             <h6 class="mt-3 mb-2 font-bold">Shared to</h6>
 
             <!-- Kendo Grid -->
