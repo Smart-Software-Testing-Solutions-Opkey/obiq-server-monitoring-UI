@@ -34,7 +34,7 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="subActivityName" title="Sub Activity">
+        <kendo-grid-column field="subActivityName" title="Sub Activity" [width]="320">
 
            
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -50,13 +50,13 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="moduleName" title="Module" [width]="160">
+        <kendo-grid-column field="moduleName" title="Module">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.moduleName}}">{{dataItem?.moduleName}}</span>
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="subModuleName" title="Process" [width]="160">
+        <kendo-grid-column field="subModuleName" title="Process">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.subModuleName}}">{{dataItem?.subModuleName}}</span>
             </ng-template>
@@ -68,13 +68,13 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="timeString" title="Time" [width]="220">
+        <kendo-grid-column field="timeString" title="Time">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.timeString}}">{{dataItem?.timeString}}</span>
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="subActivityStatus" title="Status" [width]="180">
+        <kendo-grid-column field="subActivityStatus" title="Status">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.subActivityStatus}}" class="layout-status"  [ngClass]="{'error': dataItem?.subActivityStatus == 'InCompleteWithError',
                 'success': dataItem?.subActivityStatus == 'Complete'}">{{dataItem?.subActivityStatus}}</span>

@@ -15,7 +15,7 @@
     <kendo-grid 
     [data]="erp_User_Journey_Data_Source" 
     [selectable]="true" 
-    class="scrollable"
+    class="scrollable k-grid-header-pr-0 grid-remove-right-border remove-right-padding k-grid-scrolled-y"
     (scrollBottom)="onScroll()"
     [style.height]="'calc(100vh - 7rem)'"
     >
@@ -33,16 +33,19 @@
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="subActivityName" title="Sub Activity">
+    <kendo-grid-column field="subActivityName" title="Sub Activity" [width]="320">
 
            
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
 
-            <span class="application-images">  
-                <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
-                alt="{{application_list[dataItem?.appType]}}">
-            </span>
-            <span ngbTooltip="{{dataItem?.subActivityName}}"  class="text-ellipsis">{{dataItem?.subActivityName}}</span>
+            <div class="flex-center">
+
+                <span class="application-images">  
+                    <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
+                    alt="{{application_list[dataItem?.appType]}}">
+                </span>
+                <span ngbTooltip="{{dataItem?.subActivityName}}" class="text-ellipsis ps-2">{{dataItem?.subActivityName}}</span>
+            </div>
         </ng-template>
     </kendo-grid-column>
 
@@ -58,7 +61,7 @@
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="userId" title="ERP User">
+    <kendo-grid-column field="userId" title="ERP User" [width]="240">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <span ngbTooltip="{{dataItem?.userId}}">{{dataItem?.userId}}</span>
         </ng-template>
