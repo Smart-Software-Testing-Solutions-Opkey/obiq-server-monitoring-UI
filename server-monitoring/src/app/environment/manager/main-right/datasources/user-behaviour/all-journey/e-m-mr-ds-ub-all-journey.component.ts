@@ -166,10 +166,12 @@ constructor(
           // else{
           //   form_data["timeSpanEnum"] ="LAST_24_HOUR";
           // }
+
+          window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");
           this.app_service.make_post_server_call(form_url, form_data).subscribe({
           next: (result: any) => {
      
-          window.loadingStart("#ub-user-Journey-logs-grid","Please Wait");
+            window.loadingStop("#ub-user-Journey-logs-grid");
           result = result.map((log) => {
 
             const date = new Date(log.timestamp);
@@ -204,7 +206,7 @@ constructor(
         });
   }
   onScroll(): void {
-    this.get_User_Behaviour_Journey(true); 
+    this.get_User_Behaviour_Journey(true,true); 
   }
   openInNewTab(e){
       window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
@@ -287,6 +289,7 @@ constructor(
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
     this.offset = 0;
+    this.textToSearch= ""
     this.get_User_Behaviour_Journey();
   }
 

@@ -31,6 +31,7 @@ export class EMDsUbJourneyComponent  implements OnDestroy{
     this.allDataLoaded = false
     this.offset = 0;
     this.timeFilter = JSON.parse(JSON.stringify(obj_filter))
+    this.ub_User_Journey_Data_Source = []
     this.get_User_Behaviour_Journey(this.timeFilter)
    
 }

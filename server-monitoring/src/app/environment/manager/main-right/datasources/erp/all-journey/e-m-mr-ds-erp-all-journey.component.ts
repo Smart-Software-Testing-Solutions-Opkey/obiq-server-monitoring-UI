@@ -160,12 +160,13 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     // else{
     //   form_data["timeSpanEnum"] ="LAST_24_HOUR";
     // }
+
+    window.loadingStart("#erp-user-Journey-logs-grid", "Please Wait");
+    
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
       next: (result: any) => {
-
-        window.loadingStart("#erp-user-Journey-logs-grid", "Please Wait");
- 
-        
+        window.loadingStop("#erp-user-Journey-logs-grid");
+       
         result = result.map((log) => {
 
           const date = new Date(log.timestamp);
@@ -189,9 +190,10 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
 
       },
       error: (error: any) => {
+        window.loadingStop("#erp-user-Journey-logs-grid");
         console.warn(error);
         this.msgbox.display_error_message(error);
-        window.loadingStop("#erp-user-Journey-logs-grid");
+        
 
       },
       complete: () => {
@@ -201,7 +203,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     });
   }
   onScroll(): void {
-    this.get_erp_Journey( true);
+    this.get_erp_Journey( true,true);
   }
   openInNewTab(e) {
     window.open(`/opkeyone/obiq/journey/${e.sessionId}?dataId=${e.dataId}`)
@@ -220,6 +222,7 @@ export class EMMrDsErpAllJourneyComponent implements OnInit, OnDestroy{
     this.obj_filter = JSON.parse(JSON.stringify(val))
     this.selectedTimeDate = val
     this.offset = 0;
+    this.textToSearch = ""
     this.get_erp_Journey();
   }
 
