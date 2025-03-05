@@ -30,6 +30,7 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
     this.allDataLoaded = false
     this.offset = 0;
     this.timeFilter = obj_filter
+    this.err_log_Data_Source= []
     this.get_Functional_log_error(this.timeFilter)
   }
  
@@ -125,8 +126,9 @@ export class EMMrDsErpFunctionalErrorTabComponent implements OnDestroy{
     let form_data = {
       limitBy: this.limit,
       appType: this.appType,
+      userId:this.service_data.UserDto.UserDTO.U_ID,
       offset: this.offset ,
-      "viewId": this.view?.viewId,
+      "viewId": this.view?.viewId, 
       "logToSearch": this.logToSearch
     };
     if(timeFilter?.type == 'setEnum'){

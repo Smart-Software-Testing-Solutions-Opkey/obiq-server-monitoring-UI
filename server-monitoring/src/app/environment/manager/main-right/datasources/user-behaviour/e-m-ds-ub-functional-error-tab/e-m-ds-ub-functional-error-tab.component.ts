@@ -31,6 +31,7 @@ export class EMDsUbFunctionalErrorTabComponent implements OnDestroy{
   this.allDataLoaded = false
   this.offset = 0;
   this.timeFilter = obj_filter
+  this.ub_functional_err_log_Data_Source= [] 
   this.get_Functional_log_error(this.timeFilter)
 }
  

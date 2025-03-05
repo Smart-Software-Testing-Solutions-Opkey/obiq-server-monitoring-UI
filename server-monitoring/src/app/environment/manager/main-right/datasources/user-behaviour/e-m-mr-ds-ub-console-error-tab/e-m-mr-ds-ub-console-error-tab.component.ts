@@ -32,6 +32,7 @@ export class EMMrDsUbConsoleErrorTabComponent implements OnDestroy{
     this.allDataLoaded = false
     this.offset = 0;
     this.timeFilter = obj_filter
+    this.ub_console_err_log_Data_Source = []
     this.get_console_log_error(this.timeFilter)
    
 }

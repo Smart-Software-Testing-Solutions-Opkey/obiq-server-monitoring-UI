@@ -50,6 +50,7 @@ export class EMMrDsUbAllApiErrorComponent {
       this.viewId = params['viewId'];  
     });
     this.selectedTimeDate = this.dataService.selectedDateTime
+
     
     this.get_api_log_error();
     this.startDataReceiving();
@@ -131,7 +132,7 @@ export class EMMrDsUbAllApiErrorComponent {
         userId:this.service_data.UserDto.UserDTO.U_ID,
         appType: this.appType,
         offset: this.offset ,
-        "viewId": this.viewId,
+        "viewId": this.viewId, 
         "logToSearch": this.logToSearch
       };
 
@@ -186,7 +187,7 @@ export class EMMrDsUbAllApiErrorComponent {
   }
 
   onScroll(): void {
-    this.get_api_log_error( true);
+    this.get_api_log_error( true,true);
   }
 
   backToMenu() {
@@ -204,6 +205,8 @@ export class EMMrDsUbAllApiErrorComponent {
     this.selectedTimeDate = val
     this.allDataLoaded = false;
     this.offset= 0;
+    this.logToSearch = ''
+    this.ub_api_err_log_Data_Source= []
     this.get_api_log_error();
   }
 

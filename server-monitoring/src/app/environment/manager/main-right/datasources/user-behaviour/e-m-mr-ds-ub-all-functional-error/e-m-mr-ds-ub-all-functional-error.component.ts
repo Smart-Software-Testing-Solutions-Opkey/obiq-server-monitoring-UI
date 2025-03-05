@@ -186,7 +186,7 @@ startDataReceiving(){
 }
 
 onScroll(): void {
-  this.get_Functional_log_error(true); 
+  this.get_Functional_log_error(true,true); 
 }
 
 
@@ -206,6 +206,8 @@ onScroll(): void {
     this.selectedTimeDate = val
     this.allDataLoaded = false;
     this.offset= 0;
+    this.logToSearch = ''
+    this.ub_functional_err_log_Data_Source = [];
     this.get_Functional_log_error();
   }
 

@@ -133,6 +133,7 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
       appType: this.appType,
       offset: this.offset,
       "viewId": this.viewId,
+      userId:this.service_data.UserDto.UserDTO.U_ID,
       "logToSearch": this.logToSearch
     };
     if(this.selectedTimeDate?.type == 'setEnum'){
@@ -185,7 +186,7 @@ get_all_Functional_log_error(timeFilter?: any, appendData: boolean = false): voi
 }
 
 onScroll(): void {
-  this.get_all_Functional_log_error(true); 
+  this.get_all_Functional_log_error(true,true); 
 }
 
 
@@ -205,6 +206,8 @@ onScroll(): void {
     this.selectedTimeDate = val
     this.allDataLoaded = false;
     this.offset= 0;
+    this.logToSearch = ''
+    this.erp_functional_err_log_Data_Source = []
     this.get_all_Functional_log_error();
   }
 }
