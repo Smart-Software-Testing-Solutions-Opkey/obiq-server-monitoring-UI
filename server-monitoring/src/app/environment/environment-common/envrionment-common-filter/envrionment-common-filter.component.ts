@@ -229,6 +229,7 @@ export class EnvrionmentCommonFilterComponent implements OnInit, OnDestroy {
   sendTimeFilterData(val){
    
     this.modelObj.modelDateTime = val
+    this.searchText = ""
     this.ondateTimeFilteremit.emit(JSON.parse(JSON.stringify(val)))
 
   }
