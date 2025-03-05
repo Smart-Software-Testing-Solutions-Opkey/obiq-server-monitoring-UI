@@ -166,7 +166,6 @@ ngOnDestroy() {
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-          
          if(result){
          
             // this.datasourceProgressBar = result.slice(0, 5).map((item: any) => {
@@ -228,6 +227,7 @@ createChart(): void {
    
     chart: {
       height: 35,
+      width: 100,
       type: "line",
       zoom: {
         enabled: false
@@ -243,6 +243,11 @@ createChart(): void {
       enabled: false
     },
     tooltip:{
+      fixed: {
+        enabled: true,
+        offsetX: -100,
+        offsetY: 0,
+    },
       marker:{
         fillColors: ['#268144'],
       }

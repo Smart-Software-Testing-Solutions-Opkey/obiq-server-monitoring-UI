@@ -237,6 +237,11 @@ createChart(): void {
       enabled: false
     },
     tooltip:{
+      fixed: {
+        enabled: true,
+        offsetX: -100,
+        offsetY: 0,
+    },
       marker:{
       
         fillColors: ['#B42318'],
