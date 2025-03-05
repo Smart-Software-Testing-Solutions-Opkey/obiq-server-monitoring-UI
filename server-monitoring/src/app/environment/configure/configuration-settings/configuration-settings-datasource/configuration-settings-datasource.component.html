@@ -87,7 +87,7 @@
                                                 <img src="assets/images/default/application/{{dataItem}}.png"
                                                     alt="{{dataItem}}">
                                             </span>
-                                            <span class="font-18px align-middle" style="font-weight: 500;" [ngbTooltip]="Available_Application_Instances[dataItem] ? null :'Coming soon'" >
+                                            <span class="font-18px align-middle" style="font-weight: 500;" [ngbTooltip]="dataItem !='OracleFusion' ? 'Coming soon' : null" >
                                                 {{dataItem}}
                                                 <span class="sp-instance-count ps-2">
                                                     ({{ Available_Application_Instances[dataItem] || 0 }})
