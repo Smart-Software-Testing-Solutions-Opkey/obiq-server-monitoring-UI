@@ -347,7 +347,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     if (event.target.checked) {
       if(dataItem != "OracleFusion"){
         event.target.checked = false;
-        this.msgbox.confirm_msg_box('warning','application will be added soon',[{ text: "OK", primaryBtn: true, value: "ok" }]);
+        this.msgbox.confirm_msg_box('warning','Please select Oracle Fusion ERP to proceed; support for other ERP applications will be available soon.',[{ text: "OK", primaryBtn: true, value: "ok" }]);
         return;
       }
       this.obj_datasource_widget.select_applicaton_item.push(dataItem);
