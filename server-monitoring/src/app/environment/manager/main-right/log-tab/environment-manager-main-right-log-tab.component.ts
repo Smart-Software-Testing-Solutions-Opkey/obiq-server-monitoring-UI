@@ -549,6 +549,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       next: (result: any) => {
           window.loadingStop("#Env_manager_main_right");
 
+          result.essLogsList = result.essLogsList.map((log) => {
+
+            const date = new Date(log.timestamp);
+            return {
+              ...log,
+              timeString: date.toLocaleString()
+            };
+          });
           if (result.essLogsList.length < this.limit) {
               this.allDataLoaded = true;
           }
