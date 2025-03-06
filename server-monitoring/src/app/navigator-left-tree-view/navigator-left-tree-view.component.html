@@ -13,7 +13,7 @@
                 [ngClass]="selectedView?.selected?'active':''" (click)="changeViewSelection()">
 
                 <span class="menu-icon">
-                    <i class="oci oci-journey menu-icon pe-2"></i>
+                    <i class="oci oci-main-view menu-icon pe-2"></i>
                 </span>
                 <span class="menu-text text-ellipsis d-block" ngbTooltip="{{selectedView?.viewName}}" container="body"
                     triggers="mouseenter:mouseleave">
@@ -32,7 +32,7 @@
                     [ngClass]="item.isSelected?'active':''">
 
                     <span class="menu-icon">
-                        <i class="oci oci-journey menu-icon pe-2"></i>
+                        <i class="oci oci-data-source menu-icon pe-2"></i>
                     </span>
                     <span class="menu-text text-ellipsis d-block" ngbTooltip="{{item.name}}" container="body">
                         {{item.name}}

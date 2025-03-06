@@ -36,6 +36,14 @@
 
 /***************************icon start here**************************/
 
+.oci-data-source:before {
+  content: "\e933";
+}
+
+.oci-main-view:before {
+  content: "\e934";
+}
+
 .oci-alert-circle:before {
   content: "\e931";
 }
