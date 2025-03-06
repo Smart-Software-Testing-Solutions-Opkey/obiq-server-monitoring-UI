@@ -90,11 +90,6 @@
             margin-top: 1rem;
         }
 
-        &.sticky-1 {
-            top: 0rem;
-          
-        }
-
         .card-header {
            
                 position: sticky !important;
@@ -142,7 +137,7 @@
             top: 6rem !important;
         }
     
-        .card-header:nth-child(4) {
+        .card-header:nth-child(7) {
             top: 9rem !important;
         }
         .card-body {

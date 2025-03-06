@@ -173,8 +173,6 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
     
   }
 
-  cardheader = 1;
-
   view:any
   reset_analytics(){
     

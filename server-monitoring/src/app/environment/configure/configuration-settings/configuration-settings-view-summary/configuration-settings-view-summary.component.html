@@ -77,7 +77,7 @@
 
                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
 
-                   <div class="card" [ngClass]="'sticky-' + cardheader">
+                   <div class="card">
                     @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 
                         @if(item.name == 'ERP Analytics') {

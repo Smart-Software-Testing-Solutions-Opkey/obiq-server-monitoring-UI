@@ -42,8 +42,6 @@ export class ConfigurationSettingsViewSummaryComponent implements OnInit, OnDest
   disposeAllSubscriptions() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
-  cardheader = 1;
   
   ngOnInit() {
     let data_receiver = this.app_service.dataReceiver().subscribe(data => {
