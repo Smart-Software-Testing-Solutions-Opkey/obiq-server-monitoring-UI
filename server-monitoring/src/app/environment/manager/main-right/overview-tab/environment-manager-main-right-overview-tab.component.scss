@@ -93,29 +93,31 @@
         &.sticky-1 {
             top: 0rem;
             .card-header:nth-child(1) {
-                top: 0rem !important;
+                // top: 0rem !important;
             }
         
             .card-header:nth-child(2) {
-                top: 3rem !important;
+                // top: 3rem !important;
             }
         
             .card-header:nth-child(3) {
-                top: 6rem !important;
+                // top: 6rem !important;
             }
         
             .card-header:nth-child(4) {
-                top: 9rem !important;
+                // top: 9rem !important;
             }
         }
 
         .card-header {
-            padding: 0rem;
-            border: none;
-            // background-color: transparent;
-            position: sticky;
-            background: #fff !important;
-            z-index: 9;
+           
+                position: sticky !important;
+                top: 0rem;
+                padding: 5px 5px 20px 5px;
+                margin-bottom: 0rem !important;
+                z-index: 8;
+                background: #fff;
+            
 
             .btn-accordion {
                 width: 100%;

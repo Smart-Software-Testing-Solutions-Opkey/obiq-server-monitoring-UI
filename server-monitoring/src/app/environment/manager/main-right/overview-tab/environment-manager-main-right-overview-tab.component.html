@@ -4,7 +4,7 @@
     <div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 17.1rem);">
         <div class="card" [ngClass]="'sticky-' + cardheader">
         <ng-container *ngIf="analyticsTypes.display_user_behaviour">
-            <div class="card-header py-2">
+            <div class="card-header py-2" style="top:0rem">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_UB">
                    User Behaviour
                 </a>
@@ -67,7 +67,7 @@
         </ng-container>
         <!-- hidded Test Automation Analytics -->
         <ng-container *ngIf="analyticsTypes.display_test_automation" class="d-none">
-            <div class="card-header py-2">
+            <div class="card-header py-2"  style="top:3rem">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_TA">
                     Test Automation Analytics
                 </a>
@@ -107,7 +107,7 @@
             </div>
         </ng-container>
         <ng-container *ngIf="analyticsTypes.display_erp">
-            <div class="card-header py-2">
+            <div class="card-header py-2"  style="top:3rem">
                 <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERP">
                     ERP Analytics
                 </a>
