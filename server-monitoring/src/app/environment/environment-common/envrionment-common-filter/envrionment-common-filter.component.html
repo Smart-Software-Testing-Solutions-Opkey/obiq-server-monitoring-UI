@@ -31,7 +31,7 @@
         @if( this.selectedTab == "OVERVIEW_TAB"){
           
             @if( this.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'TEST_AUTOMATION_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE'){
-                <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:30px;height:30px;" (click)="toggleEdit()" [disabled]= "dataService.selected_view_data.viewSelected.viewAccessTypePermision != 'EDIT' && dataService.UserDto.UserDTO.U_ID  != dataService.selected_view_data.viewSelected.userId" >
+                <button   ngbTooltip="Edit Widget" class="btn btn-layout btn-bg-white" container="body" style="padding:0px;width:34px;height:34px;" (click)="toggleEdit()" [disabled]= "dataService.selected_view_data.viewSelected.viewAccessTypePermision != 'EDIT' && dataService.UserDto.UserDTO.U_ID  != dataService.selected_view_data.viewSelected.userId" >
                     <i class="oci oci-edit"></i>
                 </button>
             }  
