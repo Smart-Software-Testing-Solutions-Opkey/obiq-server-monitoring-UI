@@ -169,10 +169,17 @@ ngOnDestroy() {
         next: (result: any) => {
           if (result) {
             result = Object.fromEntries(Object.entries(result).slice(0, 10))
-
             this.datasourceProgressBar = Object.keys(result).map(item => {
               const count = result[item].count;
               let dataPlotList = result[item].dataPlotList
+
+              if(dataPlotList.length == 1){
+                dataPlotList.push({
+                  "count": 1,
+                  "percentdiff": 0.0,
+                  "direction": "no change"
+              })
+              }
 
               return {
                 subActivityName: item,

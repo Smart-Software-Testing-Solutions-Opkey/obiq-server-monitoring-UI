@@ -171,7 +171,7 @@ getWidgetData(timeFilter?: any) {
       window.loadingStart("#ub-console-tab", "Please wait");
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
-        next: (result: any) => {          
+        next: (result: any) => {            
           if (result) {
           result = Object.fromEntries(Object.entries(result).slice(0, 10) )
 
@@ -179,6 +179,14 @@ getWidgetData(timeFilter?: any) {
               const count = result[item].count;
               let dataPlotList = result[item].dataPlotList
 
+              
+              if(dataPlotList.length == 1){
+                dataPlotList.push({
+                  "count": 1,
+                  "percentdiff": 0.0,
+                  "direction": "no change"
+              })
+              }
               return {
                 subActivityName: item,
                 count: count,

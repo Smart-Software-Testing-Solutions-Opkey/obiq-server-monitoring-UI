@@ -182,6 +182,14 @@ ngOnDestroy() {
               const count = result[item].count;
               let dataPlotList = result[item].dataPlotList
 
+              if(dataPlotList.length == 1){
+                dataPlotList.push({
+                  "count": 1,
+                  "percentDiff": 0.0,
+                  "direction": "no change"
+              })
+              }
+
               return {
                 subActivityName: item,
                 count: count,
