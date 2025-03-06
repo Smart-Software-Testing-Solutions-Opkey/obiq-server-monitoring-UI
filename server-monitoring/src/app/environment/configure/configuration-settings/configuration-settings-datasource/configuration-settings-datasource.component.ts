@@ -342,8 +342,14 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   }
 
   select_applicaton(dataItem, event) {
+   
 
     if (event.target.checked) {
+      if(dataItem != "OracleFusion"){
+        event.target.checked = false;
+        this.msgbox.confirm_msg_box('warning','application will be added soon',[{ text: "OK", primaryBtn: true, value: "ok" }]);
+        return;
+      }
       this.obj_datasource_widget.select_applicaton_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_applicaton_item.findIndex(item => item == dataItem);

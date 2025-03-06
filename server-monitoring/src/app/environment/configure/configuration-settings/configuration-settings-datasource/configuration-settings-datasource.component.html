@@ -80,14 +80,13 @@
                                     <label class="form-check-label">
                                         <input class="form-check-input chekbox-custom" type="checkbox"
                                             [checked]="checkApplication(dataItem)"
-                                            [disabled]="dataItem !='OracleFusion'"
                                             (change)="select_applicaton(dataItem, $event)">
                                         <span>
                                             <span class="application-images">
                                                 <img src="assets/images/default/application/{{dataItem}}.png"
                                                     alt="{{dataItem}}">
                                             </span>
-                                            <span class="font-18px align-middle" style="font-weight: 500;" [ngbTooltip]="dataItem !='OracleFusion' ? 'Coming soon' : null" >
+                                            <span class="font-18px align-middle" style="font-weight: 500;" >
                                                 {{dataItem}}
                                                 <span class="sp-instance-count ps-2">
                                                     ({{ Available_Application_Instances[dataItem] || 0 }})
