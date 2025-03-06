@@ -120,7 +120,10 @@
                             @if( recentDataPerView.length > 0){
 
                                <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
-                                 {{ timeItem.fromTime }} - {{timeItem.toTime}}      
+                                   <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}       -->
+                                <span class="text-end" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                <span class="mx-auto"> - </span>
+                                <span class="text-start" style="width: 10rem;">{{timeItem.toTime}}</span>
                                </div>
                             }
                             @else {
