@@ -17,12 +17,12 @@
                     <a class="nav-link" href="javascript:void(0)" (click)="settingsViewSelect(view)"
                         [ngClass]="selectedViewSettings && view.viewName == selectedViewSettings.viewName?'active':''" [id]="view.viewId">
                       
-                        <div class="d-flex-between" [ngbTooltip]="view.favourite ? 'favourite': null">
+                        <div class="d-flex-between">
                             <ng-container *ngIf="view?.isRenamed;else nameOnly">
                                 <input type="text" [(ngModel)]="view.viewName" (blur)="renameView(view)" (keyup.enter)="renameView(view)"  id='renameInput'>
                             </ng-container>
                             <ng-template #nameOnly>
-                                <span class="name text-ellipsis" style="display:flex;" >
+                                <span class="name text-ellipsis" style="display:flex;" [ngbTooltip]="view.favourite ? 'favourite': null" container="body">
                                     <div (click)="unStarView(view)" *ngIf="view?.favourite;else unStar">
 
                                         <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
