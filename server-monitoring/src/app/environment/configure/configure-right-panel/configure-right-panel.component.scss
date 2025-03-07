@@ -185,8 +185,8 @@
 .shared-dropdown{
   .sp-user-image{
     display: block;
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
     border-radius: 50%;
     img {
       width: 100%;
@@ -197,7 +197,14 @@
   
 }
 
-
+.shared-view{
+  ::ng-deep .k-dropdownlist .k-input-inner .k-input-value-text{
+    line-height: 0;
+  }
+  ::ng-deep .k-dropdownlist .k-input-inner .k-input-value-text .user_unassigned{
+    line-height: normal;
+  }
+}
 
 
 

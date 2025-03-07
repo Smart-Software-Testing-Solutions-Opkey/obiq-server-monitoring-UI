@@ -60,7 +60,7 @@
                 Shared
             </div>
         </div>
-        <div *ngIf="accessTypeObj.AccessType == 'SHARED'" class="row mx-0 mt-3">
+        <div *ngIf="accessTypeObj.AccessType == 'SHARED'" class="row mx-0 shared-view mt-3">
             <div class="col-sm-10 px-0 d-flex flex-wrap">
             <kendo-dropdownlist [data]="users" [filterable]="true" [defaultItem]="user_default" (selectionChange)="select_user($event)"
             [(ngModel)]="model_user" [valuePrimitive]="true"
