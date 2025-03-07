@@ -290,3 +290,7 @@
 .k-grid-scrolled-y .k-grid-content {
     overflow-y: scroll !important;
 }
+
+.show-scroll-k-grid-content .k-grid-content {
+    overflow-x: auto !important;
+}

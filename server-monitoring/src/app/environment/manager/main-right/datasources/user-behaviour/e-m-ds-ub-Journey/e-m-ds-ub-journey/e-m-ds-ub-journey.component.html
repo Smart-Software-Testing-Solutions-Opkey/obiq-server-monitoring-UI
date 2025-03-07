@@ -3,7 +3,7 @@
     <kendo-grid 
         [data]="ub_User_Journey_Data_Source" 
         [selectable]="true" 
-        class="scrollable"
+        class="scrollable show-scroll-k-grid-content"
         (scrollBottom)="onScroll()"
         [style.height]="'calc(100vh - 9rem)'"
         >
@@ -36,13 +36,13 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="moduleName" title="Module">
+        <kendo-grid-column field="moduleName" title="Module" [width]="190">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.moduleName}}">{{dataItem?.moduleName}}</span>
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="subModuleName" title="Process">
+        <kendo-grid-column field="subModuleName" title="Process" [width]="190">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.subModuleName}}">{{dataItem?.subModuleName}}</span>
             </ng-template>
@@ -54,13 +54,13 @@
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="timeString" title="Time">
+        <kendo-grid-column field="timeString" title="Time" [width]="190">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.timeString}}">{{dataItem?.timeString}}</span>
             </ng-template>
         </kendo-grid-column>
 
-        <kendo-grid-column field="subActivityStatus" title="Status">
+        <kendo-grid-column field="subActivityStatus" title="Status" [width]="190">
             <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <span ngbTooltip="{{dataItem?.subActivityStatus}}" class="layout-status"  [ngClass]="{'error': dataItem?.subActivityStatus == 'InCompleteWithError',
                 'success': dataItem?.subActivityStatus == 'Complete'}">{{dataItem?.subActivityStatus}}</span>
