@@ -27,9 +27,10 @@
         .card-header {
             padding: 0rem;
             border: none;
-            background-color: transparent;
-            position: sticky;
             border-bottom: 0;
+            position: sticky !important;
+            z-index: 9;
+            background: #fff;
 
             .btn-accordion {
                 width: 100%;
