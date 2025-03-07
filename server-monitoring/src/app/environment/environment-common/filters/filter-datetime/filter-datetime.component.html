@@ -33,11 +33,14 @@
                     <div class="p-2">
                         <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
                     </div>
-                    <div class="position-relative " style="height: 10rem;overflow-y:scroll;overflow-x: hidden;">
+                    <div class="recent-dateTime position-relative" style="height: 20rem;">
                         @if( recentDataPerView.length > 0){
 
-                           <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
-                             {{ timeItem.fromTime }} - {{timeItem.toTime}}      
+                           <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
+                             <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
+                             <span class="text-end" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                <span class="mx-auto"> - </span>
+                                <span class="text-start" style="width: 10rem;">{{timeItem.toTime}}</span>   
                            </div>
                         }
                         @else {
@@ -135,11 +138,14 @@
                         <div class="p-2">
                             <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
                         </div>
-                        <div class="position-relative " style="height: 10rem;overflow-y:scroll;overflow-x: hidden;">
+                        <div class="recent-dateTime position-relative" style="height: 10rem;">
                             @if( recentDataPerView.length > 0){
 
-                               <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
-                                 {{ timeItem.fromTime }} - {{timeItem.toTime}}      
+                               <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
+                                 <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
+                                 <span class="text-end" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                <span class="mx-auto"> - </span>
+                                <span class="text-start" style="width: 10rem;">{{timeItem.toTime}}</span>   
                                </div>
                             }
                             @else {

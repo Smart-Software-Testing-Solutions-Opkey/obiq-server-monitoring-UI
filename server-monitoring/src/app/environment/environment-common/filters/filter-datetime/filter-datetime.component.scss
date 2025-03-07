@@ -131,14 +131,9 @@
     }
 }
 
-// ::ng-deep .custom-journey-widget-height {
-//     height: calc(100% - 4rem) !important;
-// }
-
-// ::ng-deep .custom-error-widget-height {
-//     height: calc(100% - 3rem) !important;
-// }
-
-// ::ng-deep .custom-process-widget-height{
-//     height: calc(100% - 4rem) !important;
-// }
+.recent-dateTime{
+    font-size: 0.925rem;
+    color: #667085;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
