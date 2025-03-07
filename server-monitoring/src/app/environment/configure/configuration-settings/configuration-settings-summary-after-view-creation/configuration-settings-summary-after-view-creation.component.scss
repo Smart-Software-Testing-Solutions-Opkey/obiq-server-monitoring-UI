@@ -28,6 +28,8 @@
             padding: 0rem;
             border: none;
             background-color: transparent;
+            position: sticky;
+            border-bottom: 0;
 
             .btn-accordion {
                 width: 100%;
@@ -56,6 +58,30 @@
 
         .card-body {
             padding-top: 0.75rem;
+        }
+    }
+
+    .card:nth-child(1) {
+        .card-header{
+            top: 0rem !important;
+        }
+    }
+
+    .card:nth-child(2) {
+        .card-header{
+            top: 3rem !important;
+        }
+    }
+
+    .card:nth-child(3) {
+        .card-header{
+            top: 6rem !important;
+        }
+    }
+
+    .card:nth-child(4) {
+        .card-header{
+            top: 9rem !important;
         }
     }
 }
