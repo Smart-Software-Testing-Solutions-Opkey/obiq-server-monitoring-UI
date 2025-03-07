@@ -138,7 +138,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       return itemsWithBorder.includes(name); 
   }
   
-  
+    prevTime : any
     fromDateTime : any;
     toDateTime : any;
     selectedTime: string = "LAST_24_HOUR";
@@ -190,6 +190,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
     }
     
     onSelctTime(timeItem, callsource ?){
+      this.prevTime = this.selectedTime
       this.selectedTime = timeItem;
       if(this.selectedTime == "setCustom"){
         return;
@@ -229,10 +230,24 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
         return formattedDate
     }
 
+    checkIsStartDateEndDateSame(){
+      if(this.fromDatevalue.getTime() == this.toDateValue.getTime()){
+        this.service_notification.notifier(NotificationType.error, 'Start Date and End Date cannot be same');
+        this.closeTimeFilterDropdown();
+        return true
+      }else{
+        return false
+      }
+
+    }
 
     applyCustomFilter(){
-     
 
+      let IsStartDateEndDateSame = this.checkIsStartDateEndDateSame()
+      if(IsStartDateEndDateSame){
+        this.selectedTime = this.prevTime
+        return
+      }
       this.fromDateTime =this.fromDatevalue.toLocaleString('en-us',{day : 'numeric' ,month:'short',hour: 'numeric',minute: 'numeric', hour12: true})
       
       if(this.selectedTimezone.Id != "India Standard Time"){
@@ -245,11 +260,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
          this.toDateTime =this.timeZoneConversion(this.toDateTime)
       }
 
-      if(this.fromDateTime == this.toDateTime){
-        this.service_notification.notifier(NotificationType.error, 'Start Date and End Date cannot be same');
-        this.closeTimeFilterDropdown();
-        return;
-      }
+     
 
       this.displayFormat = this.selectedTimezone.DisplayName
      this.displayFormat=  this.displayFormat.substring( 0,this.displayFormat.indexOf(")") +1    )
@@ -268,7 +279,10 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
          this.recentDataPerView.splice(0,1)
          
       }
-      this.recentDataPerView.push({"fromTime": this.fromDateTime, "toTime":this.toDateTime});
+
+      if(this.fromDateTime != this.toDateTime){
+        this.recentDataPerView.push({"fromTime": this.fromDateTime, "toTime":this.toDateTime});
+      }
       this.viewDataStorageObj [viewId ] = this.recentDataPerView
 
       localStorage.setItem("filterCustomTime",JSON.stringify(this.viewDataStorageObj))

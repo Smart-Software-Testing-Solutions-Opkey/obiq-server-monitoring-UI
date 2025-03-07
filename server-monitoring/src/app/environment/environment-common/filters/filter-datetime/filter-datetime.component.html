@@ -29,6 +29,25 @@
                     </ul>
 
                 </div>
+                <div *ngIf="selectedTime != 'setCustom' " class="right px-3" style="width: calc(100% - 9rem);">
+                    <div class="p-2">
+                        <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
+                    </div>
+                    <div class="position-relative " style="height: 10rem;overflow-y:scroll;overflow-x: hidden;">
+                        @if( recentDataPerView.length > 0){
+
+                           <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
+                             {{ timeItem.fromTime }} - {{timeItem.toTime}}      
+                           </div>
+                        }
+                        @else {
+                            <span class="d-flex-center h-100 font-14px text-grey-2" >
+                                You don’t have any history yet.
+                            </span> 
+                        }  
+                    </div>
+                </div>
+
                 <div *ngIf="selectedTime == 'setCustom' " class="right px-3" style="width: calc(100% - 9rem);">
                     <div class="d-flex-between py-3">
                         <span class="mb-0 text-grey-1 font-14px font-bold">Custom</span>
@@ -120,10 +139,7 @@
                             @if( recentDataPerView.length > 0){
 
                                <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center">
-                                   <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}       -->
-                                <span class="text-end" style="width: 10rem;">{{ timeItem.fromTime }}</span>
-                                <span class="mx-auto"> - </span>
-                                <span class="text-start" style="width: 10rem;">{{timeItem.toTime}}</span>
+                                 {{ timeItem.fromTime }} - {{timeItem.toTime}}      
                                </div>
                             }
                             @else {
