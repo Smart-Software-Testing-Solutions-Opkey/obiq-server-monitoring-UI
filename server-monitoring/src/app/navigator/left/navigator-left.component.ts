@@ -214,12 +214,12 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
       userId: this.dataService.UserDto.UserDTO.U_ID,
       projectId: this.dataService.UserDto.ProjectDTO.P_ID
     }
-    window.loadingStart("#navigator-left", "Please wait");
+    window.loadingStart("#totalSection", "Please wait");
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
 
       next: (result: any) => {
-        window.loadingStop("#navigator-left");
         if (result == null || result?.length == 0) {
+          window.loadingStop("#totalSection");
           this.router.navigateByUrl('/environment/configure');
           return;
         }
@@ -242,12 +242,12 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
 
         // this.dataChanged.viewSelected = this.selectedView
         // this.set_Selected_VIew(this.selectedView)
-
+        window.loadingStop("#totalSection");
 
 
       },
       error: (error: any) => {
-        window.loadingStop("#navigator-left");
+        window.loadingStop("#totalSection");
         console.warn(error);
         this.msgbox.display_error_message(error);
       },
