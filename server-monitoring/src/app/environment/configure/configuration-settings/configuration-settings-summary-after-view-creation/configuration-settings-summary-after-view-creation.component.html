@@ -57,8 +57,10 @@
             <div class="card-body px-0 pb-0">
 
                 <div class="kendo_grid">
-                    <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                    <kendo-grid #grid_Selected_Instance_list [kendoGridBinding]="Selected_grid_dataSource"
                         (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                        [pageable]="true"
+                        [pageSize]="10"
                         class="scrollable grid_remove_vertical_border k_grid_header_pr_0"
                         style="max-height: calc(100vh - 20.2rem);">
                         <kendo-grid-column field="SystemIdentifier" title="Name">
@@ -177,8 +179,10 @@
         <div id="collapse_user" class="collapse show">
             <div class="card-body px-0">
                 <div class="kendo_grid">
-                    <kendo-grid [data]="selected_user_behaviour_component" [selectable]="false" [navigable]="true"
-                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
+                    <kendo-grid [kendoGridBinding]="selected_user_behaviour_component" [selectable]="false" [navigable]="true"
+                        class="scrollable grid_remove_vertical_border k_grid_header_pr_0"
+                        [pageable]="true"
+                        [pageSize]="10">
 
 
                         <kendo-grid-column title="User">
