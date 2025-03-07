@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerRightPanelComponent } from '../../right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -55,15 +55,23 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     private datePipe: DatePipe,
     private msgbox: MsgboxService, 
     private cdr : ChangeDetectorRef,
+    private elRef: ElementRef
   ) { }
   @Input() analyticsType: any;
   @Input() view: any;
 
   
   @Input('dataTimeData') set dataTimeData({obj_filter}){
+      
+
+    let gridContent = this.elRef.nativeElement.getElementsByClassName('k-grid-content')[0];
+    if (gridContent) {
+      gridContent.scrollTop = 0;
+    }
       this.selectedTime=obj_filter
       this.getLogsChart(this.selectedTime);
       this.offset = 0;
+      this.logDataSource= []
       this.getViewLogs(this.selectedTime);
   }
   startTime: Date | null = null;
@@ -146,11 +154,11 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
             this.allDataLoaded = false;
             this.getViewLogs(this.selectedTime)
           }
-          else if ( data.action == 'filterChange'){
-            this.appType = data.objFilter.modelApplication.toUpperCase()
-            this.getViewLogs()
+          // else if ( data.action == 'filterChange'){
+          //   this.appType = data.objFilter.modelApplication.toUpperCase()
+          //   this.getViewLogs()
 
-          }
+          // }
 
         }
       }  
@@ -525,13 +533,19 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   }
   templogDataSource : any = [];
   appType : string = 'ORACLEFUSION'
-  getViewLogs(timeFilter?: any, appendData: boolean = false) {
+  getViewLogs(timeFilter?: any, appendData: boolean = false ) {
    
     if (this.allDataLoaded) return;
     window.loadingStart("#Env_manager_main_right", "Please wait");
 
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-    const form_data =  { "timeSpanEnum": "LAST_24_HOUR", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": this.logToSearch, "limitBy": this.limit, "offset": this.offset, "widgetType": "ESS_LOG_DATA_WIDGET","appType":this.appType };
+    const form_data =  { "timeSpanEnum": "LAST_24_HOUR", 
+      "viewId": this.view.viewId, 
+      "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
+       "logToSearch": this.logToSearch, 
+       "limitBy": this.limit, 
+       "offset": this.offset, 
+       "widgetType": "ESS_LOG_DATA_WIDGET","appType":this.appType };
     if(this.selectedTime?.type == 'setEnum'){
      form_data.timeSpanEnum = timeFilter?.value;
     } else if(this.selectedTime?.type == "setCustom"){
@@ -559,14 +573,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
           });
           if (result.essLogsList.length < this.limit) {
               this.allDataLoaded = true;
-          }
+          } 
 
           if (appendData) {
               this.logDataSource = [...this.logDataSource, ...result.essLogsList];
           } else {
               this.logDataSource = result.essLogsList;
           }
-          this.offset += this.limit;
+        
       },
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
@@ -575,12 +589,16 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         },
         complete: () => {
           console.log("Completed");
+          return;
         }
       });
-  }
+    }
   onScroll() {
-    this.getViewLogs(this.selectedTime, true); // Load more data and append it
+     this.offset += this.limit;
+    this.getViewLogs(this.selectedTime, true ); // Load more data and append it
 }
+
+
 get isSelectedAnalyticsTypeEmpty(): boolean {
   return Object.keys(this.analyticsType).length === 0;
 }
