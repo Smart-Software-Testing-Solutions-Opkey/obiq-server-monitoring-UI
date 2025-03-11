@@ -204,9 +204,51 @@
   ::ng-deep .k-dropdownlist .k-input-inner .k-input-value-text .user_unassigned{
     line-height: normal;
   }
+  ::ng-deep .k-dropdownlist .k-input-inner .k-input-value-text .user_unassigned i{
+    background-color: #e4e7ec;
+    padding: .25rem;
+    border-radius: 50%;
+    color: #344054;
+  }
+  
+  ::ng-deep .k-popup.k-list-container .k-list .k-selected.k-list-optionlabel {
+    background-color: #e6fbfe !important;
+  }
 }
 
+::ng-deep .k-popup .k-list-filter .k-searchbox{
+  border: none !important;
+}
 
+::ng-deep .k-popup .k-list-filter .k-searchbox .k-svg-i-search{
+  position: absolute !important;
+  font-size: .75rem !important;
+  padding-left: 0.5rem !important;
+}
 
+::ng-deep .k-popup .k-list-filter .k-searchbox .k-input-inner {
+  width: 100% !important;
+  border: 1px solid #d0d5dd !important;
+  border-radius: .3rem !important;
+  padding: .25rem .5rem .25rem 2rem !important;
+}
 
+::ng-deep .k-popup.k-list-container .k-list .k-selected.k-list-optionlabel {
+  background-color: #e6fbfe !important;
+    position: relative;
+    color: #424242;
+    box-shadow: none;
+    padding: .5rem .75rem !important;
+}
+
+::ng-deep .k-popup.k-list-container .k-list .k-selected.k-list-optionlabel .user_unassigned i{
+  background-color: #e4e7ec;
+  padding: .25rem;
+  border-radius: 50%;
+  color: #344054;
+}
+
+::ng-deep .k-popup.k-list-container .k-list .k-selected.k-list-optionlabel .user_unassigned span{
+  opacity: 0.6;
+}
 
