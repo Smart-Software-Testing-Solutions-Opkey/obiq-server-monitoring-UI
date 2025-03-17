@@ -21,12 +21,12 @@ export class AppComponent implements OnInit {
 
   get_data(): any {
 
-    console.log("window.keycloak object ", window.keycloak);
+    console.log("window.keycloak object ", window.parent.keycloak);
 
-    if (window.keycloak == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
-    if (window.keycloak.sessionId == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
+    if (window.parent.keycloak == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
+    if (window.parent.keycloak.sessionId == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
     var form_url = environment.BASE_OPKEY_URL + "login/get_data";
-    var form_data = { sessionID: window.keycloak.sessionId, opkeyone_callsource: "Default" };
+    var form_data = { sessionID: window.parent.keycloak.sessionId, opkeyone_callsource: "Default" };
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
   force_login_user() {
     var form_url = environment.BASE_OPKEY_URL + "login/force_login_user";
-    var form_data = { sessionID: window.keycloak.sessionId };
+    var form_data = { sessionID: window.parent.keycloak.sessionId };
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
         if (result) {
