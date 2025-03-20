@@ -77,6 +77,12 @@
     margin-bottom: 2rem;
 }
 
+.custom-widget-height{
+    ::ng-deep .total-errors-details {
+        height: 90% !important;
+    }
+}
+
 ::ng-deep .custom-journey-widget-height {
     height: calc(100% - 6rem) !important;
 }

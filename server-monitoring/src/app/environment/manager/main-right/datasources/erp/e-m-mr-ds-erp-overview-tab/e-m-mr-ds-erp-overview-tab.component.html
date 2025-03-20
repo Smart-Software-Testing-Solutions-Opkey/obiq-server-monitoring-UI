@@ -22,17 +22,17 @@
                 </div> -->
                 <ng-container *ngIf="item.widId == 'total_errors_Error'">
                     <div class="margin-bottom-2 me-2 mx-1 h-100">
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart custom-widget-height" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId == 'total_errors_Warning'">
                     <div class="margin-bottom-2 px-2 h-100">
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warning', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart custom-widget-height" [Editable]="Editable" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warning', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId == 'total_errors_Success'">
                     <div class="margin-bottom-2 ms-2 mx-1 h-100">
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable"  [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Success', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart custom-widget-height" [Editable]="Editable"  [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Success', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
             
