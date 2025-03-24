@@ -297,6 +297,7 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
       if(this.viewDataStorageObj.hasOwnProperty(this.dataService.selected_view_data.viewSelected.viewId) ){
         this.recentDataPerView =this.viewDataStorageObj[this.dataService.selected_view_data.viewSelected.viewId] 
+        this.recentDataPerView.reverse();
       }
       else{
         this.recentDataPerView = []
