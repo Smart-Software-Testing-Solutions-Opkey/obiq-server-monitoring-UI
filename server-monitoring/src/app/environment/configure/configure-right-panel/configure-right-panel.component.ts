@@ -158,6 +158,7 @@ export class ConfigureRightPanelComponent {
 
     if(Object.keys(this.datasource_added_item).length == 0){
       this.model_user = null;
+      this.isDisabled = true;
     }
   }
 
