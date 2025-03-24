@@ -1,16 +1,22 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { GridDataResult, GridModule, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MsgboxService } from 'src/app/services/msgbox.service';
+import { EnvrionmentCommonFilterComponent } from 'src/app/environment/environment-common/envrionment-common-filter/envrionment-common-filter.component';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { EnvironmentCommonModule } from 'src/app/environment/environment-common/environment-common.module';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-all-journey',
+  standalone: true,
+  imports: [EnvironmentCommonModule,GridModule, CommonModule, NgbTooltip],
   templateUrl: './e-m-mr-ds-erp-all-journey.component.html',
   styleUrl: './e-m-mr-ds-erp-all-journey.component.scss'
 })

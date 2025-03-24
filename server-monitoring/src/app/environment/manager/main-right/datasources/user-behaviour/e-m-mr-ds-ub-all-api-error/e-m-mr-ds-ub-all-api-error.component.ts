@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { GridModule } from '@progress/kendo-angular-grid';
 import { Subscription } from 'rxjs';
+import { EnvironmentCommonModule } from 'src/app/environment/environment-common/environment-common.module';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
@@ -10,6 +13,8 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
+  standalone: true,
+  imports: [EnvironmentCommonModule,GridModule, CommonModule, NgbTooltip],
   selector: 'app-e-m-mr-ds-ub-all-api-error',
   templateUrl: './e-m-mr-ds-ub-all-api-error.component.html',
   styleUrl: './e-m-mr-ds-ub-all-api-error.component.scss'

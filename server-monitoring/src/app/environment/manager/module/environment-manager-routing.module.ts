@@ -20,7 +20,6 @@ const routes: Routes = [
   children:[{
     path:'summary/:viewId',
     component:EnvironmentManagerMainRightComponent,
-    
     // outlet:'rightSection'
   },
   {
@@ -30,32 +29,32 @@ const routes: Routes = [
   },
   {
     path:'erpjourney',
-    component:EMMrDsErpAllJourneyComponent,
+    loadComponent: () => import('../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component').then(m => m.EMMrDsErpAllJourneyComponent),
     // outlet:'rightSection'
   },
   {
     path :'ubjourney',
-    component: EMMrDsUbAllJourneyComponent,
+    loadComponent: () => import('../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component').then(m => m.EMMrDsUbAllJourneyComponent),
     // outlet :'rightSection'
   },
   {
     path: 'ubApiError',
-    component:  EMMrDsUbAllApiErrorComponent,
+    loadComponent: () => import('../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-api-error/e-m-mr-ds-ub-all-api-error.component').then(m => m.EMMrDsUbAllApiErrorComponent),
     // outlet: 'rightSection'
   },
   {
     path: 'ubConsoleError',
-    component:  EMMrDsUbAllConsoleErrorComponent,
+    loadComponent: () => import('../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component').then(m => m.EMMrDsUbAllConsoleErrorComponent),
     // outlet: 'rightSection'
   },
   {
     path: 'ubFunctionalError',
-    component:  EMMrDsUbAllFunctionalErrorComponent,
+    loadComponent: () => import('../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component').then(m => m.EMMrDsUbAllFunctionalErrorComponent),
     // outlet: 'rightSection'
   },
   {
     path:'erpFunctionalError',
-    component:EMMrDsErpAllFunctionalErrorComponent,
+    loadComponent: () => import('../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component').then(m => m.EMMrDsErpAllFunctionalErrorComponent),
     //  outlet: 'rightSection'
   }
 ]

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ManagerRightPanelComponent } from 'src/app/environment/manager/right-panel/manager-right-panel.component';
 import { AppDataService } from 'src/app/services/app-data.service';
@@ -7,10 +7,15 @@ import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { MsgboxService } from 'src/app/services/msgbox.service';
+import { EnvironmentCommonModule } from 'src/app/environment/environment-common/environment-common.module';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
+  standalone : true,
   selector: 'app-e-m-mr-ds-ub-all-functional-error',
+  imports: [EnvironmentCommonModule,GridModule, CommonModule, NgbTooltip],
   templateUrl: './e-m-mr-ds-ub-all-functional-error.component.html',
   styleUrl: './e-m-mr-ds-ub-all-functional-error.component.scss'
 })

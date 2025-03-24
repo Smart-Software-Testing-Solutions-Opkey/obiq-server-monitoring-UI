@@ -51,19 +51,13 @@ import { EMMrDsERPDComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp
 import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-error-widget/e-m-api-error-widget.component';
 import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
 import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
-import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
 import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey.component';
 import { EnvironmentCommonModule } from '../../environment-common/environment-common.module';
-import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component';
 import { EMMrDsErpOVFPComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p.component';
 import { EMDsUbFunctionalErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-functional-error-tab.component';
 import { EMDsUbJourneyComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-Journey/e-m-ds-ub-journey/e-m-ds-ub-journey.component';
 import { EMMrDsUbConsoleErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-console-error-tab.component';
 import { EMMrDsUbApiErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-api-error-tab.component';
-import { EMMrDsUbAllFunctionalErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component';
-import { EMMrDsUbAllApiErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-api-error/e-m-mr-ds-ub-all-api-error.component';
-import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component';
-import { EMMrDsErpAllFunctionalErrorComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component';
 import { EMDsUbFEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-f-e-panel/e-m-ds-ub-f-e-panel.component';
 import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-c-e-panel/e-m-mr-ds-ub-c-e-panel.component';
 import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-a-e-panel/e-m-mr-ds-ub-a-e-panel.component';
@@ -105,17 +99,12 @@ import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behavio
     EMApiErrorWidgetComponent,
     EMConsoleErrorWidgetComponent,
     EMFunctionalErrorWidgetComponent,
-    EMMrDsErpAllJourneyComponent,
     EMMrDsEFEJourneyComponent,
     EMMrDsErpOVFPComponent,
-    EMMrDsUbAllJourneyComponent,
     EMDsUbFunctionalErrorTabComponent,
     EMDsUbJourneyComponent,
     EMMrDsUbConsoleErrorTabComponent,
     EMMrDsUbApiErrorTabComponent,
-    EMMrDsUbAllFunctionalErrorComponent, 
-    EMMrDsUbAllApiErrorComponent, 
-    EMMrDsUbAllConsoleErrorComponent, EMMrDsErpAllFunctionalErrorComponent,
     EMDsUbFEPanelComponent,
     EMMrDsUbCEPanelComponent,
     EMMrDsUbAEPanelComponent
