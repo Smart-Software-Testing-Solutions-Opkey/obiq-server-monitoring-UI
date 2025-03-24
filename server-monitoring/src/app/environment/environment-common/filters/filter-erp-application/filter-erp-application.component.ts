@@ -27,6 +27,7 @@ export class FilterErpApplicationComponent implements OnInit {
   onSelectedApplicationChange = output<any>();
 
   ngOnInit(): void {
+    //loading applications
     this.get_application();
   }
  
