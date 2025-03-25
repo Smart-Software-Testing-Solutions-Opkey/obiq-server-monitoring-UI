@@ -21,16 +21,16 @@ import { NavigatorLeftSettingsComponent } from '../../../navigator/left/navigato
 import { ManagerRightPannelWidjetComponent } from '../right-panel/manager-right-pannel-widjet/manager-right-pannel-widjet/manager-right-pannel-widjet.component';
 import { EnvironmentManagerWidgetsStatWidgetComponent } from '../widgets/environment-manager-widgets-stat-widget/environment-manager-widgets-stat-widget.component';
 import { EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent } from '../widgets/environment-manager-widgets-total-errors-area-widget/environment-manager-widgets-total-errors-area-widget.component';
-import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
+// import { EnviornmentManagerTimeExplorerGraphComponent } from '../widgets/enviornment-manager-time-Explorer-graph/enviornment-manager-time-explorer-graph/enviornment-manager-time-explorer-graph.component';
 import { LayoutModule } from "@progress/kendo-angular-layout";
-import { NavigatorLeftTreeViewComponent } from '../../../navigator-left-tree-view/navigator-left-tree-view.component';
+import { NavigatorLeftTreeViewComponent } from '../../../navigator/navigator-left-tree-view/navigator-left-tree-view.component';
 import { JourneyGridComponent } from '../main-right/log-tab/log-tab-details/journey-grid/journey-grid.component';
 import { SelectedJourneyComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey.component';
 import { SelectedJourneyInnerComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
 import { ViewJourneySnapshotComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-snapshot/view-journey-snapshot.component';
 import { ViewJourneyErrorComponent } from '../main-right/log-tab/log-tab-details/selected-journey/selected-journey-inner/view-journey-error/view-journey-error.component';
-import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environment-manager-widgets-gauge-meter/environment-manager-widgets-gauge-meter.component';
-import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environment-manager-widgets-health-bars/environment-manager-widgets-health-bars.component';
+// import { EnvironmentManagerWidgetsGaugeMeterComponent } from '../widgets/environment-manager-widgets-gauge-meter/environment-manager-widgets-gauge-meter.component';
+// import { EnvironmentManagerWidgetsHealthBarsComponent } from '../widgets/environment-manager-widgets-health-bars/environment-manager-widgets-health-bars.component';
 import { ManagerMainRightLogTabDetailsInfoComponent } from '../main-right/log-tab/log-tab-details/info/manager-main-right-log-tab-details-info.component';
 import { EnvironmentManagerWidgetsProgressBarsComponent } from '../widgets/progress-bars/environment-manager-widgets-progress-bars.component';
 import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-details/selected-trace/selected-trace-inner/selected-trace-inner.component';
@@ -42,11 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-overview-tab.component';
 import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
 import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
-import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../widgets/environment-manager-widgets-progress-bars-user-guides/environment-manager-widgets-progress-bars-user-guides.component'; 
 import { EMMrDsUbOverviewTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-overview-tab/e-m-mr-ds-ub-overview-tab.component';
-import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-fastest-journeys/environment-manager-widgets-progress-bars-fastest-journeys.component';
-import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
-import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
 import { EMMrDsERPDComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d.component';
 import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-error-widget/e-m-api-error-widget.component';
 import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
@@ -61,39 +57,32 @@ import { EMMrDsUbApiErrorTabComponent } from '../main-right/datasources/user-beh
 import { EMDsUbFEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-f-e-panel/e-m-ds-ub-f-e-panel.component';
 import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-c-e-panel/e-m-mr-ds-ub-c-e-panel.component';
 import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-a-e-panel/e-m-mr-ds-ub-a-e-panel.component';
+import { WidgetsModule } from '../widgets/module/widgets.module';
+import { NavigatorModule } from 'src/app/navigator/module/navigator.module';
+
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
-    NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
     ManagerRightPannelWidjetComponent,
-    ViewSummaryDetailsComponent,
-    NavigatorLeftSettingsComponent,
+    ViewSummaryDetailsComponent,   
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
-    EnviornmentManagerTimeExplorerGraphComponent,
-   NavigatorLeftTreeViewComponent,
     JourneyGridComponent,
     SelectedJourneyComponent,
     SelectedJourneyInnerComponent,
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
-    EnvironmentManagerWidgetsGaugeMeterComponent,
-    EnvironmentManagerWidgetsHealthBarsComponent,
     ManagerMainRightLogTabDetailsInfoComponent,
     EnvironmentManagerWidgetsProgressBarsComponent,
     SelectedTraceInnerComponent,
     EMMrDsErpOverviewTabComponent,
     EMMrDsErpLogTabComponent,
     EMMrDsErpFunctionalErrorTabComponent,
-    EnvironmentManagerWidgetsProgressBarsUserGuidesComponent,
-    EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent,
-    EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
-    EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent,
     EMMrDsUbOverviewTabComponent,
     EMMrDsERPDComponent,
     EMApiErrorWidgetComponent,
@@ -128,29 +117,28 @@ import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behavio
     GridsterComponent,
     GridsterItemComponent,
     NgbModule,
-    EnvironmentCommonModule
+    EnvironmentCommonModule,
+    WidgetsModule,
+    NavigatorModule,
+
   
   ],
   providers: [DatePipe],
   exports:[
     EnvironmentManagerComponent,
-    NavigatorLeftComponent,
     EnvironmentManagerMainRightComponent,
     EnvironmentManagerMainRightOverviewTabComponent,
     EnvironmentManagerMainRightLogTabComponent,
     EnvironmentManagerMainRightLogTabDetailsComponent,
     ManagerRightPanelComponent,
     ViewSummaryDetailsComponent,
-    NavigatorLeftSettingsComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent,
-    NavigatorLeftTreeViewComponent,
     JourneyGridComponent,
     SelectedJourneyComponent,
     SelectedJourneyInnerComponent,
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
-    EnvironmentManagerWidgetsGaugeMeterComponent,
     SelectedTraceInnerComponent,
     EMMrDsERPDComponent,
     EMMrDsEFEJourneyComponent,
