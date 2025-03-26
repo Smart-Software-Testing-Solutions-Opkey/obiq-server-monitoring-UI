@@ -59,6 +59,7 @@ import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behavio
 import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-a-e-panel/e-m-mr-ds-ub-a-e-panel.component';
 import { WidgetsModule } from '../widgets/module/widgets.module';
 import { NavigatorModule } from 'src/app/navigator/module/navigator.module';
+import { EnvironmentCommonFilterModule } from '../../environment-common/envrionment-common-filter/module/environment-common-filter.module';
 
 @NgModule({
   declarations: [
@@ -117,11 +118,10 @@ import { NavigatorModule } from 'src/app/navigator/module/navigator.module';
     GridsterComponent,
     GridsterItemComponent,
     NgbModule,
-    EnvironmentCommonModule,
+    // EnvironmentCommonModule,
     WidgetsModule,
     NavigatorModule,
-
-  
+    EnvironmentCommonFilterModule
   ],
   providers: [DatePipe],
   exports:[

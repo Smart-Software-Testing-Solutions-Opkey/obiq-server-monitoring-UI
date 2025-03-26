@@ -5,6 +5,7 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { GridDataResult, GridModule } from '@progress/kendo-angular-grid';
 import { Subscription } from 'rxjs';
 import { EnvironmentCommonModule } from 'src/app/environment/environment-common/environment-common.module';
+import { EnvironmentCommonFilterModule } from 'src/app/environment/environment-common/envrionment-common-filter/module/environment-common-filter.module';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { MsgboxService } from 'src/app/services/msgbox.service';
@@ -13,7 +14,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   standalone : true,
   selector: 'app-e-m-mr-ds-ub-all-journey',
-  imports: [EnvironmentCommonModule,GridModule, CommonModule, NgbTooltip],  
+  imports: [EnvironmentCommonFilterModule,GridModule, CommonModule, NgbTooltip],  
   templateUrl: './e-m-mr-ds-ub-all-journey.component.html',
   styleUrl: './e-m-mr-ds-ub-all-journey.component.scss'
 })

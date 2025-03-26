@@ -10,13 +10,14 @@ import { EnvrionmentCommonFilterComponent } from 'src/app/environment/environmen
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { EnvironmentCommonModule } from 'src/app/environment/environment-common/environment-common.module';
 import { CommonModule } from '@angular/common';
+import { EnvironmentCommonFilterModule } from 'src/app/environment/environment-common/envrionment-common-filter/module/environment-common-filter.module';
 
 
 
 @Component({
   selector: 'app-e-m-mr-ds-erp-all-journey',
   standalone: true,
-  imports: [EnvironmentCommonModule,GridModule, CommonModule, NgbTooltip],
+  imports: [EnvironmentCommonFilterModule,GridModule, CommonModule, NgbTooltip],
   templateUrl: './e-m-mr-ds-erp-all-journey.component.html',
   styleUrl: './e-m-mr-ds-erp-all-journey.component.scss'
 })

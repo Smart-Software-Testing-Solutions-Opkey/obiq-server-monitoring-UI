@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +7,8 @@ import { AppDataService } from 'src/app/services/app-data.service';
 
 @Component({
   selector: 'app-msgbox-dialog',
+  standalone : true,
+  imports: [CommonModule],
   templateUrl: './msgbox-dialog.component.html',
   styleUrl: './msgbox-dialog.component.scss'
 })

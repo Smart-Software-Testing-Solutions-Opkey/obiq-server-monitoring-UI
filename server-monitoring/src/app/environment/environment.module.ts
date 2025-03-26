@@ -22,7 +22,7 @@ import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from '.
     EnvironmentRoutingModule,
     NgApexchartsModule,
     NgbTooltipModule,
-    EnvironmentCommonModule,
+    // EnvironmentCommonModule,
    
   ]
 })

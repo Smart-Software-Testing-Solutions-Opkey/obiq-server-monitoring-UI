@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-persister-modal',
+  standalone : true,
   templateUrl: './persister-modal.component.html',
   styleUrl: './persister-modal.component.scss'
 })
