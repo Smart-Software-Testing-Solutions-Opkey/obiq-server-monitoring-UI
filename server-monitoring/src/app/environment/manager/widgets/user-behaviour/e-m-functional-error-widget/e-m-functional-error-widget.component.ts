@@ -185,8 +185,6 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (result: any) => {       
             if (result) {
-  
-              result = Object.fromEntries(Object.entries(result).slice(0, 10))
               this.datasourceProgressBar = Object.keys(result).map(item => {
                 const count = result[item].count;
                 let dataPlotList = result[item].dataPlotList
@@ -206,6 +204,8 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
   
                 };
               })
+              this.datasourceProgressBar.sort((a,b)=> b.count - a.count);
+              this.datasourceProgressBar=this.datasourceProgressBar.slice(0,10);
               this.tempdatasourceProgressBar = this.datasourceProgressBar
               this.datasourceProgressBar.map(val => {
               val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
