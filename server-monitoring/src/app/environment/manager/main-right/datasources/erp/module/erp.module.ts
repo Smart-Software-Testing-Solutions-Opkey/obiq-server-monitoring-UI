@@ -10,9 +10,7 @@ import { EMMrDsErpFunctionalErrorTabComponent } from '../e-m-mr-ds-erp-functiona
 import { EMMrDsEFEJourneyComponent } from '../e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey.component';
 import { EMMrDsErpLogTabComponent } from '../e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
 import { EMMrDsERPDComponent } from '../e-m-mr-ds-erp-log-tab/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d.component';
-import { JourneyGridComponent } from '../../../log-tab/log-tab-details/journey-grid/journey-grid.component';
-import { SelectedJourneyComponent } from '../../../log-tab/log-tab-details/selected-journey/selected-journey.component';
-import { SelectedJourneyInnerComponent } from '../../../log-tab/log-tab-details/selected-journey/selected-journey-inner/selected-journey-inner.component';
+import { RightPanelModule } from 'src/app/environment/manager/right-panel/module/right-panel.module';
 
 
 
@@ -24,9 +22,7 @@ import { SelectedJourneyInnerComponent } from '../../../log-tab/log-tab-details/
     EMMrDsEFEJourneyComponent,
     EMMrDsErpLogTabComponent,
     EMMrDsERPDComponent,
-    JourneyGridComponent,
-    SelectedJourneyComponent,
-    SelectedJourneyInnerComponent,    
+   
   ],
   imports: [
     CommonModule,
@@ -35,6 +31,7 @@ import { SelectedJourneyInnerComponent } from '../../../log-tab/log-tab-details/
     WidgetsModule,
     GridsterComponent,
     GridsterItemComponent,
+    RightPanelModule
   ],
   exports :[
     EMMrDsErpOverviewTabComponent,
@@ -43,10 +40,6 @@ import { SelectedJourneyInnerComponent } from '../../../log-tab/log-tab-details/
     EMMrDsEFEJourneyComponent,
     EMMrDsErpLogTabComponent,
     EMMrDsERPDComponent,
-    JourneyGridComponent,
-    SelectedJourneyComponent,
-    SelectedJourneyInnerComponent
-    
   ]
 })
 export class ErpModule { }
