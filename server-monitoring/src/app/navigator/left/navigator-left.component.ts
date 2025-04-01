@@ -368,6 +368,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
           this.dataChanged.allSelectedAnalytics = this.analyticsTypes
           this.dataChanged.viewSelected =  this.selectedView ;
           this.service_data.selected_view_data = this.dataChanged;
+          this.app_service.routeTo('environment', `settings/${this.selectedView.viewId}`)         
 
         },
         error: (error: any) => {
