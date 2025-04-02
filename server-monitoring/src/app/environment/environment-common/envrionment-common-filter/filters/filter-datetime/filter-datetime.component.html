@@ -38,9 +38,11 @@
 
                            <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
                              <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
-                             <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
-                                <span class="mx-auto"> - </span>
-                                <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span>   
+                                <span (click)="selectRecentData(timeItem.fromTime,timeItem.toTime)" >
+                                    <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                    <span class="mx-auto"> - </span>
+                                    <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span> 
+                                </span>  
                            </div>
                         }
                         @else {
@@ -143,9 +145,11 @@
 
                                <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
                                  <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
-                                 <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
-                                <span class="mx-auto"> - </span>
-                                <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span>   
+                                 <span (click)="selectRecentData(timeItem.fromTime,timeItem.toTime)" >
+                                    <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                    <span class="mx-auto"> - </span>
+                                    <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span>   
+                                 </span>
                                </div>
                             }
                             @else {

@@ -241,6 +241,18 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
 
     }
 
+    selectRecentData(fromTime,toTime){
+      this.fromDateTime = fromTime;
+      this.toDateTime = toTime;
+
+      let fromDateValue = new Date(fromTime);
+      let toDateValue = new Date(toTime);
+      this.onDateTimeChange.emit( {type: 'setCustom', fromTimeInMillis: fromDateValue.getTime(), toTimeInMillis: toDateValue.getTime() })
+      this.dataService.selectedDateTime ={type: 'setCustom', fromTimeInMillis: fromDateValue.getTime(), toTimeInMillis: toDateValue.getTime() }
+      this.closeTimeFilterDropdown();
+   
+    }
+
     applyCustomFilter(){
 
       let IsStartDateEndDateSame = this.checkIsStartDateEndDateSame()
@@ -272,15 +284,15 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
       this.closeTimeFilterDropdown();
     }
 
-    
+
     addToHistory(){  
       let viewId = this.dataService.selected_view_data.viewSelected.viewId;
       if(  this.recentDataPerView.length > 9){
          this.recentDataPerView.splice(0,1)
          
       }
-
-      if(this.fromDateTime != this.toDateTime){
+      
+      if(this.fromDatevalue != this.toDateValue){
         this.recentDataPerView.push({"fromTime": this.fromDateTime, "toTime":this.toDateTime});
       }
       this.viewDataStorageObj [viewId ] = this.recentDataPerView
