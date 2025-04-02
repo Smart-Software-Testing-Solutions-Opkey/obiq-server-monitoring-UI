@@ -115,7 +115,7 @@ export class NavigatorLeftSettingsComponent implements OnInit {
     }
     this.selectedViewSettings = val;
     this.service_data.selected_view_data.viewSelected = val
-    this.app_service.routeTo('environment', `settings/${this.selectedViewSettings.viewId}`)
+    this.app_service.routeTo('environment', `manager/settings/${this.selectedViewSettings.viewId}`)
     // this.onSettingsSelected.emit({ isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings })
 
   }

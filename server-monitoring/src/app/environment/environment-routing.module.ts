@@ -4,14 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {
-    path: '',
+    path: 'manager',
     loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
   },{
     path: 'configure',
     loadChildren: () => import('./configure/module/environment-configure.module').then(m => m.EnvironmentConfigureModule),
     data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
   },{
-    path: 'manager',
+    path: 'managermodule',
     loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
    
   },{

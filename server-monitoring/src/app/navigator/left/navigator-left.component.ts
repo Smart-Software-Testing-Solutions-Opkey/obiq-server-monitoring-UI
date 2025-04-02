@@ -68,6 +68,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
 
            
             this.totalViews.push(data.data.selected_view);
+            this.service_data.viewsData = this.totalViews;
             if(this.isopenSettings){
               this.resetValue();
             }
@@ -166,7 +167,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
     this.service_data.selected_view_data = this.dataChanged;
 
     let queryParams = `viewType=${selectedView.name || selectedView.viewName}`
-    this.app_service.routeTo('environment', `summary/${selectedView.viewId}`, queryParams)
+    this.app_service.routeTo('environment', `manager/summary/${selectedView.viewId}`, queryParams)
   }
   set_Selected_VIew(selectedVIew, source) {
 
@@ -207,54 +208,13 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
   getAllVIews(callsource?) {
 
 
-
-    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
-
-    let form_data = {
-      userId: this.dataService.UserDto.UserDTO.U_ID,
-      projectId: this.dataService.UserDto.ProjectDTO.P_ID
-    }
-    window.loadingStart("#totalSection", "Please wait");
-    this.app_service.make_post_server_call(form_url, form_data).subscribe({
-
-      next: (result: any) => {
-        if (result == null || result?.length == 0) {
-          window.loadingStop("#totalSection");
-          this.router.navigateByUrl('/environment/configure');
-          return;
-        }
-
-        this.service_data.viewsData = result;
-        this.totalViews = result;
+        this.totalViews = this.service_data.viewsData;
         if (this.isopenSettings) { return }
 
         let selectedView =this.totalViews.find( (view)=> view.selected)
 
         this.viewChanged(selectedView ? selectedView :this.totalViews[this.totalViews.length - 1] , 'init')
-        // this.selectedView = this.totalViews[this.totalViews.length - 1];
-        // if (callsource == "settings") {
-        //   this.selectedViewSettings = this.selectedViewSettings
-        // }
-        // else {
-        //   this.selectedViewSettings = this.selectedView;
-        // }
-        // this.app_service.dataTransmitter({ data: result, action: "editDisabled", selectedView: this.selectedViewSettings });
-
-        // this.dataChanged.viewSelected = this.selectedView
-        // this.set_Selected_VIew(this.selectedView)
-        window.loadingStop("#totalSection");
-
-
-      },
-      error: (error: any) => {
-        window.loadingStop("#totalSection");
-        console.warn(error);
-        this.msgbox.display_error_message(error);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
+        
   }
   add_environment() {
     const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
@@ -313,7 +273,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
     this.dataChanged.settingsPanel = { isOpen: this.isopenSettings, selectedViewSettings: this.selectedViewSettings }
     this.onLeftPanelDataChange.emit(this.dataChanged)
     this.service_data.selected_view_data = this.dataChanged;
-    this.app_service.routeTo('environment', `settings/${this.selectedViewSettings.viewId}`)
+    this.app_service.routeTo('environment', `manager/settings/${this.selectedViewSettings.viewId}`)
 
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppService } from './services/app.service';
 import { AppDataService } from './services/app-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,34 @@ import { AppDataService } from './services/app-data.service';
 export class AppComponent implements OnInit {
 
   constructor(private app_service: AppService,
-    public service_data: AppDataService
+    public service_data: AppDataService,
+    public router : Router,
   ) { }
 
   ngOnInit() {
     this.get_data();
   }
   is_user_data_loaded = false
+
+  getAllViews(result){
+      let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/getAllViewsOfCurrentUser";
+      let form_data = {
+        userId: result.UserDTO.U_ID,
+        projectId: result.ProjectDTO.P_ID
+      }
+      this.app_service.make_post_server_call(form_url, form_data).subscribe({
+  
+        next: (result: any) => {
+          if(result == null || result?.length == 0){
+            this.router.navigateByUrl("/environment/configure");
+          }
+          else{
+            this.router.navigateByUrl("/environment/manager");
+          }
+          this.service_data.viewsData = result;
+        }
+      })
+  }
 
   get_data(): any {
 
@@ -35,6 +57,7 @@ export class AppComponent implements OnInit {
           this.force_login_user();
         } else {
           this.is_user_data_loaded = true
+          this.getAllViews(result);
         }
       },
       (error) => {
