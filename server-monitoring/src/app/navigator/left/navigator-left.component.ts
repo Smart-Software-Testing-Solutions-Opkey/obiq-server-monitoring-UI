@@ -67,8 +67,9 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
           if (data.data.action == "view_created") {
 
            
-            this.totalViews.push(data.data.selected_view);
-            this.service_data.viewsData = this.totalViews;
+            // this.totalViews.push(data.data.selected_view);
+            this.totalViews = this.service_data.viewsData;
+          
             if(this.isopenSettings){
               this.resetValue();
             }
@@ -217,28 +218,29 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
         
   }
   add_environment() {
-    const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
-      backdrop: 'static',
-      keyboard: false,
-      size: 'full',
-      centered: true,
-      windowClass: 'layout-modal transition-none'
-    });
-    modalRef.result.then((result) => {
-    }, (response) => {
-      if (response == 'close modal') {
-        return;
-      }
-      else if (response == 'create_environment')
-        this.select_service_data();
-    });
+    this.router.navigateByUrl("/environment/manager/modal?source=right");
+    // const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
+    //   backdrop: 'static',
+    //   keyboard: false,
+    //   size: 'full',
+    //   centered: true,
+    //   windowClass: 'layout-modal transition-none'
+    // });
+    // modalRef.result.then((result) => {
+    // }, (response) => {
+    //   if (response == 'close modal') {
+    //     return;
+    //   }
+    //   else if (response == 'create_environment')
+    //     this.select_service_data();
+    // });
   }
 
-  select_service_data() {
+  // select_service_data() {
 
-    this.service_data.is_env_configure = true;
-    this.router.navigate(['/environment']);
-  }
+  //   this.service_data.is_env_configure = true;
+  //   this.router.navigate(['/environment']);
+  // }
 
   viewChanged(val, source?) {
     this.service_data.selected_view_data.analyticsTypes = {}

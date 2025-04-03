@@ -10,6 +10,8 @@ import { EMMrDsUbAllApiErrorComponent } from '../main-right/datasources/user-beh
 import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component';
 import { EMMrDsUbAllFunctionalErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component';
 import { EMMrDsErpAllFunctionalErrorComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component';
+import { ConfigureModalContainerComponent } from '../../configure/configure-modal-container/configure-modal-container.component';
+
 
 const routes: Routes = [
   
@@ -58,7 +60,12 @@ const routes: Routes = [
     //  outlet: 'rightSection'
   }
 ]
-}
+},
+{
+  path: 'modal',
+  // component : ConfigureModalContainerComponent,
+  loadChildren: () => import('../../configure/module/environment-configure.module').then(m => m.EnvironmentConfigureModule),
+},
 
 ];
 

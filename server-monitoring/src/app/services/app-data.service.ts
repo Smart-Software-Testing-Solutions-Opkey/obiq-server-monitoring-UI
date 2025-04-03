@@ -332,7 +332,10 @@ export class AppDataService {
   scrollToParticularElement(id : any){
     setTimeout(() => {
         const element = document.getElementById(id);
-        element.scrollIntoView({ behavior: "instant", block: "end" });
+        if(element){
+            element.scrollIntoView({ behavior: "instant", block: "end" });
+        }
+       
       }, 20);   
   }
 

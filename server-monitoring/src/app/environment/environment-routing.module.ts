@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 const routes: Routes = [
 
   {
@@ -8,7 +7,8 @@ const routes: Routes = [
     loadChildren: () => import('./manager/module/environment-manager.module').then(m => m.EnvironmentManagerModule),
   },{
     path: 'configure',
-    loadChildren: () => import('./configure/module/environment-configure.module').then(m => m.EnvironmentConfigureModule),
+    loadComponent: () => import('./configure/environment-configure.component').then(m => m.EnvironmentConfigureComponent),
+    // loadChildren: () => import('./configure/module/environment-configure.module').then(m => m.EnvironmentConfigureModule),
     data: { title: 'Configure Environment' ,breadcrumb:'Configure'}
   },{
     path: 'managermodule',

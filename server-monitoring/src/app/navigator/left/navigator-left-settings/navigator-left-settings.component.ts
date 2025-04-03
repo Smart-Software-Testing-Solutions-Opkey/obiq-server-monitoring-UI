@@ -30,26 +30,27 @@ export class NavigatorLeftSettingsComponent implements OnInit {
 
   }
   add_environment() {
-    const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
-      backdrop: 'static',
-      keyboard: false,
-      size: 'full',
-      centered: true,
-      windowClass: 'layout-modal transition-none'
-    });
-    modalRef.result.then((result) => {
-    }, (response) => {
-      if (response == 'close modal') {
-        return;
-      }
-      else if (response == 'create_environment')
-        this.select_service_data();
-    });
+    this.router.navigateByUrl("/environment/manager/modal?source=settings");
+    // const modalRef = this.modalService.open(ConfigurationSettingsComponent, {
+    //   backdrop: 'static',
+    //   keyboard: false,
+    //   size: 'full',
+    //   centered: true,
+    //   windowClass: 'layout-modal transition-none'
+    // });
+    // modalRef.result.then((result) => {
+    // }, (response) => {
+    //   if (response == 'close modal') {
+    //     return;
+    //   }
+    //   else if (response == 'create_environment')
+    //     this.select_service_data();
+    // });
   }
-  select_service_data() {
-    this.service_data.is_env_configure = true;
-    this.router.navigate(['/environment']);
-  }
+  // select_service_data() {
+  //   this.service_data.is_env_configure = true;
+  //   this.router.navigate(['/environment']);
+  // }
   totalViews: any = []
   isopenSettings: boolean = false
   tempTotalViews: any = []

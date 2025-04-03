@@ -34,7 +34,7 @@ export class ConfigurationSettingsComponent {
     this.service_data.modalSubInstance.result.then((result) => {
     }, (response) => {
       if(response == 'Yes'){
-       this.close_model()
+       this.close_model('back')
         this.service_data.modalSubInstance = null
         this.service_data.persistermsg = ''
         return
@@ -48,8 +48,16 @@ export class ConfigurationSettingsComponent {
       
     });
   }
-  close_model() {
-    this.activeModal.dismiss('close modal');  
+  close_model(source, viewId?) {
+    debugger
+    if(source == "finish"){
+      // this.activeModal.dismiss('close_and_move_to_next');  
+      this.activeModal.dismiss(JSON.stringify({ 'close_and_move_to_next' : viewId}));  
+    }else{
+      this.activeModal.dismiss(JSON.stringify({ 'close_and_move_to_back' : true}));  
+    }
+    
+   
   }
 
 
@@ -469,7 +477,7 @@ export class ConfigurationSettingsComponent {
 
       next: (result: any) => {
         if (result) {
-          this.close_model();
+          this.close_model('finish');
         }
       },
       error: (error: any) => {
@@ -504,12 +512,14 @@ export class ConfigurationSettingsComponent {
             
             window.loadingStop("#modal-view-bilder");
             this.service_data.is_env_configure = true;
-            this.close_model();   // calling GetAllViewds after View Creation
+            this.close_model('finish',result.viewId);   // calling GetAllViewds after View Creation
             this.service_notification.notifier(NotificationType.success, 'View Created');
             console.log("after view creation: ",this.obj_configuration_setting); //
+            this.service_data.viewsData.push(result);
             // this.app_service.dataTransmitter("viewCreated");
             this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
-            this.router.navigateByUrl('/environment/manager');
+            
+            // this.router.navigateByUrl('/environment/manager');
             // this.app_service.routeTo('environment','summary')
           }
          

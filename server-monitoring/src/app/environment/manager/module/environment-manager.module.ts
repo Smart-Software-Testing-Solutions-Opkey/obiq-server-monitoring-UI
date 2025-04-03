@@ -8,7 +8,7 @@ import { NavigatorLeftComponent } from 'src/app/navigator/left/navigator-left.co
 import { EnvironmentManagerMainRightComponent } from '../main-right/environment-manager-main-right.component';
 import { EnvironmentManagerMainRightOverviewTabComponent } from '../main-right/overview-tab/environment-manager-main-right-overview-tab.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { EnvironmentConfigureModule } from '../../configure/module/environment-configure.module';
+// import { EnvironmentConfigureModule } from '../../configure/module/environment-configure.module';
 import { EnvironmentManagerMainRightLogTabComponent } from '../main-right/log-tab/environment-manager-main-right-log-tab.component';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ManagerRightPanelComponent } from '../right-panel/manager-right-panel.component';
@@ -37,6 +37,8 @@ import { EnvironmentCommonFilterModule } from '../../environment-common/envrionm
 import { UserBehaviourModule } from '../main-right/datasources/user-behaviour/module/user-behaviour.module';
 import { ErpModule } from '../main-right/datasources/erp/module/erp.module';
 import { RightPanelModule } from '../right-panel/module/right-panel.module';
+import { ConfigurationSettingsSummaryAfterViewCreationComponent } from '../../configure/configuration-settings/configuration-settings-summary-after-view-creation/configuration-settings-summary-after-view-creation.component';
+// import { ConfigureModalContainerComponent } from '../../configure/configure-modal-container/configure-modal-container.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +48,13 @@ import { RightPanelModule } from '../right-panel/module/right-panel.module';
     EnvironmentManagerMainRightLogTabComponent,
     ManagerRightPanelComponent,
     ManagerRightPannelWidjetComponent,
-    ViewSummaryDetailsComponent,   
+    ViewSummaryDetailsComponent, 
+    ConfigurationSettingsSummaryAfterViewCreationComponent,  
     EnvironmentManagerWidgetsStatWidgetComponent,
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
     EnvironmentManagerWidgetsProgressBarsComponent,
+    // ConfigureModalContainerComponent
   
     
   ],
@@ -60,7 +64,7 @@ import { RightPanelModule } from '../right-panel/module/right-panel.module';
     EnvironmentManagerRoutingModule,
     FormsModule,
     DropDownsModule,
-    EnvironmentConfigureModule,
+    // EnvironmentConfigureModule,
     GridModule,
     NgApexchartsModule,
     LayoutModule,
@@ -86,9 +90,11 @@ import { RightPanelModule } from '../right-panel/module/right-panel.module';
     EnvironmentManagerMainRightLogTabComponent,
     ManagerRightPanelComponent,
     ViewSummaryDetailsComponent,
+    ConfigurationSettingsSummaryAfterViewCreationComponent,
     EnvironmentManagerWidgetsStatWidgetComponent,
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
+    // ConfigureModalContainerComponent
   ]
 })
 export class EnvironmentManagerModule { }
