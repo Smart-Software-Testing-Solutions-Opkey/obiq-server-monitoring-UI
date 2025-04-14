@@ -291,7 +291,7 @@ export class EnvironmentManagerMainRightComponent implements OnInit, OnDestroy, 
         },
         {
           "enumType": "LOG_TAB",
-          "text": "Error Log",
+          "text": "Error Logs",
           'isVisible': true,
           'isSelected': false
         },
