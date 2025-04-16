@@ -92,9 +92,11 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
 
-    let form_data = { str_application: JSON.stringify(select_applicaton) };
+    let form_data = new FormData();
+    form_data.append("str_application",JSON.stringify(select_applicaton));
+  
 
-    this.app_service.make_get_server_call(form_url, form_data)
+    this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
         next: (result: any) => {
        
