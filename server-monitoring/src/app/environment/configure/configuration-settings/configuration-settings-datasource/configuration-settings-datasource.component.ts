@@ -191,10 +191,9 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
-    let form_data = new FormData();
-    form_data.append("str_application",JSON.stringify(instances));
-
-    this.app_service.make_post_server_call(form_url, form_data)
+    let form_data = { str_application :JSON.stringify(instances)};
+   
+    this.app_service.make_get_server_call(form_url, form_data)
       .subscribe({
         next: (result: any) => {
           this.Available_Application_Instances = Object.keys(result).reduce((acc: any, app: string) => {
