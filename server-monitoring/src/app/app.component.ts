@@ -23,10 +23,19 @@ export class AppComponent implements OnInit {
 
     console.log("window.keycloak object ", window.parent.keycloak);
 
-    if (window.parent.keycloak == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
-    if (window.parent.keycloak.sessionId == undefined) { setTimeout(() => { this.get_data(); }, 1000); return false; }
+    if (
+      typeof window.parent.keycloak === 'undefined' ||
+      (!window.parent.keycloak.sessionId &&
+        (!window.parent.keycloak.tokenParsed || !window.parent.keycloak.tokenParsed.sid))
+    ) {
+      setTimeout(() => { this.get_data(); }, 1000);
+      return false;
+    }
+
     var form_url = environment.BASE_OPKEY_URL + "login/get_data";
-    var form_data = { sessionID: window.parent.keycloak.sessionId, opkeyone_callsource: "Default" };
+    const sessionID = window.parent.keycloak.sessionId || window.parent.keycloak.tokenParsed.sid;
+    var form_data = { sessionID: sessionID, opkeyone_callsource: "Default" };
+   
 
     this.app_service.make_get_server_call(form_url, form_data).subscribe(
       (result: any) => {
