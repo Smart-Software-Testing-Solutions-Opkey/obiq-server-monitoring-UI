@@ -284,7 +284,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
     let form_data = {
       "viewName": this.modal_name,
-      "userId": this.data_service.UserDto.UserDTO.U_ID,
+      // "userId": this.data_service.UserDto.UserDTO.U_ID,
       "projectId": this.data_service.UserDto.ProjectDTO.P_ID
     }
 
