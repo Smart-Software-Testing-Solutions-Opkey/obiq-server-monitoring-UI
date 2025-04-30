@@ -31,7 +31,7 @@
         @if( this.selectedTab == "OVERVIEW_TAB"){
           
             @if( this.selectedAnalyticsType == 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'ERP_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'TEST_AUTOMATION_ANALYTICS_DATASOURCE' || this.selectedAnalyticsType == 'SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE'){
-                <button  class="btn btn-layout btn-bg-white" container="body" ngbTooltip="Edit Widget" triggers="mouseenter:mouseleave" style="padding:0px;width:34px;height:34px;" (click)="toggleEdit()" [disabled]= "dataService.selected_view_data.viewSelected.viewAccessTypePermision != 'EDIT' && dataService.UserDto.UserDTO.U_ID  != dataService.selected_view_data.viewSelected.userId" >
+                <button  class="btn btn-layout btn-bg-white" container="body" ngbTooltip="Edit Widget" triggers="mouseenter:mouseleave" style="padding:0px;width:2.2rem;height:2.2rem;" (click)="toggleEdit()" [disabled]= "dataService.selected_view_data.viewSelected.viewAccessTypePermision != 'EDIT' && dataService.UserDto.UserDTO.U_ID  != dataService.selected_view_data.viewSelected.userId" >
                     <i class="oci oci-edit"></i>
                 </button>
             }  
@@ -48,7 +48,7 @@
     </div>
 
     <div class="filter-content mb-1">
-        <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" triggers="mouseenter:mouseleave" container="body" style="padding:0px;width:34px;height:34px;" (click)="refreshPage()">
+        <button ngbTooltip="Refresh" class="btn btn-layout btn-bg-white" triggers="mouseenter:mouseleave" container="body" style="padding:0px;width:2.2rem;height:2.2rem;" (click)="refreshPage()">
             <i class="oci oci-refresh-cw"></i>
         </button>
     </div>  
