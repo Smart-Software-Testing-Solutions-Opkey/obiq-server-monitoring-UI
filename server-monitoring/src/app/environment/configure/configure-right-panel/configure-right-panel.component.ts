@@ -201,14 +201,13 @@ export class ConfigureRightPanelComponent {
     }
 
     let form_url = environment.BASE_OPKEY_URL + "Profile/GetAssignedUsersInProject";
-    let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
-    
+    let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };    
     this.app_service.make_get_server_call(form_url, form_data)
       .subscribe({
 
         next: (result: any) => {
         
-
+   
         
           this.bind_data(result);
          
@@ -291,7 +290,7 @@ export class ConfigureRightPanelComponent {
     }
 
 
-    let form_data = { SendViewData: JSON.stringify(obj) }
+    let form_data = obj;
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
 
