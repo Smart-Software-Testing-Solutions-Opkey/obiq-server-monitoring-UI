@@ -1627,3 +1627,9 @@ textarea:focus-visible {
     outline: #116173 auto 1px !important;
 }
 
+
+.disabled-item {
+    color: grey !important;
+    pointer-events: none; 
+    opacity: 0.5; 
+  }

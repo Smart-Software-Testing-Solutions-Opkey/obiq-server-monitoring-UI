@@ -68,7 +68,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="javascript:void(0)"(click)="renameSelectedView(view)" ><i class="oci oci-edit font-14px align-middle mb-1 me-2"></i>Rename</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)"(click)="deleteSelectedView(view)" ><i class="oci oci-delete font-14px align-middle mb-1 me-2 text-red"></i>Delete</a></li>
+                                        <li [ngClass]="view.userId!= dataService.UserDto.UserDTO.U_ID ? 'disabled-item' : ''"><a class="dropdown-item" href="javascript:void(0)"(click)="deleteSelectedView(view)" ><i class="oci oci-delete font-14px align-middle mb-1 me-2 text-red"></i>Delete</a></li>
                                     </ul>
                                 </div>
                             </span>
