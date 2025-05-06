@@ -13,6 +13,9 @@ export class AppService {
   private dataStream = new Subject<any>();
   public dataStream$ = this.dataStream.asObservable();
 
+  public folder_view_flagBS = new BehaviorSubject(true);
+  folder_view_flag$ = this.folder_view_flagBS.asObservable();
+
   constructor(public http: HttpClient, private router: Router,) {
     
     this.transfterSubject = new BehaviorSubject<any>(null);

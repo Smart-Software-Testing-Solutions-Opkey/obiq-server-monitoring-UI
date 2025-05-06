@@ -6,7 +6,7 @@
 
     <kendo-splitter orientation="horizontal" style="border-color: transparent;">
 
-        <kendo-splitter-pane min="20%" max="40%" size="20%">
+        <kendo-splitter-pane min="20%" max="40%"  [collapsible]="false" [collapsed]="folder_view_flag">
             <div class="left-section">
 
 
@@ -16,9 +16,9 @@
 
             </div>
         </kendo-splitter-pane>
-        <kendo-splitter-pane>
+        <kendo-splitter-pane [ngClass]="{'k-flex-basis-auto' : folder_view_flag}" [size]="folder_view_flag?'100%':'80%'">
 
-            <div class="right-section">
+            <div class="right-section" >
                 
 
                 <!-- <router-outlet name="rightSection"></router-outlet> -->

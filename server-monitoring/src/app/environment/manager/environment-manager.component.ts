@@ -14,11 +14,15 @@ export class EnvironmentManagerComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public service_data: AppDataService,
-    private app_service:AppService
+    private app_service:AppService,
   ) { }
 
+  folder_view_flag : boolean = true;
   ngOnInit(): void {
     // this.check_env_configuration();
+    this.app_service.folder_view_flag$.subscribe((data : any)=>{
+      this.folder_view_flag=!data;
+    })
   }
 
   selectedAnalyticsType: any = null
@@ -119,5 +123,7 @@ export class EnvironmentManagerComponent implements OnInit {
 
     
   }
+
+ 
 
 }

@@ -15,7 +15,22 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.get_data();
+    window.addEventListener('message', (event) => {
+      let res:any = {}
+      
+     try{
+        res = JSON.parse(event.data)
+        console.log(res);
+        if(res.toSource == 'monitoring'){
+          this.app_service.folder_view_flagBS.next(res.flag);  
+        }
+     }
+     catch(error){
+      console.log(error);
+     }
+    });
   }
   is_user_data_loaded = false
 
