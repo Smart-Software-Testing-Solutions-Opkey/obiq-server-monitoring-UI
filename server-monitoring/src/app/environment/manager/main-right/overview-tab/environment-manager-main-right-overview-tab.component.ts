@@ -183,10 +183,12 @@ export class EnvironmentManagerMainRightOverviewTabComponent implements OnInit,O
       
   }
   obj_filter : any ;
-  @Input ('child_data') set child_data({ view, allSelectedAnalytics,obj_filter }) {
+  selectedAnalyticsType : any= "";
+  @Input ('child_data') set child_data({ view, allSelectedAnalytics,obj_filter ,selectedAnalyticsType}) {
    this.view=view
    this.allSelectedAnalytics=allSelectedAnalytics
     this.obj_filter = JSON.parse(JSON.stringify(obj_filter))
+    this.selectedAnalyticsType = selectedAnalyticsType;
    this.reset_analytics()
    this.allSelectedAnalytics?.forEach(item=>{
     if(item['name']=='User Behavior Analytics')  this.analyticsTypes.display_user_behaviour=true

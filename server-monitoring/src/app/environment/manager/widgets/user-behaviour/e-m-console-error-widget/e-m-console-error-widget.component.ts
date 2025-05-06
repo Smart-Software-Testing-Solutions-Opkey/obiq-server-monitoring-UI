@@ -66,12 +66,14 @@ export class EMConsoleErrorWidgetComponent implements OnInit, OnDestroy {
    
    title:string
    obj_filter : any;
-  @Input('child_data') set child_data({ view,title, obj_filter }) {
+   selectedAnalyticsType : any = "";
+  @Input('child_data') set child_data({ view,title, obj_filter,selectedAnalyticsType }) {
     
    
    this.view = view
    this.title =title
    this.obj_filter= obj_filter
+   this.selectedAnalyticsType = selectedAnalyticsType
    if(this?.view?.viewId ){
       // this.datasourceProgressBar = [];
       this.getWidgetData(this.obj_filter)
@@ -168,7 +170,7 @@ getWidgetData(timeFilter?: any) {
         form_data["timeSpanEnum"] = timeFilter?.value;
   
       }
-      window.loadingStart("#ub-console-tab", "Please wait");
+      window.loadingStart("#ub-console-tab"+this.selectedAnalyticsType, "Please wait");
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {            
@@ -200,7 +202,7 @@ getWidgetData(timeFilter?: any) {
             val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
             })
 
-            window.loadingStop("#ub-console-tab");
+            window.loadingStop("#ub-console-tab"+this.selectedAnalyticsType);
             this.cdRef.detectChanges();
           }
 
@@ -208,7 +210,7 @@ getWidgetData(timeFilter?: any) {
 
         },
         error: (error: any) => {
-          window.loadingStop("#ub-console-tab");
+          window.loadingStop("#ub-console-tab"+this.selectedAnalyticsType);
           console.error(error);
           this.msgbox.display_error_message(error);
         }

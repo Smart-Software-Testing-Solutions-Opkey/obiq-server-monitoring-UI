@@ -109,8 +109,10 @@ export class EMMrDsErpOverviewTabComponent {
   }
   @Input() view:any
   obj_filter : any;
-  @Input ('child_data') set child_data({ obj_filter }) {
+  selectedAnalyticsType : any = "";
+  @Input ('child_data') set child_data({ obj_filter ,selectedAnalyticsType}) {
     this.obj_filter= obj_filter
+    this.selectedAnalyticsType = selectedAnalyticsType;
   }
   applicationTotalData:any = [{
     applicationName : 'Oracle Fusion',

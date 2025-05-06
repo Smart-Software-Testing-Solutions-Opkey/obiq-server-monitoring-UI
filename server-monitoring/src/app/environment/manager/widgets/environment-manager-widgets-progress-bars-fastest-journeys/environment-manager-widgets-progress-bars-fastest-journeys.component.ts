@@ -53,11 +53,13 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
   title: any = null;
   widgetType = ''
   obj_filter: any ;
-  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
+  selectedAnalyticsType: any ="";
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter,selectedAnalyticsType}) {
    this.view = view;
    this.title=title;
    this.widgetType = widgetType
    this.obj_filter = obj_filter
+   this.selectedAnalyticsType = selectedAnalyticsType;
 
    if(this.view && this.view.viewId ){
     this.datasourceProgressBar = [];
@@ -127,7 +129,7 @@ ngOnDestroy() {
 
 
   getWidgetData(timeFilter?: any){
-    window.loadingStart("#fastest-journey-"+this.widgetType, "Please wait");
+    window.loadingStart("#fastest-journey-"+this.widgetType+this.selectedAnalyticsType, "Please wait");
 
     let ajax_url : any;
     let form_data : any ;
@@ -185,14 +187,14 @@ ngOnDestroy() {
             
             
           }
-          window.loadingStop("#fastest-journey-"+this.widgetType);
+          window.loadingStop("#fastest-journey-"+this.widgetType+this.selectedAnalyticsType);
           
           this.cdRef.detectChanges();
         }
        
       },
         error: (error: any) => {
-          window.loadingStop("#fastest-journey-"+this.widgetType);
+          window.loadingStop("#fastest-journey-"+this.widgetType+this.selectedAnalyticsType);
           console.error(error);
           this.msgbox.display_error_message(error);
         }

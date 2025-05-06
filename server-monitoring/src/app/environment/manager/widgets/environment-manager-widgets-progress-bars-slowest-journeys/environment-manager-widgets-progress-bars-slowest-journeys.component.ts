@@ -57,11 +57,13 @@ export class EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent imple
   maxCount: number = 0;
   widgetType =  "USER_JOURNEY_TOP_SLOW_WIDGET"
   obj_filter: any ;
-  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
+  selectedAnalyticsType : any = "";
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter,selectedAnalyticsType}) {
    this.view = view;
    this.title=title;
   this.widgetType = widgetType;
   this.obj_filter= obj_filter
+  this.selectedAnalyticsType = selectedAnalyticsType;
   if(this?.view?.viewId && this.widgetType){
     this.datasourceProgressBar = [];
     this.getWidgetData(obj_filter)
@@ -129,7 +131,7 @@ ngOnDestroy() {
   // }
 
   getWidgetData(timeFilter?: any){
-    window.loadingStart("#slowest-journey-"+this.widgetType, "Please wait");
+    window.loadingStart("#slowest-journey-"+this.widgetType+this.selectedAnalyticsType, "Please wait");
     let ajax_url : any;
     let form_data : any ;
     if(this.widgetType == 'ERP'){
@@ -196,13 +198,13 @@ ngOnDestroy() {
             });
             this.tempdatasourceProgressBar = this.datasourceProgressBar
           }
-          window.loadingStop("#slowest-journey-"+this.widgetType);
+          window.loadingStop("#slowest-journey-"+this.widgetType+this.selectedAnalyticsType);
           this.cdRef.detectChanges();
         }
        
       },
         error: (error: any) => {
-          window.loadingStop("#slowest-journey-"+this.widgetType);
+          window.loadingStop("#slowest-journey-"+this.widgetType+this.selectedAnalyticsType);
           console.error(error);
           this.msgbox.display_error_message(error);
         }

@@ -62,14 +62,15 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
    widgetType: string
    title:string
    obj_filter : any;
-  
-  @Input('child_data') set child_data({ view,title,widgetType,obj_filter }) {
+   selectedAnalyticsType: any = "";
+  @Input('child_data') set child_data({ view,title,widgetType,obj_filter,selectedAnalyticsType }) {
     
    
    this.view = view
    this.title =title
    this.widgetType=widgetType
    this.obj_filter = obj_filter
+   this.selectedAnalyticsType = selectedAnalyticsType
    if(this?.view?.viewId ){
       
       this.getWidgetData(this.obj_filter);
@@ -181,7 +182,7 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
       }
       
 
-      window.loadingStart("#functional-tab-"+this.widgetType, "Please wait");
+      window.loadingStart("#functional-tab-"+this.widgetType+this.selectedAnalyticsType, "Please wait");
       this.app_service.make_post_server_call(ajax_url, form_data)
         .subscribe({
           next: (result: any) => {       
@@ -211,13 +212,13 @@ export class EMFunctionalErrorWidgetComponent implements OnInit, OnDestroy {
               this.datasourceProgressBar.map(val => {
               val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
               })
-              window.loadingStop("#functional-tab-"+this.widgetType);
+              window.loadingStop("#functional-tab-"+this.widgetType+this.selectedAnalyticsType);
               this.cdRef.detectChanges();
             }
 
           },
           error: (error: any) => {
-            window.loadingStop("#functional-tab-"+this.widgetType);
+            window.loadingStop("#functional-tab-"+this.widgetType+this.selectedAnalyticsType);
             console.error(error);
             this.msgbox.display_error_message(error);
           }

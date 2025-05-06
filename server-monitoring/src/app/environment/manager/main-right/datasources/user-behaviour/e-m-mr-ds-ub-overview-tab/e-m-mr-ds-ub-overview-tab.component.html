@@ -21,26 +21,26 @@
                         <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
                     </div> -->
                     <ng-container *ngIf="item.widId == 'total_errors_Error'">
-                        <div class="overview-error-panel mx-2 position-relative" style="height: 100%;" [id]="'stats-div-ErroruserBehaviour'" >
-                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        <div class="overview-error-panel mx-2 position-relative" style="height: 100%;" [id]="'stats-div-ErroruserBehaviour'+selectedAnalyticsType" >
+                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-total-errors-area-widget>
                         </div>
                     </ng-container> 
                 
                      <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
-                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'fastest-journey-userBehaviour'" >
-                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'fastest-journey-userBehaviour'+selectedAnalyticsType" >
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
-                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'slowest-journey-userBehaviour'">
+                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'slowest-journey-userBehaviour'+selectedAnalyticsType">
                                
-                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
-                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'common-journey-userBehaviour'">
+                            <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'common-journey-userBehaviour'+selectedAnalyticsType">
                                
-                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-common-journeys>
                             </div>
                         </ng-container>
                         <!-- hidded weekly log -->
@@ -50,18 +50,18 @@
                         </div>
                     </ng-container> -->
                     <ng-container *ngIf="item.widId=='TOP_API_ERRORS_WIDGET'">
-                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" id="ub-api-tab">
-                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter}"></app-e-m-api-error-widget>
+                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'ub-api-tab'+selectedAnalyticsType">
+                            <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-api-error-widget>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_CONSOLE_ERRORS_WIDGET'">
-                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" id="ub-console-tab">
-                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors',obj_filter: obj_filter}"></app-e-m-console-error-widget>
+                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'ub-console-tab'+selectedAnalyticsType">
+                            <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-console-error-widget>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
-                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'functional-tab-USER BEHAVIOR'">
-                            <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR',obj_filter: obj_filter}"></app-e-m-functional-error-widget>
+                        <div class="overview-panel widget-section p-3 mx-2 position-relative" style="height: 90%;" [id]="'functional-tab-USER BEHAVIOR'+selectedAnalyticsType">
+                            <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-functional-error-widget>
                         </div>
                     </ng-container>
                 </gridster-item>

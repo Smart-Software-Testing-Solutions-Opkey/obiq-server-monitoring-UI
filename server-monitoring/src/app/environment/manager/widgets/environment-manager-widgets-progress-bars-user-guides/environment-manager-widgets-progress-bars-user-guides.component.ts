@@ -51,11 +51,12 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
     title: any = null;
     obj_filter : any;
     widgetType: any ="USERGUIDE_PER_PROCESS";
-    @Input('child_data') set child_data({view,title,obj_filter}) {
+    selectedAnalyticsType : any = "";
+    @Input('child_data') set child_data({view,title,obj_filter,selectedAnalyticsType}) {
      this.view = view;
      this.title=title;
      this.obj_filter = obj_filter;
-
+    this.selectedAnalyticsType = selectedAnalyticsType;
      if(this?.view?.viewId ){
       this.datasourceProgressBar = [];
       this.getWidgetData(this.obj_filter)
@@ -118,7 +119,7 @@ ngOnDestroy() {
   // }
   
     getWidgetData(timeFilter?: any){
-      window.loadingStart("#user-guides-"+this.widgetType, "Please wait");
+      window.loadingStart("#user-guides-"+this.widgetType+this.selectedAnalyticsType, "Please wait");
       let ajax_url = environment.BASE_OBIQ_SERVER_URL + `OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/InsightWidgetController/getInsightWidgetData`;
       let form_data : any ;
       form_data = {
@@ -162,13 +163,13 @@ ngOnDestroy() {
               })
               this.tempdatasourceProgressBar = this.datasourceProgressBar
             }
-            window.loadingStop("#user-guides-"+this.widgetType);
+            window.loadingStop("#user-guides-"+this.widgetType+this.selectedAnalyticsType);
             this.cdRef.detectChanges();
           }
          
         },
           error: (error: any) => {
-            window.loadingStop("#user-guides-"+this.widgetType);
+            window.loadingStop("#user-guides-"+this.widgetType+this.selectedAnalyticsType);
             console.error(error);
             this.msgbox.display_error_message(error);
           }

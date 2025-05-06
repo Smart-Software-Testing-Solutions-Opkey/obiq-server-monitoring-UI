@@ -65,13 +65,15 @@ export class EMApiErrorWidgetComponent implements OnInit, OnDestroy {
 
   title: string
   obj_filter : any ;
-  @Input('child_data') set child_data({ view, title, widgetType ,obj_filter}) {
+  selectedAnalyticsType: any ="";
+  @Input('child_data') set child_data({ view, title, widgetType ,obj_filter,selectedAnalyticsType}) {
 
 
     this.view = view
     this.title = title
     this.widgetType = widgetType
     this.obj_filter = obj_filter
+    this.selectedAnalyticsType = selectedAnalyticsType;
     if (this?.view?.viewId) {
       this.getWidgetData(this.obj_filter);
       this.createChart();
@@ -163,7 +165,7 @@ ngOnDestroy() {
         form_data["timeSpanEnum"] = timeFilter?.value;
   
       }
-    window.loadingStart("#ub-api-tab", "Please wait");
+    window.loadingStart("#ub-api-tab"+this.selectedAnalyticsType, "Please wait");
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
@@ -195,7 +197,7 @@ ngOnDestroy() {
             val.dataPlotList = val.dataPlotList.map(item=>item.percentdiff)
             })
 
-            window.loadingStop("#ub-api-tab");
+            window.loadingStop("#ub-api-tab"+this.selectedAnalyticsType);
             this.cdRef.detectChanges();
           }
 
@@ -203,7 +205,7 @@ ngOnDestroy() {
 
         },
         error: (error: any) => {
-          window.loadingStop("#ub-api-tab");
+          window.loadingStop("#ub-api-tab"+this.selectedAnalyticsType);
           console.error(error);
           this.msgbox.display_error_message(error);
         }

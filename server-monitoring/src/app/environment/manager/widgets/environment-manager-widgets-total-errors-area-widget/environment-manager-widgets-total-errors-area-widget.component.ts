@@ -218,13 +218,15 @@ widgetType=''
   view:any
   title = ''
   obj_filter: any;
-  @Input('child_data') set child_data({ typeEnum,view,title,widgetType ,obj_filter}) {
+  selectedAnalyticsType: any ='';
+  @Input('child_data') set child_data({ typeEnum,view,title,widgetType ,obj_filter,selectedAnalyticsType}) {
     
    this.typeEnum = typeEnum
    this.view = view
   this.title =title
   this.widgetType = widgetType
   this.obj_filter = obj_filter
+  this.selectedAnalyticsType = selectedAnalyticsType
   if(this.typeEnum == 'Error'){
     this.getChartData('ESS_LOG_ERROR_WIDGET',this.obj_filter);
   }
@@ -358,7 +360,7 @@ dataDir = ''
         form_data["timeSpanEnum"] = timeFilter?.value;
   
       }
-      window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType, "Please wait");
+      window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType, "Please wait");
       this.app_service.make_post_server_call(ajax_url,form_data)
         .subscribe({
           next: (result: any) => {
@@ -421,13 +423,13 @@ dataDir = ''
               this.checkStyling();
               this.bind_chart();
               this.bindChart();
-              window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
+              window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType);
 
             }
 
           },
           error: (error: any) => {
-            window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType);
+            window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType);
             this.msgbox.display_error_message(error);
             console.warn(error);
           },

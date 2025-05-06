@@ -58,11 +58,13 @@ export class EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent implem
 
   widgetType = 'USER_JOURNEY_MOST_COMMON_WIDGET'
   obj_filter : any ;
-  @Input('child_data') set child_data({view,title,widgetType,obj_filter}) {
+  selectedAnalyticsType : any = "";
+  @Input('child_data') set child_data({view,title,widgetType,obj_filter,selectedAnalyticsType}) {
    this.view = view;
    this.title=title;
    this.widgetType= widgetType;
    this.obj_filter= obj_filter
+   this.selectedAnalyticsType = selectedAnalyticsType;
    if(this?.view?.viewId && this?.widgetType){
     this.datasourceProgressBar = [];
     this.getWidgetData(this.obj_filter)
@@ -126,7 +128,7 @@ ngOnDestroy() {
   // }
 
   getWidgetData(timeFilter?: any){
-    window.loadingStart("#common-journey-"+this.widgetType, "Please wait");
+    window.loadingStart("#common-journey-"+this.widgetType+this.selectedAnalyticsType, "Please wait");
    
     let ajax_url : any;
     let form_data : any ;
@@ -200,13 +202,13 @@ ngOnDestroy() {
           this.datasourceProgressBar.map(val => {
             val.dataPlotList = val.dataPlotList.map(item=>item.percentDiff)
             })
-          window.loadingStop("#common-journey-"+this.widgetType);
+          window.loadingStop("#common-journey-"+this.widgetType+this.selectedAnalyticsType);
           this.cdRef.detectChanges();
         }
        
       },
         error: (error: any) => {
-          window.loadingStop("#common-journey-"+this.widgetType);
+          window.loadingStop("#common-journey-"+this.widgetType+this.selectedAnalyticsType);
           console.error(error);
           this.msgbox.display_error_message(error);
         }

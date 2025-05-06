@@ -21,39 +21,39 @@
                     <i class="oci oci-bar-chart drag-icon px-1 drag-handler"></i>
                 </div> -->
                 <ng-container *ngIf="item.widId == 'total_errors_Error'">
-                    <div class="margin-bottom-2 me-2 mx-1 h-100 position-relative" [id]="'stats-div-ErrorERP'" >
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                    <div class="margin-bottom-2 me-2 mx-1 h-100 position-relative" [id]="'stats-div-ErrorERP'+selectedAnalyticsType" >
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId == 'total_errors_Warning'">
-                    <div class="margin-bottom-2 px-2 h-100 position-relative" [id]="'stats-div-WarningERP'" >
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warnings', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                    <div class="margin-bottom-2 px-2 h-100 position-relative" [id]="'stats-div-WarningERP'+selectedAnalyticsType" >
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warnings', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId == 'total_errors_Success'">
-                    <div class="margin-bottom-2 ms-2 mx-1 h-100 position-relative" [id]="'stats-div-SuccessERP'" >
-                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable"  [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Successes', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                    <div class="margin-bottom-2 ms-2 mx-1 h-100 position-relative" [id]="'stats-div-SuccessERP'+selectedAnalyticsType" >
+                        <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable"  [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Successes', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-total-errors-area-widget>
                     </div>
                 </ng-container>
             
                 <ng-container *ngIf="item.widId=='USER_GUIDE_LIST_PER_PROCESS_WIDGET'">
-                    <div class="widget-section margin-bottom-2 me-2 mx-1 position-relative" style="height: 90%;" [id]="'user-guides-USERGUIDE_PER_PROCESS'" >
-                        <app-environment-manager-widgets-progress-bars-user-guides [Editable]="Editable" [child_data]="{view:view,title:'Top 5 User Guides Per Process',obj_filter: obj_filter}" ></app-environment-manager-widgets-progress-bars-user-guides>
+                    <div class="widget-section margin-bottom-2 me-2 mx-1 position-relative" style="height: 90%;" [id]="'user-guides-USERGUIDE_PER_PROCESS'+selectedAnalyticsType" >
+                        <app-environment-manager-widgets-progress-bars-user-guides [Editable]="Editable" [child_data]="{view:view,title:'Top 5 User Guides Per Process',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}" ></app-environment-manager-widgets-progress-bars-user-guides>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
-                    <div class="widget-section margin-bottom-2 ms-2 mx-1 position-relative" style="height: 90%;"  [id]="'fastest-journey-ERP'" >
-                        <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                    <div class="widget-section margin-bottom-2 ms-2 mx-1 position-relative" style="height: 90%;"  [id]="'fastest-journey-ERP'+selectedAnalyticsType" >
+                        <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
-                    <div class="widget-section margin-bottom-2 me-2 mx-1 position-relative" style="height: 90%;"  [id]="'slowest-journey-ERP'">
-                        <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                    <div class="widget-section margin-bottom-2 me-2 mx-1 position-relative" style="height: 90%;"  [id]="'slowest-journey-ERP'+selectedAnalyticsType">
+                        <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
-                    <div class="widget-section margin-bottom-2 mx-1 ms-2 position-relative" style="height: 90%"  [id]="'common-journey-ERP'">
-                        <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                    <div class="widget-section margin-bottom-2 mx-1 ms-2 position-relative" style="height: 90%"  [id]="'common-journey-ERP'+selectedAnalyticsType">
+                        <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-common-journeys>
                     </div>
                 </ng-container>
                 <!-- hidded weekly log -->
@@ -65,8 +65,8 @@
                 
                 </ng-container> -->
                 <ng-container *ngIf="item.widId=='TOP_FUNCTIONAL_ERRORS_WIDGET'">
-                    <div class="widget-section margin-bottom-2 mx-1 position-relative" style="height: 95%;" [id]="'functional-tab-ERP'" >
-                        <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP',obj_filter: obj_filter}"></app-e-m-functional-error-widget>
+                    <div class="widget-section margin-bottom-2 mx-1 position-relative" style="height: 95%;" [id]="'functional-tab-ERP'+selectedAnalyticsType" >
+                        <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-functional-error-widget>
                     </div>
                 </ng-container>
             </gridster-item>
