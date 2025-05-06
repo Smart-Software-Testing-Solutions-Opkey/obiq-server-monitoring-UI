@@ -89,8 +89,8 @@ export class EMMrDsUbOverviewTabComponent {
 
     this.dashboard = [
       { cols: 3, rows: 2, y: 0, x: 0 ,widId:'total_errors_Error'},
-      { cols: 3, rows: 2, y: 0, x: 2 ,widId:'USER_JOURNEY_TOP_FAST_WIDGET'},
-      { cols: 3, rows: 2, y: 1, x: 0 ,widId:'USER_JOURNEY_TOP_SLOW_WIDGET'},
+      { cols: 3, rows: 2, y: 0, x: 2 ,widId:'USER_JOURNEY_TOP_SLOW_WIDGET'},
+      { cols: 3, rows: 2, y: 1, x: 0 ,widId:'USER_JOURNEY_TOP_FAST_WIDGET'},
       { cols: 3, rows: 2, y: 1, x: 2 ,widId:'USER_JOURNEY_MOST_COMMON_WIDGET'},
       //<!-- hidded weekly log -->
       //{ cols: 6, rows: 2, y: 2, x: 0 ,widId:'Weekly_Log_Trends'},
