@@ -226,7 +226,9 @@ widgetType=''
   this.title =title
   this.widgetType = widgetType
   this.obj_filter = obj_filter
-  this.selectedAnalyticsType = selectedAnalyticsType
+  if(selectedAnalyticsType){
+    this.selectedAnalyticsType = selectedAnalyticsType;
+  }
   if(this.typeEnum == 'Error'){
     this.getChartData('ESS_LOG_ERROR_WIDGET',this.obj_filter);
   }

@@ -59,7 +59,9 @@ export class EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent imple
    this.title=title;
    this.widgetType = widgetType
    this.obj_filter = obj_filter
-   this.selectedAnalyticsType = selectedAnalyticsType;
+   if(selectedAnalyticsType){
+    this.selectedAnalyticsType = selectedAnalyticsType;
+  }
 
    if(this.view && this.view.viewId ){
     this.datasourceProgressBar = [];

@@ -56,7 +56,9 @@ export class EnvironmentManagerWidgetsProgressBarsUserGuidesComponent implements
      this.view = view;
      this.title=title;
      this.obj_filter = obj_filter;
-    this.selectedAnalyticsType = selectedAnalyticsType;
+     if(selectedAnalyticsType){
+      this.selectedAnalyticsType = selectedAnalyticsType;
+    }
      if(this?.view?.viewId ){
       this.datasourceProgressBar = [];
       this.getWidgetData(this.obj_filter)

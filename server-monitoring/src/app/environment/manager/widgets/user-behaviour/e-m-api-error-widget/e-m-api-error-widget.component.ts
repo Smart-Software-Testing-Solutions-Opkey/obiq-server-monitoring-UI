@@ -73,7 +73,9 @@ export class EMApiErrorWidgetComponent implements OnInit, OnDestroy {
     this.title = title
     this.widgetType = widgetType
     this.obj_filter = obj_filter
-    this.selectedAnalyticsType = selectedAnalyticsType;
+    if(selectedAnalyticsType){
+      this.selectedAnalyticsType = selectedAnalyticsType;
+    }
     if (this?.view?.viewId) {
       this.getWidgetData(this.obj_filter);
       this.createChart();
