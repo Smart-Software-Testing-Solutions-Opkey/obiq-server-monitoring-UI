@@ -1,7 +1,7 @@
 <div class="filter-content mb-1">
     <div class="dropdown layout-btn-group-time"  >
         
-       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false" (click)="getRecentHistory()">
+       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside" (click)="getRecentHistory()">
             <button type="button" class="btn btn-default">
                 <i class="oci oci-chevron-left font-12px"></i>
             </button>
@@ -14,7 +14,7 @@
             </button>
        </button>
 
-       <div class="dropdown-menu py-0 border-0 border-box-shadow "  data-bs-auto-close="false">
+       <div class="dropdown-menu py-0 border-0 border-box-shadow "  data-bs-auto-close="outside" #dropdown>
             
             <div class="d-flex" style="width: 35rem;">
                 <div class="left border-box-shadow left-dropdown-menu" style="width: 9rem;">
@@ -67,10 +67,11 @@
                                 <div class="col-sm-12 px-0">
                                     <div class="date-time-text">
                                         <kendo-label>
-                                                <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
+                                                <kendo-datetimepicker
                                                 [format]="dateTimeFormat"
                                                 [(value)]="fromDatevalue"
                                                 [disabledDates]="checkFromDate"
+                                                [popupSettings]="popupSettings"
                                                 ></kendo-datetimepicker>
                                           </kendo-label>
 
@@ -98,7 +99,7 @@
                                     <div class="date-time-text" >
                                         <!-- sep 13, 2024 --> 
                                         <kendo-label>
-                                            <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
+                                            <kendo-datetimepicker [popupSettings]="popupSettings"
                                               [format]="dateTimeFormat"
                                               [(value)]="toDateValue"
                                               [disabledDates]="checkToDate"

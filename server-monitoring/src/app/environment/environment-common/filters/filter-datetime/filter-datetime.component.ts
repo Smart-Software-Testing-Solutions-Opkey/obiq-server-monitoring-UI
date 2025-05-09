@@ -6,7 +6,6 @@ import { AppService } from 'src/app/services/app.service';
 import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
 
-
 interface TimeData{
   [key : string] : Array<any>;
 }
@@ -58,6 +57,10 @@ export class FilterDatetimeComponent implements OnInit,OnDestroy{
   // }
  
 
+  public popupSettings : any= { 
+    appendTo: 'component', 
+    popupClass:'dropdownDateTimePicker'
+  };
   @Input('isRefresh') set isRefresh ({isRefresh}){
    
     if(!isRefresh){
