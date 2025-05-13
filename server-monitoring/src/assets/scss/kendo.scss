@@ -294,3 +294,11 @@
 .show-scroll-k-grid-content .k-grid-content {
     overflow-x: auto !important;
 }
+
+
+// k-splitbar css 
+
+.k-splitbar:focus, .k-splitbar.k-focus{
+    color: #3d3d3d !important;
+    background-color: #ebebeb !important;
+}
