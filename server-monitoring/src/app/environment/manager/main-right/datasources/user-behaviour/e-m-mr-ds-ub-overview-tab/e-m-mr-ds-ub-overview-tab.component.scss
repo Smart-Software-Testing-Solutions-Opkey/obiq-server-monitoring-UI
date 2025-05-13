@@ -83,6 +83,18 @@
 
 ::ng-deep .custom-journey-widget-height {
     height: calc(100% - 6rem) !important;
+    &.k-grid {
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        border-bottom-width: 0.5px;
+                        height: 2.8rem;
+                    }
+                }
+            }
+        }
+    }
 }
 
 ::ng-deep .custom-error-widget-height {
