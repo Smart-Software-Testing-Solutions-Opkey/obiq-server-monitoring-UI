@@ -43,7 +43,7 @@ export class EMMrDsErpOverviewTabComponent {
       minCols: 1,
       maxCols: 6,
       minRows: 1,
-      maxRows: 100,
+      maxRows: 20,
       maxItemCols: 6,
       minItemCols: 1,
       maxItemRows: 12,
