@@ -143,7 +143,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
   
 
   checkAllErp(){
-    return ( Object.keys(this.selected_erp_analytics).length == this.Instance_list.length)
+    return ( Object.keys(this.selected_erp_analytics).length == this.Instance_list.length && this.Instance_list.length!=0)
   }
   on_allSelection_change_erp_behaviour(event: any){
     if(event.target.checked){
