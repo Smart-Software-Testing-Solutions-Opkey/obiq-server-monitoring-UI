@@ -157,7 +157,7 @@
                 @if(selectedAnalyticsType.type == "USER_BEHAVIOUR_ANALYTICS_DATASOURCE"){
                 @if (selectedTab.enumType === 'OVERVIEW_TAB') {
                 <div class="overview">
-                    <app-e-m-mr-ds-ub-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}">
+                    <app-e-m-mr-ds-ub-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType:'USER_BEHAVIOUR_ANALYTICS_DATASOURCE'}">
                     </app-e-m-mr-ds-ub-overview-tab>
                 </div>
                 }
@@ -197,7 +197,7 @@
                 @else if(selectedAnalyticsType.type == "ERP_ANALYTICS_DATASOURCE"){
                 @if (selectedTab.enumType === 'OVERVIEW_TAB') {
                 <div class="overview">
-                    <app-e-m-mr-ds-erp-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType : selectedAnalyticsType.Type}">
+                    <app-e-m-mr-ds-erp-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType : 'ERP_ANALYTICS_DATASOURCE'}">
                     </app-e-m-mr-ds-erp-overview-tab>
                 </div>
                 }
