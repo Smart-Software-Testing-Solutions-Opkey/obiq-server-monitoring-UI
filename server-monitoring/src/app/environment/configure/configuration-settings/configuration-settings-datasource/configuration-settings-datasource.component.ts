@@ -103,7 +103,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
   
                 // this.get_AllApplications();
               }
-              if (widjet.name === "User Behaviour Analytics") {
+              if (widjet.name === "User Behavior Analytics") {
   
               }
               if (widjet.name === "Test Automation Analytics") {

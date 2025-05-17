@@ -139,10 +139,10 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_value_selection = false;
       }
     }
-      else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+      else if (this.obj_configuration_setting.tab == "User Behavior Analytics") {
         this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
 
-      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behavior Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
@@ -291,14 +291,14 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+    else if (this.obj_configuration_setting.tab == "User Behavior Analytics") {
 
       // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = "ERP Analytics";
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
-      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behavior Analytics')
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
@@ -393,7 +393,7 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    if(this.obj_configuration_setting.tab == "User Behaviour Analytics") { 
+    if(this.obj_configuration_setting.tab == "User Behavior Analytics") { 
 
       if (this.obj_configuration_setting.selected_user_behaviour_component.length == 0) {
         this.displayUserError = true;
@@ -571,7 +571,7 @@ export class ConfigurationSettingsComponent {
           });
         });
       }
-      else if( widget.name == "User Behaviour Analytics"){
+      else if( widget.name == "User Behavior Analytics"){
         this.obj_configuration_setting.selected_user_behaviour_component.forEach( selectedRow =>{
           linkedDataObject.linkedData.push({
             name: selectedRow.Name,
