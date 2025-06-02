@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { MsgboxService } from 'src/app/services/msgbox.service';
@@ -55,6 +56,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
 
     this.get_all_Instance()
   }
+  @ViewChild(DataBindingDirective, { static: true }) dataBinding: DataBindingDirective;
 
   searchText: any ;
   clearSearch(){
@@ -75,7 +77,7 @@ export class ConfigurationSettingsErpAnalyticsComponent {
           data?.SystemIdentifier.toLowerCase().includes(this.searchText.toLowerCase()) || data?.CreatedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedByName.toLowerCase().includes(this.searchText.toLowerCase()) || data?.ModifiedOn.toLowerCase().includes(this.searchText.toLowerCase())) 
        
       }
-        
+      this.dataBinding.skip = 0;
 
   }
 

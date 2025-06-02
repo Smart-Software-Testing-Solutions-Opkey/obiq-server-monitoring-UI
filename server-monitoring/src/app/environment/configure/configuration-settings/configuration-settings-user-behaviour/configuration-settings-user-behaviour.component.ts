@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { MsgboxService } from 'src/app/services/msgbox.service';
@@ -47,6 +48,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
   ngOnInit() {
     this.get_all_users()
   }
+  @ViewChild(DataBindingDirective, { static: true }) dataBinding: DataBindingDirective;
 
   user_lists = [];
 
@@ -122,6 +124,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
     if (this.searchText) {
       this.user_lists = this.temp_user_list.filter((data) => data?.Name.toLowerCase().includes(this.searchText.toLowerCase()) || data?.email_ID.toLowerCase().includes(this.searchText.toLowerCase()))
     }
+    this.dataBinding.skip = 0;
 
 
   }
@@ -138,7 +141,7 @@ export class ConfigurationSettingsUserBehaviourComponent {
 
   }
   checkAllUsers() {
-    return (Object.keys(this.selected_System_User_behaviour).length == this.user_lists.length)
+    return (Object.keys(this.selected_System_User_behaviour).length == this.user_lists.length && this.user_lists.length!=0)
   }
   on_AllSelection_Change_User_Behaviour(event: any) {
     if (event.target.checked) {
