@@ -290,7 +290,7 @@ export class ConfigureRightPanelComponent {
     }
 
 
-    let form_data = obj;
+    let form_data =  { SendViewData: JSON.stringify(obj) };
 
     this.app_service.make_post_server_call(form_url, form_data).subscribe({
 
