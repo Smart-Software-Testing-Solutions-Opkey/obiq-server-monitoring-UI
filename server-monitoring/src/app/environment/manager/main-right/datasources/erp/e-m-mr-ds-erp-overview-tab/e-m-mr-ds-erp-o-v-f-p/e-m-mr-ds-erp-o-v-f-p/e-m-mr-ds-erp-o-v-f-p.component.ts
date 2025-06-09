@@ -56,6 +56,10 @@ constructor(
   widgetType: any;
   view : any;
 
+  selectedTimeDate: any = {
+    type :'setEnum',
+    value : "LAST_24_HOUR",
+  };
   @Input('child_data') set child_data({ selectedData }) {
     
     this.selectedData = selectedData
@@ -70,6 +74,7 @@ constructor(
   ngOnInit(): void {
     if(this?.view?.viewId ){
       this.datasourceProgressBar = [];
+      this.selectedTimeDate = this.service_data.selectedDateTime
       this.getWidgetData()
       this.createChart();
     }
@@ -96,6 +101,13 @@ constructor(
           "widgetType": this.widgetType,
           "projectId":this.service_data.UserDto.ProjectDTO.P_ID
         };
+        if(this.selectedTimeDate?.type == 'setEnum'){
+          form_data["timeSpanEnum"] = this.selectedTimeDate?.value;
+        }
+        else if(this.selectedTimeDate?.type == "setCustom"){
+          form_data["fromTimeInMillis"] = this.selectedTimeDate?.fromTimeInMillis;
+          form_data["toTimeInMillis"] = this.selectedTimeDate?.toTimeInMillis;
+        }
        
         this.app_service.make_post_server_call(ajax_url, form_data)
           .subscribe({
