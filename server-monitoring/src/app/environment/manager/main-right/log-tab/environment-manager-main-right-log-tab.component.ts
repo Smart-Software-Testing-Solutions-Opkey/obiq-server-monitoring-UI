@@ -445,7 +445,16 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     const array_series = [];
     
     dataList.forEach(item => {
-      let val = item.fromTimeInStr || item.displayText
+
+      let myTime ;
+      if(item.fromTimeInMillis != 0){
+        let itemDate = new Date(item.fromTimeInMillis);
+        // myTime = String(itemDate.getHours()) + ":" + String(itemDate.getMinutes());
+        myTime = itemDate.toLocaleTimeString('en-US', { timeStyle: 'short', hour12: true })
+      }
+      
+      
+      let val =  myTime || item.displayText
       array_category.push(val)
     
       item.dataPointList.forEach(series => {
@@ -511,7 +520,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         next: (result: any) => {
       
           window.loadingStop("#Env_manager_main_right");
-       
+           
           this.chartData = result
           if(this.selectedTime?.type == 'setEnum'){
             this.createChart(timeFilter?.value);
