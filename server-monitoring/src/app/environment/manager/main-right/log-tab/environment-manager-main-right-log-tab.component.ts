@@ -173,8 +173,9 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
         return `${hours}:${minutes}`;
       }
       else if(val && this.chartData.groupedBy =="Days"){
-        let date= new Date(val)
-        return this.datePipe.transform(date, 'd MMM'); 
+        // let date= new Date(val)
+        // return this.datePipe.transform(date, 'd MMM'); 
+        return val;
 
       }
       return val;
@@ -213,7 +214,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       const isTimely = this.chartData.groupedBy;
 
       
-      let chartObj =this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType);
+      let chartObj =this.getSeriesData(this.chartData.essServerLogUsageDtoList, this.selectedLogType, this.chartData.groupedBy);
       
       this.chartOptions = {
           series: chartObj.arraySeries,
@@ -438,7 +439,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
   });
     
   }
-  getSeriesData(dataList: any[], selectedLogType: string) : any{
+  getSeriesData(dataList: any[], selectedLogType: string, groupedBy: string) : any{
       
     const array_category = [];
     const obj_series = {};
@@ -449,8 +450,14 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       let myTime ;
       if(item.fromTimeInMillis != 0){
         let itemDate = new Date(item.fromTimeInMillis);
-        // myTime = String(itemDate.getHours()) + ":" + String(itemDate.getMinutes());
-        myTime = itemDate.toLocaleTimeString('en-US', { timeStyle: 'short', hour12: true })
+        if(groupedBy == "Days"){
+          myTime = itemDate.toLocaleString().split(",")[0];
+        }
+        else{
+          // myTime = String(itemDate.getHours()) + ":" + String(itemDate.getMinutes());
+          myTime = itemDate.toLocaleTimeString('en-US', { timeStyle: 'short', hour12: true })
+        }
+       
       }
       
       
@@ -499,7 +506,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
     const form_data = {
       "timeSpanEnum": "LAST_24_HOUR",
       "viewId": this.view.viewId,
-      "projectId": this.service_data.UserDto.ProjectDTO.P_ID,
+      "projectId":this.service_data.UserDto.ProjectDTO.P_ID,
       "limitBy": 0,
       "offset": 0,
       "widgetType": "ESS_LOG_TIMEGRAPH_WIDGET"
@@ -519,6 +526,7 @@ export class EnvironmentManagerMainRightLogTabComponent implements OnInit, OnDes
       .subscribe({
         next: (result: any) => {
       
+        
           window.loadingStop("#Env_manager_main_right");
            
           this.chartData = result
