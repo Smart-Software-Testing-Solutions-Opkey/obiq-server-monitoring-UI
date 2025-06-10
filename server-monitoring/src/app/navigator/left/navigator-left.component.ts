@@ -67,7 +67,7 @@ export class NavigatorLeftComponent implements OnInit, AfterViewInit, OnDestroy 
           if (data.data.action == "view_created") {
 
            
-            this.totalViews.push(data.data.selected_view);
+            this.totalViews.unshift(data.data.selected_view);
             if(this.isopenSettings){
               this.resetValue();
             }
