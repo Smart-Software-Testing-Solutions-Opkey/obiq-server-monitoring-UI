@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppService } from './services/app.service';
 import { AppDataService } from './services/app-data.service';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,18 @@ import { AppDataService } from './services/app-data.service';
 export class AppComponent implements OnInit {
 
   constructor(private app_service: AppService,
-    public service_data: AppDataService
-  ) { }
+    public service_data: AppDataService,
+    private router:Router
+  ) {
+    router.events.subscribe(event => {
+      if(event instanceof RouteConfigLoadStart) {
+        window.loadingStart("#main-app", "Please wait"); 
+      }else if(event instanceof RouteConfigLoadEnd) {
+        window.loadingStop("#main-app");
+      }
+    
+    });
+   }
 
   ngOnInit() {
     
@@ -48,7 +59,7 @@ export class AppComponent implements OnInit {
     }
 
     window.loadingStart("#div_main_manager", "Please wait");
-    var form_url = environment.BASE_OPKEY_URL + "login/get_data";
+    var form_url = environment.BASE_OPKEY_URL + "/login/get_data";
     const sessionID = window.parent.keycloak.sessionId || window.parent.keycloak.tokenParsed.sid;
     var form_data = { sessionID: sessionID, opkeyone_callsource: "Default" };
    
