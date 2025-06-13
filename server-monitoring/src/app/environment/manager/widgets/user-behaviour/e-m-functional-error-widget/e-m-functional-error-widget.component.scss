@@ -3,3 +3,14 @@
     z-index: 1;
 
 }
+
+::ng-deep .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title{
+    padding: 0.2rem !important;
+    font-size: 10px !important;
+}
+
+::ng-deep .apexcharts-tooltip-series-group.apexcharts-active, .apexcharts-tooltip-series-group:last-child{
+    padding: 0.2rem !important;
+    height: 1.2rem !important;
+    font-size: 10px !important;
+}
