@@ -81,21 +81,21 @@
     min-height: 10rem;
 }
 
-// ::ng-deep .custom-journey-widget-height {
-//     height: calc(100% - 6rem) !important;
-//     &.k-grid {
-//         .k-grid-container {
-//             .k-grid-table {
-//                 .k-master-row {
-//                     .k-table-td {
-//                         border-bottom-width: 0.5px !important;
-//                         height: 2.255rem !important;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+::ng-deep .custom-journey-widget-height {
+    height: calc(100% - 6rem) !important;
+    &.k-grid {
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        border-bottom-width: 0.5px !important;
+                        height: 2.255rem !important;
+                    }
+                }
+            }
+        }
+    }
+}
 
 ::ng-deep .custom-error-widget-height {
     height: calc(100% - 4rem) !important;

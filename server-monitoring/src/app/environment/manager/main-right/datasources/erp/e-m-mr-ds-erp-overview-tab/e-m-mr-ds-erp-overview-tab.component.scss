@@ -83,9 +83,9 @@
     }
 }
 
-// ::ng-deep .custom-journey-widget-height {
-//     height: calc(100% - 6rem) !important;
-// }
+::ng-deep .custom-journey-widget-height {
+    height: calc(100% - 6rem) !important;
+}
 
 ::ng-deep .custom-error-widget-height {
     height: calc(100% - 4rem) !important;
@@ -96,10 +96,10 @@
 }
 
 // .k-grid .k-grid-container
-// ::ng-deep .k-grid-table .k-master-row .k-table-td{
-//     height: 2.255rem !important;
-//     border-bottom-width: 0.5px !important;
-// }
+::ng-deep .k-grid-table .k-master-row .k-table-td{
+    height: 2.255rem !important;
+    border-bottom-width: 0.5px !important;
+}
 
 .main gridster-item{
     overflow: revert !important;
