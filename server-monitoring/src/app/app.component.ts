@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
       return false;
     }
 
-    window.loadingStart("#div_main_manager", "Please wait");
+    window.loadingStart("#main-app", "Please wait");
     var form_url = environment.BASE_OPKEY_URL + "login/get_data";
     const sessionID = window.parent.keycloak.sessionId || window.parent.keycloak.tokenParsed.sid;
     var form_data = { sessionID: sessionID, opkeyone_callsource: "Default" };
@@ -71,12 +71,12 @@ export class AppComponent implements OnInit {
         if (result.UserDTO == null && result.Exception == "User already logged in from other location!" && window.origin.includes("localhost:4200")) {
           this.force_login_user();
         } else {
-          window.loadingStop("#div_main_manager");
+          window.loadingStop("#main-app");
           this.is_user_data_loaded = true
         }
       },
       (error) => {
-        window.loadingStop("#div_main_manager");
+        window.loadingStop("#main-app");
 
       }
     );
