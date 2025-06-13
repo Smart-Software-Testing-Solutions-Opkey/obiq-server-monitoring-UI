@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     }
 
     window.loadingStart("#div_main_manager", "Please wait");
-    var form_url = environment.BASE_OPKEY_URL + "/login/get_data";
+    var form_url = environment.BASE_OPKEY_URL + "login/get_data";
     const sessionID = window.parent.keycloak.sessionId || window.parent.keycloak.tokenParsed.sid;
     var form_data = { sessionID: sessionID, opkeyone_callsource: "Default" };
    
