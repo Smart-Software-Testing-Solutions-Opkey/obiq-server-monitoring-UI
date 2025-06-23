@@ -223,7 +223,7 @@ ngOnDestroy() {
     this.chartOptions = {
     
       chart: {
-        height: 35,
+        height: 30,
         width: 100,
         type: "line",
         zoom: {
