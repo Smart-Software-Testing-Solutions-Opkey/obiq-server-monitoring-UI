@@ -83,22 +83,42 @@
     }
 }
 
-::ng-deep .custom-journey-widget-height {
-    height: calc(100% - 6rem) !important;
-}
+::ng-deep {
+    .custom-process-widget-height {
+        height: calc(100% - 4.8rem);
 
-::ng-deep .custom-error-widget-height {
-    height: calc(100% - 4rem) !important;
-}
+        .k-grid {
+            max-height: 100%;
 
-::ng-deep .custom-process-widget-height{
-    height: calc(100% - 6rem) !important;
-}
+            .no-data-found{
+                height: 13rem;
+            }
+        }
+    }
 
-// .k-grid .k-grid-container
-::ng-deep .k-grid-table .k-master-row .k-table-td{
-    height: 2.255rem !important;
-    border-bottom-width: 0.5px !important;
+    .custom-error-widget-height {
+        height: calc(100% - 4rem);
+
+        .k-grid {
+            max-height: 100%;
+
+            .no-data-found{
+                height: 11.5rem;
+            }
+        }
+    }
+
+    .custom-journey-widget-height {
+        height: calc(100% - 4.6rem);
+
+        .k-grid {
+            max-height: 100%;
+
+            .no-data-found{
+                height: 13rem;
+            }
+        }
+    }
 }
 
 .main gridster-item{
