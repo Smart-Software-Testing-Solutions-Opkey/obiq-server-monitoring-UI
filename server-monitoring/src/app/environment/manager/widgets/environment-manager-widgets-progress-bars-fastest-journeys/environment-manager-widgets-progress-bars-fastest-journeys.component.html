@@ -1,4 +1,4 @@
-<div  style="position:relative;height: 100%;">
+<div  class="d-flex position-relative h-100 flex-column">
 
     <div class="panel-header d-flex-between py-2 mb-3">  
         <div style="display:flex;justify-content: space-between;align-items: center;">
@@ -32,48 +32,51 @@
             </div>
         </div>
         </div>
+  
+        <div class="custom-journey-widget-height">
+
+            <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
+            [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid">
     
-        <kendo-grid [data]="datasourceProgressBar" [selectable]="false" [navigable]="false"
-        [hideHeader]="true" class="scrollable grid_remove_vertical_border k_grid_header_pr_0 grid_manager custom-progress-grid custom-journey-widget-height">
-
-
-
-        <kendo-grid-column title="Build Name" field="subActivityName">
-
-            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
-                    {{dataItem?.subActivityName}}
-                </span>
-            </ng-template>
-
-
-        </kendo-grid-column>
- 
-            <!-- <kendo-grid-column title="" field="timeStampStr" [width]="220">
-            </kendo-grid-column> -->
-            <kendo-grid-column title="" field="timeStampStr" [width]="210">
+    
+    
+            <kendo-grid-column title="Build Name" field="subActivityName">
+    
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <span class="k_grid_text text_wrap text-start">
-                        <i class="oci oci-clock pe-2"></i>
-                        <span>{{dataItem?.calculatedTime}}</span>
+                    <span class="k_grid_text text_wrap" title="{{dataItem?.subActivityName}}" container="body">
+                        {{dataItem?.subActivityName}}
                     </span>
                 </ng-template>
+    
+    
             </kendo-grid-column>
-        
-
-        <ng-template kendoGridNoRecordsTemplate>
-            <div class="no-data-found" style="height: 11rem !important;">
-                <div class="no-data-found-content">
-                    <img class="no-data-found-content-img"
-                        src="/assets/icon-image/nodata-img.png" alt="No data">
-                    <p class="no-data-found-content-text">No data available</p>
+     
+                <!-- <kendo-grid-column title="" field="timeStampStr" [width]="220">
+                </kendo-grid-column> -->
+                <kendo-grid-column title="" field="timeStampStr" [width]="210">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span class="k_grid_text text_wrap text-start">
+                            <i class="oci oci-clock pe-2"></i>
+                            <span>{{dataItem?.calculatedTime}}</span>
+                        </span>
+                    </ng-template>
+                </kendo-grid-column>
+            
+    
+            <ng-template kendoGridNoRecordsTemplate>
+                <div class="no-data-found">
+                    <div class="no-data-found-content">
+                        <img class="no-data-found-content-img"
+                            src="/assets/icon-image/nodata-img.png" alt="No data">
+                        <p class="no-data-found-content-text">No data available</p>
+                    </div>
                 </div>
-            </div>
-        </ng-template>
-
-
-        
-    </kendo-grid>
+            </ng-template>
+    
+    
+            
+        </kendo-grid>
+        </div>
 
 
 </div>
