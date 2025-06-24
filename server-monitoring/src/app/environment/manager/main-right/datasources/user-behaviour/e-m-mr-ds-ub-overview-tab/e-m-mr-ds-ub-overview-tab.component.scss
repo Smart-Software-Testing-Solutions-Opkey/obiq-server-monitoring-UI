@@ -103,6 +103,37 @@
     }
 }
 
+@media (width: 1920px) {
+    ::ng-deep{
+
+        .custom-journey-widget-height {
+          .k-grid {
+            .k-grid-container {
+              .k-grid-table {
+                .k-master-row {
+                  .k-table-td {
+                    height: 1.8rem !important;
+                  }
+                }
+              }
+            }
+
+            .no-data-found{
+                height: 17rem;
+            }
+          }
+        }
+
+        .custom-error-widget-height {
+            .k-grid{
+                .no-data-found{
+                height: 17rem;
+            }
+            }
+        }
+    }
+}
+
 .overview-error-panel{
     ::ng-deep .total-errors-details{
         height: 90% !important;

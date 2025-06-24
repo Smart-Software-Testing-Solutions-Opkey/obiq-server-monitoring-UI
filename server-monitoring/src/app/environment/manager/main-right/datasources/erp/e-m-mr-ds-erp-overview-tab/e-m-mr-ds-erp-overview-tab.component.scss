@@ -121,6 +121,53 @@
     }
 }
 
+@media (width: 1920px) {
+    ::ng-deep{
+
+        .custom-journey-widget-height {
+          .k-grid {
+            .k-grid-container {
+              .k-grid-table {
+                .k-master-row {
+                  .k-table-td {
+                    height: 1.8rem !important;
+                  }
+                }
+              }
+            }
+            .no-data-found{
+                    height: 17rem;
+                }
+          }
+        }
+
+        .custom-process-widget-height{
+            .k-grid {
+            .k-grid-container {
+              .k-grid-table {
+                .k-master-row {
+                  .k-table-td {
+                    height: 1.8rem !important;
+                  }
+                }
+              }
+            }
+            .no-data-found{
+                    height: 17rem;
+                }
+          }
+        }
+
+        .custom-journey-widget-height{
+            .k-grid{
+                .no-data-found{
+                    height: 17rem;
+                }
+            }
+        }
+    }
+}
+
 .main gridster-item{
     overflow: revert !important;
 }
