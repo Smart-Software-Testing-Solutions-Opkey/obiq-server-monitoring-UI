@@ -1,13 +1,44 @@
-<div id="chart" class="graph-timeseries mb-3">
-    <!-- <h2>Log Usage Over Time</h2> -->
-    <apx-chart  *ngIf="chartOptions?.series?.length > 0"
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [dataLabels]="chartOptions.dataLabels"
-    [plotOptions]="chartOptions.plotOptions"
-    [responsive]="chartOptions.responsive"
-    [xaxis]="chartOptions.xaxis"
-    [legend]="chartOptions.legend"
-    [fill]="chartOptions.fill"
-  ></apx-chart>
+<div [id]="'maintimeexplorer'+widgetType" style="position:relative">
+  <div style="display:flex;justify-content: space-between;align-items: center;position: relative;margin-bottom: 1rem;" >
+
+    <div style="display:flex;justify-content: space-between;align-items: center;"  class="mb-0 p-2">
+      <div *ngIf="Editable">
+        <i class="oci oci-drag-indicator drag-icon px-1 drag-handler  mb-0 p-2  pt-3"></i>
+      </div>
+      
+        <h6 class="font-bold mb-0">
+          <ng-container *ngIf="isRename;else nameOnly">
+             <input type="text" [(ngModel)]="title" (keyup.enter)="renaming()" (blur)="renaming()" id='renameInput'>
+          </ng-container>
+         <ng-template #nameOnly class="font-bold mb-0 p-2 pt-3">
+             {{title}}
+          </ng-template>
+      </h6>  
+    </div>
+    <div *ngIf="Editable">
+      <div class="dropdown">
+        <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+            <i class="oci oci-more-vertical font-14px"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
+            <li><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-delete text-red pr-2"></i> Delete </a></li>
+        </ul>
+    </div>
+    </div>
   </div>
+  <div id="chart" class="graph-timeseries mb-3">
+      <!-- <h2>Log Usage Over Time</h2> -->
+      <apx-chart  *ngIf="chartOptions?.series?.length > 0"
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [responsive]="chartOptions.responsive"
+      [xaxis]="chartOptions.xaxis"
+      [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill"
+    ></apx-chart>
+    </div>
+  
+</div>

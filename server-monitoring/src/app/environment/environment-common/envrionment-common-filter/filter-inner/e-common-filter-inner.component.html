@@ -1,0 +1,123 @@
+<div class="main addFilter-2 addfilter-override position-relative pt-3">
+    <div class="form-fieldset" style="top: -0.7rem !important;">
+
+        <label class="fieldset-label" for="filter_name">
+            <i class="oci oci-filter_list align-middle font-14px font-bold pe-1"></i>
+            <span class="align-middle" container="body">Applied filter</span>
+        </label>
+
+    </div>
+
+    <div class="form-fieldset" style="left: auto !important; right: 0.875rem; top: -0.5rem !important;">
+        <button type="button"
+            class="btn btn-default ms-2 me-1 bt-clearFilter" ngbTooltip="" container="body" (click)="clearAll()">
+            Clear All
+        </button>
+    </div>
+
+    <div class="filterShownDiv d-flex flex-wrap scrollable">
+
+
+        @if (filterObj?.modelApplication) {
+            <div class="filter-badge">
+                <div class="applicationFilter label-filter-type active">
+                    Application: {{filterObj?.modelApplication}}
+                </div>
+            </div>
+        }
+        @if (filterObj?.modelSearch) {
+            <div class="filter-badge">
+                <div class="applicationFilter label-filter-type active">
+                    Search Text: {{filterObj?.modelSearch}}
+                    <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelSearch',filterObj?.modelSearch,null)"><i
+                        class="oci oci-x"></i>
+                    </span>
+                </div>
+            </div>
+        }
+        @if (filterObj?.modelEnvironment) {
+            @if (filterObj?.modelEnvironment.length>0) {
+                @for (item of filterObj?.modelEnvironment; track $index;let idx =$index) {
+                    <div class="filter-badge">
+                        <div class="applicationFilter label-filter-type active">
+                            Environment: {{item.envName}}
+                            <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelEnvironment',item,idx)"><i
+                                class="oci oci-x"></i>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelProcess) {
+            @if (filterObj?.modelProcess.length>0) {
+                @for (item of filterObj?.modelProcess; track $index;let idx =$index) {
+                    <div class="filter-badge">
+                        <div class="applicationFilter label-filter-type active">
+                            Process: {{item}}
+                            <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelProcess',item,idx)"><i
+                                class="oci oci-x"></i>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelStrModule) {
+            @if (filterObj?.modelStrModule.length>0) {
+                @for (item of filterObj?.modelStrModule; track $index;let idx =$index) {
+                    <div class="filter-badge">
+                        <div class="applicationFilter label-filter-type active">
+                            Module: {{item}}
+                            <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelStrModule',item,idx)"><i
+                                class="oci oci-x"></i>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelUser) {
+            @if (filterObj?.modelUser.length>0) {
+                @for (item of filterObj?.modelUser; track $index;let idx =$index) {
+                    <div class="filter-badge">
+                        <div class="applicationFilter label-filter-type active">
+                            User: {{item}}
+                            <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelUser',item,idx)"><i
+                                class="oci oci-x"></i>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelStatus) {
+            @if (filterObj?.modelStatus.length>0) {
+                @for (item of filterObj?.modelStatus; track $index;let idx =$index) {
+                    <div class="filter-badge">
+                        <div class="applicationFilter label-filter-type active">
+                            Status: {{item.value}}
+                            <span ngbTooltip="Remove" class="bt_close_filter" container="body" (click)="clearSelected('modelStatus',item,idx)"><i
+                                class="oci oci-x"></i>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+           
+        }
+        @if (filterObj?.modelFromDate && filterObj?.modelToDate) {
+            <div class="filter-badge">
+                <div class="applicationFilter label-filter-type active">
+                    CreatedOn: {{FromDate|date:"MMM"}} {{FromDay}} {{FromDate|date:"yyyy"}}-{{ToDate|date:"MMM"}} {{ToDay}} {{ToDate|date:"yyyy"}}
+                
+                </div>
+            </div>
+           
+        }
+    </div>
+</div>

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
 import { environment } from 'src/environments/environment';
-
+import { MsgBoxType, NotificationType } from 'src/app/global/enums';
+import { PersisterModalComponent } from '../../environment-common/persister-modal/persister-modal.component';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-configuration-settings',
@@ -19,9 +22,34 @@ export class ConfigurationSettingsComponent {
     private route: ActivatedRoute,
     public service_data: AppDataService,
     public app_service: AppService,
+    public service_notification : NotificationsService,
+    private msgbox: MsgboxService 
+    
+
+    
+    
   ) { }
+  sureClose(){
+    this.service_notification.showPersister("Are you sure you want to close?")
+    this.service_data.modalSubInstance.result.then((result) => {
+    }, (response) => {
+      if(response == 'Yes'){
+       this.close_model()
+        this.service_data.modalSubInstance = null
+        this.service_data.persistermsg = ''
+        return
+      }
+      else if(response == 'No'){
+        this.service_data.modalSubInstance = null
+        this.service_data.persistermsg = ''
+        return
+      }
+
+      
+    });
+  }
   close_model() {
-    this.activeModal.dismiss('close modal');
+    this.activeModal.dismiss('close modal');  
   }
 
 
@@ -30,14 +58,8 @@ export class ConfigurationSettingsComponent {
     is_value_selection: false,
     title: "Add View",
     AccessType: "",
-    AccessPermisions: {
-      "canView": true,
-      "canEdit": true
-    },
-    selectedUids: {
-      "userId":"00000000-0000-0000-0000-000000000000",
-      "permmission":"ALL"
-    },
+    AccessPermisions: 'VIEW',
+    authorizedUsers: [],
     selected_datasource: null,
     selected_erp_analytics: [],
     selected_system_diagnostics: [],
@@ -47,14 +69,19 @@ export class ConfigurationSettingsComponent {
     visitedTabs:[]
   }
 
+  viewNameInputChange(data){
+  
+  this.isDuplicateName=data
+  
+  }
 
   datasource_item = [];
   next() {
-    debugger;
+    
     if (!this.ValidationCheck()) {
       return;
     }
-
+  
     console.log("obj_configuration_setting==**********************", this.obj_configuration_setting);
 
     this.datasource_item = [];
@@ -66,7 +93,7 @@ export class ConfigurationSettingsComponent {
     }
 
     if (this.obj_configuration_setting.tab == "datasource") {
-      debugger
+      
       // if (this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = 'ERP Analytics';
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
@@ -112,10 +139,10 @@ export class ConfigurationSettingsComponent {
       this.obj_configuration_setting.is_value_selection = false;
       }
     }
-      else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+      else if (this.obj_configuration_setting.tab == "User Behavior Analytics") {
         this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
 
-      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behavior Analytics')
       if((ind+1) != (this.datasource_item.length)){
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
@@ -129,6 +156,7 @@ export class ConfigurationSettingsComponent {
       }
     }
     else if (this.obj_configuration_setting.tab == "System Diagnostics") {
+      
       this.obj_configuration_setting.visitedTabs.push(this.obj_configuration_setting.tab)
     
       let ind = this.datasource_item.findIndex(item => item.name == 'System Diagnostics')
@@ -149,6 +177,7 @@ export class ConfigurationSettingsComponent {
 
       let ind = this.datasource_item.findIndex(item => item.name == 'Test Automation Analytics')
       if((ind+1) != (this.datasource_item.length)){
+        
        let item = this.datasource_item[ind+1]
        this.obj_configuration_setting.tab = item.name;
        this.obj_configuration_setting.title = "Add " + item.name;
@@ -174,7 +203,8 @@ export class ConfigurationSettingsComponent {
   }
 
   back() {
-    debugger;
+    
+    
 
     if (this.obj_configuration_setting.tab == "view_summary") {
 
@@ -261,14 +291,14 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.is_value_selection = false;
       }
     }
-    else if (this.obj_configuration_setting.tab == "User Behaviour Analytics") {
+    else if (this.obj_configuration_setting.tab == "User Behavior Analytics") {
 
       // if(this.datasource_item.findIndex(item => item.name == 'ERP Analytics') != -1) {
       //   this.obj_configuration_setting.tab = "ERP Analytics";
       //   this.obj_configuration_setting.title = "Add ERP Analytics";
       //   this.obj_configuration_setting.is_value_selection = true;
       // }
-      let ind = this.datasource_item.findIndex(item => item.name == 'User Behaviour Analytics')
+      let ind = this.datasource_item.findIndex(item => item.name == 'User Behavior Analytics')
       if((ind-1)>=0){
         let item = this.datasource_item[ind-1]
         this.obj_configuration_setting.tab = item.name;
@@ -292,6 +322,7 @@ export class ConfigurationSettingsComponent {
     }
     this.obj_configuration_setting.visitedTabs.pop()
     this.reset_error();
+    
 
   }
 
@@ -303,13 +334,13 @@ export class ConfigurationSettingsComponent {
   display_ErpApplication: boolean = false;
   display_SystemDiagnosticsData: boolean = false;
   dispaly_Instances: boolean = false;
-
+  isDuplicateName:boolean=false;
 
   displayUserError: boolean = false;
   displayTestError: boolean = false;
 
   ValidationCheck() {
-
+  
     this.reset_error();
 
     if (this.obj_configuration_setting.tab == "datasource") {
@@ -318,7 +349,12 @@ export class ConfigurationSettingsComponent {
         this.dispaly_viewName = true;
         return false;
       }
-      else if (this.obj_configuration_setting.selected_datasource.select_datasource_item.length == 0) {
+      else if(this.isDuplicateName){
+        this.isDuplicateName=true
+        return false;
+      }
+      else if ( this.obj_configuration_setting.selected_datasource.select_datasource_item.length == 0) {
+       
         this.dispaly_DataSource = true;
         return false;
       }
@@ -357,7 +393,7 @@ export class ConfigurationSettingsComponent {
       }
 
     }
-    if(this.obj_configuration_setting.tab == "User Behaviour Analytics") { 
+    if(this.obj_configuration_setting.tab == "User Behavior Analytics") { 
 
       if (this.obj_configuration_setting.selected_user_behaviour_component.length == 0) {
         this.displayUserError = true;
@@ -366,9 +402,17 @@ export class ConfigurationSettingsComponent {
 
     }
     if(this.obj_configuration_setting.tab == "Test Automation Analytics") { 
-
+    
       if (this.obj_configuration_setting.selected_test_automation_analysis.length == 0) {
         this.displayTestError = true;
+        return false;
+      }
+
+    }
+    if(this.obj_configuration_setting.tab == "System Diagnostics") { 
+    
+      if (this.obj_configuration_setting.selected_system_diagnostics.length == 0) {
+        this.display_SystemDiagnosticsData = true;
         return false;
       }
 
@@ -386,12 +430,13 @@ export class ConfigurationSettingsComponent {
     this.display_SystemDiagnosticsData = false;
     this.dispaly_Instances = false;
     this.displayUserError = false
+  
   }
 
   //-------------------------------------------------------
 
   // finish() {
-  //   debugger;
+  //   ;
   //   this.service_data.is_env_configure = true;
   //   this.close_model();
   //   this.router.navigate(['/environment']);
@@ -399,15 +444,50 @@ export class ConfigurationSettingsComponent {
 
 
   finish() {
-    debugger;
+    
     this.createView()
+  }
+  
+  sendEmailInvite() {
+    let form_url = environment.BASE_OPKEY_URL + "Observability/SendSharedViewMail";
+
+
+    this.obj_configuration_setting.authorizedUsers =this.obj_configuration_setting.authorizedUsers.filter((user)=> user.userId != this.service_data.UserDto.UserDTO.U_ID)
+    let obj = {
+      "UserID": this.service_data.UserDto.UserDTO.U_ID,
+      "ViewName": this.obj_configuration_setting.selected_datasource.viewName,
+      "UserName": this.service_data.UserDto.UserDTO.Name,
+      "AccessType": this.obj_configuration_setting.AccessType,
+      "AuthorizedUsers":this.obj_configuration_setting.authorizedUsers,
+      "ProjectID": this.service_data.UserDto.ProjectDTO.P_ID
+
+    }
+
+    let form_data =  { SendViewData: JSON.stringify(obj) };
+
+    this.app_service.make_post_server_call(form_url, form_data).subscribe({
+
+      next: (result: any) => {
+        if (result) {
+          this.close_model();
+        }
+      },
+      error: (error: any) => {
+
+        console.warn(error);
+        this.msgbox.display_error_message(error);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
 
   }
 
   createView() {
-    debugger;
+    
 
-    window.loadingStart("#div-datasource-slection", "Please wait");
+    window.loadingStart("#modal-view-bilder", "Please wait");
 
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/createView";
 
@@ -416,15 +496,29 @@ export class ConfigurationSettingsComponent {
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
         next: (result: any) => {
-          window.loadingStop("#div-datasource-slection");
-          this.service_data.is_env_configure = true;
-          this.close_model();   // calling GetAllViewds after View Creation
-          this.app_service.dataTransmitter("viewCreated");
-          this.router.navigate(['/environment']);
+
+          if(result){
+            if(this.obj_configuration_setting.AccessType == 'SHARED'){
+              this.sendEmailInvite();
+            }
+            
+            window.loadingStop("#modal-view-bilder");
+            this.service_data.is_env_configure = true;
+            this.close_model();   // calling GetAllViewds after View Creation
+            this.service_notification.notifier(NotificationType.success, 'View Created');
+            console.log("after view creation: ",this.obj_configuration_setting); //
+            // this.app_service.dataTransmitter("viewCreated");
+            this.app_service.dataTransmitter( {type : "view_ops", data :{ action : "view_created", selected_view: result}});
+            this.router.navigateByUrl('/environment');
+            // this.app_service.routeTo('environment','summary')
+          }
+         
 
         },
         error: (error: any) => {
-          window.loadingStop("#div-datasource-slection");
+          window.loadingStop("#modal-view-bilder");
+
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -433,8 +527,9 @@ export class ConfigurationSettingsComponent {
       });
   }
 
+  
   create_View_object() {
-    debugger;
+    
     console.log(this.obj_configuration_setting, "create Object Config settings")
     var obj_Create_View = new Object();
     obj_Create_View["viewName"] = this.obj_configuration_setting.selected_datasource.viewName;
@@ -442,15 +537,16 @@ export class ConfigurationSettingsComponent {
     obj_Create_View["userId"] = this.service_data.UserDto.UserDTO.U_ID
     obj_Create_View["userName"] = this.service_data.UserDto.UserDTO.Name
     obj_Create_View["projectId"] = this.service_data.UserDto.ProjectDTO.P_ID
-    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType === "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType
-    obj_Create_View["authorizedUsers"] = (this.obj_configuration_setting.AccessType === 'PRIVATE' || this.obj_configuration_setting.AccessType === '') ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission }] : this.obj_configuration_setting.selectedUids;
+    obj_Create_View["accessType"] = this.obj_configuration_setting.AccessType == "" ? 'PRIVATE' : this.obj_configuration_setting.AccessType 
+    obj_Create_View["authorizedUsers"] = this.obj_configuration_setting.AccessType == "" ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.authorizedUsers
+    // obj_Create_View["authorizedUsers"] = (this.obj_configuration_setting.AccessType === 'PRIVATE' || this.obj_configuration_setting.AccessType === '') ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.service_data.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids?.permmission}] : this.obj_configuration_setting.selectedUids;
     obj_Create_View["linkedDataSource"] = this.createLinkedDataSourceObject();
     return obj_Create_View;
   }
 
 
   createLinkedDataSourceObject() {
-    debugger;
+    
     var linkedDataarray = [];
 
     this.obj_configuration_setting.selected_datasource.select_datasource_item.forEach(widget => {
@@ -465,10 +561,26 @@ export class ConfigurationSettingsComponent {
         this.obj_configuration_setting.selected_erp_analytics.forEach(selectedRow => {
           linkedDataObject.linkedData.push({
             name: selectedRow.SystemIdentifier,
-            value: selectedRow.SettingsID
+            value: selectedRow.SettingsID,
+            createdBy: selectedRow.CreatedBy,
+            createdByName: selectedRow.CreatedByName,
+            createdOn: selectedRow.CreatedOn,
+            modifiedBy: selectedRow.ModifiedBy,
+            modifiedByName: selectedRow.ModifiedByName,
+            modifiedOn: selectedRow.ModifiedOn
           });
         });
       }
+      else if( widget.name == "User Behavior Analytics"){
+        this.obj_configuration_setting.selected_user_behaviour_component.forEach( selectedRow =>{
+          linkedDataObject.linkedData.push({
+            name: selectedRow.Name,
+            email: selectedRow.email_ID,
+            value : selectedRow.U_ID,
+          });
+        });
+      }
+      
       linkedDataarray.push(linkedDataObject);
     });
 

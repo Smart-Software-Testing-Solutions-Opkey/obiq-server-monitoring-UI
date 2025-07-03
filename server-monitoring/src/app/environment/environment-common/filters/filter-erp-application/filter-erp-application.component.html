@@ -1,0 +1,10 @@
+
+    <kendo-dropdownlist class="application-selected-filter" [data]="filterApplications" [(ngModel)]="selectedApplication" (selectionChange)="ApplicationChange($event)"  [filterable]="true"  (filterChange)="handleFilter($event)" style="width:200px;">
+        <ng-template kendoDropDownListValueTemplate let-dataItem>
+            <span class="template">Application : {{selectedApplication}}</span> 
+          </ng-template>
+          <!-- <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span class="template">{{ dataItem }}</span> 
+          </ng-template> -->
+    </kendo-dropdownlist>
+

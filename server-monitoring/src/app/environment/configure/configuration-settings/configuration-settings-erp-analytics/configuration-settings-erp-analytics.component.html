@@ -1,31 +1,64 @@
-<h6 class="mb-3 font-bold">
-    Choose Instances 
-    <span *ngIf="obj_error.dispaly_Instances" class="form-error">Instance selection is required.</span>
-</h6>
+<div class="row mx-0 align-items-center">
+    <div class="d-flex-between px-0">
+         <div class="col-8 px-0">
+            <h6 class="mb-3 font-bold">
+                <span>Choose Instances <span class="text-astric">*</span></span> 
+                <span class="sp-sub-heading pt-2 pb-1"><i class="oci oci-lightbulb pe-2"></i>To display more instances go to app settings select Instance choose ERP and create instances
+                </span>
+                <span *ngIf="obj_error.dispaly_Instances" class="form-error"><span class="text-astric"></span>
+                    Instance selection is required.
+                </span>
+            </h6>
+         </div>
+         <div class="filter-content mb-1">
+             <div class="search_panel searchToggle">
+                 <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+                 <input type="text" class="form-control search_input" placeholder="Type and enter to search"  [(ngModel)]="searchText" (input)="filterSearchResults()" >
+                 <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch()"><i
+                     class="oci oci-x"></i>  
+                 </span>
+             </div>
+         </div>
+    </div>
 
-<kendo-grid 
+<div id="erp-loader" class="px-0 erp-anl-loader">
+    <kendo-grid 
     #grid_application 
-    [data]="Instance_list" 
-    (cellClick)="onCellClick($event)"
+    [kendoGridBinding]="Instance_list" 
     [selectable]="true" 
     [navigable]="true"
-    (selectionChange)="onSelectionChange($event)"
+    [pageable]="true"
+    [pageSize]="10"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo px-0"
     kendoGridSelectBy="SettingsID"
-    [(selectedKeys)]="selectedKeys">
-    
+    [(selectedKeys)]="selectedKeys"
+    [style.max-height]="'calc(100vh - 17rem)'">
+<!--     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
-    </kendo-grid-checkbox-column>
+    </kendo-grid-checkbox-column> -->
+
+    <kendo-grid-column [width]="50">
+        <ng-template kendoGridHeaderTemplate let-dataItem >
+            <input type="checkbox" [checked]="checkAllErp()" (change)="on_allSelection_change_erp_behaviour($event)">
+         </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <div>
+                   <input type="checkbox" [checked]="selected_erp_analytics[dataItem.SystemIdentifier]" (change)="onSelectionChange($event,dataItem)" >
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
 
     <kendo-grid-column field="SystemIdentifier" title="Instances">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
-                <span class="application-images ms-0">
+                <span class="application-images instances ms-0">
                     <img src="assets/images/default/application/{{dataItem.Application}}.png"
                         alt="{{dataItem.Application}}">
                 </span>
-                <span class="layout-text-obiq">{{dataItem.SystemIdentifier}}</span>
+                <span class="layout-text-obiq" ngbTooltip="{{dataItem?.SystemIdentifier}}">{{dataItem.SystemIdentifier}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
@@ -35,10 +68,10 @@
 
             <div class="flex-center">
                 <span class="img-app-profile">
-                    <img src="assets/images/default/profile.png" alt="">
+                    <img src="/user/getavatar/{{dataItem.CreatedBy}}" alt="">
                 </span>
-                <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                <div class="ps-2" ngbTooltip="{{dataItem?.CreatedByName}},{{ dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}">
+                    <span class="layout-text-name">{{dataItem.CreatedByName}}</span>
                     <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                 </div>
             </div>
@@ -50,10 +83,10 @@
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                 <span class="img-app-profile">
-                    <img src="assets/images/default/profile.png" alt="">
+                    <img src="/user/getavatar/{{dataItem.ModifiedBy}}" alt="">
                 </span>
-                <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                <div class="ps-2" ngbTooltip="{{dataItem?.ModifiedByName}} {{ dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}">
+                    <span class="layout-text-name">{{dataItem.ModifiedByName}}</span>
                     <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                 </div>
             </div>
@@ -68,4 +101,6 @@
             </div>
         </div>
     </ng-template>
-</kendo-grid>
+    </kendo-grid>
+
+</div>

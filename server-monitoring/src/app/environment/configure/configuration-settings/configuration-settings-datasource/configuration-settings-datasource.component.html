@@ -8,34 +8,54 @@
 
     <div class="row mx-0 mb-3">
         <div class="col-sm-6 ps-0 pe-3">
-            <label for="name" class="form-label">Name <span class="text-astric">*</span></label>
-            <input id="View_Name_Input" type="text" class="form-control" (input)="onInputChange($event)" [(ngModel)]="modal_name">
-            <span *ngIf="obj_error.dispaly_viewName" class="form-error">View name is required.</span>
+             
+            <label for="name" class="form-label">Name <span class="text-astric">*</span>
+            </label>
+            <input id="View_Name_Input" (input)="validateViewName(modal_name)" type="text" class="form-control" placeholder="Enter view name" (blur)="onInputChanges($event)" (keyup.enter)="onInputChanges($event)" [(ngModel)]="modal_name">
+            <span *ngIf="obj_error.dispaly_viewName && !obj_error.isDuplicateName" class="form-error">{{error_message}}</span>
+            <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span>
+
+            <!-- <span *ngIf="obj_error.isDuplicateName" class="form-error">This view name is already existed.</span> -->
         </div>
     </div>
 
     <div class="row mx-0 mb-3">
         <div class="col-sm-12 px-0">
 
-            <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span></label>
+            <label for="acces-type" class="form-label">Add Data-Sources<span class="text-astric">*</span>
+                <div *ngIf="obj_error.dispaly_DataSource" class="mb-1">
+                    <span class="form-error">Data source selection is required.</span>
+                </div>
+            </label>
 
-            <div *ngIf="obj_error.dispaly_DataSource" class="text-center mb-1">
-                <span class="form-error">Data source selection is required.</span>
-            </div>
+            
 
             <div class="row mx-0">
 
                 @for(item of data_Source_widjets; track item.id) {
 
+
                 <div class="col-6 ps-0 mb-3 pe-3">
 
-                    <div class="data-source-category" role="button" (click)="select_datasource(item) "
+                    <div class="data-source-category card" role="button" (click)="select_datasource(item) "
                         [ngClass]="item.isChecked ? 'active': '' ">
-                        <h4 class="text-center pb-3 header">{{item.name}}</h4>
-                        <p>
-                            <span class="d-block text-center">{{item.description}}</span>
-                            <span class="d-block text-red text-center pt-2">{{item.shortDescription}}</span>
-                        </p>
+                        <div class="card-body">
+                            <h3 class="text-center pb-3 header mb-0">{{item.name}}</h3>
+                            <p>
+                                <span class="d-block text-center" style="height: 5rem; overflow: hidden; opacity: 0.6;">{{item.description}}</span>
+                            </p>
+                        </div>
+                        <div class="card-footer py-2">
+                            @if(item.type === 'ERP_ANALYTICS_DATASOURCE') {
+                                <span class="sp-sub-heading pt-0 pb-1 text-center d-block" style="height: 3rem; overflow: hidden; word-wrap: break-word;"><i class="oci oci-lightbulb pe-2"></i>To display more instances go to app settings select Instance choose ERP and create instances<a style="display: none;" href="https://www.example.com">Two Words</a></span>
+                            }
+                            @else if(item.type === 'USER_BEHAVIOUR_ANALYTICS_DATASOURCE') {
+                                <span class="sp-sub-heading pt-0 pb-1 text-center d-block" style="height: 3rem; overflow: hidden; word-wrap: break-word;"><i class="oci oci-lightbulb pe-2"></i>Login to our Opkey browser extension and track user behavior across ERP Suites<a style="display: none;" href="https://www.example.com">Two Words</a></span>
+                            }
+                            @else {
+                                <span class="d-block text-red text-center" style="height: 3rem; overflow: hidden; word-wrap: break-word;">{{item.shortDescription}}<a style="display: none;" href="https://www.example.com">Two Words</a></span>
+                            }
+                        </div>
                         <span class="checked-data-source">
                             <i class="oci oci-check element-center"></i>
                         </span>
@@ -44,13 +64,17 @@
                     @if((item.type === 'ERP_ANALYTICS_DATASOURCE' && item.isChecked) ) {
         
                         <div class="datasource-sub-category">
-                            <label for="application" class="form-label mt-3">Choose your application <span
-                                    class="text-astric">*</span></label>
+                            <label for="application" class="form-label mt-3" style="font-size: 1.1rem;">
+                                Choose your application 
+                                <span class="text-astric">*</span>
 
-                            <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
+                                <span *ngIf="obj_error.display_ErpApplication" class="form-error">Application selection is required.</span>
+                            </label>
+
+                            
 
                             <div class="data-source-item">
-                                <!-- Loop over this.ApplicationdataSource.Applications -->
+                              
                                 @for(dataItem of datasource_application; track dataItem) {
                                 <div class="form-check mb-3">
                                     <label class="form-check-label">
@@ -62,8 +86,13 @@
                                                 <img src="assets/images/default/application/{{dataItem}}.png"
                                                     alt="{{dataItem}}">
                                             </span>
-                                            <span class="font-18px align-middle" style="font-weight: 500;">
+                                            <span class="font-18px align-middle" style="font-weight: 500;" >
                                                 {{dataItem}}
+                                                <span class="sp-instance-count ps-2">
+                                                    ({{ Available_Application_Instances[dataItem] || 0 }})
+                                                </span>
+
+                                                  
                                             </span>
                                         </span>
                                     </label>
@@ -78,10 +107,12 @@
                      
                         <div class="datasource-sub-category">
 
-                            <label for="application" class="form-label mt-3">Choose your system diagnostics
+                            <label for="application" class="form-label mt-3 pb-1" style="font-size: 1.1rem;">
+                                Choose your system diagnostics
                                 <span class="text-astric">*</span>
+                                <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">System diagnostics selection is required.</span>
                             </label>
-                            <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error">System diagnostics selection is required.</span>
+                            
 
                             @for(dataItem of datasource_system_diagnostics; track dataItem.id) {
                             <div class="form-check mb-3">
@@ -108,6 +139,7 @@
                 </div>
                 }
             </div>
+
         </div>
     </div>
 

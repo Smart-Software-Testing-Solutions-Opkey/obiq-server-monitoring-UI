@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,7 +11,8 @@ import { environment } from 'src/environments/environment';
 export class SelectedJourneyComponent implements OnInit {
 
   constructor(
-    public app_service: AppService
+    public app_service: AppService,
+    private msgbox: MsgboxService 
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class SelectedJourneyComponent implements OnInit {
         },
         error: (error: any) => {
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");
@@ -63,7 +66,7 @@ export class SelectedJourneyComponent implements OnInit {
 
 
   pageInformation(res) {
-    debugger;
+  
     let total_error = 0;
     let total_page = res.length;
     let total_duration = 0;
@@ -85,7 +88,7 @@ export class SelectedJourneyComponent implements OnInit {
   }
 
   pageErrorDetails(event) {
-    debugger;
+   
     this.pageDetails = event;
     this.isPageErrorDetails = true;
     this.isLayoutCardVisible = true;
@@ -93,7 +96,7 @@ export class SelectedJourneyComponent implements OnInit {
   }
 
   goBack(): void {
-    debugger;
+    
     this.obj_selected_journey.isDisplay_main = true;
     // this.obj_selected_journey.datasource = [];
   }

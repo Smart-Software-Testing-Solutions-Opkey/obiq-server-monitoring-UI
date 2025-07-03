@@ -17,6 +17,7 @@ import {
 import { AppDataService } from "src/app/services/app-data.service";
 import { AppService } from "src/app/services/app.service";
 import { Subscription } from "rxjs";
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -48,28 +49,77 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   constructor(
     public service_data: AppDataService,
     public app_service: AppService,
-
-
+    public dataService: AppDataService,
+    private msgbox: MsgboxService 
+    
   ) {
     
   }
-
+@Input()Editable:boolean = false
+widgetType=''
   ngOnInit(){
-    this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
-      if(data?.type == "getDataWithTime"){
-        this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
-      }
-    }))
+    // this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
+    //   if(data?.type == "getDataWithTime"){
+    //     this.getChartData('ESS_LOG_ERROR_WIDGET', data?.timeFilter)
+    //   }
+    // }))
+    this.startDataReceiving();
+    
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
   }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  isRefresh: boolean = false;
+  startDataReceiving(){
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+         if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            if(this.typeEnum == 'Error'){
+              this.getChartData('ESS_LOG_ERROR_WIDGET');
+            }
+            else if(this.typeEnum == 'Warning'){
+              this.getChartData('ESS_LOG_WARNING_WIDGET')
+            }
+            else if(this.typeEnum == 'Success'){
+              this.getChartData('ESS_LOG_SUCESS_WIDGET');
+            }
+          }
+        }
+      } 
+    });
+    this.subscriptions1.push(data_receiver);
+  }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     if(this.typeEnum == 'Error'){
+  //       this.getChartData('ESS_LOG_ERROR_WIDGET');
+  //     }
+  //     else if(this.typeEnum == 'Warning'){
+  //       this.getChartData('ESS_LOG_WARNING_WIDGET')
+  //     }
+  //     else if(this.typeEnum == 'Success'){
+  //       this.getChartData('ESS_LOG_SUCESS_WIDGET');
+  //     }
+  //   }
+  
+  // }
+
   subscriptions: Subscription[] = [];
   dataSet = []
   
   bindChart(){
-    debugger
+    
     this.chartOptions = {
       series: [
         {
@@ -166,12 +216,29 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   chartColor:string = ''
   inverseColors = false
   view:any
-  @Input('child_data') set child_data({ typeEnum,view }) {
-    debugger
+  title = ''
+  obj_filter: any;
+  selectedAnalyticsType: any ='';
+  @Input('child_data') set child_data({ typeEnum,view,title,widgetType ,obj_filter,selectedAnalyticsType}) {
+    
    this.typeEnum = typeEnum
    this.view = view
+  this.title =title
+  this.widgetType = widgetType
+  this.obj_filter = obj_filter
+  if(selectedAnalyticsType){
+    this.selectedAnalyticsType = selectedAnalyticsType;
+  }
+  if(this.typeEnum == 'Error'){
+    this.getChartData('ESS_LOG_ERROR_WIDGET',this.obj_filter);
+  }
+  else if(this.typeEnum == 'Warning'){
+    this.getChartData('ESS_LOG_WARNING_WIDGET',this.obj_filter)
+  }
+  else if(this.typeEnum == 'Success'){
+    this.getChartData('ESS_LOG_SUCESS_WIDGET',this.obj_filter);
+  }
   
- 
 
   }
 
@@ -249,12 +316,40 @@ export class EnvironmentManagerWidgetsTotalErrorsAreaWidgetComponent implements 
   }
 dataDir = ''
   getChartData(type, timeFilter?: any){
-   
-      debugger;
+
+    let ajax_url : any;
+    let form_data : any ;
+    form_data = { 
+      "timeSpanEnum": "LAST_7_DAYS" , 
+      "appType": "ORACLEFUSION", 
+      "limitBy": 50,
+      "offset": 0, 
+      "viewId": this?.view?.viewId,
+      "projectId":this.service_data.UserDto.ProjectDTO.P_ID
+    }
     
-  
-      let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
-      const form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+    if(this.widgetType == 'ERP'){
+      // ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
+      // form_data = { "timeSpanEnum": "LAST_7_DAYS", "viewId": this.view.viewId, "projectId": this.service_data.UserDto.ProjectDTO.P_ID, "logToSearch": "", "limitBy": 20, "offset": 0, "widgetType": type,"appType":"ORACLEFUSION" };
+      if(type == "ESS_LOG_ERROR_WIDGET"){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageErrorCount";
+      }
+      else if(type == 'ESS_LOG_WARNING_WIDGET'){
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageWarningCount";
+
+      }
+      else{
+        ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ServerSideLogController/sendEssLogsUsageSuccessCount";
+      }
+      
+    }
+
+    if( this.widgetType == 'userBehaviour'){
+          ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/ErrorDataAnalyticController/getAllTotalErrorByFilter";
+          form_data["userId"] = this.service_data.UserDto.UserDTO.U_ID
+    }
+       
+      
       if(timeFilter?.type == 'setEnum'){
         form_data.timeSpanEnum = timeFilter?.value;
        } else if(timeFilter?.type == "setCustom"){
@@ -262,16 +357,35 @@ dataDir = ''
         form_data["fromTimeInMillis"] = timeFilter?.fromTimeInMillis;
         form_data["toTimeInMillis"] = timeFilter?.toTimeInMillis;
       }
-      window.loadingStart("#stats-div-"+this.typeEnum, "Please wait");
-      this.app_service.make_post_server_call(ajax_url, form_data)
+      else{
+        let timeFilter={"type":"setEnum","value":"LAST_24_HOUR"}
+        form_data["timeSpanEnum"] = timeFilter?.value;
+  
+      }
+      window.loadingStart("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType, "Please wait");
+      this.app_service.make_post_server_call(ajax_url,form_data)
         .subscribe({
           next: (result: any) => {
-            debugger;
+            
             if(result){
-
-              this.dataObj.total = result.count
-              this.dataObj.percentage = result.percentdiff
-              this.dataDir = result.direction
+              if(type == "ESS_LOG_ERROR_WIDGET"){
+               
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff < 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+               // this.dataDir = result.direction
+              }
+              else if(type == 'ESS_LOG_WARNING_WIDGET'){
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff < 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+              }
+              else{
+                this.dataObj.total = result.count
+                this.dataDir = result.percentdiff > 0 ? 'up' : 'down';
+                this.dataObj.percentage =Math.abs(result.percentdiff) 
+              }
+           
               this.dataSet = []
               if(result?.dataPlotList?.length>0){
                 let totalVal = 0
@@ -309,13 +423,16 @@ dataDir = ''
               }
 
               this.checkStyling();
-              window.loadingStop("#stats-div-"+this.typeEnum);
+              this.bind_chart();
+              this.bindChart();
+              window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType);
 
             }
 
           },
           error: (error: any) => {
-            window.loadingStop("#stats-div-"+this.typeEnum);
+            window.loadingStop("#stats-div-"+this.typeEnum+this.widgetType+this.selectedAnalyticsType);
+            this.msgbox.display_error_message(error);
             console.warn(error);
           },
           complete: () => {
@@ -326,25 +443,28 @@ dataDir = ''
   }
   @ViewChild('resizableDiv', { static: true }) resizableDiv: ElementRef<any>;
   ngAfterViewInit(): void {
+ 
+   
+  }
+  bind_chart(){
     if (this.typeEnum == 'Error') {
       this.chartColor = '#B42318'
      
-      this.bindChartData('Error')
+      // this.bindChartData('Error')
     }
     else if(this.typeEnum == 'Success'){
       this.chartColor = '#268144'
    
 
-      this.bindChartData('Success')
+      // this.bindChartData('Success')
   
     }
     else if(this.typeEnum == 'Warning'){
       this.chartColor = '#FFBF00'
    
-      this.bindChartData('Warning')
+      // this.bindChartData('Warning')
   
     }
-   
   }
   width = 0
   height = 0
@@ -365,4 +485,18 @@ dataDir = ''
       }, 10);
     }
   }
+
+  isRename : boolean = false;
+  renameWidget(){
+      this.isRename = true;
+      setTimeout(() => {
+        let ele = document.getElementById('renameInput')
+        ele.focus()
+      }, 0);
+
+  }
+  renaming(){
+    this.isRename = false;
+  }
+
 }

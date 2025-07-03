@@ -16,7 +16,7 @@
                 
             </div>
         </div> -->
-        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)">
+        <app-navigator-left-settings [child_data]="{totalViews: totalViews,isopenSettings:isopenSettings,selectedViewSettings:selectedViewSettings}" (onSettingsSelected)="settingsViewSelect($event)" (onViewDelete)="Delete_Selected_View($event)" (onTotalViewsChange)="Favorite_View($event)">
         </app-navigator-left-settings>
     }
     @else {
@@ -27,21 +27,28 @@
             <div class="row mx-0 align-items-center">
 
                 <div class="col-9 ps-0 pe-1">
+
+                   
                     <kendo-dropdownlist [data]="totalViews" [(ngModel)]="selectedView"
                         (valueChange)="viewChanged($event)" textField="viewName" valueField="viewId" class="k-dropdown-height"
                         [popupSettings]="{ popupClass:'dropdown-view-anaytics'}">
                         <ng-template kendoDropDownListItemTemplate let-dataItem>
 
-                            <span class="item-template-text text-ellipsis font-14px">
-                                <i class="oci oci-star pe-2"></i>
+                            <span class="item-template-text text-ellipsis font-14px" [ngbTooltip]="dataItem.favourite ? 'favourite': null">
+                                @if(dataItem.favourite){
+                                    <i class="oci oci-star font-bold pe-1" style="color: gold;"></i>
+                                }
+                                @else{
+                                    <i class="oci oci-star pe-1"></i>
+                                }
                                 {{dataItem.viewName}}
                             </span>
                         </ng-template>
-
+                            
                         <ng-template kendoDropDownListValueTemplate let-dataItem>
                             <span class="value-template">
                                 <span class="value-template-text text-ellipsis font-14px">
-                                    {{selectedView.viewName}}
+                                    {{dataItem?.viewName}}
                                 </span>
                             </span>
                         </ng-template>
@@ -49,13 +56,13 @@
                 </div>
                 
                 <div class="col-3 px-0">
-                    <button type="button" class="btn btn-icon border-0" (click)="add_environment()"
-                        aria-label="Add Environment">
+                    <button type="button" class="btn btn-icon border-0" (click)="add_environment()" 
+                        aria-label="Add Environment" ngbTooltip="Add View" container="body" triggers="mouseenter:mouseleave">
                         <i class="oci oci-plus"></i>
                     </button>
 
                     <button type="button" class="btn btn-icon border-0" (click)="openSettings()"
-                        aria-label="Settings">
+                        aria-label="Settings" ngbTooltip="Settings" container="body" triggers="mouseenter:mouseleave">
                         <i class="oci oci-settings me-1"></i>
                     </button>
                 </div>

@@ -1,12 +1,30 @@
 .application-images {
-    width: 1.5rem;
-    height: 1.5rem;
     display: inline-block;
     margin: 0rem 1rem;
     line-height: 1rem;
+    &.instances {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 
     img {
         width: 100%;
         height: 100%;
+    }
+}
+
+.sp-sub-heading {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+#erp-loader .k-grid .k-grid-header .k-table-th{
+    padding-left: 0.625rem !important;
+}
+
+.erp-anl-loader{
+    ::ng-deep .k-grid .k-cell-inner>.k-link{
+        padding: 0.625rem !important;
     }
 }

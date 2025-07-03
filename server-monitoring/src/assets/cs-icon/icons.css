@@ -36,6 +36,46 @@
 
 /***************************icon start here**************************/
 
+.oci-user:before {
+  content: "\e935";
+}
+
+.oci-data-source:before {
+  content: "\e933";
+}
+
+.oci-main-view:before {
+  content: "\e934";
+}
+
+.oci-alert-circle:before {
+  content: "\e931";
+}
+
+.oci-check-circle:before {
+  content: "\e932";
+}
+
+.oci-external-link:before {
+  content: "\e930";
+}
+
+.oci-drag-indicator:before {
+  content: "\e92f";
+}
+
+.oci-filter:before {
+  content: "\e92e";
+}
+
+.oci-lightbulb:before {
+  content: "\e92d";
+}
+
+.oci-arrow-down:before {
+  content: "\e92c";
+}
+
 .oci-copy:before {
   content: "\e920";
 }

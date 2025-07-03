@@ -1,18 +1,24 @@
 <h6 class="mb-3 font-bold">
-    Choose OBIQ Agents 
-    <!-- <span *ngIf="obj_error.dispaly_Instances" class="form-error">Instance selection is required.</span> -->
+    Choose OBIQ Agents <span class="text-astric">*</span>
+    <span *ngIf="obj_error.display_SystemDiagnosticsData" class="form-error" >
+        <span class="text-astric" ></span>
+        OBIQ agent selection is required.
+    </span>
 </h6>
 
+<!-- [selectable]="true" -->
+
+
 <kendo-grid 
-    #grid_application 
+#grid_application
     [data]="Instance_list" 
-    (cellClick)="onCellClick($event)"
-    [selectable]="true" 
+    (cellClick)="onCellClick($event)" 
+    
     [navigable]="true"
     (selectionChange)="on_Selection_Change_System_diagnostics($event)"
-    [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
+    [selectable]="{ checkboxOnly: true,mode:'multiple'}" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
-    kendoGridSelectBy="OBIQ_Agent"
+    kendoGridSelectBy="agentId"
     [(selectedKeys)]="selectedKeys">
     
     <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
@@ -22,17 +28,17 @@
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                
-                <span class="layout-text-obiq">{{dataItem.OBIQ_Agent}}</span>
+                <span class="layout-text-obiq">{{dataItem.agentName}}</span>
             </div>
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="CreatedBy" title="URL">
+    <kendo-grid-column field="CreatedBy" title="Ip Address">
         <ng-template kendoGridCellTemplate let-dataItem>
 
             <div class="flex-center">
                 <div>
-                    <span class="layout-text-date">{{dataItem.Unique_Code}}</span>
+                    <span class="layout-text-date">{{dataItem.ipAddress}}</span>
                  
                 </div>
             </div>

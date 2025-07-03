@@ -1,50 +1,69 @@
 <div class="logs-panel">
 
-    <div id="chart" class="graph-timeseries mb-3 position-relative">
+    @if(analyticsType.type != 'ERP_ANALYTICS_DATASOURCE'){
+        <div id="chart" class="graph-timeseries mb-3 position-relative" *ngIf="chartOptions" >
     
-        <!-- <h2>Log Usage Over Time</h2> -->
-        <apx-chart  *ngIf="chartOptions.series.length > 0"
-        [series]="chartOptions.series"
-        [chart]="chartOptions.chart"
-        [dataLabels]="chartOptions.dataLabels"
-        [plotOptions]="chartOptions.plotOptions"
-        [responsive]="chartOptions.responsive"
-        [xaxis]="chartOptions.xaxis"
-        [legend]="chartOptions.legend"
-        [fill]="chartOptions.fill"
-      ></apx-chart>
-      <kendo-dropdownlist
-      [data]="logTypes"
-      [(ngModel)]="selectedLogType"
-      (valueChange)="updateChart()" class="graph-status-dropdown">
-      </kendo-dropdownlist>
-      </div>
+        
+            <!-- <h2>Log Usage Over Time</h2> -->
+            <apx-chart #chart_ess [series]="chartOptions.series" [chart]="chartOptions.chart"
+            [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+            [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke" [fill]="chartOptions.fill"
+            [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [tooltip]="chartOptions.tooltip"
+            [colors]="chartOptions.colors" [legend]="chartOptions.legend"></apx-chart>
+          <!-- <kendo-dropdownlist
+          [data]="logTypes"
+          [(ngModel)]="selectedLogType"
+          (valueChange)="updateChart()" class="graph-status-dropdown">
+          </kendo-dropdownlist> -->
+          </div>
+    }
+   
+   
 
     <div id="logs-grid"  class="logs-grid-layout">
         <kendo-grid 
-            [data]="logDataSource" 
-            [selectable]="true" 
-            (cellClick)="onSelectionChange($event)"
-            class="scrollable">
+        [data]="logDataSource" 
+        [selectable]="true" 
+        (cellClick)="onSelectionChange($event)"
+        class="scrollable custom-grid-height"
+        (scrollBottom)="onScroll()"
+        [style.height]="logHeight"
+            >
 
             <kendo-grid-column title="" [width]="10">
 
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
 
-                    <span class="layout-status-logs layout-status-color success">
+                    <span class="layout-status-logs layout-status-color" 
+                            [ngClass]="{'error': dataItem?.logType == 'Error',
+                                        'success': dataItem?.logType == 'Success',
+                                        'warning': dataItem?.logType == 'Warning',
+                                        'blocked': dataItem?.logType == 'Blocked'}">
 
                     </span>
 
                 </ng-template>
             </kendo-grid-column>
 
-            <kendo-grid-column field="timeStampString" title="Time">
+            <kendo-grid-column field="timeString" title="Time">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span ngbTooltip="{{dataItem?.timeString}}" container="body">{{dataItem?.timeString}}</span>
+                </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="userId" title="User">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span ngbTooltip="{{dataItem?.timeStampString}}" container="body">{{dataItem?.userId}}</span>
+                </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="domainName" title="Domain">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span ngbTooltip="{{dataItem?.domainName}}" container="body">{{dataItem?.domainName}}</span>
+                </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="logName"  title="Log Name">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <span ngbTooltip="{{dataItem?.logName}}" container="body">{{dataItem?.logName}}</span>
+                </ng-template>
             </kendo-grid-column>
 
             <ng-template kendoGridNoRecordsTemplate>

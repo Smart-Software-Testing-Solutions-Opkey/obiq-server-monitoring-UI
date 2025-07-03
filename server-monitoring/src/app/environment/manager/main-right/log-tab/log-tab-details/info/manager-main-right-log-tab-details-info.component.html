@@ -6,7 +6,7 @@
                 <a href="javascript:void(0)" class="nav_links" [ngClass]="{ 'active' : selectedTab == 'summarizedLog' }">
                     <span class="d-flex align-items-center justify-content-between w-100">
                         <span class="line_h_normal" style="width: calc(100% - 2rem);">
-                            <span class="sp_nav_text text-ellipsis" container="body">
+                            <span class="sp_nav_text">
                                 Summarized logs
                             </span>
                         </span>
@@ -24,7 +24,7 @@
                 <a href="javascript:void(0)" class="nav_links" [ngClass]="{ 'active' : selectedTab == 'fullLog' }">
                     <span class="d-flex align-items-center justify-content-between w-100">
                         <span class="line_h_normal" style="width: calc(100% - 2rem);">
-                            <span class="sp_nav_text text-ellipsis" container="body">
+                            <span class="sp_nav_text">
                                 Full logs
                             </span>
                         </span>
@@ -40,15 +40,16 @@
 
     <div class="right-section scrollable">
         <div class="log-details">
-            <div class="d-flex-between">
-                <span class="pe-3 word-wrap" style="white-space: pre-wrap;">
-                    {{ selectedData[selectedTab] }}
-                </span>
-                <a  href="javascript:void(0)" class="copy-placement-top">
-                    <i class="oci oci-copy-all"></i>
-                    Copy
-                </a>
-            </div>
+
+            <button type="button" class="btn copy-placement-top" ngbTooltip="Copy" container="body" 
+                aria-label="Copy" triggers="mouseenter:mouseleave">
+                <i class="oci oci-copy-all font-18px"></i>
+            </button>
+
+            <span class="p-3 pe-4 word-wrap d-block" style="white-space: pre-line;">
+                {{ selectedData[selectedTab] }}
+            </span>
+
         </div>
     </div>
 </section>

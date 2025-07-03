@@ -12,6 +12,7 @@ import {
 } from "ng-apexcharts";
 import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
+import { MsgboxService } from "src/app/services/msgbox.service";
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -30,24 +31,24 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
   constructor(    
     public dataService: AppDataService,
      public app_service: AppService,
+     private msgbox: MsgboxService 
   ) { }
   title:string = ''
   public data: number = 0;
   view:any;
   widgetType:any;
   @Input('child_data') set child_data({ title,data,view,widgetType}) {
-    debugger
+    
    this.title = title
    this.data = parseFloat(data) || 0;
    this.view = view;
    this.widgetType = widgetType;
   }
+  @Input() Editable:boolean
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
+
   ngOnInit(): void {
     this.subscriptions.push(this.app_service.dataStream$.subscribe((data: any) => {
       if(data?.type == "getDataWithTime"){
@@ -55,13 +56,45 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
       }
     }))
     this.get_Redis_Cpu_Usage(this.view,this.widgetType)
-  
+    this.startDataReceiving();
   }
+
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  isRefresh: boolean = false;
+  startDataReceiving(){
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.get_Redis_Cpu_Usage(this.view,this.widgetType)
+          }
+        }
+      }  
+    });
+    this.subscriptions1.push(data_receiver);
+  }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.get_Redis_Cpu_Usage(this.view,this.widgetType)
+  //   }
+  
+  // }
   ngAfterViewInit(): void {
     
   }
   get_Redis_Cpu_Usage(view,widgetType, timeFilter?: any){
-    debugger;
+    
     window.loadingStart("#gauge-div-" + widgetType, "Please wait");
     let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
 
@@ -81,6 +114,7 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
       error: (error: any) => {
        window.loadingStop("#gauge-div-"+widgetType);
         console.warn(error);
+        this.msgbox.display_error_message(error);
       },
       complete: () => {
         console.log("Completed");
@@ -141,6 +175,18 @@ export class EnvironmentManagerWidgetsGaugeMeterComponent implements OnInit,OnDe
     };
     
 }
+isRename : boolean = false;
+  renameWidget(){
+      this.isRename = true;
+      setTimeout(() => {
+        let ele = document.getElementById('renameInput')
+        ele.focus()
+      }, 0);
+
+  }
+  renaming(){
+    this.isRename = false;
+  }
 
 
 

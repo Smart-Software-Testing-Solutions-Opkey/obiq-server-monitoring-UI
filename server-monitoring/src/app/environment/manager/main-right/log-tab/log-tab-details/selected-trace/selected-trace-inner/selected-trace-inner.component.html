@@ -1,4 +1,4 @@
-<div class="trace">
+<div class="trace grid-panel">
     <kendo-grid 
     #grid_application 
     [data]="trace_Selected_data" 
@@ -7,7 +7,7 @@
     [navigable]="true"
     (selectionChange)="on_trace_Selection_Change_($event)" 
     class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
-    <kendo-grid-column field="appType" title="appType">
+    <kendo-grid-column field="appType" title="appType" [width]="280">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="d-flex align-items-baseline">
                 <i *ngIf="dataItem.appType!=null" class="oci oci-{{dataItem.appType | lowercase}} font_18px align-middle pe-2"></i>
@@ -23,7 +23,7 @@
     </kendo-grid-column>
 
     <!-- ModifiedBy Column with Date -->
-    <kendo-grid-column field="logName" title="logName">
+    <kendo-grid-column field="logName" title="logName" >
         <ng-template kendoGridCellTemplate let-dataItem>
             <span class="layout-text-name ps-1">{{dataItem.logName}}</span>
         </ng-template>

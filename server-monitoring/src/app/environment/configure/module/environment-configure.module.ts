@@ -36,7 +36,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     EnvironmentConfigureRoutingModule,
     GridModule,
     FormsModule,
-    DropDownsModule ,
+    DropDownsModule,
     NgbTooltipModule
   ],
   exports: [

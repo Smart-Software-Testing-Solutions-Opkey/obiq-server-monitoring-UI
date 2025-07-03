@@ -1,0 +1,169 @@
+<div class="filter-content mb-1">
+    <div class="dropdown layout-btn-group-time"  >
+        
+       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="outside" (click)="getRecentHistory()">
+            <button type="button" class="btn btn-default">
+                <i class="oci oci-chevron-left font-12px"></i>
+            </button>
+            <span class="time-text-color px-2">
+                <i class="oci oci-clock font-14px pe-2"></i>
+                from  <span class="font-bold text-theme">{{fromDateTime}}</span> to <span class="font-bold text-theme">{{toDateTime}}</span> {{displayFormat}}
+            </span>
+            <button type="button" class="btn btn-default">
+                <i class="oci oci-chevron-right font-12px"></i>
+            </button>
+       </button>
+
+       <div class="dropdown-menu py-0 border-0 border-box-shadow "  data-bs-auto-close="outside" #dropdown>
+            
+            <div class="d-flex" style="width: 35rem;">
+                <div class="left border-box-shadow left-dropdown-menu" style="width: 9rem;">
+                    <ul class="list-unstyled border-box-shadow category-bottom-border mb-0">
+                        @for(timeItem of timeFilter; track timeItem.name){
+                            <li (click)="onSelctTime(timeItem.timeValue) ;" class="dropdown-item li-dd-item" 
+                            [ngClass]="{'active': selectedTime == timeItem?.timeValue, 'border-bottom': showBorder(timeItem.name)}">
+                                {{ timeItem?.value }}
+                            </li>
+                        }
+                       
+                    </ul>
+
+                </div>
+                <div *ngIf="selectedTime != 'setCustom' " class="right px-3" style="width: calc(100% - 9rem);">
+                    <div class="p-2">
+                        <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
+                    </div>
+                    <div class="recent-dateTime position-relative" style="height: 20rem;">
+                        @if( recentDataPerView.length > 0){
+
+                           <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
+                             <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
+                             <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                <span class="mx-auto"> - </span>
+                                <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span>   
+                           </div>
+                        }
+                        @else {
+                            <span class="d-flex-center h-100 font-14px text-grey-2" >
+                                You don’t have any history yet.
+                            </span> 
+                        }  
+                    </div>
+                </div>
+
+                <div *ngIf="selectedTime == 'setCustom' " class="right px-3" style="width: calc(100% - 9rem);">
+                    <div class="d-flex-between py-3">
+                        <span class="mb-0 text-grey-1 font-14px font-bold">Custom</span>
+
+                        <button type="button" class="btn btn-default text-theme" (click)="resetTimeDate()">
+                            Reset to now
+                        </button>
+                    </div>
+
+                   
+                    <div class="row mx-0 mb-3">
+                        <div class="col-sm-5 p-0">
+                            <div class="row mx-0">
+                                <div class="col-sm-12 px-0">
+                                    <div class="date-time-text">
+                                        <kendo-label>
+                                                <kendo-datetimepicker
+                                                [format]="dateTimeFormat"
+                                                [(value)]="fromDatevalue"
+                                                [disabledDates]="checkFromDate"
+                                                [popupSettings]="popupSettings"
+                                                ></kendo-datetimepicker>
+                                          </kendo-label>
+
+                                          <!-- <kendo-datepicker></kendo-datepicker>
+                                          <kendo-timepicker ></kendo-timepicker> -->
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-6 pe-0">
+                                    <div class="date-time-text">
+                                        02:34 pm
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 text-center">
+                            <span class="sp-eperator"></span>
+                        </div>
+                        
+
+                       
+                        <div class="col-sm-5 p-0">
+                            <div class="row mx-0">
+                                <div class="col-sm-12 px-0">
+                                    <div class="date-time-text" >
+                                        <!-- sep 13, 2024 --> 
+                                        <kendo-label>
+                                            <kendo-datetimepicker [popupSettings]="popupSettings"
+                                              [format]="dateTimeFormat"
+                                              [(value)]="toDateValue"
+                                              [disabledDates]="checkToDate"
+                                              >
+                                              
+                                            </kendo-datetimepicker>
+                                        </kendo-label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-6 pe-0">
+                                    <div class="date-time-text">
+                                        02:34 pm
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row mx-0 border-bottom pb-2 align-items-center">
+                            <span class="text-theme font-14px col-sm-7 px-0">
+                                <!-- Asia/Kolkata -->
+                                <kendo-dropdownlist class="timeZone-dd-list" [data]="timezoneDatasource" [(ngModel)]="selectedTimezone"
+                                    textField="StandardName" valueField="Id">
+                                </kendo-dropdownlist>
+                            
+                            </span>
+                            <span class="btn-layout-time col-sm-5 px-0 text-end">
+                                <button (click)="closeTimeFilterDropdown()" type="button" class="btn btn-layout btn-bg-white px-2 py-1 me-2">
+                                    <span>Cancel</span>
+                                </button>
+                                <button (click)="applyCustomFilter()" type="button" class="btn btn-layout btn-bg-theme px-2 py-1">
+                                    <span>Apply</span>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="p-2">
+                            <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
+                        </div>
+                        <div class="recent-dateTime position-relative" style="height: 10rem;">
+                            @if( recentDataPerView.length > 0){
+
+                               <div *ngFor="let timeItem of recentDataPerView"  class="d-flex-center mb-2">
+                                 <!-- {{ timeItem.fromTime }} - {{timeItem.toTime}}    -->
+                                 <span class="text-center" style="width: 10rem;">{{ timeItem.fromTime }}</span>
+                                <span class="mx-auto"> - </span>
+                                <span class="text-center" style="width: 10rem;">{{timeItem.toTime}}</span>   
+                               </div>
+                            }
+                            @else {
+                                <span class="d-flex-center h-100 font-14px text-grey-2" >
+                                    You don’t have any history yet.
+                                </span> 
+                            }
+                           
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+       </div>
+
+    </div>
+
+</div>

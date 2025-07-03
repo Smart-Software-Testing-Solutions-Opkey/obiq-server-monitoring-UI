@@ -25,11 +25,11 @@ function keycloak_init_with_force_login(keycloakClientName, initedCallback) {
     //debugger;
     // similar function has been created to init the keycloak object without forcing to login named 'keycloak_init_without_force_login'
 
-    if (window.keycloak) return;
+    if (window.parent.keycloak && window.parent.keycloak.token) return;
 
     let xhr = new XMLHttpRequest();
     KeycloakClientName = keycloakClientName;
-    xhr.open('GET', pre_url + '/login/get_keycloak_settings?opkeyone_callsource=' + keycloakClientName);
+    xhr.open('POST', pre_url + 'login/get_keycloak_settings?opkeyone_callsource=' + keycloakClientName);
 
     xhr.onload = function () {
 
@@ -86,7 +86,7 @@ function keycloak_init_with_force_login(keycloakClientName, initedCallback) {
 function _inner_keycloak_init(shouldForceLogin, initedCallback) {
     //debugger;
 
-    if (window.keycloak) return;
+    if (window.parent.keycloak && window.parent.keycloak.token ) return;
 
     window.keycloak = new Keycloak({
         url: Keycloak_Auth_Url,
@@ -153,12 +153,12 @@ function _inner_keycloak_init(shouldForceLogin, initedCallback) {
 }
 
 function keycloak_init_without_force_login(keycloakClientName, initedCallback) {
-    if (window.keycloak) return;
+    if (window.parent.keycloak && window.parent.keycloak.token) return;
 
 
     let xhr = new XMLHttpRequest();
     KeycloakClientName = keycloakClientName;
-    xhr.open('GET', pre_url + '/login/get_keycloak_settings?opkeyone_callsource=' + keycloakClientName);
+    xhr.open('POST', pre_url + 'login/get_keycloak_settings?opkeyone_callsource=' + keycloakClientName);
 
     xhr.onload = function () {
 
@@ -232,7 +232,7 @@ function set_keycloak_token(token) {
 
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', pre_url + '/login/create_keycloak_token_cookie?token=' + token);
+    xhr.open('POST', pre_url + 'login/create_keycloak_token_cookie?token=' + token);
     xhr.send();
 
     xhr.onload = function () {

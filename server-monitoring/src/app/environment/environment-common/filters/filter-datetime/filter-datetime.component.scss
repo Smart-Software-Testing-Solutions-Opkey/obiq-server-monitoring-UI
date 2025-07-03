@@ -1,0 +1,139 @@
+.time-text-color {
+    font-size: 1rem;
+    color: #667085; 
+}
+
+.border-box-shadow {
+    box-shadow: 0px 1px 2px 0px #0000000F;
+}
+.date-time-text{
+    font-size: 0.65rem;
+    // padding: 0.25rem;
+    // border: 0.5px solid #D0D5DD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border-radius: 0.25rem;
+    color: #000;
+
+    ::ng-deep .k-datetimepicker{
+        input{
+            padding-right: 0.2rem;
+            padding-left: 0.2rem;
+        }
+    }
+}
+
+.dropdown-menu {
+    .left-dropdown-menu {
+        .dropdown-item {
+            color: #344054;
+        }
+    }
+}
+
+
+.layout-btn-group-time {
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .set-custom-color {
+        background-color: #E6FBFE !important;
+        font-size: 0.875rem;
+        color: #116173;
+        padding: 0.6rem;
+    }
+}
+.right {
+    .btn-layout-time {
+        .btn {
+            font-size: 0.75rem !important;
+            border-radius: 0.25rem !important;
+        }
+    }
+}
+
+.li-dd-item.active {
+    background: #E6FBFE !important;
+    color: #116173 !important;
+}
+
+::ng-deep .dropdownDateTimePicker {
+    &.k-popup {
+        .k-calendar-header .k-button-flat-primary {
+            color: #116173 !important;
+        }
+
+        .k-actions-horizontal .k-button-solid-primary  {
+            background-color: #116173 !important;
+            border-color: #116173 !important;
+        }
+
+        .k-calendar-td.k-selected .k-link {
+            background-color: #116173 !important;
+            color: #fff !important;
+        }
+
+        .k-time-header .k-time-now {
+            color: #116173 !important;
+
+            &:hover {
+                background-color: #f6feff !important;
+            }
+        }
+
+        .k-time-list {
+            .k-item:hover {
+                color: #116173 !important;
+            }
+        }
+        
+        .k-input-inner {
+            font-size: 11px !important;
+        }
+        
+    }
+}
+
+::ng-deep .timeZone-dd-list {
+    &.k-dropdownlist {
+        border-width: 0px !important;
+        box-shadow: none !important;
+        padding: 0px !important;
+        &:focus, 
+        &:focus-visible,
+        &:focus-within {
+            outline: #116173 auto 0px !important;
+        }
+
+        .k-svg-icon  {
+            display: none !important;
+        }
+
+        .k-input-inner {
+            .k-input-value-text {
+                color: #116173 !important;
+            }
+        }
+    }
+}
+
+.sp-eperator {
+    width: 1.5rem;
+    display: inline-block;
+    border: 1px solid #ddd;
+}
+
+.category-bottom-border{
+    .border-bottom {
+        border-bottom: 2px solid #F2F4F7;
+    }
+}
+
+.recent-dateTime{
+    font-size: 0.925rem;
+    color: #667085;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}

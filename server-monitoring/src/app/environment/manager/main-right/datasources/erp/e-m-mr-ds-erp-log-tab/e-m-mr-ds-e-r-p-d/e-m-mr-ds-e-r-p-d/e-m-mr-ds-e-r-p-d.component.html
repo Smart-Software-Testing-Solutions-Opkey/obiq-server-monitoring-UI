@@ -1,0 +1,151 @@
+<div class="logs-details">
+
+    <div class="status-strip mb-3 d-flex-between">
+        <div class="left">
+            <!-- <span class="error-details">
+                <i class="oci oci-WARNING pe-1"></i>
+                Error
+            </span> -->
+            <!-- <span>
+                <span class="text-theme font-bold">
+                    {{receivedTimeRange}}
+                </span> 
+                <span style="color: #667085;">
+                    (a few seconds ago)
+                </span>
+            </span> -->
+        </div>
+        <!-- <div class="right">
+            <button type="button" class="btn btn-bg-white btn-layout-export"> 
+                <i class="oci oci-export pe-2"></i>
+                Export
+            </button>
+        </div> -->
+    </div>
+
+    <!-- <div class="details-strip mb-3 d-flex align-items-start flex-wrap">
+
+        <div class="host d-inline-block datakeys-box">
+            <span class="font-bold">Domain</span>
+            <span class="d-block text-ellipsis font-14px link-color">{{selectedData?.domainName}}</span>
+        </div>
+
+        <div class="host d-inline-block datakeys-box">
+            <span class="font-bold">Host</span>
+            <span class="d-block text-ellipsis font-14px">
+                <i class="oci oci-host ps-1 pe-2"></i>{{selectedData?.dataId}}</span>
+        </div>
+
+        <div class="host d-inline-block datakeys-box">
+            <span class="font-bold">Service</span>
+            <span class="d-block text-ellipsis font-14px">{{selectedData?.appName}}</span>
+        </div>
+
+        <div class="host d-inline-block datakeys-box">
+            <span class="font-bold">Name</span>
+            <span class="d-block text-ellipsis font-14px">
+                <i class="oci oci-shelf-position ps-1 pe-2"></i>{{selectedData?.logName}}</span>
+        </div>
+       
+    </div> -->
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-4 ps-0">
+            <div class="datakeys-box">
+                <span class="font-bold">Domain</span>
+                <span class="d-block text-ellipsis font-14px link-color">
+                    <span ngbTooltip="{{selectedData?.domainName}}" container="body">{{selectedData?.domainName}}</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-4 pe-0">
+            <div class="datakeys-box">
+                <span class="font-bold"> Log Name</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <!-- <i class="oci oci-shelf-position ps-1 pe-2"></i> -->
+                    <span ngbTooltip="{{selectedData?.logName}}" container="body">{{selectedData?.logName}}</span>
+                </span>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="datakeys-box">
+                <span class="font-bold">Time</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <!-- <i class="oci oci-host ps-1 pe-2"></i> -->
+                    <span ngbTooltip="{{selectedData?.dataId}}" container="body">{{selectedData.timeStampString}}</span>
+                </span>
+            </div> 
+        </div>
+        
+    </div>
+
+    <div class="row mx-0 mb-3">
+        <div class="col-sm-4 ps-0">
+            <div class="datakeys-box">
+                <span class="font-bold">User</span>
+                <span class="d-block text-ellipsis font-14px">
+                    <!-- <i class="oci oci-host ps-1 pe-2"></i> -->
+                    <span ngbTooltip="{{selectedData?.userId}}" container="body">{{selectedData.userId}}</span>
+                </span>
+            </div> 
+        </div>
+    </div>
+
+    <!-- <div class="status-message mb-3 error-details d-flex-between">
+        <span>
+            Redis connection failed.
+        </span>
+        <span>
+            <i class="oci oci-copy-all"></i>
+        </span>
+    </div> -->
+
+    <div class="lowerPart">
+
+        <div class="tab_panel" role="tabpanel" aria-label="Tab Panel" [ngClass]="tabSelected == 'Info'?'mb-0':''" >
+            <ul class="nav-tabs mb-0" role="tablist">
+
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'SummarizedLog'?'active':''" (click)="changeSelectedTab('SummarizedLog')">
+                        <!-- <i class="oci oci-trace pe-1"></i> -->
+                        Summarized Log</a>
+                </li>
+                <!-- <li class="nav-item" role="tab" aria-controls="all-journeys-tab" >
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Metrics'?'active':''" (click)="changeSelectedTab('Metrics')">
+                        <i class="oci oci-batch pr-1"></i>
+                        Metrics</a>
+                </li> -->
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Journey'?'active':''" (click)="changeSelectedTab('Journey')">
+                        <i class="oci oci-journey pe-1"></i>
+                        Journey</a>
+                </li>
+                <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                    <a class="nav-link" 
+                        href="javascript:void(0)" [ngClass]="tabSelected == 'Full Log'?'active':''" (click)="changeSelectedTab('Full Log')">
+                        <!-- <i class="oci oci-info pe-1"></i> -->
+                        Full Log</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab_view_content" style="background-color: #DDDDDD;padding:10px;">
+            @if (tabSelected == 'SummarizedLog') {
+               {{selectedData.summarizedLog}}
+            }
+            @else if (tabSelected == 'Journey') {
+                <div class="journey">
+                    <app-journey-grid [child_data]="{selectedData: selectedData}"></app-journey-grid>
+                </div>
+            }
+            @else if(tabSelected == "Full Log"){
+                <div class="Info">
+                    {{selectedData.fullLog}}
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,7 +18,8 @@ export class SelectedTraceInnerComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public service_data: AppDataService,
-    public app_service: AppService,) {
+    public app_service: AppService,
+    private msgbox: MsgboxService ) {
 
   }
   selectedData: any
@@ -26,7 +28,7 @@ export class SelectedTraceInnerComponent implements OnInit, OnDestroy {
   tabSelected: string = 'Trace'
   trace_Selected_data: any = [];
   @Input('child_data') set child_data({ selectedData }) {
-    debugger
+    
     this.selectedData = selectedData
     this.dataKeys = Object.keys(this.selectedData)
     this.dataValues = Object.values(this.selectedData);
@@ -60,6 +62,7 @@ export class SelectedTraceInnerComponent implements OnInit, OnDestroy {
         error: (error: any) => {
           window.loadingStop("#Env_manager_main_right");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");

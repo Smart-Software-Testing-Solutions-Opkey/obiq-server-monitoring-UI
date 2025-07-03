@@ -1,0 +1,83 @@
+<div class="main">
+
+    <div class="upper d-flex mb-4" *ngIf="type == 'error'">
+
+        <span class="exception-iconBox d-inline-block mt-2"> <i class="oci oci-alert-circle element-center"
+                style="font-size: 1.75rem;"></i> </span>
+        <span class="d-block ps-2 pt-3 msg_content_width">
+            <span class="d-block text-start pb-3"
+                style="font-weight: 500; color:#D92D20;text-transform: capitalize;font-size: 1.5rem;">Oops!!</span>
+            <div class="text-start">
+                <div class="" style="white-space: pre-line;">
+                    <div class="scrollable"
+                        style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem; font-weight: 600;">
+                        <div class="msgBoxContent">
+                            {{msg}}
+                            <div>
+                                @if(traceId){
+                                <br>
+                                Trace ID : <span style="color:#007bff;">{{traceId}}</span>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+
+    <div class="upper d-flex mb-4" *ngIf="type == 'confirm'">
+
+        <span class="confirm-iconBox d-inline-block mt-2"> <i class="oci oci-check-circle element-center"
+                style="font-size: 1.75rem;"></i> </span>
+
+        <span class="d-block ps-2 pt-3 msg_content_width">
+            <span class="d-block text-start pb-3"
+                style="font-weight: 500; color:#424242;text-transform: capitalize;font-size: 1.5rem;">Confirm</span>
+            <div class="text-start">
+                <div class="" style="white-space: pre-line;">
+                    <div class="scrollable"
+                        style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem; font-weight: 600;">
+                        <div class="msgBoxContent">
+                            {{msg}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+    </div>
+
+    <div class="upper d-flex mb-4" *ngIf="type == 'warning'">
+
+        <span class="exception-iconBox d-inline-block mt-2"> <i class="oci oci-WARNING element-center"
+            style="font-size: 1.75rem;"></i> </span>
+
+        <span class="d-block ps-2 pt-3 msg_content_width">
+            <span class="d-block text-start pb-3"
+                style="font-weight: 500; color:#424242;text-transform: capitalize;font-size: 1.5rem;">Warning</span>
+            <div class="text-start">
+                <div class="" style="white-space: pre-line;">
+                    <div class="scrollable"
+                        style="max-height: 22rem; word-wrap: break-word; padding-right: 0.25rem; font-weight: 600;">
+                        <div class="msgBoxContent">
+                            {{msg}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+    </div>
+    <div class="lower mt-3">
+        <ng-container *ngFor="let btn of buttons">
+            <button (click)="closeModal(btn.value)" id="report-btn" [class.primary]="btn.primaryBtn" style="padding-right: 1rem !important; padding-left: 1rem !important;">
+                {{btn.text}}
+            </button>
+        </ng-container>
+
+    </div>
+</div>

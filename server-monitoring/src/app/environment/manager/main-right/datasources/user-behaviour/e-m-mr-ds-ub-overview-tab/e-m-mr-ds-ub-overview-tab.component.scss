@@ -1,0 +1,157 @@
+.panel-widget {
+    padding: 1rem;
+    min-height: 7rem;
+    // border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0px 1px 3px 0px #0000001A;
+
+    & + .panel-widget {
+        margin-top: 1rem;
+    }
+
+    .graph-details-value {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .graph-percentage {
+            color: #268144;
+            font-weight: 600;
+            font-size: 1.75rem;
+            margin-bottom: 0rem;
+        } 
+    }
+
+    .graph-details-health {
+        display: flex;
+        align-items: center;
+
+        .layout-text-status {
+            color: #667085;
+            font-size: 0.875rem;
+        }
+
+        .graph-status {
+            background-color: #F5F5F5;
+            color: #12B76A;
+            padding: 0.15rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.8125rem;
+        }
+    }
+
+    .graph-diagram {
+        height: 4rem;
+    }
+}
+
+.widget-section{
+    box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.1019607843);
+    border-top: 2px solid #116173;
+    border-radius: 0.25rem;
+}
+
+::ng-deep .total-error-chart {
+    .total-errors-details {
+        .errors-chart-flex {
+            display: flex;
+            align-items: end;
+        }
+    }
+}
+
+.overview-panel-padiing {
+    &:first-child , &:nth-child(3){
+        padding-left: 0rem;
+        padding-right: 1rem;
+    }
+
+    &:nth-child(2),&:nth-child(4) {
+        padding-right: 0rem;
+        padding-left: 1rem;
+    }
+}
+.margin-bottom-2 {
+    margin-bottom: 2rem;
+}
+
+::ng-deep {
+
+    .custom-error-widget-height {
+        height: calc(100% - 4rem);
+
+        .k-grid {
+            max-height: 100%;
+
+            .no-data-found{
+                height: 11.5rem;
+            }
+        }
+    }
+
+    .custom-journey-widget-height {
+        height: calc(100% - 4.6rem);
+
+        .k-grid {
+            max-height: 100%;
+
+            .no-data-found{
+                height: 13rem;
+            }
+        }
+    }
+}
+
+@media (width: 1920px) {
+    ::ng-deep{
+
+        .custom-journey-widget-height {
+          .k-grid {
+            .k-grid-container {
+              .k-grid-table {
+                .k-master-row {
+                  .k-table-td {
+                    height: 1.8rem !important;
+                  }
+                }
+              }
+            }
+
+            .no-data-found{
+                height: 17rem;
+            }
+          }
+        }
+
+        .custom-error-widget-height {
+            .k-grid{
+                .no-data-found{
+                height: 17rem;
+            }
+            }
+        }
+    }
+}
+
+.overview-error-panel{
+    ::ng-deep .total-errors-details{
+        height: 90% !important;
+        padding-bottom: 3rem;
+    }
+    
+    
+    ::ng-deep .total-errors-details .widget-header{
+        padding-top: .5rem !important;
+        padding-bottom: .5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    ::ng-deep .total-errors-details .graph-custom-wh{
+        align-items: center !important;
+    }
+}
+
+.main gridster-item{
+    overflow: revert !important;
+}

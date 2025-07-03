@@ -1,0 +1,15 @@
+<div class="search_panel" [class.searchToggle]="isSearchToggled">
+    <span class="search_icon" container="body" ngbtooltip="Search" (click)="toggleSearch()">
+        <i class="oci oci-search "></i>
+    </span>
+    @if(openSearch){
+
+        <input #searchInput autocomplete="off" class="form-control layout_placeholder search_input" (blur)="sendSearchvalue(searchInput.value)" (keyup.enter)="sendSearchvalue(searchInput.value)" placeholder="Type and enter to search" type="text" [(ngModel)]="searchModel">
+    }
+    @if (searchModel?.length>0) {
+
+        <span class="clear_search_icon" container="body" ngbtooltip="Clear Search" (click)="clearSearch()">
+            <i class="oci oci-x"></i>
+        </span>
+    }
+</div>

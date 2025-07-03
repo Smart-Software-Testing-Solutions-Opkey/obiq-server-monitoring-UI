@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,13 @@ export class AppService {
 
   private transfterSubject: BehaviorSubject<any>;
 
-  private dataStream = new BehaviorSubject<any>(null);
+  private dataStream = new Subject<any>();
   public dataStream$ = this.dataStream.asObservable();
 
-  constructor(public http: HttpClient) {
+  public folder_view_flagBS = new BehaviorSubject(true);
+  folder_view_flag$ = this.folder_view_flagBS.asObservable();
+
+  constructor(public http: HttpClient, private router: Router,) {
     
     this.transfterSubject = new BehaviorSubject<any>(null);
   }
@@ -39,5 +43,15 @@ export class AppService {
 
   make_get_server_call(form_url: string, form_data: any) {
     return this.http.get(form_url, { params: form_data });
+  }
+  routeTo(portal,view,queryParam?){
+  //  let section = '(rightSection:'+view+')'
+
+   if(!queryParam){
+    this.router.navigateByUrl('/'+portal+'/'+view)
+   }else{
+    this.router.navigateByUrl('/'+portal+'/'+view+'?'+queryParam)
+   }
+    
   }
 }

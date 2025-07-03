@@ -1,0 +1,97 @@
+<div id="ub-user-Journey-logs-grid"  class="logs-grid-layout">
+    <!-- (cellClick)="onSelectionChange($event)" -->
+    <kendo-grid 
+        [data]="ub_User_Journey_Data_Source" 
+        [selectable]="true" 
+        class="scrollable show-scroll-k-grid-content"
+        (scrollBottom)="onScroll()"
+        [style.height]="'calc(100vh - 9rem)'"
+        >
+
+        <kendo-grid-column title="" [width]="10">
+
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                <span class="journey-tab">
+
+                </span>
+
+            </ng-template>
+        </kendo-grid-column>
+
+       
+        <kendo-grid-column field="subActivityName" title="Sub Activity" [width]="320">
+
+           
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                <div class="flex-center">
+
+                    <span class="application-images">
+                        <img src="assets/images/default/application/{{application_list[dataItem.appType]}}.png"
+                            alt="{{application_list[dataItem?.appType]}}">
+                    </span>
+                    <span ngbTooltip="{{dataItem?.subActivityName}}" class="text-ellipsis ps-2">{{dataItem?.subActivityName}}</span>
+                </div>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="moduleName" title="Module" [width]="190">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.moduleName}}">{{dataItem?.moduleName}}</span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="subModuleName" title="Process" [width]="190">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.subModuleName}}">{{dataItem?.subModuleName}}</span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="userId" title="ERP User" [width]="240">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.userId}}">{{dataItem?.userId}}</span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="timeString" title="Time" [width]="190">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.timeString}}">{{dataItem?.timeString}}</span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="subActivityStatus" title="Status" [width]="190">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <span ngbTooltip="{{dataItem?.subActivityStatus}}" class="layout-status"  [ngClass]="{'error': dataItem?.subActivityStatus == 'InCompleteWithError',
+                'success': dataItem?.subActivityStatus == 'Complete'}">{{dataItem?.subActivityStatus}}</span>
+            </ng-template>
+        </kendo-grid-column>
+        
+        <kendo-grid-column title="Action" class="td_overflow_visible text-center td_pb_0 pl-3" [width]="70"
+                    [headerClass]="'td_overflow_visible text-center'">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <div class="dropdown">
+                            <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                                <i class="oci oci-more-vertical font-14px"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li (click)="openInNewTab(dataItem)"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Open in new Tab </a></li>
+                        
+                            </ul>
+                        </div>
+                    </ng-template>
+        </kendo-grid-column>
+
+       
+        
+
+        <ng-template kendoGridNoRecordsTemplate>
+            <div class="no-data-found" style="height: 17rem !important;">
+                <div class="no-data-found-content">
+                    <img class="no-data-found-content-img" src="/assets/icon-image/nodata-img.png" alt="No data">
+                    <p class="no-data-found-content-text">No data available</p>
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid>
+</div>

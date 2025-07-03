@@ -19,9 +19,7 @@ export class SelectedJourneyInnerComponent {
   ) { }
 
   ngOnInit() {
-    if (this.pageDetails.headers.length > 0) {
-      this.openAccordionId = this.pageDetails.headers[0].id; // Open the first child initially in accordion
-  }
+    
   }
 
   pageErrorDetails: any;
@@ -103,20 +101,7 @@ export class SelectedJourneyInnerComponent {
   }
 
 
-  private openAccordionId: string | null = null; 
-
-  toggleAccordion(id: string): void {
-    if (this.openAccordionId === id) {
-      this.openAccordionId = null; 
-    } else {
-      this.openAccordionId = id; 
-    }
-  }
-
-  isOpen(id: string): boolean {
-    return this.openAccordionId === id;
-  }
-
+ 
   toggleActiveLink(event: MouseEvent) {
 
     const target = event.target as HTMLElement;
@@ -135,7 +120,7 @@ export class SelectedJourneyInnerComponent {
 
 
   view_errors(event, errorType) {
-    debugger;
+    
 
     if (event.length == 0) {
       // this.service_notification.notifier(NotificationType.warning, 'No errors available.');
@@ -161,7 +146,7 @@ export class SelectedJourneyInnerComponent {
 
 
   view_screenshot() {
-    debugger;
+  
     const modalRef = this.modalService.open(ViewJourneySnapshotComponent, {
       backdrop: 'static',
       keyboard: false,

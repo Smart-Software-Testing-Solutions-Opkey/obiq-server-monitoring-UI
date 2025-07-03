@@ -98,7 +98,33 @@
             }
         }
         
+        .k-input-inner {
+            font-size: 11px !important;
+        }
         
+    }
+}
+
+::ng-deep .timeZone-dd-list {
+    &.k-dropdownlist {
+        border-width: 0px !important;
+        box-shadow: none !important;
+        padding: 0px !important;
+        &:focus, 
+        &:focus-visible,
+        &:focus-within {
+            outline: #116173 auto 0px !important;
+        }
+
+        .k-svg-icon  {
+            display: none !important;
+        }
+
+        .k-input-inner {
+            .k-input-value-text {
+                color: #116173 !important;
+            }
+        }
     }
 }
 
@@ -108,4 +134,12 @@
     border: 1px solid #ddd;
 }
 
+.category-bottom-border{
+    .border-bottom {
+        border-bottom: 2px solid #F2F4F7;
+    }
+}
 
+::ng-deep .custom-grid-height{
+    height: calc(100vh - 25rem);
+}

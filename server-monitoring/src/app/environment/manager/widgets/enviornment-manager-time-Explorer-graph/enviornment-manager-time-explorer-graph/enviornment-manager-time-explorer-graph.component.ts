@@ -7,6 +7,7 @@ import {
 import { Subscription } from 'rxjs';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -30,11 +31,21 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
   constructor(
     public app_service: AppService,
     public service_data: AppDataService,
+    public dataService: AppDataService,
+    private msgbox: MsgboxService 
 
   ) {
 
   }
   @Input() chartData: any;
+  @Input() Editable : boolean = false
+  title :any;
+  widgetType = ''
+  @Input('child_data') set child_data({view,title,widgetType}) {
+   this.view = view;
+   this.title=title;
+   this.widgetType = widgetType
+  }
   public chartOptions: Partial<ChartOptions>;
   subscriptions: Subscription[] = [];
   ngOnInit(): void {
@@ -45,15 +56,45 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     }))
     this.getLogsChart()
     // this.createChart();
+    this.startDataReceiving();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
   }
-  @Input() view: any
+ 
+  subscriptions1: Subscription[] = [];
+ 
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions1.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  isRefresh: boolean = false;
+  startDataReceiving(){
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
+      if (data !== null) {
+        if (data.callsource == 'OVERVIEW_TAB'){
+          if( data.action == 'refresh'){
+            this.getLogsChart()
+          }
+        }
+      } 
+    });
+    this.subscriptions1.push(data_receiver);
+  }
+  // refreshPage(){
+  //   if(this.isRefresh == true){
+  //     this.getLogsChart();
+  //   }
+  
+  // }
+
+  view: any
 
   getLogsChart(timeFilter?: any) {
-    window.loadingStart("#Env_manager_main_right", "Please wait");
+    window.loadingStart("#maintimeexplorer"+this.widgetType, "Please wait..");
     let ajax_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi//ServerInsightWidgetrController/getInsightWidgetData";
     const form_data = {
       "timeSpanEnum": "LAST_7_DAYS",
@@ -73,13 +114,14 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
     this.app_service.make_post_server_call(ajax_url, form_data)
       .subscribe({
         next: (result: any) => {
-          window.loadingStop("#Env_manager_main_right");
+          window.loadingStop("#maintimeexplorer"+this.widgetType);
           this.chartData = result
           this.createChart();
         },
         error: (error: any) => {
-          window.loadingStop("#Env_manager_main_right");
+          window.loadingStop("#maintimeexplorer"+this.widgetType);
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           console.log("Completed");
@@ -91,7 +133,7 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
       series: this.getSeriesData(this.chartData.essServerLogUsageDtoList),
       chart: {
         type: 'bar',
-        height: 200,
+        height: 280,
         stacked: true,
         toolbar: {
           show: true,
@@ -182,5 +224,17 @@ export class EnviornmentManagerTimeExplorerGraphComponent implements OnInit, OnD
       case 'Warning': return '#ff6833';
       default: return '#ff3333';
     }
+  }
+  isRename : boolean = false;
+  renameWidget(){
+      this.isRename = true;
+      setTimeout(() => {
+        let ele = document.getElementById('renameInput')
+        ele.focus()
+      }, 0);
+
+  }
+  renaming(){
+    this.isRename = false;
   }
 }

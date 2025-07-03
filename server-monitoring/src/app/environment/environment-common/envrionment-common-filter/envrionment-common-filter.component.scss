@@ -1,0 +1,38 @@
+.bt_dropdown_filter {
+    background-color: #fff !important;
+}
+
+.bt_dropdown_filter .filter_count {
+    position: absolute;
+    left: 0.938rem;
+    top: -0.625rem;
+    text-align: center;
+    border-radius: 0.438rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: #ff6161;
+    border: 1px solid #fff;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1rem;
+    font-size: 0.75rem;
+}
+
+.filter-content {
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    
+    .btn-search{
+        height: 2rem;
+        font-size: small;
+    }
+}
+
+.advance-filter{
+    .filter-content {
+        ::ng-deep .application-selected-filter{
+            background-color: #e6fbfe !important;
+            border: 0;
+        }
+    }
+}

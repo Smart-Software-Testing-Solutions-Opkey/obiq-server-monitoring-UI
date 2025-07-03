@@ -1,54 +1,274 @@
 
 <div class="main">
-    <div class="row mx-0">
-        <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
-        </div>
-        <div class="col-sm-4 margin-bottom-2 px-3">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
-        </div>
-        <div class="col-sm-4 margin-bottom-2 ps-3 pe-0">
-            <app-environment-manager-widgets-total-errors-area-widget  class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view}"></app-environment-manager-widgets-total-errors-area-widget>
-        </div>
-        <div class="col-sm-3 margin-bottom-2 ps-0 pe-3">
-            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
-        </div>
-        <div class="col-sm-3 margin-bottom-2 px-3">
-            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
-        </div>
-       
-        <div class="col-sm-3 margin-bottom-2 px-3">
-            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
-        </div>
-        <div class="col-sm-3 margin-bottom-2 pe-0 ps-3">
-            <app-environment-manager-widgets-gauge-meter [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
-        </div>
-    </div>
 
-    <div class="row mx-0">
-    @for(progressBarItem of progressBarArray; track $index){
-      
-            <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
-                <div class="overview-panel widget-section p-3">
-                    <div class="panel-header d-flex-between mb-3">
-                        <h6 class="mb-0">{{ progressBarItem?.heading }}</h6>
-                        <!-- <a href="your-link-here" class="view-full-journey" style="text-decoration: none; color: #1C7C92;">View Full Journey</a> -->
+    <div id="accordion_summary" class="accordion-view-summary" style="height: calc(100vh - 17.1rem);">
+        <div class="card">
+        <ng-container *ngIf="analyticsTypes.display_user_behaviour">
+            <div class="card-header py-2" >
+                <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_UB">
+                   User Behavior
+                </a>
+            </div>
+            <div id="collapse_UB" class="collapse mx-1 show">
+                <div class="card-body px-1 pb-0">
+                    <div class="row mx-0">
+                        <div class="col-sm-6 margin-bottom-2 pe-3 ps-0">
+                            <div class="overview-error-panel position-relative" style="height: 100%;" [id]="'stats-div-ErroruserBehaviour'+selectedAnalyticsType" >
+                                <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'userBehaviour', obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-total-errors-area-widget>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'fastest-journey-userBehaviour'+selectedAnalyticsType" >
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys  [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                            </div>
+                        </div>
+                 
                     </div>
-                    <app-environment-manager-widgets-progress-bars [widgetData]="progressBarItem" [view]="view"></app-environment-manager-widgets-progress-bars>
+                    <div class="row mx-0">
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'slowest-journey-userBehaviour'+selectedAnalyticsType" >
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'common-journey-userBehaviour'+selectedAnalyticsType" >
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'userBehaviour',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'ub-api-tab'+selectedAnalyticsType" >
+                                <app-e-m-api-error-widget  [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 API Errors',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-api-error-widget>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing" >
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'ub-console-tab'+selectedAnalyticsType" >
+                                <app-e-m-console-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Console Errors',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-console-error-widget>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing ps-0" >
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'functional-tab-USER BEHAVIOR'+selectedAnalyticsType">
+                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view ,title:'Top 10 Functional Errors',widgetType:'USER BEHAVIOR',obj_filter: obj_filter,selectedAnalyticsType:selectedAnalyticsType}"></app-e-m-functional-error-widget> 
+                            </div>
+                        </div>
+                 
+                    </div>
+                
+                    <!-- hidded weekly log -->
+                    <!-- <div class="widget-section">
+                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
+                    </div> -->
+    
                 </div>
             </div>
-       
-       
-    }
-    </div>
+        </ng-container>
+        <!-- hidded Test Automation Analytics -->
+        <ng-container *ngIf="analyticsTypes.display_test_automation" class="d-none">
+            <div class="card-header py-2"  >
+                <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_TA">
+                    Test Automation Analytics
+                </a>
+            </div>
+            <div id="collapse_TA" class="collapse show">
+                <div class="card-body px-1 pb-0">
+                    <div class="row mx-0">
+                        <div class="col-sm-4 margin-bottom-2 pe-3 ps-0">
+                            <app-environment-manager-widgets-total-errors-area-widget class="total-error-chart" [Editable]="Editable" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors', widgetType:'testAutomation'}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3">
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'testAutomation'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                            </div>
+                        </div>
+                 
+                    </div>
+                    <div class="row mx-0">
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3">
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'testAutomation'}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3">
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'testAutomation'}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                            </div>
+                        </div>
+                 
+                    </div>
+                
+                    <div class="widget-section">
+                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'testAutomation'}"></app-enviornment-manager-time-explorer-graph>
+                    </div>
+    
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="analyticsTypes.display_erp">
+            <div class="card-header py-2"  >
+                <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERP">
+                    ERP Analytics
+                </a>
+            </div>
 
-    <div class="widget-section">
-        <h6 class="font-bold mb-0 p-2 pt-3">
-            Weekly Log Trends
-        </h6>
-        <app-enviornment-manager-time-explorer-graph [view]="view"></app-enviornment-manager-time-explorer-graph>
+            <div id="collapse_ERP" class="collapse mx-1 show">
+                <div class="card-body px-1 pb-0">
+                    <div class="row mx-0">
+                        <div class="col-sm-4 margin-bottom-2 pe-3 ps-0 h-100 position-relative" [id]="'stats-div-ErrorERP'" >
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total ESS Errors', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </div>
+                        <div class="col-sm-4 margin-bottom-2 px-3 h-100 position-relative" [id]="'stats-div-WarningERP'" >
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total ESS Warnings', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </div>
+                        <div class="col-sm-4 margin-bottom-2 ps-3 pe-0 h-100 position-relative" [id]="'stats-div-SuccessERP'" >
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total ESS Successes', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </div>
+                
+                 
+                    </div>
+                    <div class="row mx-0">
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'user-guides-USERGUIDE_PER_PROCESS'" >
+                                <app-environment-manager-widgets-progress-bars-user-guides [Editable]="Editable" [child_data]="{view:view,title:'Top 5 User Guides Per Process',obj_filter: obj_filter}" ></app-environment-manager-widgets-progress-bars-user-guides>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'fastest-journey-ERP'" >
+                                <app-environment-manager-widgets-progress-bars-fastest-journeys [Editable]="Editable"  [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                            </div>
+                        </div>
+                 
+                    </div>
+                    <div class="row mx-0">
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'slowest-journey-ERP'">
+                                <app-environment-manager-widgets-progress-bars-slowest-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Slowest Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'common-journey-ERP'" >
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable" [child_data]="{view:view,title:'Top 5 Most Common Journeys', widgetType:'ERP',obj_filter: obj_filter}"></app-environment-manager-widgets-progress-bars-common-journeys>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 margin-bottom-2 overview-panel-padiing">
+                            <div class="overview-panel widget-section p-3 position-relative" [id]="'functional-tab-ERP'" >
+                                <app-e-m-functional-error-widget [Editable]="Editable" [child_data]="{view:view,title:'Top 10 Functional errors', widgetType:'ERP',obj_filter: obj_filter}"></app-e-m-functional-error-widget>
+                            </div>
+                        </div>
+                 
+                    </div>
+                
+                    <!-- hidded weekly log -->
+                    <!-- <div class="widget-section">
+                        <app-enviornment-manager-time-explorer-graph [Editable]="Editable" [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'ERP',obj_filter: obj_filter}"></app-enviornment-manager-time-explorer-graph>
+                    </div> -->
+    
+                </div>
+            </div>
+        </ng-container>
+        <!-- hidded System Diagnostics Analytics -->
+        <ng-container *ngIf="analyticsTypes.display_system_diagnostics" class="d-none">
+            <div class="card-header mb-1">
+                <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_SD">
+                    System Diagnostics Analytics
+                </a>
+            </div>
+            <div id="collapse_SD" class="collapse show">
+                <div class="card-body px-1 pb-0">
+                    <div class="row mx-0">
+                        <div class="col-sm-3 margin-bottom-2 ps-0 pe-3">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </div>
+                        <div class="col-sm-3 margin-bottom-2 px-3">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </div>
+                       
+                        <div class="col-sm-3 margin-bottom-2 px-3">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </div>
+                        <div class="col-sm-3 margin-bottom-2 pe-0 ps-3">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </ng-container>
     </div>
-    <!-- <div class="row mx-0">
-        <app-environment-manager-widgets-health-bars></app-environment-manager-widgets-health-bars>
-    </div> -->
+    </div>
+         
+          
+
+        <!-- <div style="height: calc(100vh - 7rem) !important;" class="scrollable">
+
+            <gridster [options]="options" style="background-color: white;" >
+                @for (item of dashboard; track item;let idx = $index;) {
+        
+                    <gridster-item [item]="item" >
+                    
+                        <ng-container *ngIf="item.widId == 'total_errors_Error'">
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Error',view:view,title:'Total Errors'}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId == 'total_errors_Warning'">
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Warning',view:view,title:'Total Warning'}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId == 'total_errors_Success'">
+                            <app-environment-manager-widgets-total-errors-area-widget [Editable]="Editable" class="total-error-chart" [child_data]="{typeEnum: 'Success',view:view,title:'Total Success'}"></app-environment-manager-widgets-total-errors-area-widget>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId == 'TELEMETRY_REDIS_CPU_USAGE_WIDGET'">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis CPU Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId == 'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'Redis RAM Usage',data:'1.62%',view:view,widgetType:'TELEMETRY_REDIS_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </ng-container>
+    
+                        <ng-container *ngIf="item.widId == 'TELEMETRY_VM_CPU_USAGE_WIDGET'">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM CPU Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_CPU_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId == 'TELEMETRY_VM_MEMORY_USAGE_WIDGET'">
+                            <app-environment-manager-widgets-gauge-meter [Editable]="Editable" [child_data]="{title: 'VM RAM Usage',data:'1.29%',view:view,widgetType:'TELEMETRY_VM_MEMORY_USAGE_WIDGET'}"></app-environment-manager-widgets-gauge-meter>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_GUIDE_LIST_PER_PROCESS_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                                <app-environment-manager-widgets-progress-bars-user-guides  [Editable]="Editable" [child_data]="{view:view,title:'User Guides Per Process'}" ></app-environment-manager-widgets-progress-bars-user-guides>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_FAST_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                                 <app-environment-manager-widgets-progress-bars-fastest-journeys  [child_data]="{view:view,title:'Top 5 Fastest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-fastest-journeys>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_JOURNEY_TOP_SLOW_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                               
+                                 <app-environment-manager-widgets-progress-bars-slowest-journeys [child_data]="{view:view,title:'5 Slowest Journeys', widgetType:'userBehaviour'}"></app-environment-manager-widgets-progress-bars-slowest-journeys>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='USER_JOURNEY_MOST_COMMON_WIDGET'">
+                            <div class="overview-panel widget-section p-3">
+                               
+                                <app-environment-manager-widgets-progress-bars-common-journeys [Editable]="Editable"  [view]="view" title="5 Most Common Journeys"></app-environment-manager-widgets-progress-bars-common-journeys>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.widId=='Weekly_Log_Trends'">
+                            <div class="widget-section">
+                                <div  style="display: flex;" class="mb-0 p-2">
+                                    <div *ngIf="Editable">
+                                        <i class="oci oci-bar-chart drag-icon px-1 drag-handler  mb-0 p-2  pt-3"></i>
+                                    </div>
+                                    <h6 class="font-bold mb-0 p-2 pt-3">
+                                        Weekly Log Trends
+                                    </h6>
+                                   </div>
+                               <app-enviornment-manager-time-explorer-graph [child_data]="{view:view,title:'Weekly Log Trends', widgetType:'userBehaviour'}"></app-enviornment-manager-time-explorer-graph>
+                            </div>
+                        </ng-container>
+                    </gridster-item>
+                }
+              </gridster>
+        </div> -->
+    
 </div>

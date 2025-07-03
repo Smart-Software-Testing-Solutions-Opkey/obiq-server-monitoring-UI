@@ -1,22 +1,27 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, output, SimpleChanges } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
 import { ConfigureRightPanelComponent } from '../../configure-right-panel/configure-right-panel.component';
-
+import { NotificationsService } from 'src/app/services/notification-service/notifications.service';
+import { NotificationType } from 'src/app/global/enums';
+import { Subscription } from 'rxjs';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 @Component({
   selector: 'app-configuration-settings-summary-after-view-creation',
   templateUrl: './configuration-settings-summary-after-view-creation.component.html',
   styleUrl: './configuration-settings-summary-after-view-creation.component.scss'
 })
-export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit {
+export class ConfigurationSettingsSummaryAfterViewCreationComponent implements OnInit, AfterViewInit, OnDestroy {
   receivedAccessType: any;
   constructor(
     public app_service: AppService,
     public dataService: AppDataService,
     public modalService: NgbModal,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public service_notification: NotificationsService,
+    private msgbox: MsgboxService
   ) {
   }
   obj_configuration_setting: any;
@@ -26,17 +31,33 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
   selectedUsers: any[] = [];
   Show_Project_Access: boolean = false;
   Selected_grid_dataSource: any;
+  selected_grid_System_Diagnostics: any = []
+  selected_user_behaviour_component: any = []
+  selected_test_automation_analysis: any = []
   groupedDataSource: any = {};
+  ngOnDestroy() {
+    this.dataService.isEnablePersister = false
+    this.disposeAllSubscriptions();
+  }
+
+  isDisabled: boolean = false;
   @Input('child_data')
-  set child_data({ obj_configuration_setting }) {
-    debugger;
+  set child_data({ obj_configuration_setting, isDisabled }) {
+   debugger
+    console.log("from after view       :",obj_configuration_setting)
     if (obj_configuration_setting !== this.obj_configuration_setting) {
       this.obj_configuration_setting = obj_configuration_setting;
 
 
       this.onConfigurationSettingChange();
     }
+    if (isDisabled) {
+      this.isDisabled = isDisabled
+    }
   }
+
+
+
 
   onCellClick(event) {
 
@@ -48,7 +69,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       keyboard: false,
       size: 'full',
       centered: true,
-      windowClass: 'layout-modal-right panel-end'
+      windowClass: 'layout-modal-right panel-end custom-access-modal'
     });
     modalRef.result.then((result) => {
     }, (response) => {
@@ -56,9 +77,16 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         return;
       }
     });
-    modalRef.componentInstance.selectedItem = { callsource: this.obj_configuration_setting };
+    // this.obj_configuration_setting.AccessPermissions = 'VIEW'
+    modalRef.componentInstance.selectedItem = this.obj_configuration_setting;
+    modalRef.componentInstance.typeSelectedItem = "update";
+
+
+
   }
   onConfigurationSettingChange(): void {
+
+
     if (this.obj_configuration_setting) {
 
       this.obj_configuration_setting.selected_erp_analytics = this.obj_configuration_setting.selected_erp_analytics.map(item => {
@@ -68,65 +96,96 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
         };
       });
       this.Selected_grid_dataSource = this.obj_configuration_setting.selected_erp_analytics
+
+      if(this.obj_configuration_setting && this.obj_configuration_setting.selected_user_behaviour_component){
+        this.obj_configuration_setting.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component.map(item => {
+          return {
+            ...item,
+            value: JSON.parse(item.value)
+          };
+        });
+        this.selected_user_behaviour_component = this.obj_configuration_setting.selected_user_behaviour_component
+      }
+
+
+
+
     }
-    debugger;
-    this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
+
+    this.selectedAccessType = this.obj_configuration_setting?.selected_view?.accessType
+    this.dataService.changedAccessType = this.selectedAccessType
     console.log('Configuration setting has changed:', this.obj_configuration_setting);
+
+
+
   }
 
 
+  subscriptions: Subscription[] = [];
+
+  disposeAllSubscriptions() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.app_service.dataReceiver().subscribe(data => {
+    let data_receiver = this.app_service.dataReceiver().subscribe(data => {
+
       if (data !== null) {
-        debugger;
+
         this.receivedAccessType = data;
         console.log(this.receivedAccessType, "recived==========")
-        this.selectedAccessType = this.receivedAccessType.AccessType
-        this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
-        if (this.obj_configuration_setting.AccessType == "SHARED") {
-          this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
-            userId: item.U_ID,
-            permmission: item.permission === "EDIT" ? "ALL" : item.permission
-          }));
+        if(data.callsource == 'settings'){
+          this.selectedAccessType = this.receivedAccessType?.data?.selected_view?.accessType
         }
-        else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
+        else if(data.action == 'editDisabled'){
+          this.selectedAccessType = this.receivedAccessType?.selectedView?.accessType
+        }
+        else if(data.callsource == 'navigatorops'){
+          this.selectedAccessType = this.receivedAccessType?.data?.selectedView?.accessType
+        }
+        else{
+          this.selectedAccessType = this.receivedAccessType?.AccessType
+        }
 
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          if (this.receivedAccessType.AccessPermisions.EDIT == true) {
-            this.obj_configuration_setting.selectedUids.permmission = "ALL";
-          }
-          else {
-            this.obj_configuration_setting.selectedUids.permmission = "VIEW"
-          }
-        }
-        else {
-          this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
-          this.obj_configuration_setting.selectedUids.permmission = "ALL";
+       
+        
+        
+        // this.dataService.changedAccessType = this.selectedAccessType
+        // this.obj_configuration_setting.AccessType = this.receivedAccessType.AccessType;
+        // if (this.obj_configuration_setting.AccessType == "SHARED") {
+        //   this.obj_configuration_setting.selectedUids = this.receivedAccessType.map(item => ({
+        //     userId: item.U_ID,
+        //     permmission: item.permission === "EDIT" ? "ALL" : item.permission
+        //   }));
+        // }
+        // else if (this.obj_configuration_setting.AccessType == "PUBLIC") {
 
-        }
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   if (this.receivedAccessType.AccessPermisions.EDIT == true) {
+        //     this.obj_configuration_setting.selectedUids.permmission = "ALL";
+        //   }
+        //   else {
+        //     this.obj_configuration_setting.selectedUids.permmission = "VIEW"
+        //   }
+        // }
+        // else {
+        //   this.obj_configuration_setting.selectedUids.userId = "00000000-0000-0000-0000-000000000000"
+        //   this.obj_configuration_setting.selectedUids.permmission = "ALL";
+
+        // }
         this.cdr.detectChanges();
       }
     });
+
+    this.subscriptions.push(data_receiver);
   }
   ngAfterViewInit(): void {
 
   }
-  onAccessTypeChange(selectedOption: string) {
-    debugger;
-    this.selectedAccessType = selectedOption;
-    if (this.selectedAccessType == "SHARED") {
-      this.getAllProjects()
-    }
-    else {
-      this.Show_Project_Access = false
-    }
-    this.obj_configuration_setting.AccessType = this.selectedAccessType
-    console.log('Access Type Changed:', selectedOption);
-
-  }
+ 
 
   onUserSelect(user: any, event: Event): void {
-    debugger;
+
     if ((event.target as HTMLInputElement).checked) {
 
       this.selectedUsers.push({
@@ -141,15 +200,15 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
     console.log(this.selectedUsers);
   }
   create_to_update_object() {
-    debugger;
+
     var obj_Update_View = new Object();
     obj_Update_View["viewId"] = this.obj_configuration_setting.selected_view.viewId,
       obj_Update_View["viewName"] = this.obj_configuration_setting.selected_view.viewName,
       obj_Update_View["accessType"] = this.selectedAccessType,
       obj_Update_View["userId"] = this.dataService.UserDto.UserDTO.U_ID
-      obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
-      obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission}] : this.obj_configuration_setting.selectedUids;
-      return obj_Update_View;
+    obj_Update_View["projectId"] = this.dataService.UserDto.ProjectDTO.P_ID
+    obj_Update_View["authorizedUsers"] = this.obj_configuration_setting.AccessType === 'PRIVATE' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: "ALL" }] : this.obj_configuration_setting.AccessType === 'PUBLIC' ? [{ userId: this.dataService.UserDto.UserDTO.U_ID, permmission: this.obj_configuration_setting.selectedUids.permmission }] : this.obj_configuration_setting.selectedUids;
+    return obj_Update_View;
   }
   Update_ViewAccess_Type() {
 
@@ -157,25 +216,35 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
 
     let form_data = this.create_to_update_object() as any;
 
+
     this.app_service.make_post_server_call(form_url, form_data)
       .subscribe({
 
         next: (result: any) => {
-          this.app_service.dataTransmitter("viewCreated");
+          // this.app_service.dataTransmitter("viewCreated");
+          // this.selectedAccessType = form_data?.accessType;
+          console.log(this.selectedAccessType);
+          
+          this.obj_configuration_setting.selected_view.accessType = this.selectedAccessType;
+          // this.selectedAccessType = this.obj_configuration_setting.selected_view.accessType
+          console.log(this.selectedAccessType);
+          this.app_service.dataTransmitter({ callsource: 'settings', data: this.obj_configuration_setting });
+          
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
           console.log("Completed");
+          this.service_notification.notifier(NotificationType.success, 'Access Type Updated');
         }
       });
   }
 
   getAllProjects() {
-    debugger;
-   
+
+
     let form_url = environment.BASE_OBIQ_SERVER_URL + "Profile/GetAssignedUsersInProject";
 
     let form_data = { P_ID: this.dataService.UserDto.ProjectDTO.P_ID };
@@ -189,7 +258,7 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
           this.users = result;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -198,7 +267,55 @@ export class ConfigurationSettingsSummaryAfterViewCreationComponent implements O
       });
   }
 
-  backToMenu(){
-    this.app_service.dataTransmitter({callsource:'settings',data:'backToMenu'});
+  backToMenu() {
+    if (this.dataService.isEnablePersister) {
+
+      this.service_notification.showPersister('You have unsaved changes, wish to continue?')
+      this.dataService.modalSubInstance.result.then((result) => {
+      }, (response) => {
+        if (response == 'Yes') {
+          this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
+          this.dataService.modalSubInstance = null
+          return
+        }
+        else if (response == 'No') {
+          this.dataService.modalSubInstance = null
+          return
+        }
+
+
+      });
+    }
+    else {
+      this.app_service.dataTransmitter({ callsource: 'settings', data: 'backToMenu' });
+    }
+
+  }
+
+  onSettingsSelectedData = output<any>()
+
+  updateSummaryData() {
+    if (this.dataService.isEnablePersister) {
+
+      this.service_notification.showPersister('You have unsaved changes, wish to continue?')
+      this.dataService.modalSubInstance.result.then((result) => {
+      }, (response) => {
+        if (response == 'Yes') {
+          this.onSettingsSelectedData.emit({ isOpen: 'Settings', selectedViewSettings: this.obj_configuration_setting })
+          this.Update_ViewAccess_Type()
+          this.dataService.modalSubInstance = null
+          return
+        }
+        else if (response == 'No') {
+          this.dataService.modalSubInstance = null
+          return
+        }
+
+
+      });
+    }
+    else {
+      this.Update_ViewAccess_Type()
+    }
   }
 }

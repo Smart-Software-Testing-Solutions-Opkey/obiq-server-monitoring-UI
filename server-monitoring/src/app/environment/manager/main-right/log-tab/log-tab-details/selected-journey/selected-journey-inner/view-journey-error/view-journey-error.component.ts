@@ -27,7 +27,7 @@ export class ViewJourneyErrorComponent implements OnInit {
 
   header_text = "";
   bind_header() {
-    debugger;
+  
     if(this.errorType == 'functionalErrors') {
       this.header_text = "Functional Error";
 

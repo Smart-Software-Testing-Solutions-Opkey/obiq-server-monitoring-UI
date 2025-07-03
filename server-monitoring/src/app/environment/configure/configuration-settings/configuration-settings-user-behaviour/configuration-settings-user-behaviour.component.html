@@ -1,32 +1,77 @@
-<h6 class="mb-3 font-bold">
-    Choose Agents 
-    <span *ngIf="obj_error.displayUserError" class="form-error">Agent selection is required.</span>
-</h6>
 
-<kendo-grid 
+<div class="row mx-0 align-items-center">
+    <div class="d-flex-between mb-2 px-0">
+         <div class="col-8 px-0">
+            <h6 class="mb-2 font-bold">
+                Choose Users <span class="text-astric">*</span>
+                <span class="ub-sub-heading pt-2 pb-1"><i class="oci oci-lightbulb pe-2"></i>Login to our opkey browser extension and track user behavior across ERP Suites
+                </span>
+            
+                <span *ngIf="obj_error.displayUserError" class="form-error">User selection is required.</span>
+            </h6>
+            
+         </div>
+         <div class="filter-content my-1">
+             <div class="search_panel searchToggle">
+                 <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+                 <input type="text" class="form-control search_input" placeholder="Type and enter to search"  [(ngModel)]="searchText" (input)="filterSearchResults()" >
+                 <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch()"><i
+                     class="oci oci-x"></i>  
+                 </span>
+             </div>
+         </div>
+    </div>
+
+
+<div id="ub-loader" class="px-0 user-b-loader">
+    <kendo-grid 
     #grid_application 
-    [data]="agent_lists" 
+    [kendoGridBinding]="user_lists" 
     [selectable]="true"         
     [navigable]="true"   
-    (selectionChange)="on_Selection_Change_User_Behavious($event)"
     [selectable]="{ checkboxOnly: true, mode: 'multiple' }" 
-    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo"
-    kendoGridSelectBy="email"
-    [(selectedKeys)]="selectedKeys">
+    class="scrollable grid_remove_vertical_border k_grid_header_pr_0 checkbox-custom-kendo px-0"
+    kendoGridSelectBy="U_ID"
+    [(selectedKeys)]="selectedKeys" 
+    [pageable]="true"
+    [pageSize]="10"
+    [style.max-height]="'calc(100vh - 15rem)'">
     
-    <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
-    </kendo-grid-checkbox-column>
+    <!-- <kendo-grid-checkbox-column [showSelectAll]="true" [width]="50">
+    </kendo-grid-checkbox-column> -->
 
-    <kendo-grid-column field="SystemIdentifier" title="Agents">
+    <kendo-grid-column [width]="50">
+        <ng-template kendoGridHeaderTemplate >
+            <input type="checkbox" [checked]="checkAllUsers()" (change)="on_AllSelection_Change_User_Behaviour($event)">
+         </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+                <div>
+                   <input type="checkbox" [checked]="selected_System_User_behaviour[dataItem.U_ID]" (change)="on_Selection_Change_User_Behaviour($event,dataItem)" >
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="SystemIdentifier" title="Name">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div class="flex-center">
                 <span class="img-app-profile">
-                    <img src="assets/images/default/profile.png" alt="">
+                    <img src="/user/getavatar/{{dataItem.U_ID}}" alt="">
                 </span>
 
                 <div class="ps-2">
-                    <span class="layout-text-name">{{dataItem.name}}</span>
-                    <span class="layout-text-date">{{dataItem.email}}</span>
+                    <span class="layout-text-name" ngbTooltip="{{dataItem?.Name}}">{{dataItem.Name}}</span>
+                </div>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="SystemIdentifier" title="Email address">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="flex-center">
+
+                <div>
+                    <span class="layout-text-date" ngbTooltip="{{dataItem?.email_ID}}">{{dataItem.email_ID}}</span>
                 </div>
             </div>
         </ng-template>
@@ -40,3 +85,5 @@
         </div>
     </ng-template>
 </kendo-grid>
+
+</div>

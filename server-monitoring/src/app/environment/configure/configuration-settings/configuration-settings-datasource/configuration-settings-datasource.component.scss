@@ -6,16 +6,23 @@
 
 .data-source-category {
     border: 1px solid #D0D5DD;
-    padding: 1.5rem;
+    //padding: 1.5rem;
     border-radius: 0.5rem;
-    height: 14.5rem;
+    height: 15.5rem;
     position: relative;
 
     p {
-        padding-top: 2rem;
+        padding-top: 1rem;
         font-weight: 400;
         line-height: 1.25rem;
         color: #000;
+        font-size: small;
+    }
+
+    .card-footer{
+        background: #fff;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
     }
 
     &.active {
@@ -39,13 +46,18 @@
                 font-size: 0.7rem;
             }
         }
+
+        .card-footer{
+            border-top: 1px solid #116173;
+            background-color: #E4F1F4 !important;
+        }
     }
 
     .header {
         position: relative;
         color: #116173;
-        font-size: 1.25rem;
-        height: 2.5rem;
+        font-size: 1.2rem;
+        height: 2rem;
         font-weight: 600 !important;
 
         &::after {

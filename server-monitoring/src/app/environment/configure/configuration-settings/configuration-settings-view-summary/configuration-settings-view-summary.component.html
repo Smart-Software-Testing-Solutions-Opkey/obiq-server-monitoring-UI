@@ -7,7 +7,7 @@
             <label for="accessType" class="form-label">Access Type <span class="text-astric">*</span></label>
             
             <div class="dropdown access-type-layout">
-                <button (click)="OnAccessTypeClick()"type="button" class="btn btn-bg-white bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
+                <button (click)="OnAccessTypeClick()"type="button" class="btn btn-bg-white custom-bt-dropdown-icon d-flex-between w-100 dropdown-toggle {{ selectedAccessType }}" data-bs-toggle="dropdown">
                   <span>
                     {{ selectedAccessType }}
                   </span>
@@ -38,9 +38,20 @@
     </div>
 
     <div class="row mx-0 mb-3 align-items-center">
-        <div class="col-6 px-0">
-            <h4 class="text-header mb-0">View Summary</h4>
-        </div>
+       <div class="d-flex-between px-0">
+            <div class="col-6 px-0">
+                <h4 class="text-header mb-0">View Summary</h4>
+            </div>
+            <div class="filter-content mb-1 me-3">
+                <div class="search_panel searchToggle">
+                    <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
+                    <input type="text" class="form-control search_input" placeholder="Search"  [(ngModel)]="searchText" (input)="filterSearchResults()" >
+                    <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"  (click)="clearSearch()"><i
+                        class="oci oci-x"></i>  
+                    </span>
+                </div>
+            </div>
+       </div>
 
         <!-- <div class="col-6 px-0">
             <div class="search_panel searchToggle ms-auto" style="width: 20rem;">
@@ -59,19 +70,20 @@
     </div>
     
 
-    <div class="row mx-0 mb-3">
+    <div class="row mx-0">
         <div class="col-12 px-0">
 
-            <div id="accordion_summary" class="accordion-view-summary">
+            <div id="accordion_summary" class="accordion-view-summary pe-3" style="height: calc(100vh - 22rem); overflow: auto;">
 
                @if(obj_configuration_setting.selected_datasource != null && obj_configuration_setting.selected_datasource.select_datasource_item.length != 0) {
 
+                   <div class="card">
                     @for(item of obj_configuration_setting.selected_datasource.select_datasource_item; track item.id) {
 
                         @if(item.name == 'ERP Analytics') {
 
-                            <div class="card">
-                                <div class="card-header">
+                            <!-- <div class="card"> -->
+                                <div class="card-header py-2">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_ERPAnalytics">
                                         ERP Analytics
                                     </a>
@@ -80,18 +92,20 @@
                                     <div class="card-body px-0">
             
                                         <div class="kendo_grid">
-                                            <kendo-grid #grid_Selected_Instance_list [data]="Selected_grid_dataSource"
+                                            <kendo-grid #grid_Selected_Instance_list [kendoGridBinding]="Selected_grid_dataSource"
                                                 (cellClick)="onCellClick($event)" [selectable]="true" [navigable]="true"
+                                                [pageable]="true"
+                                                [pageSize]="10"
                                                 (selectionChange)="onSelectionChange($event)"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
                                                 <kendo-grid-column field="SystemIdentifier" title="Instances">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
-                                                            <span class="application-images ms-0">
+                                                            <span class="application-images instances ms-0">
                                                                 <img src="assets/images/default/application/{{dataItem.Application}}.png"
                                                                     alt="{{dataItem.Application}}">
                                                             </span>
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.SystemIdentifier}}</span>
+                                                            <span class="layout-text-obiq" ngbTooltip="{{dataItem?.SystemIdentifier}}">{{dataItem.SystemIdentifier}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
@@ -100,10 +114,10 @@
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                             <span class="img-app-profile">
-                                                                <img src="assets/images/default/profile.png" alt="">
+                                                                <img src="/user/getavatar/{{dataItem.CreatedBy}}" alt="">
                                                             </span>
-                                                            <div class="ps-2">
-                                                                <span class="layout-text-name">{{dataItem.CreatedBy}}</span>
+                                                            <div class="ps-2" ngbTooltip="{{dataItem?.CreatedByName}},{{ dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}">
+                                                                <span class="layout-text-name">{{dataItem.CreatedByName}}</span>
                                                                 <span class="layout-text-date">{{dataItem.CreatedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                                             </div>
                                                         </div>
@@ -114,10 +128,10 @@
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                             <span class="img-app-profile">
-                                                                <img src="assets/images/default/profile.png" alt="">
+                                                                <img src="/user/getavatar/{{dataItem.ModifiedBy}}" alt="">
                                                             </span>
-                                                            <div class="ps-2">
-                                                                <span class="layout-text-name">{{dataItem.ModifiedBy}}</span>
+                                                            <div class="ps-2" ngbTooltip="{{dataItem?.ModifiedByName}},{{ dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}">
+                                                                <span class="layout-text-name">{{dataItem.ModifiedByName}}</span>
                                                                 <span class="layout-text-date">{{dataItem.ModifiedOn | date:'MMM d, y, h:mm:ss a'}}</span>
                                                             </div>
                                                         </div>
@@ -138,13 +152,13 @@
             
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
                         @if(item.name == 'System Diagnostics') {
                             
-                            <div class="card">
+                            <!-- <div class="card"> -->
                                 <div class="card-header">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_systemDiagnostics">
                                         System Diagnostics
@@ -159,17 +173,18 @@
                                                 <kendo-grid-column field="SystemIdentifier" title="OBIQ Agent">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
-                                                            <span class="layout-text-obiq ps-2">{{dataItem.OBIQ_Agent}}</span>
+                                                            <span class="layout-text-obiq ps-2"  ngbTooltip="{{dataItem?.agentName}}">{{dataItem.agentName}}</span>
+                                                           
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
             
-                                                <kendo-grid-column field="CreatedBy" title="URL">
+                                                <kendo-grid-column field="CreatedBy" title="IP Address">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                           
                                                             <div>
-                                                                <span class="layout-text-date">{{dataItem.Unique_Code}}</span>
+                                                                <span class="layout-text-date"  ngbTooltip="{{dataItem?.ipAddress}}">{{dataItem.ipAddress}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -188,14 +203,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
-                        @if(item.name == 'User Behaviour Analytics') {
+                        @if(item.name == 'User Behavior Analytics') {
                             
-                            <div class="card">
-                                <div class="card-header">
+                            <!-- <div class="card"> -->
+                                <div class="card-header py-2">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_user">
                                         User Behavior Analytics
                                     </a>
@@ -203,19 +218,30 @@
                                 <div id="collapse_user" class="collapse show">
                                     <div class="card-body px-0">
                                         <div class="kendo_grid">
-                                            <kendo-grid [data]="selected_user_behaviour_component"
+                                            <kendo-grid [kendoGridBinding]="selected_user_behaviour_component"
                                                 [selectable]="false" [navigable]="true"
+                                                [pageable]="true"
+                                                [pageSize]="10"
                                                 class="scrollable grid_remove_vertical_border k_grid_header_pr_0">
 
-                                                <kendo-grid-column title="Agents">
+                                                <kendo-grid-column title="User">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center">
                                                             <span class="img-app-profile">
-                                                                <img src="assets/images/default/profile.png" alt="">
+                                                                <img src="/user/getavatar/{{dataItem.U_ID}}" alt="">
                                                             </span>
                                                             <div class="ps-2">
-                                                                <span class="layout-text-name">{{dataItem.name}}</span>
-                                                                <span class="layout-text-date">{{dataItem.email}}</span>
+                                                                <span class="layout-text-name" ngbTooltip="{{dataItem?.Name}}">{{dataItem.Name}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </kendo-grid-column>
+                                                <kendo-grid-column title="Email address">
+                                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                                        <div class="flex-center">
+                                                            
+                                                            <div>
+                                                                <span class="layout-text-date" ngbTooltip="{{dataItem?.email_ID}}">{{dataItem.email_ID}}</span>
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -234,13 +260,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                         }
 
                         @if(item.name == 'Test Automation Analytics') {
 
-                            <div class="card">
+                            <!-- <div class="card"> -->
                                 <div class="card-header">
                                     <a class="btn btn-accordion" data-bs-toggle="collapse" data-bs-target="#collapse_testAutomation">
                                         Test Automation Analytics
@@ -255,8 +281,8 @@
                                                 <kendo-grid-column field="AgentName" title="User Name">
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                                         <div class="flex-center executionAgent">               
-                                                            <span class="status me-2" [ngClass]="dataItem.status=='online'? 'online':'offline'"></span>
-                                                            <span class="layout-text-obiq ps-1">{{dataItem?.AgentName}}</span>
+                                                            <span class="status me-2" [ngClass]="dataItem['IsOnline']== true ? 'online':'offline'"></span>
+                                                            <span class="layout-text-obiq ps-1" ngbTooltip="{{dataItem?.AgentName}}">{{dataItem?.AgentName}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
@@ -265,7 +291,7 @@
                                                     <ng-template kendoGridCellTemplate let-dataItem>
                                             
                                                         <div class="flex-center">
-                                                            <span class="layout-text-date">{{dataItem?.AgentName}}</span>
+                                                            <span class="layout-text-date" ngbTooltip="{{dataItem?.AgentName}}">{{dataItem?.AgentName}}</span>
                                                         </div>
                                                     </ng-template>
                                                 </kendo-grid-column>
@@ -291,12 +317,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                             
                         }
 
-
+                        
                     }
+                </div>
 
                 }
 

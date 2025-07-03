@@ -8,7 +8,8 @@
 
         <div class="rp-header-right">
             <button type="button" class="btn btn-rp"
-                (click)="close_model()" aria-label="Close">
+                (click)="close_model()" aria-label="Close" ngbTooltip="Close" 
+                    container="body" triggers="mouseenter:mouseleave">
                 <i class="oci oci-x"></i>
             </button>
         </div>
@@ -22,6 +23,25 @@
         }
         @else if(this.selectedPanel == 'AddWidgets'){
             <app-manager-right-pannel-widjet></app-manager-right-pannel-widjet>
+        }
+        @else if(this.selectedPanel == "ErpLogDetails"){
+            <app-e-m-mr-ds-e-r-p-d [child_data]="{selectedData:selectedItem.data}"></app-e-m-mr-ds-e-r-p-d>
+        }
+        @else if(this.selectedPanel == "ErpFunctionalJourney"){
+            <app-e-m-mr-ds-e-f-e-journey [child_data]="{selectedData:selectedItem.data}"></app-e-m-mr-ds-e-f-e-journey>
+        }
+        @else if(this.selectedPanel == "ERPAllProcessWidget"){
+            <app-e-m-mr-ds-erp-o-v-f-p [child_data]="{selectedData:selectedItem.data}" ></app-e-m-mr-ds-erp-o-v-f-p>
+        }
+        @else if(this.selectedPanel == 'ubAllFunctionalWidget'){
+            <app-e-m-ds-ub-f-e-panel [child_data]="{selectedData:selectedItem.data}"></app-e-m-ds-ub-f-e-panel>
+        }
+        @else if(this.selectedPanel == 'ubAllConsoleWidget'){
+            <app-e-m-mr-ds-ub-c-e-panel [child_data]="{selectedData:selectedItem.data}"></app-e-m-mr-ds-ub-c-e-panel>
+
+        }
+        @else if(this.selectedPanel == 'ubAllApiWidget'){
+            <app-e-m-mr-ds-ub-a-e-panel [child_data]="{selectedData:selectedItem.data}"></app-e-m-mr-ds-ub-a-e-panel>
         }
     </div>
 

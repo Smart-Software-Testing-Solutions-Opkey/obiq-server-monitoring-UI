@@ -1,226 +1,30 @@
-
 <div id="Env_manager_main_right" class="feature-container h-100">
-
     <div class="feature-breadcrumb">
         <app-navigator-breadcrumb></app-navigator-breadcrumb>
-        
+
     </div>
+
 
     <div class="feature-body feature-body-height flex-box-column">
 
         <div class="app-filter app-filter-content px-4">
 
             <div class="left">
-                <h3 class="mb-0 text-ellipsis">{{this.selectedView.viewName}}</h3>
+                <h3 class="mb-0 text-ellipsis">{{selectedView.viewName || selectedView.name}}</h3>
             </div>
 
-            <div class="right flex-center justify-content-end flex-wrap">
-                <!-- <div class="filter-content">
-                    <button type="button" class="btn btn-layout btn-bg-theme filter-content-btn" (click)="addWidget()">
-                        <i class="oci oci-plus me-2"></i>
-                        <span>Widget</span>
-                    </button>
-                </div> -->
-
-                <div class="filter-content">
-                    <div class="search_panel searchToggle">
-    
-                        <span class="search_icon" ngbTooltip="Search" container="body"><i class="oci oci-search"></i></span>
-                
-                        <input type="text" class="form-control search_input" placeholder="Search">
-                
-                        <span ngbTooltip="Clear Search" container="body" class="clear_search_icon"><i
-                                class="oci oci-x"></i>
-                
-                        </span>
-                    </div>
-
-                </div>
-
-                <!-- <div class="filter-content">
-                    <div class="btn-group layout-btn-group">
-                        <button type="button" class="btn btn-default" >
-                            <i class="oci oci-delete"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-default" >
-                            <i class="oci oci-edit"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-default" >
-                            <i class="oci oci-refresh-cw"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-default" >
-                            <i class="oci oci-plus"></i>
-                        </button>
-
-                    </div>
-
-                </div> -->
-
-                <!-- <div class="filter-content">
-                    <div class="layout-btn-group-time">
-                        
-                        <button type="button" class="btn btn-default p-2 border-0 flex-center">
-                            <button class="btn btn-default">
-                                <i class="oci oci-chevron-left font-12px align-middle"></i>
-                            </button>
-                            <span class="time-text-color px-2">
-                                <i class="oci oci-clock font-14px pe-2"></i>
-                                from <span class="font-bold text-theme">{{receivedTimeRange}}</span> (GMT+5:30)
-                            </span>
-                            <button class="btn btn-default">
-                                <i class="oci oci-chevron-right font-12px align-middle"></i>
-                            </button>
-                        </button>
-
-                    </div>
-
-                </div> -->
-
-                <div class="filter-content">
-                    <div class="dropdown layout-btn-group-time">
-                        
-                       <button #timeFilterToggleButton type="button" class="btn btn-default dropdown-toggle p-2 border-0 flex-center"  data-bs-toggle="dropdown" data-bs-auto-close="false">
-                            <button type="button" class="btn btn-default">
-                                <i class="oci oci-chevron-left font-12px"></i>
-                            </button>
-                            <span class="time-text-color px-2">
-                                <i class="oci oci-clock font-14px pe-2"></i>
-                                <!-- from <span class="font-bold text-theme">Sep 13, 02:32 pm</span> to <span class="font-bold text-theme">Sep 13, 03:04 pm</span> (GMT+5:30) -->
-                                from <span class="font-bold text-theme">{{receivedTimeRange}}</span> (GMT+5:30)
-                            </span>
-                            <button type="button" class="btn btn-default">
-                                <i class="oci oci-chevron-right font-12px"></i>
-                            </button>
-                       </button>
-
-                       <div class="dropdown-menu py-0 border-0 border-box-shadow ">
-                            
-                            <div class="d-flex" style="width: 35rem;">
-                                <div class="left border-box-shadow left-dropdown-menu" style="width: 9rem;">
-                                    <ul class="list-unstyled border-box-shadow mb-0">
-                                        @for(timeItem of timeFilter; track timeItem.name){
-                                            <li (click)="onSelctTime(timeItem)" class="dropdown-item li-dd-item" [ngClass]="{'active': selectedTime == timeItem?.name}">
-                                                {{ timeItem?.value }}
-                                            </li>
-                                        }
-                                        <!-- <li class="dropdown-item">60 minutes</li> -->
-                                    </ul>
-    
-                                    <!-- <ul class="list-unstyled border-box-shadow mb-0">
-                                        <li class="dropdown-item">3 hours</li>
-                                        <li class="dropdown-item">6 hours</li>
-                                        <li class="dropdown-item">12 hours</li>
-                                        <li class="dropdown-item">24 hours</li>
-                                    </ul>
-    
-                                    <ul class="list-unstyled border-box-shadow mb-0">
-                                        <li class="dropdown-item">3 days</li>
-                                        <li class="dropdown-item">7 days</li>
-                                    </ul>
-    
-                                    <ul class="list-unstyled border-box-shadow mb-0">
-                                        <li class="dropdown-item">1 month</li>
-                                        <li class="dropdown-item">3 months</li>
-                                    </ul>
-    
-                                    <div class="set-custom-color">
-                                        <span>
-                                           Set Custom
-                                        </span>
-                                    </div> -->
-                                </div>
-                                <div *ngIf="selectedTime == 'setCustom' " class="right px-3" style="width: calc(100% - 9rem);">
-                                    <div class="d-flex-between py-3">
-                                        <span class="mb-0 text-grey-1 font-14px font-bold">Custom</span>
-
-                                        <button type="button" class="btn btn-default text-theme">
-                                            Reset to now
-                                        </button>
-                                    </div>
-
-                                    <div class="row mx-0 mb-3">
-                                        <div class="col-sm-5 p-0">
-                                            <div class="row mx-0">
-                                                <div class="col-sm-12 px-0">
-                                                    <div class="date-time-text">
-                                                        <kendo-label>
-                                                                <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
-                                                                [format]="dateTimeFormat"
-                                                                [(value)]="fromDatevalue"
-                                                                ></kendo-datetimepicker>
-                                                          </kendo-label>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="col-sm-6 pe-0">
-                                                    <div class="date-time-text">
-                                                        02:34 pm
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2 text-center">
-                                            <span class="sp-eperator"></span>
-                                        </div>
-                                        
-                                        <div class="col-sm-5 p-0">
-                                            <div class="row mx-0">
-                                                <div class="col-sm-12 px-0">
-                                                    <div class="date-time-text" >
-                                                        <!-- sep 13, 2024 -->
-                                                        <kendo-label>
-                                                            <kendo-datetimepicker [popupSettings]="{ popupClass:'dropdownDateTimePicker'}"
-                                                              [format]="dateTimeFormat"
-                                                              [(value)]="toDateValue"
-                                                            ></kendo-datetimepicker>
-                                                          </kendo-label>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="col-sm-6 pe-0">
-                                                    <div class="date-time-text">
-                                                        02:34 pm
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="d-flex-between border-bottom pb-2">
-                                            <span class="text-theme font-14px">
-                                                Asia/Kolkata
-                                            </span>
-                                            <span class="btn-layout-time">
-                                                <button (click)="closeTimeFilterDropdown()" type="button" class="btn btn-layout btn-bg-white px-2 py-1 me-2">
-                                                    <span>Cancel</span>
-                                                </button>
-                                                <button (click)="applyCustomFilter()" type="button" class="btn btn-layout btn-bg-theme px-2 py-1">
-                                                    <span>Apply</span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                        <div class="p-2">
-                                            <p class="text-center mb-0 text-grey-1 font-14px">Recent</p>
-                                        </div>
-                                        <div class="position-relative" style="height: 10rem;">
-                                            <span class="d-flex-center h-100 font-14px text-grey-2">
-                                                You don’t have any history yet.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                       </div>
-
-                    </div>
-
-                </div>
-            
+            <div class="right flex-center justify-content-end flex-wrap" style="margin-top: 0.5rem;">
+                <app-envrionment-common-filter
+                    [selected_tab]='{selectedTab: selectedTab.enumType , forDisablePermissionData:forDisablePermissionData,Editable : Editable}'
+                    [isShowSearchText]= '{isShowSearchText: isShowSearchText}'
+                    [selectedAnalyticsType]=selectedAnalyticsType.type (onEditableChange)="toggleEdit($event)"
+                    (ondateTimeFilteremit)="changeTimeFilter($event)"
+                    (onFilterSelected)="changeFilter($event)"
+                    [selectedTimeDate]='{selectedTimeDate: selectedTimeDate}'
+                    ></app-envrionment-common-filter>
             </div>
+
+
         </div>
 
         <div class="app-body flex-box-column scrollable">
@@ -229,97 +33,201 @@
 
                 <ul class="nav-tabs mb-0" role="tablist">
                     @for (tab of availableTabs; track $index) {
-    
-                        @if (tab.isVisible) {
-    
-                            <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                                <a class="nav-link" [ngClass]="tab.isSelected?'active':''"
-                                    href="javascript:void(0)" (click)="changeSelectedTab(tab)">
-                                    @if (tab.text == 'Overview') {
-                                        <i class="oci oci-map pr-1"></i>
-                                    }
 
-                                    @else if  (tab.text == 'Log') {
-                                        <i class="oci oci-logs pr-1"></i>
-                                    }
-                                    
-                                    @else if  (tab.text == 'Time Explorer') {
-                                        <i class="oci oci-time-explorer pr-1"></i>
-                                    }
+                    @if (tab.isVisible) {
 
-                                    @else if  (tab.text == 'Telemetry') {
-                                        <i class="oci oci-bar-chart pr-1"></i>
-                                    }
-                                    {{tab.text}}
-                                </a>
-                            </li>
-                        }
-    
+                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                        <a class="nav-link" [ngClass]="tab.isSelected?'active':''" href="javascript:void(0)"
+                            (click)="changeSelectedTab(tab)">
+                            @if (tab.text == 'Overview') {
+                            <i class="oci oci-map pr-1"></i>
+                            }
+
+                            @else if (tab.text == 'Error Log') {
+                            <i class="oci oci-logs pr-1"></i>
+                            }
+
+                            @else if (tab.text == 'Time Explorer') {
+                            <i class="oci oci-time-explorer pr-1"></i>
+                            }
+
+                            @else if (tab.text == 'Telemetry') {
+                            <i class="oci oci-bar-chart pr-1"></i>
+                            }
+                            {{tab.text}}
+                        </a>
+                    </li>
+                    }
+
                     }
                     <!-- <li class="nav-item " role="tab" aria-controls="top-journeys-tab">
-                        <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"
-                            href="javascript:void(0)" (click)="changeSelectedTab('overview')">
-                            <i class="oci oci-journey pr-1"></i>
-                            Overview</a>
-                    </li>
-    
-                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                        <a class="nav-link" [ngClass]="selectedTab=='log'?'active':''"
-                            href="javascript:void(0)" (click)="changeSelectedTab('log')">
-                            <i class="oci oci-journey pr-1"></i>
-                            Log</a>
-                    </li>
-    
-                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                        <a class="nav-link" [ngClass]="selectedTab=='timeexplorer'?'active':''"
-                            href="javascript:void(0)" (click)="changeSelectedTab('timeexplorer')">
-                            <i class="oci oci-journey pr-1"></i>
-                            Time Explorer</a>
-                    </li>
-    
-                    <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
-                        <a class="nav-link" [ngClass]="selectedTab=='telemetry'?'active':''"
-                            href="javascript:void(0)" (click)="changeSelectedTab('telemetry')">
-                            <i class="oci oci-journey pr-1"></i>
-                            Telemetry</a>
-                    </li> -->
-    
+                            <a class="nav-link" [ngClass]="selectedTab=='overview'?'active':''"
+                                href="javascript:void(0)" (click)="changeSelectedTab('overview')">
+                                <i class="oci oci-journey pr-1"></i>
+                                Overview</a>
+                        </li>
+        
+                        <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                            <a class="nav-link" [ngClass]="selectedTab=='log'?'active':''"
+                                href="javascript:void(0)" (click)="changeSelectedTab('log')">
+                                <i class="oci oci-journey pr-1"></i>
+                                Log</a>
+                        </li>
+        
+                        <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                            <a class="nav-link" [ngClass]="selectedTab=='timeexplorer'?'active':''"
+                                href="javascript:void(0)" (click)="changeSelectedTab('timeexplorer')">
+                                <i class="oci oci-journey pr-1"></i>
+                                Time Explorer</a>
+                        </li>
+        
+                        <li class="nav-item" role="tab" aria-controls="all-journeys-tab">
+                            <a class="nav-link" [ngClass]="selectedTab=='telemetry'?'active':''"
+                                href="javascript:void(0)" (click)="changeSelectedTab('telemetry')">
+                                <i class="oci oci-journey pr-1"></i>
+                                Telemetry</a>
+                        </li> -->
+
                 </ul>
 
-                <div class="error-details-count">
-                    <span>
-                        <!-- <i class="oci oci-WARNING pe-2"></i>4 -->
-                    </span>
-                </div>
+                <!-- <div class="error-details-count">
+                        <span>
+                            <i class="oci oci-WARNING pe-2"></i>4
+                        </span>
+                    </div> -->
             </div>
-    
+            <!--     
+                <div class="tab_view_content h-100 scrollable px-4 pb-2">
+        
+                    @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
+                        <div class="overview">
+                            <app-environment-manager-main-right-overview-tab [view]="selectedView" [Editable]="Editable"></app-environment-manager-main-right-overview-tab>
+                        </div>
+                    }
+                    @else if (selectedTab.enumType == 'LOG_TAB') {
+                        <div class="log">
+                            <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType" 
+                            [view]="selectedView" ></app-environment-manager-main-right-log-tab>
+                        </div>
+                
+                    }
+                    @else if (selectedTab.enumType == 'TIME_EXPLORER_TAB') {
+                
+                        <div class="timeexplorer">
+                            Time explorer component here
+                        </div>
+                    }
+                    @else if (selectedTab.enumType == 'telemetry') {
+                
+                        <div class="telemetry">
+                            Telemetry component here
+                        </div>
+                    }
+        
+                </div>  -->
             <div class="tab_view_content h-100 scrollable px-4 pb-2">
-    
-                @if (selectedTab.enumType == 'OVERVIEW_TAB') { 
-                    <div class="overview">
-                        <app-environment-manager-main-right-overview-tab [view]="selectedView"></app-environment-manager-main-right-overview-tab>
-                    </div>
+                @if (isSelectedAnalyticsTypeEmpty) {
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-environment-manager-main-right-overview-tab
+                        [child_data]="{view:selectedView,allSelectedAnalytics:allSelectedAnalytics,obj_filter: obj_filter,selectedAnalyticsType : ''}" 
+                        [Editable]="Editable">
+                    </app-environment-manager-main-right-overview-tab>
+                </div>
                 }
-                @else if (selectedTab.enumType == 'LOG_TAB') {
-                    <div class="log">
-                        <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType" 
-                        [view]="selectedView" ></app-environment-manager-main-right-log-tab>
-                    </div>
-            
+                @else if (selectedTab.enumType === 'LOG_TAB') {
+                <div class="log">
+                    <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+                    </app-environment-manager-main-right-log-tab>
+                </div>
                 }
-                @else if (selectedTab.enumType == 'TIME_EXPLORER_TAB') {
-            
-                    <div class="timeexplorer">
-                        Time explorer component here
-                    </div>
+                @else if (selectedTab.enumType === 'TIME_EXPLORER_TAB') {
+                <div class="timeexplorer">
+                    Time explorer component here
+                </div>
                 }
-                @else if (selectedTab.enumType == 'telemetry') {
-            
-                    <div class="telemetry">
-                        Telemetry component here
-                    </div>
+                @else if (selectedTab.enumType === 'telemetry') {
+                <div class="telemetry">
+                    Telemetry component here
+                </div>
                 }
-    
+                }
+                @else {
+                @if(selectedAnalyticsType.type == "USER_BEHAVIOUR_ANALYTICS_DATASOURCE"){
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-e-m-mr-ds-ub-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType:'USER_BEHAVIOUR_ANALYTICS_DATASOURCE'}">
+                    </app-e-m-mr-ds-ub-overview-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
+                <div class="log">
+                    <app-e-m-ds-ub-functional-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+                    </app-e-m-ds-ub-functional-error-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "JOURNEY_TAB"){
+                <div class="log">
+                    <app-e-m-ds-ub-journey [analyticsType]="selectedAnalyticsType" [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+
+                    </app-e-m-ds-ub-journey>
+                </div>
+                }
+
+
+                @else if(selectedTab.enumType === "LOG_APP_CONSOLE_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-ub-console-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+                    </app-e-m-mr-ds-ub-console-error-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_API_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-ub-api-error-tab [analyticsType]="selectedAnalyticsType" [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+                    </app-e-m-mr-ds-ub-api-error-tab>
+                </div>
+                }
+                }
+                @else if(selectedAnalyticsType.type == "TEST_AUTOMATION_ANALYTICS_DATASOURCE"){
+                <div class="telemetry">
+                    TEST_AUTOMATION_ANALYTICS Selected
+                </div>
+                }
+                @else if(selectedAnalyticsType.type == "ERP_ANALYTICS_DATASOURCE"){
+                @if (selectedTab.enumType === 'OVERVIEW_TAB') {
+                <div class="overview">
+                    <app-e-m-mr-ds-erp-overview-tab [view]="selectedView" [Editable]="Editable" [child_data]= "{obj_filter: obj_filter,selectedAnalyticsType : 'ERP_ANALYTICS_DATASOURCE'}">
+                    </app-e-m-mr-ds-erp-overview-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === 'LOG_TAB'){
+                <div class="log">
+                    <app-environment-manager-main-right-log-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+                    </app-environment-manager-main-right-log-tab>
+                </div>
+                }
+                @else if(selectedTab.enumType === "LOG_APP_FUNCTIONAL_ERROR"){
+                <div class="log">
+                    <app-e-m-mr-ds-erp-functional-error-tab [analyticsType]="selectedAnalyticsType"
+                        [view]="selectedView" [dataTimeData]="{obj_filter: obj_filter}">
+
+                    </app-e-m-mr-ds-erp-functional-error-tab>
+                </div>
+                }
+
+                }
+                @else if(selectedAnalyticsType.type == "SYSTEM_DIAGNOSTICS_ANALYTICS_DATASOURCE"){
+                <div class="telemetry">
+                    SYSTEM_DIAGNOSTICS_ANALYTICS Selected
+                </div>
+                }
+
+
+                }
+
+
             </div>
 
         </div>

@@ -4,6 +4,18 @@
     color: #344054;
 }
 
+.custom-bt-dropdown-icon.dropdown-toggle{
+
+    &::after{
+        border-width: 0 !important;
+        font-family: cs-icon !important;
+        content: "\e908" !important;
+        font-size: 0.75rem;
+        color: #667085;
+        margin-left: 0.5rem !important;
+    }
+}
+
 .accordion-view-summary {
     .card {
         border: none;
@@ -15,7 +27,11 @@
         .card-header {
             padding: 0rem;
             border: none;
-            background-color: transparent;
+            // background-color: transparent;
+            background: #fff !important;
+            position: sticky;
+            z-index: 9;
+            border-bottom: 0;
 
             .btn-accordion {
                 width: 100%;
@@ -40,6 +56,22 @@
                     top: 25%;
                 }
             }
+        }
+
+        .card-header:nth-child(1) {
+            top: 0rem !important;
+        }
+    
+        .card-header:nth-child(3) {
+            top: 3rem !important;
+        }
+    
+        .card-header:nth-child(5) {
+            top: 6rem !important;
+        }
+    
+        .card-header:nth-child(7) {
+            top: 9rem !important;
         }
 
         .card-body {
@@ -100,10 +132,26 @@
     }
 }
 
-.access-type-layout {
-    .bt-dropdown-icon {
-        &.dropdown-toggle:after {
-            display: none;
-        }
+// .access-type-layout {
+//     .bt-dropdown-icon {
+//         &.dropdown-toggle:after {
+//             display: none;
+//         }
+//     }
+// }
+
+.application-images {
+    display: inline-block;
+    margin: 0rem 1rem;
+    line-height: 1rem;
+    &.instances {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
     }
 }
+

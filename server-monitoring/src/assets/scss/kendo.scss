@@ -1,3 +1,11 @@
+.grid-panel {
+    .k-grid {
+        td {
+            vertical-align: top;
+        }
+    }
+}
+
 .k-grid {
     border-radius: 0.5rem;
 
@@ -41,7 +49,10 @@
                 }
 
                 &:hover {
-                    background-color: #f6feff!important;
+                    .k-table-td {
+                        background-color: #f6feff!important;
+                        //background-color: #e6fbfe!important;
+                    }
                 }
 
                 &.k-selected {
@@ -189,4 +200,105 @@
             box-shadow: none !important;
         }
     }
+}
+//Kendo Notification 
+.k-notification-content{
+    font-size: 1rem;
+}
+/****kendo window inner right section***/
+.inner_right_section_k_window {
+    position: fixed !important;
+    top: 0 !important;
+    left: auto !important;
+    right: 0 !important;
+    width: 35rem;
+    min-width: 35rem !important;
+    max-width: 70rem;
+    height: 100vh;
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.12);
+    z-index: 2;
+    color: #344054;
+    font-size: 0.875rem;
+    line-height: 1.875rem;
+    z-index: 1000 !important;
+}
+ 
+.inner_right_section_k_window.k-window-overlap {
+    z-index: 9999 !important;
+}
+ 
+.inner_right_section_k_window.window_25 {
+    width: 25rem;
+    min-width: 25rem !important;
+}
+ 
+.inner_right_section_k_window.window_40 {
+    width: 40rem;
+    min-width: 40rem !important;
+}
+ 
+.inner_right_section_k_window.max_50 {
+    max-width: 50rem;
+}
+ 
+.inner_right_section_k_window .k-resize-n,
+.inner_right_section_k_window .k-resize-s,
+.inner_right_section_k_window .k-resize-e {
+    display: none !important;
+}
+ 
+.inner_right_section_k_window .k-resize-w {
+    width: 0.675rem !important;
+}
+ 
+.inner_right_section_k_window .k-window-titlebar {
+    display: none !important;
+}
+ 
+.inner_right_section_k_window .k-window-content {
+    padding: 0px !important;
+}
+ 
+.sliderOverlay {
+    position: fixed;
+    top: 0;
+    left: 0rem;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: default;
+    z-index: 9;
+}
+
+/********************************************/
+.td_overflow_visible {
+    overflow: visible !important;
+}
+
+/* ---------------------remove right padding in user management --------------------------- */
+
+.remove-right-padding.k-grid.k-grid-header-pr-0 .k-grid-header {
+    padding-right: 12px !important;
+}
+
+.k-grid.grid-remove-right-border .k-grid-header-wrap{
+    border-right: none !important;
+}
+
+.k-grid-scrolled-y .k-grid-content {
+    overflow-y: scroll !important;
+}
+
+.show-scroll-k-grid-content .k-grid-content {
+    overflow-x: auto !important;
+}
+
+
+// k-splitbar css 
+
+.k-splitbar:focus, .k-splitbar.k-focus{
+    color: #3d3d3d !important;
+    background-color: #ebebeb !important;
 }

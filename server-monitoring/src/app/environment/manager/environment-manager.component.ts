@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-environment-manager',
@@ -12,20 +13,25 @@ export class EnvironmentManagerComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public service_data: AppDataService
+    public service_data: AppDataService,
+    private app_service:AppService,
   ) { }
 
+  folder_view_flag : boolean = true;
   ngOnInit(): void {
     // this.check_env_configuration();
+    this.app_service.folder_view_flag$.subscribe((data : any)=>{
+      this.folder_view_flag=!data;
+    })
   }
 
   selectedAnalyticsType: any = null
   changeSelectedAnalytics(val) {
-    debugger
+  
     this.selectedAnalyticsType = val
   }
   check_env_configuration() {
-    debugger;
+    
     //this.getAllViews()
     if (!this.service_data.is_env_configure) {
       this.router.navigate(['environment/configure']);
@@ -72,20 +78,23 @@ export class EnvironmentManagerComponent implements OnInit {
     selectedViewSettings: {}
   }
   settingsSelected(val) {
-    debugger
+    
     this.objSettings = val
   }
 
+  viewUserData(val){
+    return;
+    this.app_service.dataTransmitter({data : val,action :"editDisabled"});
+
+  }
+  
   obj_configuration_setting = {
     tab: "datasource",
     title: "Add View",
     selected_datasource: [],
     selected_erp_analytics: [],
     selected_view: null,
-    AccessPermisions: {
-      "canView": true,
-      "canEdit": true
-    },
+    AccessPermisions: 'VIEW',
     selectedUids: {
       "userId":"00000000-0000-0000-0000-000000000000",
       "permmission":"ALL"
@@ -93,10 +102,28 @@ export class EnvironmentManagerComponent implements OnInit {
 
   }
   leftPanelDataUpdate(val) {
-    debugger
+    
+    if(this.service_data.isUserAllJourneyOpen == true || this.service_data.isAllErrorOpen == true){
+      this.app_service.dataTransmitter({callsource : 'navigatorAll'})
+    }
+
+    this.app_service.dataTransmitter({callsource: 'stopEdit',selectedAnalyticsType :this.selectedAnalyticsType})
     this.objSettings = val.settingsPanel
     this.selectedAnalyticsType = val.analyticsTypes
+   
     this.selectedView = val.viewSelected
+    this.service_data.selectedArtifactData = {
+      Settings_View_Selection:this.objSettings.selectedViewSettings,
+      obj_configuration_setting:this.obj_configuration_setting,
+      selectedAnalyticsType:this.selectedAnalyticsType,
+      selectedView:this.selectedView,
+      allSelectedAnalytics:val.allSelectedAnalytics
+    }
+    this.app_service.dataTransmitter({callsource:'navigatorops',data:this.service_data.selectedArtifactData});
+
+    
   }
+
+ 
 
 }

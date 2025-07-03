@@ -1,22 +1,43 @@
-<div class="total-errors-details" [id]="'stats-div-'+typeEnum" style="position: relative;" >
-    <h6 class="font-bold mb-0">
-      @if (typeEnum == 'Error') {
-        Total Errors
-      }
-      @else if(typeEnum == 'Success'){
-        Total Success
-      }
-      @else if(typeEnum == 'Warning'){
-        Total Warnings
-      }
-    </h6>
-    <div class="row mx-0 align-items-end">
-      <div class="col-sm-7 px-0">
-        <div class="row mx-0 align-items-center">
-          <div class="col-sm-3 ps-0">
-            <span class="error-value" style="font-size: 1.2rem;">{{dataObj.total}}</span>
+<div class="total-errors-details custom-view-height"  style="position: relative;" >
+  
+   <div class="widget-header d-flex-between">
+
+        <div style="display:flex;justify-content: space-between;align-items: center;">
+          <div *ngIf="Editable">
+            <i class="oci oci-drag-indicator drag-icon px-1 drag-handler"></i>
           </div>
-          <div class="col-sm-9 ps-3">
+          
+            <h6 class="font-bold mb-0">
+              <ng-container *ngIf="isRename;else nameOnly">
+                 <input type="text" [(ngModel)]="title" (keyup.enter)="renaming()" (blur)="renaming()" id='renameInput'>
+              </ng-container>
+             <ng-template #nameOnly>
+                 {{title}}
+              </ng-template>
+          </h6>  
+        </div>
+        <div *ngIf="Editable">
+          <!-- <div class="dropdown">
+            <button type="button" class="btn remove-icon-drop btn-layout-more" data-bs-toggle="dropdown">
+                <i class="oci oci-more-vertical font-14px"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li (click)="renameWidget()"><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-edit  pr-2" ></i> Rename </a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" ><i class="oci oci-delete text-red pr-2"></i> Delete </a></li>
+            </ul>
+        </div> -->
+        </div>
+   </div>
+    <div class="row mx-0 align-items-end graph-custom-wh">
+      <div class="col-sm-7 px-0 mb-3">
+        <div class="row mx-0 flex-column align-items-center line_h_1">
+          <div class="col-sm-3 ps-0 w-100 mb-3">
+            <!-- @if(this.typeEnum !="Success"){
+              
+            } -->
+            <span class="error-value" style="font-size: 1.8rem;">{{dataObj.total}}</span>
+          </div>
+          <div class="col-sm-9 ps-1 px-0 w-100">
             <div class="error-value-last" style="color: #667085;">
               @if(this.dataDir == 'up'){
               <span class="success-percentage">

@@ -1,0 +1,29 @@
+::ng-deep .logs-grid-layout {
+    .k-grid {
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        //-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+
+                        &:first-child {
+                            padding: 0rem !important;
+                        }
+                    }
+
+                    .all-functional-error-section{
+                        background: #C4320A;
+                        color: #344054;
+                        border-radius: 1rem;
+                        font-weight: 500;
+                        font-size: .8125rem;
+                        line-height: 1.125rem;
+                        height: 3rem;
+                        display: block;
+                        width: 0.35rem;
+                    }
+                }
+            }
+        }
+    }
+}

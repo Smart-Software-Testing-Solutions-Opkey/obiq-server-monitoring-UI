@@ -37,7 +37,36 @@ import { SelectedTraceInnerComponent } from '../main-right/log-tab/log-tab-detai
 import { LabelModule } from "@progress/kendo-angular-label";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EMMrDsErpOverviewTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-overview-tab.component';
+import { EMMrDsErpLogTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-erp-log-tab.component';
+import { EMMrDsErpFunctionalErrorTabComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-erp-functional-error-tab.component';
+import { EnvironmentManagerWidgetsProgressBarsUserGuidesComponent } from '../widgets/environment-manager-widgets-progress-bars-user-guides/environment-manager-widgets-progress-bars-user-guides.component'; 
+import { EMMrDsUbOverviewTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-overview-tab/e-m-mr-ds-ub-overview-tab.component';
+import { EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-fastest-journeys/environment-manager-widgets-progress-bars-fastest-journeys.component';
+import { EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-slowest-journeys/environment-manager-widgets-progress-bars-slowest-journeys.component';
+import { EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent } from '../widgets/environment-manager-widgets-progress-bars-common-journeys/environment-manager-widgets-progress-bars-common-journeys.component';
+import { EMMrDsERPDComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-log-tab/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d/e-m-mr-ds-e-r-p-d.component';
+import { EMApiErrorWidgetComponent } from '../widgets/user-behaviour/e-m-api-error-widget/e-m-api-error-widget.component';
+import { EMConsoleErrorWidgetComponent } from '../widgets/user-behaviour/e-m-console-error-widget/e-m-console-error-widget.component';
+import { EMFunctionalErrorWidgetComponent } from '../widgets/user-behaviour/e-m-functional-error-widget/e-m-functional-error-widget.component';
+import { EMMrDsErpAllJourneyComponent } from '../main-right/datasources/erp/all-journey/e-m-mr-ds-erp-all-journey.component';
+import { EMMrDsEFEJourneyComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-functional-error-tab/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey/e-m-mr-ds-e-f-e-journey.component';
+import { EnvironmentCommonModule } from '../../environment-common/environment-common.module';
+import { EMMrDsUbAllJourneyComponent } from '../main-right/datasources/user-behaviour/all-journey/e-m-mr-ds-ub-all-journey.component';
+import { EMMrDsErpOVFPComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-overview-tab/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p/e-m-mr-ds-erp-o-v-f-p.component';
+import { EMDsUbFunctionalErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-functional-error-tab.component';
+import { EMDsUbJourneyComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-Journey/e-m-ds-ub-journey/e-m-ds-ub-journey.component';
+import { EMMrDsUbConsoleErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-console-error-tab.component';
+import { EMMrDsUbApiErrorTabComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-api-error-tab.component';
+import { EMMrDsUbAllFunctionalErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-functional-error/e-m-mr-ds-ub-all-functional-error.component';
+import { EMMrDsUbAllApiErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-api-error/e-m-mr-ds-ub-all-api-error.component';
+import { EMMrDsUbAllConsoleErrorComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-all-console-error/e-m-mr-ds-ub-all-console-error.component';
+import { EMMrDsErpAllFunctionalErrorComponent } from '../main-right/datasources/erp/e-m-mr-ds-erp-all-functional-error/e-m-mr-ds-erp-all-functional-error.component';
+import { EMDsUbFEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-ds-ub-functional-error-tab/e-m-ds-ub-f-e-panel/e-m-ds-ub-f-e-panel.component';
+import { EMMrDsUbCEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-console-error-tab/e-m-mr-ds-ub-c-e-panel/e-m-mr-ds-ub-c-e-panel.component';
+import { EMMrDsUbAEPanelComponent } from '../main-right/datasources/user-behaviour/e-m-mr-ds-ub-api-error-tab/e-m-mr-ds-ub-a-e-panel/e-m-mr-ds-ub-a-e-panel.component';
 @NgModule({
   declarations: [
     EnvironmentManagerComponent,
@@ -63,7 +92,33 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     EnvironmentManagerWidgetsHealthBarsComponent,
     ManagerMainRightLogTabDetailsInfoComponent,
     EnvironmentManagerWidgetsProgressBarsComponent,
-    SelectedTraceInnerComponent
+    SelectedTraceInnerComponent,
+    EMMrDsErpOverviewTabComponent,
+    EMMrDsErpLogTabComponent,
+    EMMrDsErpFunctionalErrorTabComponent,
+    EnvironmentManagerWidgetsProgressBarsUserGuidesComponent,
+    EnvironmentManagerWidgetsProgressBarsFastestJourneysComponent,
+    EnvironmentManagerWidgetsProgressBarsSlowestJourneysComponent,
+    EnvironmentManagerWidgetsProgressBarsCommonJourneysComponent,
+    EMMrDsUbOverviewTabComponent,
+    EMMrDsERPDComponent,
+    EMApiErrorWidgetComponent,
+    EMConsoleErrorWidgetComponent,
+    EMFunctionalErrorWidgetComponent,
+    EMMrDsErpAllJourneyComponent,
+    EMMrDsEFEJourneyComponent,
+    EMMrDsErpOVFPComponent,
+    EMMrDsUbAllJourneyComponent,
+    EMDsUbFunctionalErrorTabComponent,
+    EMDsUbJourneyComponent,
+    EMMrDsUbConsoleErrorTabComponent,
+    EMMrDsUbApiErrorTabComponent,
+    EMMrDsUbAllFunctionalErrorComponent, 
+    EMMrDsUbAllApiErrorComponent, 
+    EMMrDsUbAllConsoleErrorComponent, EMMrDsErpAllFunctionalErrorComponent,
+    EMDsUbFEPanelComponent,
+    EMMrDsUbCEPanelComponent,
+    EMMrDsUbAEPanelComponent
 
 
   ],
@@ -79,7 +134,12 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     LayoutModule,
     LabelModule,
     DateInputsModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    FormsModule,
+    GridsterComponent,
+    GridsterItemComponent,
+    NgbModule,
+    EnvironmentCommonModule
   
   ],
   providers: [DatePipe],
@@ -102,7 +162,11 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     ViewJourneySnapshotComponent,
     ViewJourneyErrorComponent,
     EnvironmentManagerWidgetsGaugeMeterComponent,
-    SelectedTraceInnerComponent
+    SelectedTraceInnerComponent,
+    EMMrDsERPDComponent,
+    EMMrDsEFEJourneyComponent,
+    EMMrDsErpOVFPComponent
+    
   ]
 })
 export class EnvironmentManagerModule { }

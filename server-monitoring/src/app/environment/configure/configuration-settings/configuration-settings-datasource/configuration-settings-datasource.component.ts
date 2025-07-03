@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environments/environment';
+import { AppDataService } from 'src/app/services/app-data.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 
 @Component({
   selector: 'app-configuration-settings-datasource',
@@ -14,7 +16,10 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public app_service: AppService
+    public app_service: AppService,
+    public data_service: AppDataService,
+    private msgbox: MsgboxService
+
   ) { }
 
 
@@ -24,19 +29,32 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     dispaly_viewName: false,
     dispaly_DataSource: false,
     display_ErpApplication: false,
-    display_SystemDiagnosticsData: false
+    display_SystemDiagnosticsData: false,
+    isDuplicateName: false,
   }
 
-  @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData }) {
+  error_message = "View name is required"
+  @Input('child_data') set child_data({ obj_configuration_setting, dispaly_viewName, dispaly_DataSource, display_ErpApplication, display_SystemDiagnosticsData, isDuplicateName, isIncorrectName, isIncorrectLength }) {
+    console.log(obj_configuration_setting);
+    
     this.obj_configuration_setting = obj_configuration_setting;
     this.obj_error.dispaly_viewName = dispaly_viewName;
     this.obj_error.dispaly_DataSource = dispaly_DataSource;
     this.obj_error.display_ErpApplication = display_ErpApplication;
     this.obj_error.display_SystemDiagnosticsData = display_SystemDiagnosticsData;
+    this.obj_error.isDuplicateName = isDuplicateName
     this.bindData()
   }
-
+  onViewNameInputChange = output<any>();
   ngOnInit() {
+
+      if(this.obj_configuration_setting?.selected_datasource?.select_datasource_item.length > 0){
+        this.obj_configuration_setting.selected_datasource.select_datasource_item.forEach((selectedData)=>{
+          if(selectedData.name == "ERP Analytics"){
+            this.get_AllApplications();
+          }
+        })
+      }
     this.get_all_datasource();
     this.restet_obj_datasource();
   }
@@ -59,6 +77,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   modal_name = '';
   data_Source_widjets = [];
+  Available_Application_Instances: any = {};
 
   get_all_datasource() {
 
@@ -71,41 +90,52 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
         next: (result: any) => {
           window.loadingStop("#div-datasource-slection");
-          result.forEach((widjet: any) => {
+
+          // To Remove "System Diagnostics" and "Test Automation Analytics"
+          if( result){
+            result = result.filter((widget: any) =>
+              widget.name !== "System Diagnostics" && widget.name !== "Test Automation Analytics"
+            );
+  
+            result.forEach((widjet: any) => {
+  
+              if (widjet.name === "ERP Analytics") {
+  
+                // this.get_AllApplications();
+              }
+              if (widjet.name === "User Behavior Analytics") {
+  
+              }
+              if (widjet.name === "Test Automation Analytics") {
+  
+              }
+              if (widjet.name === "System Diagnostics") {
+                this.get_datasource_system_diagnostics(widjet.id);
+              }
+            });
+  
+  
+            this.data_Source_widjets = result;
+  
+            this.data_Source_widjets.forEach(item => {
+              item['isChecked'] = false;
+              if (this.obj_datasource_widget?.select_datasource_item?.length > 0) {
+                this.obj_datasource_widget?.select_datasource_item.forEach(ele => {
+                  if (ele.id == item.id) {
+                    item['isChecked'] = true;
+                  }
+                })
+  
+              }
+            })
+          }
           
-            if (widjet.name === "ERP Analytics") {
 
-              this.get_AllApplications();
-            }
-            if (widjet.name === "User Behaviour Analytics") {
-
-            }
-            if (widjet.name === "Test Automation Analytics") {
-
-            }
-            if (widjet.name === "System Diagnostics") {
-              this.get_datasource_system_diagnostics(widjet.id);
-            }
-          });
-
-
-          this.data_Source_widjets = result;
-
-          this.data_Source_widjets.forEach(item => {
-            item['isChecked'] = false;
-            if(this.obj_datasource_widget?.select_datasource_item?.length > 0){
-              this.obj_datasource_widget?.select_datasource_item.forEach(ele =>{
-                if(ele.id == item.id){
-                  item['isChecked'] = true;
-                }
-              })
-            }
-          })
-         
 
         },
         error: (error: any) => {
           window.loadingStop("#div-datasource-slection");
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -122,19 +152,19 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
   get_AllApplications() {
 
-    this.datasource_application = [
-      "OracleFusion",
-      "SAP",
-      "Salesforce",
-      "PeopleSoft",
-      "Workday",
-      "OracleEBS",
-      "MSDynamicsFSO",
-      "VeevaVault",
-      "Coupa",
-      "OracleIntegrationCloud"
-    ];
-    return
+    // this.datasource_application = [
+    //   "OracleFusion",
+    //   "SAP",
+    //   "Salesforce",
+    //   "PeopleSoft",
+    //   "Workday",
+    //   "OracleEBS",
+    //   "MSDynamicsFSO",
+    //   "VeevaVault",
+    //   "Coupa",
+    //   "OracleIntegrationCloud"
+    // ];
+    // return
 
     let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetApplications";
     // let form_url = "https://myqlm.dev.opkeyone.com/ExternalApplicationSettings/GetApplications";
@@ -145,15 +175,46 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
         next: (result: any) => {
           this.datasource_application = result;
+          this.get_ERP_App_Instance_count(result)
+          console.log(this.Available_Application_Instances, "A---------------------");
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
           console.log("Completed");
         }
       });
+  }
+  get_ERP_App_Instance_count(instances) {
+    let select_applicaton = this.obj_configuration_setting.selected_datasource.select_applicaton_item;
+
+    let form_url = environment.BASE_OPKEY_URL + "ExternalApplicationSettings/GetAllSettingsByApplications";
+    let form_data = { str_application :JSON.stringify(instances)};
+   
+    this.app_service.make_get_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          this.Available_Application_Instances = Object.keys(result).reduce((acc: any, app: string) => {
+            acc[app] = result[app]?.length || 0;  // caluclated instances of all the appliations
+            return acc;
+          }, {});
+
+          console.log(this.Available_Application_Instances, "A---------------------");
+
+
+
+        },
+        error: (error: any) => {
+          this.msgbox.display_error_message(error);
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
+
   }
 
 
@@ -169,7 +230,7 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
           this.datasource_system_diagnostics = result;
         },
         error: (error: any) => {
-
+          this.msgbox.display_error_message(error);
           console.warn(error);
         },
         complete: () => {
@@ -178,34 +239,117 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
       });
   }
 
+  validateViewName(viewName) {
+    const regex = (/[\\!@#$%^&:?<>|\*\/"]/gm);
+    if (viewName == "" || viewName.trim() == '') {
+      this.obj_error.dispaly_viewName = true;
+      this.error_message = "View name is required."
+      return false
+    }
+    else {
+      this.obj_error.dispaly_viewName = false;
+    }
 
-  onInputChange(event: any) {
-    console.log(event.target.value);
+    if (regex.test(viewName)) {
+      this.obj_error.dispaly_viewName = true;
+      this.error_message = "Name can't contain any of following characters : \\!@#$%^&:?<>\/|*"
+      return false;
+    }
+    else {
+      this.obj_error.dispaly_viewName = false;
+    }
+    if (viewName.length > 255) {
+      this.obj_error.dispaly_viewName = true;
+      this.error_message = "Name length can not be greater then 255."
+      return false
+    }
+    else {
+      this.obj_error.dispaly_viewName = false;
+    }
+
+
+
+      return true;
+  }
+  onInputChanges(event: any) {
     this.modal_name = event.target.value;
+
+    if (!this.validateViewName(this.modal_name)){
+      return;
+    }
+      
+
+    let form_url = environment.BASE_OBIQ_SERVER_URL + "OpkeyObiqServerApi/OpkeyTraceIAAnalyticsApi/TelemetryViewController/checkViewNameExists";
+
+    let form_data = {
+      "viewName": this.modal_name,
+      // "userId": this.data_service.UserDto.UserDTO.U_ID,
+      "projectId": this.data_service.UserDto.ProjectDTO.P_ID
+    }
+
+    this.app_service.make_post_server_call(form_url, form_data)
+      .subscribe({
+        next: (result: any) => {
+          window.loadingStop("#navigator-left");
+
+          this.obj_error.isDuplicateName = result
+          this.onViewNameInputChange.emit(result)
+          if (result == true) this.obj_error.dispaly_viewName = false
+
+
+        },
+        error: (error: any) => {
+          window.loadingStop("#navigator-left");
+          this.msgbox.display_error_message(error);
+          console.warn(error);
+        },
+        complete: () => {
+          console.log("Completed");
+        }
+      });
     this.obj_datasource_widget.viewName = event.target.value;
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+
   }
+
+
 
   datasource_item_name = "";
   select_datasource(dataItem) {
-    debugger;
+
     // this.datasource_item_name = dataItem.name;
+   
     dataItem.isChecked = !dataItem.isChecked;
     if (dataItem.isChecked) {
+      if( dataItem.name == 'ERP Analytics'){
+        this.get_AllApplications();
+      }
       this.obj_datasource_widget.select_datasource_item.push(dataItem);
     } else {
-      let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item == dataItem);
+      let index = this.obj_datasource_widget.select_datasource_item.findIndex(item => item.id == dataItem.id);
       this.obj_datasource_widget.select_datasource_item.splice(index, 1);
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
 
+    if (this.obj_configuration_setting.selected_datasource.select_datasource_item.length > 0) {
+      this.obj_error.dispaly_DataSource = false;
+    }
+    else {
+      this.obj_error.dispaly_DataSource = true;
+    }
 
   }
 
   select_applicaton(dataItem, event) {
-    debugger;
+   
+
     if (event.target.checked) {
+      if(dataItem != "OracleFusion"){
+        event.target.checked = false;
+        this.msgbox.confirm_msg_box('warning','Please select Oracle Fusion ERP to proceed; support for other ERP applications will be available soon.',[{ text: "OK", primaryBtn: true, value: "ok" }]);
+        return;
+      }
       this.obj_datasource_widget.select_applicaton_item.push(dataItem);
     } else {
       let index = this.obj_datasource_widget.select_applicaton_item.findIndex(item => item == dataItem);
@@ -214,10 +358,17 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
 
+    if (this.obj_configuration_setting.selected_datasource.select_applicaton_item.length > 0) {
+      this.obj_error.display_ErpApplication = false;
+    }
+    else {
+      this.obj_error.display_ErpApplication = true;
+    }
+
   }
 
   select_systemDiagnostics(dataItem, event) {
-    debugger;
+
     if (event.target.checked) {
       this.obj_datasource_widget.select_systemDiagnostics_item.push(dataItem);
     } else {
@@ -226,29 +377,36 @@ export class ConfigurationSettingsDatasourceComponent implements OnInit {
     }
 
     this.obj_configuration_setting.selected_datasource = this.obj_datasource_widget;
+
+    if (this.obj_configuration_setting.selected_datasource.select_systemDiagnostics_item.length > 0) {
+      this.obj_error.display_SystemDiagnosticsData = false;
+    }
+    else {
+      this.obj_error.display_SystemDiagnosticsData = true;
+    }
+
   }
-  bindData(){
-    debugger
-    this.modal_name = this.obj_configuration_setting?.selected_datasource?.viewName??''
-    this.obj_datasource_widget =  this.obj_configuration_setting?.selected_datasource??{
+  bindData() {
+
+    this.modal_name = this.obj_configuration_setting?.selected_datasource?.viewName ?? ''
+    this.obj_datasource_widget = this.obj_configuration_setting?.selected_datasource ?? {
       viewName: "",
       select_datasource_item: [],
       select_applicaton_item: [],
       select_systemDiagnostics_item: []
     }
   }
-  checkApplication(item){
-    return  this.obj_datasource_widget?.select_applicaton_item?.includes(item)
+  checkApplication(item) {
+    return this.obj_datasource_widget?.select_applicaton_item?.includes(item)
   }
-  checkSystem(item){
+  checkSystem(item) {
     let bool = false
-  this.obj_datasource_widget?.select_systemDiagnostics_item?.forEach((element) =>{
-    if(element.id == item.id)
-    {
-      bool = true
-    }
-    
-  });
-  return bool
+    this.obj_datasource_widget?.select_systemDiagnostics_item?.forEach((element) => {
+      if (element.id == item.id) {
+        bool = true
+      }
+
+    });
+    return bool
   }
 }

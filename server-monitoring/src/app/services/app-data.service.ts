@@ -9,8 +9,17 @@ export class AppDataService {
 
   is_env_configure:boolean = false;
   showSelectedViewEnvironment: boolean = false;
+  changedAccessType:string="PRIVATE"
   UserDto :any = null;
   viewsData = []
+  modalSubInstance:any
+  persistermsg = ''
+  errorObj : any 
+  isEnablePersister = false
+  selectedArtifactData:any = {}
+  isUserAllJourneyOpen = false;
+  isAllErrorOpen = false;
+  assignedUser: any = []
   widgets_data:any = [
     {
         "ID": "105265c0-e34f-4c2e-b8f1-adde9687fd9d",
@@ -307,4 +316,38 @@ export class AppDataService {
   setSelectedViewEnvironmentVisibility(visible: boolean) {
     this.showSelectedViewEnvironment = visible;
   }
+  totalViews:any = {
+    data:[],
+    source:''
+  };
+
+  selected_view_data :any=  {
+    "viewSelected": {},
+    "settingsPanel": { isOpen: false, selectedViewSettings: {} },
+    "analyticsTypes": {},
+    "selectedTab": {},
+    "allSelectedAnalytics": []
+  }
+
+  scrollToParticularElement(id : any){
+    setTimeout(() => {
+        const element = document.getElementById(id);
+        element.scrollIntoView({ behavior: "instant", block: "end" });
+      }, 20);   
+  }
+
+  selectedDataSourceData :any={
+    userBehaviourdata : [],
+    erpAnalyticsData : [],
+    testAutomationData : [],
+    systemDiagonosticsData :[] 
+  }
+
+  selectedDateTime : any = {
+    type: 'setEnum',
+    value : 'LAST_24_HOUR'
+
+  }
+
 }
+

@@ -1,0 +1,61 @@
+.graph-timeseries {
+    padding: 1rem;
+    min-height: 7rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+}
+
+::ng-deep .logs-grid-layout {
+    .k-grid {
+        .k-grid-header {
+
+            .k-table-th {
+                .k-column-title {
+                    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+                }
+            }
+        }
+
+        .k-grid-container {
+            .k-grid-table {
+                .k-master-row {
+                    .k-table-td {
+                        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
+
+                        &:first-child {
+                            padding: 0rem !important;
+                        }
+                    }
+
+                    .layout-status-logs {
+                        // padding: .2rem .5rem;
+                        background: #C4320A;
+                        color: #344054;
+                        border-radius: 1rem;
+                        font-weight: 500;
+                        font-size: .8125rem;
+                        line-height: 1.125rem;
+                        height: 3rem;
+                        display: block;
+                        width: 0.35rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.graph-status-dropdown {
+    position: absolute;
+    top: 0.6rem;
+    right: 10rem;
+    width: 8rem;
+}
+
+
+@media (max-width: 1366px) {
+    .graph-status-dropdown {
+        top: 0.9rem;
+        right: 12rem;
+    }
+}

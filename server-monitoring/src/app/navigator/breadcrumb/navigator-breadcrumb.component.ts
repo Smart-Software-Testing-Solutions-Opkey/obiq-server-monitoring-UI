@@ -44,7 +44,7 @@ export class NavigatorBreadcrumbComponent  implements OnInit {
    * @param breadcrumbs
    */
   buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadCrumb[] = []): IBreadCrumb[] {
-    debugger;
+    
     //If no routeConfig is avalailable we are on the root path
     let label = route.routeConfig && route.routeConfig.data ? route.routeConfig.data['breadcrumb'] : '';
     let path: any = route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
+import { MsgboxService } from 'src/app/services/msgbox.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,14 +11,15 @@ import { environment } from 'src/environments/environment';
 export class JourneyGridComponent implements OnInit {
 
   constructor(
-    public app_service: AppService
+    public app_service: AppService,
+    private msgbox: MsgboxService 
   ) { }
 
   calsource = null;
   selectedData = null;
   noDataMsg: string = "Please wait fetching data...";
   @Input('child_data') set child_data({ selectedData }) {
-    debugger
+    
     this.selectedData = selectedData
   }
 
@@ -51,6 +53,7 @@ export class JourneyGridComponent implements OnInit {
         error: (error: any) => {
           window.loadingStop("#div-journey");
           console.warn(error);
+          this.msgbox.display_error_message(error);
         },
         complete: () => {
           window.loadingStop("#div-journey");
@@ -81,7 +84,7 @@ export class JourneyGridComponent implements OnInit {
   }
 
   onSelectionChange(e) {
-    debugger
+    
     let dataItem = e.dataItem;
     this.obj_selected_journey.datasource = dataItem;
     this.obj_selected_journey.isDisplay_main = false;
